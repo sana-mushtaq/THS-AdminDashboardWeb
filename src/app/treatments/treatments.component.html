@@ -1,0 +1,235 @@
+<app-header></app-header>
+<div id="app">
+   <section class="el-container">
+      <div>
+         <menu class="menu-bar">
+            <a routerLink="javascript:void(0);" class="toggle-menu">
+               <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span
+                     class="bar bar3"></span></div>
+            </a>
+            <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+         </menu>
+         <app-sidebar></app-sidebar>
+         <nav class="nav-bar">
+            <a routerLink="../dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png"
+                  width="60%"></a>
+            <ul>
+               <li><a routerLink="../department" class="blue-text"><i class="icon-layers"></i> Department
+                  </a>
+               </li>
+               <li><a routerLink="../treatments" class="router-link-exact-active active light-green-text"><i
+                        class="icon-rehabilitation"></i> Treatments
+                  </a>
+               </li>
+               <li><a routerLink="../tests" class="red-text"><i class="icon-flask"></i> Tests
+                  </a>
+               </li>
+            </ul>
+         </nav>
+      </div>
+      <main class="el-main">
+         <header class="el-header" style="height: auto;">
+            <div class="hdr-tit">
+               <h5 class="primary-color">Masters</h5>
+               <h6>Taib Home Medical Care Company - Riyadh</h6>
+            </div>
+            <ul role="menubar" class="el-menu-demo el-menu--horizontal el-menu">
+               <!---->
+               <!---->
+               <li role="menuitem" aria-haspopup="true" class="el-submenu" tabindex="0">
+                  <div class="el-submenu__title" style="border-bottom-color: transparent;"><img
+                        src="assets/images/user.svg" class="avtar"><i
+                        class="el-submenu__icon-arrow el-icon-arrow-down"></i></div>
+                  <div class="el-menu--horizontal" id="horizontal"
+                     style="position: absolute; top: 40px; right:3%; z-index: 2038; display: none;"
+                     x-placement="bottom-start">
+                     <ul role="menu" class="el-menu el-menu--popup el-menu--popup-bottom-start">
+                        <li role="menuitem" routerLink="../profile" tabindex="-1" class="el-menu-item">Profile</li>
+                        <li role="menuitem" routerLink="../change-password" tabindex="-1" class="el-menu-item">Change
+                           Password</li>
+                        <li role="menuitem" routerLink="/" tabindex="-1" class="el-menu-item">Logout</li>
+                     </ul>
+                  </div>
+               </li>
+            </ul>
+         </header>
+         <div class="m-t-30 el-row">
+            <!---->
+            <!---->
+            <!---->
+            <!---->
+            <!---->
+            <!---->
+            <div class="o-flow-x">
+               <div>
+                  <div
+                     class="el-table master-table  el-table--fit el-table--enable-row-hover el-table--enable-row-transition"
+                     style="width: 100%;">
+                     <div class="hidden-columns">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                     </div>
+                     <div class="el-table__header-wrapper">
+                        <table cellspacing="0" cellpadding="0" border="0" class="el-table__header"
+                           style="width: 1010px;">
+                           <colgroup>
+                              <col name="el-table_11_column_55" width="200">
+                              <col name="el-table_11_column_56" width="200">
+                              <col name="el-table_11_column_57" width="305">
+                              <col name="el-table_11_column_58" width="305">
+                              <col name="gutter" width="0">
+                           </colgroup>
+                           <thead class="has-gutter">
+                              <tr class="">
+                                 <th colspan="1" rowspan="1" class="el-table_11_column_55     is-leaf">
+                                    <div class="cell">
+                                       Treatment Name
+                                       <div class="el-input">
+                                          <!----><input type="text" autocomplete="off" class="el-input__inner">
+                                          <!---->
+                                          <!---->
+                                          <!---->
+                                          <!---->
+                                       </div>
+                                    </div>
+                                 </th>
+                                 <th colspan="1" rowspan="1" class="el-table_11_column_56     is-leaf">
+                                    <div class="cell">
+                                       Arabic
+                                       <div class="el-input">
+                                          <!----><input type="text" autocomplete="off" class="el-input__inner">
+                                          <!---->
+                                          <!---->
+                                          <!---->
+                                          <!---->
+                                       </div>
+                                    </div>
+                                 </th>
+                                 <th colspan="1" rowspan="1" class="el-table_11_column_57  is-right   is-leaf">
+                                    <div class="cell"></div>
+                                 </th>
+                                 <th colspan="1" rowspan="1" class="el-table_11_column_58     is-leaf">
+                                    <div class="cell">Status</div>
+                                 </th>
+                                 <th class="gutter" style="width: 0px; display: none;"></th>
+                              </tr>
+                           </thead>
+                        </table>
+                     </div>
+                     <div class="el-table__body-wrapper is-scrolling-none" style="margin-top: 3%;">
+                        <table id="example" class="display" cellspacing="0" width="100%">
+                           <thead>
+                              <tr>
+                                 <th>Treatment Name</th>
+                                 <th>Arabic</th>
+                                 <th>Status</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr class="el-table__row">
+                                 <td>Package of 12 sessions</td>
+                                 <td>١٢ جلسة علاج طبيعي </td>
+                                 <td>
+                                    <div class="cell">
+                                       <label class="switch">
+                                          <input type="checkbox" checked>
+                                          <span class="slider round"
+                                             style="border-color: rgb(19, 206, 102); background-color: rgb(19, 206, 102);"></span>
+                                       </label>
+                                    </div>
+                                 </td>
+                              </tr>
+                              <tr class="el-table__row">
+                                 <td>Package of 3 sessions</td>
+                                 <td>٣ جلسات علاج طبيعي </td>
+                                 <td>
+                                    <div class="cell">
+                                       <label class="switch">
+                                          <input type="checkbox" checked>
+                                          <span class="slider round"
+                                             style="border-color: rgb(19, 206, 102); background-color: rgb(19, 206, 102);"></span>
+                                       </label>
+                                    </div>
+                                 </td>
+                              </tr>
+                              <tr class="el-table__row">
+                                 <td>Package of 6 sessions</td>
+                                 <td>٦ جلسات علاج طبيعي</td>
+                                 <td>
+                                    <div class="cell">
+                                       <label class="switch">
+                                          <input type="checkbox" checked>
+                                          <span class="slider round"
+                                             style="border-color: rgb(19, 206, 102); background-color: rgb(19, 206, 102);"></span>
+                                       </label>
+                                    </div>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!---->
+            <div class="pull-right m-t25">
+               <!---->
+            </div>
+         </div>
+      </main>
+   </section>
+</div>
+
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+<div role="tooltip" id="el-tooltip-9477" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2042; display: none;">
+   Appointment
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-7343" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2048; display: none;">
+   Employee
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-7647" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2052; display: none;">
+   Patient
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-9129" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center top; z-index: 2061; display: none;">
+   Accounts
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-2943" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2065; display: none;">
+   Role Management
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-5222" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2088; display: none;">
+   Settings
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-6056" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2092; display: none;">
+   Rate And Review
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-5114" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center top; z-index: 2094; display: none;">
+   Package
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-2554" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2102; display: none;">
+   Services
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-6209" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2106; display: none;">
+   Master
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>

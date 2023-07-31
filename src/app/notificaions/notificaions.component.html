@@ -1,0 +1,933 @@
+<div id="app">
+    <section class="el-container">
+       <div>
+          <menu class="menu-bar">
+             <a href="javascript:void(0);" class="toggle-menu">
+                <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span
+                      class="bar bar3"></span></div>
+             </a>
+             <a href="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+          </menu>
+          <app-sidebar></app-sidebar>
+          <nav class="nav-bar-none"></nav>
+       </div>
+ 
+       <main class="el-main dashboard">
+ 
+ 
+          <app-header></app-header>
+          <div>
+             <div>
+                <div class="o-flow-x">
+                   <div
+                      class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+                      style="width: 100%;">
+                      <div class="hidden-columns">
+                         <div></div>
+                         <div></div>
+                         <div></div>
+                         <div></div>
+                         <div placeholder="Package Type Name"></div>
+                         <div></div>
+                         <div></div>
+                         <div></div>
+                      </div>
+ 
+                     
+ 
+                      <div class="d-flex justify-content align-items-center">
+                         <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-flask"></i> Notifications</span>  
+                         <button id="package" data-toggle="modal" data-target="#add_department" class="add-btn mr-0 float-right"><i class="fa fa-plus-circle"></i> Add Notificaions</button>
+                      </div>
+ 
+ 
+                      <div class="el-card is-always-shadow noti_count_content">
+                        <!---->
+                        <div class="el-card__body">
+                           <ul class="dash-list ">
+                              <li>
+                                 <img src="../../assets/images/whatsapp.png" width="75">
+                                 <span>
+                                    Total Whatsapp Notification
+                                    <h3>2</h3>
+                                    <!-- <h3>0 <small>Today's</small></h3> -->
+                                 </span>
+                              </li>
+                              <li>
+                                <img src="../../assets/images/sms.png" width="75">
+                                 <span>
+                                    Total SMS Notification
+                                    <h3>2</h3>
+                                 </span>
+                              </li>
+                              <li>
+                                <img src="../../assets/images/mail.jpeg" width="75">
+                                 <span>
+                                    Total Push Notification
+                                    <h3>2</h3>
+                                 </span>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                      <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 1.5%;width:100%;">
+                        <h4 class="recent_txt">Recent 200 Notifications</h4>
+                         <table id="departmentsTable" class="display" cellspacing="0" width="100%">
+                            <thead>
+                               <tr>
+                                  <th>SNO</th>
+                                  <th>Notification Type</th>
+                                  <th>Notification Content</th>
+                                  <th>Notifications VIA</th>
+                                  <th>Patient name</th>
+                                  <th>Notification Status</th>
+                                  <th>View</th>
+                               </tr>
+                            </thead>
+                            <tbody>
+                               <tr class="el-table__row">
+                                  <td>1</td>
+                                  <td>Appoinment ReScheduled</td>
+                                  <td>Hi Nagaraj, Your Appoinment Rescheduled, Will Updated you Soon</td>
+                                  <td>SMS, Whatsapp, Push Noti</td>
+                                  <td>Nagaraj Muthraj</td>
+                                  <td>Success</td>
+                                  <td>
+                                     <div class="cell">
+                                        <i class="icon-pencil ico-pointer" id="ico-pointer"></i>
+                                     </div>
+                                  </td>
+                               </tr>
+                            </tbody>
+                         </table>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </main>
+    </section>
+ </div>
+ 
+ <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+ <div role="tooltip" id="el-tooltip-7343" aria-hidden="true" class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2005; display: none;">
+    Employee
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+ </div>
+ <div role="tooltip" id="el-tooltip-7647" aria-hidden="true" class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2010; display: none;">
+    Patient
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+ </div>
+ <div role="tooltip" id="el-tooltip-9477" aria-hidden="true" class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2028; display: none;">
+    Appointment
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+ </div>
+ <div role="tooltip" id="el-tooltip-9129" aria-hidden="true" class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2030; display: none;">
+    Accounts
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+ </div>
+ <div role="tooltip" id="el-tooltip-2943" aria-hidden="true" class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2032; display: none;">
+    Role Management
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+ </div>
+ <div role="tooltip" id="el-tooltip-6209" aria-hidden="true" class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2034; display: none;">
+    Master
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+ </div>
+ <div role="tooltip" id="el-tooltip-5114" aria-hidden="true" class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2036; display: none;">
+    Package
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+ </div>
+ 
+ 
+ 
+ <!-- The Modal  -->
+ <div id="myModal_view" class="modal schedule_modal">
+ 
+    <!-- Modal content -->
+    <div class="modal-content" style="width: 60% !important;">
+       <div class="modal-header" style="border-bottom: unset;">
+          <span class="close">&times;</span>
+          <h2></h2>
+       </div>
+       <div class="modal-body">
+          <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+             <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-12 el-col-xl-8"
+                style="padding-left: 30px; padding-right: 30px;">
+                <h6>Description</h6>
+                <p class="grid_content_text grid-txt">Uric Acid Test (Blood analysis) is an important test that your
+                   doctor may order to diagnose a range of diseases like gout.</p>
+             </div>
+          </div>
+          <div class="m-t50 el-row" style="margin-left: -15px; margin-right: -15px;">
+             <div class="el-col el-col-12" style="padding-left: 30px; padding-right: 30px;">
+                <h6>Instructions</h6>
+                <ul class="customdots">
+                   <li>
+                      &nbsp;This test does not require fasting.
+                   </li>
+                   <li>
+                      This test does not require fasting.
+                   </li>
+                </ul>
+             </div>
+             <div class="el-col el-col-12" style="padding-left: 30px; padding-right: 30px;">
+                <h6>Instructions in Arabic</h6>
+                <ul class="customdots">
+                   <li>
+                      هذا التحليل لا يتطلب الصيام.
+                   </li>
+                   <li>
+                      هذا التحليل لا يتطلب الصيام.
+                   </li>
+                </ul>
+             </div>
+          </div>
+          <div class="m-t50 el-row" style="margin-left: -15px; margin-right: -15px;">
+             <div class="el-col el-col-12" style="padding-left: 30px; padding-right: 30px;">
+                <h6>Test Included in this Package</h6>
+                <ul class="customdots">
+                   <li>
+                      Uric Acid in Serum
+                   </li>
+                </ul>
+             </div>
+             <!---->
+          </div>
+       </div>
+       <div class="modal-footer">
+          <h3></h3>
+       </div>
+    </div>
+ </div>
+ 
+ 
+ <div id="add_department_old" class="modal schedule_modal" style="padding: 5%;">
+    <div class="modal-content" style="width: 60% !important;">
+       <div class="modal-header" style="border-bottom: unset;">
+          <span class="close" (click)="closeModal()">&times;</span>
+          <h2>Send Notification</h2>
+       </div>
+       <div class="modal-body">
+        <form class="el-form newform el-form--label-top" id="departmentForm" >
+
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                    <div class="el-form-item is-required">
+                        <label for="fn.en" class="el-form-item__label">Notification Type</label>
+                        <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                            <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                                placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+
+                            <!-- <ul id="noti_img">
+                                <li><input type="radio" id="cb1" name="noti_type" (change)="NotificationTypeChange($event.target)" value="1"/>
+                                    <label for="cb1"><img src="../../assets/images/whatsapp.png" /></label>
+                                </li>
+                                <li><input type="radio" id="cb2" name="noti_type" (change)="NotificationTypeChange($event.target)" value="2"/>
+                                    <label for="cb2"><img src="../../assets/images/sms.png" /></label>
+                                </li>
+                                <li><input type="radio" id="cb3" name="noti_type" (change)="NotificationTypeChange($event.target)" value="3"/>
+                                    <label for="cb3"><img src="../../assets/images/mail.jpeg" /></label>
+                                </li>
+                            </ul> -->
+
+                            <div
+                                class="invalid-feedback">
+                                <span>This value is required.</span>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                            <input id="departmentName" type="text" autocomplete="off" placeholder="Enter Package Name"
+                                class="el-input__inner">
+                            <select class="el-input__inner">
+                                <option>Select</option>
+                                <option>Appointment Rescheduled</option>
+                                <option>Appoinment Remainder</option>
+                                <option>CareGiven Change</option>
+                                <option>Appointment Cancelled</option>
+                                <option>Offer Remainder</option>
+                            </select>
+                        </div>      
+                        </div>               -->
+                    </div>
+                </div>
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;margin-top:1%;" *ngIf="notificationType == 3">
+                    <div class="el-form-item">
+                        <label for="fn.ar" class="el-form-item__label" style="width: 100%;text-align:center;">Device Details</label>
+                        <div class="el-form-item__content device_details">
+                            <ul class="dash-list three">
+                                <li>
+                                   <img src="../../assets/images/ios_logo.png" width="50">
+                                   <span>
+                                       IOS Device
+                                      <h3>2</h3>
+                                      <!-- <h3>0 <small>Today's</small></h3> -->
+                                   </span>
+                                </li>
+                                <li>
+                                   <img src="../../assets/images/android_logo.png" width="50">
+                                   <span>
+                                        Android Device
+                                      <h3>2</h3>
+                                   </span>
+                                </li>
+                                
+                             </ul>
+                            <!-- <div class="line-input el-input">
+
+                            <input type="text" class="el-input__inner" 
+                                placeholder="Enter Package Name in Arabic" />
+
+                            <div
+                                class="invalid-feedback">
+                                <span>This value is required.</span>
+                            </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                   <div class="el-form-item is-required">
+                       <label for="fn.ar" class="el-form-item__label">Campaign Title</label>
+                       <div class="el-form-item__content">
+                           <div class="line-input el-input">
+                           <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                               placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+
+                           <input type="text" class="el-input__inner"  placeholder="Enter Campaign Title" />
+
+                           <div
+                               class="invalid-feedback">
+                               <span>This value is required.</span>
+                           </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                   <div class="el-form-item is-required">
+                       <label for="fn.ar" class="el-form-item__label">Campaign Title Arabic</label>
+                       <div class="el-form-item__content">
+                           <div class="line-input el-input">
+                           <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                               placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+
+                           <input type="text" class="el-input__inner"  placeholder="Enter Campaign Title in Arabic" />
+
+                           <div
+                               class="invalid-feedback">
+                               <span>This value is required.</span>
+                           </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;" *ngIf="notificationType == 3">
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                    <div class="el-form-item is-required">
+                        <label for="fn.ar" class="el-form-item__label">Notification Title</label>
+                        <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                            <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                                placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+
+                            <input type="text" class="el-input__inner" 
+                                placeholder="Enter Notification Title" />
+
+                            <div
+                                class="invalid-feedback">
+                                <span>This value is required.</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                    <div class="el-form-item is-required">
+                        <label for="fn.ar" class="el-form-item__label">Notification Title Arabic</label>
+                        <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                            <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                                placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+
+                            <input type="text" class="el-input__inner" 
+                                placeholder="Enter Notification Title in Arabic" />
+
+                            <div
+                                class="invalid-feedback">
+                                <span>This value is required.</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                    <div class="el-form-item is-required">
+                        <label for="fn.ar" class="el-form-item__label">Notification Content</label>
+                        <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                            <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                                placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+
+                            <input type="text" class="el-input__inner" 
+                                placeholder="Enter Notification Content" />
+
+                            <div
+                                class="invalid-feedback">
+                                <span>This value is required.</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                    <div class="el-form-item is-required">
+                        <label for="fn.ar" class="el-form-item__label">Notification Content Arabic</label>
+                        <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                            <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                                placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+
+                            <input type="text" class="el-input__inner" 
+                                placeholder="Enter Notification Content in Arabic" />
+
+                            <div
+                                class="invalid-feedback">
+                                <span>This value is required.</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                      <label for="fn.ar" class="el-form-item__label">Notification to</label>
+                      <div class="el-form-item__content">
+                          <div class="line-input el-input notification_flex">   
+                              <label class="radio_label">
+                                 <input type="radio" name="noti_to" class="noti_to" checked value="1" (change)="NotificationTo($event.target)"/>
+                                 <span>All</span>
+                              </label>
+                              <label class="radio_label">
+                                 <input type="radio" name="noti_to" class="noti_to" value="2" (change)="NotificationTo($event.target)"/>
+                                 <span>Male</span>
+                              </label>
+                              <label class="radio_label">
+                                 <input type="radio" name="noti_to" class="noti_to" value="3" (change)="NotificationTo($event.target)"/>
+                                 <span>Female</span>
+                              </label>
+
+                              <label class="radio_label">
+                                 <input type="radio" name="noti_to" class="noti_to" value="4" (change)="NotificationTo($event.target)"/>
+                                 <span>Home laboratory Tests</span>
+                              </label>
+                              <label class="radio_label">
+                                 <input type="radio" name="noti_to" class="noti_to" value="5" (change)="NotificationTo($event.target)"/>
+                                 <span>Home Physical therapy</span>
+                              </label>
+                              <label class="radio_label">
+                                 <input type="radio" name="noti_to" class="noti_to" value="6" (change)="NotificationTo($event.target)"/>
+                                 <span>Individual Message</span>
+                              </label>
+                              <label class="radio_label">
+                                 <input type="radio" name="noti_to" class="noti_to" value="7" (change)="NotificationTo($event.target)"/>
+                                 <span>Group Message</span>
+                              </label>
+                              <label class="radio_label">
+                                 <input type="radio" name="noti_to" class="noti_to" value="8" (change)="NotificationTo($event.target)"/>
+                                 <span>Other</span>
+                              </label>
+                          <div
+                              class="invalid-feedback">
+                              <span>This value is required.</span>
+                          </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;" *ngIf="notificationTo == 6 || notificationTo == 7 || notificationTo == 8">
+                    <div class="el-form-item is-required">
+                        <label for="fn.ar" class="el-form-item__label">Select Patient</label>
+                        <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                                
+                                    <ng-multiselect-dropdown
+                                        [settings]="dropdownSettings"
+                                        [data]="dropdownList"
+                                    >
+                                    </ng-multiselect-dropdown>
+                            <div
+                                class="invalid-feedback">
+                                <span>This value is required.</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                    <div class="el-form-item is-required">
+                        <label for="fn.ar" class="el-form-item__label">Email Id</label>
+                        <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                            <input id="departmentNameArabic" type="text" autocomplete="off"
+                                placeholder="Enter Package Name in Arabic" class="el-input__inner">
+
+                            <input type="text" class="el-input__inner" 
+                                placeholder="Enter Email ID" />
+
+                            <div
+                                class="invalid-feedback">
+                                <span>This value is required.</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+            <br />
+            <div class="text-right">
+            <button type="submit" class="btn btn-primary el-button el-button--primary save">
+                Send
+            </button>
+            </div>
+        </form>
+       </div>
+       <div class="modal-footer">
+          <h3></h3>
+       </div>
+    </div>
+ </div>
+
+
+ <div id="add_department" class="modal schedule_modal" style="padding: 5%;">
+    <div class="modal-content" style="width: 60% !important;">
+       <div class="modal-header" style="border-bottom: unset;">
+          <span class="close" (click)="closeModal()">&times;</span>
+          <h2>Send Notification</h2>
+       </div>
+       <div class="modal-body">
+        <form class="el-form newform el-form--label-top" id="departmentForm" >
+
+            
+
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;display:flex">
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-15" style="border: 1px solid #dfdfdf;padding: 2%;margin: 1%;border-radius: 10px;">
+                    <div class="el-row" style="margin-left: -15px; margin-right: -15px; margin-top: 1%;">
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24" style="padding-left: 15px; padding-right: 15px;">
+                            <div class="el-form-item is-required">
+                                <label for="fn.en" class="el-form-item__label">Choose Notification Type</label>
+                                <div class="el-form-item__content">
+                                    <div class="line-input el-input">
+                                    <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                                        placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+        
+                                    <ul id="noti_img">
+                                        <li><input type="radio" id="cb1" name="__noti_type" (change)="NotificationTypeChange($event.target)" value="1"/>
+                                            <label for="cb1"><img src="../../assets/images/whatsapp.png" /></label>
+                                        </li>
+                                        <li><input type="radio" id="cb2" name="__noti_type" (change)="NotificationTypeChange($event.target)" value="2"/>
+                                            <label for="cb2"><img src="../../assets/images/sms.png" /></label>
+                                        </li>
+                                        <li><input type="radio" id="cb3" name="__noti_type" (change)="NotificationTypeChange($event.target)" value="3"/>
+                                            <label for="cb3"><img src="../../assets/images/mail.jpeg" /></label>
+                                        </li>
+                                        <li><input type="radio" id="cb4" name="__noti_type" (change)="NotificationTypeChange($event.target)" value="4"/>
+                                            <label for="cb4"><img src="../../assets/images/push_noti_icon.jpeg" /></label>
+                                        </li>
+                                    </ul>
+        
+                                    <div
+                                        class="invalid-feedback">
+                                        <span>This value is required.</span>
+                                    </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="el-form-item__content">
+                                    <div class="line-input el-input">
+                                    <input id="departmentName" type="text" autocomplete="off" placeholder="Enter Package Name"
+                                        class="el-input__inner">
+                                    <select class="el-input__inner">
+                                        <option>Select</option>
+                                        <option>Appointment Rescheduled</option>
+                                        <option>Appoinment Remainder</option>
+                                        <option>CareGiven Change</option>
+                                        <option>Appointment Cancelled</option>
+                                        <option>Offer Remainder</option>
+                                    </select>
+                                </div>      
+                                </div>               -->
+                            </div>
+                        </div>                
+        
+                    </div>
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-right: 10px;">
+                        <div class="el-form-item is-required">
+                            <label for="fn.en" class="el-form-item__label">Notification Type</label>
+                            
+                            <div class="el-form-item__content">
+                                <div class="line-input el-input">
+                                <select class="el-input__inner" (change)="NotificationTo($event.target)">
+                                    <option value="1">Individual Message</option>
+                                    <option value="2" selected>Group Message</option>
+                                </select>
+                            </div>      
+                            </div>              
+                        </div>
+                    </div>
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-right: 10px;">
+                        <div class="el-form-item is-required">
+                            <label for="fn.en" class="el-form-item__label">Notify to</label>
+                            
+                            <div class="el-form-item__content">
+                                <div class="line-input el-input">
+                                <select class="el-input__inner">
+                                    <option value="">-Select-</option>
+                                    <option value="1">Both Caregiver and Patient</option>
+                                    <option value="2">Patient</option>
+                                    <option value="3">Caregiver</option>
+                                </select>
+                            </div>      
+                            </div>              
+                        </div>
+                    </div>
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-right: 10px;" *ngIf="notificationTo == 2">
+                        <div class="el-form-item is-required">
+                            <label for="fn.en" class="el-form-item__label">Gender</label>
+                            
+                            <div class="el-form-item__content">
+                                <div class="line-input el-input">
+                                <select class="el-input__inner">
+                                    <option value="">-Select-</option>
+                                    <option value="1">All</option>
+                                    <option value="2">Male</option>
+                                    <option value="3">Female</option>
+                                </select>
+                            </div>      
+                            </div>              
+                        </div>
+                    </div>
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" *ngIf="notificationTo == 2">
+                        <div class="el-form-item is-required">
+                            <label for="fn.en" class="el-form-item__label">Department</label>
+                            
+                            <div class="el-form-item__content">
+                                <div class="line-input el-input">
+                                <select class="el-input__inner">
+                                    <option value="">-Select-</option>
+                                    <option value="1">Home laboratory Tests</option>
+                                    <option value="2">Home Physical therapy</option>
+                                    <option value="3">Home Nursing Services</option>
+                                    <option value="4">Home Visit Doctor</option>
+                                    <option value="5">Immunizations</option>
+                                    <option value="6">Children and Older People Escort</option>
+                                </select>
+                            </div>      
+                            </div>              
+                        </div>
+                    </div>
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24" *ngIf="notificationTo == 1">
+                        <div class="el-form-item is-required">
+                            <label for="fn.ar" class="el-form-item__label">Select Patient</label>
+                            <div class="el-form-item__content">
+                                <div class="line-input el-input">
+                                    
+                                        <ng-multiselect-dropdown
+                                            [settings]="dropdownSettings"
+                                            [data]="dropdownList"
+                                        >
+                                        </ng-multiselect-dropdown>
+                                    <div
+                                        class="invalid-feedback">
+                                        <span>This value is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="add-btn el-button save">
+                            Search
+                        </button>
+                    </div>
+                </div>
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-8" style="border: 1px solid #dfdfdf; padding: 1%; margin: 1%; border-radius: 10px;">
+                    <div class="el-form-item">
+                        <div class="el-form-item__content">
+                            <label for="fn.ar" class="el-form-item__label" style="width: 100%;text-align:center;">Targetted Audience</label>
+                            <ul class="dash-list target three">
+                                <li style="width: 100% ! important;">
+                                   <img src="../../assets/images/users_icons.png" width="100">
+                                   <span>
+                                      <h3>17026</h3>
+                                      <!-- <h3>0 <small>Today's</small></h3> -->
+                                   </span>
+                                </li>
+                             </ul>
+                            <ul class="dash-list target three">
+                                <li>
+                                   <img src="../../assets/images/male_icon.png" width="45">
+                                   <span>
+                                      <h3>10113</h3>
+                                      <!-- <h3>0 <small>Today's</small></h3> -->
+                                   </span>
+                                </li>
+                                <li>
+                                   <img src="../../assets/images/female_icon.png" width="45">
+                                   <span>
+                                      <h3>7913</h3>
+                                   </span>
+                                </li>
+                                
+                             </ul>
+                            <ul class="dash-list target three">
+                                <li>
+                                   <img src="../../assets/images/ios_logo.png" width="50">
+                                   <span>
+                                      <h3>5900</h3>
+                                      <!-- <h3>0 <small>Today's</small></h3> -->
+                                   </span>
+                                </li>
+                                <li>
+                                   <img src="../../assets/images/android_logo.png" width="50">
+                                   <span>
+                                      <h3>9700</h3>
+                                   </span>
+                                </li>
+                                
+                             </ul>
+                            <!-- <div class="line-input el-input">
+
+                            <input type="text" class="el-input__inner" 
+                                placeholder="Enter Package Name in Arabic" />
+
+                            <div
+                                class="invalid-feedback">
+                                <span>This value is required.</span>
+                            </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        <form class="el-form newform el-form--label-top" id="departmentForm" >
+
+            
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;margin-top:1%">
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                    <div class="el-form-item is-required">
+                        <label for="fn.ar" class="el-form-item__label">Campaign Title</label>
+                        <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                            <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                                placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+ 
+                            <input type="text" class="el-input__inner"  placeholder="Enter Campaign Title" />
+ 
+                            <div
+                                class="invalid-feedback">
+                                <span>This value is required.</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ 
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                    <div class="el-form-item is-required">
+                        <label for="fn.ar" class="el-form-item__label">Campaign Title Arabic</label>
+                        <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                            <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                                placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+ 
+                            <input type="text" class="el-input__inner"  placeholder="Enter Campaign Title in Arabic" />
+ 
+                            <div
+                                class="invalid-feedback">
+                                <span>This value is required.</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+ 
+             <div class="el-row" style="margin-left: -15px; margin-right: -15px;" *ngIf="notificationType == 4">
+                 <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                     <div class="el-form-item is-required">
+                         <label for="fn.ar" class="el-form-item__label">Notification Title</label>
+                         <div class="el-form-item__content">
+                             <div class="line-input el-input">
+                             <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                                 placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+ 
+                             <input type="text" class="el-input__inner" 
+                                 placeholder="Enter Notification Title" />
+ 
+                             <div
+                                 class="invalid-feedback">
+                                 <span>This value is required.</span>
+                             </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+ 
+                 <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                     <div class="el-form-item is-required">
+                         <label for="fn.ar" class="el-form-item__label">Notification Title Arabic</label>
+                         <div class="el-form-item__content">
+                             <div class="line-input el-input">
+                             <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                                 placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+ 
+                             <input type="text" class="el-input__inner" 
+                                 placeholder="Enter Notification Title in Arabic" />
+ 
+                             <div
+                                 class="invalid-feedback">
+                                 <span>This value is required.</span>
+                             </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+             <div class="el-row" style="margin-left: -15px; margin-right: -15px;" *ngIf="notificationType == 3">
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24" style="padding-left: 15px; padding-right: 15px;">
+                    <div class="el-form-item is-required">
+                        <label for="fn.ar" class="el-form-item__label">Mail Subject</label>
+                        <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                            <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                                placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+
+                            <input type="text" class="el-input__inner" 
+                                placeholder="Enter Notification Title" />
+
+                            <div
+                                class="invalid-feedback">
+                                <span>This value is required.</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;" *ngIf="notificationType == 3">
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24" style="padding-left: 15px; padding-right: 15px;">
+                    <div class="el-form-item is-required">
+                        <label for="fn.ar" class="el-form-item__label">Mail Body</label>
+                        <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                            <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                                placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+                            <!-- <div class="summernote"></div> -->
+                            <div [ngxSummernote]="config"></div>
+                            <!-- <textarea class="el-input__inner" 
+                                 placeholder="Enter Notification Content" rows="10" style="height: auto;"></textarea> -->
+
+                                 <!-- <summernote></summernote> -->
+                            <div
+                                class="invalid-feedback">
+                                <span>This value is required.</span>
+                            </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+             
+             <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                 <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                     <div class="el-form-item is-required">
+                         <label for="fn.ar" class="el-form-item__label">Notification Content</label>
+                         <div class="el-form-item__content">
+                             <div class="line-input el-input">
+                             <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                                 placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+ 
+                             <textarea class="el-input__inner" 
+                                 placeholder="Enter Notification Content" rows="5" style="height: auto;"></textarea>
+ 
+                             <div
+                                 class="invalid-feedback">
+                                 <span>This value is required.</span>
+                             </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+ 
+                 <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                     <div class="el-form-item is-required">
+                         <label for="fn.ar" class="el-form-item__label">Notification Content Arabic</label>
+                         <div class="el-form-item__content">
+                             <div class="line-input el-input">
+                             <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
+                                 placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+ 
+
+                            <textarea class="el-input__inner" 
+                                placeholder="Enter Notification Content in Arabic" rows="5" style="height: auto;"></textarea>
+ 
+                             <div
+                                 class="invalid-feedback">
+                                 <span>This value is required.</span>
+                             </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+
+            <div class="text-right">
+            <button type="submit" class="add-btn el-button el-button--primary save">
+                Send
+            </button>
+            </div>
+        </form>
+       </div>
+       <div class="modal-footer">
+          <h3></h3>
+       </div>
+    </div>
+ </div>
+
+ 
+ 

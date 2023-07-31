@@ -1,0 +1,384 @@
+<div id="app">
+    <section class="el-container">
+        <div>
+            <menu class="menu-bar">
+                <a href="javascript:void(0);" class="toggle-menu">
+                    <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+                </a>
+                <a href="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+            </menu>
+            <app-sidebar></app-sidebar>
+            <app-submenu></app-submenu>
+        </div>
+
+        <main class="el-main">
+            <app-header></app-header>
+            <div>
+                <div>
+                    <div class="o-flow-x">
+                        <div class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition" style="width: 100%;">
+                            <div class="hidden-columns">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div placeholder="Package Type Name"></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                            
+
+                            <div class="d-flex justify-content align-items-center">
+                                <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-package"></i> Employer Package List</span>  
+                                <button id="package" data-toggle="modal" data-target="#add_labPackage" (click)="showAddNewPackageView()" class="add-btn mr-0 float-right"><i class="fa fa-plus-circle"></i> Add Package</button>
+                            </div>
+
+                            <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%;width:100%;">
+                                <table id="labpackages" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Package ID</th>
+                                            <th>App Image</th>
+                                            <th>Package Name</th>
+                                            <th>Package Name Arabic</th>
+                                            <th>Package Category</th>
+                                            <th>No. of Tests</th>
+                                            <th>Prie in SAR</th>
+                                            <th>View</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="el-table__row" *ngFor="let package of servicePackageList">
+                                            <td>{{package.packageId}}</td>
+                                            <td>
+                                                <div _ngcontent-eme-c46="" class="d-flex-center ">
+                                                    <span _ngcontent-eme-c46="" class="zoom">
+                                          <img _ngcontent-eme-c46="" *ngIf="package.imagePath == null"
+                                             src="assets/images/thumbnail.png" class="image-cover"
+                                             style="max-width:200px;width:100%; max-height:100px;">
+                                          <img _ngcontent-eme-c46="" *ngIf="package.imagePath != null"
+                                             [src]="package.imagePath" class="image-cover"
+                                             style="max-width:200px;width:100%; max-height:100px;">
+                                            </span>
+                                                </div>
+                                            </td>
+
+                                            <td>{{package.packageName}}</td>
+                                            <td>{{package.packageNameArabic}}</td>
+                                            <td>{{package.pacakgeCategoryName}}</td>
+                                            <td>{{package.noOfTestsIncluded}}</td>
+                                            <td>
+                                                <div class="cell" id="value">
+                                                    <div>SAR {{package.packagePrice}}</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="cell">
+                                                    <i class="icon-pencil ico-pointer" id="ico-pointer" (click)="labtechpackagelistEdit(package.packageId)"></i>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+</div>
+
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+<div role="tooltip" id="el-tooltip-7343" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2005; display: none;">
+    Employee
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-7647" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2010; display: none;">
+    Patient
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-9477" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2028; display: none;">
+    Appointment
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-9129" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2030; display: none;">
+    Accounts
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-2943" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2032; display: none;">
+    Role Management
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-6209" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2034; display: none;">
+    Master
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-5114" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2036; display: none;">
+    Package
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+
+
+
+<!-- The Modal  -->
+<div id="myModal_view" class="modal schedule_modal">
+
+    <!-- Modal content -->
+    <div class="modal-content" style="width: 60% !important;">
+        <div class="modal-header" style="border-bottom: unset;">
+            <span class="close">&times;</span>
+            <h2></h2>
+        </div>
+        <div class="modal-body">
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-12 el-col-xl-8" style="padding-left: 30px; padding-right: 30px;">
+                    <h6>Description</h6>
+                    <p class="grid_content_text grid-txt">Uric Acid Test (Blood analysis) is an important test that your doctor may order to diagnose a range of diseases like gout.</p>
+                </div>
+            </div>
+            <div class="m-t50 el-row" style="margin-left: -15px; margin-right: -15px;">
+                <div class="el-col el-col-12" style="padding-left: 30px; padding-right: 30px;">
+                    <h6>Instructions</h6>
+                    <ul class="customdots">
+                        <li>
+                            &nbsp;This test does not require fasting.
+                        </li>
+                        <li>
+                            This test does not require fasting.
+                        </li>
+                    </ul>
+                </div>
+                <div class="el-col el-col-12" style="padding-left: 30px; padding-right: 30px;">
+                    <h6>Instructions in Arabic</h6>
+                    <ul class="customdots">
+                        <li>
+                            هذا التحليل لا يتطلب الصيام.
+                        </li>
+                        <li>
+                            هذا التحليل لا يتطلب الصيام.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="m-t50 el-row" style="margin-left: -15px; margin-right: -15px;">
+                <div class="el-col el-col-12" style="padding-left: 30px; padding-right: 30px;">
+                    <h6>Test Included in this Package</h6>
+                    <ul class="customdots">
+                        <li>
+                            Uric Acid in Serum
+                        </li>
+                    </ul>
+                </div>
+                <!---->
+            </div>
+        </div>
+        <div class="modal-footer">
+            <h3></h3>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="add_labPackage" class="modal schedule_modal" style="padding-top: 50px;">
+    <div class="modal-content" style="width: 60% !important;">
+        <div class="modal-header" style="border-bottom: unset;" (click)="onClickCloseModel()">
+            <span class="close" (click)="close()">&times;</span>
+            <div class="modal-title">{{ modalTitle }}</div>
+        </div>
+        <div class="modal-body">
+            <form class="el-form newform el-form--label-top" id="labtechpackagelistForm" (ngSubmit)="postLabPackageToServer()" [formGroup]="typeValidationForm">
+
+                <div class="el-row mt-3" style="margin-left: -15px; margin-right: -15px;">
+
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                        <div class="el-form-item is-required">
+                            <label for="fn.en" class="el-form-item__label">Package Name</label>
+                            <div class="el-form-item__content">
+                                <div class="line-input el-input">
+                                    <input type="text" class="el-input__inner" formControlName="packageName" [ngClass]="{'is-invalid': type['packageName'].errors && (type['packageName'].dirty || type['packageName'].touched)}" placeholder="Enter Package Name" />
+
+                                    <div *ngIf="type['packageName'].errors && (type['packageName'].dirty || type['packageName'].touched)" class="invalid-feedback">
+                                        <span *ngIf="type['packageName'].errors['required']">This value is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                        <div class="el-form-item is-required">
+                            <label for="fn.ar" class="el-form-item__label">Package Name in Arabic</label>
+                            <div class="el-form-item__content">
+                                <div class="line-input el-input">
+                                    <!-- <input id="serviceNameArabic" type="text" autocomplete="off"
+                              placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+                                    <input type="text" class="el-input__inner" formControlName="packageNameArabic" [ngClass]="{'is-invalid': type['packageNameArabic'].errors && (type['packageNameArabic'].dirty || type['packageNameArabic'].touched)}" placeholder="Enter Package Name in Arabic"
+                                    />
+
+                                    <div *ngIf="type['packageNameArabic'].errors && (type['packageNameArabic'].dirty || type['packageNameArabic'].touched)" class="invalid-feedback">
+                                        <span *ngIf="type['packageNameArabic'].errors['required']">This value is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                        <div class="el-form-item is-required">
+                            <label for="ln.en" class="el-form-item__label">Package Cost</label>
+                            <div class="el-form-item__content">
+                                <div class="line-input el-input">
+                                    <input type="text" class="el-input__inner" formControlName="packagePrice" [ngClass]="{'is-invalid': type['packagePrice'].errors && (type['packagePrice'].dirty || type['packagePrice'].touched)}" placeholder="Enter Package Cost" />
+
+                                    <div *ngIf="type['packagePrice'].errors && (type['packagePrice'].dirty || type['packagePrice'].touched)" class="invalid-feedback">
+                                        <span *ngIf="type['packagePrice'].errors['required']">This value is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                        <div class="el-form-item is-required">
+                            <label for="role_id" class="el-form-item__label">Select Category</label>
+                            <div class="el-form-item__content">
+                                <div class="el-select line-input">
+                                    <select class="select" (change)="serviceCategorySelected($event)" formControlName="categoryId" [ngClass]="{'is-invalid': type['categoryId'].errors && (type['categoryId'].dirty || type['categoryId'].touched)}">
+                              <option value="">Select Category</option>
+                              <option class="el-select-dropdown__item d-flex hover"
+                                 *ngFor='let category of serviceCategories' value={{category.serviceId}}>
+                                 <span class="eloptionpsis">{{category.categoryName}}</span></option>
+                           </select>
+                                    <div *ngIf="type['categoryId'].errors && (type['categoryId'].dirty || type['categoryId'].touched)" class="invalid-feedback">
+                                        <span *ngIf="type['categoryId'].errors['required']">This value is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                        <div class="el-form-item is-required">
+                            <label for="ln.ar" class="el-form-item__label">Description</label>
+                            <div class="el-form-item__content">
+                                <div class="line-input el-input">
+                                    <textarea type="text" class="el-input__inner" formControlName="packageDescription" [ngClass]="{'is-invalid': type['packageDescription'].errors && (type['packageDescription'].dirty || type['packageDescription'].touched)}" placeholder="Enter Description"></textarea>
+                                    <div *ngIf="type['packageDescription'].errors && (type['packageDescription'].dirty || type['packageDescription'].touched)" class="invalid-feedback">
+                                        <span *ngIf="type['packageDescription'].errors['required']">This value is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                        <div class="el-form-item is-required">
+                            <label for="ln.ar" class="el-form-item__label">Description in Arabic</label>
+                            <div class="el-form-item__content">
+                                <div class="line-input el-input">
+                                    <textarea type="text" class="el-input__inner" formControlName="packageDescriptionArabic" [ngClass]="{'is-invalid': type['packageDescriptionArabic'].errors && (type['packageDescription'].dirty || type['packageDescription'].touched)}" placeholder="Enter Description"></textarea>
+                                    <div *ngIf="type['packageDescriptionArabic'].errors && (type['packageDescriptionArabic'].dirty || type['packageDescriptionArabic'].touched)" class="invalid-feedback">
+                                        <span *ngIf="type['packageDescriptionArabic'].errors['required']">This value is
+                                 required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                        <div class="el-form-item is-required">
+                            <label for="ln.ar" class="el-form-item__label">Instruction</label>
+                            <div class="el-form-item__content">
+                                <div class="line-input el-input">
+                                    <textarea type="text" class="el-input__inner" formControlName="instructions" [ngClass]="{'is-invalid': type['instructions'].errors && (type['instructions'].dirty || type['instructions'].touched)}" placeholder="Enter Instruction"></textarea>
+                                    <div *ngIf="type['instructions'].errors && (type['instructions'].dirty || type['instructions'].touched)" class="invalid-feedback">
+                                        <span *ngIf="type['instructions'].errors['required']">This value is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                        <div class="el-form-item is-required">
+                            <label for="ln.ar" class="el-form-item__label">Instruction in Arabic</label>
+                            <div class="el-form-item__content">
+                                <div class="line-input el-input">
+                                    <textarea type="text" class="el-input__inner" formControlName="instructionsArabic" [ngClass]="{'is-invalid': type['instructionsArabic'].errors && (type['instructionsArabic'].dirty || type['instructionsArabic'].touched)}" placeholder="Enter Instruction in Arabic"></textarea>
+                                    <div *ngIf="type['instructionsArabic'].errors && (type['instructionsArabic'].dirty || type['instructionsArabic'].touched)" class="invalid-feedback">
+                                        <span *ngIf="type['instructionsArabic'].errors['required']">This value is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 5%;">
+                        <div class="el-form-item is-required">
+                            <div class="el-form-item__content">
+                                <div class="line-input el-input">
+                                    <input type="search" class="form-control" placeholder="Search by Packages">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                        <div class="el-form-item is-required">
+                            <div class="el-form-item__content">
+                                <div class="line-input el-input">
+                                    <input type="text" class="form-control" placeholder="Search by Packages">
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <select class="form-control" id="my-select" formControlName="testIncluded" multiple>
+                  <option *ngFor="let test of individualTestList" [value]="test.serviceId">{{test.labTestCategoryName}}
+                     -
+                     {{test.serviceName}}</option>
+               </select>
+
+                    <br />
+
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                        <div class="el-form-item is-required">
+                            <label for="fn.ar" class="el-form-item__label">Choose Image</label>
+                            <div class="el-form-item__content">
+                                <div id="beforefilepreview">
+                                    <div tabindex="10" class="el-upload el-upload--text">
+                                        <label class="d-flex-center" for="file_package">
+                                 <img src="assets/images/photoupload.svg" class="avatar-img">
+                                 <input type="file" id="file_package" accept="image/*" class="form-control"
+                                    (change)="handleFileInput($event.target)" hidden />
+                                 <span class="gray-color">Upload Photo</span>
+                              </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary el-button el-button--primary save" [disabled]="!this.typeValidationForm.valid">
+                  Submit
+               </button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <h3></h3>
+        </div>
+    </div>
+
+</div>

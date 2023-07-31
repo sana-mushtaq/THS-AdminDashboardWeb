@@ -1,0 +1,103 @@
+<div id="app">
+   <section class="el-container">
+      <div>
+         <menu class="menu-bar">
+            <a routerLink="javascript:void(0);" class="toggle-menu">
+               <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span
+                     class="bar bar3"></span></div>
+            </a>
+            <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+         </menu>
+         <app-sidebar></app-sidebar>
+         <app-submenu></app-submenu>
+      </div>
+      <main class="el-main">
+         <app-header></app-header>
+         <div>
+            <!---->
+            <!---->
+            <div>
+               <h4>Documents List</h4>
+               <div class="o-flow-x">
+                  <div
+                     class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+                     style="width: 100%;">
+                     <div class="hidden-columns">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                     </div>
+
+                     <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%;">
+                        <!-- <table cellspacing="0" cellpadding="0" border="0" class="el-table__body" style="width: 1240px;"> -->
+                        <table id="docTable" class="display" cellspacing="0" width="100%">
+                           <thead>
+                              <tr>
+                                 <th>Patient ID</th>
+                                 <th>Patient Name</th>
+                                 <th>Mobile</th>
+                                 <th>Appointment Id</th>
+                                 <th>Employee</th>
+                                 <th>Emp Type</th>
+                                 <th>Service Type</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <!-- <tr routerLink="../viewdoc" class="el-table__row">
+                                 <td>PAT5Wp2ntA</td>
+                                 <td>Lama Saleh</td>
+                                 <td>542259742</td>
+                                 <td>APP03221103018</td>
+                                 <td>lab Female lab Female</td>
+                                 <td>Lab Technician</td>
+                                 <td>Home Visit</td>
+                              </tr>
+
+                              <tr class="el-table__row">
+                                 <td>PATGhOttlF</td>
+                                 <td>Aqab Alqahtani</td>
+                                 <td>555931550</td>
+                                 <td>APP03221102958</td>
+                                 <td>Nurse Female</td>
+                                 <td>Nurse</td>
+                                 <td>Home Visit</td>
+                              </tr>
+                              <tr class="el-table__row">
+                                 <td>PATAhx1gL4</td>
+                                 <td>Nawaf BinBaz</td>
+                                 <td>550040160</td>
+                                 <td>APP03221102898</td>
+                                 <td>ghannam almutairi</td>
+                                 <td>Nurse</td>
+                                 <td>Home Visit</td>
+                              </tr> -->
+
+                           </tbody>
+                        </table>
+                        <!---->
+                        <!---->
+                     </div>
+
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </main>
+   </section>
+</div>
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+<div role="tooltip" id="el-tooltip-7343" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2005; display: none;">
+   Employee
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-7647" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2010; display: none;">
+   Patient
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>

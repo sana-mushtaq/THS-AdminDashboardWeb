@@ -1,0 +1,127 @@
+<app-header></app-header>
+<div id="app">
+   <section class="el-container">
+      <div>
+         <menu class="menu-bar">
+            <a routerLink="javascript:void(0);" class="toggle-menu">
+               <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span
+                     class="bar bar3"></span></div>
+            </a>
+            <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+         </menu>
+         <app-sidebar></app-sidebar>
+         <nav class="nav-bar">
+            <a routerLink="../dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png"
+                  width="60%"></a>
+            <ul>
+               <li><a routerLink="../nurse" class="light-blue-text"><i class="f-size14 icon-bonnet"></i> Nurse</a></li>
+               <li><a routerLink="../technician" class="thick-blue-text"><i class="icon-flask"></i> Lab technician</a>
+               </li>
+               <!-- <li><a routerLink="../users" class="blue-text"><i class="icon-avatar"></i> System User</a></li>
+               <li><a routerLink="../doctor" class="pink-text"><i class="icon-first-aid"></i> Doctor</a></li>
+               <li><a routerLink="../physiotherapist" class="light-green-text"><i class="icon-rehabilitation"></i> Physiotherapist</a></li>
+               <li><a routerLink="../nurse" class="light-blue-text"><i class="f-size14 icon-bonnet"></i> Nurse</a></li>
+               <li><a routerLink="../technician" class="thick-blue-text"><i class="icon-flask"></i> Lab technician</a></li>
+               <li><a routerLink="../receptionist" class="router-link-exact-active active yellow-text"><i class="icon-receptionist"></i> Receptionist</a></li>
+               <li><a routerLink="../accountant" class="brown-text"><i class="icon-calculator"></i> Accountant</a></li> -->
+            </ul>
+         </nav>
+      </div>
+      <main class="el-main">
+         <app-header></app-header>
+         <div>
+            <!---->
+            <!---->
+            <div class="o-flow-x">
+               <div
+                  class="el-table master-table el-table--fit el-table--enable-row-hover el-table--enable-row-transition"
+                  style="width: 100%;">
+                  <div class="hidden-columns">
+                     <div></div>
+                     <div></div>
+                     <!---->
+                     <div></div>
+                     <div></div>
+                     <!---->
+                     <div></div>
+                  </div>
+
+                  <!-- <div class="el-table__header-wrapper">
+                     <table cellspacing="0" cellpadding="0" border="0" class="el-table__header" style="width: 1000px;">
+                        <colgroup>
+                           <col name="el-table_2_column_6" width="100">
+                           <col name="el-table_2_column_7" width="200">
+                           <col name="el-table_2_column_8" width="200">
+                           <col name="el-table_2_column_9" width="200">
+                           <col name="el-table_2_column_10" width="200">
+                           <col name="el-table_2_column_11" width="100">
+                           <col name="gutter" width="0">
+                        </colgroup>
+                        <thead class="has-gutter">
+                           <tr class="">
+                              <th colspan="1" rowspan="1" class="el-table_2_column_6     is-leaf">
+                                 <div class="cell">EMP ID</div>
+                              </th>
+                              <th colspan="1" rowspan="1" class="el-table_2_column_7     is-leaf">
+                                 <div class="cell">
+                                    Name
+                                    <div class="el-input">
+                                       <input type="text" autocomplete="off" placeholder="" class="el-input__inner">
+                                    </div>
+                                 </div>
+                              </th>
+                              <th colspan="1" rowspan="1" class="el-table_2_column_8     is-leaf">
+                                 <div class="cell">
+                                    Mobile
+                                    <div class="el-input">
+                                      <input type="number" autocomplete="off" placeholder="" class="el-input__inner">
+                                    </div>
+                                 </div>
+                              </th>
+                              <th colspan="1" rowspan="1" class="el-table_2_column_9     is-leaf">
+                                 <div class="cell">
+                                    Email
+                                    <div class="el-input">
+                                       <input type="text" autocomplete="off" placeholder="" class="el-input__inner">
+                                    </div>
+                                 </div>
+                              </th>
+                              <th colspan="1" rowspan="1" class="el-table_2_column_10     is-leaf">
+                                 <div class="cell">Status</div>
+                              </th>
+                              <th colspan="1" rowspan="1" class="el-table_2_column_11   undefined el-table__expand-column  is-leaf">
+                                 <div class="cell"></div>
+                              </th>
+                              <th class="gutter" style="width: 0px; display: none;"></th>
+                           </tr>
+                        </thead>
+                     </table>
+                  </div> -->
+
+                  <div class="el-table__body-wrapper is-scrolling-none" style="margin-top: 3%;">
+                     <table id="example" class="display" cellspacing="0" width="100%">
+                        <thead>
+                           <tr>
+                              <th>EMP ID</th>
+                              <th>Name</th>
+                              <th>Mobile</th>
+                              <th>Email</th>
+                              <!-- <th>Gender</th>
+                                   <th>Blood Group</th>
+                                   <th>Date of Birth</th> -->
+                              <th>Status</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                     </table>
+
+                     <!---->
+                  </div>
+               </div>
+            </div>
+         </div>
+      </main>
+   </section>
+</div>

@@ -1,0 +1,730 @@
+<div id="app">
+    <section class="el-container">
+      <div>
+        <menu class="menu-bar">
+          <a href="javascript:void(0);" class="toggle-menu">
+            <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+          </a>
+          <a href="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+        </menu>
+  
+        <app-sidebar></app-sidebar>
+  
+        <nav class="nav-bar-none"></nav>
+      </div>
+      <main class="el-main dashboard">
+        <app-header></app-header>
+        <div>
+          <div>
+            <div>
+              <div class="custom-btn el-row">
+                <button
+                  type="button"
+                  routerLink="../escort-requests"
+                  class="mb-3 el-button back-btn el-button--default el-button--small is-plain"
+                >
+                  <span><i class="icon-arrow-left h2"></i></span>
+                </button>
+  
+                <div class="row d-flex align-items-center mb-3">
+                  <div class="col-lg-6">
+                    <h4 class="mb-0 f-w6">Booking Details</h4>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="text-right">
+                      <button *ngIf="selectedAppointment.appointmentCurrentStatus < 2" class="add-btn mr-0" (click)="cancelAppointment()">
+                        Cancel Appointment
+                      </button>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-lg-8">
+                    <div class="el-card m-b30 is-always-shadow">
+                      <div class="el-card__body is-always-shadow">
+                        <h6 style="color: #88909c">Service Type <span class="float-right text-right">Appointment Status</span></h6>
+                        <h4 class="m-t0 m-b20 f-w6">
+                          <span>{{ appointmentDetails.serviceDescription }} <i></i></span>
+                          <span class="float-right @ngIf {{ appointmentDetails.appointmentStatusText == 'Open' }} open @endIf" style="font-size: 14px">{{
+                            appointmentDetails.appointmentStatusText
+                          }}</span>
+                        </h4>
+                        <div class="m-b30 el-row" style="margin-left: -15px; margin-right: -15px">
+                          <div class="row mt-3">
+                            <div class="col-lg-4 pr-0" style="padding-left: 30px">
+                              <label class="label-color">Service Date &amp; Time</label>
+                              
+                                <h6>{{ appointmentDetails.serviceDate }}, {{ appointmentDetails.serviceTime }}  <i class="icon-pencil m-r10" (click)="openRescheduleWindow()" style="cursor: pointer;"></i></h6>
+                              
+                            </div>
+                            <div class="col-lg-3">
+                              <label class="label-color">Appointment ID</label>
+                              <h6>APP{{ appointmentDetails.appointmentId }}</h6>
+                            </div>
+                            <div class="col-lg-2">
+                              <label class="label-color">Gender</label>
+                              <h6>{{ appointmentDetails.serviceOptionText }}</h6>
+                            </div>
+                            <div class="col-lg-3">
+                              <label class="label-color">Current Status</label>
+                              <h6 class="@ngIf {{ appointmentDetails.appointmentCurrentStatusText == 'Open' }} success @endif">
+                                {{ appointmentDetails.appointmentCurrentStatusText }}
+                              </h6>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="m-0 app-brdr el-row">
+                          <div class="appoiment-view el-col el-col-24">
+                            <h4>Service(s) Booked</h4>
+                          </div>
+                        </div>
+  
+                        <table class="table table-borderless left-padding" style="border: 1px solid #add2de">
+                          <thead>
+                            <tr>
+                              <th>Service ID</th>
+                              <th>Service Name</th>
+                              <th>Patient Name</th>
+                              <th>Date of Birth</th>
+                              <th>Nationality ID</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let service of appointmentDetails.requestedServices">
+                              <td>{{ service.serviceId }}</td>
+                              <td>
+                                {{ service.serviceName }} <br />
+                                {{ service.serviceNameArabic }}
+                              </td>
+                              <td>
+                                {{ service.firstName }} {{ service.lastName }} <span class="text-primary">- {{ service.genderText }}</span>
+                              </td>
+                              <td>{{ service.dob }}</td>
+                              <td>{{ service.idNumber }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+  
+                        <div class="m-b20 app-brdr el-row" style="margin-top: 40px">
+                          <div class="appoiment-view el-col el-col-24">
+                            <h4>Patient Notes</h4>
+                            <span>{{ appointmentDetails.patientNotes }}</span>
+                          </div>
+                        </div>
+  
+                        <div class="m-b20 app-brdr el-row" style="margin-top: 40px">
+                          <div class="appoiment-view el-col el-col-24">
+                            <h4>Admin Notes</h4>
+                            <span>{{ appointmentDetails.adminNotes }}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div class="col-lg-4">
+                    <div class="el-card m-b30 is-always-shadow">
+                      <h4 class="m-0 f-w6 p-3">
+                        Patient Details
+                        <span class="@ngIf{{ appointmentDetails.bloodGroup == '' }} float-right text-white blood-bg @endIf">{{
+                          appointmentDetails.bloodGroup
+                        }}</span>
+                      </h4>
+  
+                      <div class="col-lg-12">
+                        <h4 class="text-center"><img src="assets/images/user.svg" class="text-center" style="height: 70px; width: 70px" /></h4>
+                        <h4 class="text-center text-primary">
+                          {{ appointmentDetails.primaryPatientName }} {{ appointmentDetails.lastName }}
+                          <span class="text-black">- {{ appointmentDetails.genderText }}</span>
+                        </h4>
+                        <h6 class="text-center mt-3">
+                          <span>+966 {{ appointmentDetails.mobileNumber }}</span>
+                        </h6>
+                      </div>
+  
+                      <div class="col-lg-12" style="border-top: 1px dashed #ccc; margin-top: 20px; padding-top: 15px">
+                        <table class="table pat-table mb-2">
+                          <tbody>
+                            <tr>
+                              <td>Patient ID</td>
+                              <td>PAT{{ appointmentDetails.patientId }}</td>
+                            </tr>
+                            <tr>
+                              <td>Nationality ID</td>
+                              <td>{{ appointmentDetails.idNumber }}</td>
+                            </tr>
+                            <tr>
+                              <td>DOB</td>
+                              <td>{{ appointmentDetails.dob }}</td>
+                            </tr>
+                            <tr>
+                              <td>Email</td>
+                              <td>{{ appointmentDetails.email }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div>
+                          <label class="label-color pl-1 mb-0">Location</label>
+                          <h6 class="pl-1" style="line-height: 26px !important">{{ appointmentDetails.address }}</h6>
+                          <span class="light-blue cursor"></span>
+                          <div class="custom-map app-map">
+                            <div class="el-dialog__wrapper" style="display: none">
+                              <div role="dialog" aria-modal="true" aria-label="Your Location" class="el-dialog" style="margin-top: 15vh">
+                                <div class="el-dialog__header">
+                                  <span class="el-dialog__title">Your Location</span
+                                  ><button type="button" aria-label="Close" class="el-dialog__headerbtn">
+                                    <i class="el-dialog__close el-icon el-icon-close"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="el-card m-b30 is-always-shadow">
+                      <h4 class="m-0 f-w6 p-3">Assign Booking</h4>
+  
+                      <div *ngIf="appointmentDetails.parctiseUserId != null" class="">
+                        <div class="col-lg-12">
+                          <table class="table pat-table mb-2">
+                            <tbody>
+                              <tr>
+                                <td>Caregiver Name</td>
+                                <td>{{ appointmentDetails.providerFirstName }} {{ appointmentDetails.providerLastName }}</td>
+                              </tr>
+                              <tr>
+                                <td>Caregiver ID</td>
+                                <td>EMP{{ appointmentDetails.parctiseUserId }}</td>
+                              </tr>
+                              <tr>
+                                <td>Mobile</td>
+                                <td>{{ appointmentDetails.providerMobile }}</td>
+                              </tr>
+                              <tr>
+                                <td>Email</td>
+                                <td>{{ appointmentDetails.providerEmail }}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+  
+                          <div class="col-lg-12 pl-0" *ngIf="appointmentDetails.appointmentCurrentStatus <= 2">
+                            <div id="myBtn" class="btn btn-primary mb-3 btn-sm" (click)="openStaffSelectionWindow()">
+                              <i class="icon-pencil m-r10"></i>
+                              <span>Edit</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="col-lg-12 text-center">
+                        <button
+                          *ngIf="appointmentDetails.parctiseUserId == null"
+                          type="button"
+                          class="btn btn-primary mt-3 mb-4 btn-md btn-pad el-button--default"
+                          (click)="openStaffSelectionWindow()"
+                          [disabled]="!appointmentDetails.patientInsuraceDetails[0].verificationStatus"
+                        >
+                          <span id="schedule" class="schedule">Assign Care Giver</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div>
+                  <h4 class="m-b20 mt-3 f-w6">Appointment Status</h4>
+                  <div class="el-card is-always-shadow">
+                    <div class="el-card__body px-1 pt-3 pb-2">
+                      <h4 class="progress-menu"></h4>
+                      <ol class="steps">
+                        <li *ngFor="let history of appointmentStatusCompleted" class="step is-complete" [attr.data-step]="history.currentStatus">
+                          <h4 class="mb-2 appoint_step_head">
+                            {{ history.statusText }}
+                          </h4>
+                          <p>{{ history.updateDate }} {{ history.updateTime }}</p>
+                        </li>
+                        <li *ngIf="appointmentStatusInProgress != null" class="step is-active" [attr.data-step]="appointmentStatusInProgress.currentStatus">
+                          <h4 class="mb-2 appoint_step_head">
+                            <a
+                              href="https://maps.google.com/?q={{ appointmentStatusInProgress.latitude }},{{ appointmentStatusInProgress.longitude }}"
+                              target="_blank"
+                              ><i class="fa fa-map-marker" aria-hidden="true"></i
+                            ></a>
+                            {{ appointmentStatusInProgress.statusText }}
+                          </h4>
+                          <p>
+                            {{ appointmentStatusInProgress.updateDate }}
+                            {{ appointmentStatusInProgress.updateTime }}
+                          </p>
+                        </li>
+                        <li *ngFor="let history of appointmentStatusOpen" class="step" [attr.data-step]="history.currentStatus">
+                          <h5 class="mb-2">{{ history.statusText }}</h5>
+                        </li>
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+  
+                <!-- <div class="row">
+                  <div class="col-lg-6">
+                    <div>
+                      <h4 class="m-b20 mt-5 f-w6">Upload Result</h4>
+                      <div class="el-card is-always-shadow">
+                        <div class="el-card__body" style="min-height: 280px">
+                          <div id="beforefilepreview" class="d-flex justify-content-between align-items-center">
+                            <div tabindex="0" class="el-upload el-upload--text">
+                              
+                              <label class="d-flex-center" for="files">
+                                <img src="assets/images/photoupload.svg" class="avatar-img" />
+                                <input
+                                  type="file"
+                                  id="files"
+                                  accept="application/pdf"
+                                  style="display: block"
+                                  class="file_inner"
+                                  multiple
+                                  hidden
+                                  #fileInput
+                                  (change)="handleFileInput($event)"
+                                  [disabled]="!this.LabResultInput"
+                                />
+                                <span class="gray-color">Upload Lab Result</span>
+                              </label>
+                            </div>
+  
+                            <div class="text-right">
+                              <button
+                                type="submit"
+                                class="btn btn-primary el-button el-button--primary save"
+                                (click)="submitAppointmentResult()"
+                                [disabled]="!this.LabResultSubmit"
+                              >
+                                Submit
+                              </button>
+                            </div>
+                          </div>
+                          <div *ngIf="selectedAppointment.serviceSectorId != 1 && selectedAppointment.appointmentCurrentStatus < 6">
+                            <p class="enable_txt">This will get Enable once sample is submitted to the lab</p>
+                          </div>
+                          <!-- <div *ngIf="selectedAppointment.serviceSectorId == 1 && selectedAppointment.appointmentCurrentStatus == 7" class="text-center">
+                            <img src="../../assets/images/tick.png" width="25%" class="mt-3"/>
+                            <p class="font-weight-bold mt-4">Already Submitted</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div>
+                      <h4 class="m-b20 f-w6 mt-5">Lab Test Result</h4>
+                      <div class="el-card is-always-shadow">
+                        <div class="el-card__body" style="min-height: 280px">
+                          <div class="row" *ngIf="selectedAppointment.serviceSectorId == 1 && selectedAppointment.appointmentCurrentStatus == 7">
+                            <div
+                              class="appoiment-view col-lg-12 row justify-content-center"
+                              style="padding-left: 15px; padding-right: 15px"
+                              *ngFor="let testResult of appointmentDetails.testResults"
+                            >
+                              <span class="light-blue cursor col-md-10" (click)="openTestResult(testResult.fileLink)"
+                                >{{ testResult.fileName }} <i class="fa fa-download float-right" style="margin-top: 4px"></i>
+                              </span>
+                              <button
+                                *ngIf="appointmentTriggerSource == '1'"
+                                class="light-blue btn col-md-1 ml-2 p-0 mt-2 mb-3"
+                                type="button"
+                                (click)="deleteAppointment(testResult.resultId)"
+                              >
+                                <i class="fa fa-trash-o" style="margin-top: 4px"></i>
+                              </button>
+                            </div>
+                          </div>
+                          <div class="nolabcontent" *ngIf="selectedAppointment.appointmentCurrentStatus != 7">
+                            <img src="../../assets/images/noresult.png" class="nolabresultimg" />
+                            <!-- <p class="nolabresult">No Lab Results Available Right Now</p>
+                          </div>
+  
+                          <!-- <div
+                          class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6"
+                          style="padding-left: 15px; padding-right: 15px"
+                        >
+                          <span class="light-blue cursor">file1.pdf</span>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="row" *ngIf="appointmentTriggerSource == '2'">
+                  <div class="col-lg-4">
+                    <div>
+                      <h4 class="m-b20 mt-5 f-w6">Result Reading</h4>
+                      <div class="el-card is-always-shadow">
+                        <div class="el-card__body result_read_body" style="min-height: 280px">
+                          <div
+                            id="beforefilepreview"
+                            class="text-center"
+                            *ngIf="
+                              selectedAppointment.serviceSectorId == 1 &&
+                              selectedAppointment.appointmentCurrentStatus == 7 &&
+                              appointmentDetails.resultReadingStatus == 1
+                            "
+                          >
+                            <button class="btn btn-primary el-button el-button--primary teext" (click)="openReaderSelectionWindow()">Assign Care Giver</button>
+                          </div>
+                          <div *ngIf="appointmentDetails.resultReadingStatus == 2" class="">
+                            <div class="col-lg-12">
+                              <table class="table pat-table mb-2">
+                                <tbody>
+                                  <tr>
+                                    <td>Caregiver Name</td>
+                                    <td>{{ appointmentDetails.rrProviderFirstName }} {{ appointmentDetails.rrProviderLastName }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Caregiver ID</td>
+                                    <td>EMP{{ appointmentDetails.rrPractiseUserId }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Mobile</td>
+                                    <td>{{ appointmentDetails.rrProviderMobile }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Email</td>
+                                    <td>{{ appointmentDetails.rrProviderEmail }}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+  
+                              <div class="col-lg-12 pl-0">
+                                <div id="myBtn" class="btn btn-primary mb-3 btn-sm" (click)="openReaderSelectionWindow()">
+                                  <i class="icon-pencil m-r10"></i>
+                                  <span>Edit</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+  
+                          <div *ngIf="appointmentDetails.resultReadingStatus == 3" class="">
+                            <div class="col-lg-12">
+                              <table class="table pat-table mb-2">
+                                <tbody>
+                                  <tr>
+                                    <td>Caregiver Name</td>
+                                    <td>{{ appointmentDetails.rrProviderFirstName }} {{ appointmentDetails.rrProviderLastName }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Caregiver ID</td>
+                                    <td>EMP{{ appointmentDetails.rrPractiseUserId }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Mobile</td>
+                                    <td>{{ appointmentDetails.rrProviderMobile }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Email</td>
+                                    <td>{{ appointmentDetails.rrProviderEmail }}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          <!-- <div *ngIf="selectedAppointment.serviceSectorId == 1 && selectedAppointment.appointmentCurrentStatus == 7" class="text-center">
+                            <img src="../../assets/images/tick.png" width="25%" class="mt-3" />
+                            <p class="font-weight-bold mt-4">Already Submitted</p>
+                          </div> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <div>
+                      <h4 class="m-b20 f-w6 mt-5">Result Reading - Voice</h4>
+                      <div class="el-card is-always-shadow">
+                        <div class="el-card__body" style="min-height: 280px">
+                          <div class="row" *ngIf="appointmentDetails.resultReadingStatus == 3 && appointmentDetails.appointmentCurrentStatus == 7">
+                            <div
+                              class="appoiment-view col-lg-12"
+                              style="padding-left: 15px; padding-right: 15px"
+                              *ngFor="let testResult of appointmentDetails.testResults"
+                            >
+                              <span class="light-blue cursor" (click)="openTestResult(testResult.resultReadingFileUrl)"
+                                >{{ testResult.resultReadingFileName }} <i class="fa fa-download float-right" style="margin-top: 4px"></i>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="nolabcontent" *ngIf="appointmentDetails.resultReadingStatus != 3 && appointmentDetails.appointmentCurrentStatus == 7">
+                            <img src="../../assets/images/noresult.png" class="noreadingresultimg" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+              <div class="el-dialog__wrapper employeedialog" style="display: none">
+                <div role="dialog" aria-modal="true" aria-label="dialog" class="el-dialog" style="margin-top: 15vh">
+                  <div class="el-dialog__header">
+                    <span class="el-dialog__title"></span
+                    ><button type="button" aria-label="Close" class="el-dialog__headerbtn">
+                      <i class="el-dialog__close el-icon el-icon-close"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
+  </div>
+  <script
+    async=""
+    defer="defer"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-EXDwh2adbELTFKlDgn3RXMP648GC12s&amp;sensor=false&amp;libraries=places"
+  ></script>
+  <script type="text/javascript" src="static/js/manifest.787d0d92fd70cf16874e.js"></script>
+  <script type="text/javascript" src="static/js/vendor.6f6ef6bc866762bf29a6.js"></script>
+  <script type="text/javascript" src="static/js/app.a27789e3d261f525a01a.js"></script>
+  <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0"></div>
+  <div
+    role="tooltip"
+    id="el-tooltip-1472"
+    aria-hidden="true"
+    class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2014; display: none"
+  >
+    Accounts
+    <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+  </div>
+  <div
+    role="tooltip"
+    id="el-tooltip-8183"
+    aria-hidden="true"
+    class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2018; display: none"
+  >
+    Appointment
+    <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+  </div>
+  
+  <!-- The Modal -->
+  <div id="schedule_modal" class="modal schedule_modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: unset">
+        <span class="close">&times;</span>
+        <h2>Assign an caregiver for this booking</h2>
+      </div>
+      <div class="modal-body">
+        <div class="" style="padding-left: 15px; padding-right: 15px">
+          <form class="el-form">
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+              <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                      <label for="fn.en" class="el-form-item__label">Select Date</label>
+                      <div class="el-form-item__content">
+                          <div class="line-input el-input">
+                              <input type="date" class="el-input__inner" formControlName="contactPerson" 
+                              placeholder="Enter Email" (change)="SetDate($event)"/>   
+                              <div class="invalid-feedback">
+                                   <span >This value is required.</span>
+                               </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  
+              <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                      <label for="fn.ar" class="el-form-item__label">Select Time</label>
+                      <div class="el-form-item__content">
+                          <div class="line-input el-input">
+                              <!-- <input id="serviceNameArabic" type="text" autocomplete="off"
+                        placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+                              <input type="time" class="el-input__inner" formControlName="mobile" 
+                              placeholder="Enter Mobile" (change)="SetTime($event)"/>   
+                              
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="el-form-item is-required">
+              <label for="role_id" class="el-form-item__label">Select Caregiver</label>
+              <div class="el-form-item__content">
+                <div class="el-select line-input">
+                  <select class="select" (change)="staffSelected($event)">
+                    <option>Select Caregiver</option>
+                    <option class="el-select-dropdown__item d-flex hover" *ngFor="let user of practiseUsers" value="{{ user.userId }}">
+                      <span class="eloptionpsis">{{ user.firstName }} {{ user.lastName }}</span>
+                      - <span class="emp-id">{{ user.gender }}</span>
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+              <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                      <label for="fn.en" class="el-form-item__label">Collected Amount</label>
+                      <div class="el-form-item__content">
+                          <div class="line-input el-input">
+                              <input type="text" class="el-input__inner" formControlName="contactPerson" 
+                              placeholder="Enter Email" (change)="setCollectedAmount($event.target)"/>   
+                              <div class="invalid-feedback">
+                                   <span >This value is required.</span>
+                               </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  
+              <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                      <label for="fn.ar" class="el-form-item__label">Payment Reference Number</label>
+                      <div class="el-form-item__content">
+                          <div class="line-input el-input">
+                              <!-- <input id="serviceNameArabic" type="text" autocomplete="off"
+                        placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+                              <input type="text" class="el-input__inner" formControlName="mobile" 
+                              placeholder="Enter Mobile" (change)="setPaymentReference($event.target)"/>   
+                              
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+  
+            <div class="el-form-item">
+              <label class="el-form-item__label">Admin Notes</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-textarea">
+                  <textarea autocomplete="off" placeholder="Admin Notes" (change)="adminNotes($event.target)" class="el-textarea__inner" style="min-height: 100px; height: 100px;"></textarea>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="m-b30 m-t30 el-row">
+            <div class="el-col el-col-24">
+              <button type="button" class="el-button btn-block el-button--primary" (click)="assignStaffForAppointment()">
+                <span>Confirm</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <h3></h3>
+      </div>
+    </div>
+  </div>
+  
+  <!-- The Modal -->
+  <div id="reader_schedule_modal" class="modal schedule_modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: unset">
+        <span class="close">&times;</span>
+        <h2>Assign an Result Reader for this booking</h2>
+      </div>
+      <div class="modal-body">
+        <div class="" style="padding-left: 15px; padding-right: 15px">
+          <form class="el-form">
+            <div class="el-form-item is-required">
+              <label for="role_id" class="el-form-item__label">Select Caregiver</label>
+              <div class="el-form-item__content">
+                <div class="el-select line-input">
+                  <select class="select" (change)="readerSelected($event)">
+                    <option>Select Caregiver</option>
+                    <option class="el-select-dropdown__item d-flex hover" *ngFor="let user of practiseUsers" value="{{ user.userId }}">
+                      <span class="eloptionpsis">{{ user.firstName }} {{ user.lastName }}</span>
+                      - <span class="emp-id">{{ user.gender }}</span>
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="m-b30 m-t30 el-row">
+            <div class="el-col el-col-24">
+              <button type="button" class="el-button btn-block el-button--primary" (click)="assignReaderForAppointment()">
+                <span>Confirm</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <h3></h3>
+      </div>
+    </div>
+  </div>
+  
+  <!-- The Modal -->
+  <div id="reschedule_modal" class="modal schedule_modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: unset">
+        <span class="close">&times;</span>
+        <h2>Reschedule for this booking</h2>
+      </div>
+      <div class="modal-body">
+        <div class="" style="padding-left: 15px; padding-right: 15px">
+          <form class="el-form">
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+              <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                      <label for="fn.en" class="el-form-item__label">Select Date</label>
+                      <div class="el-form-item__content">
+                          <div class="line-input el-input">
+                              <input type="date" class="el-input__inner" formControlName="contactPerson" 
+                              placeholder="Enter Email" (change)="SetDate($event)"/>   
+                              <div class="invalid-feedback">
+                                   <span >This value is required.</span>
+                               </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  
+              <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                      <label for="fn.ar" class="el-form-item__label">Select Time</label>
+                      <div class="el-form-item__content">
+                          <div class="line-input el-input">
+                              <!-- <input id="serviceNameArabic" type="text" autocomplete="off"
+                        placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+                              <input type="time" class="el-input__inner" formControlName="mobile" 
+                              placeholder="Enter Mobile" (change)="SetTime($event)"/>   
+                              
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>        
+          <div class="el-form-item">
+            <label class="el-form-item__label">Reschedule Notes</label>
+            <div class="el-form-item__content">
+              <div class="line-input el-textarea">
+                <textarea autocomplete="off" placeholder="Reschedule Notes" (change)="RescheduleNotes($event.target)" class="el-textarea__inner" style="min-height: 100px; height: 100px;"></textarea>
+              </div>
+            </div>
+          </div>
+          </form>
+          <div class="m-b30 m-t30 el-row">
+            <div class="el-col el-col-24">
+              <button type="button" class="el-button btn-block el-button--primary" (click)="rescheduleForAppointment()">
+                <span>Confirm</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <h3></h3>
+      </div>
+    </div>
+  </div>

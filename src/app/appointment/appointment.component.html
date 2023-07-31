@@ -1,0 +1,275 @@
+
+<div id="app">
+         <section class="el-container">
+            <div>
+               <menu class="menu-bar">
+                  <a routerLink="javascript:void(0);" class="toggle-menu">
+                     <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+                  </a>
+                  <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a> 
+               </menu>
+               <app-sidebar></app-sidebar>
+               <app-submenu></app-submenu>
+            </div>
+            <main class="el-main">
+               <app-header></app-header>
+               <div>
+                  <div>
+                     <div class="m-t-30 el-row">
+                        <!----> <!----> <!----> 
+                        <div>
+                           <div class="el-card is-always-shadow">
+                              <!---->
+                              <div class="el-card__body">
+                                 <div class="d-flex justify-content app-grid-default">
+                                    <h4>Default Service Type duration</h4>
+                                    <a routerLink="../edit-appointment" class=""><strong>Edit Details</strong></a>
+                                 </div>
+                                 <div>
+                                    <div class="app-grid-default">
+                                       <h5>Doctor</h5>
+                                       <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"><span>Home Visit</span></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;">
+                                             <p>45 Mins</p>
+                                          </div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;">
+                                             <p>SAR 300</p>
+                                          </div>
+                                       </div>
+                                       <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"><span>Video Call</span></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;">
+                                             <p>20 Mins</p>
+                                          </div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;">
+                                             <p>SAR 45</p>
+                                          </div>
+                                       </div>
+                                       <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"><span>Chat</span></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;">
+                                             <p>15 Mins</p>
+                                          </div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;">
+                                             <p>SAR 25</p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div>
+                                    <div class="app-grid-default">
+                                       <h5>Physiotherapist</h5>
+                                       <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"><span>Home Visit</span></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;">
+                                             <p>60 Mins</p>
+                                          </div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;">
+                                             <p>SAR 0</p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div>
+                                    <div class="app-grid-default">
+                                       <h5>Nurse</h5>
+                                       <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"><span>Home Visit</span></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;">
+                                             <p>60 Mins</p>
+                                          </div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;">
+                                             <p>SAR 50</p>
+                                          </div>
+                                       </div>
+                                       <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                       </div>
+                                       <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                       </div>
+                                       <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                       </div>
+                                       <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                       </div>
+                                       <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                       </div>
+                                       <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div>
+                                    <div class="app-grid-default">
+                                       <h5>Lab Technician</h5>
+                                       <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"><span>Home Visit</span></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;">
+                                             <p>60 Mins</p>
+                                          </div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;">
+                                             <p>SAR 100</p>
+                                          </div>
+                                       </div>
+                                       <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                          <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-4 el-col-xl-4" style="padding-left: 15px; padding-right: 15px;"></div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="el-card m-t30 is-always-shadow">
+                              <!---->
+                              <div class="el-card__body">
+                                 <div>
+                                    <div class="d-flex justify-content">
+                                       <h4>General Settings</h4>
+                                    </div>
+                                 </div>
+                                 <div class="app-grid">
+                                    <h5>Video Consultation</h5>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                       <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                          <h5>Consultation Fee Settings</h5>
+                                          <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-12 el-col-lg-10 el-col-xl-10" style="padding-left: 15px; padding-right: 15px;"><span>General Practice &amp; Resident</span></div>
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-16 el-col-md-12 el-col-lg-10 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                                <p>SAR 46.55</p>
+                                             </div>
+                                          </div>
+                                          <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-12 el-col-lg-10 el-col-xl-10" style="padding-left: 15px; padding-right: 15px;"><span> Registrar &amp; Senior Registrar</span></div>
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-16 el-col-md-12 el-col-lg-10 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                                <p>SAR 65.55</p>
+                                             </div>
+                                          </div>
+                                          <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-12 el-col-lg-10 el-col-xl-10" style="padding-left: 15px; padding-right: 15px;"><span>Consultant/ Consultant in main Speciality</span></div>
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-16 el-col-md-12 el-col-lg-10 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                                <p>SAR 113.05</p>
+                                             </div>
+                                          </div>
+                                          <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-12 el-col-lg-10 el-col-xl-10" style="padding-left: 15px; padding-right: 15px;"><span>Consultant  in Sub-speciality</span></div>
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-16 el-col-md-12 el-col-lg-10 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                                <p>SAR 189.05</p>
+                                             </div>
+                                          </div>
+                                          <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-12 el-col-lg-10 el-col-xl-10" style="padding-left: 15px; padding-right: 15px;"><span>Consultant in Sub-Sub-speciality</span></div>
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-16 el-col-md-12 el-col-lg-10 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                                <p>SAR 2</p>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                          <h5>Duration Settings</h5>
+                                          <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-12 el-col-lg-10 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;"><span>Default Duration</span></div>
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-12 el-col-lg-10 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                                <p>15 Mins</p>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="app-grid">
+                                    <h5>Chat Consultation</h5>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                       <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                          <h5>Consultation Fee Settings</h5>
+                                          <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-12 el-col-lg-10 el-col-xl-10" style="padding-left: 15px; padding-right: 15px;"><span>General Practice &amp; Resident</span></div>
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-16 el-col-md-12 el-col-lg-10 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                                <p>SAR 30</p>
+                                             </div>
+                                          </div>
+                                          <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-12 el-col-lg-10 el-col-xl-10" style="padding-left: 15px; padding-right: 15px;"><span> Registrar &amp; Senior Registrar</span></div>
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-16 el-col-md-12 el-col-lg-10 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                                <p>SAR 40</p>
+                                             </div>
+                                          </div>
+                                          <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-12 el-col-lg-10 el-col-xl-10" style="padding-left: 15px; padding-right: 15px;"><span>Consultant/ Consultant in main Speciality</span></div>
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-16 el-col-md-12 el-col-lg-10 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                                <p>SAR 50</p>
+                                             </div>
+                                          </div>
+                                          <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-12 el-col-lg-10 el-col-xl-10" style="padding-left: 15px; padding-right: 15px;"><span>Consultant  in Sub-speciality</span></div>
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-16 el-col-md-12 el-col-lg-10 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                                <p>SAR 60</p>
+                                             </div>
+                                          </div>
+                                          <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-12 el-col-lg-10 el-col-xl-10" style="padding-left: 15px; padding-right: 15px;"><span>Consultant in Sub-Sub-speciality</span></div>
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-16 el-col-md-12 el-col-lg-10 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                                <p>SAR 70</p>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                          <h5>Duration Settings</h5>
+                                          <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-12 el-col-lg-10 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;"><span>Default Duration</span></div>
+                                             <div class="gri-tit el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-12 el-col-lg-10 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                                <p>15 Mins</p>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!---->
+                        </div>
+                        <!---->
+                     </div>
+                  </div>
+               </div>
+            </main>
+         </section>
+      </div>
+
+      <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+      <div role="tooltip" id="el-tooltip-8995" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2001; display: none;">
+         Accounts
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-5329" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2003; display: none;">
+         Master
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-9008" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2005; display: none;">
+         Services
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-7427" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2007; display: none;">
+         Settings
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-9729" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center top; z-index: 2009; display: none;">
+         Dashboard
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+   <!-- </body>
+</html> -->

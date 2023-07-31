@@ -1,0 +1,135 @@
+<div id="app">
+   <section class="el-container">
+      <div>
+         <menu class="menu-bar">
+            <a routerLink="javascript:void(0);" class="toggle-menu">
+               <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span
+                     class="bar bar3"></span></div>
+            </a>
+            <a routerLink="../dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+         </menu>
+         <app-sidebar></app-sidebar>
+         <app-submenu></app-submenu>
+      </div>
+      <main class="el-main">
+         <app-header></app-header>
+         <div>
+            <!---->
+            <!---->
+            <div class="o-flow-x">
+               <div
+                  class="el-table master-table el-table--fit el-table--enable-row-hover el-table--enable-row-transition"
+                  style="width: 100%;">
+                  <div class="hidden-columns">
+                     <div></div>
+                     <div></div>
+                     <!---->
+                     <div></div>
+                     <div></div>
+                     <!---->
+                     <div></div>
+                  </div>
+
+                  <!-- <div class="el-table__header-wrapper">
+                           <table cellspacing="0" cellpadding="0" border="0" class="el-table__header" style="width: 800px;">
+                              <colgroup>
+                                 <col name="el-table_1_column_1" width="100">
+                                 <col name="el-table_1_column_2" width="200">
+                                 <col name="el-table_1_column_3" width="200">
+                                 <col name="el-table_1_column_4" width="200">
+                                 <col name="el-table_1_column_5" width="100">
+                                 <col name="gutter" width="0">
+                              </colgroup>
+                              <thead class="has-gutter">
+                                 <tr class="">
+                                    <th colspan="1" rowspan="1" class="el-table_1_column_1     is-leaf">
+                                       <div class="cell">EMP ID</div>
+                                    </th>
+                                    <th colspan="1" rowspan="1" class="el-table_1_column_2     is-leaf">
+                                       <div class="cell">
+                                          Name
+                                          <div class="el-input">
+                                            <input type="text" autocomplete="off" placeholder="" class="el-input__inner">
+                                          </div>
+                                       </div>
+                                    </th>
+                                    <th colspan="1" rowspan="1" class="el-table_1_column_3     is-leaf">
+                                       <div class="cell">
+                                          Mobile
+                                          <div class="el-input">
+                                             <input type="number" autocomplete="off" placeholder="" class="el-input__inner">
+                                          </div>
+                                       </div>
+                                    </th>
+                                    <th colspan="1" rowspan="1" class="el-table_1_column_4     is-leaf">
+                                       <div class="cell">
+                                          Email
+                                          <div class="el-input">
+                                             <input type="text" autocomplete="off" placeholder="" class="el-input__inner">
+                                          </div>
+                                       </div>
+                                    </th>
+                                    <th colspan="1" rowspan="1" class="el-table_1_column_5   undefined el-table__expand-column  is-leaf">
+                                       <div class="cell"></div>
+                                    </th>
+                                    <th class="gutter" style="width: 0px; display: none;"></th>
+                                 </tr>
+                              </thead>
+                           </table>
+                        </div> -->
+                  <div class="d-flex justify-content align-items-center">
+                   <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-flask "></i> Lab Technician List</span>  <button class="add-btn mr-0 float-right" routerLink="../add-technician"><i class="fa fa-plus-circle"></i> Add Lab Technician</button>
+                  </div>
+                  <div class="el-table__body-wrapper is-scrolling-none" style="margin-top: 3%;">
+                     <table id="techniciantable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                           <tr>
+                              <th>EMP ID</th>
+                              <th>Name</th>
+                              <th>Mobile</th>
+                              <th>Email</th>
+                              <th>Gender</th>
+                              <th>Blood Group</th>
+                              <th>Date of Birth</th>
+                              <th>Status</th>
+                              <th>Action</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr class="el-table__row" *ngFor="let user of practiseUsers">
+                              <td routerLink="../view-technician">{{user.empDisplayId}}</td>
+                              <td>
+                                 <div class="cell">
+                                    <div class="d-flex-center"><span class="avtar3"><img src="assets/images/user.svg"
+                                             class="image-cover"></span> <span class="grid_offlinestatus"></span> <span
+                                          title="lab Female lab Female">{{user.firstName}} {{user.lastName}}</span>
+                                    </div>
+                                 </div>
+                              </td>
+                              <td>{{user.mobile}}</td>
+                              <td>{{user.email}}</td>
+                              <td>{{user.gender}}</td>
+                              <td>{{user.bloodGroup}}</td>
+                              <td>{{user.dob}}</td>
+                              <td>
+                                 <div class="cell">
+                                    <label class="switch">
+                                       <input type="checkbox" checked>
+                                       <span class="slider round"></span>
+                                    </label>
+                                 </div>
+                              </td>
+                              <td> <div class="cell">
+                                 <i class="icon-pencil ico-pointer" id="ico-pointer" (click)="technicianEdit(user.userId)"></i>
+                              </div></td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="el-table__column-resize-proxy" style="display: none;"></div>
+               </div>
+            </div>
+         </div>
+      </main>
+   </section>
+</div>

@@ -1,0 +1,476 @@
+<div id="app">
+  <div class="login-page" style="background:#edf7fb ;">
+     <div class="login-wrapper" style="background: repeating-linear-gradient(
+        45deg,
+        #ddf1f8,
+        #ddf1f8 10px,
+        #d1eff9 10px,
+        #d1eff9 20px
+      );">
+        <div class="el-row">
+           <div
+              class="hidden-xs-only el-col el-col-24 el-col-xs-24 el-col-sm-13 el-col-md-13 el-col-lg-13 el-col-xl-13">
+              <i class="icon-bluelogowithtwxt logo"></i>
+              <h1>
+                 Get Exclusive access
+                 <div class="mt-3">
+                    to
+                    <strong style="color:#0e6281">Taib <span class="ar-font">للأطباء </span></strong>
+                 </div>
+              </h1>
+              <img src="assets/images/loginimage.svg">
+           </div>
+           <div class="text-center el-col el-col-24 el-col-xs-24 el-col-sm-11 el-col-md-11 el-col-lg-11 el-col-xl-11 mt-5">
+              <img src="assets/images/Taib_logo_Trans.png" class="m-b20 image-cover" style="width:60%" >
+              <form class="el-form">
+
+                 <!-- <div class="el-form-item is-required">
+                    <div class="el-form-item__content">
+                       <div class="el-input el-input--suffix">
+                          <input type="text" autocomplete="off" placeholder="Access ID" class="el-input__inner">
+                          <span class="el-input__suffix">
+                             <span class="el-input__suffix-inner">
+                                <i class="el-input__icon icon-user2"></i>
+                             </span>
+                          </span>
+                       </div>
+                    </div>
+                 </div> -->
+
+                 
+
+                 <div class="wrap-input100 validate-input mt-4" data-validate = "Valid email is required: ex@abc.xyz">
+                  <input class="input100"  id="username" autocomplete="off" placeholder="Email or username">
+                  <span class="focus-input100"></span>
+                  <span class="symbol-input100">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                  </span>
+                </div>
+
+                <div class="wrap-input100 validate-input mt-3" data-validate = "Password is required">
+                  <input class="input100" type="password" id="password" placeholder="Password">
+                  <span class="focus-input100"></span>
+                  <span class="symbol-input100">
+                    <i class="fa fa-lock" aria-hidden="true"></i>
+                  </span>
+                </div>
+
+                <div class="container-login100-form-btn">
+                  <button class="login100-form-btn" (click)="loginClicked()">
+                    Login
+                  </button>
+                </div>
+
+                 
+
+                
+
+                 <div class="m-t40 d-none"><a routerLink="../forgot-password" class="gray-color ">Forgot Password ?</a><br>
+                 </div>
+
+              </form>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>
+
+<style>
+
+
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; }
+input:focus::-moz-placeholder { color:transparent; }
+input:focus:-ms-input-placeholder { color:transparent; }
+
+textarea:focus::-webkit-input-placeholder { color:transparent; }
+textarea:focus:-moz-placeholder { color:transparent; }
+textarea:focus::-moz-placeholder { color:transparent; }
+textarea:focus:-ms-input-placeholder { color:transparent; }
+
+input::-webkit-input-placeholder { color: #6d797d; }
+input:-moz-placeholder { color: #6d797d; }
+input::-moz-placeholder { color: #6d797d; }
+input:-ms-input-placeholder { color: #6d797d; }
+
+textarea::-webkit-input-placeholder { color: #6d797d; }
+textarea:-moz-placeholder { color: #6d797d; }
+textarea::-moz-placeholder { color: #6d797d; }
+textarea:-ms-input-placeholder { color: #6d797d; }
+
+
+button {
+	outline: none !important;
+	border: none;
+	background: transparent;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+
+.wrap-input100 {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  margin-bottom: 10px;
+}
+
+.input100 {
+ 
+  font-size: 15px;
+  line-height: 1.5;
+  color: #27353a;
+border: none !important;
+  display: block;
+  width: 100%;
+  background: #fff;
+  height: 50px;
+  border-radius: 25px;
+  padding: 0 30px 0 68px;
+}
+
+
+.focus-input100 {
+  display: block;
+  position: absolute;
+  border-radius: 25px;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 0px 0px 0px;
+  color: rgba(27,146,194, 0.8);
+}
+
+.input100:focus + .focus-input100 {
+  -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
+  animation: anim-shadow 0.5s ease-in-out forwards;
+}
+
+@-webkit-keyframes anim-shadow {
+  to {
+    box-shadow: 0px 0px 70px 25px;
+    opacity: 0;
+  }
+}
+
+@keyframes anim-shadow {
+  to {
+    box-shadow: 0px 0px 70px 25px;
+    opacity: 0;
+  }
+}
+
+.symbol-input100 {
+  font-size: 15px;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  border-radius: 25px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-left: 35px;
+  pointer-events: none;
+  color: #666666;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.input100:focus + .focus-input100 + .symbol-input100 {
+  color: #1b92c2;
+  padding-left: 28px;
+}
+
+
+.container-login100-form-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.login100-form-btn {
+  
+  font-size: 15px;
+  line-height: 1.5;
+  color: #fff;
+  text-transform: uppercase;
+
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  background: #1b92c2;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 25px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.login100-form-btn:hover {
+  background: #333333;
+}
+
+
+
+  
+  .light {
+      position: absolute;
+      width: 0px;
+      opacity: .75;
+      background-color: white;
+      box-shadow: #fff 0px 0px 20px 2px;
+      opacity: 0;
+      top: 100vh;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+      margin: auto;
+  }
+  
+  .x1{
+    -webkit-animation: floatUp 4s infinite linear;
+    -moz-animation: floatUp 4s infinite linear;
+    -o-animation: floatUp 4s infinite linear;
+    animation: floatUp 4s infinite linear;
+     -webkit-transform: scale(1.0);
+     -moz-transform: scale(1.0);
+     -o-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+  
+  .x2{
+    -webkit-animation: floatUp 7s infinite linear;
+    -moz-animation: floatUp 7s infinite linear;
+    -o-animation: floatUp 7s infinite linear;
+    animation: floatUp 7s infinite linear;
+    -webkit-transform: scale(1.6);
+    -moz-transform: scale(1.6);
+    -o-transform: scale(1.6);
+    transform: scale(1.6);
+    left: 15%;
+  }
+  
+  .x3{
+    -webkit-animation: floatUp 2.5s infinite linear;
+    -moz-animation: floatUp 2.5s infinite linear;
+    -o-animation: floatUp 2.5s infinite linear;
+    animation: floatUp 2.5s infinite linear;
+    -webkit-transform: scale(.5);
+    -moz-transform: scale(.5);
+    -o-transform: scale(.5);
+    transform: scale(.5);
+    left: -15%;
+  }
+  
+  .x4{
+    -webkit-animation: floatUp 4.5s infinite linear;
+    -moz-animation: floatUp 4.5s infinite linear;
+    -o-animation: floatUp 4.5s infinite linear;
+    animation: floatUp 4.5s infinite linear;
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+    left: -34%;
+  }
+  
+  .x5{
+    -webkit-animation: floatUp 8s infinite linear;
+    -moz-animation: floatUp 8s infinite linear;
+    -o-animation: floatUp 8s infinite linear;
+    animation: floatUp 8s infinite linear;
+    -webkit-transform: scale(2.2);
+    -moz-transform: scale(2.2);
+    -o-transform: scale(2.2);
+    transform: scale(2.2);
+    left: -57%;
+  }
+  
+  .x6{
+    -webkit-animation: floatUp 3s infinite linear;
+    -moz-animation: floatUp 3s infinite linear;
+    -o-animation: floatUp 3s infinite linear;
+    animation: floatUp 3s infinite linear;
+    -webkit-transform: scale(.8);
+    -moz-transform: scale(.8);
+    -o-transform: scale(.8);
+    transform: scale(.8);
+    left: -81%;
+  }
+  
+  .x7{
+    -webkit-animation: floatUp 5.3s infinite linear;
+    -moz-animation: floatUp 5.3s infinite linear;
+    -o-animation: floatUp 5.3s infinite linear;
+    animation: floatUp 5.3s infinite linear;
+    -webkit-transform: scale(3.2);
+    -moz-transform: scale(3.2);
+    -o-transform: scale(3.2);
+    transform: scale(3.2);
+    left: 37%;
+  }
+  
+  .x8{
+    -webkit-animation: floatUp 4.7s infinite linear;
+    -moz-animation: floatUp 4.7s infinite linear;
+    -o-animation: floatUp 4.7s infinite linear;
+    animation: floatUp 4.7s infinite linear;
+    -webkit-transform: scale(1.7);
+    -moz-transform: scale(1.7);
+    -o-transform: scale(1.7);
+    transform: scale(1.7);
+    left: 62%;
+  }
+  
+  .x9{
+    -webkit-animation: floatUp 4.1s infinite linear;
+    -moz-animation: floatUp 4.1s infinite linear;
+    -o-animation: floatUp 4.1s infinite linear;
+    animation: floatUp 4.1s infinite linear;
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -o-transform: scale(0.9);
+    transform: scale(0.9);
+    left: 85%;
+  }
+  
+  button:focus{
+    outline: none;
+  }
+  
+  @-webkit-keyframes floatUp{
+    0%{top: 100vh; opacity: 0;}
+    25%{opacity: 1;}
+    50%{top: 0vh; opacity: .8;}
+    75%{opacity: 1;}
+    100%{top: -100vh; opacity: 0;}
+  }
+  @-moz-keyframes floatUp{
+    0%{top: 100vh; opacity: 0;}
+    25%{opacity: 1;}
+    50%{top: 0vh; opacity: .8;}
+    75%{opacity: 1;}
+    100%{top: -100vh; opacity: 0;}
+  }
+  @-o-keyframes floatUp{
+    0%{top: 100vh; opacity: 0;}
+    25%{opacity: 1;}
+    50%{top: 0vh; opacity: .8;}
+    75%{opacity: 1;}
+    100%{top: -100vh; opacity: 0;}
+  }
+  @keyframes floatUp{
+    0%{top: 100vh; opacity: 0;}
+    25%{opacity: 1;}
+    50%{top: 0vh; opacity: .8;}
+    75%{opacity: 1;}
+    100%{top: -100vh; opacity: 0;}
+  }
+  
+  
+  @-webkit-keyframes fadeIn{
+    from{opacity: 0;}
+    to{opacity: 1;}
+  }
+  
+  @-moz-keyframes fadeIn{
+    from{opacity: 0;}
+    to{opacity: 1;}
+  }
+  
+  @-o-keyframes fadeIn{
+    from{opacity: 0;}
+    to{opacity: 1;}
+  }
+  
+  @keyframes fadeIn{
+    from{opacity: 0;}
+    to{opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeOut{
+    0%{opacity: 0;}
+    30%{opacity: 1;}
+    80%{opacity: .9;}
+    100%{opacity: 0;}
+  }
+  
+  @-moz-keyframes fadeOut{
+    0%{opacity: 0;}
+    30%{opacity: 1;}
+    80%{opacity: .9;}
+    100%{opacity: 0;}
+  }
+  
+  @-o-keyframes fadeOut{
+    0%{opacity: 0;}
+    30%{opacity: 1;}
+    80%{opacity: .9;}
+    100%{opacity: 0;}
+  }
+  
+  @keyframes fadeOut{
+    0%{opacity: 0;}
+    30%{opacity: 1;}
+    80%{opacity: .9;}
+    100%{opacity: 0;}
+  }
+  
+  @-webkit-keyframes finalFade{
+    0%{opacity: 0;}
+    30%{opacity: 1;}
+    80%{opacity: .9;}
+    100%{opacity: 1;}
+  }
+  
+  @-moz-keyframes finalFade{
+    0%{opacity: 0;}
+    30%{opacity: 1;}
+    80%{opacity: .9;}
+    100%{opacity: 1;}
+  }
+  
+  @-o-keyframes finalFade{
+    0%{opacity: 0;}
+    30%{opacity: 1;}
+    80%{opacity: .9;}
+    100%{opacity: 1;}
+  }
+  
+  @keyframes finalFade{
+    0%{opacity: 0;}
+    30%{opacity: 1;}
+    80%{opacity: .9;}
+    100%{opacity: 1;}
+  }
+  
+  </style>
+
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>

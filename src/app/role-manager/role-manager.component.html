@@ -1,0 +1,613 @@
+<app-header></app-header>
+<div id="app">
+         <section class="el-container">
+            <div>
+               <menu class="menu-bar">
+                  <a routerLink="javascript:void(0);" class="toggle-menu">
+                     <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+                  </a>
+                  <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+               </menu>
+               <app-sidebar></app-sidebar>
+               <nav class="nav-bar">
+                  <a routerLink="dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png" width="60%"></a> 
+                  <ul>
+                     <li><a routerLink="../add" class="router-link-exact-active active light-blue-text"><i class="icon-circle-plus"></i> Add Role
+                        </a>
+                     </li>
+                     <li><a routerLink="../list" class="pink-text"><i class="icon-checklist"></i> Role List
+                        </a>
+                     </li>
+                  </ul>
+               </nav>
+            </div>
+            <main class="el-main">
+               <app-header></app-header>
+               <div>
+                  <div>
+                     <!----> 
+                     <div>
+                        <div class="el-card is-always-shadow">
+                           <!---->
+                           <div class="el-card__body">
+                              <h3>Role Management</h3>
+                              <!----> 
+                              <form class="el-form el-form--label-top">
+                                 <div class="m-t30 el-row" style="margin-left: -20px; margin-right: -20px;">
+                                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-20 el-col-md-18 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                       <div class="el-form-item is-required">
+                                          <label for="role" class="el-form-item__label">Role Name</label>
+                                          <div class="el-form-item__content">
+                                             <div class="line-input el-input">
+                                                <!----><input type="text" autocomplete="off" placeholder="Enter Role name" class="el-input__inner"><!----><!----><!----><!---->
+                                             </div>
+                                             <!---->
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="role-check">
+                                    <div label="Patient" class="role-list">
+                                       <label class="el-checkbox" aria-controls="undefined">
+                                          <span tabindex="0" role="checkbox" aria-checked="mixed" class="el-checkbox__input is-indeterminate">
+                                             <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             
+                                       </span>
+                                          <span class="el-checkbox__label">
+                                             Patient<!---->
+                                          </span>
+                                       </label>
+                                       <div role="group" aria-label="checkbox-group" class="el-checkbox-group">
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                          </span>
+                                             <span class="el-checkbox__label">
+                                                View Patients<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Update Document<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Document<!---->
+                                             </span>
+                                          </label>
+                                       </div>
+                                    </div>
+                                    <div label="Packages" class="role-list">
+                                       <label class="el-checkbox" aria-controls="undefined">
+                                          <span tabindex="0" role="checkbox" aria-checked="mixed" class="el-checkbox__input is-indeterminate">
+                                             <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                          </span>
+                                          <span class="el-checkbox__label">
+                                             Packages<!---->
+                                          </span>
+                                       </label>
+                                       <div role="group" aria-label="checkbox-group" class="el-checkbox-group">
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Lab Packages<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Nurse Packages<!---->
+                                             </span>
+                                          </label>
+                                       </div>
+                                    </div>
+                                    <div label="Accounts" class="role-list">
+                                       <label class="el-checkbox" aria-controls="undefined">
+                                          <span tabindex="0" role="checkbox" aria-checked="mixed" class="el-checkbox__input is-indeterminate">
+                                             <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                          </span>
+                                          <span class="el-checkbox__label">
+                                             Accounts<!---->
+                                          </span>
+                                       </label>
+                                       <div role="group" aria-label="checkbox-group" class="el-checkbox-group">
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Bill List<!---->
+                                             </span>
+                                          </label>
+                                       </div>
+                                    </div>
+                                    <div label="Settings" class="role-list">
+                                       <label class="el-checkbox" aria-controls="undefined">
+                                          <span tabindex="0" role="checkbox" aria-checked="mixed" class="el-checkbox__input is-indeterminate">
+                                             <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                          </span>
+                                          <span class="el-checkbox__label">
+                                             Settings<!---->
+                                          </span>
+                                       </label>
+                                       <div role="group" aria-label="checkbox-group" class="el-checkbox-group">
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Appointment Settings<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Schedule Settings<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Application Settings<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Schedule Settings<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Appointment Settings<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Application Settings<!---->
+                                             </span>
+                                          </label>
+                                       </div>
+                                    </div>
+                                    <div label="Master" class="role-list">
+                                       <label class="el-checkbox" aria-controls="undefined">
+                                          <span tabindex="0" role="checkbox" aria-checked="mixed" class="el-checkbox__input is-indeterminate">
+                                             <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                          </span>
+                                          <span class="el-checkbox__label">
+                                             Master<!---->
+                                          </span>
+                                       </label>
+                                       <div role="group" aria-label="checkbox-group" class="el-checkbox-group">
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Departments<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                                </span>
+                                             <span class="el-checkbox__label">
+                                                Add Tests<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Treatments<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Departments<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Tasks<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Tests<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Packages<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Treatments<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Packages<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Tasks<!---->
+                                             </span>
+                                          </label>
+                                       </div>
+                                    </div>
+                                    <div label="Appointment" class="role-list">
+                                       <label class="el-checkbox" aria-controls="undefined">
+                                          <span tabindex="0" role="checkbox" aria-checked="mixed" class="el-checkbox__input is-indeterminate">
+                                             <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                          </span>
+                                          <span class="el-checkbox__label">
+                                             Appointment<!---->
+                                          </span>
+                                       </label>
+                                       <div role="group" aria-label="checkbox-group" class="el-checkbox-group">
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Assign Staff for Appointment<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Appointments<!---->
+                                             </span>
+                                          </label>
+                                       </div>
+                                    </div>
+                                    <div label="Employee" class="role-list">
+                                       <label class="el-checkbox" aria-controls="undefined">
+                                          <span tabindex="0" role="checkbox" aria-checked="mixed" class="el-checkbox__input is-indeterminate">
+                                             <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                          </span>
+                                          <span class="el-checkbox__label">
+                                             Employee<!---->
+                                          </span>
+                                       </label>
+                                       <div role="group" aria-label="checkbox-group" class="el-checkbox-group">
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Hospital Admin<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Doctor<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Physiotherapist<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Doctor<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Nurse<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Send Password<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Nurse<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Receptionist<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Physiotherapist<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Accountant<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add LabTech<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Hospital Admin<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Accountant<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View LabTech<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Receptionist<!---->
+                                             </span>
+                                          </label>
+                                       </div>
+                                    </div>
+                                    <div label="Role management" class="role-list">
+                                       <label class="el-checkbox" aria-controls="undefined">
+                                          <span tabindex="0" role="checkbox" aria-checked="mixed" class="el-checkbox__input is-indeterminate">
+                                             <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                          </span>
+                                          <span class="el-checkbox__label">
+                                             Role management<!---->
+                                          </span>
+                                       </label>
+                                       <div role="group" aria-label="checkbox-group" class="el-checkbox-group">
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Role management<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Role management<!---->
+                                             </span>
+                                          </label>
+                                       </div>
+                                    </div>
+                                    <div label="Service Type" class="role-list">
+                                       <label class="el-checkbox" aria-controls="undefined">
+                                          <span tabindex="0" role="checkbox" aria-checked="mixed" class="el-checkbox__input is-indeterminate">
+                                             <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                          </span>
+                                          <span class="el-checkbox__label">
+                                             Service Type<!---->
+                                          </span>
+                                       </label>
+                                       <div role="group" aria-label="checkbox-group" class="el-checkbox-group">
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Tests<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Treatments<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Packages<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Treatments<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Packages<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Tasks<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Tasks<!---->
+                                             </span>
+                                          </label>
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                View Tests<!---->
+                                             </span>
+                                          </label>
+                                       </div>
+                                    </div>
+                                    <div label="Coupons" class="role-list">
+                                       <label class="el-checkbox" aria-controls="undefined">
+                                          <span tabindex="0" role="checkbox" aria-checked="mixed" class="el-checkbox__input is-indeterminate">
+                                             <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                          </span>
+                                          <span class="el-checkbox__label">
+                                             Coupons<!---->
+                                          </span>
+                                       </label>
+                                       <div role="group" aria-label="checkbox-group" class="el-checkbox-group">
+                                          <label class="el-checkbox">
+                                             <span class="el-checkbox__input">
+                                                <input type="checkbox" id="scales" class="el-checkbox__inner" name="">
+                                             </span>
+                                             <span class="el-checkbox__label">
+                                                Add Coupons<!---->
+                                             </span>
+                                          </label>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="text-right">
+                                    <button type="button" class="el-button el-button--primary">
+                                       <!----><!----><span>Save</span>
+                                    </button>
+                                    <!---->
+                                 </div>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                     <!---->
+                  </div>
+                  <!---->
+               </div>
+            </main>
+         </section>
+      </div>
+      <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+      <div role="tooltip" id="el-tooltip-7343" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2005; display: none;">
+         Employee
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-7647" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2010; display: none;">
+         Patient
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-9477" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2028; display: none;">
+         Appointment
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-9129" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2030; display: none;">
+         Accounts
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-2943" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2032; display: none;">
+         Role Management
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-6209" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2034; display: none;">
+         Master
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>

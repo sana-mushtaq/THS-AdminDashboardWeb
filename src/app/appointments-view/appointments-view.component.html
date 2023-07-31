@@ -1,0 +1,248 @@
+<app-header></app-header>
+<div id="app">
+         <section class="el-container">
+            <div>
+               <menu class="menu-bar">
+                  <a href="javascript:void(0);" class="toggle-menu">
+                     <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+                  </a>
+                  <a href="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+               </menu>
+               <aside class="el-aside side-menu" style="width: 130px;">
+                  <div class="el-scrollbar">
+                     <div class="scrollbar-wrapper el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+                        <div class="el-scrollbar__view"><a href="dashboard" class="hidden-xs"><i class="icon-logo-symbol logo"></i></a> <a href="/dashboard" class="" content="Dashboard"><i class="el-tooltip icon-dashboard item item" aria-describedby="el-tooltip-7390" tabindex="0"></i><span class="hidden-sm-and-up">Dashboard</span></a> <a href="/employees" class=""><i class="el-tooltip item icon-emplyee" aria-describedby="el-tooltip-4885" tabindex="0"></i> <span class="hidden-sm-and-up">Employee</span></a><a href="/patients" class=""><i class="el-tooltip item icon-patients-status" aria-describedby="el-tooltip-7226" tabindex="0"></i> <span class="hidden-sm-and-up">Patient</span></a><a href="/appointments" class="active"><i class="el-tooltip item icon-calendar3" aria-describedby="el-tooltip-8183" tabindex="0"></i> <span class="hidden-sm-and-up">Appointment</span></a><a href="/accounts" class=""><i class="el-tooltip item icon-padlock" aria-describedby="el-tooltip-1472" tabindex="0"></i> <span class="hidden-sm-and-up">Accounts</span></a><a href="/role-manager" class=""><i class="el-tooltip item icon-manager" aria-describedby="el-tooltip-4275" tabindex="0"></i> <span class="hidden-sm-and-up">Role Management</span></a><a href="/package" class=""><i class="el-tooltip item icon-package" aria-describedby="el-tooltip-6780" tabindex="0"></i> <span class="hidden-sm-and-up">Package</span></a><a href="/master" class=""><i class="el-tooltip item icon-king" aria-describedby="el-tooltip-6093" tabindex="0"></i> <span class="hidden-sm-and-up">Master</span></a><a href="/services" class=""><i class="el-tooltip item icon-checklist" aria-describedby="el-tooltip-6704" tabindex="0"></i> <span class="hidden-sm-and-up">Services</span></a><a href="/settings" class=""><i class="el-tooltip item icon-settings" aria-describedby="el-tooltip-540" tabindex="0"></i> <span class="hidden-sm-and-up">Settings</span></a><a href="/rateandreview" class=""><i class="el-tooltip item icon-star-review" aria-describedby="el-tooltip-6176" tabindex="0"></i> <span class="hidden-sm-and-up">Rate And Review</span></a></div>
+                     </div>
+                     <div class="el-scrollbar__bar is-horizontal">
+                        <div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+                     </div>
+                     <div class="el-scrollbar__bar is-vertical">
+                        <div class="el-scrollbar__thumb" style="transform: translateY(0%); height: 64.1243%;"></div>
+                     </div>
+                  </div>
+               </aside>
+               <nav class="nav-bar-none">
+                  <!---->
+               </nav>
+            </div>
+            <main class="el-main dashboard">
+               <header class="el-header" style="height: auto;">
+                  <div class="hdr-tit">
+                     <h5 class="primary-color">Appointments</h5>
+                     <h6>Taib Home Medical Care Company - Riyadh</h6>
+                  </div>
+                  <ul role="menubar" class="el-menu-demo el-menu--horizontal el-menu">
+                     <!----> <!----> 
+                     <li role="menuitem" aria-haspopup="true" class="el-submenu" tabindex="0">
+                        <div class="el-submenu__title" style="border-bottom-color: transparent;"><img src="assets/images/user.svg" class="avtar"><i class="el-submenu__icon-arrow el-icon-arrow-down"></i></div>
+                        <div class="el-menu--horizontal" id="horizontal" style="position: absolute; top: 40px; right:3%; z-index: 2038; display: none;" x-placement="bottom-start">
+                           <ul role="menu" class="el-menu el-menu--popup el-menu--popup-bottom-start">
+                              <li role="menuitem" routerLink="../profile" tabindex="-1" class="el-menu-item">Profile</li>
+                              <li role="menuitem" routerLink="../change-password" tabindex="-1" class="el-menu-item">Change Password</li>
+                              <li role="menuitem" routerLink="/" tabindex="-1" class="el-menu-item">Logout</li>
+                           </ul>
+                        </div>
+                     </li>
+                  </ul>
+               </header>
+               <div>
+                  <!----> <!----> 
+                  <div>
+                     <div>
+                        <div class=" custom-btn el-row">
+                           <button type="button" class="el-button back-btn el-button--default el-button--small is-plain">
+                              <!----><!----><span><i class="icon-arrow-left h2"></i></span>
+                           </button>
+                           <h4 class="m-b20 f-w6 ">Booking Details</h4>
+                           <div class="el-card is-always-shadow">
+                              <!---->
+                              <div class="el-card__body">
+                                 <h4 class="m-b20 f-w6">Patient Details</h4>
+                                 <button class="accordion">
+                                    <div role="tab" aria-controls="el-collapse-content-6532" aria-describedby="el-collapse-content-6532">
+                                        <div role="button" id="el-collapse-head-6532" tabindex="0" class="el-collapse-item__header" style="background: unset;display: block;border: none;">
+                                           <div class="m-b30 new-app el-row" style="margin-left: -15px; margin-right: -15px;">
+                                              <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Patient name</label> <span>Gout Alrubaie</span></div>
+                                              <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Patient ID</label> <span>PATtRUj3xN</span></div>
+                                              <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Gender</label> <span>Female</span></div>
+                                              <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Blood Group</label> <span></span></div>
+                                           </div>
+                                           <i class="el-collapse-item__arrow el-icon-arrow-right" style="display:none;"></i>
+                                        </div>
+                                     </div>
+                                 </button>
+                                    <div class="panel">
+                                        <div class="el-collapse-item">
+                                            <!-- <div role="tab" aria-controls="el-collapse-content-6532" aria-describedby="el-collapse-content-6532">
+                                               <div role="button" id="el-collapse-head-6532" tabindex="0" class="el-collapse-item__header">
+                                                  <div class="m-b30 new-app el-row" style="margin-left: -15px; margin-right: -15px;">
+                                                     <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Patient name</label> <span>Gout Alrubaie</span></div>
+                                                     <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Patient ID</label> <span>PATtRUj3xN</span></div>
+                                                     <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Gender</label> <span>Female</span></div>
+                                                     <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Blood Group</label> <span></span></div>
+                                                  </div>
+                                                  <i class="el-collapse-item__arrow el-icon-arrow-right"></i>
+                                               </div>
+                                            </div> -->
+                                            <div role="tabpanel" aria-hidden="true" aria-labelledby="el-collapse-head-6532" id="el-collapse-content-6532" class="el-collapse-item__wrap" style="background-color: unset;">
+                                               <div class="el-collapse-item__content">
+                                                  <div class="m-t30 el-row" style="margin-left: -15px; margin-right: -15px;">
+                                                     <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Date of birth</label> <span></span></div>
+                                                     <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Phone</label> <span>+966 504191050</span></div>
+                                                     <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Email</label> <span>Haya_es@icloud.com</span></div>
+                                                     <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Nationality Id</label> <span>1002773738</span></div>
+                                                  </div>
+                                                  <div class="m-b30 el-row" style="margin-left: -15px; margin-right: -15px;">
+                                                     <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;">
+                                                        <label>Location</label> <span class="light-blue cursor">4134، الشفا، الرياض 14713&nbsp;7139، السعودية</span> 
+                                                        <div class="custom-map app-map">
+                                                           <div class="el-dialog__wrapper" style="display: none;">
+                                                              <div role="dialog" aria-modal="true" aria-label="Your Location" class="el-dialog" style="margin-top: 15vh;">
+                                                                 <div class="el-dialog__header"><span class="el-dialog__title">Your Location</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div>
+                                                              </div>
+                                                           </div>
+                                                        </div>
+                                                     </div>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                         </div>
+                                    </div>
+                              </div>
+                           </div>
+                           <!----> 
+                           <div>
+                              <!---->
+                           </div>
+                           <div>
+                              <div>
+                                 <div>
+                                    <h4 class="m-t40">Assign Booking</h4>
+                                    <div class="el-card m-t40 is-always-shadow">
+                                       <!---->
+                                       <div class="el-card__body">
+                                          <div class="m-b30 el-row" style="margin-left: -15px; margin-right: -15px;">
+                                             <div class="appoiment-view el-col el-col-24 el-col-xs-8 el-col-sm-6 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Employee name</label> <span>REEMA ALBOKAIRI</span></div>
+                                             <div class="appoiment-view el-col el-col-24 el-col-xs-8 el-col-sm-6 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Employee ID</label> <span>EMP1529</span></div>
+                                             <div class="appoiment-view el-col el-col-24 el-col-xs-8 el-col-sm-6 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Link</label> <span>https://provider.sanar.sa/</span></div>
+                                             <div class="appoiment-view el-col el-col-24 el-col-xs-8 el-col-sm-6 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Password</label> <span>199867</span></div>
+                                             <!----> 
+                                             <div>
+                                                <div class="pull-right">
+                                                   <div class="cursor el-col el-col-24 el-col-xs-8 el-col-sm-6 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;">
+                                                      <div id="myBtn"><i class="icon-pencil m-r10"></i> <span>Edit</span></div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!---->
+                           </div>
+                           <h4 class="m-t40 m-b20 f-w6">Appointment Details</h4>
+                           <div class="el-card m-b30 is-always-shadow">
+                              <!---->
+                              <div class="el-card__body">
+                                 <div class="m-b30 el-row" style="margin-left: -15px; margin-right: -15px;">
+                                    <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Service type</label> <span>
+                                       Home Visit
+                                       <i>(Nurse)</i></span>
+                                    </div>
+                                    <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Service Date &amp; Time</label> <span>25th Feb 2022, 2:00:00 PM</span></div>
+                                    <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Appointment ID</label> <span>APP0222199485</span></div>
+                                    <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Appointment status</label> <span>Confirmed</span></div>
+                                    <div class="appoiment-view m-t10 el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Gender</label> <span>Female</span></div>
+                                 </div>
+                                 <div class="m-b30 app-brdr el-row">
+                                    <div class="appoiment-view el-col el-col-24"><label>Service</label> <span>Gastrostomy / Ostomy Tube Feeding  (أنبوب التغذية المعدي) </span></div>
+                                 </div>
+                                 <div class="m-b30 app-brdr el-row">
+                                    <div class="appoiment-view el-col el-col-24">
+                                       <label>Medical report</label> 
+                                       <div></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!----> 
+                           <div>
+                              <h4 class="m-b20 f-w6">Price Details</h4>
+                              <div class="el-card is-always-shadow">
+                                 <!---->
+                                 <div class="el-card__body">
+                                    <div class="m-b30 el-row" style="margin-left: -15px; margin-right: -15px;">
+                                       <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Appointment Fee</label> <span>300</span></div>
+                                       <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Discount</label> <span>0</span></div>
+                                       <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Appointment Price</label> <span>300</span></div>
+                                       <div class="appoiment-view el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>VAT</label> <span>0</span></div>
+                                       <div class="appoiment-view m-t10 el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-6 el-col-lg-6 el-col-xl-6" style="padding-left: 15px; padding-right: 15px;"><label>Total Price</label> <span>300</span></div>
+                                       <!---->
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="el-dialog__wrapper employeedialog" style="display: none;">
+                           <div role="dialog" aria-modal="true" aria-label="dialog" class="el-dialog" style="margin-top: 15vh;">
+                              <div class="el-dialog__header"><span class="el-dialog__title"></span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div>
+                              <!----><!---->
+                           </div>
+                        </div>
+                     </div>
+                     <!---->
+                  </div>
+                  <!---->
+               </div>
+            </main>
+         </section>
+      </div>
+      <script async="" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-EXDwh2adbELTFKlDgn3RXMP648GC12s&amp;sensor=false&amp;libraries=places"></script><script type="text/javascript" src="static/js/manifest.787d0d92fd70cf16874e.js"></script><script type="text/javascript" src="static/js/vendor.6f6ef6bc866762bf29a6.js"></script><script type="text/javascript" src="static/js/app.a27789e3d261f525a01a.js"></script>
+      <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+      <div role="tooltip" id="el-tooltip-1472" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2014; display: none;">
+         Accounts
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-8183" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2018; display: none;">
+         Appointment
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+
+      <!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2>Assign an employee for this booking</h2>
+      </div>
+      <div class="modal-body">
+        <div class="" style="padding-left: 15px; padding-right: 15px;">
+            <div class="el-form-item is-required">
+                <label for="role_id" class="el-form-item__label">Select Employee</label>
+                <div class="el-form-item__content">
+                   <div class="el-select line-input">
+                     <select class="select">
+                         <option>Select Employee</option>
+                         <option class="el-select-dropdown__item d-flex hover"><span class="eloptionpsis">Nurse Female</span> <span class="emp-id">Female</span></option>
+                         <option class="el-select-dropdown__item d-flex"><span class="eloptionpsis">REEMA ALBOKAIRI</span> <span class="emp-id">Female</span></option>
+                         <option class="el-select-dropdown__item d-flex"><span class="eloptionpsis">DEEMA M</span> <span class="emp-id">Female</span></option>
+                         <option class="el-select-dropdown__item d-flex"><span class="eloptionpsis">Ashjan  Naji</span> <span class="emp-id">Female</span></option>
+                         <option class="el-select-dropdown__item d-flex"><span class="eloptionpsis">SARA M</span> <span class="emp-id">Female</span></option>
+                         <option class="el-select-dropdown__item d-flex"><span class="eloptionpsis">NOURA T</span> <span class="emp-id">Female</span></option>
+                         <option class="el-select-dropdown__item d-flex"><span class="eloptionpsis">SMSR M</span> <span class="emp-id">Female</span></option>
+                        </select>
+                   </div>
+                   <!---->
+                </div>
+             </div>
+         </div>
+      </div>
+      <div class="modal-footer">
+        <h3></h3>
+      </div>
+    </div>
+  
+  </div>

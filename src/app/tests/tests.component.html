@@ -1,0 +1,161 @@
+<app-header></app-header>
+<div id="app">
+         <section class="el-container">
+            <div>
+               <menu class="menu-bar">
+                  <a routerLink="javascript:void(0);" class="toggle-menu">
+                     <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+                  </a>
+                  <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+               </menu>
+               <app-sidebar></app-sidebar>
+               <nav class="nav-bar">
+                  <a routerLink="dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png" width="60%"></a> 
+                  <ul>
+                     <li><a routerLink="../department" class="blue-text"><i class="icon-layers"></i> Department
+                        </a>
+                     </li>
+                     <li><a routerLink="../treatments" class="light-green-text"><i class="icon-rehabilitation"></i> Treatments
+                        </a>
+                     </li>
+                     <li><a routerLink="../tests" class="router-link-exact-active active red-text"><i class="icon-flask"></i> Tests
+                        </a>
+                     </li>
+                  </ul>
+               </nav>
+            </div>
+            <main class="el-main">
+               <app-header></app-header>
+               <div class="m-t-30 el-row">
+                  <!----> <!----> <!----> <!----> <!----> <!----> 
+                  <div class="o-flow-x">
+                     <div>
+                        <div class="el-table master-table  el-table--fit el-table--enable-row-hover el-table--enable-row-transition" style="width: 100%;">
+                           <div class="hidden-columns">
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                           </div>
+                           <div class="el-table__header-wrapper">
+                              <table cellspacing="0" cellpadding="0" border="0" class="el-table__header" style="width: 1010px;">
+                                 <colgroup>
+                                    <col name="el-table_14_column_67" width="200">
+                                    <col name="el-table_14_column_68" width="200">
+                                    <col name="el-table_14_column_69" width="305">
+                                    <col name="el-table_14_column_70" width="305">
+                                    <col name="gutter" width="0">
+                                 </colgroup>
+                                 <thead class="has-gutter">
+                                    <tr class="">
+                                       <th colspan="1" rowspan="1" class="el-table_14_column_67     is-leaf">
+                                          <div class="cell">
+                                             Test Name
+                                             <div class="el-input">
+                                                <!----><input type="text" autocomplete="off" class="el-input__inner"><!----><!----><!----><!---->
+                                             </div>
+                                          </div>
+                                       </th>
+                                       <th colspan="1" rowspan="1" class="el-table_14_column_68     is-leaf">
+                                          <div class="cell">
+                                             Arabic
+                                             <div class="el-input">
+                                                <!----><input type="text" autocomplete="off" class="el-input__inner"><!----><!----><!----><!---->
+                                             </div>
+                                          </div>
+                                       </th>
+                                       <th colspan="1" rowspan="1" class="el-table_14_column_69  is-right   is-leaf">
+                                          <div class="cell"></div>
+                                       </th>
+                                       <th colspan="1" rowspan="1" class="el-table_14_column_70     is-leaf">
+                                          <div class="cell">Status</div>
+                                       </th>
+                                       <th class="gutter" style="width: 0px; display: none;"></th>
+                                    </tr>
+                                 </thead>
+                              </table>
+                           </div>
+                           <div class="el-table__body-wrapper is-scrolling-none" style="margin-top: 3%;">
+                             <table id="example" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Test Name</th>
+                                            <th>Arabic</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="el-table__row">
+                                            <td>17 KETOSTEROID</td>
+                                            <td>معايره (17) كيتو ستيرويد</td>
+                                            <td>
+                                             <div class="cell">
+                                                <label class="switch">
+                                                  <input type="checkbox" checked>
+                                                  <span class="slider round" style="border-color: rgb(19, 206, 102); background-color: rgb(19, 206, 102);"></span>
+                                                </label>
+                                             </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="el-table__row">
+                                          <td>17 OH KETOSTEROID</td>
+                                          <td>معايره (17) كيتو ستيرويد هيدروكسيد</td>
+                                          <td>
+                                           <div class="cell">
+                                              <label class="switch">
+                                                <input type="checkbox" checked>
+                                                <span class="slider round" style="border-color: rgb(19, 206, 102); background-color: rgb(19, 206, 102);"></span>
+                                              </label>
+                                           </div>
+                                          </td>
+                                      </tr>
+                                      <tr class="el-table__row">
+                                       <td>2 HOURS P.P.B.S</td>
+                                       <td>فحص السكر بعد الإفطار بساعتين</td>
+                                       <td>
+                                        <div class="cell">
+                                           <label class="switch">
+                                             <input type="checkbox" checked>
+                                             <span class="slider round" style="border-color: rgb(19, 206, 102); background-color: rgb(19, 206, 102);"></span>
+                                           </label>
+                                        </div>
+                                       </td>
+                                   </tr>
+                                    </tbody>
+                                </table> 
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!----> 
+                  <div class="pull-right m-t25">
+                     <div class="el-pagination is-background" data="[object Object]">
+                        <button type="button" disabled="disabled" class="btn-prev"><i class="el-icon el-icon-arrow-left"></i></button>
+                        <ul class="el-pager">
+                           <li class="number active">1</li>
+                           <!---->
+                           <li class="number">2</li>
+                           <li class="number">3</li>
+                           <li class="number">4</li>
+                           <li class="number">5</li>
+                           <li class="number">6</li>
+                           <li class="el-icon more btn-quicknext el-icon-more"></li>
+                           <li class="number">30</li>
+                        </ul>
+                        <button type="button" class="btn-next"><i class="el-icon el-icon-arrow-right"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </main>
+         </section>
+      </div>
+      
+      <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+      <div role="tooltip" id="el-tooltip-8995" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2001; display: none;">
+         Accounts
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-5329" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2003; display: none;">
+         Master
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>

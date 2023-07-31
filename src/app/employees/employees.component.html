@@ -1,0 +1,163 @@
+
+<div id="app">
+   <section class="el-container">
+      <div>
+         
+         <app-sidebar></app-sidebar>
+         <nav class="nav-bar">
+            <a routerLink="../dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png"
+                  width="60%"></a>
+            <ul>
+               <li><a routerLink="../nurse" class="light-blue-text"><i class="f-size14 icon-bonnet"></i> Nurse</a></li>
+               <li><a routerLink="../technician" class="thick-blue-text"><i class="icon-flask"></i> Lab technician</a>
+               </li>
+               <!-- <li><a routerLink="../users" class="router-link-exact-active active blue-text"><i class="icon-avatar"></i> System User</a></li>
+                     <li><a routerLink="../doctor" class="pink-text"><i class="icon-first-aid"></i> Doctor</a></li>
+                     <li><a routerLink="../physiotherapist" class="light-green-text"><i class="icon-rehabilitation"></i> Physiotherapist</a></li>
+                     <li><a routerLink="../nurse" class="light-blue-text"><i class="f-size14 icon-bonnet"></i> Nurse</a></li>
+                     <li><a routerLink="../technician" class="thick-blue-text"><i class="icon-flask"></i> Lab technician</a></li>
+                     <li><a routerLink="../receptionist" class="yellow-text"><i class="icon-receptionist"></i> Receptionist</a></li>
+                     <li><a routerLink="../accountant" class="brown-text"><i class="icon-calculator"></i> Accountant</a></li> -->
+            </ul>
+         </nav>
+      </div>
+      <main class="el-main">
+         <app-header></app-header>
+         <div>
+            <!---->
+            <!---->
+            <div class="o-flow-x">
+               <div
+                  class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+                  style="width: 100%;">
+                  <div class="hidden-columns">
+                     <div></div>
+                     <div></div>
+                     <!---->
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                  </div>
+                  <!-- <div class="el-table__header-wrapper">
+                           <table cellspacing="0" cellpadding="0" border="0" class="el-table__header" style="width: 1000px;">
+                              <colgroup>
+                                 <col name="el-table_2_column_7" width="100">
+                                 <col name="el-table_2_column_8" width="200">
+                                 <col name="el-table_2_column_9" width="200">
+                                 <col name="el-table_2_column_10" width="200">
+                                 <col name="el-table_2_column_11" width="200">
+                                 <col name="el-table_2_column_12" width="100">
+                                 <col name="gutter" width="0">
+                              </colgroup>
+                              <thead class="has-gutter">
+                                 <tr class="">
+                                    <th colspan="1" rowspan="1" class="el-table_2_column_7     is-leaf">
+                                       <div class="cell">EMP ID</div>
+                                    </th>
+                                    <th colspan="1" rowspan="1" class="el-table_2_column_8     is-leaf">
+                                       <div class="cell">
+                                          Name
+                                          <div class="el-input">
+                                            <input type="text" autocomplete="off" placeholder="" class="el-input__inner">
+                                          </div>
+                                       </div>
+                                    </th>
+                                    <th colspan="1" rowspan="1" class="el-table_2_column_9     is-leaf">
+                                       <div class="cell">
+                                          Mobile
+                                          <div class="el-input">
+                                             <input type="number" autocomplete="off" placeholder="" class="el-input__inner">
+                                          </div>
+                                       </div>
+                                    </th>
+                                    <th colspan="1" rowspan="1" class="el-table_2_column_10     is-leaf">
+                                       <div class="cell">
+                                          Email
+                                          <div class="el-input">
+                                             <input type="text" autocomplete="off" placeholder="" class="el-input__inner">
+                                          </div>
+                                       </div>
+                                    </th>
+                                    <th colspan="1" rowspan="1" class="el-table_2_column_11     is-leaf">
+                                       <div class="cell">Status</div>
+                                    </th>
+                                    <th colspan="1" rowspan="1" class="el-table_2_column_12   undefined el-table__expand-column  is-leaf">
+                                       <div class="cell"></div>
+                                    </th>
+                                    <th class="gutter" style="width: 0px; display: none;"></th>
+                                 </tr>
+                              </thead>
+                           </table>
+                        </div> -->
+                  <div style="text-align: right;">
+                     <li role="menuitem" tabindex="-1" class="el-menu-item is-active"><button class="add-btn"
+                        routerLink="../add-user">Add User</button></li>
+                  </div>
+                  <div class="el-table__body-wrapper is-scrolling-none" style="margin-top: 3%;">
+                     <table id="employeetable" class="display" cellspacing="0" width="100%" style="margin-top: 3%;">
+                        <thead>
+                           <tr>
+                              <th>EMP ID</th>
+                              <th>Name</th>
+                              <th>Mobile</th>
+                              <th>Email</th>
+                              <th>Gender</th>
+                              <th>Blood Group</th>
+                              <th>Date of Birth</th>
+                              <th>Status</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr class="el-table__row">
+                              <td routerLink="../view-user">EMP696</td>
+                              <td>
+                                 <div class="cell">
+                                    <div class="d-flex-center"><span class="avtar3"><img src="assets/images/user.svg"
+                                             class="image-cover"></span> <span class="grid_offlinestatus"></span> <span
+                                          title="hamad  admin">hamad admin</span></div>
+                                 </div>
+                              </td>
+                              <td>8686</td>
+                              <td>00@taibsa.com</td>
+                              <td>Male</td>
+                              <td>O+</td>
+                              <td>01-01-2000</td>
+                              <td>
+                                 <div class="cell">
+                                    <label class="switch">
+                                       <input type="checkbox" checked>
+                                       <span class="slider round"></span>
+                                    </label>
+                                 </div>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="pull-right m-t25">
+            </div>
+         </div>
+      </main>
+   </section>
+</div>
+<div class="el-menu--horizontal" id="horizontal"
+   style="position: absolute; top: 65px; right:3%; z-index: 2038; display: none;" x-placement="bottom-start">
+   <ul role="menu" class="el-menu el-menu--popup el-menu--popup-bottom-start">
+      <li role="menuitem" routerLink="../profile" tabindex="-1" class="el-menu-item">Profile</li>
+      <li role="menuitem" routerLink="../change-password" tabindex="-1" class="el-menu-item">Change Password</li>
+      <li role="menuitem" routerLink="/" tabindex="-1" class="el-menu-item">Logout</li>
+   </ul>
+</div>
+<div role="tooltip" id="el-tooltip-6080" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2043; display: none;">
+   Dashboard
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-7537" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2047; display: none;">
+   Employee
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>

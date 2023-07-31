@@ -1,0 +1,517 @@
+<div id="app">
+  <section class="el-container">
+    <div>
+      <menu class="menu-bar">
+        <a routerLink="javascript:void(0);" class="toggle-menu">
+          <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+        </a>
+        <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+      </menu>
+      <app-sidebar></app-sidebar>
+      <app-submenu></app-submenu>
+    </div>
+    <main class="el-main">
+      <app-header></app-header>
+      <div>
+        <div class="o-flow-x">
+          <div
+            class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+            style="width: 100%"
+          >
+            <div class="hidden-columns">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+
+            <div class="d-flex justify-content align-items-center">
+              <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-invoice2"></i> Employer List</span>
+              <button (click)="onReset()" data-toggle="modal" data-target="#add_employee" class="add-btn mr-0 float-right"><i class="fa fa-plus-circle"></i> Add Employer</button>
+            </div>
+
+            <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%; width: 100%">
+              <table id="employers_table" class="display" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>Employer ID</th>
+                    <th>Employer Name</th>
+                    <th>Contact Person Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let emp of EmployeerList">
+                    <td>{{ emp.employeerId }}</td>
+                    <td><img src="{{ emp.logoPath }}" class="zoom image-cover" /> {{ emp.employeerName }}</td>
+                    <td>{{ emp.contactPersonName }}</td>
+                    <td>{{ emp.email }}</td>
+                    <td>{{ emp.mobile }}</td>
+                    <td>
+                      <div class="cell">
+                        <i class="icon-pencil ico-pointer" id="ico-pointer" (click)="EmployeerEdit(emp.employeerId)"></i>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h3 class="modal-title" id="exampleModalLabel">Add New Employee</h3>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="el-row mt-3" style="margin-left: -15px; margin-right: -15px;">
+                                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                                    <div class="el-form-item is-required">
+                                        <label for="fn.en" class="el-form-item__label">Employee Name</label>
+                                        <div class="el-form-item__content">
+                                            <div class="line-input el-input">
+                                                <input type="text" class="el-input__inner form-control" formControlName="serviceName" placeholder="Enter Employee Name" />
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                                    <div class="el-form-item is-required">
+                                        <label for="fn.en" class="el-form-item__label">Contact Person Name</label>
+                                        <div class="el-form-item__content">
+                                            <div class="line-input el-input">
+                                                <input type="text" class="el-input__inner form-control" formControlName="serviceName" placeholder="Enter Contact Person Name" />
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                                    <div class="el-form-item is-required">
+                                        <label for="fn.ar" class="el-form-item__label">Email</label>
+                                        <div class="el-form-item__content">
+                                            <div class="line-input el-input">
+                                                <input type="text" class="el-input__inner form-control" formControlName="serviceName" placeholder="Enter Email" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                                    <div class="el-form-item is-required">
+                                        <label for="fn.ar" class="el-form-item__label">Phone Number</label>
+                                        <div class="el-form-item__content">
+                                            <div class="line-input el-input">
+                                                <input type="text" class="el-input__inner form-control" formControlName="serviceName" placeholder="Enter Phone Number" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                                    <div class="el-form-item is-required">
+                                        <label for="fn.ar" class="el-form-item__label">Address</label>
+                                        <div class="el-form-item__content">
+                                            <div class="line-input el-input">
+                                                <textarea class="form-control" placeholder="Enter Address" rows="4"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                                    <div class="el-form-item is-required">
+                                        <label for="fn.ar" class="el-form-item__label">Website</label>
+                                        <div class="el-form-item__content">
+                                            <div class="line-input el-input">
+                                                <input type="text" class="el-input__inner form-control" formControlName="serviceName" placeholder="Enter Website" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                                    <div class="el-form-item is-required">
+                                        <label for="fn.en" class="el-form-item__label">Employee Logo</label>
+                                        <div class="el-form-item__content">
+                                            <div class="line-input el-input">
+                                                <input type="file" class="el-input__inner form-control" formControlName="serviceName" id="files_department"/>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                                    <div class="el-form-item is-required">
+                                        <label for="fn.ar" class="el-form-item__label">Logo Preview</label>
+                                        <div class="el-form-item__content" id="beforefilepreview" >
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                <div class="el-col" style="padding-left: 15px; padding-right: 15px;">
+                                    <div class="el-form-item is-required">
+                                        <label for="fn.en" class="el-form-item__label">Choose Employee</label>
+                                        <div class="el-form-item__content">
+                                            <div class="line-input el-input">
+                                                <select class="form-control mt-0" id="my-select" formControlName="testIncluded" multiple>
+                                                    <option >Package 1- Package1</option>
+                                                    <option >Package 2- Package2</option>
+                                                 </select>
+                    
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+
+                            
+
+                        </div>
+                        <div class="modal-footer text-right">
+                          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                          <button type="button" class="el-button el-button--primary save">Add</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+</div>
+
+
+
+<button class="d-none edit-employer" data-toggle="modal" data-target="#add_employee">Edit Employee Button Hidden</button>
+
+<div id="add_employee" class="modal schedule_modal" style="padding-top: 50px">
+  <div class="modal-content" style="width: 60% !important">
+    <div class="modal-header" style="border-bottom: unset" (click)="onClickCloseModel()">
+      <span class="close" (click)="close()">&times;</span>
+      <h2 *ngIf="!isEditing">Add Employer</h2>
+      <h2 *ngIf="isEditing">Edit Employer</h2>
+    </div>
+    <div class="modal-body">
+      <form class="el-form newform el-form--label-top" id="labtechpackagelistForm" (ngSubmit)="(isEditing) ? onUpdateEmployer() : createNewEmployeer()" [formGroup]="typeValidationForm">
+        <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Employer Name</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    formControlName="employeerName"
+                    [ngClass]="{ 'is-invalid': type['employeerName'].errors && (type['employeerName'].dirty || type['employeerName'].touched) }"
+                    placeholder="Enter Employeer Name"
+                  />
+                  <div *ngIf="type['employeerName'].errors && (type['employeerName'].dirty || type['employeerName'].touched)" class="invalid-feedback">
+                    <span *ngIf="type['employeerName'].errors['required']">This value is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Employer Name Arabic</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    formControlName="employeerNameArabic"
+                    [ngClass]="{
+                      'is-invalid': type['employeerNameArabic'].errors && (type['employeerNameArabic'].dirty || type['employeerNameArabic'].touched)
+                    }"
+                    placeholder="Enter Employeer Name Arabic"
+                  />
+                  <div
+                    *ngIf="type['employeerNameArabic'].errors && (type['employeerNameArabic'].dirty || type['employeerNameArabic'].touched)"
+                    class="invalid-feedback"
+                  >
+                    <span *ngIf="type['employeerNameArabic'].errors['required']">This value is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.ar" class="el-form-item__label">Contact Person Name</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <!-- <input id="serviceNameArabic" type="text" autocomplete="off"
+                              placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    formControlName="contactPersonName"
+                    [ngClass]="{ 'is-invalid': type['contactPersonName'].errors && (type['contactPersonName'].dirty || type['contactPersonName'].touched) }"
+                    placeholder="Enter Contact Person Name"
+                  />
+                  <div
+                    *ngIf="type['contactPersonName'].errors && (type['contactPersonName'].dirty || type['contactPersonName'].touched)"
+                    class="invalid-feedback"
+                  >
+                    <span *ngIf="type['contactPersonName'].errors['required']">This value is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.ar" class="el-form-item__label">Contact Person Name Arabic</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <!-- <input id="serviceNameArabic" type="text" autocomplete="off"
+                              placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    formControlName="contactPersonNameArabic"
+                    [ngClass]="{
+                      'is-invalid': type['contactPersonNameArabic'].errors && (type['contactPersonNameArabic'].dirty || type['contactPersonNameArabic'].touched)
+                    }"
+                    placeholder="Enter Contact Person Name Arabic"
+                  />
+                  <div
+                    *ngIf="type['contactPersonNameArabic'].errors && (type['contactPersonNameArabic'].dirty || type['contactPersonNameArabic'].touched)"
+                    class="invalid-feedback"
+                  >
+                    <span *ngIf="type['contactPersonNameArabic'].errors['required']">This value is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Email</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    formControlName="email"
+                    [ngClass]="{ 'is-invalid': type['email'].errors && (type['email'].dirty || type['email'].touched) }"
+                    placeholder="Enter Email"
+                  />
+                  <div *ngIf="type['email'].errors && (type['email'].dirty || type['email'].touched)" class="invalid-feedback">
+                    <span *ngIf="type['email'].errors['required']">This value is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.ar" class="el-form-item__label">Phone Number</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <!-- <input id="serviceNameArabic" type="text" autocomplete="off"
+                             placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    formControlName="mobile"
+                    [ngClass]="{ 'is-invalid': type['mobile'].errors && (type['mobile'].dirty || type['mobile'].touched) }"
+                    placeholder="Enter Mobile"
+                  />
+                  <div *ngIf="type['mobile'].errors && (type['mobile'].dirty || type['mobile'].touched)" class="invalid-feedback">
+                    <span *ngIf="type['mobile'].errors['required']">This value is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Address</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    formControlName="address"
+                    [ngClass]="{ 'is-invalid': type['address'].errors && (type['address'].dirty || type['address'].touched) }"
+                    placeholder="Enter Address"
+                  />
+                  <div *ngIf="type['address'].errors && (type['address'].dirty || type['address'].touched)" class="invalid-feedback">
+                    <span *ngIf="type['address'].errors['required']">This value is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.ar" class="el-form-item__label">Website</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <!-- <input id="serviceNameArabic" type="text" autocomplete="off"
+                          placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    formControlName="website"
+                    [ngClass]="{ 'is-invalid': type['website'].errors && (type['website'].dirty || type['website'].touched) }"
+                    placeholder="Enter Lab Name in Arabic"
+                  />
+                  <div *ngIf="type['website'].errors && (type['website'].dirty || type['website'].touched)" class="invalid-feedback">
+                    <span *ngIf="type['website'].errors['required']">This value is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Promotion Code</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    formControlName="employeerAccessCode"
+                    [ngClass]="{
+                      'is-invalid': type['employeerAccessCode'].errors && (type['employeerAccessCode'].dirty || type['employeerAccessCode'].touched)
+                    }"
+                    placeholder="Enter Promotion Code"
+                  />
+                  <div
+                    *ngIf="type['employeerAccessCode'].errors && (type['employeerAccessCode'].dirty || type['employeerAccessCode'].touched)"
+                    class="invalid-feedback"
+                  >
+                    <span *ngIf="type['employeerAccessCode'].errors['required']">This value is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.ar" class="el-form-item__label">Employer Logo</label>
+              <div class="el-form-item__content">
+                <div id="beforefilepreview">
+                  <div tabindex="10" class="el-upload el-upload--text">
+                    <label class="d-flex-center" for="file_package">
+                      <img src="assets/images/photoupload.svg" class="avatar-img" />
+                      <input type="file" id="file_package" accept="image/*" class="form-control" (change)="handleFileInput($event.target)" hidden />
+                      <span class="gray-color">Upload Photo</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.ar" class="el-form-item__label">Image Preview</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <img src="{{ imgPreview }}" id="image_preview_lab" width="100" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="el-row" style="padding: 2% 2%; border: 1px solid #e2e2e2;">
+          <div class="el-form-item is-required">
+            <label for="fn.ar" class="el-form-item__label">Choose Packages</label>
+          </div>
+          <select class="form-control my-select" id="my-select" formControlName="packagesSelected" multiple >
+            <option *ngFor="let service of ServiceCorpPackage" [value]="service.packageId">{{ service.packageName }}</option>
+          </select>
+        </div>
+
+        <div class="el-row mt-5" style="padding: 2% 2%; border: 1px solid #e2e2e2;">
+          <div class="el-form-item is-required">
+            <label for="fn.ar" class="el-form-item__label">Choose Labs</label>
+          </div>
+          <select class="form-control my-select" id="my-select1" formControlName="labsSelected" multiple>
+            <option *ngFor="let lab of LabLists" [value]="lab.serviceProviderId">{{lab.providerName}}</option>
+          </select>
+        </div>
+
+        <div class="text-right mt-4">
+          <button type="submit" class="btn btn-primary el-button el-button--primary save">Submit</button>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <h3></h3>
+    </div>
+  </div>
+</div>
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0"></div>
+<div
+  role="tooltip"
+  id="el-tooltip-7343"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2005; display: none"
+>
+  Employee
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-7647"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2010; display: none"
+>
+  Patient
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-9477"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2028; display: none"
+>
+  Appointment
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-9129"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2030; display: none"
+>
+  Accounts
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>

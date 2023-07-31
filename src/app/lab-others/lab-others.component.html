@@ -1,0 +1,437 @@
+<div id="app">
+    <section class="el-container">
+      <div>
+        <menu class="menu-bar">
+          <a href="javascript:void(0);" class="toggle-menu">
+            <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+          </a>
+          <a href="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+        </menu>
+        <app-sidebar></app-sidebar>
+        <nav class="nav-bar">
+          <a routerLink="dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png" width="60%" /></a>
+          <ul>
+                    
+            <li><a routerLink="../lab-package-list" class="router-link-exact-active light-blue-text"><i
+                class="icon-flask"></i> Lab Packages
+          </a>
+            
+            <li class=""><a routerLink="../lab-test" class="router-link-exact-active  light-blue-text"><i class="icon-flask"></i> Tests
+          </a>
+            </li>
+            <li><a routerLink="../lab-others" class="router-link-exact-active active light-blue-text"><i class="icon-flask"></i> Others
+          </a>
+            </li>
+        </ul>
+        </nav>
+      </div>
+  
+      <main class="el-main">
+        <app-header></app-header>
+        <div>
+          <div>
+            <!---->
+            <div class="o-flow-x">
+              <div
+                class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+                style="width: 100%"
+              >
+                <div class="hidden-columns">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div placeholder="Package Type Name"></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              
+  
+                <div class="d-flex justify-content align-items-center">
+                  <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-flask"></i> Service List</span>  
+                </div>
+
+                <div class="row mt-4" style="justify-content: space-between;">
+                  <ul class="nav">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="javascript:void(0)" (click)="activerequests()">Active Services</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="javascript:void(0)" (click)="closedrequests()">Inactive Services</a>
+                    </li>
+                  </ul>
+                  <!-- <div class="text-right mb-5">
+                          <button class="add-btn new_btn" data-toggle="modal" data-target="#exampleModal">Add New Promotion</button>
+                      </div> -->
+                </div>
+                <div>
+                  <div class="o-flow-x">
+                    <div
+                      class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+                      style="width: 100%"
+                    >
+                      <div class="hidden-columns">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div class="new_side"></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+      
+                      <!-- ACTIVE REQUESTS -->
+                      <div class="in_ac_cards active_card_space">
+                        <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%; width: 1800px">
+                          <table id="commonServiceTable_active" class="display" cellspacing="0" width="100%">
+                            <thead>
+                              <tr>
+                                <th>Service ID</th>
+                                <th>App Image</th>
+                                <th>Services Name</th>
+                                <th>Services Name Arabic</th>
+                                <th>Department</th>
+                                <th>Service Price</th>
+                                <th>Status</th>
+                                <!-- <th>Action</th> -->
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr class="el-table__row" *ngFor="let service of activeServiceList">
+                                <td>{{ service.serviceId }}</td>
+                                <td>
+                                  <div _ngcontent-eme-c46="" class="d-flex-center">
+                                    <span _ngcontent-eme-c46="" class="zoom">
+                                      <img _ngcontent-eme-c46="" *ngIf="service.imagePath == null" src="assets/images/thumbnail.png" class="image-cover" width="100"/>
+                                      <img _ngcontent-eme-c46="" *ngIf="service.imagePath != null" [src]="service.imagePath" class="image-cover" />
+                                    </span>
+                                  </div>
+                                </td>
+                                <td>{{ service.title }}</td>
+                                <td>{{ service.titleArabic }}</td>
+                                <td>{{ service.sectorName }}</td>
+                                <td>{{ service.servicePrice }}</td>
+                                <td>
+                                  <div class="cell">
+                                     <label class="switch">
+                                        <input type="checkbox" checked (change)="statusChange(service.serviceId, service.isActive)" >
+                                        <span class="slider round"></span>
+                                     </label>
+                                  </div>
+                               </td>
+                                <!-- <td>
+                                  <div class="cell">
+                                    <i class="icon-pencil ico-pointer" id="ico-pointer" (click)="otherEdit(service.serviceId)"></i>
+                                  </div>
+                                </td> -->
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+      
+                      <!-- CLOSED REQUESTS -->
+      
+                      <div class="in_ac_cards inactive_card_space">
+                        <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%; width: 1800px">
+                          <table id="commonServiceTable_inactive" class="display" cellspacing="0" width="100%">
+                            <thead>
+                              <tr>
+                                <th>Service ID</th>
+                                <th>App Image</th>
+                                <th>Services Name</th>
+                                <th>Services Name Arabic</th>
+                                <th>Department</th>
+                                <th>Service Price</th>
+                                <th>Status</th>
+                                <!-- <th>Action</th> -->
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr class="el-table__row" *ngFor="let service of inactiveServiceList">
+                                <td>{{ service.serviceId }}</td>
+                                <td>
+                                  <div _ngcontent-eme-c46="" class="d-flex-center">
+                                    <span _ngcontent-eme-c46="" class="zoom">
+                                      <img _ngcontent-eme-c46="" *ngIf="service.imagePath == null" src="assets/images/thumbnail.png" class="image-cover" width="100"/>
+                                      <img _ngcontent-eme-c46="" *ngIf="service.imagePath != null" [src]="service.imagePath" class="image-cover" />
+                                    </span>
+                                  </div>
+                                </td>
+                                <td>{{ service.title }}</td>
+                                <td>{{ service.titleArabic }}</td>
+                                <td>{{ service.sectorName }}</td>
+                                <td>{{ service.servicePrice }}</td>
+                                <td>
+                                  <div class="cell">
+                                     <label class="switch">
+                                        <input type="checkbox" (change)="statusChange(service.serviceId, service.isActive)" >
+                                        <span class="slider round"></span>
+                                     </label>
+                                  </div>
+                               </td>
+                                <!-- <td>
+                                  <div class="cell">
+                                    <i class="icon-pencil ico-pointer" id="ico-pointer" (click)="otherEdit(service.serviceId)"></i>
+                                  </div>
+                                </td> -->
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
+  </div>
+  
+  <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0"></div>
+  <div
+    role="tooltip"
+    id="el-tooltip-7343"
+    aria-hidden="true"
+    class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2005; display: none"
+  >
+    Employee
+    <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+  </div>
+  <div
+    role="tooltip"
+    id="el-tooltip-7647"
+    aria-hidden="true"
+    class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2010; display: none"
+  >
+    Patient
+    <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+  </div>
+  <div
+    role="tooltip"
+    id="el-tooltip-9477"
+    aria-hidden="true"
+    class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2028; display: none"
+  >
+    Appointment
+    <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+  </div>
+  <div
+    role="tooltip"
+    id="el-tooltip-9129"
+    aria-hidden="true"
+    class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2030; display: none"
+  >
+    Accounts
+    <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+  </div>
+  <div
+    role="tooltip"
+    id="el-tooltip-2943"
+    aria-hidden="true"
+    class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2032; display: none"
+  >
+    Role Management
+    <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+  </div>
+  <div
+    role="tooltip"
+    id="el-tooltip-6209"
+    aria-hidden="true"
+    class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2034; display: none"
+  >
+    Master
+    <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+  </div>
+  <div
+    role="tooltip"
+    id="el-tooltip-5114"
+    aria-hidden="true"
+    class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2036; display: none"
+  >
+    Package
+    <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+  </div>
+  
+  <!-- The Modal  -->
+  <div id="myModal_view" class="modal schedule_modal">
+    <!-- Modal content -->
+    <div class="modal-content" style="width: 60% !important">
+      <div class="modal-header" style="border-bottom: unset">
+        <span class="close">&times;</span>
+        <h2></h2>
+      </div>
+      <div class="modal-body">
+        <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-12 el-col-xl-8" style="padding-left: 30px; padding-right: 30px">
+            <h6>Description</h6>
+            <p class="grid_content_text grid-txt">
+              Uric Acid Test (Blood analysis) is an important test that your doctor may order to diagnose a range of diseases like gout.
+            </p>
+          </div>
+        </div>
+        <div class="m-t50 el-row" style="margin-left: -15px; margin-right: -15px">
+          <div class="el-col el-col-12" style="padding-left: 30px; padding-right: 30px">
+            <h6>Instructions</h6>
+            <ul class="customdots">
+              <li>&nbsp;This test does not require fasting.</li>
+              <li>This test does not require fasting.</li>
+            </ul>
+          </div>
+          <div class="el-col el-col-12" style="padding-left: 30px; padding-right: 30px">
+            <h6>Instructions in Arabic</h6>
+            <ul class="customdots">
+              <li>هذا التحليل لا يتطلب الصيام.</li>
+              <li>هذا التحليل لا يتطلب الصيام.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="m-t50 el-row" style="margin-left: -15px; margin-right: -15px">
+          <div class="el-col el-col-12" style="padding-left: 30px; padding-right: 30px">
+            <h6>Test Included in this Package</h6>
+            <ul class="customdots">
+              <li>Uric Acid in Serum</li>
+            </ul>
+          </div>
+          <!---->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <h3></h3>
+      </div>
+    </div>
+  </div>
+  
+  <div id="add_commonService" class="modal schedule_modal" style="padding: 5%">
+    <div class="modal-content" style="width: 60% !important">
+      <div class="modal-header" style="border-bottom: unset">
+        <span class="close" (click)="closeNewServiceView()">&times;</span>
+        <h3>{{ modalTitle }}</h3>
+      </div>
+      <div class="modal-body">
+        <form class="el-form newform el-form--label-top pt-4" id="serviceForm" (ngSubmit)="postCommonServiceToServer()" [formGroup]="typeValidationForm">
+          
+            <div class="row">
+                <div class="col-lg-5"><label>Choose Other Services</label></div>
+                <div class="col-lg-3"><label>Cost</label></div>
+                <div class="col-lg-2"><label></label></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="form-group">                            
+                        <select class="form-control">
+                            <option>Choose Other Service </option>
+                            <option>Service 1</option>
+                            <option>Service 2</option>
+                            <option>Service 3</option>
+                            <option>Service 4</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">                            
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-2">                        
+                    <div><i class="fa fa-minus-circle text-danger" style="font-size:30px;margin-top:3px;"></i> </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="form-group">                            
+                        <select class="form-control">
+                            <option>Choose Other Service </option>
+                            <option>Service 1</option>
+                            <option>Service 2</option>
+                            <option>Service 3</option>
+                            <option>Service 4</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">                            
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-2">                        
+                    <div><i class="fa fa-plus-circle text-success" style="font-size:30px;margin-top:3px;"></i> </div>
+                </div>
+            </div>
+  
+          <div class="text-center mt-4">
+            <!-- <button type="button" class="el-button el-button--primary save" (click)="onClickPostService()">
+                    <span>Submit</span>
+                 </button> -->
+  
+            <button type="submit" class="btn btn-primary el-button el-button--primary save" [disabled]="!this.typeValidationForm.valid">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <h3></h3>
+      </div>
+    </div>
+  </div>
+
+  <div id="customize_commonService" class="modal schedule_modal" style="padding-top: 50px;">
+    <div class="modal-content" style="width: 60% !important;">
+        <div class="modal-header" style="border-bottom: unset;" (click)="close()">
+            <span class="close" (click)="close()">&times;</span>
+            <h3>Customize Lab Package</h3>
+        </div>
+        <div class="modal-body">
+            <form class="el-form newform el-form--label-top pt-4" id="labtechpackagelistForm" (ngSubmit)="addCustomizePrice()" [formGroup]="typeValidationForm">
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label class="form-label">Choose Sector</label>
+                        <select class="form-control" formControlName="sectorId">
+                            <option value="">Select Sector</option>
+                            <option *ngFor="let package of sectorList"  value="{{package.sectorId}}">{{package.sectorName}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label class="form-label">Choose Service</label>
+                        <select class="form-control" formControlName="serviceId" (change)="fetchPrice($event)">
+                            <option *ngFor="let package of commonMainServiceList"  value="{{package.serviceId}}">{{package.title}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 form-group">
+                      <label class="form-label">Taib Price</label>
+                      <input class="form-control" type="text" id="taib_price" readonly/>
+                    </div>
+                    
+                    <div class="col-md-3 form-group">
+                        <label class="form-label">Your Price</label>
+                        <input class="form-control" type="text" formControlName="customPrice"/>
+                    </div>
+                </div>
+              
+                <div class="text-right mt-4">
+                    <button type="submit" class="btn btn-primary el-button el-button--primary save" [disabled]="!this.typeValidationForm.valid">
+                  Submit
+               </button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <h3></h3>
+        </div>
+    </div>
+</div>
+  
+  

@@ -1,0 +1,150 @@
+
+<div id="app">
+   <section class="el-container">
+      <div>
+         <menu class="menu-bar">
+            <a routerLink="javascript:void(0);" class="toggle-menu">
+               <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span
+                     class="bar bar3"></span></div>
+            </a>
+            <a routerLink="../dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+         </menu>
+         <app-sidebar></app-sidebar>
+         <app-submenu></app-submenu>
+      </div>
+      <main class="el-main">
+         
+         <app-header></app-header>
+         <div>
+            <div>
+               <div class="o-flow-x">
+                  <div
+                     class="el-table master-table  el-table--fit el-table--enable-row-hover el-table--enable-row-transition"
+                     style="width: 100%;">
+                     <div class="hidden-columns">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                     </div>
+                     
+
+                     <div class="d-flex justify-content align-items-center">
+                        <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-rehabilitation"></i> Lab Test List</span>  
+                        <button id="package" data-toggle="modal" (click)="package()" class="add-btn mr-0 float-right"><i class="fa fa-plus-circle"></i> Add Category</button>
+                    </div>
+
+                     <div class="el-table__body-wrapper is-scrolling-none" style="margin-top: 3%;">
+                        <table id="serviceTable" class="display" cellspacing="0" width="100%">
+                           <thead>
+                              <tr>
+                                 <th>Category Name</th>
+                                 <th>Category Name in Arabic</th>
+                                 <th>Action</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr class="el-table__row" *ngFor="let category of serviceCategories">
+                                 <td>{{category.categoryName}}</td>
+                                 <td>{{category.categoryNameArabic}}</td>
+                                 <td>
+                                    <div class="cell">
+                                       <i class="icon-pencil ico-pointer" id="ico-pointer" (click)="servicesEdit(category.serviceId)"></i>
+                                    </div>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+      </main>
+   </section>
+</div>
+
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+<div role="tooltip" id="el-tooltip-8995" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2001; display: none;">
+   Accounts
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-5329" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2003; display: none;">
+   Master
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+
+
+<div id="add_pacakge" class="modal schedule_modal" style="padding-top: 50px;">
+   <!-- Modal content -->
+   <div class="modal-content" style="width: 60% !important;">
+      <div class="modal-header" style="border-bottom: unset;">
+         <span class="close"  (click)="close()">&times;</span>
+         <h2>{{ this.modalTitle }}</h2>
+      </div>
+
+      <div class="modal-body">
+         <form class="el-form newform el-form--label-top" id="categoryForm" (ngSubmit)="postServiceCategoryToServer()" [formGroup] = "typeValidationForm">
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="fn.en" class="el-form-item__label">Category Name</label>
+                     <div class="el-form-item__content">
+                        <div class="line-input el-input">
+                           <!-- <input type="text" id="categoryName" autocomplete="off" placeholder="Enter Category Name"
+                              class="el-input__inner"> -->
+
+                              <input type="text" class="el-input__inner" formControlName="labTestCategoryName"
+                              [ngClass]="{'is-invalid': type['labTestCategoryName'].errors && (type['labTestCategoryName'].dirty || type['labTestCategoryName'].touched)}"
+                              placeholder="Enter Category Name" />
+                              <div *ngIf="type['labTestCategoryName'].errors && (type['labTestCategoryName'].dirty || type['labTestCategoryName'].touched)" class="invalid-feedback">
+                                <span *ngIf="type['labTestCategoryName'].errors['required']">This value is required.</span>
+                              </div>
+
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="fn.ar" class="el-form-item__label">Category Name in Arabic</label>
+                     <div class="el-form-item__content">
+                        <div class="line-input el-input">
+                           <!-- <input type="text" id="categoryNameArabic" autocomplete="off"
+                              placeholder="Enter Category Name in Arabic" class="el-input__inner"> -->
+
+                              <input type="text" class="el-input__inner" formControlName="labTestCategoryNameArabic"
+                              [ngClass]="{'is-invalid': type['labTestCategoryNameArabic'].errors && (type['labTestCategoryNameArabic'].dirty || type['labTestCategoryNameArabic'].touched)}"
+                              placeholder="Enter Category Name in Arabic" />
+                              <div *ngIf="type['labTestCategoryNameArabic'].errors && (type['labTestCategoryNameArabic'].dirty || type['labTestCategoryNameArabic'].touched)" class="invalid-feedback">
+                                <span *ngIf="type['labTestCategoryNameArabic'].errors['required']">This value is required.</span>
+                              </div>
+
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <br />
+
+            <div class="text-right">
+               <!-- <button type="button" class="el-button el-button--primary save" (click)="postServiceCategoryClicked()">
+                  <span>Save</span>
+               </button> -->
+               <button type="submit" class="btn btn-primary el-button el-button--primary save"
+               [disabled]="!this.typeValidationForm.valid">
+               Submit
+             </button>
+            </div>
+         </form>
+      </div>
+      <div class="modal-footer">
+         <h3></h3>
+      </div>
+   </div>
+</div>

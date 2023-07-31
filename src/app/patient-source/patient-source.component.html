@@ -1,0 +1,314 @@
+<div id="app">
+  <section class="el-container">
+    <div>
+      <menu class="menu-bar">
+        <a href="javascript:void(0);" class="toggle-menu">
+          <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+        </a>
+        <a href="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+      </menu>
+      <app-sidebar></app-sidebar>
+      <app-submenu></app-submenu>
+    </div>
+    <main class="el-main">
+      <app-header></app-header>
+      <div>
+        <div>
+          <div class="o-flow-x">
+            <div class="el-table master-table el-table--fit el-table--enable-row-hover el-table--enable-row-transition" style="width: 100%">
+              <div class="hidden-columns">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              
+
+              <div class="d-flex justify-content align-items-center">
+                <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-settings"></i> Patient Source List</span>  
+                <button id="package" (click)="showAddNewPatientSource()" class="add-btn mr-0 float-right"><i class="fa fa-plus-circle"></i> Add Patient Source</button>
+              </div>
+
+              <div class="el-table__body-wrapper is-scrolling-none" style="margin-top: 3%">
+                <table id="pacakgeCategoryTable" class="display" cellspacing="0" width="100%">
+                  <thead>
+                    <tr>
+                      <th>Source Name</th>
+                      <th>Source Name in Arabic</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="el-table__row" *ngFor="let patientSource of patientSources">
+                      <td>{{ patientSource.sourceName }}</td>
+                      <td>{{ patientSource.sourceNameArabic }}</td>
+                      <td>
+                        <button class="edit_button btn" type="button" (click)="editPatientSource(patientSource.sourceId)">
+                          <i class="icon-pencil ico-pointer" id="ico-pointer"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+</div>
+
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0"></div>
+<div
+  role="tooltip"
+  id="el-tooltip-7343"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2005; display: none"
+>
+  Employee
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-7647"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2010; display: none"
+>
+  Patient
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-9477"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2028; display: none"
+>
+  Appointment
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-9129"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2030; display: none"
+>
+  Accounts
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-2943"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2032; display: none"
+>
+  Role Management
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-6209"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2034; display: none"
+>
+  Master
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-5114"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2036; display: none"
+>
+  Package
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+
+<div id="add_patientsource" class="modal schedule_modal" style="padding-top: 50px">
+  <!-- Modal content -->
+  <div class="modal-content" style="width: 60% !important">
+    <div class="modal-header" style="border-bottom: unset">
+      <span class="close" (click)="close()">&times;</span>
+      <h2>{{ modalTitle }}</h2>
+    </div>
+
+    <div class="modal-body">
+      <form class="el-form newform el-form--label-top" id="patientSourceForm" (ngSubmit)="postPatientSource()" [formGroup]="patientSourceForm">
+        <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Source Name</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    formControlName="sourceName"
+                    [ngClass]="{
+                      'is-invalid': type['sourceName'].errors && (type['sourceName'].dirty || type['sourceName'].touched)
+                    }"
+                    placeholder="Enter Category Name"
+                  />
+                  <div *ngIf="type['sourceName'].errors && (type['sourceName'].dirty || type['sourceName'].touched)" class="invalid-feedback">
+                    <span *ngIf="type['sourceName'].errors['required']">This value is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.ar" class="el-form-item__label">Source Name in Arabic</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    formControlName="sourceNameArabic"
+                    [ngClass]="{
+                      'is-invalid': type['sourceNameArabic'].errors && (type['sourceNameArabic'].dirty || type['sourceNameArabic'].touched)
+                    }"
+                    placeholder="Enter Category Name in Arabic"
+                  />
+                  <div *ngIf="type['sourceNameArabic'].errors && (type['sourceNameArabic'].dirty || type['sourceNameArabic'].touched)" class="invalid-feedback">
+                    <span *ngIf="type['sourceNameArabic'].errors['required']">This value is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+
+        <div class="text-right">
+          <button type="submit" class="btn btn-primary el-button el-button--primary save" [disabled]="!this.patientSourceForm.valid">Submit</button>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <h3></h3>
+    </div>
+  </div>
+</div>
+
+<!-- <div id="add_patientsource" class="modal schedule_modal" style="padding-top: 50px">
+  <div class="modal-content" style="width: 60% !important">
+    <div class="modal-header" style="border-bottom: unset">
+      <span class="close" (click)="close()">&times;</span>
+      <h2>Add New Source</h2>
+    </div>
+
+    <div class="modal-body">
+      <form class="el-form newform el-form--label-top" id="patientSourceForm">
+        <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Source Name</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    formControlName="sourceName"
+                    [ngClass]="{ 'is-invalid': type['sourceName'].errors && (type['sourceName'].dirty || type['sourceName'].touched) }"
+                    placeholder="Enter Category Name"
+                  />
+                  <div *ngIf="type['sourceName'].errors && (type['sourceName'].dirty || type['sourceName'].touched)" class="invalid-feedback">
+                    <span *ngIf="type['sourceName'].errors['required']">This value is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.ar" class="el-form-item__label">Source Name in Arabic</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    formControlName="sourceNameArabic"
+                    [ngClass]="{ 'is-invalid': type['sourceNameArabic'].errors && (type['sourceNameArabic'].dirty || type['sourceNameArabic'].touched) }"
+                    placeholder="Enter Category Name"
+                  />
+                  <div *ngIf="type['sourceNameArabic'].errors && (type['sourceNameArabic'].dirty || type['sourceNameArabic'].touched)" class="invalid-feedback">
+                    <span *ngIf="type['sourceNameArabic'].errors['required']">This value is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+
+        <div class="text-right">
+          <button type="submit" class="btn btn-primary el-button el-button--primary save" (click)="postPatientSource()">Submit</button>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <h3></h3>
+    </div>
+  </div>
+</div> -->
+
+<!-- The Modal  -->
+<div id="myModal_view" class="modal schedule_modal">
+  <!-- Modal content -->
+  <div class="modal-content" style="width: 60% !important">
+    <div class="modal-header" style="border-bottom: unset">
+      <span class="close">&times;</span>
+      <h2></h2>
+    </div>
+    <div class="modal-body">
+      <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-12 el-col-xl-8" style="padding-left: 30px; padding-right: 30px">
+          <h6>Description</h6>
+          <p class="grid_content_text grid-txt">The nurse performs surgical wound cleaning, disinfection and dressing.</p>
+        </div>
+      </div>
+      <div class="m-t50 el-row" style="margin-left: -15px; margin-right: -15px">
+        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-12 el-col-xl-8" style="padding-left: 30px; padding-right: 30px">
+          <h6>Instructions</h6>
+          <ul class="customdots">
+            <li>
+              Tell the Nurse if you suffer from any infectious diseases that can be transmitted through blood and whether you have been diagnosed with diabetes
+              or not.
+            </li>
+          </ul>
+        </div>
+        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-10 el-col-lg-12 el-col-xl-10" style="padding-left: 30px; padding-right: 30px">
+          <h6>Instructions in Arabic</h6>
+          <ul class="customdots">
+            <li>الإفصاح عن وجود أمراض معديه عن طريق الدم ، الإفصاح عن ما إذا كان المريض لديه مرض السكري من عدمه</li>
+          </ul>
+        </div>
+      </div>
+      <div class="m-t50 el-row" style="margin-left: -15px; margin-right: -15px">
+        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-12 el-col-xl-8" style="padding-left: 30px; padding-right: 30px">
+          <h6>Inclusions</h6>
+          <ul class="customdots">
+            <li>Medical adhesive tape and alcohol swabs, vaseline gauze, and salt solution will be brought to disinfect and change the dressing.</li>
+          </ul>
+        </div>
+        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-10 el-col-lg-12 el-col-xl-10" style="padding-left: 30px; padding-right: 30px">
+          <h6>Inclusions in Arabic</h6>
+          <ul class="customdots">
+            <li>"سيتم احضار شريط لاصق طبي والمسحات الكحولية، شاش فزلين ومحلول ملح للتطهير اللازم لتطهير وتغيير الضماد</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <h3></h3>
+    </div>
+  </div>
+</div>

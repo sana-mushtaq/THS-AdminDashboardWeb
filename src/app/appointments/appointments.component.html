@@ -1,0 +1,288 @@
+<div id="app">
+  <section class="el-container">
+    <div>
+      <menu class="menu-bar lab-hide">
+        <a routerLink="javascript:void(0);" class="toggle-menu">
+          <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+        </a>
+        <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+      </menu>
+      <app-sidebar class="lab-hide"></app-sidebar>
+      <app-submenu></app-submenu>
+      <nav class="nav-bar-none"></nav>
+    </div>
+    <main class="el-main">
+      <app-header></app-header>
+      <div>
+        <div>
+          
+          <form class="el-form custom-radio m-t10 el-form--label-top">
+            <input type="radio" id="book_date" name="fav_language" class="el-radio__inner" value="Booking Date" checked (click)="dateTypeClicked(1)" />
+            <label for="">Booking Date</label>
+            <input type="radio" id="book_slot" name="fav_language" class="el-radio__inner" value="Slot Date" (click)="dateTypeClicked(2)" />
+            <label for="">Slot Date</label>
+
+            <div class="m-t30 el-row" style="margin-left: -10px; margin-right: -10px">
+              <div class="el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-6 el-col-xl-6" style="padding-left: 10px; padding-right: 10px">
+                <div class="el-form-item">
+                  <label class="el-form-item__label">Select Services</label>
+                  <div class="el-form-item__content">
+                    <div class="el-select line-input">
+                      <select class="select" (change)="sectorSelected($event.target)">
+                        <option>Select</option>
+                        <option class="el-select-dropdown__item" *ngFor="let sector of sectorList" value="{{ sector.sectorId }}">
+                          <span>{{ sector.sectorName }}</span>
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-6 el-col-xl-6"
+                id="book_date_show"
+                style="padding-left: 10px; padding-right: 10px"
+              >
+                <div class="el-form-item line-input">
+                  <label class="el-form-item__label">Select Booking Date</label>
+                  <div class="el-form-item__content">
+                    <div class="el-date-editor el-range-editor el-input__inner el-date-editor--daterange">
+                      <!-- <i class="el-input__icon el-range__icon el-icon-date"></i> -->
+                      <!-- <input autocomplete="off" placeholder="Start date" name="" class="el-range-input"> -->
+                      <input type="date" id="bookingStartDate" name="" class="date" placeholder="Start date" (change)="startDateChanged($event)" />
+                      <span class="el-range-separator">-</span>
+                      <input type="date" id="bookingEndDate" name="" class="date" placeholder="End date" (change)="endDateChanged($event)" />
+                      <!-- <input autocomplete="off" placeholder="End date" name="" class="el-range-input"> -->
+                      <i class="el-input__icon el-range__close-icon"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-6 el-col-xl-6"
+                id="book_slot_show"
+                style="padding-left: 10px; padding-right: 10px; display: none"
+              >
+                <div class="el-form-item line-input">
+                  <label class="el-form-item__label">Select Slot Date</label>
+                  <div class="el-form-item__content">
+                    <div class="el-date-editor el-range-editor el-input__inner el-date-editor--daterange">
+                      <!-- <i class="el-input__icon el-range__icon el-icon-date"></i>
+                                       <input autocomplete="off" placeholder="Start date" name="" class="el-range-input"> -->
+                      <input type="date" id="slotStartDate" name="" class="date" placeholder="Start date" (change)="startDateChanged($event)" />
+                      <span class="el-range-separator">-</span>
+                      <input type="date" id="slotEndDate" name="" class="date" placeholder="End date" (change)="endDateChanged($event)" />
+                      <!-- <input autocomplete="off" placeholder="End date" name="" class="el-range-input"> -->
+                      <i class="el-input__icon el-range__close-icon"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-6 el-col-xl-6 mt-4"
+                id="book_slot_show"
+                style="padding-left: 10px; padding-right: 10px;"
+              >
+                <div class="text-left">
+                  <button type="button" class="el-button el-button--primary save" (click)="filterButtonClicked()">
+                    <span>Filter</span>
+                  </button>
+                  <button type="button" class="el-button el-button--info save" (click)="clearFilterClicked()">
+                    <span>Clear</span>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-6 el-col-xl-6 mt-2 text-right"
+                id="book_slot_show"
+                style="padding-left: 10px; padding-right: 10px;"
+              >
+              <div class="dropdown-check-list" tabindex="100" data-toggle="collapse" data-target="#items">
+                <span id="list1" class="anchor">All Appointments <i class="el-icon-arrow-down el-icon--right"></i></span>
+                <ul id="items" class="items" style="display: none">
+                  <li *ngIf="opennewView == true"><input type="checkbox"  id="statusnew" class="el-checkbox__inner" (change)="StatuFilterAppoinmentList($event.target)" value="1" /> <span>New</span></li>
+                  <li *ngIf="opennewView == true"><input type="checkbox"  id="statusinprogress" class="el-checkbox__inner" (change)="StatuFilterAppoinmentList($event.target)" value="2"/> <span>In Progress</span></li>
+                  <li *ngIf="opennewView == false"><input type="checkbox" id="statuscompleted" class="el-checkbox__inner" (change)="StatuFilterAppoinmentList2($event.target)" value="3"/> <span>Completed</span></li>
+                  <li *ngIf="opennewView == false"><input type="checkbox" id="statuscancelled" class="el-checkbox__inner" (change)="StatuFilterAppoinmentList2($event.target)" value="4"/> <span>Cancelled</span></li>
+                </ul>
+              </div>
+              </div>
+              <!-- <div
+                class="text-right custom-selects m-t20 el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12 main_drop_status"
+                style="padding-left: 10px; padding-right: 10px"
+              >
+                
+              </div> -->
+            </div>
+
+
+            <!-- <div style="text-align: right;">
+                     <li role="menuitem" tabindex="-1" class="el-menu-item is-active">
+                        <button class="add-btn" (click)="filterButtonClicked()">Filter</button>
+                     </li>
+                  </div> -->
+          </form>
+          <div>
+            <div class="o-flow-x">
+              <div
+                class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+                style="width: 100%"
+              >
+                <div class="hidden-columns">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div class="new_side"></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <div class="row" style="justify-content: space-between; margin-left: 10px;">
+                  <ul class="nav">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="active" href="javascript:void(0)" (click)="activerequests()">Active Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="inactive" href="javascript:void(0)" (click)="closedrequests()">Closed Appointments</a>
+                    </li>
+                  </ul>
+                  <div class="text-right">
+                    <button class="add-btn mr-0" routerLink="../add-appointments">New Appointment</button>
+                    <button class="add-btn mr-0" style="margin-left:10px" routerLink="/appointments/add">New Appointment Page</button>
+
+                  </div>
+                  <!-- <div class="text-right mb-5">
+                          <button class="add-btn new_btn" data-toggle="modal" data-target="#exampleModal">Add New Promotion</button>
+                      </div> -->
+                </div>
+                <!-- 
+                <div class="row mt-5" style="justify-content: space-between; margin-left: 10px;" *ngIf="opennewView == true">
+                  <ul class="nav">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="new" href="javascript:void(0)" (click)="newrequests()">New Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="open" href="javascript:void(0)" (click)="openrequests()">Open Appointments</a>
+                    </li>
+                  </ul>
+                </div> -->
+
+                <!-- <button type="button" class="el-button el-button--primary save" (click)="downloadAppointmentData()"  style="margin-top: 1%;">
+                  <span>Export</span>
+                </button> -->
+
+                <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 1%; width: 1800px">
+                  <table id="appointmentstable" class="display" cellspacing="0" style="width: 1800px">
+                    <thead>
+                      <tr>
+                        <th>SNo</th>
+                        <th>Appointment ID</th>
+                        <th>Transaction/Booking Date &amp; Time</th>
+                        <th>Patient Name</th>
+                        <th>Mobile</th>
+                        <th>Email ID</th>
+                        <th>Slot Date &amp; Time</th>
+                        <th>Booking Status</th>
+                        <th>Status</th>
+                        <th>Payment Reference</th>
+                        <th>Payment Method</th>
+                        <th>Patient Source</th>
+                        <th>Appointment Source</th>
+                        <th>Collected Amount</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngFor="let appointment of appointmentList; let i = index" class="el-table__row">
+                        <td (click)="viewAppointmentDetails(appointment)">{{ i + 1 }}</td>
+                        <td (click)="viewAppointmentDetails(appointment)">
+                          <div class="cell">
+                            <p>{{ appointment.appointmentDisplayId }}</p>
+                            <p>{{ appointment.serviceName }}</p>
+                            <p>{{ appointment.serviceGender }}</p>
+                          </div>
+                        </td>
+                        <td (click)="viewAppointmentDetails(appointment)">{{ appointment.appointmentBookingDate }}</td>
+                        <td (click)="viewAppointmentDetails(appointment)" style="padding: 0 !important">
+                          <div class="cell" style="padding: 0px !important">
+                            <div class="d-flex-center" style="padding: 0px !important">
+                              <span class="avtar3" style="margin-right: 3px !important"><img src="assets/images/user.svg" class="image-cover" /></span>
+                              <span>{{ appointment.primaryPatientFirstName }} {{ appointment.primaryPatientLastName }}</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td (click)="viewAppointmentDetails(appointment)">{{ appointment.patientMobile }}</td>
+                        <td (click)="viewAppointmentDetails(appointment)">{{ appointment.patientEmail }}</td>
+                        <td (click)="viewAppointmentDetails(appointment)">
+                          <div class="cell">
+                            <p>{{ appointment.appointmentDate }}</p>
+                            <p>{{ appointment.appointmentTime }}</p>
+                          </div>
+                        </td>
+                        <td (click)="viewAppointmentDetails(appointment)">{{ appointment.appointmentStatusMessage }}</td>
+                        <td (click)="viewAppointmentDetails(appointment)">{{ appointment.appointmentStage }}</td>
+                        <td>
+                          {{ appointment.paymentStatus || 'N/A' }}
+                          <ng-container *ngIf="appointment.paymentMethod=='Payment transfer'">
+                            <ng-container *ngIf="appointment.paymentStatus && appointment.paymentStatus!='' && appointment.paymentStatus!='CAPTURED'">
+                              <a (click)="verifyManualPayment(appointment, i)" class="d-block mb-1">Verify</a>
+                            </ng-container>
+                          </ng-container>
+                          <ng-container *ngIf="appointment.paymentMethod=='Tap payment'">
+                            <ng-container *ngIf="appointment.paymentStatus && appointment.paymentStatus!='' && appointment.paymentStatus!='CAPTURED'">
+                              <a (click)="verifyPayment(appointment)" class="d-block mb-1">Verify</a>
+                              <a (click)="sendSMS(appointment)" class="d-block m-0">Send SMS</a>
+                            </ng-container>
+                          </ng-container>
+                        </td>
+                        <td (click)="viewAppointmentDetails(appointment)">{{appointment.paymentMethod}}</td>
+                        <td (click)="viewAppointmentDetails(appointment)">{{ appointment.patientSource }}</td>
+                        <td (click)="viewAppointmentDetails(appointment)">{{ appointment.refSourceName }}</td>
+                        <td (click)="viewAppointmentDetails(appointment)">{{ appointment.servicePrice | number: "1.2-2" }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+</div>
+
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0"></div>
+<div
+  role="tooltip"
+  id="el-tooltip-7343"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2005; display: none"
+>
+  Employee
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-7647"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2010; display: none"
+>
+  Patient
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-9477"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2014; display: none"
+>
+  Appointment
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>

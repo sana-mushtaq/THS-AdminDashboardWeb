@@ -1,0 +1,8 @@
+https://hms.sanar.sa/login
+SANHSP38
+operation@taibsa.com
+123456789
+
+
+"src/assets/js/common.js",
+              "src/assets/js/util.js",

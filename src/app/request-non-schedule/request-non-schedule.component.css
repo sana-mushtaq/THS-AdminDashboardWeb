@@ -1,0 +1,84 @@
+.appoint_step_head {
+    font-weight: 800;
+}
+
+.appoint_step_head a i {
+    font-size: 22px;
+    color: red;
+}
+.dclass {
+    display: block !important;
+}
+.appoint_step_head {
+    font-weight: 600;
+}
+.step h4{font-size:15px !important;line-height: 22px !important;}
+.step h5{font-size:14px !important;font-weight:400 !important;line-height: 22px !important;}
+.appoint_step_head a i {
+    font-size: 22px;
+    color: red;
+}
+.steps>.step.is-active{font-size:13px !important;font-weight: 700;}
+.steps>.step{font-size:12px !important;font-weight: 500;}
+
+.steps>.step:before {
+   
+    width: 2rem;
+    height: 2rem;
+   
+    margin-bottom: -4.2rem;
+    line-height: 1.8rem;
+    
+    font-weight: 500 !important;
+    font-size: 1.1rem;
+    top: 51%;
+}
+.steps{height: 7rem !important;}
+
+.open{background-color: #dcf9ca;color:#378a05; padding:6px 12px; border-radius: 6px;}
+.label-color{color:#88909C}
+.success{color:#378a05}
+table.left-padding tr td, table.left-padding tr th  {padding-left:10px !important}
+table.left-padding tr th, table.price-table tr th{background:#e1f6fd;padding:4px 5px !important;font-weight:600}
+table.left-padding tr:nth-child(even){background:#ecf8fc ;}
+table.left-padding tr td{padding:4px 5px !important}
+table.price-table tr td{padding:8px 5px !important}
+.text-primary{color:#1b90c8 !important}
+.text-black{color:#000 !important}
+.blood-bg{background: red;padding: 8px 4px;border-radius: 40px;font-size: 14px;font-weight: 500;margin-top:-8px}
+table tr td{padding:4px 5px !important}
+table.pat-table tr td{border:none}
+table.pat-table tr td:first-child{color:#88909C}
+.font600{font-weight: 600;}
+.nolabresult {text-align: center;font-weight: 600;margin-top: 18%;}
+.nolabcontent { text-align: center;}
+.nolabresultimg { width: 50%;}
+.noreadingresultimg { width: 30%;}
+.enable_txt {
+    text-align: center;
+    margin-top: 14%;
+    color: red;
+    font-weight: 500;
+}
+.result_read_body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.edit_btn {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #32acd9;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 50%;
+    position: absolute;
+    top: 32%;
+    right: 40%;
+    font-size: 14px;
+}
+.update_btn {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}

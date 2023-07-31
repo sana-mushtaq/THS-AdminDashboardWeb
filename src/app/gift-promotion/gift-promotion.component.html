@@ -1,0 +1,539 @@
+<div id="app">
+  <section class="el-container">
+    <div>
+      <menu class="menu-bar">
+        <a routerLink="javascript:void(0);" class="toggle-menu">
+          <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+        </a>
+        <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+      </menu>
+      <app-sidebar></app-sidebar>
+      <app-submenu></app-submenu>
+    </div>
+    <main class="el-main">
+      <app-header></app-header>
+      <div>
+        <div class="d-flex justify-content align-items-center">
+          <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-calendar"></i> Promotion</span>
+          <button class="add-btn new_btn" data-toggle="modal" data-target="#newPromoModal"><i class="fa fa-plus-circle"></i> Add New Promotion</button>
+        </div>
+        <div class="m-t30 el-row" style="margin-left: -10px; margin-right: -10px">
+          <!-- <div class="el-col el-col-6 el-col-xs-10 el-col-sm-6" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Seacrh Patient</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    id="searchPatientInput"
+                    placeholder="Enter Patient Id / Name / Email / Mobile"
+                  />
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-6 el-col-xl-6" style="padding-left: 10px; padding-right: 10px">
+            <div class="el-form-item">
+              <label class="el-form-item__label">Select Promotion</label>
+              <div class="el-form-item__content">
+                <div class="el-select line-input">
+                  <select class="select" (change)="promoSelect($event.target)">
+                    <option value="0">Select</option>
+                    <option class="el-select-dropdown__item" *ngFor="let promo of promoList" value="{{ promo.promoId }}">
+                      <span>{{ promo.promoCode }}</span>
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-6 el-col-xl-6"
+            id="book_slot_show"
+            style="padding-left: 10px; padding-right: 10px"
+          >
+            <div class="el-form-item line-input">
+              <label class="el-form-item__label">Select Date</label>
+              <div class="el-form-item__content">
+                <div class="el-date-editor el-range-editor el-input__inner el-date-editor--daterange">
+                  <!-- <i class="el-input__icon el-range__icon el-icon-date"></i>
+                                       <input autocomplete="off" placeholder="Start date" name="" class="el-range-input"> -->
+                  <input type="date" id="slotStartDate" name="" class="date" placeholder="Start date" (change)="startDateChanged($event)" />
+                  <span class="el-range-separator">-</span>
+                  <input type="date" id="slotEndDate" name="" class="date" placeholder="End date" (change)="endDateChanged($event)" />
+                  <!-- <input autocomplete="off" placeholder="End date" name="" class="el-range-input"> -->
+                  <i class="el-input__icon el-range__close-icon"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-6 el-col-xs-10 el-col-sm-6" style="padding-left: 15px; padding-right: 15px">
+            <div class="mt-3">
+              <button type="button" class="el-button el-button--primary save" (click)="filterClicked()">
+                <span>Filter</span>
+              </button>
+              <button type="button" class="el-button el-button--info save" (click)="filterClearClicked()">
+                <span>Clear</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="o-flow-x">
+          <div
+            class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+            style="width: 100%"
+          >
+            <div class="hidden-columns">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+
+            <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%; width: 100%">
+              <div class="row" style="justify-content: space-between">
+                <ul class="nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="javascript:void(0)" (click)="activecard()">Active Promotions</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" (click)="inactivecard()">InActive Promotions</a>
+                  </li>
+                </ul>
+                <!-- <div class="text-right mb-5">
+                  <button class="add-btn new_btn" data-toggle="modal" data-target="#newPromoModal">Add New Promotion</button>
+                </div> -->
+              </div>
+
+              <div class="in_ac_cards active_card_space">
+                <div class="row text-center no_active" *ngIf="activePromotions.length == 0">
+                  <p class="no_active_text">No Active Promotions</p>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 p-3" *ngFor="let promotion of activePromotions">
+                    <div class="off_card_layout" (click)="promotionClicked(promotion)">
+                      <img src="{{ promotion.promoImagePath }}" width="100%" class="off_card_image" />
+                      <div class="off_card_details">
+                        <p class="off_gift_title">{{ promotion.promoName }}</p>
+                        <p class="off_gift_sub_title">{{ promotion.promoDescription }}</p>
+                        <div class="row mt-2">
+                          <div class="col-md-3">
+                            <span class="active_badge">{{ promotion.promoValueText }}</span>
+                          </div>
+                          <div class="col-md-9 text-right">
+                            <p class="off_gift_title">{{ promotion.promoCode }}</p>
+                          </div>
+                        </div>
+
+                        <div class="row mt-2">
+                          <div class="col-md-6 text-left">
+                            <p class="off_gift_sub_title">
+                              {{ promotion.startDate }} to
+                              {{ promotion.endDate }}
+                            </p>
+                          </div>
+                          <div class="col-md-6 text-right">
+                            <label class="switch">
+                              <input type="checkbox" checked (click)="updatePromotionStatus(promotion, 1)" />
+                              <span class="slider round"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- InActive Card Content-->
+              <div class="in_ac_cards inactive_card_space">
+                <div class="row">
+                  <div class="col-md-3 p-3" *ngFor="let promotion of inActivePromotions">
+                    <div class="off_card_layout" (click)="promotionClicked(promotion)">
+                      <img src="{{ promotion.promoImagePath }}" width="100%" class="off_card_image" />
+                      <div class="off_card_details">
+                        <p class="off_gift_title">{{ promotion.promoName }}</p>
+                        <p class="off_gift_sub_title">{{ promotion.promoDescription }}</p>
+                        <div class="row mt-2">
+                          <div class="col-md-3">
+                            <span class="active_badge">{{ promotion.promoValueText }}</span>
+                          </div>
+                          <div class="col-md-9 text-right">
+                            <p class="off_gift_title">{{ promotion.promoCode }}</p>
+                          </div>
+                        </div>
+
+                        <div class="row mt-2">
+                          <div class="col-md-6 text-left">
+                            <p class="off_gift_sub_title">
+                              {{ promotion.startDate }} to
+                              {{ promotion.endDate }}
+                            </p>
+                          </div>
+                          <div class="col-md-6 text-right">
+                            <label class="switch">
+                              <input type="checkbox" unchecked (click)="updatePromotionStatus(promotion, 0)" />
+                              <span class="slider round"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-3 p-3">
+                    <div class="off_card_layout">
+                      <img src="../../assets/images/giftcard.jpg" width="100%" class="off_card_image" />
+                      <div class="off_card_details">
+                        <p class="off_gift_title">Summer Saving Upto 10%</p>
+                        <p class="off_gift_sub_title">Discount and Wallert Points With Sabb</p>
+                        <div class="row mt-2">
+                          <div class="col-md-3">
+                            <span class="inactive_badge">Inctive</span>
+                          </div>
+                          <div class="col-md-9 text-right">
+                            <p class="date_sta">15-08-2022 - 21-08-2022</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3 p-3">
+                    <div class="off_card_layout">
+                      <img src="../../assets/images/giftcard.jpg" width="100%" class="off_card_image" />
+                      <div class="off_card_details">
+                        <p class="off_gift_title">Summer Saving Upto 10%</p>
+                        <p class="off_gift_sub_title">Discount and Wallert Points With Sabb</p>
+                        <div class="row mt-2">
+                          <div class="col-md-3">
+                            <span class="inactive_badge">Inctive</span>
+                          </div>
+                          <div class="col-md-9 text-right">
+                            <p class="date_sta">15-08-2022 - 21-08-2022</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3 p-3">
+                    <div class="off_card_layout">
+                      <img src="../../assets/images/giftcard.jpg" width="100%" class="off_card_image" />
+                      <div class="off_card_details">
+                        <p class="off_gift_title">Summer Saving Upto 10%</p>
+                        <p class="off_gift_sub_title">Discount and Wallert Points With Sabb</p>
+                        <div class="row mt-2">
+                          <div class="col-md-3">
+                            <span class="inactive_badge">Inctive</span>
+                          </div>
+                          <div class="col-md-9 text-right">
+                            <p class="date_sta">15-08-2022 - 21-08-2022</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3 p-3">
+                    <div class="off_card_layout">
+                      <img src="../../assets/images/giftcard.jpg" width="100%" class="off_card_image" />
+                      <div class="off_card_details">
+                        <p class="off_gift_title">Summer Saving Upto 10%</p>
+                        <p class="off_gift_sub_title">Discount and Wallert Points With Sabb</p>
+                        <div class="row mt-2">
+                          <div class="col-md-3">
+                            <span class="inactive_badge">Inctive</span>
+                          </div>
+                          <div class="col-md-9 text-right">
+                            <p class="date_sta">15-08-2022 - 21-08-2022</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+
+            <div class="modal schedule_modal" id="newPromoModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-xl" role="document">
+                <form class="el-form newform el-form--label-top" id="newPromoForm" (ngSubmit)="postNewPromo()" [formGroup]="newPromoForm">
+                  <div class="modal-content" style="width: 60% !important">
+                    <div class="modal-header p-3">
+                      <h3 class="modal-title" id="exampleModalLabel">New Promotion</h3>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="clearForm()">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                          <div class="el-form-item is-required">
+                            <label for="fn.en" class="el-form-item__label">Promotion Name English</label>
+                            <div class="el-form-item__content">
+                              <div class="line-input el-input">
+                                <input type="text" class="el-input__inner form-control" formControlName="promoName" placeholder="Enter Promotion Name" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                          <div class="el-form-item is-required">
+                            <label for="fn.en" class="el-form-item__label">Promotion Name Arabic</label>
+                            <div class="el-form-item__content">
+                              <div class="line-input el-input">
+                                <input type="text" class="el-input__inner form-control" formControlName="promoNameArabic" placeholder="Enter Promotion Name" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                          <div class="el-form-item is-required">
+                            <label for="fn.ar" class="el-form-item__label">Promotion Description English</label>
+                            <div class="el-form-item__content">
+                              <div class="line-input el-input">
+                                <textarea
+                                  type="text"
+                                  class="form-control"
+                                  rows="6"
+                                  formControlName="promoDescription"
+                                  placeholder="Enter Promotion Description English"
+                                ></textarea>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                          <div class="el-form-item is-required">
+                            <label for="fn.ar" class="el-form-item__label">Promotion Description Arabic</label>
+                            <div class="el-form-item__content">
+                              <div class="line-input el-input">
+                                <textarea
+                                  type="text"
+                                  class="form-control"
+                                  rows="6"
+                                  formControlName="promoDescriptionArabic"
+                                  placeholder="Enter Promotion Description Arabic"
+                                ></textarea>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                          <div class="el-form-item is-required">
+                            <label for="fn.en" class="el-form-item__label">Select Promotion Type</label>
+                            <div class="row" style="justify-content: space-around">
+                              <div class="row mr-3">
+                                <input type="radio" name="offer_type" class="custom_radio" checked (click)="promoTypeClicked(1)" />
+                                <label class="mt-2 ml-3">Fixed Amount</label>
+                              </div>
+                              <div class="row">
+                                <input type="radio" name="offer_type" class="custom_radio" (click)="promoTypeClicked(2)" />
+                                <label class="mt-2 ml-3">Percentage</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                          <div class="el-form-item is-required">
+                            <label for="fn.ar" class="el-form-item__label">Enter Percentage or Fixed Amount</label>
+                            <div class="el-form-item__content">
+                              <div class="line-input el-input">
+                                <input
+                                  type="number"
+                                  class="el-input__inner form-control"
+                                  formControlName="promoValue"
+                                  placeholder="Enter the Percentage or Fixed Amount"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                          <div class="el-form-item is-required">
+                            <label for="fn.en" class="el-form-item__label">Enter Offer Code</label>
+                            <div class="el-form-item__content">
+                              <div class="line-input el-input">
+                                <input type="text" class="el-input__inner form-control" formControlName="promoCode" placeholder="Enter Offer Code" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                          <div class="el-form-item is-required">
+                            <label for="fn.en" class="el-form-item__label">Department</label>
+                            <div class="el-form-item__content">
+                              <div class="line-input el-input">
+                                <select class="form-control" (change)="sectorChanged($event.target)">
+                                  <option [value]="0">All</option>
+                                  <option *ngFor="let sector of sectorList" [value]="sector.sectorId">{{ sector.sectorName }}</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                          <div class="el-form-item is-required">
+                            <label for="fn.en" class="el-form-item__label">Start Date</label>
+                            <div class="el-form-item__content">
+                              <div class="line-input el-input">
+                                <input type="date" class="el-input__inner form-control" formControlName="startDate" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                          <div class="el-form-item is-required">
+                            <label for="fn.ar" class="el-form-item__label">End Date</label>
+                            <div class="el-form-item__content">
+                              <div class="line-input el-input">
+                                <input type="date" class="el-input__inner form-control" formControlName="endDate" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                          <div class="el-form-item is-required">
+                            <label for="fn.en" class="el-form-item__label">Promotion Image</label>
+                            <div class="el-form-item__content">
+                              <!-- <div class="line-input el-input">
+                                <input type="file" id="files_service" accept="image/*" class="form-control" (change)="handleFileInput($event.target)" />
+                              </div> -->
+                              <div tabindex="0" class="el-upload el-upload--text">
+                                <label for="files_department" class="d-flex-center">
+                                  <img src="assets/images/photoupload.svg" class="avatar-img" />
+                                  <input
+                                    type="file"
+                                    id="files_department"
+                                    accept="image/*"
+                                    hidden=""
+                                    class="form-control"
+                                    (change)="handleFileInput($event.target)"
+                                  />
+                                  <span class="gray-color">Upload Photo</span>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                          <div class="el-form-item is-required">
+                            <label for="fn.ar" class="el-form-item__label">Image Preview</label>
+                            <div class="el-form-item__content" id="beforefilepreview">
+                              <span class="pip" *ngIf="selectedPromotion != null">
+                                <img class="imageThumb" src="{{ selectedPromotion.promoImagePath }}" /><br /><span class="remove">Remove image</span></span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                          <div class="el-form-item is-required">
+                            <label for="fn.en" class="el-form-item__label">Influencer Promotion Status</label>
+                            <div class="el-form-item__content">
+                              <!-- <div class="line-input el-input">
+                                <input type="file" id="files_service" accept="image/*" class="form-control" (change)="handleFileInput($event.target)" />
+                              </div> -->
+                              <div class="cell">
+                                <label class="switch">
+                                  <input type="checkbox" value="0" (change)="influencerStatusChange($event.target)" />
+                                  <span class="slider round"></span>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                          <div class="el-form-item is-required">
+                            <label for="fn.ar" class="el-form-item__label">Image Preview</label>
+                            <div class="el-form-item__content" id="beforefilepreview"></div>
+                          </div>
+                        </div>
+                      </div> -->
+                    </div>
+                    <div class="modal-footer text-right">
+                      <button type="button" class="btn btn-warning" data-dismiss="modal" (click)="clearForm()">Close</button>
+                      <button type="button" class="el-button el-button--primary save" [disabled]="!this.newPromoForm.valid" (click)="postNewPromo()">
+                        Add
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+</div>
+
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0"></div>
+<div
+  role="tooltip"
+  id="el-tooltip-7343"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2005; display: none"
+>
+  Employee
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-7647"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2010; display: none"
+>
+  Patient
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-9477"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2028; display: none"
+>
+  Appointment
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-9129"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2030; display: none"
+>
+  Accounts
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>

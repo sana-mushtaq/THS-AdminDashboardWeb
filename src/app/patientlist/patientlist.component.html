@@ -1,0 +1,330 @@
+<div id="app">
+  <section class="el-container">
+    <div>
+      <menu class="menu-bar">
+        <a href="javascript:void(0);" class="toggle-menu">
+          <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+        </a>
+        <a href="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+      </menu>
+      <app-sidebar></app-sidebar>
+      <app-submenu></app-submenu>
+    </div>
+
+    <main class="el-main">
+      <app-header></app-header>
+      <div>
+        <!---->
+        <div class="o-flow-x">
+          <div class="el-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition" style="width: 100%">
+            <div class="hidden-columns">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+
+            <div class="d-flex justify-content align-items-center">
+              <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-checklist"></i> Patient List</span>
+              <button class="add-btn mr-0 float-right" data-toggle="modal" (click)="showNewPatientView()"><i class="fa fa-plus-circle"></i> New Patient</button>
+            </div>
+            <div class="m-t30 el-row" style="margin-left: -10px; margin-right: -10px">
+              <div class="el-col el-col-6 el-col-xs-10 el-col-sm-6" style="padding-left: 15px; padding-right: 15px">
+                <div class="el-form-item is-required">
+                  <label for="fn.en" class="el-form-item__label">Seacrh Patient</label>
+                  <div class="el-form-item__content">
+                    <div class="line-input el-input">
+                      <input
+                        type="text"
+                        class="el-input__inner"
+                        id="searchPatientInput"
+                        value="{{ searchPatientInput }}"
+                        placeholder="Enter Patient Id / Name / Email / Mobile"
+                        (change)="SearchPatientInput($event.target)"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="el-col el-col-6 el-col-xs-10 el-col-sm-6" style="padding-left: 15px; padding-right: 15px">
+                <div class="mt-3">
+                  <button type="button" class="el-button el-button--primary save" (click)="filterPatient($event.target)">
+                    Filter
+                  </button>
+                  <button type="button" class="el-button el-button--info save" (click)="clearfilterPatient($event.target)">
+                    Clear
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="el-table__body-wrapper is-scrolling-none" style="margin-top: 3%">
+              <!-- <table cellspacing="0" cellpadding="0" border="0" class="el-table__body" style="width: 1000px;"> -->
+              <table id="example" class="display" cellspacing="0" width="100%" style="display: none">
+                <thead>
+                  <tr>
+                    <th>Patient Id</th>
+                    <th>Patient Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Gender</th>
+                    <th>National ID</th>
+                    <th>Wallet Balance</th>
+                    <th>Date of Birth</th>
+                    <th>Source</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <!-- <tbody>
+                  <tr class="el-table__row" *ngFor="let patient of patientList" (click)="viewPatientDetails(patient.patientId)">
+                    <td>{{ patient.patientDisplayId }}</td>
+                    <td>
+                      <div class="cell">
+                        <div class="d-flex-center">
+                          <span class="avtar3"><img src="assets/images/user.svg" class="image-cover" /></span> <span class="grid_offlinestatus"></span>
+                          <span title="Lama Saleh">{{ patient.firstName }} {{ patient.lastName }}</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{ patient.email }}</td>
+                    <td>{{ patient.mobileNumber }}</td>
+                    <td>{{ patient.genderText }}</td>
+                    <td>{{ patient.nationalId }}</td>
+                    <td>SAR {{ patient.walletBalance }}</td>
+                    <td>{{ patient.dob }}</td>
+                    <td>{{ patient.sourceName }}</td>
+                  </tr>
+                </tbody> -->
+              </table>
+
+              <!---->
+              <!---->
+            </div>
+          </div>
+        </div>
+        <!---->
+        <!---->
+      </div>
+    </main>
+  </section>
+</div>
+
+<div id="newPatientModal" class="modal schedule_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">New Patient Details</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="el-row mt-3" style="margin-left: -15px; margin-right: -15px">
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">First Name</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input type="text" class="el-input__inner form-control" placeholder="Enter First Name" id="patientFirstName" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Last Name</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input type="text" class="el-input__inner form-control" placeholder="Enter Last Name" id="patientLastName" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">National ID</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input type="text" class="el-input__inner form-control" placeholder="Enter National ID" id="patientNationalId" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Mobile Number</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input type="text" class="el-input__inner form-control" placeholder="Enter Mobile Number" id="patientMobileNumber" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Email ID</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input type="text" class="el-input__inner form-control" placeholder="Enter Email ID" id="patientEmailId" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Gender</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <select class="form-control" (change)="genderSelected($event.target)">
+                    <option [value]="null">-Select-</option>
+                    <option [value]="1">Male</option>
+                    <option [value]="2">Female</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">DOB</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input type="date" class="el-input__inner form-control" placeholder="Enter DOB" id="patientDob" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Source of Reference</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <select class="form-control" id="patientSourceDp" formControlName="patientSourceDp" (change)="patientSourceChanged($event.target)">
+                    <option [value]="ptSource.sourceId" *ngFor="let ptSource of patientSources">
+                      {{ ptSource.sourceName }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer text-right">
+        <button type="button" class="btn btn-warning" data-dismiss="modal" (click)="close()">Cancel</button>
+        <button type="button" class="el-button el-button--primary save" (click)="postNewPatient()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div id="newPatientModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">New Patient Details</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">First Name</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input type="text" class="el-input__inner form-control" placeholder="Enter First Name" id="patientFirstName" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Last Name</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input type="text" class="el-input__inner form-control" placeholder="Enter Last Name" id="patientLastName" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">National ID</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input type="text" class="el-input__inner form-control" placeholder="Enter National ID" id="patientNationalId" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Mobile Number</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input type="text" class="el-input__inner form-control" placeholder="Enter Mobile Number" id="patientMobileNumber" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Email ID</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input type="text" class="el-input__inner form-control" placeholder="Enter Email ID" id="patientEmailId" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Gender</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <select class="form-control" (change)="genderSelected($event.target)">
+                    <option [value]="1">Male</option>
+                    <option [value]="2">Female</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">DOB</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <input type="date" class="el-input__inner form-control" placeholder="Enter DOB" id="patientDob" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Source of Reference</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <select class="form-control" id="patientSourceDp" formControlName="patientSourceDp" (change)="patientSourceChanged($event.target)">
+                    <option [value]="ptSource.sourceId" *ngFor="let ptSource of patientSources">
+                      {{ ptSource.sourceName }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer text-right">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+        <button type="button" class="el-button el-button--primary save" (click)="postNewPatient()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div> -->

@@ -1,0 +1,193 @@
+<app-header></app-header>
+<div id="app">
+   <section class="el-container">
+      <div>
+         <menu class="menu-bar">
+            <a href="javascript:void(0);" class="toggle-menu">
+               <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span
+                     class="bar bar3"></span></div>
+            </a>
+            <a href="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+         </menu>
+         <app-sidebar></app-sidebar>
+         <nav class="nav-bar">
+            <a href="dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png"
+                  width="60%"></a>
+            <ul>
+               <li><a routerLink="../nurse" class="light-blue-text"><i class="f-size14 icon-bonnet"></i> Nurse</a></li>
+               <li><a routerLink="../technician" class="thick-blue-text"><i class="icon-flask"></i> Lab technician</a>
+               </li>
+
+               <!-- <li><a routerLink="../users" class="blue-text"><i class="icon-avatar" ></i> System User</a></li>
+                <li><a routerLink="../doctor" class="router-link-exact-active active pink-text"><i class="icon-first-aid"></i> Doctor</a></li>
+                <li><a routerLink="../physiotherapist" class="light-green-text"><i class="icon-rehabilitation" ></i> Physiotherapist</a></li>
+                <li><a routerLink="../nurse" class="light-blue-text" ><i class="f-size14 icon-bonnet"></i> Nurse</a></li>
+                <li><a routerLink="../technician" class="thick-blue-text" ><i class="icon-flask"></i> Lab technician</a></li>
+                <li><a routerLink="../receptionist" class="yellow-text" ><i class="icon-receptionist"></i> Receptionist</a></li>
+                <li><a routerLink="../accountant" class="brown-text" ><i class="icon-calculator"></i> Accountant</a></li> -->
+            </ul>
+         </nav>
+      </div>
+      <main class="el-main">
+         <header class="el-header" style="height: auto;">
+            <div class="hdr-tit">
+               <h5 class="primary-color">Employee</h5>
+               <h6>Taib Home Medical Care Company - Riyadh</h6>
+            </div>
+            <ul role="menubar" class="el-menu-demo el-menu--horizontal el-menu">
+               <li role="menuitem" tabindex="-1" class="el-menu-item is-active"><button class="add-btn"
+                     routerLink="../add-doctor">Add Doctor</button></li>
+               <!---->
+               <li role="menuitem" aria-haspopup="true" class="el-submenu" tabindex="0">
+                  <div class="el-submenu__title" style="border-bottom-color: transparent;"><img
+                        src="assets/images/user.svg" class="avtar"><i
+                        class="el-submenu__icon-arrow el-icon-arrow-down"></i></div>
+               </li>
+            </ul>
+         </header>
+         <div>
+            <!---->
+            <!---->
+            <div class="o-flow-x">
+               <div
+                  class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+                  style="width: 100%;">
+                  <div class="hidden-columns">
+                     <div></div>
+                     <div></div>
+                     <div class="new_side"></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                  </div>
+
+                  <!-- <div class="el-table__header-wrapper">
+                     <table cellspacing="0" cellpadding="0" border="0" class="el-table__header" style="width: 1150px;">
+                        <colgroup>
+                           <col name="el-table_7_column_37" width="100">
+                           <col name="el-table_7_column_38" width="200">
+                           <col name="el-table_7_column_39" width="150">
+                           <col name="el-table_7_column_40" width="200">
+                           <col name="el-table_7_column_41" width="200">
+                           <col name="el-table_7_column_42" width="200">
+                           <col name="el-table_7_column_43" width="100">
+                           <col name="gutter" width="0">
+                        </colgroup>
+                        <thead class="has-gutter">
+                           <tr class="">
+                              <th colspan="1" rowspan="1" class="el-table_7_column_37     is-leaf">
+                                 <div class="cell">EMP ID</div>
+                              </th>
+                              <th colspan="1" rowspan="1" class="el-table_7_column_38     is-leaf">
+                                 <div class="cell">
+                                    Name
+                                    <div class="el-input">
+                                       <input type="text" autocomplete="off" placeholder="" class="el-input__inner">
+                                    </div>
+                                 </div>
+                              </th>
+                              <th colspan="1" rowspan="1" class="el-table_7_column_39     is-leaf">
+                                 <div class="cell">
+                                    Department
+                                    <div class="el-input">
+                                       <input type="text" autocomplete="off" placeholder="" class="el-input__inner">
+                                    </div>
+                                 </div>
+                              </th>
+                              <th colspan="1" rowspan="1" class="el-table_7_column_40     is-leaf">
+                                 <div class="cell">
+                                    Mobile
+                                    <div class="el-input">
+                                       <input type="number" autocomplete="off" placeholder="" class="el-input__inner">
+                                    </div>
+                                 </div>
+                              </th>
+                              <th colspan="1" rowspan="1" class="el-table_7_column_41     is-leaf">
+                                 <div class="cell">
+                                    Email
+                                    <div class="el-input">
+                                       <input type="text" autocomplete="off" placeholder="" class="el-input__inner">
+                                    </div>
+                                 </div>
+                              </th>
+                              <th colspan="1" rowspan="1" class="el-table_7_column_42     is-leaf">
+                                 <div class="cell">Status</div>
+                              </th>
+                              <th colspan="1" rowspan="1" class="el-table_7_column_43   undefined el-table__expand-column  is-leaf">
+                                 <div class="cell"></div>
+                              </th>
+                              <th class="gutter" style="width: 0px; display: none;"></th>
+                           </tr>
+                        </thead>
+                     </table>
+                  </div> -->
+                  <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%;width: 1150px;">
+                     <table id="example" class="display" cellspacing="0" width="100%">
+                        <thead>
+                           <tr>
+                              <th>EMP ID</th>
+                              <th>Name</th>
+                              <th>Department</th>
+                              <th>Mobile</th>
+                              <th>Email</th>
+                              <th>Gender</th>
+                              <th>Blood Group</th>
+                              <th>Date of Birth</th>
+                              <th>Status</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr class="el-table__row">
+                              <td routerLink="../view">EMP2654</td>
+                              <td>
+                                 <div class="cell">
+                                    <div class="d-flex-center"><span class="avtar3"><img
+                                             src="https://static.sanar.sa/mis/7ed08b77f840fb936b845b476e843e92.jpeg"
+                                             class="image-cover"></span> <span class="grid_offlinestatus"></span> <span
+                                          title="Nuha Abdullah ">Nuha Abdullah </span></div>
+                                 </div>
+                              </td>
+                              <td>General Medicine</td>
+                              <td>555555</td>
+                              <td>n-taib@gmail.com</td>
+                              <td>Female</td>
+                              <td>O+</td>
+                              <td>2018-08-28</td>
+                              <td>
+                                 <div class="cell">
+                                    <label class="switch">
+                                       <input type="checkbox" checked>
+                                       <span class="slider round"></span>
+                                    </label>
+                                 </div>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </main>
+   </section>
+</div>
+<div class="el-menu--horizontal" id="horizontal"
+   style="position: absolute; top: 65px; right:3%; z-index: 2038; display: none;" x-placement="bottom-start">
+   <ul role="menu" class="el-menu el-menu--popup el-menu--popup-bottom-start">
+      <li role="menuitem" routerLink="../profile" tabindex="-1" class="el-menu-item">Profile</li>
+      <li role="menuitem" routerLink="../change-password" tabindex="-1" class="el-menu-item">Change Password</li>
+      <li role="menuitem" routerLink="/" tabindex="-1" class="el-menu-item">Logout</li>
+   </ul>
+</div>
+<div role="tooltip" id="el-tooltip-6080" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2043; display: none;">
+   Dashboard
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-7537" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2047; display: none;">
+   Employee
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>

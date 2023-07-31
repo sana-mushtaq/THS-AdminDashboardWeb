@@ -1,0 +1,95 @@
+.table tr.selectable{ cursor: pointer;}
+
+.table th, .table td {
+    padding: 10px 10px !important;
+}
+
+.form-control.ng-invalid.ng-touched{
+    border-color: red;
+}
+
+.category-wrapper{
+    max-width: 100%;
+    margin: auto;
+    white-space: nowrap;
+    overflow-x: auto;
+    background-color: #f7f8fa;
+    border-radius: 10px;
+    padding: 10px;
+}
+.service-area .category-wrapper .category{
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    white-space: break-spaces;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+.service-area .category-wrapper .category p{ font-size: 11px;}
+.service-area .category-wrapper .category .category-img{ 
+    width: 60px; 
+    height: 60px;
+    display: block;
+    margin: auto;
+    border-radius: 100%;
+    background-color: transparent;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background-color: white;
+    border: 1px solid #f7f8fa;
+}
+.service-area .category-wrapper .category .category-img img{ width: 100%;}
+.service-area .category-wrapper .category .category-img img.default{ padding: 10px;}
+.service-area .category-wrapper .category:hover{ background-color: white;}
+.service-area .category-wrapper .category.active{background-color: white;}
+
+.category-card{ border-radius: 10px; overflow: hidden; background-color: var(--light); padding: 10px; cursor: pointer;}
+.category-card img{
+    height: 130px;
+    object-fit: cover;
+    border-radius: 10px;
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: all 0.3s ease-in-out;
+}
+.category-card img.default{
+    object-fit: contain;
+    padding: 15px;
+}
+.category-card:hover img{ padding: 5px; }
+.category-card:hover img.default{ padding: 20px; }
+
+
+.preview-card img{
+    height: 100px;
+    object-fit: contain;
+    border-radius: 10px;
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: white;
+    padding: 10px 0px;
+}
+.preview-card .label{
+    font-weight: 500;
+    min-width: 80px;
+    max-width: 80px;
+}
+
+.google-map-wrapper agm-map{
+    height: 330px;
+    background-color: var(--light);
+    margin-bottom: 1rem;
+}
+
+.preview-details h6{ line-height: 21px !important; }
+/* .no-picker::-webkit-calendar-picker-indicator{
+    display: none;
+}
+
+.no-picker::-webkit-input-placeholder{ 
+    visibility: hidden !important;
+} */

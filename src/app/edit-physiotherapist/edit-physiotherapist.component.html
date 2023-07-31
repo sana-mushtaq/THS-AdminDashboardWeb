@@ -1,0 +1,2126 @@
+
+<div id="app">
+   <section class="el-container">
+      <div>
+         <menu class="menu-bar">
+            <a href="javascript:void(0);" class="toggle-menu">
+               <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span
+                     class="bar bar3"></span></div>
+            </a>
+            <a href="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+         </menu>
+         <app-sidebar></app-sidebar>
+         <nav class="nav-bar">
+            <a href="dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png"
+                  width="60%"></a>
+            <ul>
+               <li><a routerLink="../nurse" class="light-blue-text"><i class="f-size14 icon-bonnet"></i> Nurse</a></li>
+               <li><a routerLink="../technician" class="thick-blue-text"><i class="icon-flask"></i> Lab technician</a></li>
+               <li><a routerLink="../physiotherapist" class="router-link-exact-active active light-green-text"><i class="icon-rehabilitation"></i> Physiotherapist</a></li>
+               <li><a routerLink="../general-physician" class="yellow-text"><i class="icon-receptionist"></i> General Physician</a></li>
+
+               <!-- <li><a routerLink="../users" class="blue-text"><i class="icon-avatar"></i> System User</a></li>
+                      <li><a routerLink="../doctor" class="pink-text"><i class="icon-first-aid"></i> Doctor</a></li>
+                      <li><a routerLink="../physiotherapist" class="router-link-exact-active active light-green-text"><i class="icon-rehabilitation"></i> Physiotherapist</a></li>
+                      <li><a routerLink="../nurse" class="light-blue-text"><i class="f-size14 icon-bonnet"></i> Nurse</a></li>
+                      <li><a routerLink="../technician" class="thick-blue-text"><i class="icon-flask"></i> Lab technician</a></li>
+                      <li><a routerLink="../receptionist" class="yellow-text"><i class="icon-receptionist"></i> Receptionist</a></li>
+                      <li><a routerLink="../accountant" class="brown-text"><i class="icon-calculator"></i> Accountant</a></li> -->
+            </ul>
+         </nav>
+      </div>
+      <main class="el-main">
+         <app-header></app-header>
+         <div>
+            <div style="text-align: right;">
+               <button class="add-btn"
+                     routerLink="../add-physiotherapist">Add Physiotherapist</button>
+            </div>
+            <div>
+               <button type="button" routerLink="../physiotherapist"
+                  class="el-button back-btn el-button--default el-button--small is-plain">
+                  <!---->
+                  <!----><span><i class="icon-arrow-left h2"></i></span>
+               </button>
+               <div class="el-card customtabs is-always-shadow">
+                  <!---->
+                  <div class="el-card__body">
+                     <div class="el-tabs el-tabs--top el-tabs--border-card">
+                        <div class="el-tabs__header is-top">
+                           <div class="el-tabs__nav-wrap is-top">
+                              <div class="el-tabs__nav-scroll">
+                                 <div role="tablist" class="el-tabs__nav is-top" style="transform: translateX(0px);">
+                                    <div id="tab-basic" aria-controls="pane-basic" role="tab" tabindex="0"
+                                       class="el-tabs__item is-top" aria-selected="true"><span>Basic Details</span>
+                                    </div>
+                                    <div id="tab-schedule" aria-controls="pane-schedule" role="tab" tabindex="-1"
+                                       class="el-tabs__item is-top"><span>Schedule Configuration</span></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="el-tabs__content">
+                           <div role="tabpanel" id="pane-basic" aria-labelledby="tab-basic" class="el-tab-pane"
+                              style="">
+                              <div>
+                                 <form class="el-form newform el-form--label-top">
+                                    <div class="m-t20">
+                                       <!---->
+                                       <div>
+                                          <div tabindex="0" class="el-upload el-upload--text">
+                                             <!---->
+                                             <div class="d-flex-center"><img src="assets/images/photoupload.svg"
+                                                   class="avatar-img"> <span class="gray-color">Upload Photo</span>
+                                             </div>
+                                             <input type="file" name="fileToUpload" id="fileToUploads" accept="image/*">
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="m-t20 el-row" style="margin-left: -15px; margin-right: -15px;">
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item is-required">
+                                             <label for="role_id" class="el-form-item__label">Role</label>
+                                             <div class="el-form-item__content">
+                                                <div class="el-select line-input">
+
+                                                   <select class="select">
+                                                      <option>Select Role</option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Doctor</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select" selected>
+                                                         <span>Physiotherapist</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Nurse</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Labtechnician</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Accountant</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Receptionist</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Doctors</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select"><span>doc
+                                                            tor</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>manager</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>speciaoptionst</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Nursing Care Services</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Treatment</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Physical Therapy Treatment</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select"><span>LAB
+                                                            TECHNITION</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>MANAGER</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>DOCTOR</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>RECEPTIONIST</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>ACCOUNTANT</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>ASSISTANT ACCOUNTANT</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Healthcare Services</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>DOCTOR</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>MANAGER</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select"><span>The
+                                                            Main Doctor</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Doctor</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Shatha hamdan</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Trial I</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Trial II</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Trial III</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>RAWABI</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>DELTA HOME LAB</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>DELTA HOME LAB II</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>DELTA HOME LAB III</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Physiotherapist</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>MANAGER</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>NURSE</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>DOCTOR</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>manager</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>nurse</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>doctor</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>DELTA MEDICAL LABORATORY</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>manager</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Rami Osama</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Zaynab Bakri</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>z</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Mayada Kamel</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>doctor</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Lowella Fernando</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Joana Oboza</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Emily Ortega</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Elaine Ortega</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Shery Priela</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Elaine Balana</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Doctor</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>nurse</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select"><span>Lab
+                                                            technician</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>physiotherapist</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select"><span>LAB
+                                                            TEC</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Hesham Bahnasy</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>re</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>nora</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>m</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>phiso</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>phiso</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>ahmad</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>DOMINICK</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>DUKENEIL</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Nurse</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>ER</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select"><span>Sup
+                                                            Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Adminn</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>CHAIRMEN</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Administration</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Role two</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>LAB</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>physiotherapist</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>call center</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Call Center Test</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select"><span>DR
+                                                            MAHMOUD</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Admin Manager</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>IT</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Accountant2</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Accountant3</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>DOCTOR</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Admin New</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Super Admin</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>ADMIN</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Uploading Result</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>upload result</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>CustomerService</span></option>
+                                                      <option class="el-select-dropdown__item multiple-select">
+                                                         <span>Accounts</span></option>
+                                                   </select>
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item is-required">
+                                             <label for="title_id" class="el-form-item__label">Title</label>
+                                             <div class="el-form-item__content">
+                                                <div class="el-select line-input">
+                                                   <select class="select">
+                                                      <option>Select Title</option>
+                                                      <option class="el-select-dropdown__item" selected><span>Ms</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Prof_Female</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Prof_Male</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Mr</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Dr</span></option>
+                                                   </select>
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item is-required">
+                                             <label for="fn.en" class="el-form-item__label">First Name</label>
+                                             <div class="el-form-item__content">
+                                                <div class="line-input el-input">
+                                                   <!----><input type="text" autocomplete="off" placeholder="JAWAHER"
+                                                      class="el-input__inner">
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item is-required">
+                                             <label for="fn.ar" class="el-form-item__label">First name in Arabic</label>
+                                             <div class="el-form-item__content">
+                                                <div class="line-input el-input">
+                                                   <!----><input type="text" autocomplete="off" placeholder="جواهر"
+                                                      class="el-input__inner">
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item is-required">
+                                             <label for="ln.en" class="el-form-item__label">Last Name</label>
+                                             <div class="el-form-item__content">
+                                                <div class="line-input el-input">
+                                                   <!----><input type="text" autocomplete="off" placeholder="ALSHAMMRI"
+                                                      class="el-input__inner">
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item is-required">
+                                             <label for="ln.ar" class="el-form-item__label">Last name in Arabic</label>
+                                             <div class="el-form-item__content">
+                                                <div class="line-input el-input">
+                                                   <!----><input type="text" autocomplete="off" placeholder="الشمري"
+                                                      class="el-input__inner">
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item is-required">
+                                             <label for="email" class="el-form-item__label">Email id</label>
+                                             <div class="el-form-item__content">
+                                                <div class="line-input el-input is-disabled">
+                                                   <!----><input type="text" disabled="disabled" autocomplete="off"
+                                                      placeholder="jjj@hotmail.com" class="el-input__inner">
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item is-required">
+                                             <label for="natio" class="el-form-item__label">Nationality</label>
+                                             <div class="el-form-item__content">
+                                                <div class="el-select line-input">
+                                                   <select class="select">
+                                                      <option>Select Nationality</option>
+                                                      <option class="el-select-dropdown__item"><span>Afghanistan</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Albania</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Algeria</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>American
+                                                            Samoa</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Andorra</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Angola</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Anguilla</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Antigua And
+                                                            Barbuda</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Argentina</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Armenia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Aruba</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item">
+                                                         <span>Austraoptiona</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Austria</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Azerbaijan</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Bahamas</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Bahrain</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Bangladesh</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Barbados</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Belarus</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Belgium</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Beoptionze</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Benin</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Bermuda</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Bhutan</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Booptionvia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Bonaire Saint
+                                                            Eustatius and Saba</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Bosnia And
+                                                            Herzegovina</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Botswana</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Brazil</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Brunei</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Bulgaria</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Burkina Faso</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Burundi</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Cambodia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Cameroon</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Canada</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Cape Verde</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Cayman
+                                                            Islands</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Central African
+                                                            Repuboptionc</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Chad</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Chile</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>China</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Colombia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Comoros</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Congo</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Cook Islands</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Costa Rica</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Cote dIvoire</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Croatia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Cuba</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Curacao</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Cyprus</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Czech
+                                                            Repuboptionc</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Democratic
+                                                            Repuboptionc of the Congo</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Denmark</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Djibouti</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Dominica</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Dominican
+                                                            Repuboptionc</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Ecuador</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Egypt</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>El Salvador</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Equatorial
+                                                            Guinea</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Eritrea</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Estonia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Ethiopia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Faroe
+                                                            Islands</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Federated States Of
+                                                            Micronesia</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Fiji</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Finland</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>France</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>French
+                                                            Guiana</span></option>
+                                                      <option class="el-select-dropdown__item"><span>French
+                                                            Polynesia</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Gabon</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Gambia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Georgia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Germany</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Ghana</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Gibraltar</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Greece</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Greenland</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Grenada</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Guadeloupe</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Guam</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Guatemala</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Guinea</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>GuineaBissau</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Guyana</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Haiti</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Honduras</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Hong Kong</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Hungary</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Iceland</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>India</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Indonesia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Iran</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Iraq</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Ireland</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Israel</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Italy</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Jamaica</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Japan</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Jordan</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Kazakhstan</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Kenya</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Kiribati</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Kosovo</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Kuwait</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Kyrgyzstan</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Laos</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Latvia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Lebanon</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Lesotho</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>optionberia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>optionbya</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item">
+                                                         <span>optionechtenstein</span></option>
+                                                      <option class="el-select-dropdown__item">
+                                                         <span>optionthuania</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Luxembourg</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Macedonia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Madagascar</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Malawi</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Malaysia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Maldives</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Maoption</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Malta</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Martinique</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Mauritania</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Mauritius</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Mexico</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Moldova</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Monaco</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Mongooptiona</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Montenegro</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Morocco</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Mozambique</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Myanmar</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Namibia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Nauru</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Nepal</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Netherlands</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Netherlands
+                                                            Antilles</span></option>
+                                                      <option class="el-select-dropdown__item"><span>New
+                                                            Caledonia</span></option>
+                                                      <option class="el-select-dropdown__item"><span>New Zealand</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Nicaragua</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Niger</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Nigeria</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Norfolk
+                                                            Island</span></option>
+                                                      <option class="el-select-dropdown__item"><span>North Korea</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Northern Mariana
+                                                            Islands</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Norway</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Oman</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Pakistan</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Palau</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Palestinian
+                                                            Territory Occupied</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Panama</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Papua New
+                                                            Guinea</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Paraguay</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Peru</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item">
+                                                         <span>Phioptionppines</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Poland</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Portugal</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Puerto Rico</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Qatar</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Reunion</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Romania</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Russia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Rwanda</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Saint Kitts And
+                                                            Nevis</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Saint Lucia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Saint Martin
+                                                            (French part)</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Saint Vincent And
+                                                            The Grenadines</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Samoa</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>San Marino</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Sao Tome And
+                                                            Principe</span></option>
+                                                      <option class="el-select-dropdown__item" selected><span>Saudi
+                                                            Arabia</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Senegal</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Serbia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Seychelles</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Sierra Leone</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Singapore</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Sint Maarten</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Slovakia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Slovenia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Solomon
+                                                            Islands</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Somaoptiona</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>South Africa</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>South Korea</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>South Sudan</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Spain</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Sri Lanka</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Sudan</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Suriname</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Swaziland</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Sweden</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Switzerland</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Syria</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Taiwan</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Tajikistan</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Tanzania</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Thailand</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Timor-Leste</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Togo</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Tonga</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Trinidad And
+                                                            Tobago</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Tunisia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Turkey</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Turkmenistan</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Turks and Caicos
+                                                            Island</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Tuvalu</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Uganda</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Ukraine</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>United Arab
+                                                            Emirates</span></option>
+                                                      <option class="el-select-dropdown__item"><span>United
+                                                            Kingdom</span></option>
+                                                      <option class="el-select-dropdown__item"><span>United States of
+                                                            America</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Uruguay</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Uzbekistan</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Vanuatu</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Venezuela</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Vietnam</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Virgin Islands
+                                                            British</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Virgin Islands
+                                                            Us</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Yemen</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Zambia</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Zimbabwe</span>
+                                                      </option>
+                                                   </select>
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-row" style="margin-left: -10px; margin-right: -10px;">
+                                             <div
+                                                class="el-col el-col-24 el-col-xs-8 el-col-sm-8 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                                style="padding-left: 10px; padding-right: 10px;">
+                                                <div class="el-form-item is-required">
+                                                   <label for="pc" class="el-form-item__label">Code</label>
+                                                   <div class="el-form-item__content">
+                                                      <div class="el-select line-input">
+                                                         <select class="select">
+                                                            <option>Select</option>
+                                                            <option class="el-select-dropdown__item"><span>+593</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+31</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+53</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+32</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+965</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+230</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+54</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+678</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+682</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+55</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+596</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1671</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+82</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1767</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+962</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+213</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+98</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+91</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+244</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+84</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+378</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+263</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+245</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+49</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+677</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+241</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+222</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item" selected>
+                                                               <span>+966</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+94</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+507</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+354</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+40</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+239</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+64</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+225</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+595</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+350</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+58</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+996</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+260</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+95</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+264</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1246</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+224</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+90</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+44</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+41</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+34</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+92</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+43</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+351</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+505</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+257</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+51</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1441</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+502</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+251</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+992</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+961</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+48</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+968</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+261</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+61</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+268</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+30</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+375</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+52</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+229</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+389</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+591</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+993</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+590</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1345</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+970</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+45</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+382</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+62</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+212</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+685</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+266</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+599</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+223</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+506</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+243</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+675</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+233</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+237</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+967</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+36</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+673</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1268</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+7</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+855</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+976</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+250</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+353</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+235</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+383</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1473</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+47</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+385</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+358</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+359</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+676</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+974</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+597</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+386</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+381</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+298</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+592</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+691</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+995</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+46</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+355</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+299</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+598</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+232</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+291</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+352</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+852</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+504</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+297</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+252</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+670</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+216</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+880</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+423</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+240</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+994</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+509</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+7</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+65</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+594</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1684</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+33</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+960</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+267</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+93</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+998</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+972</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+372</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+373</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+686</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+376</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+971</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1264</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1876</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+211</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+973</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+370</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+689</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+265</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+687</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+256</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+503</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+253</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+269</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+242</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+679</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+226</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+680</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+221</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+254</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+262</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+236</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+501</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+255</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+234</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+248</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+249</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+387</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+231</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+227</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+856</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+39</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+27</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+377</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+238</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+374</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+975</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+86</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+421</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+56</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+963</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+81</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+60</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+356</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+599</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1242</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+688</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+599</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+886</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+220</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+228</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+590</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+674</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+218</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+420</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+20</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+371</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+850</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+258</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+66</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+63</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+964</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+977</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+672</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+357</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1809</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+380</span>
+                                                            </option>
+                                                            <option class="el-select-dropdown__item"><span>+57</span>
+                                                            </option>
+                                                         </select>
+                                                      </div>
+                                                      <!---->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div
+                                                class="el-col el-col-24 el-col-xs-16 el-col-sm-16 el-col-md-16 el-col-lg-16 el-col-xl-16"
+                                                style="padding-left: 10px; padding-right: 10px;">
+                                                <div class="el-form-item is-required">
+                                                   <label for="ph" class="el-form-item__label">Mobile number</label>
+                                                   <div class="el-form-item__content">
+                                                      <div class="line-input el-input is-disabled">
+                                                         <!----><input type="number" disabled="disabled"
+                                                            autocomplete="off" placeholder="507620979"
+                                                            class="el-input__inner">
+                                                         <!---->
+                                                         <!---->
+                                                         <!---->
+                                                         <!---->
+                                                      </div>
+                                                      <!---->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item">
+                                             <label for="dob" class="el-form-item__label">Date Of Birth</label>
+                                             <div class="el-form-item__content">
+                                                <input type="date" id="" name="" class="date" value="1997-06-11"
+                                                   placeholder="DOB" required />
+
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item">
+                                             <label for="blood" class="el-form-item__label">Blood Group</label>
+                                             <div class="el-form-item__content">
+                                                <div class="el-select line-input">
+                                                   <select class="select">
+                                                      <option>Select Blood Group</option>
+                                                      <option class="el-select-dropdown__item"><span>A+</span></option>
+                                                      <option class="el-select-dropdown__item"><span>B+</span></option>
+                                                      <option class="el-select-dropdown__item"><span>AB+</span></option>
+                                                      <option class="el-select-dropdown__item"><span>A-</span></option>
+                                                      <option class="el-select-dropdown__item"><span>B-</span></option>
+                                                      <option class="el-select-dropdown__item"><span>AB-</span></option>
+                                                      <option class="el-select-dropdown__item" selected><span>O+</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>O-</span></option>
+                                                   </select>
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item is-required">
+                                             <label for="deg" class="el-form-item__label">Degree</label>
+                                             <div class="el-form-item__content">
+                                                <div class="el-select line-input">
+                                                   <select class="select">
+                                                      <option>Select Degree</option>
+                                                      <option class="el-select-dropdown__item selected" selected>
+                                                         <span>Speciaoptionst</span></option>
+                                                      <option class="el-select-dropdown__item"><span>PhD / Consultant
+                                                            speciaoptionst</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Master degree/
+                                                            Senior speciaoptionst</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Diploma</span>
+                                                      </option>
+                                                      <option class="el-select-dropdown__item"><span>Bachelor
+                                                            degree/Speciaoptionst</span></option>
+                                                      <option class="el-select-dropdown__item"><span>Consultant
+                                                            Speciaoptionst</span></option>
+                                                      <option class="el-select-dropdown__item hover"><span>Senior
+                                                            Speciaoptionst</span></option>
+                                                   </select>
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item is-required">
+                                             <label for="known_lang.en" class="el-form-item__label">Languages
+                                                spoken</label>
+                                             <div class="el-form-item__content">
+                                                <div class="el-select line-input">
+                                                   <select class="select">
+                                                      <option>Select Language</option>
+                                                      <option class="el-select-dropdown__item" selected>
+                                                         <span>Arabic</span></option>
+                                                      <option class="el-select-dropdown__item"><span>English</span>
+                                                      </option>
+                                                   </select>
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item is-required">
+                                             <label for="known_lang.ar" class="el-form-item__label">Languages spoken in
+                                                Arabic</label>
+                                             <div class="el-form-item__content">
+                                                <div class="el-select line-input">
+                                                   <select class="select">
+                                                      <option>Select Language in Arabic</option>
+                                                      <option class="el-select-dropdown__item" selected>
+                                                         <span>عربي</span></option>
+                                                      <option class="el-select-dropdown__item"><span>إنجليزي</span>
+                                                      </option>
+                                                   </select>
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item">
+                                             <label for="des" class="el-form-item__label">Designation</label>
+                                             <div class="el-form-item__content">
+                                                <div class="line-input el-input">
+                                                   <!----><input type="text" autocomplete="off"
+                                                      placeholder="Enter Designation" class="el-input__inner">
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!---->
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item custom-radio">
+                                             <label for="gnd" class="el-form-item__label">Gender</label>
+                                             <div class="el-form-item__content">
+                                                <input type="radio" id="" name="fav_language" class="el-radio__inner"
+                                                   value="Male" checked>
+                                                  <label for="">Male</label>
+                                                  <input type="radio" id="" name="fav_language" class="el-radio__inner"
+                                                   value="Female">
+                                                  <label for="">Female</label>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!---->
+                                    </div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item is-required">
+                                             <label for="med_reg" class="el-form-item__label">Medical Reg No</label>
+                                             <div class="el-form-item__content">
+                                                <div class="line-input el-input">
+                                                   <!----><input type="text" autocomplete="off"
+                                                      placeholder="Medical Reg No" class="el-input__inner">
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item is-required">
+                                             <label for="med_reg_exp" class="el-form-item__label">Medical Licence
+                                                expiry</label>
+                                             <div class="el-form-item__content">
+                                                <input type="date" id="" name="" class="date" placeholder="DOB">
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item is-required">
+                                             <label for="exp.en.val" class="el-form-item__label">Experience</label>
+                                             <div class="el-form-item__content">
+                                                <div class="line-input el-input">
+                                                   <!----><input type="number" autocomplete="off" max="2"
+                                                      placeholder="Enter Experience" class="el-input__inner">
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div
+                                          class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                          style="padding-left: 15px; padding-right: 15px;">
+                                          <div class="el-form-item is-required">
+                                             <label for="exp.ar.val" class="el-form-item__label">Experience in
+                                                Arabic</label>
+                                             <div class="el-form-item__content">
+                                                <div class="line-input el-input">
+                                                   <!----><input type="number" autocomplete="off" max="2"
+                                                      placeholder="Enter Experience in Arabic" class="el-input__inner">
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                   <!---->
+                                                </div>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;"></div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;"></div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;"></div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;"></div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;"></div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;"></div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;"></div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;"></div>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;"></div>
+                                    <div class="m-t30 el-row" style="margin-left: -15px; margin-right: -15px;"></div>
+                                    <!---->
+                                    <!---->
+                                    <div class="m-t30 el-row">
+                                       <h4>Service Type</h4>
+                                       <form class="el-form">
+                                          <div class="el-form-item">
+                                             <!---->
+                                             <div class="el-form-item__content"><label
+                                                   class="el-checkbox is-disabled is-checked"><span
+                                                      class="el-checkbox__input is-disabled is-checked"><span
+                                                         class="el-checkbox__inner"></span><input type="checkbox"
+                                                         aria-hidden="false" disabled="disabled"
+                                                         class="el-checkbox__original" value="ST0"></span><span
+                                                      class="el-checkbox__label">Home Visit
+                                                      <!----></span></label>
+                                                <!---->
+                                             </div>
+                                          </div>
+                                          <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                             <div
+                                                class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                                style="padding-left: 15px; padding-right: 15px;">
+                                                <div class="el-form-item"><label for="dur1"
+                                                      class="el-form-item__label">Duration</label>
+                                                   <div class="el-form-item__content">
+                                                      <div class="el-select line-input">
+                                                         <!---->
+                                                         <div class="el-input is-disabled el-input--suffix">
+                                                            <!----><input type="text" disabled="disabled"
+                                                               readonly="readonly" autocomplete="off"
+                                                               placeholder="Select Duration" class="el-input__inner">
+                                                            <!----><span class="el-input__suffix"><span
+                                                                  class="el-input__suffix-inner"><i
+                                                                     class="el-select__caret el-input__icon el-icon-arrow-up"></i>
+                                                                  <!---->
+                                                                  <!---->
+                                                                  <!---->
+                                                                  <!---->
+                                                                  <!----></span>
+                                                               <!----></span>
+                                                            <!---->
+                                                            <!---->
+                                                         </div>
+                                                         <div class="el-select-dropdown el-popper"
+                                                            style="display: none; min-width: 296.388px;">
+                                                            <div class="el-scrollbar" style="">
+                                                               <div class="el-select-dropdown__wrap el-scrollbar__wrap"
+                                                                  style="margin-bottom: -17px; margin-right: -17px;">
+                                                                  <ul
+                                                                     class="el-scrollbar__view el-select-dropdown__list">
+                                                                     <!---->
+                                                                     <li class="el-select-dropdown__item"><span>15
+                                                                           Minutes</span></li>
+                                                                     <li class="el-select-dropdown__item"><span>20
+                                                                           Minutes</span></li>
+                                                                     <li class="el-select-dropdown__item"><span>30
+                                                                           Minutes</span></li>
+                                                                     <li class="el-select-dropdown__item selected">
+                                                                        <span>45 Minutes</span></li>
+                                                                     <li class="el-select-dropdown__item"><span>1
+                                                                           Hour</span></li>
+                                                                  </ul>
+                                                               </div>
+                                                               <div class="el-scrollbar__bar is-horizontal">
+                                                                  <div class="el-scrollbar__thumb"
+                                                                     style="transform: translateX(0%);"></div>
+                                                               </div>
+                                                               <div class="el-scrollbar__bar is-vertical">
+                                                                  <div class="el-scrollbar__thumb"
+                                                                     style="transform: translateY(0%);"></div>
+                                                               </div>
+                                                            </div>
+                                                            <!---->
+                                                         </div>
+                                                      </div>
+                                                      <!---->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div
+                                                class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                                style="padding-left: 15px; padding-right: 15px;">
+                                                <div class="el-form-item"><label for="fee1"
+                                                      class="el-form-item__label">Fee</label>
+                                                   <div class="el-form-item__content">
+                                                      <div class="line-input el-input">
+                                                         <!----><input type="number" autocomplete="off" min="0.0"
+                                                            step="0.01" oninput="validity.valid||(value=value);"
+                                                            placeholder="Fee" class="el-input__inner">
+                                                         <!---->
+                                                         <!---->
+                                                         <!---->
+                                                         <!---->
+                                                      </div>
+                                                      <!---->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <!---->
+                                          <!---->
+                                          <!---->
+                                          <!---->
+                                       </form>
+                                       <!---->
+                                       <!---->
+                                       <div class="el-form-item"><label for="bio.en" class="el-form-item__label">Short
+                                             Biography </label>
+                                          <div class="el-form-item__content">
+                                             <div class="line-input el-textarea"><textarea autocomplete="off"
+                                                   placeholder="Short Biography" class="el-textarea__inner"
+                                                   style="min-height: 138px; height: 138px;"></textarea>
+                                                <!---->
+                                             </div>
+                                             <!---->
+                                          </div>
+                                       </div>
+                                       <div class="el-form-item"><label for="bio.ar" class="el-form-item__label">Short
+                                             Biography in Arabic</label>
+                                          <div class="el-form-item__content">
+                                             <div class="line-input el-textarea"><textarea autocomplete="off"
+                                                   placeholder="Short Biography in Arabic" class="el-textarea__inner"
+                                                   style="min-height: 138px; height: 138px;"></textarea>
+                                                <!---->
+                                             </div>
+                                             <!---->
+                                          </div>
+                                       </div>
+                                       <div class="m-b20 ">
+                                          <!---->
+                                          <div>
+                                             <div tabindex="0" class="el-upload el-upload--text">
+                                                <div class="d-flex-center"><i class="icon-circle-plus ico-blu"></i>
+                                                   <span class="gray-color">Upload attachments (optional) </span>
+                                                   <!---->
+                                                   <!---->
+                                                </div>
+                                                <!----><input type="file" name="fileToUpload" class="fileToUploads">
+                                             </div>
+                                             <ul class="el-upload-list el-upload-list--text"></ul>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-form-item status" width="100">
+                                       <label class="el-form-item__label">Status</label>
+                                       <div class="el-form-item__content">
+                                          <label class="el-checkbox is-checked">
+                                             <span class="el-checkbox__input is-checked"><span
+                                                   class="el-checkbox__inner"></span><input type="checkbox"
+                                                   aria-hidden="false" class="el-checkbox__original" value=""></span>
+                                             <span class="el-checkbox__label">
+                                                Active
+                                                <!---->
+                                             </span>
+                                          </label>
+                                          <!---->
+                                       </div>
+                                    </div>
+                                    <div class="text-right">
+                                       <!---->
+                                       <button type="button" class="el-button el-button--default">
+                                          <!---->
+                                          <!----><span>Cancel</span>
+                                       </button>
+                                       <!---->
+                                       <button type="button" class="el-button el-button--primary">
+                                          <!---->
+                                          <!----><span>Update</span>
+                                       </button>
+                                    </div>
+                                 </form>
+                                 <div>
+                                    <form class="el-form newform m-t20 el-form--label-top">
+                                       <h4>Password reset</h4>
+                                       <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div
+                                             class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                             style="padding-left: 15px; padding-right: 15px;">
+                                             <div class="el-form-item is-required">
+                                                <label for="reenteremail" class="el-form-item__label">Re enter Email
+                                                   ID</label>
+                                                <div class="el-form-item__content">
+                                                   <div class="line-input el-input">
+                                                      <!----><input type="text" autocomplete="off"
+                                                         placeholder="Enter Re enter Email ID" class="el-input__inner">
+                                                      <!---->
+                                                      <!---->
+                                                      <!---->
+                                                      <!---->
+                                                   </div>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div
+                                             class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                             style="padding-left: 15px; padding-right: 15px;">
+                                             <div class="el-form-item is-required">
+                                                <label for="pwd" class="el-form-item__label">Enter Password</label>
+                                                <div class="el-form-item__content">
+                                                   <div class="line-input el-input">
+                                                      <!----><input type="text" autocomplete="off"
+                                                         placeholder="Enter Password" class="el-input__inner">
+                                                      <!---->
+                                                      <!---->
+                                                      <!---->
+                                                      <!---->
+                                                   </div>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div
+                                             class="text-right el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                             style="padding-left: 15px; padding-right: 15px;">
+                                             <button type="button" class="el-button m-t40 el-button--default">
+                                                <!---->
+                                                <!----><span>Send to Email</span>
+                                             </button>
+                                          </div>
+                                       </div>
+                                    </form>
+                                 </div>
+                                 <!---->
+                              </div>
+                           </div>
+
+                           <div role="tabpanel" id="pane-schedule" aria-labelledby="tab-schedule" class="el-tab-pane"
+                              style="">
+                              <div class="schedule">
+                                 <div>
+                                    <div class="d-flex justify-content">
+                                       <h4></h4>
+                                    </div>
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                    <div class="el-card is-never-shadow">
+                                       <!---->
+                                       <div class="el-card__body">
+                                          <h4>Sunday</h4>
+                                          <div class="session-grid">
+                                             <div class="session">
+                                                <div class="homevisit">
+                                                   <i class="icon-home"></i> <strong>Session 1</strong>
+                                                   <p>12:45 -19:30</p>
+                                                   <span class="gray-color">Home visit</span> <span
+                                                      class="icon-cancel"></span>
+                                                </div>
+                                             </div>
+                                             <a href="javascript:void(0);" class="session-add add_session_btn"><i
+                                                   class="icon-circle-plus"></i>
+                                                Add Session
+                                             </a>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-card is-never-shadow">
+                                       <!---->
+                                       <div class="el-card__body">
+                                          <h4>Monday</h4>
+                                          <div class="session-grid">
+                                             <div class="session">
+                                                <div class="homevisit">
+                                                   <i class="icon-home"></i> <strong>Session 1</strong>
+                                                   <p>12:45 -19:30</p>
+                                                   <span class="gray-color">Home visit</span> <span
+                                                      class="icon-cancel"></span>
+                                                </div>
+                                             </div>
+                                             <a href="javascript:void(0);" class="session-add add_session_btn"><i
+                                                   class="icon-circle-plus"></i>
+                                                Add Session
+                                             </a>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-card is-never-shadow">
+                                       <!---->
+                                       <div class="el-card__body">
+                                          <h4>Tuesday</h4>
+                                          <div class="session-grid">
+                                             <div class="session">
+                                                <div class="homevisit">
+                                                   <i class="icon-home"></i> <strong>Session 1</strong>
+                                                   <p>12:45 -19:30</p>
+                                                   <span class="gray-color">Home visit</span> <span
+                                                      class="icon-cancel"></span>
+                                                </div>
+                                             </div>
+                                             <a href="javascript:void(0);" class="session-add add_session_btn"><i
+                                                   class="icon-circle-plus"></i>
+                                                Add Session
+                                             </a>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-card is-never-shadow">
+                                       <!---->
+                                       <div class="el-card__body">
+                                          <h4>Wednesday</h4>
+                                          <div class="session-grid">
+                                             <div class="session">
+                                                <div class="homevisit">
+                                                   <i class="icon-home"></i> <strong>Session 1</strong>
+                                                   <p>12:45 -19:30</p>
+                                                   <span class="gray-color">Home visit</span> <span
+                                                      class="icon-cancel"></span>
+                                                </div>
+                                             </div>
+                                             <a href="javascript:void(0);" class="session-add add_session_btn"><i
+                                                   class="icon-circle-plus"></i>
+                                                Add Session
+                                             </a>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-card is-never-shadow">
+                                       <!---->
+                                       <div class="el-card__body">
+                                          <h4>Thursday</h4>
+                                          <div class="session-grid">
+                                             <div class="session">
+                                                <div class="homevisit">
+                                                   <i class="icon-home"></i> <strong>Session 1</strong>
+                                                   <p>12:45 -19:30</p>
+                                                   <span class="gray-color">Home visit</span> <span
+                                                      class="icon-cancel"></span>
+                                                </div>
+                                             </div>
+                                             <a href="javascript:void(0);" class="session-add add_session_btn"><i
+                                                   class="icon-circle-plus"></i>
+                                                Add Session
+                                             </a>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-card is-never-shadow">
+                                       <!---->
+                                       <div class="el-card__body">
+                                          <h4>Friday</h4>
+                                          <div class="session-grid">
+                                             <div class="session">
+                                                <div class="homevisit">
+                                                   <i class="icon-home"></i> <strong>Session 1</strong>
+                                                   <p>12:45 -19:30</p>
+                                                   <span class="gray-color">Home visit</span> <span
+                                                      class="icon-cancel"></span>
+                                                </div>
+                                             </div>
+                                             <a href="javascript:void(0);" class="session-add add_session_btn"><i
+                                                   class="icon-circle-plus"></i>
+                                                Add Session
+                                             </a>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-card is-never-shadow">
+                                       <!---->
+                                       <div class="el-card__body">
+                                          <h4>Saturday</h4>
+                                          <div class="session-grid">
+                                             <div class="session">
+                                                <div class="homevisit">
+                                                   <i class="icon-home"></i> <strong>Session 1</strong>
+                                                   <p>12:45 -19:30</p>
+                                                   <span class="gray-color">Home visit</span> <span
+                                                      class="icon-cancel"></span>
+                                                </div>
+                                             </div>
+                                             <a href="javascript:void(0);" class="session-add add_session_btn"><i
+                                                   class="icon-circle-plus"></i>
+                                                Add Session
+                                             </a>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-row">
+                                       <button type="button" class="el-button pull-right el-button--primary">
+                                          <!---->
+                                          <!----><span>Save Schedule</span>
+                                       </button>
+                                    </div>
+                                 </div>
+                                 <!---->
+                                 <div class="el-dialog__wrapper wd50" style="display: none;">
+                                    <div role="dialog" aria-modal="true" aria-label="Add Session" class="el-dialog"
+                                       style="margin-top: 15vh;">
+                                       <div class="el-dialog__header"><span class="el-dialog__title">Add
+                                             Session</span><button type="button" aria-label="Close"
+                                             class="el-dialog__headerbtn"><i
+                                                class="el-dialog__close el-icon el-icon-close"></i></button></div>
+                                       <!---->
+                                       <!---->
+                                    </div>
+                                 </div>
+                                 <div class="el-dialog__wrapper w30 text-center" style="display: none;">
+                                    <div role="dialog" aria-modal="true" aria-label="dialog" class="el-dialog"
+                                       style="margin-top: 15vh;">
+                                       <div class="el-dialog__header"><span class="el-dialog__title"></span><button
+                                             type="button" aria-label="Close" class="el-dialog__headerbtn"><i
+                                                class="el-dialog__close el-icon el-icon-close"></i></button></div>
+                                       <!---->
+                                       <!---->
+                                    </div>
+                                 </div>
+                              </div>
+                              <!---->
+                           </div>
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!---->
+            <!---->
+            <!---->
+         </div>
+      </main>
+   </section>
+</div>
+<script async="" defer="defer"
+   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-EXDwh2adbELTFKlDgn3RXMP648GC12s&amp;sensor=false&amp;libraries=places">
+</script>
+<script type="text/javascript" src="static/js/manifest.787d0d92fd70cf16874e.js"></script>
+<script type="text/javascript" src="static/js/vendor.6f6ef6bc866762bf29a6.js"></script>
+<script type="text/javascript" src="static/js/app.a27789e3d261f525a01a.js"></script>
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+<div role="tooltip" id="el-tooltip-2340" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2001; display: none;">
+   Employee
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+
+<div id="add_session" class="modal add_session">
+
+   <!-- Modal content -->
+   <div class="modal-content" style="width: 45% !important;">
+      <div class="modal-header" style="border-bottom: unset;">
+         <span class="close">&times;</span>
+         <h2>Add Session</h2>
+      </div>
+      <div class="modal-body">
+         <form class="el-form">
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-10 el-col-xl-10"
+                  style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item">
+                     <label class="el-form-item__label">Select service</label>
+                     <div class="el-form-item__content">
+                        <div class="el-select line-input">
+                           <select class="select">
+                              <option>Select Services</option>
+                              <option class="el-select-dropdown__item"><span>Home Visit Doctor</span></option>
+                              <option class="el-select-dropdown__item"><span>Video Consultation</span></option>
+                              <option class="el-select-dropdown__item"><span>Chat consultation</span></option>
+                           </select>
+                        </div>
+                        <!---->
+                     </div>
+                  </div>
+               </div>
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-7 el-col-xl-7"
+                  style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="sr" class="el-form-item__label">Select Start time</label>
+                     <div class="el-form-item__content">
+                        <div class="el-select line-input">
+                           <select class="select">
+                              <option>Select Start time</option>
+                              <option class="el-select-dropdown__item"><span>No data</span></option>
+                           </select>
+                        </div>
+                        <!---->
+                     </div>
+                  </div>
+               </div>
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-7 el-col-xl-7"
+                  style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="er" class="el-form-item__label">Select End time</label>
+                     <div class="el-form-item__content">
+                        <div class="el-select line-input">
+                           <select class="select">
+                              <option>Select End time</option>
+                              <option class="el-select-dropdown__item"><span>No data</span></option>
+                           </select>
+                        </div>
+                        <!---->
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!---->
+            <div class="text-right">
+               <button type="button" class="el-button m-t25 el-button--primary">
+                  <!---->
+                  <!----><span>Save</span>
+               </button>
+            </div>
+         </form>
+
+      </div>
+      <div class="modal-footer">
+         <!-- <button type="button" class="btn btn-default"    data-dismiss="modal">Close</button> -->
+         <!-- <div class="text-right"><button type="button" class="el-button m-t25 el-button--primary"><span>Save</span></button></div> -->
+      </div>
+   </div>
+
+</div>

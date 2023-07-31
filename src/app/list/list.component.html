@@ -1,0 +1,150 @@
+<app-header></app-header>
+<div id="app">
+         <section class="el-container">
+            <div>
+               <menu class="menu-bar">
+                  <a href="javascript:void(0);" class="toggle-menu">
+                     <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+                  </a>
+                  <a href="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+               </menu>
+               <app-sidebar></app-sidebar>
+               <nav class="nav-bar">
+                  <a routerLink="../dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png" width="60%"></a> 
+                  <ul>
+                     <li><a routerLink="../add" class="light-blue-text"><i class="icon-circle-plus"></i> Add Role
+                        </a>
+                     </li>
+                     <li><a routerLink="../list" class="router-link-exact-active active pink-text"><i class="icon-checklist"></i> Role List
+                        </a>
+                     </li>
+                  </ul>
+               </nav>
+            </div>
+            <main class="el-main">
+               <app-header></app-header>
+               <div>
+                  <!----> 
+                  <div>
+                     <div class="o-flow-x">
+                        <div class="el-table master-table el-table--fit el-table--enable-row-hover el-table--enable-row-transition" style="width: 100%;">
+                           <div class="hidden-columns">
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                           </div>
+                           <div class="el-table__header-wrapper">
+                              <table cellspacing="0" cellpadding="0" border="0" class="el-table__header" style="width: 1009px;">
+                                 <colgroup>
+                                    <col name="el-table_5_column_27" width="180">
+                                    <col name="el-table_5_column_28" width="200">
+                                    <col name="el-table_5_column_29" width="200">
+                                    <col name="el-table_5_column_30" width="429">
+                                    <col name="gutter" width="0">
+                                 </colgroup>
+                                 <thead class="has-gutter">
+                                    <tr class="">
+                                       <th colspan="1" rowspan="1" class="el-table_5_column_27     is-leaf">
+                                          <div class="cell">
+                                             Role Name
+                                             <div class="line-input el-input">
+                                                <!----><input type="text" autocomplete="off" class="el-input__inner"><!----><!----><!----><!---->
+                                             </div>
+                                          </div>
+                                       </th>
+                                       <th colspan="1" rowspan="1" class="el-table_5_column_28     is-leaf">
+                                          <div class="cell">
+                                             Modified Date
+                                             <div class="el-date-editor line-input el-input el-input--prefix el-input--suffix el-date-editor--date">
+                                                <input type="text" autocomplete="off" name="" placeholder="Modified Date" class="el-input__inner">
+                                                <span class="el-input__prefix">
+                                                   <i class="el-input__icon el-icon-date"></i>
+                                                </span>
+                                                <span class="el-input__suffix">
+                                                   <span class="el-input__suffix-inner">
+                                                      <i class="el-input__icon"></i>
+                                                   </span>
+                                                 
+                                                </span>
+
+                                                <!-- <input type="date" id="" name=""> -->
+                                                
+                                             </div>
+                                          </div>
+                                       </th>
+                                       <th colspan="1" rowspan="1" class="el-table_5_column_29     is-leaf">
+                                          <div class="cell">
+                                             Modified By
+                                             <div class="line-input el-input">
+                                                <!----><input type="text" autocomplete="off" class="el-input__inner"><!----><!----><!----><!---->
+                                             </div>
+                                          </div>
+                                       </th>
+                                       <th colspan="1" rowspan="1" class="el-table_5_column_30  is-right   is-leaf">
+                                          <div class="cell"></div>
+                                       </th>
+                                       <th class="gutter" style="width: 0px; display: none;"></th>
+                                    </tr>
+                                 </thead>
+                              </table>
+                           </div>
+                           <div class="el-table__body-wrapper is-scrolling-none" style="margin-top: 3%;">
+                              <table id="example" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Role Name</th>
+                                            <th>Modified Date</th>
+                                            <th>Modified By</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="el-table__row">
+                                            <td>Accountant</td>
+                                            <td>2020-05-04</td>
+                                            <td>admin@sanar.sa</td>
+                                            <td><div class="cell"><i  routerLink="../edit-role" class="icon-pencil ico-pointer"></i></div></td>
+                                        </tr>
+                                        <tr class="el-table__row">
+                                          <td>Admin</td>
+                                          <td>2020-05-04</td>
+                                          <td>admin@sanar.sa</td>
+                                          <td><div class="cell"><i  routerLink="../edit-role" class="icon-pencil ico-pointer"></i></div></td>
+                                      </tr>
+                                    </tbody>
+                                </table>
+                           </div>
+                           
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </main>
+         </section>
+      </div>
+      <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+      <div role="tooltip" id="el-tooltip-7343" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2005; display: none;">
+         Employee
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-7647" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2010; display: none;">
+         Patient
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-9477" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2028; display: none;">
+         Appointment
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-9129" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2030; display: none;">
+         Accounts
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-2943" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2032; display: none;">
+         Role Management
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-6209" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2034; display: none;">
+         Master
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>

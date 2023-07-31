@@ -1,0 +1,32 @@
+.modal-dialog {
+    max-width: inherit ! important;
+}
+/* .modal-header {
+    display: flex ! important;
+} */
+select {
+    font-size: 12px;
+    height: calc(1.5em + 0.75rem + 2px);;
+    margin-top: 27px;
+}
+.zoom {
+    /* padding: 50px; */
+    transition: transform .2s;
+    width: 40px;
+   
+    margin: 0 auto;
+  }
+  
+  .zoom:hover {
+    -ms-transform: scale(2.5); /* IE 9 */
+    -webkit-transform: scale(2.5); /* Safari 3-8 */
+    transform: scale(2.5); 
+    z-index: 99999;
+  }
+  
+  textarea {
+    font-size: 12px;
+  }
+  .el-input__inner {
+    height: calc(1.5em + 0.75rem + 2px) ! important;
+  }

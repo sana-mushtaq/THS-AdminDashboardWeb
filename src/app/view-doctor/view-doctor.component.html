@@ -1,0 +1,509 @@
+<app-header></app-header>
+<div id="app">
+   <section class="el-container">
+      <div>
+         <menu class="menu-bar">
+            <a href="javascript:void(0);" class="toggle-menu">
+               <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span
+                     class="bar bar3"></span></div>
+            </a>
+            <a href="/dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+         </menu>
+
+         <app-sidebar></app-sidebar>
+
+         <nav class="nav-bar">
+            <a href="dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png" width="60%">
+               <!-- <i class="icon-sanar"></i> --></a>
+            <ul>
+               <li><a routerLink="../nurse" class="light-blue-text"><i class="f-size14 icon-bonnet"></i> Nurse</a></li>
+               <li><a routerLink="../technician" class="thick-blue-text"><i class="icon-flask"></i> Lab technician</a>
+               </li>
+               <!-- <li><a routerLink="../users" class="blue-text"><i class="icon-avatar"></i> System User</a></li>
+                   <li><a routerLink="../doctor" class="router-link-exact-active active pink-text"><i class="icon-first-aid"></i> Doctor</a></li>
+                   <li><a routerLink="../physiotherapist" class="light-green-text"><i class="icon-rehabilitation"></i> Physiotherapist</a></li>
+                   <li><a routerLink="../nurse" class="light-blue-text"><i class="f-size14 icon-bonnet"></i> Nurse</a></li>
+                   <li><a routerLink="../technician" class="thick-blue-text"><i class="icon-flask"></i> Lab technician</a></li>
+                   <li><a routerLink="../receptionist" class="yellow-text"><i class="icon-receptionist"></i> Receptionist</a></li>
+                   <li><a routerLink="../accountant" class="brown-text"><i class="icon-calculator"></i> Accountant</a></li> -->
+            </ul>
+         </nav>
+      </div>
+      <main class="el-main">
+         <app-header></app-header>
+         <div>
+            <!---->
+            <div>
+               <button type="button" routerLink="../doctor"
+                  class="el-button back-btn el-button--default el-button--small is-plain">
+                  <!---->
+                  <!----><span><i class="icon-arrow-left h2"></i></span>
+               </button>
+               <div class="el-card  customtabs is-always-shadow">
+                  <!---->
+                  <div class="el-card__body">
+                     <div class="el-tabs el-tabs--top el-tabs--border-card">
+                        <div class="el-tabs__header is-top">
+                           <div class="el-tabs__nav-wrap is-top">
+                              <div class="el-tabs__nav-scroll">
+                                 <div role="tablist" class="el-tabs__nav is-top" style="transform: translateX(0px);">
+                                    <div id="tab-0" aria-controls="pane-0" role="tab" aria-selected="true" tabindex="0"
+                                       class="el-tabs__item is-top is-active"><span>Basic Details</span></div>
+                                    <div id="tab-1" aria-controls="pane-1" role="tab" tabindex="-1"
+                                       class="el-tabs__item is-top"><span>Schedule Configuration</span></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="el-tabs__content">
+                           <div role="tabpanel" id="pane-0" aria-labelledby="tab-0" class="el-tab-pane">
+                              <a href="/employees/doctor/edit/EMP2654" class="edit-det"><strong>Edit
+                                    Details</strong></a>
+                              <div>
+                                 <div>
+                                    <!---->
+                                    <div class="profile-det">
+                                       <span class="avtar2"><a
+                                             href="https://static.sanar.sa/mis/7ed08b77f840fb936b845b476e843e92.jpeg"
+                                             target="_blank"><img
+                                                src="https://static.sanar.sa/mis/7ed08b77f840fb936b845b476e843e92.jpeg"
+                                                class="image-cover"></a></span>
+                                       <div>
+                                          <h6>Nuha Abdullah </h6>
+                                          <small class="uid">UID:EMP2654</small>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <ul class="details-list">
+                                    <li><span>Title</span>
+                                       Dr.
+                                    </li>
+                                    <li><span>First Name</span>
+                                       Nuha
+                                    </li>
+                                    <li><span>First Name in Arabic</span>
+                                       نهى
+                                    </li>
+                                    <li><span>Last Name</span>
+                                       Abdullah
+                                    </li>
+                                    <li><span>Last Name in Arabic</span>
+                                       عبدالله
+                                    </li>
+                                    <li><span>Email ID</span>
+                                       n-taib@gmail.com
+                                    </li>
+                                    <li><span>Mobile number</span>
+                                       +966 555555
+                                    </li>
+                                    <li><span>Nationality</span>
+                                       Yemen
+                                    </li>
+                                    <li><span>Date of Birth</span>
+                                       2018-08-28
+                                    </li>
+                                    <li><span>Experience</span>
+                                       1 year
+                                    </li>
+                                    <li><span>Experience in Arabic</span>
+                                       1 سنوات
+                                    </li>
+                                    <li><span>Specialist</span>
+                                       General Practitioner
+                                    </li>
+                                    <li><span>Classification</span>
+                                       General Practitioner
+                                    </li>
+                                    <li><span>Blood Group</span>
+                                    </li>
+                                    <li>
+                                       <span>Degree</span>
+                                       <div class="bio">Bachelor of medicine</div>
+                                    </li>
+                                    <li><span>Language</span>
+                                       English, Arabic
+                                    </li>
+                                    <li><span>Language in Arabic</span>
+                                       إنجليزي, عربي
+                                    </li>
+                                    <li><span>Designation</span>
+                                    </li>
+                                    <li><span>Gender</span>
+                                       Female
+                                    </li>
+                                    <li><span>Department</span>
+                                       General Medicine
+                                    </li>
+                                    <li><span>Medical Reg No</span>
+                                       20216833
+                                    </li>
+                                    <li><span>Medical Licence Expiry</span>
+                                       2023-08-15
+                                    </li>
+                                    <li><span>Memberships</span>
+                                    </li>
+                                    <li><span>Memberships in Arabic</span>
+                                    </li>
+                                    <li><span>Specialised In</span>
+                                    </li>
+                                    <li><span>Specialised In( Arabic)</span>
+                                    </li>
+                                    <li><span>Medical school</span>
+                                    </li>
+                                    <li><span>Medical school in Arabic</span>
+                                    </li>
+                                    <li><span>Internship</span>
+                                    </li>
+                                    <li><span>Internship in Arabic</span>
+                                    </li>
+                                    <li><span>Fellowship</span>
+                                    </li>
+                                    <li><span>Fellowship in Arabic</span>
+                                    </li>
+                                    <li>
+                                       <span>Awards</span>
+                                       <div>
+                                          <div></div>
+                                       </div>
+                                    </li>
+                                    <li>
+                                       <span>Awards in Arabic</span>
+                                       <div>
+                                          <div></div>
+                                       </div>
+                                    </li>
+                                    <li><span>Publications</span>
+                                    </li>
+                                    <li><span>Publications in Arabic</span>
+                                    </li>
+                                    <li><span>Residence</span>
+                                    </li>
+                                    <li><span>Residence in Arabic</span>
+                                    </li>
+                                    <div class="o-flow-x">
+                                       <div class="el-table el-table--fit el-table--enable-row-hover"
+                                          style="width: 100%;">
+                                          <div class="hidden-columns">
+                                             <div></div>
+                                             <div></div>
+                                             <div></div>
+                                             <div></div>
+                                          </div>
+                                          <div class="el-table__header-wrapper">
+                                             <table cellspacing="0" cellpadding="0" border="0" class="el-table__header"
+                                                style="width: 949px;">
+                                                <colgroup>
+                                                   <col name="el-table_6_column_34" width="180">
+                                                   <col name="el-table_6_column_35" width="180">
+                                                   <col name="el-table_6_column_36" width="295">
+                                                   <col name="el-table_6_column_37" width="294">
+                                                   <col name="gutter" width="0">
+                                                </colgroup>
+                                                <thead class="has-gutter">
+                                                   <tr class="">
+                                                      <th colspan="1" rowspan="1"
+                                                         class="el-table_6_column_34     is-leaf">
+                                                         <div class="cell">Expreience in English</div>
+                                                      </th>
+                                                      <th colspan="1" rowspan="1"
+                                                         class="el-table_6_column_35  is-right   is-leaf">
+                                                         <div class="cell">Expreience in Arabic</div>
+                                                      </th>
+                                                      <th colspan="1" rowspan="1"
+                                                         class="el-table_6_column_36  is-right   is-leaf">
+                                                         <div class="cell">From</div>
+                                                      </th>
+                                                      <th colspan="1" rowspan="1"
+                                                         class="el-table_6_column_37  is-right   is-leaf">
+                                                         <div class="cell">To</div>
+                                                      </th>
+                                                      <th class="gutter" style="width: 0px; display: none;"></th>
+                                                   </tr>
+                                                </thead>
+                                             </table>
+                                          </div>
+                                          <div class="el-table__body-wrapper is-scrolling-none">
+                                             <table cellspacing="0" cellpadding="0" border="0" class="el-table__body"
+                                                style="width: 949px;">
+                                                <colgroup>
+                                                   <col name="el-table_6_column_34" width="180">
+                                                   <col name="el-table_6_column_35" width="180">
+                                                   <col name="el-table_6_column_36" width="295">
+                                                   <col name="el-table_6_column_37" width="294">
+                                                </colgroup>
+                                                <tbody>
+                                                   <!---->
+                                                </tbody>
+                                             </table>
+                                             <div class="el-table__empty-block" style="height: 100%; width: 949px;">
+                                                <span class="el-table__empty-text">No Data</span></div>
+                                             <!---->
+                                          </div>
+                                          <!---->
+                                          <!---->
+                                          <!---->
+                                          <!---->
+                                          <div class="el-table__column-resize-proxy" style="display: none;"></div>
+                                       </div>
+                                    </div>
+                                    <li>
+                                       <span>Certifications</span>
+                                       <div>
+                                          <div></div>
+                                       </div>
+                                    </li>
+                                    <li>
+                                       <span>Biography</span>
+                                       <div class="bio"></div>
+                                    </li>
+                                    <li>
+                                       <span>Biography in Arabic</span>
+                                       <div class="bio">
+                                          <div></div>
+                                       </div>
+                                    </li>
+                                    <li>
+                                       <span>Service Type</span>
+                                       <div class="session-grid">
+                                          <div class="session videocall">
+                                             <i class="icon-video-icon"></i> <strong>Video Call</strong>
+                                             <div>
+                                                Duration :
+                                                <span class="gray-color">20 Minutes</span>
+                                             </div>
+                                             <div>
+                                                Fee :
+                                                <span class="gray-color">SAR 45</span>
+                                             </div>
+                                          </div>
+                                          <div class="session chat">
+                                             <i class="icon-chat"></i> <strong>Chat</strong>
+                                             <div>
+                                                Duration :
+                                                <span class="gray-color">15 Minutes</span>
+                                             </div>
+                                             <div>
+                                                Fee :
+                                                <span class="gray-color">SAR 25</span>
+                                             </div>
+                                          </div>
+                                          <div class="session v-color">
+                                             <i class="icon-home"></i> <strong>Home visit</strong>
+                                             <div>
+                                                Duration :
+                                                <span class="gray-color">45 Minutes</span>
+                                             </div>
+                                             <div>
+                                                Fee :
+                                                <span class="gray-color">SAR 300</span>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </li>
+                                    <li><span>Doctor Disabled</span>
+                                       false
+                                    </li>
+                                    <li><span>Status</span>
+                                       inactive
+                                    </li>
+                                 </ul>
+                                 <form class="el-form"></form>
+                              </div>
+                           </div>
+                           <div role="tabpanel" id="pane-1" aria-labelledby="tab-1" class="el-tab-pane" style="">
+                              <a routerLink="../edit-doctor" class="edit-det"><strong>Edit Details</strong></a>
+                              <div class="schedule">
+                                 <div>
+                                    <div class="d-flex justify-content">
+                                       <h4></h4>
+                                    </div>
+                                    <div role="alert" class="el-alert custom-alert m-b30 el-alert--warning is-light">
+                                       <i class="el-alert__icon el-icon-warning is-big"></i>
+                                       <div class="el-alert__content">
+                                          <!---->
+                                          <p class="el-alert__description">Any update in schedule will be reflected from
+                                             2022-03-01</p>
+                                          <!----><i class="el-alert__closebtn el-icon-close"></i>
+                                       </div>
+                                    </div>
+                                    <!---->
+                                    <!---->
+                                    <div class="el-card is-never-shadow">
+                                       <!---->
+                                       <div class="el-card__body">
+                                          <h4>Sunday</h4>
+                                          <div class="session-grid">
+                                             <div class="session">
+                                                <div class="homevisit">
+                                                   <i class="icon-home"></i> <strong>Session 1</strong>
+                                                   <p>16:30 -23:15</p>
+                                                   <span class="gray-color">Home visit</span>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                             <!---->
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-card is-never-shadow">
+                                       <!---->
+                                       <div class="el-card__body">
+                                          <h4>Monday</h4>
+                                          <div class="session-grid">
+                                             <div class="session">
+                                                <div class="homevisit">
+                                                   <i class="icon-home"></i> <strong>Session 1</strong>
+                                                   <p>16:30 -23:15</p>
+                                                   <span class="gray-color">Home visit</span>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                             <!---->
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-card is-never-shadow">
+                                       <!---->
+                                       <div class="el-card__body">
+                                          <h4>Tuesday</h4>
+                                          <div class="session-grid">
+                                             <div class="session">
+                                                <div class="homevisit">
+                                                   <i class="icon-home"></i> <strong>Session 1</strong>
+                                                   <p>16:30 -23:15</p>
+                                                   <span class="gray-color">Home visit</span>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                             <!---->
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-card is-never-shadow">
+                                       <!---->
+                                       <div class="el-card__body">
+                                          <h4>Wednesday</h4>
+                                          <div class="session-grid">
+                                             <div class="session">
+                                                <div class="homevisit">
+                                                   <i class="icon-home"></i> <strong>Session 1</strong>
+                                                   <p>16:30 -23:15</p>
+                                                   <span class="gray-color">Home visit</span>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                             <!---->
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-card is-never-shadow">
+                                       <!---->
+                                       <div class="el-card__body">
+                                          <h4>Thursday</h4>
+                                          <div class="session-grid">
+                                             <div class="session">
+                                                <div class="homevisit">
+                                                   <i class="icon-home"></i> <strong>Session 1</strong>
+                                                   <p>16:30 -23:15</p>
+                                                   <span class="gray-color">Home visit</span>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                             <!---->
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-card is-never-shadow">
+                                       <!---->
+                                       <div class="el-card__body">
+                                          <h4>Friday</h4>
+                                          <div class="session-grid">
+                                             <div class="session">
+                                                <div class="homevisit">
+                                                   <i class="icon-home"></i> <strong>Session 1</strong>
+                                                   <p>12:00 -19:30</p>
+                                                   <span class="gray-color">Home visit</span>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                             <!---->
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-card is-never-shadow">
+                                       <!---->
+                                       <div class="el-card__body">
+                                          <h4>Saturday</h4>
+                                          <div class="session-grid">
+                                             <div class="session">
+                                                <div class="homevisit">
+                                                   <i class="icon-home"></i> <strong>Session 1</strong>
+                                                   <p>16:30 -23:15</p>
+                                                   <span class="gray-color">Home visit</span>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                             <!---->
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="el-row"></div>
+                                 </div>
+                                 <!---->
+                                 <div class="el-dialog__wrapper wd50" style="display: none;">
+                                    <div role="dialog" aria-modal="true" aria-label="Add Session" class="el-dialog"
+                                       style="margin-top: 15vh;">
+                                       <div class="el-dialog__header"><span class="el-dialog__title">Add
+                                             Session</span><button type="button" aria-label="Close"
+                                             class="el-dialog__headerbtn"><i
+                                                class="el-dialog__close el-icon el-icon-close"></i></button></div>
+                                       <!---->
+                                       <!---->
+                                    </div>
+                                 </div>
+                                 <div class="el-dialog__wrapper w30 text-center" style="display: none;">
+                                    <div role="dialog" aria-modal="true" aria-label="dialog" class="el-dialog"
+                                       style="margin-top: 15vh;">
+                                       <div class="el-dialog__header"><span class="el-dialog__title"></span><button
+                                             type="button" aria-label="Close" class="el-dialog__headerbtn"><i
+                                                class="el-dialog__close el-icon el-icon-close"></i></button></div>
+                                       <!---->
+                                       <!---->
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!---->
+            <!---->
+         </div>
+      </main>
+   </section>
+</div>
+<script async="" defer="defer"
+   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-EXDwh2adbELTFKlDgn3RXMP648GC12s&amp;sensor=false&amp;libraries=places">
+</script>
+<script type="text/javascript" src="static/js/manifest.787d0d92fd70cf16874e.js"></script>
+<script type="text/javascript" src="static/js/vendor.6f6ef6bc866762bf29a6.js"></script>
+<script type="text/javascript" src="static/js/app.a27789e3d261f525a01a.js"></script>
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+<div role="tooltip" id="el-tooltip-1127" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2011; display: none;">
+   Patient
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-8931" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2013; display: none;">
+   Employee
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-1867" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2015; display: none;">
+   Appointment
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>

@@ -1,0 +1,50 @@
+.modal-dialog {
+    max-width: inherit ! important;
+}
+.modal-header {
+    display: flex ! important;
+}
+select {
+    font-size: 12px;
+    height: 30px;
+    margin-top: 27px;
+}
+.zoom {
+    /* padding: 50px; */
+    transition: transform .2s;
+    /* width: 200px; */
+    /* height: 200px; */
+    margin: 0 auto;
+  }
+  
+  .zoom:hover {
+    -ms-transform: scale(2.5); /* IE 9 */
+    -webkit-transform: scale(2.5); /* Safari 3-8 */
+    transform: scale(2.5); 
+  }
+  .image-cover{
+      width: 75px;
+      height: 75px;
+  }
+  textarea {
+    font-size: 12px;
+  }
+
+  select {
+    font-size: 12px;
+    height: 30px;
+    margin-top: 15px;
+}
+.dash-list li {
+    justify-content: center;
+}
+.dash-list.three li {
+  width: 33%;
+}
+.dash-list li {
+    list-style: none;
+    width: 25%;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}

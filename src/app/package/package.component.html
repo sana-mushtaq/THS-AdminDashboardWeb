@@ -1,0 +1,465 @@
+<div id="app">
+  <section class="el-container">
+    <div>
+      <menu class="menu-bar">
+        <a href="javascript:void(0);" class="toggle-menu">
+          <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+        </a>
+        <a href="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+      </menu>
+      <app-sidebar></app-sidebar>
+      <app-submenu></app-submenu>
+    </div>
+    <main class="el-main">
+      <app-header></app-header>
+      <div>
+        <div>
+          <div class="o-flow-x">
+            <div class="el-table master-table el-table--fit el-table--enable-row-hover el-table--enable-row-transition" style="width: 100%">
+              <div class="hidden-columns">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              
+
+              <div class="d-flex justify-content align-items-center">
+                <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-bonnet"></i> Category List</span>  
+                <button id="package" (click)="addcategory()" class="add-btn mr-0 float-right"><i class="fa fa-plus-circle"></i> Add New Category</button>
+             </div>
+
+              <div class="el-table__body-wrapper is-scrolling-none" style="margin-top: 3%">
+                <table id="pacakgeCategoryTable" class="display" cellspacing="0" width="100%">
+                  <thead>
+                    <tr>
+                      <th>Category Name</th>
+                      <th>Category Name in Arabic</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="el-table__row" *ngFor="let category of serviceCategories">
+                      <td>{{ category.categoryName }}</td>
+                      <td>{{ category.categoryNameArabic }}</td>
+                      <td>
+                        <button class="edit_button btn py-0" type="button" (click)="categoryEdit(category.serviceId)">
+                          <i class="icon-pencil ico-pointer" id="ico-pointer"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div>
+            <div>
+               <div class="o-flow-x">
+
+                  <div class="o-flow-x">
+                     <div
+                        class="el-table master-table  el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+                        style="width: 100%;">
+                        <div class="hidden-columns">
+                           <div></div>
+                           <div></div>
+                           <div></div>
+                           <div></div>
+                           <div placeholder="Task Type Name"></div>
+                           <div></div>
+                           <div></div>
+                           <div></div>
+                        </div>
+                        <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%;width: 100%;">
+                           <table id="example" class="display" cellspacing="0" width="100%">
+                              <thead>
+                                 <tr>
+                                    <th>Task Image</th>
+                                    <th>Task Name</th>
+                                    <th>Task Name Arabic</th>
+                                    <th>Price in SAR</th>
+                                    <th>Task Type Name</th>
+                                    <th></th>
+                                    <th>View</th>
+                                    <th>Status</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr class="el-table__row">
+                                    <td>
+                                       <div class="cell"><img
+                                             src="https://static.sanar.sa/mis/ff69312710487703f2a23232f0aad008.jpeg"
+                                             class="avtar2"></div>
+                                    </td>
+                                    <td>vital signs </td>
+                                    <td>قياس العلامات الحيوية<</td> <td>50</td>
+                                    <td>Nurse</td>
+                                    <td>
+                                       <div class="cell"><i routerLink="../edit-nursepackage"
+                                             class="icon-pencil ico-pointer"></i></div>
+                                    </td>
+                                    <td>
+                                       <div class="cell"><i id="myBtn_view" data-toggle="modal"
+                                             data-target="#myModal_view" class="icon-eye ico-pointer"></i></div>
+                                    </td>
+                                    <td>
+                                       <div class="cell">
+                                          <label class="switch">
+                                             <input type="checkbox" checked>
+                                             <span class="slider round"></span>
+                                          </label>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div> -->
+    </main>
+  </section>
+</div>
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0"></div>
+<div
+  role="tooltip"
+  id="el-tooltip-7343"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2005; display: none"
+>
+  Employee
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-7647"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2010; display: none"
+>
+  Patient
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-9477"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2028; display: none"
+>
+  Appointment
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-9129"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2030; display: none"
+>
+  Accounts
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-2943"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2032; display: none"
+>
+  Role Management
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-6209"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2034; display: none"
+>
+  Master
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-5114"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2036; display: none"
+>
+  Package
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+
+<div id="add_pacakgecategory" class="modal schedule_modal" style="padding-top: 50px">
+  <!-- Modal content -->
+  <div class="modal-content" style="width: 60% !important">
+    <div class="modal-header" style="border-bottom: unset">
+      <span class="close" (click)="close()">&times;</span>
+      <h2>{{ modalTitle }}</h2>
+    </div>
+
+    <div class="modal-body">
+      <form class="el-form newform el-form--label-top" id="nursepackageForm" (ngSubmit)="postServiceCategoryToServer()" [formGroup]="typeValidationForm">
+        <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.en" class="el-form-item__label">Category Name</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    formControlName="pacakgeCategoryName"
+                    [ngClass]="{
+                      'is-invalid': type['pacakgeCategoryName'].errors && (type['pacakgeCategoryName'].dirty || type['pacakgeCategoryName'].touched)
+                    }"
+                    placeholder="Enter Category Name"
+                  />
+                  <div
+                    *ngIf="type['pacakgeCategoryName'].errors && (type['pacakgeCategoryName'].dirty || type['pacakgeCategoryName'].touched)"
+                    class="invalid-feedback"
+                  >
+                    <span *ngIf="type['pacakgeCategoryName'].errors['required']">This value is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+            <div class="el-form-item is-required">
+              <label for="fn.ar" class="el-form-item__label">Category Name in Arabic</label>
+              <div class="el-form-item__content">
+                <div class="line-input el-input">
+                  <!-- <input type="text" id="categoryNameArabic" autocomplete="off"
+                              placeholder="Enter Category Name in Arabic" class="el-input__inner"> -->
+
+                  <input
+                    type="text"
+                    class="el-input__inner"
+                    formControlName="packageCategoryNameArabic"
+                    [ngClass]="{
+                      'is-invalid':
+                        type['packageCategoryNameArabic'].errors && (type['packageCategoryNameArabic'].dirty || type['packageCategoryNameArabic'].touched)
+                    }"
+                    placeholder="Enter Category Name in Arabic"
+                  />
+                  <div
+                    *ngIf="type['packageCategoryNameArabic'].errors && (type['packageCategoryNameArabic'].dirty || type['packageCategoryNameArabic'].touched)"
+                    class="invalid-feedback"
+                  >
+                    <span *ngIf="type['packageCategoryNameArabic'].errors['required']">This value is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+
+        <div class="text-right">
+          <!-- <button type="button" class="el-button el-button--primary save" (click)="postServiceCategoryClicked()">
+                  <span>Save</span>
+               </button> -->
+
+          <button type="submit" class="btn btn-primary el-button el-button--primary save" [disabled]="!this.typeValidationForm.valid">Submit</button>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <h3></h3>
+    </div>
+  </div>
+</div>
+
+<!-- <div id="add_pacakge" class="modal schedule_modal" style="padding-top: 50px;">
+
+   <div class="modal-content" style="width: 60% !important;">
+      <div class="modal-header" style="border-bottom: unset;">
+         <span class="close">&times;</span>
+         <h2>Add New Package
+
+         </h2>
+      </div>
+      <div class="modal-body">
+         <form class="el-form newform el-form--label-top">
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="fn.en" class="el-form-item__label">Package Name</label>
+                     <div class="el-form-item__content">
+                        <div class="line-input el-input">
+                           <input type="text" autocomplete="off" placeholder="Enter Package Name"
+                              class="el-input__inner">
+                           
+                           
+                           
+                           
+                        </div>
+                        
+                     </div>
+                  </div>
+               </div>
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="fn.ar" class="el-form-item__label">Package Name in Arabic</label>
+                     <div class="el-form-item__content">
+                        <div class="line-input el-input">
+                           <input type="text" autocomplete="off" placeholder="Enter Package Name in Arabic"
+                              class="el-input__inner">
+                           
+                           
+                           
+                           
+                        </div>
+                        
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="ln.en" class="el-form-item__label">Package Cost</label>
+                     <div class="el-form-item__content">
+                        <div class="line-input el-input">
+                           <input type="text" autocomplete="off" placeholder="Enter Package Cost"
+                              class="el-input__inner">
+                           
+                           
+                           
+                           
+                        </div>
+                        
+                     </div>
+                  </div>
+               </div>
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="ln.ar" class="el-form-item__label">Description</label>
+                     <div class="el-form-item__content">
+                        <div class="line-input el-input">
+                           <textarea style="border:1px solid #dcdfe6" autocomplete="off" placeholder="Enter Description"
+                              class="el-input__inner"></textarea>
+                        </div>
+                        
+                     </div>
+                  </div>
+               </div>
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="ln.ar" class="el-form-item__label">Instruction</label>
+                     <div class="el-form-item__content">
+                        <div class="line-input el-input">
+                           <textarea style="border:1px solid #dcdfe6" autocomplete="off" placeholder="Enter Instruction"
+                              class="el-input__inner"></textarea>
+                        </div>
+                        
+                     </div>
+                  </div>
+               </div>
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="ln.ar" class="el-form-item__label">Instruction in Arabic</label>
+                     <div class="el-form-item__content">
+                        <div class="line-input el-input">
+                           <textarea style="border:1px solid #dcdfe6" autocomplete="off"
+                              placeholder="Enter Instruction in Arabic" class="el-input__inner"></textarea>
+                        </div>
+                        
+                     </div>
+                  </div>
+               </div>
+
+               <select class="form-control" multiple="multiple" id="my-select">
+                  <option>Test 1</option>
+                  <option>Test 2</option>
+                  <option>Test 3</option>
+                  <option>Test 4</option>
+                  <option>Test 5</option>
+               </select>
+
+            </div>
+            <br />
+
+            <div class="text-right">
+               <button type="button" class="el-button el-button--default">
+                  
+                  <span>Reset</span>
+               </button>
+               
+               <button type="button" class="el-button el-button--primary save">
+                  
+                  <span>Save</span>
+               </button>
+               
+            </div>
+         </form>
+      </div>
+      <div class="modal-footer">
+         <h3></h3>
+      </div>
+   </div>
+
+</div> -->
+
+<!-- The Modal  -->
+<div id="myModal_view" class="modal schedule_modal">
+  <!-- Modal content -->
+  <div class="modal-content" style="width: 60% !important">
+    <div class="modal-header" style="border-bottom: unset">
+      <span class="close">&times;</span>
+      <h2></h2>
+    </div>
+    <div class="modal-body">
+      <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-12 el-col-xl-8" style="padding-left: 30px; padding-right: 30px">
+          <h6>Description</h6>
+          <p class="grid_content_text grid-txt">The nurse performs surgical wound cleaning, disinfection and dressing.</p>
+        </div>
+      </div>
+      <div class="m-t50 el-row" style="margin-left: -15px; margin-right: -15px">
+        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-12 el-col-xl-8" style="padding-left: 30px; padding-right: 30px">
+          <h6>Instructions</h6>
+          <ul class="customdots">
+            <li>
+              Tell the Nurse if you suffer from any infectious diseases that can be transmitted through blood and whether you have been diagnosed with diabetes
+              or not.
+            </li>
+          </ul>
+        </div>
+        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-10 el-col-lg-12 el-col-xl-10" style="padding-left: 30px; padding-right: 30px">
+          <h6>Instructions in Arabic</h6>
+          <ul class="customdots">
+            <li>الإفصاح عن وجود أمراض معديه عن طريق الدم ، الإفصاح عن ما إذا كان المريض لديه مرض السكري من عدمه</li>
+          </ul>
+        </div>
+      </div>
+      <div class="m-t50 el-row" style="margin-left: -15px; margin-right: -15px">
+        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-12 el-col-xl-8" style="padding-left: 30px; padding-right: 30px">
+          <h6>Inclusions</h6>
+          <ul class="customdots">
+            <li>Medical adhesive tape and alcohol swabs, vaseline gauze, and salt solution will be brought to disinfect and change the dressing.</li>
+          </ul>
+        </div>
+        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-10 el-col-lg-12 el-col-xl-10" style="padding-left: 30px; padding-right: 30px">
+          <h6>Inclusions in Arabic</h6>
+          <ul class="customdots">
+            <li>"سيتم احضار شريط لاصق طبي والمسحات الكحولية، شاش فزلين ومحلول ملح للتطهير اللازم لتطهير وتغيير الضماد</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <h3></h3>
+    </div>
+  </div>
+</div>

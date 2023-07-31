@@ -1,0 +1,444 @@
+<div id="app">
+  <section class="el-container">
+    <div>
+      <app-sidebar></app-sidebar>
+    </div>
+    <main class="el-main dashboard">
+      <app-header></app-header>
+      <div>
+        <div>
+          <button type="button" class="el-button back-btn el-button--default el-button--small is-plain" routerLink="../lab-appointments">
+            <span><i class="icon-arrow-left h2"></i></span>
+          </button>
+          <div class="el-card customtabs is-always-shadow">
+            <div class="el-card__body">
+              <div class="el-tabs el-tabs--top el-tabs--border-card">
+                <div class="el-tabs__content">
+                  <div role="tabpanel" id="pane-basic" aria-labelledby="tab-basic" class="el-tab-pane">
+                    <div>
+                      <h3>Primary Patient</h3>
+                      <div class="patient_search_content">
+                        <input type="search" id="patient_mobile" class="form-control primary_search_input" placeholder="Enter Primary Patient Mobile Number" />
+                        <button class="el-button el-button--primary save" (click)="patientSearchClicked()">Search</button>
+                      </div>
+                      <table class="table patient_detail_table" id="datatable">
+                        <thead>
+                          <th>Patient Name</th>
+                          <th>Gender</th>
+                          <th>Mobile</th>
+                          <th>Email ID</th>
+                          <th>National ID</th>
+                          <th>Date of Birth</th>
+                          <th>Dependents</th>
+                          <th>Action</th>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let patient of patients">
+                            <td>{{ patient.firstName }} {{ patient.lastName }}</td>
+                            <td>{{ patient.gender }}</td>
+                            <td>{{ patient.mobileNumber }}</td>
+                            <td>{{ patient.emailId }}</td>
+                            <td>{{ patient.nationalId }}</td>
+                            <td>{{ patient.dob }}</td>
+                            <td> <a class="view_dependents" (click)="ViewDependentList(patient.userId)"><i class="el-eye icon-view" aria-describedby="el-tooltip-4409" tabindex="0"></i>   <span *ngIf="DependentCount != null">{{ DependentCount }}</span> Dependents</a>
+                            </td>
+                            <td><button class="btn btn-warning patient_select" (click)="primaryPatientSelected(patient)">Select</button></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="el-card customtabs is-always-shadow">
+            <div class="el-card__body">
+              <div class="el-tabs el-tabs--top el-tabs--border-card">
+                <div class="el-tabs__content">
+                  <div role="tabpanel" id="pane-basic" aria-labelledby="tab-basic" class="el-tab-pane">
+                    <div>
+                      <h3>Appointment Details</h3>
+                      <div class="row mt-3">
+                        <div class="form-group col-md-3">
+                          <label class="form-label">Patient Name</label>
+                          <input type="text" class="form-control" readonly id="patient_name" />
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="form-label">Patient Email</label>
+                          <input type="text" class="form-control" readonly id="patient_email" />
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="form-label">National ID</label>
+                          <input type="text" class="form-control" readonly id="patient_nationalid" />
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="form-label">DOB</label>
+                          <input type="text" class="form-control" readonly id="patient_dob" />
+                        </div>
+                      </div>
+                      <div class="row mt-3">
+                        <div class="form-group col-md-4">
+                          <label class="form-label">Service Date</label>
+                          <input type="date" class="form-control" id="service_date" />
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label class="form-label">Service Time</label>
+                          <input type="text" class="timepicker form-control" id="service_time" />
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label class="form-label">Service Address</label>
+                          <textarea type="text" class="form-control" rows="2" placeholder="Enter address" id="service_address"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="el-card customtabs is-always-shadow" style="margin-bottom: 13%">
+            <div class="el-card__body">
+              <div class="el-tabs el-tabs--top el-tabs--border-card">
+                <div class="el-tabs__content">
+                  <div role="tabpanel" id="pane-basic" aria-labelledby="tab-basic" class="el-tab-pane">
+                    <div>
+                      <div style="display: flex; justify-content: 'space-between'">
+                        <h3>Service Required</h3>
+                        <button class="add-btn new_btn" data-toggle="modal" (click)="chooseServiceClicked()" [disabled]="isInvalidPrimaryUser">
+                          Add Service
+                        </button>
+                      </div>
+                      <table class="table patient_detail_table" id="datatable">
+                        <thead>
+                          <tr>
+                            <th>SNo</th>
+                            <th>Service Details</th>
+                            <th>Service Price (SAR)</th>
+                            <th>Patient Name</th>
+                            <th>National ID</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let service of finalServices; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ service.selectedService.serviceName }}</td>
+                            <td>{{ service.selectedService.servicePrice }}</td>
+                            <td>{{ service.selectedPatient.firstName }} {{ service.selectedPatient.lastName }}</td>
+                            <td>{{ service.selectedPatient.nationalId }}</td>
+                            <td><button class="btn btn-warning" (click)="deleteFinanlizedService(i)">Delete</button></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="el-card customtabs is-always-shadow appointment_payment">
+            <div class="el-card__body">
+              <div class="el-tabs el-tabs--top el-tabs--border-card">
+                <div class="el-tabs__content">
+                  <div role="tabpanel" id="pane-basic" aria-labelledby="tab-basic" class="el-tab-pane">
+                    <div class="row">
+                      <div class="form-group col-md-3">
+                        <label class="form-label">Collected Amount</label>
+                        <input type="text" class="form-control" id="service_paidamount" (input)="paymentDetailsChanged($event.target)" />
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label class="form-label">Payment Reference No.</label>
+                        <input type="text" class="form-control" id="payment_reference" (input)="paymentDetailsChanged($event.target)" />
+                      </div>
+                      <div class="form-group col-md-2">
+                        <button class="el-button el-button--primary save mt-4" (click)="confirmAppointment()" [disabled]="isFormInvalid">
+                          Book Appointment
+                        </button>
+                      </div>
+                      <div class="text-right col-md-4">
+                        <h5 class="mb-0">
+                          Total : <span style="font-size: 24px; color: #f44336">SAR {{ finalServiceCost }}</span>
+                        </h5>
+                        <p class="mt-2 view_details_btn">View Details</p>
+                        <!-- <button class="el-button el-button--primary save mt-2" style="background-color: #ff5aa4">Confirm</button> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="el-card customtabs is-always-shadow view_details">
+            <div class="el-card__body">
+              <div class="el-tabs el-tabs--top el-tabs--border-card">
+                <div class="">
+                  <div role="tabpanel" id="pane-basic" aria-labelledby="tab-basic" class="el-tab-pane">
+                    <div class="row view_details_body">
+                      <h3 class="summary_txt mb-3">Summary</h3>
+                      <button class="btn summary_txt mb-3 p-0" id="summary_close_btn">X</button>
+                    </div>
+                    <div class="row view_details_body">
+                      <h5 class="mb-3">Service Cost</h5>
+                      <h5 *ngIf="finalServiceQuote != null" class="text-right mb-3">SAR {{ finalServiceQuote.serviceCostWithoutVat }}</h5>
+                      <h5 *ngIf="finalServiceQuote == null" class="text-right mb-3">SAR 0.00</h5>
+                    </div>
+                    <div class="row view_details_body">
+                      <h5 class="mb-3">Home Visit Charge</h5>
+                      <h5 *ngIf="finalServiceQuote != null" class="text-right mb-3">SAR {{ finalServiceQuote.homeVisitCharge }}</h5>
+                      <h5 *ngIf="finalServiceQuote == null" class="text-right mb-3">SAR 0.00</h5>
+                    </div>
+                    <div class="row view_details_body">
+                      <h5 class="mb-3">VAT</h5>
+                      <h5 *ngIf="finalServiceQuote != null" class="text-right mb-3">SAR {{ finalServiceQuote.VAT }}</h5>
+                      <h5 *ngIf="finalServiceQuote == null" class="text-right mb-3">SAR 0.00</h5>
+                    </div>
+                    <div class="row view_details_body">
+                      <h5 class="mb-3">Total</h5>
+                      <h5 *ngIf="finalServiceQuote != null" class="text-right mb-3">SAR {{ finalServiceQuote.totalCost }}</h5>
+                      <h5 *ngIf="finalServiceQuote == null" class="text-right mb-3">SAR 0.00</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+</div>
+
+<div class="modal schedule_modal" id="newServiceModel" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="overflow: scroll">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">New Service</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeNewServiceModel()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="el-card customtabs is-always-shadow">
+          <div class="el-card__body" style="padding: 0 30px 20px 30px">
+            <div class="el-tabs el-tabs--top el-tabs--border-card">
+              <div class="el-tabs__content">
+                <div role="tabpanel" id="pane-basic" aria-labelledby="tab-basic" class="el-tab-pane">
+                  <div>
+                    <h5>Service Type</h5>
+                    <div class="row mt-3">
+                      <div class="form-group col-md-6 labtest_border">
+                        <label class="form-label">Lab Test</label>
+                        <div class="row ml-2">
+                          <div class="row col-md-6">
+                            <div class="row col-md-3">
+                              <input type="radio" class="form-control" id="package" name="labtest" (change)="serviceChanged($event, 1)" />
+                            </div>
+                            <label for="package" class="mt-2 ml-2">Package</label>
+                          </div>
+                          <div class="row col-md-6">
+                            <div class="row col-md-3">
+                              <input type="radio" class="form-control" id="individualtest" name="labtest" (change)="serviceChanged($event, 2)" />
+                            </div>
+                            <label for="individualtest" class="mt-2 ml-2">Individual Test</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label class="form-label">Other Service</label>
+                        <div class="row ml-2">
+                          <div class="row col-md-6">
+                            <div class="row col-md-3">
+                              <input type="radio" class="form-control" id="package" name="labtest" (change)="serviceChanged($event, 3)" />
+                            </div>
+                            <label for="package" class="mt-2 ml-2">Other Service</label>
+                          </div>
+                          <div class="row col-md-6">
+                            <select class="form-control" (change)="sectorChanged($event.target)">
+                              <option [value]="">Select the Service</option>
+                              <option [value]="sector.sectorId" *ngFor="let sector of sectorList">{{ sector.sectorName }}</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="el-card customtabs is-always-shadow">
+          <div class="el-card__body" style="padding: 0 30px 20px 30px">
+            <div class="el-tabs el-tabs--top el-tabs--border-card">
+              <div class="el-tabs__content">
+                <div role="tabpanel" id="pane-basic" aria-labelledby="tab-basic" class="el-tab-pane">
+                  <div>
+                    <table class="table patient_detail_table" id="datatable">
+                      <thead>
+                        <tr>
+                          <th>Service Name</th>
+                          <th>Patient Name</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+
+                      <tbody id="service_add">
+                        <tr>
+                          <td *ngIf="selectedServiceType == 1 || selectedServiceType == 2">
+                            <select class="form-control" (change)="serviceSelected($event.target)">
+                              <option>Select Service</option>
+                              <option *ngFor="let service of currentServiceList" [value]="service.serviceId">
+                                {{ service.serviceCategoryName }} - {{ service.serviceName }} - SAR {{ service.servicePrice }}
+                              </option>
+                            </select>
+                          </td>
+
+                          <td *ngIf="selectedServiceType == 3">
+                            <select class="form-control" (change)="serviceSelected($event.target)">
+                              <option>Select Service</option>
+                              <option *ngFor="let service of currentServiceList" [value]="service.serviceId">
+                                {{ service.serviceName }} - SAR {{ service.servicePrice }}
+                              </option>
+                            </select>
+                          </td>
+
+                          <td>
+                            <select class="form-control" (change)="patientSelected($event.target)">
+                              <option>Select Patient</option>
+                              <option *ngFor="let patient of dependents" [value]="patient.userId">
+                                {{ patient.firstName }} {{ patient.lastName }} - {{ patient.gender }} - {{ patient.nationalId }}
+                              </option>
+                            </select>
+                          </td>
+                          <td>
+                            <button
+                              type="button"
+                              class="btn btn-primary remove_service_row"
+                              style="font-size: 12px !important; margin-left: 10px !important"
+                              (click)="addService()"
+                            >
+                              Add
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="el-card customtabs is-always-shadow">
+          <div class="el-card__body" style="padding: 0 30px 20px 30px">
+            <div class="el-tabs el-tabs--top el-tabs--border-card">
+              <div class="el-tabs__content">
+                <div role="tabpanel" id="pane-basic" aria-labelledby="tab-basic" class="el-tab-pane">
+                  <div>
+                    <table class="table patient_detail_table" id="datatable">
+                      <thead>
+                        <tr>
+                          <th>SNo</th>
+                          <th>Service Name</th>
+                          <th>Price</th>
+                          <th>Patient Name</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+
+                      <tbody id="service_add">
+                        <tr *ngFor="let service of selectedServices; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <td>{{ service.selectedService.serviceCategoryName }} - {{ service.selectedService.serviceName }}</td>
+                          <td>{{ service.selectedService.servicePrice }}</td>
+                          <td>{{ service.selectedPatient.firstName }} {{ service.selectedPatient.lastName }}</td>
+                          <td>
+                            <button type="button" class="add-btn" style="font-size: 12px !important; margin-left: 10px !important" (click)="removeService(i)">
+                              Remove
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer text-right">
+        <!-- <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button> -->
+        <button type="button" class="el-button el-button--primary save" (click)="serviceSelectionCompleted()">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- VIEW DEPENDENT MODAL -->
+
+<div class="modal schedule_modal" id="viewDependentModel" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="overflow: scroll">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Dependent Lists</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="el-card customtabs is-always-shadow">
+          <div class="el-card__body" style="padding: 0 30px 20px 30px">
+            <div class="el-tabs el-tabs--top el-tabs--border-card">
+              <div class="el-tabs__content">
+                <div role="tabpanel" id="pane-basic" aria-labelledby="tab-basic" class="el-tab-pane">
+                  <div>
+                    <table class="table table-bordered text-center">
+                      <thead>
+                        <tr>
+                          <th>SNO</th>
+                          <th>Dependent Name</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let patient of modaldependents;let i = index;">
+                          <td>{{i + 1}}</td>
+                          <td class="text-left" style="padding-left: 15px ! important;">{{ patient.firstName }} {{ patient.lastName }} - {{ patient.gender }} - {{ patient.nationalId }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script
+  async=""
+  defer="defer"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-EXDwh2adbELTFKlDgn3RXMP648GC12s&amp;sensor=false&amp;libraries=places"
+></script>
+<script type="text/javascript" src="static/js/manifest.787d0d92fd70cf16874e.js"></script>
+<script type="text/javascript" src="static/js/vendor.6f6ef6bc866762bf29a6.js"></script>
+<script type="text/javascript" src="static/js/app.a27789e3d261f525a01a.js"></script>
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0"></div>
+<div
+  role="tooltip"
+  id="el-tooltip-1472"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2001; display: none"
+>
+  Accounts
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>

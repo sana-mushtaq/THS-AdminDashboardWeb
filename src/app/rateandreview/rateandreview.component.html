@@ -1,0 +1,545 @@
+<app-header></app-header>
+<div id="app">
+         <section class="el-container">
+            <div>
+               <menu class="menu-bar">
+                  <a routerLink="javascript:void(0);" class="toggle-menu">
+                     <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+                  </a>
+                  <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+               </menu>
+
+               <app-sidebar></app-sidebar>
+               
+               <nav class="nav-bar-none">
+                  <!---->
+               </nav>
+            </div>
+            <main class="el-main dashboard">
+               <app-header></app-header>
+               <div>
+                  <div class="pos-rel">
+                     <div class="custom-review-tabs">
+                        <div class="el-tabs el-tabs--card el-tabs--top">
+                           <div class="el-tabs__header is-top">
+                              <div class="el-tabs__nav-wrap is-top">
+                                 <div class="el-tabs__nav-scroll">
+                                    <div role="tablist" class="el-tabs__nav is-top" style="transform: translateX(0px);">
+                                       <div id="tab-Rating" aria-controls="pane-Rating" role="tab" aria-selected="true" tabindex="0" class="el-tabs__item is-top is-active">Rating</div>
+                                       <div id="tab-User" aria-controls="pane-User Review and Rating" role="tab" tabindex="-1" class="el-tabs__item is-top">User Review &amp; Rating</div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="el-tabs__content">
+                              <div role="tabpanel" id="pane-Rating" aria-labelledby="tab-Rating" class="el-tab-pane">
+                                 <div>
+                                    <form class="el-form sa-rrf-filter">
+                                       <div class="el-row" style="margin-left: -10px; margin-right: -10px;">
+                                          <div class="el-col el-col-24 el-col-xs-10 el-col-sm-10 el-col-md-12 el-col-lg-12 el-col-xl-12" style="padding-left: 10px; padding-right: 10px;"></div>
+                                          <div class="el-col el-col-24 el-col-xs-10 el-col-sm-10 el-col-md-12 el-col-lg-12 el-col-xl-12" style="padding-left: 10px; padding-right: 10px;">
+                                             <div class="el-form-item">
+                                                <!---->
+                                                <div class="el-form-item__content">
+                                                   <div class="el-date-editor el-range-editor el-input__inner el-date-editor--daterange"><i class="el-input__icon el-range__icon el-icon-date"></i><input autocomplete="off" placeholder="Start date" name="" class="el-range-input"><span class="el-range-separator">-</span><input autocomplete="off" placeholder="End date" name="" class="el-range-input"><i class="el-input__icon el-range__close-icon"></i></div>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </form>
+                                    <div class="rating-list">
+                                       <div class="m-t20 el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-8 el-col-xl-8" style="padding-left: 15px; padding-right: 15px;">
+                                             <div class="el-card is-always-shadow">
+                                                <!---->
+                                                <div class="el-card__body">
+                                                   <h6>Overall Rating</h6>
+                                                   <div class="rating-num">
+                                                      <div role="slider" aria-valuenow="3.9" aria-valuetext="3.9" aria-valuemin="0" aria-valuemax="5" tabindex="0" class="el-rate">
+                                                         <span class="el-rate__item" style="cursor: auto;">
+                                                            <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                               <!---->
+                                                            </i>
+                                                         </span>
+                                                         <span class="el-rate__item" style="cursor: auto;">
+                                                            <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                               <!---->
+                                                            </i>
+                                                         </span>
+                                                         <span class="el-rate__item" style="cursor: auto;">
+                                                            <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                               <!---->
+                                                            </i>
+                                                         </span>
+                                                         <span class="el-rate__item" style="cursor: auto;"><i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);"><i class="el-rate__decimal el-icon-star-on" style="color: rgb(38, 82, 243); width: 90%;"></i></i></span>
+                                                         <span class="el-rate__item" style="cursor: auto;">
+                                                            <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                               <!---->
+                                                            </i>
+                                                         </span>
+                                                         <span class="el-rate__text" style="color: rgb(31, 45, 61);">3.9</span>
+                                                      </div>
+                                                      <span class="gray-color">1351 reviews</span>
+                                                   </div>
+                                                   <div class="line-progress">
+                                                      <span class="gray-color">5</span> 
+                                                      <div role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100" class="el-progress el-progress--line">
+                                                         <div class="el-progress-bar">
+                                                            <div class="el-progress-bar__outer" style="height: 12px;">
+                                                               <div class="el-progress-bar__inner" style="width: 64%; background-color: rgb(168, 237, 116);">
+                                                                  <!---->
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="el-progress__text" style="font-size: 16.8px;">64%</div>
+                                                      </div>
+                                                      <span class="gray-color">866</span>
+                                                   </div>
+                                                   <div class="line-progress">
+                                                      <span class="gray-color">4</span> 
+                                                      <div role="progressbar" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100" class="el-progress el-progress--line">
+                                                         <div class="el-progress-bar">
+                                                            <div class="el-progress-bar__outer" style="height: 12px;">
+                                                               <div class="el-progress-bar__inner" style="width: 7%; background-color: rgb(255, 114, 72);">
+                                                                  <!---->
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="el-progress__text" style="font-size: 16.8px;">7%</div>
+                                                      </div>
+                                                      <span class="gray-color">100</span>
+                                                   </div>
+                                                   <div class="line-progress">
+                                                      <span class="gray-color">3</span> 
+                                                      <div role="progressbar" aria-valuenow="6" aria-valuemin="0" aria-valuemax="100" class="el-progress el-progress--line">
+                                                         <div class="el-progress-bar">
+                                                            <div class="el-progress-bar__outer" style="height: 12px;">
+                                                               <div class="el-progress-bar__inner" style="width: 6%; background-color: rgb(255, 114, 72);">
+                                                                  <!---->
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="el-progress__text" style="font-size: 16.8px;">6%</div>
+                                                      </div>
+                                                      <span class="gray-color">82</span>
+                                                   </div>
+                                                   <div class="line-progress">
+                                                      <span class="gray-color">2</span> 
+                                                      <div role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="100" class="el-progress el-progress--line">
+                                                         <div class="el-progress-bar">
+                                                            <div class="el-progress-bar__outer" style="height: 12px;">
+                                                               <div class="el-progress-bar__inner" style="width: 3%; background-color: rgb(255, 114, 72);">
+                                                                  <!---->
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="el-progress__text" style="font-size: 16.8px;">3%</div>
+                                                      </div>
+                                                      <span class="gray-color">39</span>
+                                                   </div>
+                                                   <div class="line-progress">
+                                                      <span class="gray-color">1</span> 
+                                                      <div role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" class="el-progress el-progress--line">
+                                                         <div class="el-progress-bar">
+                                                            <div class="el-progress-bar__outer" style="height: 12px;">
+                                                               <div class="el-progress-bar__inner" style="width: 20%; background-color: rgb(255, 182, 51);">
+                                                                  <!---->
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="el-progress__text" style="font-size: 16.8px;">20%</div>
+                                                      </div>
+                                                      <span class="gray-color">264</span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-16 el-col-xl-16" style="padding-left: 15px; padding-right: 15px;">
+                                             <div class="el-card is-always-shadow">
+                                                <!---->
+                                                <div class="el-card__body">
+                                                   <h6 class="font-bold m-b30">Service Wise rating</h6>
+                                                   <ul class="rate-rev-list">
+                                                      <li class="vc">
+                                                         <i class="appoiment-label"></i> 
+                                                         <div class="rate-rev-cnt"><span class="rate-rev-cnt-tit">Video Consultation(Doctor)</span> <span class="rate-rev-per">0 %</span></div>
+                                                         <div class="rate-rev-count">0 reviews</div>
+                                                         <div role="slider" aria-valuenow="0" aria-valuetext="0" aria-valuemin="0" aria-valuemax="5" tabindex="0" class="el-rate">
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__text" style="color: rgb(31, 45, 61);">0</span>
+                                                         </div>
+                                                         <!---->
+                                                      </li>
+                                                      <li class="hv">
+                                                         <i class="appoiment-label"></i> 
+                                                         <div class="rate-rev-cnt"><span class="rate-rev-cnt-tit">Home Visit(Doctor)</span> <span class="rate-rev-per">1 %</span></div>
+                                                         <div class="rate-rev-count">12 reviews</div>
+                                                         <div role="slider" aria-valuenow="3.8" aria-valuetext="3.8" aria-valuemin="0" aria-valuemax="5" tabindex="0" class="el-rate">
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;"><i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);"><i class="el-rate__decimal el-icon-star-on" style="color: rgb(38, 82, 243); width: 80%;"></i></i></span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__text" style="color: rgb(31, 45, 61);">3.8</span>
+                                                         </div>
+                                                         <!---->
+                                                      </li>
+                                                      <li class="ph">
+                                                         <i class="appoiment-label"></i> 
+                                                         <div class="rate-rev-cnt"><span class="rate-rev-cnt-tit">Physiotherapist</span> <span class="rate-rev-per">0 %</span></div>
+                                                         <div class="rate-rev-count">4 reviews</div>
+                                                         <div role="slider" aria-valuenow="3" aria-valuetext="3" aria-valuemin="0" aria-valuemax="5" tabindex="0" class="el-rate">
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__text" style="color: rgb(31, 45, 61);">3</span>
+                                                         </div>
+                                                         <!---->
+                                                      </li>
+                                                      <li class="nu">
+                                                         <i class="appoiment-label"></i> 
+                                                         <div class="rate-rev-cnt"><span class="rate-rev-cnt-tit">Nurse</span> <span class="rate-rev-per">0 %</span></div>
+                                                         <div class="rate-rev-count">3 reviews</div>
+                                                         <div role="slider" aria-valuenow="3.7" aria-valuetext="3.7" aria-valuemin="0" aria-valuemax="5" tabindex="0" class="el-rate">
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;"><i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);"><i class="el-rate__decimal el-icon-star-on" style="color: rgb(38, 82, 243); width: 70%;"></i></i></span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__text" style="color: rgb(31, 45, 61);">3.7</span>
+                                                         </div>
+                                                         <!---->
+                                                      </li>
+                                                      <li class="nu">
+                                                         <i class="appoiment-label"></i> 
+                                                         <div class="rate-rev-cnt"><span class="rate-rev-cnt-tit">Nurse</span> <span class="rate-rev-per">5 %</span></div>
+                                                         <div class="rate-rev-count">70 reviews</div>
+                                                         <div role="slider" aria-valuenow="4.2" aria-valuetext="4.2" aria-valuemin="0" aria-valuemax="5" tabindex="0" class="el-rate">
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;"><i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);"><i class="el-rate__decimal el-icon-star-on" style="color: rgb(38, 82, 243); width: 20%;"></i></i></span><span class="el-rate__text" style="color: rgb(31, 45, 61);">4.2</span>
+                                                         </div>
+                                                         <!---->
+                                                      </li>
+                                                      <li class="lp">
+                                                         <i class="appoiment-label"></i> 
+                                                         <div class="rate-rev-cnt"><span class="rate-rev-cnt-tit">Package</span> <span class="rate-rev-per">86 %</span></div>
+                                                         <div class="rate-rev-count">1167 reviews</div>
+                                                         <div role="slider" aria-valuenow="3.9" aria-valuetext="3.9" aria-valuemin="0" aria-valuemax="5" tabindex="0" class="el-rate">
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(38, 82, 243);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__item" style="cursor: auto;"><i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);"><i class="el-rate__decimal el-icon-star-on" style="color: rgb(38, 82, 243); width: 90%;"></i></i></span>
+                                                            <span class="el-rate__item" style="cursor: auto;">
+                                                               <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                  <!---->
+                                                               </i>
+                                                            </span>
+                                                            <span class="el-rate__text" style="color: rgb(31, 45, 61);">3.9</span>
+                                                         </div>
+                                                         <!---->
+                                                      </li>
+                                                   </ul>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <!---->
+                                 </div>
+                              </div>
+                              
+                              <div role="tabpanel" id="pane-User" aria-labelledby="tab-User Review and Rating" class="el-tab-pane" style="display: none;">
+                                 <div>
+                                    <form class="el-form sa-rrf-filter">
+                                       <div class="el-row" style="margin-left: -10px; margin-right: -10px;">
+                                          <div class="el-col el-col-24 el-col-xs-10 el-col-sm-10 el-col-md-12 el-col-lg-12 el-col-xl-12" style="padding-left: 10px; padding-right: 10px;"></div>
+                                          <div class="el-col el-col-24 el-col-xs-10 el-col-sm-10 el-col-md-12 el-col-lg-12 el-col-xl-12" style="padding-left: 10px; padding-right: 10px;">
+                                             <div class="el-form-item">
+                                                <!---->
+                                                <div class="el-form-item__content">
+                                                   <div class="el-date-editor el-range-editor el-input__inner el-date-editor--daterange"><i class="el-input__icon el-range__icon el-icon-date"></i><input autocomplete="off" placeholder="Start date" name="" class="el-range-input"><span class="el-range-separator">-</span><input autocomplete="off" placeholder="End date" name="" class="el-range-input"><i class="el-input__icon el-range__close-icon"></i></div>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </form>
+                                    <div class="o-flow-x xs-50">
+                                       <div class="el-table master-table el-table--fit el-table--enable-row-hover el-table--enable-row-transition">
+                                          <div class="hidden-columns">
+                                             <div></div>
+                                             <div></div>
+                                             <div></div>
+                                             <div></div>
+                                             <div></div>
+                                          </div>
+                                          <div class="el-table__header-wrapper">
+                                             <table cellspacing="0" cellpadding="0" border="0" class="el-table__header" style="width: 1270px;">
+                                                <colgroup>
+                                                   <col name="el-table_3_column_15" width="200">
+                                                   <col name="el-table_3_column_16" width="250">
+                                                   <col name="el-table_3_column_17" width="180">
+                                                   <col name="el-table_3_column_18" width="240">
+                                                   <col name="el-table_3_column_19" width="400">
+                                                   <col name="gutter" width="0">
+                                                </colgroup>
+                                                <thead class="has-gutter">
+                                                   <tr class="">
+                                                      <th colspan="1" rowspan="1" class="el-table_3_column_15     is-leaf">
+                                                         <div class="cell">Provider Name</div>
+                                                      </th>
+                                                      <th colspan="1" rowspan="1" class="el-table_3_column_16     is-leaf">
+                                                         <div class="cell">Service Type</div>
+                                                      </th>
+                                                      <th colspan="1" rowspan="1" class="el-table_3_column_17     is-leaf">
+                                                         <div class="cell">Rating</div>
+                                                      </th>
+                                                      <th colspan="1" rowspan="1" class="el-table_3_column_18     is-leaf">
+                                                         <div class="cell">Appointment Date &amp; time</div>
+                                                      </th>
+                                                      <th colspan="1" rowspan="1" class="el-table_3_column_19     is-leaf">
+                                                         <div class="cell">Status</div>
+                                                      </th>
+                                                      <th class="gutter" style="width: 0px; display: none;"></th>
+                                                   </tr>
+                                                </thead>
+                                             </table>
+                                          </div>
+                                          <div class="el-table__body-wrapper is-scrolling-none"  style="margin-top: 3%;">
+                                             <table id="example" class="display" cellspacing="0" width="100%">
+                                                   <thead>
+                                                       <tr>
+                                                           <th>Provider Name</th>
+                                                           <th>Service Type</th>
+                                                           <th>Rating</th>
+                                                           <th>Appointment Date &amp; time</th>
+                                                           <th>Status</th>
+                                                       </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                       <tr class="el-table__row">
+                                                           <td>Taib Home Medical Care Company - Riyadh</td>
+                                                           <td>Home Visit (Lab technician)</td>
+                                                           <td>
+                                                            <div class="cell">
+                                                               <div role="slider" aria-valuenow="1" aria-valuetext="1" aria-valuemin="0" aria-valuemax="5" tabindex="0" class="el-rate rating-points">
+                                                                  <span class="el-rate__item" style="cursor: auto;">
+                                                                     <i class="el-rate__icon el-icon-star-on" style="color: rgb(255, 206, 0);">
+                                                                        <!---->
+                                                                     </i>
+                                                                  </span>
+                                                                  <span class="el-rate__item" style="cursor: auto;">
+                                                                     <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                        <!---->
+                                                                     </i>
+                                                                  </span>
+                                                                  <span class="el-rate__item" style="cursor: auto;">
+                                                                     <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                        <!---->
+                                                                     </i>
+                                                                  </span>
+                                                                  <span class="el-rate__item" style="cursor: auto;">
+                                                                     <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                        <!---->
+                                                                     </i>
+                                                                  </span>
+                                                                  <span class="el-rate__item" style="cursor: auto;">
+                                                                     <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                        <!---->
+                                                                     </i>
+                                                                  </span>
+                                                                  <span class="el-rate__text" style="color: rgb(31, 45, 61);">1</span>
+                                                               </div>
+                                                            </div>
+                                                           </td>
+                                                           <td>11-20 Feb 2022</td>
+                                                           <td>Publish (Provider only)</td>
+                                                       </tr>
+                                                       <tr class="el-table__row">
+                                                         <td>Taib Home Medical Care Company - Riyadh</td>
+                                                         <td>Home Visit (Lab technician)</td>
+                                                         <td>
+                                                            <div class="cell">
+                                                               <div role="slider" aria-valuenow="1" aria-valuetext="1" aria-valuemin="0" aria-valuemax="5" tabindex="0" class="el-rate rating-points">
+                                                                  <span class="el-rate__item" style="cursor: auto;">
+                                                                     <i class="el-rate__icon el-icon-star-on" style="color: rgb(255, 206, 0);">
+                                                                        <!---->
+                                                                     </i>
+                                                                  </span>
+                                                                  <span class="el-rate__item" style="cursor: auto;">
+                                                                     <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                        <!---->
+                                                                     </i>
+                                                                  </span>
+                                                                  <span class="el-rate__item" style="cursor: auto;">
+                                                                     <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                        <!---->
+                                                                     </i>
+                                                                  </span>
+                                                                  <span class="el-rate__item" style="cursor: auto;">
+                                                                     <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                        <!---->
+                                                                     </i>
+                                                                  </span>
+                                                                  <span class="el-rate__item" style="cursor: auto;">
+                                                                     <i class="el-rate__icon el-icon-star-on" style="color: rgb(239, 242, 247);">
+                                                                        <!---->
+                                                                     </i>
+                                                                  </span>
+                                                                  <span class="el-rate__text" style="color: rgb(31, 45, 61);">1</span>
+                                                               </div>
+                                                            </div>
+                                                         </td>
+                                                         <td>11-20 Feb 2022</td>
+                                                         <td>Publish (Provider only)</td>
+                                                     </tr>
+                                                   </tbody>
+                                               </table>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!---->
+               </div>
+            </main>
+            
+         </section>
+      </div>
+      <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+      <div role="tooltip" id="el-tooltip-8995" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2001; display: none;">
+         Accounts
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-5329" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2003; display: none;">
+         Master
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-9008" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2005; display: none;">
+         Services
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-7427" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2007; display: none;">
+         Settings
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-9729" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center top; z-index: 2009; display: none;">
+         Dashboard
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+   <!-- </body>
+</html> -->

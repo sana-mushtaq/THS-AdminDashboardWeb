@@ -1,0 +1,8 @@
+#week_add td{
+    padding-right: 10px ! important;
+    padding-bottom: 5px;
+}
+.week_detail_table td {
+    vertical-align: middle;
+    padding: 7px 0 ! important;
+}

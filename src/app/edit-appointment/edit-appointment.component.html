@@ -1,0 +1,372 @@
+
+<div id="app">
+         <section class="el-container">
+            <div>
+               <menu class="menu-bar">
+                  <a href="javascript:void(0);" class="toggle-menu">
+                     <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+                  </a>
+                  <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a> 
+               </menu>
+               <app-sidebar></app-sidebar>
+               <app-submenu></app-submenu>
+            </div>
+            <main class="el-main">
+               <app-header></app-header>
+               <div>
+                  <div>
+                     <div class="m-t-30 el-row">
+                        <!----> <!----> 
+                        <div>
+                           <button routerLink="../appointment-setting" type="button" class="el-button back-btn el-button--default el-button--small is-plain">
+                              <!----><!----><span><i class="icon-arrow-left h2"></i></span>
+                           </button>
+                           <div>
+                              <div class="el-card is-always-shadow">
+                                 <!---->
+                                 <div class="el-card__body">
+                                    <h4>Appointment </h4>
+                                    <form class="el-form el-form--label-top">
+                                       <h4>Default Service Type duration</h4>
+                                       <div>
+                                          <h5>Doctor</h5>
+                                          <div class="el-row">
+                                             <h5>Home</h5>
+                                          </div>
+                                          <div class="el-row" style="margin-left: -20px; margin-right: -20px;">
+                                             <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                                <div class="el-form-item line-input is-required">
+                                                   <label for="defualt_home_dur" class="el-form-item__label">Duration (In Minutes)</label>
+                                                   <div class="el-form-item__content">
+                                                    <select class="select">
+                                                        <option>Select Duration</option>
+                                                        <option class="el-select-dropdown__item hover">15</option>
+                                                        <option class="el-select-dropdown__item">20</option>
+                                                        <option class="el-select-dropdown__item">30</option>
+                                                        <option class="el-select-dropdown__item selected" selected>45</option>
+                                                        <option class="el-select-dropdown__item">60</option>
+                                                    </select>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                                <div class="el-form-item is-success is-required">
+                                                   <label for="defualt_home_fee" class="el-form-item__label">Fee</label>
+                                                   <div class="el-form-item__content">
+                                                      <div class="line-input el-input">
+                                                         <!----><input type="number" autocomplete="off" placeholder="300" class="el-input__inner"><!----><!----><!----><!---->
+                                                      </div>
+                                                      <!---->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <h5>Video Consultation</h5>
+                                          <div class="el-row" style="margin-left: -20px; margin-right: -20px;">
+                                             <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                                <div class="el-form-item line-input is-required">
+                                                   <label for="defualt_video_dur" class="el-form-item__label">Duration (In Minutes)</label>
+                                                   <div class="el-form-item__content">
+                                                    <select class="select">
+                                                        <option>Select Duration</option>
+                                                        <option class="el-select-dropdown__item hover">15</option>
+                                                        <option class="el-select-dropdown__item selected" selected>20</option>
+                                                        <option class="el-select-dropdown__item">30</option>
+                                                        <option class="el-select-dropdown__item">45</option>
+                                                        <option class="el-select-dropdown__item">60</option>
+                                                    </select>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                                <div class="el-form-item is-success is-required">
+                                                   <label for="defualt_video_fee" class="el-form-item__label">Fee</label>
+                                                   <div class="el-form-item__content">
+                                                      <div class="line-input el-input">
+                                                         <!----><input type="number" autocomplete="off" placeholder="45" class="el-input__inner"><!----><!----><!----><!---->
+                                                      </div>
+                                                      <!---->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <h5>Chat Consultation</h5>
+                                          <div class="el-row" style="margin-left: -20px; margin-right: -20px;">
+                                             <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                                <div class="el-form-item line-input is-required">
+                                                   <label for="defualt_chat_dur" class="el-form-item__label">Duration (In Minutes)</label>
+                                                   <div class="el-form-item__content">
+                                                    <select class="select">
+                                                        <option>Select Duration</option>
+                                                        <option class="el-select-dropdown__item hover selected" selected>15</option>
+                                                        <option class="el-select-dropdown__item">20</option>
+                                                        <option class="el-select-dropdown__item">30</option>
+                                                        <option class="el-select-dropdown__item">45</option>
+                                                        <option class="el-select-dropdown__item">60</option>
+                                                    </select>
+                                                      <!---->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                                <div class="el-form-item is-required">
+                                                   <label for="defualt_chat_fee" class="el-form-item__label">Fee</label>
+                                                   <div class="el-form-item__content">
+                                                      <div class="line-input el-input">
+                                                         <!----><input type="number" autocomplete="off" placeholder="25" class="el-input__inner"><!----><!----><!----><!---->
+                                                      </div>
+                                                      <!---->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div>
+                                          <h5>Physiotherapist</h5>
+                                          <div class="el-row" style="margin-left: -20px; margin-right: -20px;">
+                                             <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                                <div class="el-form-item line-input is-required">
+                                                   <label for="p_defualt_home_dur" class="el-form-item__label">Duration (In Minutes)</label>
+                                                   <div class="el-form-item__content">
+                                                    <select class="select">
+                                                        <option>Select Duration</option>
+                                                        <option class="el-select-dropdown__item hover">15</option>
+                                                        <option class="el-select-dropdown__item">20</option>
+                                                        <option class="el-select-dropdown__item">30</option>
+                                                        <option class="el-select-dropdown__item">45</option>
+                                                        <option class="el-select-dropdown__item selected" selected>60</option>
+                                                    </select>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                                <div class="el-form-item is-required">
+                                                   <label for="p_defualt_home_fee" class="el-form-item__label">Fee</label>
+                                                   <div class="el-form-item__content">
+                                                      <div class="line-input el-input">
+                                                         <!----><input type="number" autocomplete="off" placeholder="50" class="el-input__inner"><!----><!----><!----><!---->
+                                                      </div>
+                                                      <!---->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div>
+                                          <h5>Nurse</h5>
+                                          <div class="el-row" style="margin-left: -20px; margin-right: -20px;">
+                                             <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                                <div class="el-form-item line-input is-required">
+                                                   <label for="nurse_homr_dur" class="el-form-item__label">Duration (In Minutes)</label>
+                                                   <div class="el-form-item__content">
+                                                    <select class="select">
+                                                        <option>Select Duration</option>
+                                                        <option class="el-select-dropdown__item hover">15</option>
+                                                        <option class="el-select-dropdown__item">20</option>
+                                                        <option class="el-select-dropdown__item">30</option>
+                                                        <option class="el-select-dropdown__item">45</option>
+                                                        <option class="el-select-dropdown__item selected" selected>60</option>
+                                                    </select>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                                <div class="el-form-item is-required">
+                                                   <label for="nurse_hm_fee" class="el-form-item__label">Fee</label>
+                                                   <div class="el-form-item__content">
+                                                      <div class="line-input el-input">
+                                                         <!----><input type="number" autocomplete="off" placeholder="100" class="el-input__inner"><!----><!----><!----><!---->
+                                                      </div>
+                                                      <!---->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div>
+                                          <h5>Lab Technician</h5>
+                                          <div class="el-row" style="margin-left: -20px; margin-right: -20px;">
+                                             <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                                <div class="el-form-item line-input is-required">
+                                                   <label for="lab_homr_dur" class="el-form-item__label">Duration (In Minutes)</label>
+                                                   <div class="el-form-item__content">
+                                                      <div class="el-select">
+                                                         <!---->
+                                                         <div class="el-input el-input--suffix">
+                                                            <!----><input type="text" readonly="readonly" autocomplete="off" placeholder="Select Duration" class="el-input__inner"><!---->
+                                                            <span class="el-input__suffix">
+                                                               <span class="el-input__suffix-inner">
+                                                                  <i class="el-select__caret el-input__icon el-icon-arrow-up"></i><!----><!----><!----><!----><!---->
+                                                               </span>
+                                                               <!---->
+                                                            </span>
+                                                            <!----><!---->
+                                                         </div>
+                                                         <div class="el-select-dropdown el-popper" style="display: none; min-width: 289.725px;">
+                                                            <div class="el-scrollbar" style="">
+                                                               <div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+                                                                  <ul class="el-scrollbar__view el-select-dropdown__list">
+                                                                     <!---->
+                                                                     <li class="el-select-dropdown__item">15</li>
+                                                                     <li class="el-select-dropdown__item">20</li>
+                                                                     <li class="el-select-dropdown__item">30</li>
+                                                                     <li class="el-select-dropdown__item">45</li>
+                                                                     <li class="el-select-dropdown__item selected">60</li>
+                                                                  </ul>
+                                                               </div>
+                                                               <div class="el-scrollbar__bar is-horizontal">
+                                                                  <div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+                                                               </div>
+                                                               <div class="el-scrollbar__bar is-vertical">
+                                                                  <div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+                                                               </div>
+                                                            </div>
+                                                            <!---->
+                                                         </div>
+                                                      </div>
+                                                      <!---->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                                <div class="el-form-item is-required">
+                                                   <label for="lab_hm_fee" class="el-form-item__label">Fee</label>
+                                                   <div class="el-form-item__content">
+                                                      <div class="line-input el-input">
+                                                         <!----><input type="number" autocomplete="off" placeholder="Enter Fee" class="el-input__inner"><!----><!----><!----><!---->
+                                                      </div>
+                                                      <!---->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="text-right">
+                                          <button type="button" class="el-button el-button--default">
+                                             <!----><!----><span>Cancel</span>
+                                          </button>
+                                          <button type="button" class="el-button el-button--primary">
+                                             <!----><!----><span>save</span>
+                                          </button>
+                                       </div>
+                                    </form>
+                                 </div>
+                              </div>
+                           </div>
+                           <!---->
+                        </div>
+                        <!----> <!---->
+                     </div>
+                  </div>
+               </div>
+            </main>
+         </section>
+      </div>
+      <script async="" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-EXDwh2adbELTFKlDgn3RXMP648GC12s&amp;sensor=false&amp;libraries=places"></script><script type="text/javascript" src="static/js/manifest.787d0d92fd70cf16874e.js"></script><script type="text/javascript" src="static/js/vendor.6f6ef6bc866762bf29a6.js"></script><script type="text/javascript" src="static/js/app.a27789e3d261f525a01a.js"></script>
+      <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+      <div role="tooltip" id="el-tooltip-4253" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2005; display: none;">
+         Dashboard
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-6070" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2016; display: none;">
+         Package
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-7186" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2020; display: none;">
+         Services
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-3401" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2022; display: none;">
+         Master
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-8916" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2024; display: none;">
+         Settings
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-1459" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2026; display: none;">
+         Employee
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div class="pac-container pac-logo hdpi" style="display: none; width: 0px; position: absolute; left: 0px; top: 0px;"></div>
+      <div class="pac-container pac-logo hdpi" style="display: none; width: 0px; position: absolute; left: 0px; top: 0px;"></div>
+      <div tabindex="-1" role="dialog" aria-modal="true" aria-label="dialog" class="el-message-box__wrapper" style="z-index: 2040; display: none;">
+         <div class="el-message-box">
+            <div class="el-message-box__header">
+               <div class="el-message-box__title">
+                  <!----><span></span>
+               </div>
+               <button type="button" aria-label="Close" class="el-message-box__headerbtn"><i class="el-message-box__close el-icon-close"></i></button>
+            </div>
+            <div class="el-message-box__content">
+               <div class="el-message-box__container">
+                  <!---->
+                  <div class="el-message-box__message">
+                     <p>Are you sure to close this dialog?</p>
+                  </div>
+               </div>
+               <div class="el-message-box__input" style="display: none;">
+                  <div class="el-input">
+                     <!----><input type="text" autocomplete="off" placeholder="" class="el-input__inner"><!----><!----><!----><!---->
+                  </div>
+                  <div class="el-message-box__errormsg" style="visibility: hidden;"></div>
+               </div>
+            </div>
+            <div class="el-message-box__btns">
+               <button type="button" class="el-button el-button--default el-button--small">
+                  <!----><!----><span>
+                  Cancel
+                  </span>
+               </button>
+               <button type="button" class="el-button el-button--default el-button--small el-button--primary ">
+                  <!----><!----><span>
+                  OK
+                  </span>
+               </button>
+            </div>
+         </div>
+      </div>
+      <div class="el-select-dropdown el-popper" style="min-width: 289.725px; transform-origin: center top; z-index: 2042; display: none;">
+         <div class="el-scrollbar" style="">
+            <div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+               <ul class="el-scrollbar__view el-select-dropdown__list">
+                  <!---->
+                  <li class="el-select-dropdown__item">15</li>
+                  <li class="el-select-dropdown__item">20</li>
+                  <li class="el-select-dropdown__item">30</li>
+                  <li class="el-select-dropdown__item selected hover">45</li>
+                  <li class="el-select-dropdown__item">60</li>
+               </ul>
+            </div>
+            <div class="el-scrollbar__bar is-horizontal">
+               <div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+            </div>
+            <div class="el-scrollbar__bar is-vertical">
+               <div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+            </div>
+         </div>
+         <!---->
+         <div x-arrow="" class="popper__arrow" style="left: 35px;"></div>
+      </div>
+      <div class="el-select-dropdown el-popper" style="min-width: 289.725px; transform-origin: center top; z-index: 2044; display: none;">
+         <div class="el-scrollbar" style="">
+            <div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+               <ul class="el-scrollbar__view el-select-dropdown__list">
+                  <!---->
+                  <li class="el-select-dropdown__item">15</li>
+                  <li class="el-select-dropdown__item selected hover">20</li>
+                  <li class="el-select-dropdown__item">30</li>
+                  <li class="el-select-dropdown__item">45</li>
+                  <li class="el-select-dropdown__item">60</li>
+               </ul>
+            </div>
+            <div class="el-scrollbar__bar is-horizontal">
+               <div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+            </div>
+            <div class="el-scrollbar__bar is-vertical">
+               <div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+            </div>
+         </div>
+         <!---->
+         <div x-arrow="" class="popper__arrow" style="left: 35px;"></div>
+      </div>

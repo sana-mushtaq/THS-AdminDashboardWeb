@@ -1,0 +1,15 @@
+.dash-list li {
+    width: 100%;
+}
+.dash-list li:before {
+    right: 0px;
+    display: none;
+}
+.lab-hide{display: none !important;}
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    margin-right: 15px;
+}
+.custom-radio .el-radio__inner {margin-right: 10px;}
+.dash-list li {padding: 5%; }

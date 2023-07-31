@@ -1,0 +1,571 @@
+<div id="app">
+  <section class="el-container">
+    <div>
+      <app-sidebar></app-sidebar>
+      <nav class="nav-bar-none">
+        <!---->
+      </nav>
+    </div>
+
+    <main class="el-main dashboard">
+      <app-header></app-header>
+      <div>
+        <div>
+          <div>
+            <div class="el-card is-always-shadow">
+              <!---->
+              <div class="el-card__body">
+                <ul class="dash-list">
+                  <li>
+                    <div class="light-blue-bg"><i class="icon-team"></i></div>
+                    <span>
+                      Today's Appointments
+                      <h3>{{ todayAppointmentCount }}</h3>
+                      <!-- <h3>0 <small>Today's</small></h3> -->
+                    </span>
+                  </li>
+                  <li>
+                    <div class="green-bg"><i class="icon-patients-status"></i></div>
+                    <span>
+                      Total Appointments
+                      <h3>{{ totalAppointmentsCount }}</h3>
+                    </span>
+                  </li>
+                  <li>
+                    <div class="pink-bg"><i class="icon-money-bag"></i></div>
+                    <span>
+                      Number of Patients
+                      <h3>{{ totalPatientsCount }}</h3>
+                    </span>
+                  </li>
+                  <li>
+                    <div class="yellow-bg"><i class="icon-doctor-bag"></i></div>
+                    <span>
+                      Total Number of Staffs
+                      <h3>{{ totalStaffsCount }}</h3>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="m-t30 el-row" style="margin-left: -15px; margin-right: -15px">
+              <!-- <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-16 el-col-xl-16"
+                        style="padding-left: 15px; padding-right: 15px;">
+                        <div>
+                           <div>
+                              <div class="el-card is-always-shadow">
+                                 
+                                 <div class="el-card__body card__body pb-4">
+                                    <div class="map-min-hgt ">
+                                       <div class="chartjs-size-monitor"
+                                          style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                          <div class="chartjs-size-monitor-expand"
+                                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                             <div
+                                                style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
+                                             </div>
+                                          </div>
+                                          <div class="chartjs-size-monitor-shrink"
+                                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                             <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                          </div>
+                                       </div>
+                                       <h4>Sector Wise Appointment</h4>
+                                       <div class="d-flex-center m-t10 el-row"
+                                          style="justify-content: flex-end;">
+                                          <div
+                                             class="el-col el-col-24 el-col-xs-20 el-col-sm-12 el-col-md-12 el-col-lg-5 el-col-xl-5"
+                                             style="padding-left: 10px; padding-right: 10px;">
+                                             <div class="el-select">
+                                                <label class="el-form-item__label mb-0">Select Type</label>
+                                                <select class="select"
+                                                   style="border-radius: 5px;">
+                                                   <option>Select</option>
+                                                   <option class="el-select-dropdown__item"><span>This Week</span>
+                                                   </option>
+                                                   <option class="el-select-dropdown__item"><span>This Month</span>
+                                                   </option>
+                                                   <option class="el-select-dropdown__item"><span>Last 6 Months</span>
+                                                   </option>
+                                                   <option class="el-select-dropdown__item"><span>Last 1 Year</span>
+                                                   </option>
+                                                </select>
+                                             </div>
+                                          </div>
+                                          <div
+                                             class="el-col el-col-24 el-col-xs-20 el-col-sm-12 el-col-md-12 el-col-lg-8 el-col-xl-8"
+                                             style="padding-left: 10px; padding-right: 10px;">
+                                             <div class="el-input">
+                                                <div class="el-date-editor el-range-editor el-date-editor--daterange" style="display: flex;align-items: center;">
+                                                   <div>
+                                                      <label class="el-form-item__label mb-0">From Date</label>
+                                                      <input type="date" name="" placeholder="Start date" class="date">
+                                                   </div>
+                                                   <span class="el-range-separator">-</span>
+                                                   <div>
+                                                      <label class="el-form-item__label mb-0">To Date</label>
+                                                      <input type="date" name="" placeholder="End date" class="date">
+                                                   </div>
+                                                   <i class="el-input__icon el-range__close-icon"></i>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div id='myChart' style="width: 100%;height: 90%;"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div> -->
+              <div
+                class="mm-mt20 el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12"
+                style="padding-left: 15px; padding-right: 15px"
+              >
+                <div class="el-card is-always-shadow">
+                  <!---->
+                  <div class="el-card__body pb-4">
+                    <div class="map-min-hgt">
+                      <h4>Recent Taib Appointments</h4>
+
+                      <div class="item" *ngFor="let appointment of latestAppointments">
+                        <div class="time-app"></div>
+                        <img src="assets/images/img_avatar2.png" class="avtar" />
+                        <div class="cont">
+                          <span class="app-tme">{{ appointment.appointmentBookingDate }}</span>
+                          <h6>{{ appointment.primaryPatientFirstName }} {{ appointment.primaryPatientLastName }}</h6>
+                          <div>{{ appointment.serviceName }}</div>
+                          <small></small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="mm-mt20 el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12"
+                style="padding-left: 15px; padding-right: 15px"
+              >
+                <div class="el-card is-always-shadow">
+                  <!---->
+                  <div class="el-card__body pb-4">
+                    <div class="map-min-hgt">
+                      <h4>Recent Other Branch Appointments</h4>
+
+                      <div class="item" *ngFor="let appointment of latestAppointments">
+                        <div class="time-app"></div>
+                        <img src="assets/images/img_avatar2.png" class="avtar" />
+                        <div class="cont">
+                          <span class="app-tme">{{ appointment.appointmentBookingDate }}</span>
+                          <h6>{{ appointment.primaryPatientFirstName }} {{ appointment.primaryPatientLastName }}</h6>
+                          <div>{{ appointment.serviceName }}</div>
+                          <small></small>
+                        </div>
+                      </div>
+
+                      <!-- <div class="item">
+                                    <div class="time-app"></div>
+                                    <img src="assets/images/img_avatar2.png" class="avtar">
+                                    <div class="cont">
+                                       <span class="app-tme">08:00 AM</span>
+                                       <h6>Ohoud Almugairen</h6>
+                                       <div>ohoud.almugairen@gmail.com</div>
+                                       <small></small>
+                                    </div>
+                                 </div>
+                                 <div class="item">
+                                    <div class="time-app"></div>
+                                    <img src="assets/images/img_avatar2.png" class="avtar">
+                                    <div class="cont">
+                                       <span class="app-tme">05:00 AM</span>
+                                       <h6>Fahad Almutairi</h6>
+                                       <div>fra4994@hotmail.com</div>
+                                       <small></small>
+                                    </div>
+                                 </div>
+                                 <div class="item">
+                                    <div class="time-app"></div>
+                                    <img src="assets/images/img_avatar2.png" class="avtar">
+                                    <div class="cont">
+                                       <span class="app-tme">07:00 AM</span>
+                                       <h6>Meshal Alharbi</h6>
+                                       <div>h_s_30@hotmail.com</div>
+                                       <small></small>
+                                    </div>
+                                 </div>
+                                 <div class="item">
+                                    <div class="time-app"></div>
+                                    <img src="assets/images/img_avatar2.png" class="avtar">
+                                    <div class="cont">
+                                       <span class="app-tme">01:00 PM</span>
+                                       <h6>Noura Almatar</h6>
+                                       <div>Anoud@samaa.co</div>
+                                       <small></small>
+                                    </div>
+                                 </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+              <div
+                class="mm-mt20 el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12"
+                style="padding-left: 15px; padding-right: 15px"
+              >
+                <div class="el-card is-always-shadow">
+                  <div class="el-card__body pb-4">
+                    <h4>Choose your Filter</h4>
+                    <form class="el-form custom-radio m-t10 el-form--label-top">
+                      <input type="radio" id="book_date" name="filter_type" class="el-radio__inner" value="Booking Date" checked (click)="dateTypeClicked(1)" />
+                      <label for="">Date Wise</label>
+                      <input type="radio" id="book_slot" name="filter_type" class="el-radio__inner" value="Slot Date" (click)="dateTypeClicked(2)" />
+                      <label for="">Weekly</label>
+                      <input type="radio" id="book_slot" name="filter_type" class="el-radio__inner" value="Slot Date" (click)="dateTypeClicked(3)" />
+                      <label for="">Monthly</label>
+
+                      <div class="m-t30 el-row" style="margin-left: -10px; margin-right: -10px">
+                        <div
+                          class="el-col el-col-24 el-col-xs-24 el-col-sm-14 el-col-md-14 el-col-lg-14 el-col-xl-14"
+                          id="book_date_show"
+                          style="padding-left: 10px; padding-right: 10px"
+                          *ngIf="filterType == 1"
+                        >
+                          <div class="el-form-item line-input d-flex justify-content-around">
+                            <div class="el-form-group">
+                              <label class="el-form-item__label">From Date</label>
+                              <input
+                                type="date"
+                                id="bookingStartDate"
+                                name=""
+                                class="date el-input__inner"
+                                placeholder="Start date"
+                                (change)="startDateChanged($event)"
+                              />
+                            </div>
+                            <div class="el-form-group">
+                              <label class="el-form-item__label">To Date</label>
+                              <input
+                                type="date"
+                                id="bookingEndDate"
+                                name=""
+                                class="date el-input__inner"
+                                placeholder="End date"
+                                (change)="endDateChanged($event)"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-6 el-col-xl-14"
+                          id="book_date_show"
+                          style="padding-left: 10px; padding-right: 10px"
+                          *ngIf="filterType == 2"
+                        >
+                          <div class="el-form-item line-input d-flex">
+                            <div class="el-form-group">
+                              <label class="el-form-item__label">Select Month</label>
+                              <input
+                                type="month"
+                                id="bookingStartDateWeekly"
+                                name=""
+                                class="date el-input__inner"
+                                placeholder="Start date"
+                                (change)="startDateChanged($event)"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-6 el-col-xl-14"
+                          id="book_date_show"
+                          style="padding-left: 10px; padding-right: 10px"
+                          *ngIf="filterType == 3"
+                        >
+                          <div class="el-form-item line-input d-flex">
+                            <div class="el-form-group">
+                              <label class="el-form-item__label">Select Year</label>
+                              <input type="text" id="yearSelect" name="" class="date el-input__inner" placeholder="YYYY" (change)="yearChanged($event)" />
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-8 el-col-xl-8 mt-4"
+                          id="book_slot_show"
+                          style="padding-left: 10px; padding-right: 10px"
+                        >
+                          <div class="text-left">
+                            <button type="button" class="el-button el-button--primary save" (click)="filterButtonClicked()">
+                              <span>Filter</span>
+                            </button>
+                            <button type="button" class="el-button el-button--info save" (click)="clearFilterClicked()">
+                              <span>Clear</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="mm-mt20 el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12"
+                style="padding-left: 15px; padding-right: 15px"
+              >
+                <div class="el-card is-always-shadow">
+                  <!---->
+                  <div class="el-card__body pb-4">
+                    <h4>Collected Amount</h4>
+                    <ul class="dash-list dash-list-down">
+                      <li>
+                        <div class="light-blue-bg"><i class="icon-team"></i></div>
+                        <span>
+                          Total Amount
+                          <h3>SAR {{ totalCollection }}</h3>
+                          <!-- <h3>0 <small>Today's</small></h3> -->
+                        </span>
+                      </li>
+                      <li>
+                        <div class="green-bg"><i class="icon-patients-status"></i></div>
+                        <span>
+                          Mobile
+                          <h3>SAR {{ mobileApp }}</h3>
+                        </span>
+                      </li>
+                      <li>
+                        <div class="pink-bg"><i class="icon-money-bag"></i></div>
+                        <span>
+                          Desktop
+                          <h3>SAR {{ adminPortal }}</h3>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="m-t15 el-row" style="margin-left: -15px; margin-right: -15px">
+              <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12" style="padding-left: 15px; padding-right: 15px">
+                <div class="el-card is-always-shadow">
+                  <!---->
+                  <div class="el-card__body pb-4">
+                    <div
+                      class="chartjs-size-monitor"
+                      style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1"
+                    >
+                      <div
+                        class="chartjs-size-monitor-expand"
+                        style="
+                          position: absolute;
+                          left: 0;
+                          top: 0;
+                          right: 0;
+                          bottom: 0;
+                          overflow: hidden;
+                          pointer-events: none;
+                          visibility: hidden;
+                          z-index: -1;
+                        "
+                      >
+                        <div style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
+                      </div>
+                      <div
+                        class="chartjs-size-monitor-shrink"
+                        style="
+                          position: absolute;
+                          left: 0;
+                          top: 0;
+                          right: 0;
+                          bottom: 0;
+                          overflow: hidden;
+                          pointer-events: none;
+                          visibility: hidden;
+                          z-index: -1;
+                        "
+                      >
+                        <div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                      <h4>Date Wise Chart</h4>
+                      <!-- <button class="el-button el-button--primary save p-1" (click)="toggleChart('1','myChart1')">Toggle Chart</button> -->
+                    </div>
+
+                    <div id="myChart1" style="width: 100%; height: 50vh"></div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="mm-mt20 el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12"
+                style="padding-left: 15px; padding-right: 15px"
+              >
+                <div class="el-card is-always-shadow">
+                  <!---->
+                  <div class="el-card__body">
+                    <div
+                      class="chartjs-size-monitor"
+                      style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1"
+                    >
+                      <div
+                        class="chartjs-size-monitor-expand"
+                        style="
+                          position: absolute;
+                          left: 0;
+                          top: 0;
+                          right: 0;
+                          bottom: 0;
+                          overflow: hidden;
+                          pointer-events: none;
+                          visibility: hidden;
+                          z-index: -1;
+                        "
+                      >
+                        <div style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
+                      </div>
+                      <div
+                        class="chartjs-size-monitor-shrink"
+                        style="
+                          position: absolute;
+                          left: 0;
+                          top: 0;
+                          right: 0;
+                          bottom: 0;
+                          overflow: hidden;
+                          pointer-events: none;
+                          visibility: hidden;
+                          z-index: -1;
+                        "
+                      >
+                        <div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
+                      </div>
+                    </div>
+                    <h4>Money Collected</h4>
+                    <div id="myChart2" style="width: 100%; height: 50vh"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12" style="padding-left: 15px; padding-right: 15px">
+                <div class="el-card is-always-shadow">
+                  <!---->
+                  <div class="el-card__body pb-4">
+                    <div
+                      class="chartjs-size-monitor"
+                      style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1"
+                    >
+                      <div
+                        class="chartjs-size-monitor-expand"
+                        style="
+                          position: absolute;
+                          left: 0;
+                          top: 0;
+                          right: 0;
+                          bottom: 0;
+                          overflow: hidden;
+                          pointer-events: none;
+                          visibility: hidden;
+                          z-index: -1;
+                        "
+                      >
+                        <div style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
+                      </div>
+                      <div
+                        class="chartjs-size-monitor-shrink"
+                        style="
+                          position: absolute;
+                          left: 0;
+                          top: 0;
+                          right: 0;
+                          bottom: 0;
+                          overflow: hidden;
+                          pointer-events: none;
+                          visibility: hidden;
+                          z-index: -1;
+                        "
+                      >
+                        <div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
+                      </div>
+                    </div>
+                    <h4>Care Giver Wise</h4>
+
+                    <div id="myChart3" style="width: 100%; height: 50vh"></div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="mm-mt20 el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12"
+                style="padding-left: 15px; padding-right: 15px"
+              >
+                <div class="el-card is-always-shadow">
+                  <!---->
+                  <div class="el-card__body">
+                    <div
+                      class="chartjs-size-monitor"
+                      style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1"
+                    >
+                      <div
+                        class="chartjs-size-monitor-expand"
+                        style="
+                          position: absolute;
+                          left: 0;
+                          top: 0;
+                          right: 0;
+                          bottom: 0;
+                          overflow: hidden;
+                          pointer-events: none;
+                          visibility: hidden;
+                          z-index: -1;
+                        "
+                      >
+                        <div style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
+                      </div>
+                      <div
+                        class="chartjs-size-monitor-shrink"
+                        style="
+                          position: absolute;
+                          left: 0;
+                          top: 0;
+                          right: 0;
+                          bottom: 0;
+                          overflow: hidden;
+                          pointer-events: none;
+                          visibility: hidden;
+                          z-index: -1;
+                        "
+                      >
+                        <div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
+                      </div>
+                    </div>
+                    <h4>Department Wise</h4>
+                    <div id="myChart4" style="width: 100%; height: 50vh"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+</div>
+
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0"></div>
+<div
+  role="tooltip"
+  id="el-tooltip-5426"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2004; display: none"
+>
+  Dashboard
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-9709"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2010; display: none"
+>
+  Employee
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>

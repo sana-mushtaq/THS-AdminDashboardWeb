@@ -1,0 +1,511 @@
+
+<div id="app">
+         <section class="el-container">
+            <div>
+               <menu class="menu-bar">
+                  <a href="javascript:void(0);" class="toggle-menu">
+                     <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+                  </a>
+                  <a href="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+               </menu>
+               
+               <app-sidebar></app-sidebar>
+               <app-submenu></app-submenu>
+               
+            </div>
+            <main class="el-main">
+               <app-header></app-header>
+               <div>
+                  <div>
+                     <div class="m-t-30 el-row">
+                        <div>
+                           <button routerLink="../application-setting" type="button" class="el-button back-btn el-button--default el-button--small is-plain">
+                              <!----><!----><span><i class="icon-arrow-left h2"></i></span>
+                           </button>
+                           <div>
+                              <div class="el-card is-always-shadow">
+                                 <!---->
+                                 <div class="el-card__body">
+                                    <div class="d-flex justify-content">
+                                       <h4>Application Settings</h4>
+                                    </div>
+                                    <form class="el-form el-form--label-top">
+                                       <div class="m-tb20">
+                                          <i class="el-icon-circle-close profile-remove-icon"></i> 
+                                          <div>
+                                             <div tabindex="0" class="el-upload el-upload--text">
+                                                <!----> 
+                                                <div class="d-flex-center"><img src="https://static.sanar.sa/mis/605cb46d89d7af55435a5dcb0777a63e.png" class="avatar-img"> <input type="file" name="fileToUpload" id="fileToUploads" accept="image/*"><span class="gray-color">Upload Photo</span></div>
+                                                <!-- <input type="file" name="filename" accept="image/*" class="el-upload__input"> -->
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="m-t30 el-row" style="margin-left: -15px; margin-right: -15px;">
+                                          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-8 el-col-xl-8" style="padding-left: 15px; padding-right: 15px;">
+                                             <div class="el-form-item is-required">
+                                                <label for="app_title" class="el-form-item__label">Application Title</label>
+                                                <div class="el-form-item__content">
+                                                   <div class="line-input el-input">
+                                                      <!----><input type="text" autocomplete="off" placeholder="TAIB COMPANY" class="el-input__inner"><!----><!----><!----><!---->
+                                                   </div>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-8 el-col-xl-8" style="padding-left: 15px; padding-right: 15px;">
+                                             <div class="el-form-item is-required">
+                                                <label for="email" class="el-form-item__label">Email id</label>
+                                                <div class="el-form-item__content">
+                                                   <div class="line-input el-input">
+                                                      <!----><input type="text" autocomplete="off" placeholder="operation@taibsa.com" class="el-input__inner"><!----><!----><!----><!---->
+                                                   </div>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-8 el-col-xl-8" style="padding-left: 15px; padding-right: 15px;">
+                                             <div class="el-row" style="margin-left: -12.5px; margin-right: -12.5px;">
+                                                <div class="el-col el-col-8" style="padding-left: 12.5px; padding-right: 12.5px;">
+                                                   <div class="el-form-item is-required">
+                                                      <label for="pc" class="el-form-item__label">Code</label>
+                                                      <div class="el-form-item__content">
+                                                         <div class="el-select line-input">
+                                                            <select class="select">
+                                                            <option>Select</option>
+                                                            <option class="el-select-dropdown__item hover"><span>+264</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+49</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+41</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+31</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+90</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+34</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+91</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+962</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1246</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+53</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+593</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+965</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+595</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+213</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1441</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+502</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+677</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+244</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+251</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+241</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+224</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+996</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+222</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+257</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+992</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+230</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+260</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+51</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+351</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+32</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+64</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+55</span></option>
+                                                            <option class="el-select-dropdown__item selected" selected><span>+966</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+84</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+354</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+54</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+82</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+95</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+94</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+961</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+507</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+678</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+596</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+48</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+40</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1671</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+378</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+505</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+263</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+98</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1767</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+225</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+245</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+682</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+350</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+239</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+968</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+92</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+58</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+43</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+44</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+61</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+27</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+39</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+30</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+52</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+267</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+377</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+886</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+375</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+598</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+238</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+46</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+374</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1876</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+229</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+299</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+261</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+355</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+93</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+599</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+389</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+236</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+268</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+291</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+998</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+975</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+240</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+501</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+599</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+218</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+976</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+211</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+964</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+977</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+967</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+86</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+47</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+36</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+420</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+352</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+20</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+371</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+421</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+591</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+255</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+852</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+504</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+673</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1268</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+297</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+672</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+252</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+994</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+220</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+993</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+590</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+234</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+972</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+386</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+357</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+56</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+385</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+973</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+370</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+689</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+963</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+265</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1345</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+509</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+223</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+228</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+232</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+670</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+7</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+81</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+970</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1809</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+506</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+250</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+687</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+372</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+248</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+353</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+45</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+256</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+221</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+382</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+7</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+65</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+850</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+594</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+503</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+243</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+253</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+373</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+249</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1684</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+235</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+686</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+269</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+242</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+60</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+62</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+381</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+376</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+356</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+212</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+358</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+855</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+971</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+679</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+254</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+685</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+359</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+387</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+262</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+675</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1264</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+599</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+298</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+592</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+676</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+691</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+974</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+226</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+383</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+231</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+258</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+227</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+66</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+856</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+63</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1242</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+380</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+216</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+590</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+33</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+57</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+995</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+233</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+880</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+237</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+1473</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+423</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+266</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+597</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+680</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+960</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+674</span></option>
+                                                            <option class="el-select-dropdown__item"><span>+688</span></option>
+                                                            </select>
+                                                            
+                                                         </div>
+                                                         <!---->
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                                <div class="el-col el-col-16" style="padding-left: 12.5px; padding-right: 12.5px;">
+                                                   <div class="el-form-item is-required">
+                                                      <label for="ph" class="el-form-item__label">Phone Number</label>
+                                                      <div class="el-form-item__content">
+                                                         <div class="line-input el-input">
+                                                            <!----><input type="text" autocomplete="off" placeholder="Phone Number" maxlength="15" class="el-input__inner"><!----><!----><!----><!---->
+                                                         </div>
+                                                         <!---->
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-8 el-col-xl-8" style="padding-left: 15px; padding-right: 15px;">
+                                             <div class="el-form-item custom-map">
+                                                <label for="loc" class="el-form-item__label">Select Location</label>
+                                                <div class="el-form-item__content">
+                                                   <i class="el-icon-location"></i> <input placeholder="Search" class="search-input"> <!----><!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="el-col el-col-24" style="padding-left: 15px; padding-right: 15px;">
+                                             <div class="el-form-item">
+                                                <label for="desc.en" class="el-form-item__label">Description</label>
+                                                <div class="el-form-item__content">
+                                                   <div class="line-input el-textarea">
+                                                      <textarea autocomplete="off" placeholder="Description" class="el-textarea__inner" style="min-height: 138px; height: 138px;"></textarea>
+                                                      <!---->
+                                                   </div>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="el-col el-col-24" style="padding-left: 15px; padding-right: 15px;">
+                                             <div class="el-form-item">
+                                                <label for="desc.ar" class="el-form-item__label">Description in Arabic</label>
+                                                <div class="el-form-item__content">
+                                                   <div class="line-input el-textarea">
+                                                      <textarea autocomplete="off" placeholder="Description in Arabic" class="el-textarea__inner" style="min-height: 138px; height: 138px;"></textarea>
+                                                      <!---->
+                                                   </div>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="el-row" style="margin-left: -20px; margin-right: -20px;">
+                                          <div class="el-col el-col-8 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                             <p>Favicon</p>
+                                             <div class="m-tb20">
+                                                <!----> 
+                                                <div>
+                                                   <div tabindex="0" class="el-upload el-upload--text">
+                                                      <!----> 
+                                                      <div class="d-flex-center"><img src="assets/images/photoupload.svg" class="avatar-img"><input type="file" name="fileToUpload" id="fileToUploads" accept="image/*"><span class="gray-color">Upload Photo</span></div>
+                                                      <!-- <input type="file" name="filename" accept="image/*" class="el-upload__input"> -->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                             <p class="m-b30 madate">Logo</p>
+                                             <div class="m-tb20">
+                                                <i class="el-icon-circle-close profile-remove-icon"></i> 
+                                                <div>
+                                                   <div tabindex="0" class="el-upload el-upload--text">
+                                                      <!----> 
+                                                      <div class="d-flex-center"><img src="https://static.sanar.sa/mis/6e44ed2c9f41cc3cef657dcb3ed09d7c.png" class="avatar-img"><input type="file" name="fileToUpload" id="fileToUploads" accept="image/*"><span class="gray-color">Upload Photo</span></div>
+                                                      <!-- <input type="file" name="filename" accept="image/*" class="el-upload__input"> -->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="el-row" style="margin-left: -20px; margin-right: -20px;">
+                                          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                             <div class="el-form-item">
+                                                <label for="add.en" class="el-form-item__label">Address</label>
+                                                <div class="el-form-item__content">
+                                                   <div class="line-input el-textarea">
+                                                      <textarea autocomplete="off" placeholder="Al Riyadh" class="el-textarea__inner" style="min-height: 75px; height: 75px;"></textarea>
+                                                      <!---->
+                                                   </div>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                             <div class="el-form-item">
+                                                <label for="add.ar" class="el-form-item__label">Address in Arabic</label>
+                                                <div class="el-form-item__content">
+                                                   <div class="line-input el-textarea">
+                                                      <textarea autocomplete="off" placeholder="الرياض" class="el-textarea__inner" style="min-height: 75px; height: 75px;"></textarea>
+                                                      <!---->
+                                                   </div>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                             <div class="el-form-item">
+                                                <label for="copy_right" class="el-form-item__label">Copyright Text</label>
+                                                <div class="el-form-item__content">
+                                                   <div class="line-input el-textarea">
+                                                      <textarea autocomplete="off" placeholder="Copyright text" class="el-textarea__inner" style="min-height: 75px; height: 75px;"></textarea>
+                                                      <!---->
+                                                   </div>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                             <div class="el-form-item">
+                                                <label for="tlink" class="el-form-item__label">Twitter Link</label>
+                                                <div class="el-form-item__content">
+                                                   <div class="line-input el-textarea">
+                                                      <textarea autocomplete="off" placeholder="Twitter link" class="el-textarea__inner" style="min-height: 75px; height: 75px;"></textarea>
+                                                      <!---->
+                                                   </div>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                             <div class="el-form-item">
+                                                <label for="flink" class="el-form-item__label">Facebook Link</label>
+                                                <div class="el-form-item__content">
+                                                   <div class="line-input el-textarea">
+                                                      <textarea autocomplete="off" placeholder="Facebook Link" class="el-textarea__inner" style="min-height: 75px; height: 75px;"></textarea>
+                                                      <!---->
+                                                   </div>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                             <div class="el-form-item">
+                                                <label for="ilink" class="el-form-item__label">Instagram Link</label>
+                                                <div class="el-form-item__content">
+                                                   <div class="line-input el-textarea">
+                                                      <textarea autocomplete="off" placeholder="Instagram Link" class="el-textarea__inner" style="min-height: 75px; height: 75px;"></textarea>
+                                                      <!---->
+                                                   </div>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 20px; padding-right: 20px;">
+                                             <div class="el-form-item">
+                                                <label for="glink" class="el-form-item__label">Google plus Link</label>
+                                                <div class="el-form-item__content">
+                                                   <div class="el-textarea">
+                                                      <textarea autocomplete="off" placeholder="Google plus  Link" class="el-textarea__inner" style="min-height: 75px; height: 75px;"></textarea>
+                                                      <!---->
+                                                   </div>
+                                                   <!---->
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="text-right">
+                                          <button type="button" class="el-button el-button--default">
+                                             <!----><!----><span>Cancel</span>
+                                          </button>
+                                          <button type="button" class="el-button el-button--primary">
+                                             <!----><!----><span>Save</span>
+                                          </button>
+                                       </div>
+                                    </form>
+                                 </div>
+                              </div>
+                           </div>
+                           <!---->
+                        </div>
+                        <!----> <!----> <!----> <!---->
+                     </div>
+                  </div>
+               </div>
+            </main>
+         </section>
+      </div>
+      <script async="" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-EXDwh2adbELTFKlDgn3RXMP648GC12s&amp;sensor=false&amp;libraries=places"></script><script type="text/javascript" src="static/js/manifest.787d0d92fd70cf16874e.js"></script><script type="text/javascript" src="static/js/vendor.6f6ef6bc866762bf29a6.js"></script><script type="text/javascript" src="static/js/app.a27789e3d261f525a01a.js"></script>
+      <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+      <div role="tooltip" id="el-tooltip-4253" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2005; display: none;">
+         Dashboard
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-6070" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2016; display: none;">
+         Package
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-7186" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2020; display: none;">
+         Services
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-3401" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2022; display: none;">
+         Master
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-8916" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2024; display: none;">
+         Settings
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-1459" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2026; display: none;">
+         Employee
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>

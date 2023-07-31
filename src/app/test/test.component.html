@@ -1,0 +1,330 @@
+<div id="app">
+   <section class="el-container">
+      <div>
+         <menu class="menu-bar">
+            <a routerLink="javascript:void(0);" class="toggle-menu">
+               <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span
+                     class="bar bar3"></span></div>
+            </a>
+            <a routerLink="../dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+         </menu>
+         <app-sidebar></app-sidebar>
+         <app-submenu></app-submenu>
+      </div>
+
+      <main class="el-main">
+         <app-header></app-header>
+         <div>
+            <div>
+               <div class="o-flow-x">
+                  <div
+                     class="el-table master-table  el-table--fit el-table--enable-row-hover el-table--enable-row-transition"
+                     style="width: 100%;">
+                     <div class="hidden-columns">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                     </div>
+                    
+
+                     <div class="d-flex justify-content align-items-center">
+                        <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-flask"></i> Test List</span>  
+                        <button id="package" data-toggle="modal" data-target="#add_labtest" (click)="showAddNewTestView()" class="add-btn mr-0 float-right"><i class="fa fa-plus-circle"></i> Add Test</button>
+                     </div>
+
+                     <div class="el-table__body-wrapper is-scrolling-none" style="margin-top: 3%;">
+                        <table id="testtable" class="display" cellspacing="0" width="100%">
+                           <thead>
+                              <tr>
+                                 <th>Test ID</th>
+                                 <th>Test Name</th>
+                                 <th>Test Name in Arabic</th>
+                                 <th>Test Category</th>
+                                 <th>Test Category in Arabic</th>
+                                 <th>Price</th>
+                                 <th></th>
+                              </tr>
+                           </thead>
+
+                           <tbody>
+                              <tr class="el-table__row" *ngFor="let test of individualTestList">
+                                 <td>{{test.serviceId}}</td>
+                                 <td>{{test.serviceName}}</td>
+                                 <td>{{test.serviceNameArabic}}</td>
+                                 <td>{{test.labTestCategoryName}}</td>
+                                 <td>{{test.labTestCategoryNameArabic}}</td>
+                                 <td>
+                                    <div class="cell" id="value">
+                                       <div>SAR {{test.servicePrice}}</div>
+                                    </div>
+
+                                    <!-- <div id="el_input">
+                                       <div class="w50 el-input">
+                                          <input type="number" autocomplete="off" class="el-input__inner">
+                                       </div>
+                                       <button type="button" class="el-button el-button--success is-circle">
+                                          <i class="el-icon-check"></i>
+                                       </button>
+                                    </div> -->
+
+                                 </td>
+                                 <td>
+                                    <button class="cell btn" (click)="edittest(test.serviceId)">
+                                       <i class="icon-pencil ico-pointer edit_test_pencil"></i>
+                                    </button>
+                                 </td>
+                              </tr>
+                           </tbody>
+
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </main>
+   </section>
+</div>
+
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+<div role="tooltip" id="el-tooltip-8995" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2001; display: none;">
+   Accounts
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-5329" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2003; display: none;">
+   Master
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+
+
+
+<div id="add_labtest" class="modal schedule_modal" style="padding-top: 50px;">
+   <div class="modal-content" style="width: 60% !important;">
+      <div class="modal-header" style="border-bottom: unset;" (click)="onClickCloseModel()">
+         <span class="close" (click)="close()">&times;</span>
+         <h2>{{ modalTitle }}</h2>
+      </div>
+      <div class="modal-body">
+         <form class="el-form newform el-form--label-top" id="testForm" (ngSubmit)="postLabTestToServer()"
+            [formGroup]="typeValidationForm">
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="fn.en" class="el-form-item__label">Test Name</label>
+                     <div class="el-form-item__content">
+                        <div class="line-input el-input">
+                           <!-- <input id="serviceName" type="text" autocomplete="off" placeholder="Enter Package Name"
+                              class="el-input__inner"> -->
+
+                           <input type="text" class="el-input__inner" formControlName="serviceName"
+                              [ngClass]="{'is-invalid': type['serviceName'].errors && (type['serviceName'].dirty || type['serviceName'].touched)}"
+                              placeholder="Enter Test Name" />
+
+                           <div
+                              *ngIf="type['serviceName'].errors && (type['serviceName'].dirty || type['serviceName'].touched)"
+                              class="invalid-feedback">
+                              <span *ngIf="type['serviceName'].errors['required']">This value is required.</span>
+                           </div>
+
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="fn.ar" class="el-form-item__label">Test Name in Arabic</label>
+                     <div class="el-form-item__content">
+                        <div class="line-input el-input">
+                           <!-- <input id="serviceNameArabic" type="text" autocomplete="off"
+                              placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
+
+                           <input type="text" class="el-input__inner" formControlName="serviceNameArabic"
+                              [ngClass]="{'is-invalid': type['serviceNameArabic'].errors && (type['serviceNameArabic'].dirty || type['serviceNameArabic'].touched)}"
+                              placeholder="Enter Test Name in Arabic" />
+
+                           <div
+                              *ngIf="type['serviceNameArabic'].errors && (type['serviceNameArabic'].dirty || type['serviceNameArabic'].touched)"
+                              class="invalid-feedback">
+                              <span *ngIf="type['serviceNameArabic'].errors['required']">This value is required.</span>
+                           </div>
+
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="ln.en" class="el-form-item__label">Test Cost</label>
+                     <div class="el-form-item__content">
+                        <div class="line-input el-input">
+                           <input type="text" class="el-input__inner" formControlName="servicePrice"
+                              [ngClass]="{'is-invalid': type['servicePrice'].errors && (type['servicePrice'].dirty || type['servicePrice'].touched)}"
+                              placeholder="Enter Test Cost" />
+                           <div
+                              *ngIf="type['servicePrice'].errors && (type['servicePrice'].dirty || type['servicePrice'].touched)"
+                              class="invalid-feedback">
+                              <span *ngIf="type['servicePrice'].errors['required']">This value is required.</span>
+                           </div>
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="role_id" class="el-form-item__label">Select Category</label>
+                     <div class="el-form-item__content">
+                        <div class="el-select line-input">
+                           <select class="select" (change)="serviceCategorySelected($event)"
+                              formControlName="categoryId"
+                              [ngClass]="{'is-invalid': type['categoryId'].errors && (type['categoryId'].dirty || type['categoryId'].touched)}">
+                              <option value="">Select Category</option>
+                              <option class="el-select-dropdown__item d-flex hover"
+                                 *ngFor='let category of serviceCategories' value={{category.serviceId}}>
+                                 <span class="eloptionpsis">{{category.categoryName}}</span></option>
+                           </select>
+
+                           <div
+                              *ngIf="type['categoryId'].errors && (type['categoryId'].dirty || type['categoryId'].touched)"
+                              class="invalid-feedback">
+                              <span *ngIf="type['categoryId'].errors['required']">This value is required.</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item">
+                     <label for="ln.ar" class="el-form-item__label">Description</label>
+                     <div class="el-form-item__content">
+                        <div class="line-input el-input">
+                           <textarea class="el-input__inner" formControlName="serviceDescription"
+                              [ngClass]="{'is-invalid': type['serviceDescription'].errors && (type['serviceDescription'].dirty || type['serviceDescription'].touched)}"
+                              placeholder="Enter Description">
+                           </textarea>
+
+                           <!-- <div
+                              *ngIf="type['serviceDescription'].errors && (type['serviceDescription'].dirty || type['serviceDescription'].touched)"
+                              class="invalid-feedback">
+                              <span *ngIf="type['serviceDescription'].errors['required']">This value is required.</span>
+                           </div> -->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item">
+                     <label for="ln.ar" class="el-form-item__label">Description in Arabic</label>
+                     <div class="el-form-item__content">
+                        <div class="line-input el-input">
+                           <textarea class="el-input__inner" formControlName="serviceDescriptionArabic"
+                              [ngClass]="{'is-invalid': type['serviceDescriptionArabic'].errors && (type['serviceDescriptionArabic'].dirty || type['serviceDescriptionArabic'].touched)}"
+                              placeholder="Enter Description"></textarea>
+
+                           <!-- <div
+                              *ngIf="type['serviceDescriptionArabic'].errors && (type['serviceDescriptionArabic'].dirty || type['serviceDescriptionArabic'].touched)"
+                              class="invalid-feedback">
+                              <span *ngIf="type['serviceDescriptionArabic'].errors['required']">This value is
+                                 required.</span>
+                           </div> -->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="ln.ar" class="el-form-item__label">Instruction</label>
+                     <div class="el-form-item__content">
+                        <div class="line-input el-input">
+                           <!-- <textarea id="instructions" style="border:1px solid #dcdfe6" autocomplete="off"
+                              placeholder="Enter Instruction" class="el-input__inner"></textarea> -->
+
+
+                           <textarea class="el-input__inner" formControlName="instructions"
+                              [ngClass]="{'is-invalid': type['instructions'].errors && (type['instructions'].dirty || type['instructions'].touched)}"
+                              placeholder="Enter Instruction"></textarea>
+
+                           <div
+                              *ngIf="type['instructions'].errors && (type['instructions'].dirty || type['instructions'].touched)"
+                              class="invalid-feedback">
+                              <span *ngIf="type['instructions'].errors['required']">This value is required.</span>
+                           </div>
+                        </div>
+
+                     </div>
+                  </div>
+               </div>
+
+               <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+                  <div class="el-form-item is-required">
+                     <label for="ln.ar" class="el-form-item__label">Instruction in Arabic</label>
+                     <div class="el-form-item__content">
+                        <div class="line-input el-input">
+                           <textarea class="el-input__inner" formControlName="instructionsArabic"
+                              [ngClass]="{'is-invalid': type['instructionsArabic'].errors && (type['instructionsArabic'].dirty || type['instructionsArabic'].touched)}"
+                              placeholder="Enter Instruction in Arabic"></textarea>
+
+                           <div
+                              *ngIf="type['instructionsArabic'].errors && (type['instructionsArabic'].dirty || type['instructionsArabic'].touched)"
+                              class="invalid-feedback">
+                              <span *ngIf="type['instructionsArabic'].errors['required']">This value is required.</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               
+                  <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                    <div class="el-form-item is-required">
+                      <label for="fn.en" class="el-form-item__label">Show in Patient App</label>
+                      <div class="el-form-item__content">
+                        <!-- <div class="line-input el-input">
+                          <input type="file" id="files_service" accept="image/*" class="form-control" (change)="handleFileInput($event.target)" />
+                        </div> -->
+                        <div class="cell">
+                          <label class="switch">
+                             <input type="checkbox" value="0" (change)="availForCustomer($event.target)" checked>
+                             <span class="slider round"></span>
+                          </label>
+                       </div>
+                      </div>
+                    </div>
+                  </div>
+                
+
+
+            </div>
+            <br />
+
+            <div class="text-right">
+               <!-- <button type="button" class="el-button el-button--primary save" (click)="postNewLabTestClicked()">
+                  <span>Save</span>
+               </button> -->
+
+               <button type="submit" class="btn btn-primary el-button el-button--primary save"
+                  [disabled]="!this.typeValidationForm.valid">
+                  Submit
+               </button>
+
+            </div>
+         </form>
+      </div>
+      <div class="modal-footer">
+         <h3></h3>
+      </div>
+   </div>
+</div>

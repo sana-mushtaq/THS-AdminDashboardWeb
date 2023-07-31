@@ -1,0 +1,375 @@
+<div id="app">
+  <section class="el-container">
+    <div>
+      <menu class="menu-bar">
+        <a href="javascript:void(0);" class="toggle-menu">
+          <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+        </a>
+        <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+      </menu>
+
+      <app-sidebar></app-sidebar>
+    </div>
+    <main class="el-main dashboard">
+      <div>
+        <div class="row profiletop">
+          <div class="col-md-12">
+            <button type="button" routerLink="../patientlist" class="mb-3 el-button back-btn el-button--default el-button--small is-plain">
+              <span><i class="icon-arrow-left h2"></i></span>
+            </button>
+          </div>
+          <div class="col-sm-6">
+            <h3>Profile</h3>
+            <div class="el-card customtabs is-always-shadow">
+              <div class="el-card__body pt-0">
+                <div class="el-tabs el-tabs--top el-tabs--border-card">
+                  <div class="el-tabs__content">
+                    <div role="tabpanel" id="pane-0" aria-labelledby="tab-0" class="el-tab-pane" style="">
+                      <!-- <a routerLink="../edit-nurse" class="edit-det"><strong>Edit Details</strong></a> -->
+                      <div>
+                        <div>
+                          <div class="row d-flex justify-content-center align-items-center" style="padding-top: 15px; min-height: 190px; max-height: 190px">
+                            <div class="col-lg-7">
+                              <div class="profile-det">
+                                <span class="avtar4" style="margin-top: 5px"
+                                  ><a href="assets/images/user.svg" target="_blank"><img src="assets/images/user.svg" class="image-cover" /></a
+                                ></span>
+                                <div>
+                                  <h4 class="primary-color">
+                                    {{ patientDetails[0].firstName }} - <span style="color: #457085">{{ patientDetails[0].lastName }}</span>
+                                  </h4>
+                                  <h5></h5>
+                                  <h6><i class="fa fa-envelope"></i> {{ patientDetails[0].email }}</h6>
+                                  <h6><i class="fa fa-phone"></i> +966 {{ patientDetails[0].mobileNumber }}</h6>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-5 view-table">
+                              <table class="table table-borderless">
+                                <tbody>
+                                  <tr>
+                                    <td>Nationality</td>
+                                    <td>{{ patientDetails[0].nationalId }}</td>
+                                  </tr>
+
+                                  <tr>
+                                    <td>Date of Birth</td>
+                                    <td>{{ patientDetails[0].dob }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Gender</td>
+                                    <td>{{ patientDetails[0].genderText }}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+
+                          <!---->
+                        </div>
+                        <!---->
+                      </div>
+                    </div>
+                    <!---->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <h3>Profile History</h3>
+            <div class="el-card customtabs is-always-shadow">
+              <div class="el-card__body pt-0">
+                <div class="el-tabs el-tabs--top el-tabs--border-card">
+                  <div class="el-tabs__content">
+                    <div role="tabpanel" id="pane-0" aria-labelledby="tab-0" class="el-tab-pane" style="">
+                      <!-- <a routerLink="../edit-nurse" class="edit-det"><strong>Edit Details</strong></a> -->
+                      <div>
+                        <div>
+                          <div class="row d-flex justify-content-center align-items-center" style="padding-top: 15px; border-radius: 10px">
+                            <div class="dflex">
+                              <div class="bgcolor_patient">
+                                <div>
+                                  <h2 class="totaltxt"><i class="fa fa-calendar"></i><br />Total Appointments</h2>
+                                  <h5 *ngIf="patientAppointmentDetails == null" class="totalcount">0</h5>
+                                  <h5 *ngIf="patientAppointmentDetails != null" class="totalcount">{{ patientAppointmentDetails.length }}</h5>
+                                </div>
+                              </div>
+
+                              <div class="bgcolor_patient">
+                                <div>
+                                  <h2 class="totaltxt"><i class="fa-solid fa-dollar-sign"></i><br />Total Spend</h2>
+                                  <h5 class="totalcount">N/A</h5>
+                                </div>
+                              </div>
+
+                              <div class="bgcolor_patient">
+                                <div>
+                                  <h2 class="totaltxt"><i class="icon-wallet"></i><br />Wallet Balance</h2>
+                                  <h5 *ngIf="patientDetails == null" class="totalcount">SAR 0</h5>
+                                  <h5 *ngIf="patientDetails != null" class="totalcount">SAR {{ patientDetails[0].walletBalance }}</h5>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!---->
+                        </div>
+
+                        <!---->
+                      </div>
+                    </div>
+                    <!---->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12" *ngIf="patientDependents != null || patientDependents.length > 0">
+            <div class="col-md-12 mb-2 p-0 m-0 row align-items-center">
+              <div class="col-md-6 p-0 m-0">
+                <h3>Dependents</h3>
+              </div>
+              <div class="col-md-6 text-right p-0 m-0">
+                <button class="add-btn" id="add_dependent" (click)="showNewDependentView()">Add Dependents</button>
+              </div>
+            </div>
+            <div class="el-card customtabs is-always-shadow">
+              <div class="el-card__body pt-0">
+                <div class="el-tabs el-tabs--top el-tabs--border-card">
+                  <div class="el-tabs__content">
+                    <div role="tabpanel" id="pane-0" aria-labelledby="tab-0" class="el-tab-pane" style="">
+                      <!-- <a routerLink="../edit-nurse" class="edit-det"><strong>Edit Details</strong></a> -->
+                      <div class="row" style="padding-top: 15px">
+                        <div class="col-md-2" *ngFor="let dependents of patientDependents">
+                          <div class="imagecover">
+                            <img src="assets/images/user.svg" />
+                            <h4>{{ dependents.firstName }} - {{ dependents.lastName }}</h4>
+                            <h6>{{ dependents.patientDisplayId }}</h6>
+                            <h6>{{ dependents.genderText }}</h6>
+                            <h5>{{ dependents.email }}</h5>
+                            <h6>{{ dependents.nationalId }}</h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!---->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div>
+              <div class="o-flow-x">
+                <div
+                  class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+                  style="width: 100%"
+                >
+                  <div class="hidden-columns">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div class="new_side"></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                  <div class="row" style="justify-content: space-between; margin-left: 10px">
+                    <ul class="nav">
+                      <li class="nav-item">
+                        <a class="nav-link active" href="javascript:void(0)" (click)="activerequests()">Ongoing Appointments</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)" (click)="closedrequests()">Completed Appointments</a>
+                      </li>
+                    </ul>
+                    <!-- <div class="text-right mb-5">
+                                <button class="add-btn new_btn" data-toggle="modal" data-target="#exampleModal">Add New Promotion</button>
+                            </div> -->
+                  </div>
+
+                  <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%">
+                    <table id="appointmentstable" class="display" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th>SNo</th>
+                          <th>Appointment ID</th>
+                          <th>Transaction/Booking Date &amp; Time</th>
+                          <th>Patient Name</th>
+                          <th>Mobile</th>
+                          <th>Email ID</th>
+                          <th>Slot Date &amp; Time</th>
+                          <th>Booking Status</th>
+                          <th>Status</th>
+                          <th>Patient Source</th>
+                          <th>Collected Amount</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr
+                          *ngFor="let appointment of appointmentList; let i = index"
+                          class="el-table__row"
+                          (click)="viewAppointmentDetails(appointment)"
+                        >
+                          <td>{{ i + 1 }}</td>
+                          <td>
+                            <div class="cell">
+                              <p>{{ appointment.appointmentDisplayId }}</p>
+                              <p>{{ appointment.serviceName }}</p>
+                              <p>{{ appointment.serviceGender }}</p>
+                            </div>
+                          </td>
+                          <td>{{ appointment.appointmentBookingDate }}</td>
+                          <td style="padding: 0 !important">
+                            <div class="cell" style="padding: 0px !important">
+                              <div class="d-flex-center" style="padding: 0px !important">
+                                <span class="avtar3" style="margin-right: 3px !important"><img src="assets/images/user.svg" class="image-cover" /></span>
+                                <span title="Alhussian">{{ appointment.primaryPatientFirstName }} {{ appointment.primaryPatientLastName }}</span>
+                              </div>
+                            </div>
+                          </td>
+                          <td>{{ appointment.patientMobile }}</td>
+                          <td>{{ appointment.patientEmail }}</td>
+                          <td>
+                            <div class="cell">
+                              <p>{{ appointment.appointmentDate }}</p>
+                              <p>{{ appointment.appointmentTime }}</p>
+                            </div>
+                          </td>
+                          <td>{{ appointment.appointmentStatusMessage }}</td>
+                          <td>{{ appointment.appointmentStage }}</td>
+                          <td>{{ appointment.patientSource }}</td>
+                          <td>{{ appointment.servicePrice | number : "1.2-2" }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+  <div id="newDependentModal" class="modal schedule_modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLabel">Add New Dependent</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="el-row mt-3" style="margin-left: -15px; margin-right: -15px">
+            <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+              <div class="el-form-item is-required">
+                <label for="fn.en" class="el-form-item__label">First Name</label>
+                <div class="el-form-item__content">
+                  <div class="line-input el-input">
+                    <input type="text" class="el-input__inner form-control" placeholder="Enter First Name" id="patientFirstName" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+              <div class="el-form-item is-required">
+                <label for="fn.en" class="el-form-item__label">Last Name</label>
+                <div class="el-form-item__content">
+                  <div class="line-input el-input">
+                    <input type="text" class="el-input__inner form-control" placeholder="Enter Last Name" id="patientLastName" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+              <div class="el-form-item is-required">
+                <label for="fn.en" class="el-form-item__label">Mobile</label>
+                <div class="el-form-item__content">
+                  <div class="line-input el-input">
+                    <input type="text" class="el-input__inner form-control" placeholder="Enter Mobile" id="patientMobile" />
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+              <div class="el-form-item is-required">
+                <label for="fn.en" class="el-form-item__label">Email</label>
+                <div class="el-form-item__content">
+                  <div class="line-input el-input">
+                    <input type="text" class="el-input__inner form-control" placeholder="Enter Email Id" id="patientEmail" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+              <div class="el-form-item is-required">
+                <label for="fn.en" class="el-form-item__label">Gender</label>
+                <div class="el-form-item__content">
+                  <div class="line-input el-input">
+                    <select class="form-control" (change)="DependentgenderSelected($event.target)">
+                      <option [value]="null">-Select-</option>
+                      <option [value]="1">Male</option>
+                      <option [value]="2">Female</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+              <div class="el-form-item is-required">
+                <label for="fn.en" class="el-form-item__label">DOB</label>
+                <div class="el-form-item__content">
+                  <div class="line-input el-input">
+                    <input type="date" class="el-input__inner form-control" placeholder="Enter DOB" id="patientDob" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+              <div class="el-form-item is-required">
+                <label for="fn.en" class="el-form-item__label">National ID</label>
+                <div class="el-form-item__content">
+                  <div class="line-input el-input">
+                    <input type="text" class="el-input__inner form-control" placeholder="Enter National ID" id="patientNationalId" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer text-right">
+          <button type="button" class="btn btn-warning" data-dismiss="modal" (click)="close()">Cancel</button>
+          <button type="button" class="el-button el-button--primary save" (click)="postNewDependent()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script
+  async=""
+  defer="defer"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-EXDwh2adbELTFKlDgn3RXMP648GC12s&amp;sensor=false&amp;libraries=places"
+></script>
+<script type="text/javascript" src="static/js/manifest.787d0d92fd70cf16874e.js"></script>
+<script type="text/javascript" src="static/js/vendor.6f6ef6bc866762bf29a6.js"></script>
+<script type="text/javascript" src="static/js/app.a27789e3d261f525a01a.js"></script>
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0"></div>
+<div
+  role="tooltip"
+  id="el-tooltip-2340"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2001; display: none"
+>
+  Employee
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>

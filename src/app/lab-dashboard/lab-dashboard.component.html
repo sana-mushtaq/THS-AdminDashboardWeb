@@ -1,0 +1,275 @@
+<div id="app">
+   <section class="el-container">
+      <div>
+
+         <app-sidebar></app-sidebar>
+         <nav class="nav-bar-none">
+            <!---->
+         </nav>
+      </div>
+
+      <main class="el-main dashboard">
+         <app-header></app-header>
+         <div>
+            <div>
+               <div>
+                  <div class="el-card is-always-shadow">
+                     <!---->
+                     <div class="el-card__body">
+                        <ul class="dash-list ">
+                           <li>
+                              <div class="light-blue-bg"><i class="icon-team"></i></div>
+                              <span>
+                                 Today's Appointments
+                                 <h3>{{todayAppointmentCount}}</h3>
+                                 <!-- <h3>0 <small>Today's</small></h3> -->
+                              </span>
+                           </li>
+                           <li>
+                              <div class="green-bg"><i class="icon-patients-status"></i></div>
+                              <span>
+                                 Total Appointments
+                                 <h3>{{totalAppointmentsCount}}</h3>
+                              </span>
+                           </li>
+                           <!-- <li>
+                              <div class="pink-bg"><i class="icon-money-bag"></i></div>
+                              <span>
+                                 Number of Patients
+                                 <h3>{{totalPatientsCount}}</h3>
+                              </span>
+                           </li> -->
+                           <li>
+                              <div class="yellow-bg"><i class="icon-doctor-bag"></i></div>
+                              <span>
+                                 Total Number of Staffs
+                                 <h3>{{totalStaffsCount}}</h3>
+                              </span>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="m-t30 el-row" style="margin-left: -15px; margin-right: -15px;">
+                     <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-16 el-col-xl-16"
+                        style="padding-left: 15px; padding-right: 15px;">
+                        <div>
+                           <div>
+                              <div class="el-card is-always-shadow">
+                                 <!---->
+                                 <div class="el-card__body card__body pb-4">
+                                    <div class="map-min-hgt ">
+                                       <div class="chartjs-size-monitor"
+                                          style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                          <div class="chartjs-size-monitor-expand"
+                                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                             <div
+                                                style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
+                                             </div>
+                                          </div>
+                                          <div class="chartjs-size-monitor-shrink"
+                                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                             <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                          </div>
+                                       </div>
+                                       <h4>Employee V/S Revenue</h4>
+                                       <div class="d-flex-center m-t10 el-row"
+                                          style="margin-left: -10px; margin-right: -10px;">
+                                          <div
+                                             class="el-col el-col-24 el-col-xs-20 el-col-sm-12 el-col-md-12 el-col-lg-5 el-col-xl-5"
+                                             style="padding-left: 10px; padding-right: 10px;">
+                                             <div class="el-select">
+                                                <select class="select"
+                                                   style="border: 1px solid #dcdfe6;border-radius: 5px;">
+                                                   <option>Select</option>
+                                                   <option class="el-select-dropdown__item"><span>This Week</span>
+                                                   </option>
+                                                   <option class="el-select-dropdown__item"><span>This Month</span>
+                                                   </option>
+                                                   <option class="el-select-dropdown__item"><span>Last 6 Months</span>
+                                                   </option>
+                                                   <option class="el-select-dropdown__item"><span>Last 1 Year</span>
+                                                   </option>
+                                                </select>
+
+                                             </div>
+                                          </div>
+                                          <div
+                                             class="text-right el-col el-col-24 el-col-xs-24 el-col-sm-18 el-col-md-19 el-col-lg-19 el-col-xl-19"
+                                             style="padding-left: 10px; padding-right: 10px;">
+                                             <div class="indicator"><span class="indi-blu">Doctor</span> <span
+                                                   class="indi-yellow">Physiotherapist</span> <span
+                                                   class="indi-pink">Nurse</span> <span class="indi-green">Lab
+                                                   Tech</span></div>
+                                          </div>
+                                       </div>
+
+                                       <div id='myChart' style="width: 100%;height: 90%;"></div>
+
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div
+                        class="mm-mt20 el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-8 el-col-xl-8"
+                        style="padding-left: 15px; padding-right: 15px;">
+                        <div class="el-card is-always-shadow">
+                           <!---->
+                           <div class="el-card__body pb-4">
+                              <div class="map-min-hgt ">
+                                 <h4>Recent 5 Appointments</h4>
+
+                                 <div class="item" *ngFor="let appointment of latestAppointments">
+                                    <div class="time-app"></div>
+                                    <img src="assets/images/img_avatar2.png" class="avtar">
+                                    <div class="cont">
+                                       <span class="app-tme">{{appointment.appointmentBookingDate}}</span>
+                                       <h6>{{appointment.primaryPatientFirstName}}
+                                          {{appointment.primaryPatientLastName}}</h6>
+                                       <div>{{appointment.serviceName}}</div>
+                                       <small></small>
+                                    </div>
+                                 </div>
+
+                                 <!-- <div class="item">
+                                    <div class="time-app"></div>
+                                    <img src="assets/images/img_avatar2.png" class="avtar">
+                                    <div class="cont">
+                                       <span class="app-tme">08:00 AM</span>
+                                       <h6>Ohoud Almugairen</h6>
+                                       <div>ohoud.almugairen@gmail.com</div>
+                                       <small></small>
+                                    </div>
+                                 </div>
+                                 <div class="item">
+                                    <div class="time-app"></div>
+                                    <img src="assets/images/img_avatar2.png" class="avtar">
+                                    <div class="cont">
+                                       <span class="app-tme">05:00 AM</span>
+                                       <h6>Fahad Almutairi</h6>
+                                       <div>fra4994@hotmail.com</div>
+                                       <small></small>
+                                    </div>
+                                 </div>
+                                 <div class="item">
+                                    <div class="time-app"></div>
+                                    <img src="assets/images/img_avatar2.png" class="avtar">
+                                    <div class="cont">
+                                       <span class="app-tme">07:00 AM</span>
+                                       <h6>Meshal Alharbi</h6>
+                                       <div>h_s_30@hotmail.com</div>
+                                       <small></small>
+                                    </div>
+                                 </div>
+                                 <div class="item">
+                                    <div class="time-app"></div>
+                                    <img src="assets/images/img_avatar2.png" class="avtar">
+                                    <div class="cont">
+                                       <span class="app-tme">01:00 PM</span>
+                                       <h6>Noura Almatar</h6>
+                                       <div>Anoud@samaa.co</div>
+                                       <small></small>
+                                    </div>
+                                 </div> -->
+
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="m-t15 el-row" style="margin-left: -15px; margin-right: -15px;">
+                     <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12"
+                        style="padding-left: 15px; padding-right: 15px;">
+                        <div class="el-card is-always-shadow">
+                           <!---->
+                           <div class="el-card__body pb-4">
+                              <div class="chartjs-size-monitor"
+                                 style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                 <div class="chartjs-size-monitor-expand"
+                                    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                 </div>
+                                 <div class="chartjs-size-monitor-shrink"
+                                    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                 </div>
+                              </div>
+                              <h4>Service V/S Revenue</h4>
+                              <div class="d-flex-center m-t10 el-row" style="margin-left: -12px; margin-right: -12px;">
+                                 <div
+                                    class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-16 el-col-lg-10 el-col-xl-5"
+                                    style="padding-left: 12px; padding-right: 12px;">
+                                    <div class="el-select">
+                                       <select class="select" style="border: 1px solid #dcdfe6;border-radius: 5px;">
+                                          <option>Select</option>
+                                          <option class="el-select-dropdown__item"><span>This Week</span></option>
+                                          <option class="el-select-dropdown__item"><span>This Month</span></option>
+                                          <option class="el-select-dropdown__item"><span>Last 6 Months</span></option>
+                                          <option class="el-select-dropdown__item"><span>Last 1 Year</span></option>
+                                       </select>
+                                    </div>
+                                 </div>
+                                 <div
+                                    class="text-right el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-20 el-col-lg-20 el-col-xl-19"
+                                    style="padding-left: 12px; padding-right: 12px;">
+                                    <div class="indicator"><span class="indi-home-srvc">Home Service</span> <span
+                                          class="indi-video">Video</span> <span class="indi-chat">Chat</span></div>
+                                 </div>
+                              </div>
+
+                              <div id='myChart2' style="width: 100%;height: 50vh"></div>
+
+
+                           </div>
+                        </div>
+                     </div>
+                     <div
+                        class="mm-mt20 el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12"
+                        style="padding-left: 15px; padding-right: 15px;">
+                        <div class="el-card is-always-shadow">
+                           <!---->
+                           <div class="el-card__body">
+                              <div class="chartjs-size-monitor"
+                                 style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                 <div class="chartjs-size-monitor-expand"
+                                    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                 </div>
+                                 <div class="chartjs-size-monitor-shrink"
+                                    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                 </div>
+                              </div>
+                              <h4>Month V/S Appointments</h4>
+                              <div class="d-flex-center m-t10 el-row" style="margin-left: -12px; margin-right: -12px;">
+                                 <!---->
+                                 <div
+                                    class="text-right el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-20 el-col-lg-20 el-col-xl-19"
+                                    style="padding-left: 12px; padding-right: 12px;">
+                                    <div style="height: 40px;"></div>
+                                 </div>
+                              </div>
+                              <div id='myChart3' style="width: 100%;height: 50vh"></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </main>
+   </section>
+</div>
+
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+<div role="tooltip" id="el-tooltip-5426" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2004; display: none;">
+   Dashboard
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-9709" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2010; display: none;">
+   Employee
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>

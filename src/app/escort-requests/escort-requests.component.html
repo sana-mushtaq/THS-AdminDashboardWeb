@@ -1,0 +1,257 @@
+<div id="app">
+    <section class="el-container">
+      <div>
+        <menu class="menu-bar">
+          <a routerLink="javascript:void(0);" class="toggle-menu">
+            <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+          </a>
+          <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+        </menu>
+        <app-sidebar></app-sidebar>
+        <app-submenu></app-submenu>
+      </div>
+      <main class="el-main">
+        <app-header></app-header>        
+        <div>
+          <div>
+            <div>
+              <div class="o-flow-x">
+                <div
+                  class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+                  style="width: 100%"
+                >
+                  <div class="hidden-columns">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div class="new_side"></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+  
+                  <div class="col-lg-12">
+                    <div class="row" style="justify-content: space-between">
+                      <ul class="nav">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="javascript:void(0)" (click)="NewRequests()">New</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="javascript:void(0)" (click)="ActiveRequests()">Active</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="javascript:void(0)" (click)="ClosedRequests()">Closed</a>
+                        </li>
+                      </ul>
+
+                    </div>
+                  </div>
+  
+                  <!-- New Requests-->
+                  <div class="in_ac_cards new_card_space">
+                    <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%; width: 100%">
+                      <table id="EscortNew" class="display" cellspacing="0" style="width: 100%">
+                        <thead>
+                          <tr>
+                            <th>Appoinment ID</th>
+                            <th>Booking Date & Time</th>
+                            <th>Service Date & Time</th>
+                            <th>Patient Name</th>
+                            <th>Patient Contact No</th>
+                            <th>Patient Address</th>
+                          </tr>
+                        </thead>
+  
+                        <tbody>
+                          <tr *ngFor="let appointment of newAppointmentList; let i = index" class="el-table__row">
+                            <td (click)="viewAppointmentDetails(appointment)" class="text-center">
+                              {{ appointment.appointmentDisplayId }} <br />
+                              <span class="badge badge-success" style="font-size: 12px; font-weight: 500">View</span>
+                            </td>
+                            <td>
+                              {{ appointment.appointmentBookingDate }}
+                            </td>
+                            <td>
+                              <div class="cell">
+                                <p>{{ appointment.appointmentDate }}</p>
+                                <p>{{ appointment.appointmentTime }}</p>
+                              </div>
+                            </td>
+  
+                            <td>{{ appointment.primaryPatientFirstName }} {{ appointment.primaryPatientLastName }}</td>
+                            <td>{{ appointment.patientMobile }}</td>
+                            <td style="width: 20%">{{ appointment.address }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+  
+                  <!-- ACTIVE REQUESTS -->
+                  <div class="in_ac_cards active_card_space">
+                    <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%; width: 100%">
+                      <table id="EscortActive" class="display" cellspacing="0" style="width: 100%">
+                        <thead>
+                          <tr>
+                            <th>Appoinment ID</th>
+                            <th>Booking Date & Time</th>
+                            <th>Service Date & Time</th>
+                            <th>Patient Name</th>
+                            <th>Patient Contact No</th>
+                            <th>Patient Address</th>
+                          </tr>
+                        </thead>
+  
+                        <tbody>
+                          <tr *ngFor="let appointment of activeAppointmentList; let i = index" class="el-table__row">
+                            <td (click)="viewAppointmentDetails(appointment)" class="text-center">
+                              {{ appointment.appointmentDisplayId }} <br />
+                              <span class="badge badge-success" style="font-size: 12px; font-weight: 500">View</span>
+                            </td>
+                            <td>
+                              {{ appointment.appointmentBookingDate }}
+                            </td>
+                            <td>
+                              <div class="cell">
+                                <p>{{ appointment.appointmentDate }}</p>
+                                <p>{{ appointment.appointmentTime }}</p>
+                              </div>
+                            </td>
+                            <td>{{ appointment.primaryPatientFirstName }} {{ appointment.primaryPatientLastName }}</td>
+                            <td>{{ appointment.patientMobile }}</td>
+                            <td style="width: 20%">{{ appointment.address }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+  
+                  <!-- CLOSED REQUESTS -->
+  
+                  <div class="in_ac_cards inactive_card_space">
+                    <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%; width: 100%">
+                      <table id="EscortClosed" class="display" cellspacing="0" style="width: 100%">
+                        <thead>
+                          <tr>
+                            <th>Appoinment ID</th>
+                            <th>Booking Date & Time</th>
+                            <th>Service Date & Time</th>
+                            <th>Patient Name</th>
+                            <th>Patient Contact No</th>
+                            <th>Patient Address</th>
+                          </tr>
+                        </thead>
+  
+                        <tbody>
+                          <tr *ngFor="let appointment of closedAppointmentList; let i = index" class="el-table__row">
+                            <td (click)="viewAppointmentDetails(appointment)" class="text-center">
+                              {{ appointment.appointmentDisplayId }} <br />
+                              <span class="badge badge-success" style="font-size: 12px; font-weight: 500">View</span>
+                            </td>
+                            <td>
+                              {{ appointment.appointmentBookingDate }}
+                            </td>
+                            <td>
+                              <div class="cell">
+                                <p>{{ appointment.appointmentDate }}</p>
+                                <p>{{ appointment.appointmentTime }}</p>
+                              </div>
+                            </td>  
+                            <td>{{ appointment.primaryPatientFirstName }} {{ appointment.primaryPatientLastName }}</td>
+                            <td>{{ appointment.patientMobile }}</td>
+                            <td style="width: 20%">{{ appointment.address }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
+  </div>
+  <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0"></div>
+  <div
+    role="tooltip"
+    id="el-tooltip-7343"
+    aria-hidden="true"
+    class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2005; display: none"
+  >
+    Employee
+    <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+  </div>
+  <div
+    role="tooltip"
+    id="el-tooltip-7647"
+    aria-hidden="true"
+    class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2010; display: none"
+  >
+    Patient
+    <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+  </div>
+  <div
+    role="tooltip"
+    id="el-tooltip-9477"
+    aria-hidden="true"
+    class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2028; display: none"
+  >
+    Appointment
+    <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+  </div>
+  <div
+    role="tooltip"
+    id="el-tooltip-9129"
+    aria-hidden="true"
+    class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2030; display: none"
+  >
+    Accounts
+    <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+  </div>
+  
+  <!-- The Modal -->
+  <div id="assign_lab" class="modal schedule_modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: unset">
+        <span class="close" (click)="close()">&times;</span>
+        <h2>Assign Booking to Another Lab</h2>
+      </div>
+      <div class="modal-body">
+        <div class="" style="padding-left: 15px; padding-right: 15px">
+          <form class="el-form">
+            <div class="el-form-item is-required">
+              <label for="role_id" class="el-form-item__label">Select Lab</label>
+              <div class="el-form-item__content">
+                <div class="el-select line-input">
+                  <select class="select" (change)="setServiceProvider($event.target)">
+                    <option>Select Lab</option>
+                    <option *ngFor="let lab of insuranceList" value="{{ lab.insuranceProviderId }}">{{ lab.insuranceName }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="m-b30 m-t30 el-row">
+            <div class="el-col el-col-24">
+              <button type="button" class="el-button btn-block el-button--primary" (click)="BookToAnotherLab()">
+                <span>Confirm</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <h3></h3>
+      </div>
+    </div>
+  </div>
+  

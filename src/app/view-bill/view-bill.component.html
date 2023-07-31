@@ -1,0 +1,145 @@
+
+<div id="app">
+         <section class="el-container">
+            <div>
+               <menu class="menu-bar">
+                  <a routerLink="javascript:void(0);" class="toggle-menu">
+                     <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+                  </a>
+                  <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+               </menu>
+               <app-sidebar></app-sidebar>
+               <nav class="nav-bar">
+                  <a routerLink="dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png" width="60%"></a> 
+                  <ul>
+                     <li><a routerLink="../bill-list" class="router-link-exact-active active blue-text"><i class="icon-invoice2"></i> Bill List
+                        </a>
+                     </li>
+                  </ul>
+               </nav>
+            </div>
+            <main class="el-main">
+               <app-header></app-header>
+               <div>
+                  <!----> 
+                  <div>
+                     <div class="el-card m-t20 is-always-shadow">
+                        <!---->
+                        <div class="el-card__body">
+                           <div class="el-row" style="margin-left: -5px; margin-right: -5px;">
+                              <div class="el-col el-col-24 el-col-xs-24 el-col-sm-10 el-col-md-10 el-col-lg-10 el-col-xl-10" style="padding-left: 5px; padding-right: 5px;">
+                                 <ul class="bill-list">
+                                    <li><span>Hospital name :</span> <span>Taib Home Medical Care Company - Riyadh</span></li>
+                                    <li><span>Patient name :</span> <span>Lama Saleh</span></li>
+                                    <li><span>Invoice No :</span> <span>C-APP03221103018</span></li>
+                                    <li><span>Patient ID :</span> <span>PAT5Wp2ntA</span></li>
+                                    <li><span>Appointment ID :</span> <span>APP03221103018</span></li>
+                                    <li><span>Transaction ID :</span> <span>C-APP03221103018</span></li>
+                                 </ul>
+                              </div>
+                              <div class="text-center el-col el-col-24 el-col-xs-24 el-col-sm-4 el-col-md-4 el-col-lg-4 el-col-xl-4" style="padding-left: 5px; padding-right: 5px;"><img class="image-cover1 max-hit"></div>
+                              <div class="pull-right text-right el-col el-col-24 el-col-xs-24 el-col-sm-10 el-col-md-10 el-col-lg-10 el-col-xl-10" style="padding-left: 5px; padding-right: 5px;">
+                                 <ul class="bill-list">
+                                    <li><span>Date :</span> <span>08-03-2022</span></li>
+                                    <li><span>Start Time :</span> <span>3:00 PM</span></li>
+                                    <li><span>End Time :</span> <span>16:00</span></li>
+                                    <li><span>Reference ID :</span> <span></span></li>
+                                    <li><span>ServiceType :</span> <span>Home Visit</span></li>
+                                 </ul>
+                              </div>
+                           </div>
+                           <div class="main-table m-t30">
+                              <div class="table-head gray-bg">
+                                 <div class="table-row">
+                                    <div class="table-col">Patient Details</div>
+                                    <div class="table-col">Medical Record No</div>
+                                    <div class="table-col">Nationality</div>
+                                    <div class="table-col">Identity No</div>
+                                    <div class="table-col">Booking ID</div>
+                                 </div>
+                              </div>
+                              <div class="table-body"></div>
+                           </div>
+                           <div class="main-table service-table">
+                              <div class="table-body">
+                                 <!----> <!----> 
+                                 <div class="table-row">
+                                    <div class="table-col">Number of Units</div>
+                                    <div class="table-col">1</div>
+                                 </div>
+                                 <div class="table-row">
+                                    <div class="table-col">Unit Price</div>
+                                    <div class="table-col">SAR 355.00</div>
+                                 </div>
+                                 <div class="table-row">
+                                    <div class="table-col">Gross Price</div>
+                                    <div class="table-col">SAR 355.00</div>
+                                 </div>
+                                 <div class="table-row">
+                                    <div class="table-col">Discount</div>
+                                    <div class="table-col">SAR 35.5</div>
+                                 </div>
+                                 <div class="table-row">
+                                    <div class="table-col">Promotion Discount</div>
+                                    <div class="table-col">SAR 35.5</div>
+                                 </div>
+                                 <div class="table-row">
+                                    <div class="table-col">Promotion Code</div>
+                                    <div class="table-col">U1H</div>
+                                 </div>
+                                 <div class="table-row">
+                                    <div class="table-col">Net Price</div>
+                                    <div class="table-col">SAR 319.50</div>
+                                 </div>
+                                 <!----> <!----> <!----> <!----> <!----> <!---->
+                              </div>
+                           </div>
+                           <div class="main-table">
+                              <div class="table-body">
+                                 <div class="table-row">
+                                    <div class="table-col">
+                                       <span>Total Patient Price Including VAT</span> <!---->
+                                    </div>
+                                    <div class="table-col">
+                                       <span>SAR 319.5</span> <!---->
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="main-table">
+                              <div class="table-head gray-bg">
+                                 <div class="table-row">
+                                    <div class="table-col">Collection Summary</div>
+                                 </div>
+                              </div>
+                              <div class="table-body">
+                                 <div class="table-row">
+                                    <div class="table-col">
+                                       <span>Total Patient Price Including VAT</span> <!----> <!----> 
+                                       <p class="m-t10">PG Collection</p>
+                                    </div>
+                                    <div class="table-col">
+                                       <span>SAR 319.5</span> <!----> <!----> 
+                                       <p class="m-t10">SAR 319.5</p>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!---->
+               </div>
+            </main>
+         </section>
+      </div>
+      <script async="" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-EXDwh2adbELTFKlDgn3RXMP648GC12s&amp;sensor=false&amp;libraries=places"></script><script type="text/javascript" src="static/js/manifest.787d0d92fd70cf16874e.js"></script><script type="text/javascript" src="static/js/vendor.6f6ef6bc866762bf29a6.js"></script><script type="text/javascript" src="static/js/app.a27789e3d261f525a01a.js"></script>
+      <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+      <div role="tooltip" id="el-tooltip-3122" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2001; display: none;">
+         Appointment
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-7128" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2003; display: none;">
+         Accounts
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>

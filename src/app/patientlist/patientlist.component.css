@@ -1,0 +1,15 @@
+.modal-dialog {
+    max-width: inherit ! important;
+}
+.modal-header {
+    display: flex ! important;
+}
+select {
+    font-size: 12px;
+    height: 38px;
+    border-left: 0px;
+    border-top:0px;
+    padding-left:0px;
+    border-right: 0px;
+    border-radius: 0px;
+}

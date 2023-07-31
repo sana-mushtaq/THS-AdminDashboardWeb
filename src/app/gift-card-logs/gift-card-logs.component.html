@@ -1,0 +1,135 @@
+<p>promotion-history works!</p>
+
+<div id="app">
+  <section class="el-container">
+    <div>
+      <menu class="menu-bar">
+        <a routerLink="javascript:void(0);" class="toggle-menu">
+          <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+        </a>
+        <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+      </menu>
+      <app-sidebar></app-sidebar>
+      <app-submenu></app-submenu>
+    </div>
+    <main class="el-main">
+      <app-header></app-header>
+      <div>
+        <div class="o-flow-x">
+          <div
+            class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+            style="width: 100%"
+          >
+            <div class="hidden-columns">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+
+            <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%; width: 100%">
+              <table id="gift-logs-table" class="display" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>Gift No</th>
+                    <th>Sender Name</th>
+                    <th>Receiver Name</th>
+                    <th>Sender Message</th>
+                    <th>Gift Amount</th>
+                    <th>Gift Status</th>
+                    <th>Claimed Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let gift of giftDetails; let i = index" class="el-table__row">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ gift.senderFirstName }} {{ gift.senderLastName }}</td>
+                    <td>{{ gift.receiverName }}</td>
+                    <td>{{ gift.senderMessage }}</td>
+                    <td>{{ gift.giftAmount }}</td>
+                    <td class="text-center">
+                      <span class="badge badge-success" style="font-size: 12px; font-weight: 500" *ngIf="gift.giftStatus == 1">Claimed</span>
+                      <span class="badge badge-danger" style="font-size: 12px; font-weight: 500" *ngIf="gift.giftStatus == 0">Not Claimed</span>
+                    </td>
+                    <td>{{ gift.giftClaimedDate }}</td>                    
+                  </tr>
+                  <!-- <tr>
+                                <td>2</td>
+                                <td>1234 5678 9012 3456</td>
+                                <td>Discount 30% for Taib Online Treatment</td>
+                                <td>Devaraj</td>
+                                <td>SAR 29</td>
+                                <td>SAR 31.50</td>
+                                <td>29-07-2022</td>
+                             </tr>
+                             <tr>
+                                <td>3</td>
+                                <td>1234 5678 9012 3456</td>
+                                <td>Discount 30% for Taib Online Treatment</td>
+                                <td>Devaraj</td>
+                                <td>SAR 29</td>
+                                <td>SAR 31.50</td>
+                                <td>29-07-2022</td>
+                             </tr>
+                             <tr>
+                                <td>4</td>
+                                <td>1234 5678 9012 3456</td>
+                                <td>Discount 30% for Taib Online Treatment</td>
+                                <td>Devaraj</td>
+                                <td>SAR 29</td>
+                                <td>SAR 31.50</td>
+                                <td>29-07-2022</td>
+                             </tr> -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+</div>
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0"></div>
+<div
+  role="tooltip"
+  id="el-tooltip-7343"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2005; display: none"
+>
+  Employee
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-7647"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2010; display: none"
+>
+  Patient
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-9477"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2028; display: none"
+>
+  Appointment
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-9129"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2030; display: none"
+>
+  Accounts
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>

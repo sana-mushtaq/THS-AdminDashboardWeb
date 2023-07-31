@@ -1,0 +1,246 @@
+
+<div id="app">
+    <section class="el-container">
+       <div>
+          <menu class="menu-bar">
+             <a routerLink="javascript:void(0);" class="toggle-menu">
+                <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span
+                      class="bar bar3"></span></div>
+             </a>
+             <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+          </menu>
+          <app-sidebar></app-sidebar>
+          <app-submenu></app-submenu>
+       </div>
+       <main class="el-main">
+        <app-header></app-header>
+        <div>
+          <div>
+            <!-- <div class="text-right">
+              <button class="add-btn" routerLink="../add-appointments">Add Service Request</button>
+            </div> -->
+            <form class="el-form custom-radio m-t30 el-form--label-top">
+              
+              <div class="m-t30 el-row" style="margin-left: -10px; margin-right: -10px">
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-6 el-col-xl-6" style="padding-left: 10px; padding-right: 10px">
+                  <div class="el-form-item">
+                    <label class="el-form-item__label">Select Client</label>
+                    <div class="el-form-item__content">
+                      <div class="el-select line-input">
+                        <select class="select" (change)="changeEmployeerId($event)">
+                          <option value="0">All</option>
+                            <option *ngFor="let active of EmployeerList" class="el-select-dropdown__item"  [value]='active.employeerId'>{{active.employeerName}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-6 el-col-xl-6" style="padding-left: 10px; padding-right: 10px">
+                  <div class="el-form-item">
+                    <label class="el-form-item__label">Select Lab</label>
+                    <div class="el-form-item__content">
+                      <div class="el-select line-input">
+                        <select class="select" (change)="changeLabId($event)">
+                          <option value="0">All</option>
+                            <option *ngFor="let lab of LabLists" class="el-select-dropdown__item"  [value]='lab.serviceProviderId'>{{lab.providerName}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>   
+                <div class="mt-4">
+                    <button type="button" class="el-button el-button--primary save mt-3 ml-3" (click)="filterButtonClicked()">
+                      <span>Filter</span>
+                    </button>
+                    <!-- <button type="button" class="el-button el-button--primary save">
+                      <span>Clear</span>
+                    </button> -->
+                  </div>             
+              </div>
+  
+             
+            </form>
+            <div class="row" style="justify-content: space-between;">
+                <ul class="nav">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="javascript:void(0)" (click)="activerequests()">Active Requests</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="javascript:void(0)" (click)="closedrequests()">Closed Requests</a>
+                    </li>
+                </ul>
+                <!-- <div class="text-right mb-5">
+                    <button class="add-btn new_btn" data-toggle="modal" data-target="#exampleModal">Add New Promotion</button>
+                </div> -->
+            </div>
+            <div>
+              <div class="o-flow-x">
+                <div
+                  class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+                  style="width: 100%"
+                >
+                  <div class="hidden-columns">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div class="new_side"></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                  
+                    <!-- ACTIVE REQUESTS -->
+                  <div class="in_ac_cards active_card_space">
+                  <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%; width: 1800px">
+                    <table id="servicerequeststable" class="display" cellspacing="0" style="width: 1800px">
+                      <thead>
+                        <tr>
+                          <th>Appointment ID</th>
+                          <th>Transaction/Booking Date &amp; Time</th>
+                          <th>Lab Name</th>
+                          <th>Patient Name</th>
+                          <th>City</th>
+                          <th>Employeer Name</th>
+                          <th>Employee ID</th>
+                          <th>Mobile</th>
+                          <th>Email ID</th>
+                          <th>Slot Date &amp; Time</th>
+                          <th>Booking Status</th>
+                          <th>Status</th>
+                          <th>Collected Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          
+                        <tr *ngFor="let appointment of activeList; let i = index" class="el-table__row" (click)="viewAppointmentDetails(appointment)">
+                          <td>
+                            <div class="cell">
+                              <p>{{ appointment.appointmentDisplayId }}</p>
+                              <p>{{ appointment.packageName }}</p>
+                              <p>{{ appointment.serviceGender }}</p>
+                            </div>
+                          </td>
+                          <td>{{ appointment.appointmentBookingDate }}</td>
+                          <td>{{ appointment.serviceProviderName }}</td>
+                          <td style="padding: 0 !important">
+                            <div class="cell" style="padding: 0px !important">
+                              <div class="d-flex-center" style="padding: 0px !important">
+                                <span class="avtar3" style="margin-right: 3px !important"><img src="assets/images/user.svg" class="image-cover" /></span>
+                                <span title="Alhussian">{{ appointment.primaryPatientFirstName }} {{ appointment.primaryPatientLastName }}</span>
+                              </div>
+                            </div>
+                          </td>                          
+                          <td>{{ appointment.city }}</td>
+                          <td>{{ appointment.employeerName }}</td>
+                          <td>{{ appointment.corpEmpId }}</td>
+                          <td>{{ appointment.patientMobile }}</td>
+                          <td>{{ appointment.patientEmail }}</td>
+                          <td>
+                            <div class="cell">
+                              <p>{{ appointment.appointmentDate }}</p>
+                              <p>{{ appointment.appointmentTime }}</p>
+                            </div>
+                          </td>
+                          <td>{{ appointment.appointmentStatusMessage }}</td>
+                          <td>{{ appointment.appointmentStage }}</td>
+                          <td>{{ appointment.servicePrice | number: "1.2-2" }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  </div>
+
+                  <!-- CLOSED REQUESTS -->
+
+                  <div class="in_ac_cards inactive_card_space">
+                    <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%; width: 1800px">
+                      <table id="closedservicerequeststable"  class="display" cellspacing="0" style="width: 1800px">
+                        <thead>
+                          <tr>
+                            <th>Appointment ID</th>
+                            <th>Transaction/Booking Date &amp; Time</th>
+                            <th>Lab Name</th>
+                            <th>Patient Name</th>
+                            <th>City</th>
+                            <th>Employeer Name</th>
+                            <th>Employee ID</th>
+                            <th>Mobile</th>
+                            <th>Email ID</th>
+                            <th>Slot Date &amp; Time</th>
+                            <th>Booking Status</th>
+                            <th>Status</th>
+                            <th>Collected Amount</th>
+                          </tr>
+                        </thead>
+    
+                        <tbody>
+                          <tr *ngFor="let appointment of inactiveList; let i = index" class="el-table__row" (click)="viewAppointmentDetails(appointment)">
+                            <td>
+                              <div class="cell">
+                                <p>{{ appointment.appointmentDisplayId }}</p>
+                                <p>{{ appointment.packageName }}</p>
+                                <p>{{ appointment.serviceGender }}</p>
+                              </div>
+                            </td>
+                            <td>{{ appointment.appointmentBookingDate }}</td>
+                            <td>{{ appointment.serviceProviderName }}</td>
+                            <td style="padding: 0 !important">
+                              <div class="cell" style="padding: 0px !important">
+                                <div class="d-flex-center" style="padding: 0px !important">
+                                  <span class="avtar3" style="margin-right: 3px !important"><img src="assets/images/user.svg" class="image-cover" /></span>
+                                  <span title="Alhussian">{{ appointment.primaryPatientFirstName }} {{ appointment.primaryPatientLastName }}</span>
+                                </div>
+                              </div>
+                            </td>                          
+                            <td>{{ appointment.city }}</td>
+                            <td>{{ appointment.employeerName }}</td>
+                            <td>{{ appointment.corpEmpId }}</td>
+                            <td>{{ appointment.patientMobile }}</td>
+                            <td>{{ appointment.patientEmail }}</td>
+                            <td>
+                              <div class="cell">
+                                <p>{{ appointment.appointmentDate }}</p>
+                                <p>{{ appointment.appointmentTime }}</p>
+                              </div>
+                            </td>
+                            <td>{{ appointment.appointmentStatusMessage }}</td>
+                            <td>{{ appointment.appointmentStage }}</td>
+                            <td>{{ appointment.servicePrice | number: "1.2-2" }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
+ </div>
+ <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+ <div role="tooltip" id="el-tooltip-7343" aria-hidden="true" class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2005; display: none;">
+    Employee
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+ </div>
+ <div role="tooltip" id="el-tooltip-7647" aria-hidden="true" class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2010; display: none;">
+    Patient
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+ </div>
+ <div role="tooltip" id="el-tooltip-9477" aria-hidden="true" class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2028; display: none;">
+    Appointment
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+ </div>
+ <div role="tooltip" id="el-tooltip-9129" aria-hidden="true" class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2030; display: none;">
+    Accounts
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+ </div>

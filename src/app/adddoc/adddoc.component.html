@@ -1,0 +1,108 @@
+
+<div id="app">
+         <section class="el-container">
+            <div>
+               <menu class="menu-bar">
+                  <a routerLink="javascript:void(0);" class="toggle-menu">
+                     <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+                  </a>
+                  <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+               </menu>
+               <app-sidebar></app-sidebar>
+               <app-submenu></app-submenu>
+            </div>
+            <main class="el-main">
+               <app-header></app-header>
+               <div>
+                  <div>
+                     <div class="el-card is-always-shadow">
+                        <!---->
+                        <div class="el-card__body">
+                           <h4>Documents</h4>
+                           <form class="el-form el-form--label-top">
+                              <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                 <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 15px; padding-right: 15px;">
+                                    <div class="el-form-item">
+                                       <label class="el-form-item__label">Patient ID</label>
+                                       <div class="el-form-item__content">
+                                          <div class="line-input el-input">
+                                             <!----><input type="text" autocomplete="off" placeholder="Enter Patient ID" class="el-input__inner"><!----><!----><!----><!---->
+                                          </div>
+                                          <!---->
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 15px; padding-right: 15px;">
+                                    <div class="el-form-item">
+                                       <label class="el-form-item__label">Patient Name</label>
+                                       <div class="el-form-item__content">
+                                          <div class="line-input el-input">
+                                             <!----><input type="text" autocomplete="off" placeholder="Enter Patient Name" class="el-input__inner"><!----><!----><!----><!---->
+                                          </div>
+                                          <!---->
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 15px; padding-right: 15px;">
+                                    <div class="el-form-item">
+                                       <label class="el-form-item__label">Appointment ID</label>
+                                       <div class="el-form-item__content">
+                                          <div class="line-input el-input">
+                                             <!----><input type="text" autocomplete="off" placeholder="Enter Appointment ID" class="el-input__inner"><!----><!----><!----><!---->
+                                          </div>
+                                          <!---->
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 15px; padding-right: 15px;">
+                                    <div class="el-form-item">
+                                       <label class="el-form-item__label">Mobile number</label>
+                                       <div class="el-form-item__content">
+                                          <div class="line-input el-input">
+                                             <!----><input type="number" autocomplete="off" placeholder="Enter mobile number" class="el-input__inner"><!----><!----><!----><!---->
+                                          </div>
+                                          <!---->
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 15px; padding-right: 15px;">
+                                    <div class="el-form-item">
+                                       <label class="el-form-item__label">Service Type</label>
+                                       <div class="el-form-item__content">
+                                          <div class="el-select line-input">
+                                             <select class="select">
+                                                <option>Select Service</option>
+                                                <option class="el-select-dropdown__item"><span>Telemedicine</span></option>
+                                                <option class="el-select-dropdown__item"><span>Chat Consultation</span></option>
+                                                <option class="el-select-dropdown__item"><span>Home Visit</span></option>
+                                             </select>
+                                          </div>
+                                          <!---->
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="text-right m-t30 el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8" style="padding-left: 15px; padding-right: 15px;">
+                                    <button type="button" class="el-button el-button--primary">
+                                       <!----><!----><span>Search</span>
+                                    </button>
+                                 </div>
+                              </div>
+                           </form>
+                        </div>
+                     </div>
+                     <!----> <!---->
+                  </div>
+                  <!----> <!----> <!----> <!----> <!---->
+               </div>
+            </main>
+         </section>
+      </div>
+      <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+      <div role="tooltip" id="el-tooltip-7343" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2005; display: none;">
+         Employee
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-7647" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2010; display: none;">
+         Patient
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>

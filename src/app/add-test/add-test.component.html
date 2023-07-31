@@ -1,0 +1,128 @@
+<app-header></app-header>
+<div id="app">
+   <section class="el-container">
+      <div>
+         <menu class="menu-bar">
+            <a href="javascript:void(0);" class="toggle-menu">
+               <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span
+                     class="bar bar3"></span></div>
+            </a>
+            <a href="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+         </menu>
+
+         <app-sidebar></app-sidebar>
+
+         <nav class="nav-bar">
+            <a routerLink="dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png"
+                  width="60%"></a>
+            <ul>
+               <li><a routerLink="../services" class="router-link-exact-active"><i class="icon-rehabilitation"></i> Lab
+                     Test Category
+                  </a>
+               </li>
+               <li><a routerLink="../test" class="red-text active red-text"><i class="icon-flask"></i> Tests
+                  </a>
+               </li>
+            </ul>
+         </nav>
+      </div>
+      <main class="el-main">
+         <app-header></app-header>
+         <div>
+            <!---->
+            <div>
+               <div>
+                  <div class="el-card is-always-shadow">
+                     <!---->
+                     <div class="el-card__body">
+                        <form class="el-form el-form--label-top">
+                           <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                              <div
+                                 class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                 style="padding-left: 15px; padding-right: 15px;">
+                                 <div class="el-form-item is-required">
+                                    <label for="trtmnt_id" class="el-form-item__label">Test</label>
+                                    <div class="el-form-item__content">
+                                       <div class="line-input el-input">
+                                          <!----><input type="text" autocomplete="off" placeholder="Enter Test"
+                                             class="el-input__inner" required>
+                                          <!---->
+                                          <!---->
+                                          <!---->
+                                          <!---->
+                                       </div>
+                                       <!---->
+                                    </div>
+                                 </div>
+                              </div>
+                              <div
+                                 class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-8 el-col-xl-8"
+                                 style="padding-left: 15px; padding-right: 15px;">
+                                 <div class="el-form-item is-required">
+                                    <label for="fee.val" class="el-form-item__label">Amount</label>
+                                    <div class="el-form-item__content">
+                                       <div class="line-input el-input">
+                                          <!----><input type="number" autocomplete="off" placeholder="Enter Amount"
+                                             class="el-input__inner" required>
+                                          <!---->
+                                          <!---->
+                                          <!---->
+                                          <!---->
+                                       </div>
+                                       <!---->
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="text-right m-t30">
+                              <button type="button" class="el-button el-button--primary">
+                                 <!---->
+                                 <!----><span>Save</span>
+                              </button>
+                              <button type="button" class="el-button el-button--primary">
+                                 <!---->
+                                 <!----><span>Save &amp; Continue</span>
+                              </button>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <!---->
+            </div>
+            <!---->
+            <!---->
+            <!---->
+            <!---->
+            <!---->
+         </div>
+      </main>
+   </section>
+</div>
+<script async="" defer="defer"
+   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-EXDwh2adbELTFKlDgn3RXMP648GC12s&amp;sensor=false&amp;libraries=places">
+</script>
+<script type="text/javascript" src="static/js/manifest.787d0d92fd70cf16874e.js"></script>
+<script type="text/javascript" src="static/js/vendor.6f6ef6bc866762bf29a6.js"></script>
+<script type="text/javascript" src="static/js/app.a27789e3d261f525a01a.js"></script>
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+<div role="tooltip" id="el-tooltip-194" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2001; display: none;">
+   Appointment
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-8702" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2007; display: none;">
+   Dashboard
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-854" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2009; display: none;">
+   Employee
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-8646" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2013; display: none;">
+   Services
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>

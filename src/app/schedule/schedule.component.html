@@ -1,0 +1,322 @@
+
+<div id="app">
+         <section class="el-container">
+            <div>
+               <menu class="menu-bar">
+                  <a href="javascript:void(0);" class="toggle-menu">
+                     <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+                  </a>
+                  <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a> 
+               </menu>
+               <app-sidebar></app-sidebar>
+               <app-submenu></app-submenu>
+            </div>
+            <main class="el-main">
+               <app-header></app-header>
+               <div>
+                  <div>
+                     <div class="m-t-30 el-row">
+                        <!----> <!----> <!----> <!----> 
+                        <div>
+                           <div class="el-card is-never-shadow">
+                              <!---->
+                              <div class="el-card__body">
+                                 <h4>Schedule Configuration</h4>
+                                 <form class="el-form">
+                                    <div class="el-row" style="margin-left: -10px; margin-right: -10px;">
+                                       <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-18 el-col-xl-4" style="padding-left: 10px; padding-right: 10px;">
+                                          <div class="custom-radio">
+                                             <label role="radio" aria-checked="true" tabindex="0" class="el-radio is-checked">
+                                                <input type="radio" id="" name="fav_language" class="el-radio__inner" value="Male" checked>
+                                                <span class="el-radio__label">
+                                                   Nurse<!---->
+                                                </span>
+                                             </label>
+                                             <label role="radio" tabindex="0" class="el-radio">
+                                                <input type="radio" id="" name="fav_language" class="el-radio__inner" value="Male" checked>
+                                                <span class="el-radio__label">
+                                                   Lab technician<!---->
+                                                </span>
+                                             </label>
+                                          </div>
+                                       </div>
+                                       <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-8 el-col-lg-6 el-col-xl-4" style="padding-left: 10px; padding-right: 10px;">
+                                          <div class="el-form-item line-input">
+                                             <label class="el-form-item__label">Select Date</label>
+                                             <input type="date" id="" name="" class="date" placeholder="DOB">
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </form>
+                              </div>
+                           </div>
+                           <div class="el-row">
+                              <div>
+                                 <div>
+                                    <div>
+                                       <div class="el-card m-t30 is-never-shadow">
+                                          <!---->
+                                          <div class="el-card__body">
+                                             <h4>Sunday</h4>
+                                             <div class="session-grid" id="hide_sunday">
+                                                <div class="session">
+                                                   <div class="homevisit">
+                                                      <i class="icon-home"></i> <strong>Session 1</strong> 
+                                                      <p>00:00 -00:00</p>
+                                                      <span class="gray-color">Home visit</span> <span id="icon-cancel" class="icon-cancel"></span>
+                                                   </div>
+                                                </div>
+                                                <!---->
+                                             </div>
+
+                                             <div class="session-grid" id="add_sunday"> <a href="javascript:void(0);" id="add_session_btn" class="session-add"><i class="icon-circle-plus"></i>
+                                                Add Session
+                                                </a>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="el-card is-never-shadow">
+                                          <!---->
+                                          <div class="el-card__body">
+                                             <h4>Monday</h4>
+                                             <div class="session-grid" id="hide_monday">
+                                                <div class="session">
+                                                   <div class="homevisit">
+                                                      <i class="icon-home"></i> <strong>Session 1</strong> 
+                                                      <p>00:00 -00:00</p>
+                                                      <span class="gray-color">Home visit</span> <span id="icon-cancel1" class="icon-cancel"></span>
+                                                   </div>
+                                                </div>
+                                                <!---->
+                                             </div>
+
+                                             <div class="session-grid" id="add_monday"> <a href="javascript:void(0);" class="session-add"><i class="icon-circle-plus"></i>
+                                                Add Session
+                                                </a>
+                                             </div>
+
+                                          </div>
+                                       </div>
+                                       <div class="el-card is-never-shadow">
+                                          <!---->
+                                          <div class="el-card__body">
+                                             <h4>Tuesday</h4>
+                                             <div class="session-grid" id="hide_tuesday">
+                                                <div class="session">
+                                                   <div class="homevisit">
+                                                      <i class="icon-home"></i> <strong>Session 1</strong> 
+                                                      <p>00:00 -00:00</p>
+                                                      <span class="gray-color">Home visit</span> <span id="icon-cancel2" class="icon-cancel"></span>
+                                                   </div>
+                                                </div>
+                                                <!---->
+                                             </div>
+
+                                             <div class="session-grid" id="add_tuesday"> <a href="javascript:void(0);" class="session-add"><i class="icon-circle-plus"></i>
+                                                Add Session
+                                                </a>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="el-card is-never-shadow">
+                                          <!---->
+                                          <div class="el-card__body">
+                                             <h4>Wednesday</h4>
+                                             <div class="session-grid" id="hide_wednesday">
+                                                <div class="session">
+                                                   <div class="homevisit">
+                                                      <i class="icon-home"></i> <strong>Session 1</strong> 
+                                                      <p>00:00 -00:00</p>
+                                                      <span class="gray-color">Home visit</span> <span id="icon-cancel3" class="icon-cancel"></span>
+                                                   </div>
+                                                </div>
+                                                <!---->
+                                             </div>
+                                             <div class="session-grid" id="add_wednesday"> <a href="javascript:void(0);" class="session-add"><i class="icon-circle-plus"></i>
+                                                Add Session
+                                                </a>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="el-card is-never-shadow">
+                                          <!---->
+                                          <div class="el-card__body">
+                                             <h4>Thursday</h4>
+                                             <div class="session-grid" id="hide_thursday">
+                                                <div class="session">
+                                                   <div class="homevisit">
+                                                      <i class="icon-home"></i> <strong>Session 1</strong> 
+                                                      <p>00:00 -00:00</p>
+                                                      <span class="gray-color">Home visit</span> <span id="icon-cancel4" class="icon-cancel"></span>
+                                                   </div>
+                                                </div>
+                                                <!---->
+                                             </div>
+                                             <div class="session-grid" id="add_thursday"> <a href="javascript:void(0);" class="session-add"><i class="icon-circle-plus"></i>
+                                                Add Session
+                                                </a>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="el-card is-never-shadow">
+                                          <!---->
+                                          <div class="el-card__body">
+                                             <h4>Friday</h4>
+                                             <div class="session-grid" id="hide_friday">
+                                                <div class="session">
+                                                   <div class="homevisit">
+                                                      <i class="icon-home"></i> <strong>Session 1</strong> 
+                                                      <p>00:00 -00:00</p>
+                                                      <span class="gray-color">Home visit</span> <span id="icon-cancel5" class="icon-cancel"></span>
+                                                   </div>
+                                                </div>
+                                                <!---->
+                                             </div>
+                                             <div class="session-grid" id="add_friday"> <a href="javascript:void(0);" class="session-add"><i class="icon-circle-plus"></i>
+                                                Add Session
+                                                </a>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="el-card is-never-shadow">
+                                          <!---->
+                                          <div class="el-card__body">
+                                             <h4>Saturday</h4>
+                                             <div class="session-grid" id="hide_saturday">
+                                                <div class="session">
+                                                   <div class="homevisit">
+                                                      <i class="icon-home"></i> <strong>Session 1</strong> 
+                                                      <p>00:00 -00:00</p>
+                                                      <span class="gray-color">Home visit</span> <span id="icon-cancel6" class="icon-cancel"></span>
+                                                   </div>
+                                                </div>
+                                                <!---->
+                                             </div>
+                                             <div class="session-grid" id="add_saturday"> <a href="javascript:void(0);" class="session-add"><i class="icon-circle-plus"></i>
+                                                Add Session
+                                                </a>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <button type="button" class="el-button pull-right m-t30 m-b20 el-button--primary">
+                                          <!----><!----><span>Save Schedule</span>
+                                       </button>
+                                    </div>
+                                 </div>
+                                 <!----> 
+                                 <div class="el-dialog__wrapper wd50" style="display: none;">
+                                    <div role="dialog" aria-modal="true" aria-label="Add Session" class="el-dialog" style="margin-top: 15vh;">
+                                       <div class="el-dialog__header"><span class="el-dialog__title">Add Session</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div>
+                                       <!----><!---->
+                                    </div>
+                                 </div>
+                                 <div class="el-dialog__wrapper w30 text-center" style="display: none;">
+                                    <div role="dialog" aria-modal="true" aria-label="dialog" class="el-dialog" style="margin-top: 15vh;">
+                                       <div class="el-dialog__header"><span class="el-dialog__title"></span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div>
+                                       <!----><!---->
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </main>
+         </section>
+      </div>
+
+      <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+      <div role="tooltip" id="el-tooltip-8995" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2001; display: none;">
+         Accounts
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-5329" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2003; display: none;">
+         Master
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-9008" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2005; display: none;">
+         Services
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-7427" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center bottom; z-index: 2007; display: none;">
+         Settings
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+      <div role="tooltip" id="el-tooltip-9729" aria-hidden="true" class="el-tooltip__popper is-dark" style="transform-origin: center top; z-index: 2009; display: none;">
+         Dashboard
+         <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+      </div>
+
+      <div id="add_session" class="modal add_session">
+
+         <!-- Modal content -->
+         <div class="modal-content" style="width: 45% !important;">
+           <div class="modal-header" style="border-bottom: unset;">
+             <span class="close">&times;</span>
+             <h2>Add Session</h2>
+           </div>
+           <div class="modal-body">
+             <form class="el-form">
+                <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                   <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-10 el-col-xl-10" style="padding-left: 15px; padding-right: 15px;">
+                      <div class="el-form-item">
+                         <label class="el-form-item__label">Select service</label>
+                         <div class="el-form-item__content">
+                            <div class="el-select line-input">
+                               <select class="select">
+                                  <option>Select Services</option>
+                                  <option class="el-select-dropdown__item"><span>Home Visit Doctor</span></option>
+                                  <!-- <option class="el-select-dropdown__item"><span>Video Consultation</span></option>
+                                  <option class="el-select-dropdown__item"><span>Chat consultation</span></option> -->
+                              </select>
+                            </div>
+                            <!---->
+                         </div>
+                      </div>
+                   </div>
+                   <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-7 el-col-xl-7" style="padding-left: 15px; padding-right: 15px;">
+                      <div class="el-form-item is-required">
+                         <label for="sr" class="el-form-item__label">Select Start time</label>
+                         <div class="el-form-item__content">
+                            <div class="el-select line-input">
+                               <select class="select">
+                                  <option>Select Start time</option>
+                                  <option class="el-select-dropdown__item"><span>No data</span></option>
+                              </select>
+                            </div>
+                            <!---->
+                         </div>
+                      </div>
+                   </div>
+                   <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-7 el-col-xl-7" style="padding-left: 15px; padding-right: 15px;">
+                      <div class="el-form-item is-required">
+                         <label for="er" class="el-form-item__label">Select End time</label>
+                         <div class="el-form-item__content">
+                            <div class="el-select line-input">
+                               <select class="select">
+                                  <option>Select End time</option>
+                                  <option class="el-select-dropdown__item"><span>No data</span></option>
+                              </select>
+                            </div>
+                            <!---->
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <!----> 
+                <div class="text-right">
+                   <button type="button" class="el-button m-t25 el-button--primary save">
+                      <!----><!----><span>Save</span>
+                   </button>
+                </div>
+             </form>
+            
+           </div>
+           <div class="modal-footer">
+             <!-- <button type="button" class="btn btn-default"    data-dismiss="modal">Close</button> -->
+             <!-- <div class="text-right"><button type="button" class="el-button m-t25 el-button--primary"><span>Save</span></button></div> -->
+           </div>
+         </div>
+       
+       </div>

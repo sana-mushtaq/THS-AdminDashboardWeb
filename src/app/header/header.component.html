@@ -1,0 +1,19 @@
+<header class="el-header" style="height: auto;">
+   <div class="hdr-tit">
+      <h5 class="primary-color">Dashboard</h5>
+      <h6>Taib Home Medical Care Company - Riyadh</h6>
+   </div>
+   <ul role="menubar" class="el-menu-demo el-menu--horizontal el-menu">
+      <!----> <!----> 
+      <li role="menuitem" aria-haspopup="true" class="el-submenu" tabindex="0">
+         <div class="el-submenu__title" style="border-bottom-color: transparent;"><img src="assets/images/user.svg" class="avtar"><i class="el-submenu__icon-arrow el-icon-arrow-down"></i></div>
+         <div class="el-menu--horizontal" id="horizontal" style="display: none;">
+            <ul role="menu" class="el-menu el-menu--popup el-menu--popup-bottom-start">
+               <li role="menuitem" routerLink="../profile" tabindex="-1" class="el-menu-item" *ngIf="accessLevel == 100" >Profile</li>
+               <li role="menuitem" routerLink="../change-password" tabindex="-1" class="el-menu-item" *ngIf="accessLevel == 2">Change Password</li>
+               <li role="menuitem" tabindex="-1" class="el-menu-item" (click)="LogoutClick()">Logout</li>
+            </ul>
+         </div>
+      </li>
+   </ul>
+</header>

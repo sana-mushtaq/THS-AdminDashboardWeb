@@ -1,0 +1,345 @@
+<div id="app">
+    <section class="el-container">
+       <div>
+          <menu class="menu-bar">
+             <a routerLink="javascript:void(0);" class="toggle-menu">
+                <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span
+                      class="bar bar3"></span></div>
+             </a>
+             <a routerLink="../dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+          </menu>
+          <app-sidebar></app-sidebar>
+          <nav class="nav-bar">
+             <a routerLink="dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png"
+                   width="60%"></a>
+                   <ul>
+                    
+                    <li><a routerLink="../lab-package-list" class="router-link-exact-active light-blue-text"><i
+                        class="icon-flask"></i> Lab Packages
+                  </a>
+                    
+                    <li class=""><a routerLink="../lab-test" class="router-link-exact-active active light-blue-text"><i class="icon-flask"></i> Tests
+                  </a>
+                    </li>
+                    <li><a routerLink="../lab-others" class="router-link-exact-active  light-blue-text"><i class="icon-flask"></i> Others
+                  </a>
+                    </li>
+                </ul>
+          </nav>
+       </div>
+ 
+       <main class="el-main">
+          <app-header></app-header>
+          <div>
+             <div>
+                <div class="o-flow-x">
+                   <div
+                      class="el-table master-table  el-table--fit el-table--enable-row-hover el-table--enable-row-transition"
+                      style="width: 100%;">
+                      <div class="hidden-columns">
+                         <div></div>
+                         <div></div>
+                         <div></div>
+                         <div></div>
+                      </div>
+                     
+ 
+                      <div class="d-flex justify-content align-items-center">
+                         <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-flask"></i> Test List</span>  
+                      </div>
+
+                      <div class="row mt-4" style="justify-content: space-between;">
+                        <ul class="nav">
+                          <li class="nav-item">
+                            <a class="nav-link active" href="javascript:void(0)" (click)="activerequests()">Active Tests</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)" (click)="closedrequests()">Inactive Tests</a>
+                          </li>
+                        </ul>
+                        <!-- <div class="text-right mb-5">
+                                <button class="add-btn new_btn" data-toggle="modal" data-target="#exampleModal">Add New Promotion</button>
+                            </div> -->
+                      </div>
+                      <div>
+                        <div class="o-flow-x">
+                          <div
+                            class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+                            style="width: 100%"
+                          >
+                            <div class="hidden-columns">
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div class="new_side"></div>
+                              <div></div>
+                              <div></div>
+                            </div>
+            
+                            <!-- ACTIVE REQUESTS -->
+                            <div class="in_ac_cards active_card_space">
+                              <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%; width: 1800px">
+                                 <table id="testtable_active" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                       <tr>
+                                          <th>Test ID</th>
+                                          <th>Test Name</th>
+                                          <th>Test Name in Arabic</th>
+                                          <th>Test Category</th>
+                                          <th>Test Category in Arabic</th>
+                                          <th>Price</th>
+                                          <th>Status</th>
+                                          <!-- <th></th> -->
+                                       </tr>
+                                    </thead>
+         
+                                    <tbody>
+                                       <tr class="el-table__row" *ngFor="let test of activeLabTestList">
+                                          <td>{{test.serviceId}}</td>
+                                          <td>{{test.serviceName}}</td>
+                                          <td>{{test.serviceNameArabic}}</td>
+                                          <td>{{test.labTestCategoryName}}</td>
+                                          <td>{{test.labTestCategoryNameArabic}}</td>
+                                          <td>
+                                             <div class="cell" id="value">
+                                                <div>SAR {{test.servicePrice}}</div>
+                                             </div>
+         
+                                             <!-- <div id="el_input">
+                                                <div class="w50 el-input">
+                                                   <input type="number" autocomplete="off" class="el-input__inner">
+                                                </div>
+                                                <button type="button" class="el-button el-button--success is-circle">
+                                                   <i class="el-icon-check"></i>
+                                                </button>
+                                             </div> -->
+         
+                                          </td>
+                                          <td>
+                                             <div class="cell">
+                                                <label class="switch">
+                                                   <input type="checkbox" checked (change)="statusChange(test.serviceId, test.isActive)" >
+                                                   <span class="slider round"></span>
+                                                </label>
+                                             </div>
+                                          </td>
+                                          <!-- <td>
+                                             <button class="cell btn" (click)="edittest(test.serviceId)">
+                                                <i class="icon-pencil ico-pointer edit_test_pencil"></i>
+                                             </button>
+                                          </td> -->
+                                       </tr>
+                                    </tbody>
+         
+                                 </table>
+                              </div>
+                            </div>
+            
+                            <!-- CLOSED REQUESTS -->
+            
+                            <div class="in_ac_cards inactive_card_space">
+                              <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%; width: 1800px">
+                                 <table id="testtable_inactive" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                       <tr>
+                                          <th>Test ID</th>
+                                          <th>Test Name</th>
+                                          <th>Test Name in Arabic</th>
+                                          <th>Test Category</th>
+                                          <th>Test Category in Arabic</th>
+                                          <th>Price</th>
+                                          <th>Status</th>
+                                          <!-- <th></th> -->
+                                       </tr>
+                                    </thead>
+         
+                                    <tbody>
+                                       <tr class="el-table__row" *ngFor="let test of inactiveLabTestList">
+                                          <td>{{test.serviceId}}</td>
+                                          <td>{{test.serviceName}}</td>
+                                          <td>{{test.serviceNameArabic}}</td>
+                                          <td>{{test.labTestCategoryName}}</td>
+                                          <td>{{test.labTestCategoryNameArabic}}</td>
+                                          <td>
+                                             <div class="cell" id="value">
+                                                <div>SAR {{test.servicePrice}}</div>
+                                             </div>
+         
+                                             <!-- <div id="el_input">
+                                                <div class="w50 el-input">
+                                                   <input type="number" autocomplete="off" class="el-input__inner">
+                                                </div>
+                                                <button type="button" class="el-button el-button--success is-circle">
+                                                   <i class="el-icon-check"></i>
+                                                </button>
+                                             </div> -->
+         
+                                          </td>
+                                          <td>
+                                             <div class="cell">
+                                                <label class="switch">
+                                                   <input type="checkbox" (change)="statusChange(test.serviceId, test.isActive)" >
+                                                   <span class="slider round"></span>
+                                                </label>
+                                             </div>
+                                          </td>
+                                          <!-- <td>
+                                             <button class="cell btn" (click)="edittest(test.serviceId)">
+                                                <i class="icon-pencil ico-pointer edit_test_pencil"></i>
+                                             </button>
+                                          </td> -->
+                                       </tr>
+                                    </tbody>
+         
+                                 </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+ 
+                      <div class="el-table__body-wrapper is-scrolling-none" style="margin-top: 3%;">
+                         
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </main>
+    </section>
+ </div>
+ 
+ <div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+ <div role="tooltip" id="el-tooltip-8995" aria-hidden="true" class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2001; display: none;">
+    Accounts
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+ </div>
+ <div role="tooltip" id="el-tooltip-5329" aria-hidden="true" class="el-tooltip__popper is-dark"
+    style="transform-origin: center bottom; z-index: 2003; display: none;">
+    Master
+    <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+ </div>
+ 
+ 
+ 
+ <div id="add_labtest" class="modal schedule_modal" style="padding-top: 50px;">
+    <div class="modal-content" style="width: 60% !important;">
+       <div class="modal-header" style="border-bottom: unset;" (click)="onClickCloseModel()">
+          <span class="close" (click)="close()">&times;</span>
+          <h3>{{ modalTitle }}</h3>
+       </div>
+       <div class="modal-body">
+          <form class="el-form newform el-form--label-top pt-4" id="testForm" (ngSubmit)="postLabTestToServer()"
+             [formGroup]="typeValidationForm">
+             
+             <div class="row">
+                <div class="col-lg-5"><label>Choose Test</label></div>
+                <div class="col-lg-3"><label>Cost</label></div>
+                <div class="col-lg-2"><label></label></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="form-group">                            
+                        <select class="form-control">
+                            <option>Choose Test </option>
+                            <option>Test 1</option>
+                            <option>Test 2</option>
+                            <option>Test 3</option>
+                            <option>Test 4</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">                            
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-2">                        
+                    <div><i class="fa fa-minus-circle text-danger" style="font-size:30px;margin-top:3px;"></i> </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="form-group">                            
+                        <select class="form-control">
+                            <option>Choose Test </option>
+                            <option>Test 1</option>
+                            <option>Test 2</option>
+                            <option>Test 3</option>
+                            <option>Test 4</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">                            
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-2">                        
+                    <div><i class="fa fa-plus-circle text-success" style="font-size:30px;margin-top:3px;"></i> </div>
+                </div>
+            </div>
+
+ 
+             <div class="text-center mt-4">
+                <!-- <button type="button" class="el-button el-button--primary save" (click)="postNewLabTestClicked()">
+                   <span>Save</span>
+                </button> -->
+ 
+                <button type="submit" class="btn btn-primary el-button el-button--primary save"
+                   [disabled]="!this.typeValidationForm.valid">
+                   Submit
+                </button>
+ 
+             </div>
+          </form>
+       </div>
+       <div class="modal-footer">
+          <h3></h3>
+       </div>
+    </div>
+ </div>
+
+ <div id="customize_labtest" class="modal schedule_modal" style="padding-top: 50px;">
+   <div class="modal-content" style="width: 60% !important;">
+       <div class="modal-header" style="border-bottom: unset;" (click)="onClickCloseModel()">
+           <span class="close" (click)="close()">&times;</span>
+           <h3>Customize Lab Test</h3>
+       </div>
+       <div class="modal-body">
+           <form class="el-form newform el-form--label-top pt-4" id="labtechpackagelistForm" (ngSubmit)="addCustomizePrice()" [formGroup]="typeValidationForm">
+               <div class="row">
+                   <div class="col-md-4 form-group">
+                       <label class="form-label">Choose Test</label>
+                       <select class="form-control" formControlName="serviceId" (change)="fetchPrice($event)">
+                           <option value=""> - Select Tests- </option>
+                           <option *ngFor="let test of individualMainTestList" value="{{test.serviceId}}">{{test.serviceName}}</option>
+                       </select>
+                   </div>
+                   <div class="col-md-4 form-group">
+                       <label class="form-label">Taib Price</label>
+                       <input class="form-control" type="text" id="taib_price" readonly/>
+                   </div>
+                   <div class="col-md-4 form-group">
+                       <label class="form-label">Your Price</label>
+                       <input class="form-control" formControlName="customPrice"  type="text"/>
+                   </div>
+               </div>
+             
+               <div class="text-right mt-4">
+                   <button type="submit" class="btn btn-primary el-button el-button--primary save" [disabled]="!this.typeValidationForm.valid">
+                 Submit
+              </button>
+               </div>
+           </form>
+       </div>
+       <div class="modal-footer">
+           <h3></h3>
+       </div>
+   </div>
+</div>

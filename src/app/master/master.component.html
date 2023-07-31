@@ -1,0 +1,175 @@
+<app-header></app-header>
+<div id="app">
+   <section class="el-container">
+      <div>
+         <menu class="menu-bar">
+            <a href="javascript:void(0);" class="toggle-menu">
+               <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span
+                     class="bar bar3"></span></div>
+            </a>
+            <a href="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%"></a>
+         </menu>
+         <app-sidebar></app-sidebar>
+         <nav class="nav-bar">
+            <a routerLink="../dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png"
+                  width="60%"></a>
+            <ul>
+               <li><a routerLink="../department" class="router-link-exact-active active blue-text"><i
+                        class="icon-layers"></i> Department
+                  </a>
+               </li>
+               <li><a routerLink="../treatments" class="light-green-text"><i class="icon-rehabilitation"></i>
+                     Treatments
+                  </a>
+               </li>
+               <li><a routerLink="../tests" class="red-text"><i class="icon-flask"></i> Tests
+                  </a>
+               </li>
+            </ul>
+         </nav>
+      </div>
+      <main class="el-main">
+         <app-header></app-header>
+         <div class="m-t-30 el-row">
+            <!---->
+            <!---->
+            <!---->
+            <!---->
+            <!---->
+            <!---->
+            <div class="o-flow-x">
+               <div
+                  class="el-table master-table el-table--fit el-table--enable-row-hover el-table--enable-row-transition"
+                  style="width: 100%;">
+                  <div class="hidden-columns">
+                     <div></div>
+                     <div></div>
+                  </div>
+                  <div class="el-table__header-wrapper">
+                     <table cellspacing="0" cellpadding="0" border="0" class="el-table__header" style="width: 1009px;">
+                        <colgroup>
+                           <col name="el-table_8_column_47" width="505">
+                           <col name="el-table_8_column_48" width="504">
+                           <col name="gutter" width="0">
+                        </colgroup>
+                        <thead class="has-gutter">
+                           <tr class="">
+                              <th colspan="1" rowspan="1" class="el-table_8_column_47     is-leaf">
+                                 <div class="cell">Department</div>
+                              </th>
+                              <th colspan="1" rowspan="1" class="el-table_8_column_48     is-leaf">
+                                 <div class="cell">Status</div>
+                              </th>
+                              <th class="gutter" style="width: 0px; display: none;"></th>
+                           </tr>
+                        </thead>
+                     </table>
+                  </div>
+                  <div class="el-table__body-wrapper is-scrolling-none" style="margin-top: 3%;">
+                     <!-- <table cellspacing="0" cellpadding="0" border="0" class="el-table__body" style="width: 1009px;"> -->
+                     <table id="example" class="display" cellspacing="0" width="100%">
+                        <thead>
+                           <tr>
+                              <th>Department</th>
+                              <th>Status</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr class="el-table__row">
+                              <td>Allergy and Immunology</td>
+                              <td>
+                                 <div class="cell">
+                                    <label class="switch">
+                                       <input type="checkbox" checked>
+                                       <span class="slider round"
+                                          style="border-color: rgb(19, 206, 102); background-color: rgb(19, 206, 102);"></span>
+                                    </label>
+                                 </div>
+                              </td>
+                           </tr>
+                           <tr class="el-table__row">
+                              <td>Anesthesia</td>
+                              <td>
+                                 <div class="cell">
+                                    <label class="switch">
+                                       <input type="checkbox" checked>
+                                       <span class="slider round"
+                                          style="border-color: rgb(19, 206, 102); background-color: rgb(19, 206, 102);"></span>
+                                    </label>
+                                 </div>
+                              </td>
+                           </tr>
+                           <tr class="el-table__row">
+                              <td>Cardiac and Chest surgery</td>
+                              <td>
+                                 <div class="cell">
+                                    <label class="switch">
+                                       <input type="checkbox" checked>
+                                       <span class="slider round"
+                                          style="border-color: rgb(19, 206, 102); background-color: rgb(19, 206, 102);"></span>
+                                    </label>
+                                 </div>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </main>
+   </section>
+</div>
+
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0;"></div>
+<div role="tooltip" id="el-tooltip-9477" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2042; display: none;">
+   Appointment
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-7343" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2048; display: none;">
+   Employee
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-7647" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2052; display: none;">
+   Patient
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-9129" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center top; z-index: 2061; display: none;">
+   Accounts
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-2943" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2065; display: none;">
+   Role Management
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-5222" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2088; display: none;">
+   Settings
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-6056" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2092; display: none;">
+   Rate And Review
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-5114" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center top; z-index: 2094; display: none;">
+   Package
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-2554" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2102; display: none;">
+   Services
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>
+<div role="tooltip" id="el-tooltip-6209" aria-hidden="true" class="el-tooltip__popper is-dark"
+   style="transform-origin: center bottom; z-index: 2106; display: none;">
+   Master
+   <div x-arrow="" class="popper__arrow" style="left: 8px;"></div>
+</div>

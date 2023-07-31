@@ -1,0 +1,397 @@
+<div id="app">
+  <section class="el-container">
+    <div>
+      <menu class="menu-bar">
+        <a routerLink="javascript:void(0);" class="toggle-menu">
+          <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+        </a>
+        <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+      </menu>
+      <app-sidebar></app-sidebar>
+      <app-submenu></app-submenu>
+    </div>
+    <main class="el-main">
+      <app-header></app-header>
+      <div>
+        <div class="o-flow-x">
+          <div
+            class="el-table master-table el-table--fit el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition"
+            style="width: 100%"
+          >
+            <div class="hidden-columns">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+
+            <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%; width: 100%">
+              <div class="row" style="justify-content: space-between">
+                <ul class="nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="javascript:void(0)" id="active_card_call">Active Cards</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" id="inactive_card_call">InActive Cards</a>
+                  </li>
+                </ul>
+                <div class="text-right mb-5">
+                  <button class="add-btn new_btn" data-toggle="modal" data-target="#exampleModal">Add Gift Card</button>
+                </div>
+              </div>
+
+              <div class="in_ac_cards gif_active_card_space">
+                <div class="row">
+                  <div class="col-md-3 p-3">
+                    <div class="off_card_layout">
+                      <img src="../../assets/images/giftcard.jpg" width="100%" class="off_card_image" />
+                      <div class="off_card_details">
+                        <p class="off_gift_title">Summer Saving Upto 10%</p>
+                        <p class="off_gift_sub_title">Discount and Wallert Points With Sabb</p>
+                        <div class="row mt-2">
+                          <div class="col-md-3">
+                            <span class="active_badge">Active</span>
+                          </div>
+                          <div class="col-md-9 text-right">
+                            <p class="date_sta">15-08-2022 - 21-08-2022</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <div class="col-md-3 p-3">
+                                <div class="off_card_layout">
+                                    <img src="../../assets/images/giftcard.jpg" width="100%" class="off_card_image">
+                                    <div class="off_card_details">
+                                        <p class="off_gift_title">Summer Saving Upto 10%</p>
+                                        <p class="off_gift_sub_title">Discount and Wallert Points With Sabb</p>
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                 <span class="active_badge">Active</span> 
+                                            </div>
+                                            <div class="col-md-9 text-right">
+                                                <p class="date_sta">15-08-2022 - 21-08-2022 </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 p-3">
+                                <div class="off_card_layout">
+                                    <img src="../../assets/images/giftcard.jpg" width="100%" class="off_card_image">
+                                    <div class="off_card_details">
+                                        <p class="off_gift_title">Summer Saving Upto 10%</p>
+                                        <p class="off_gift_sub_title">Discount and Wallert Points With Sabb</p>
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                 <span class="active_badge">Active</span> 
+                                            </div>
+                                            <div class="col-md-9 text-right">
+                                                <p class="date_sta">15-08-2022 - 21-08-2022 </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 p-3">
+                                <div class="off_card_layout">
+                                    <img src="../../assets/images/giftcard.jpg" width="100%" class="off_card_image">
+                                    <div class="off_card_details">
+                                        <p class="off_gift_title">Summer Saving Upto 10%</p>
+                                        <p class="off_gift_sub_title">Discount and Wallert Points With Sabb</p>
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                 <span class="active_badge">Active</span> 
+                                            </div>
+                                            <div class="col-md-9 text-right">
+                                                <p class="date_sta">15-08-2022 - 21-08-2022 </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 p-3">
+                                <div class="off_card_layout">
+                                    <img src="../../assets/images/giftcard.jpg" width="100%" class="off_card_image">
+                                    <div class="off_card_details">
+                                        <p class="off_gift_title">Summer Saving Upto 10%</p>
+                                        <p class="off_gift_sub_title">Discount and Wallert Points With Sabb</p>
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                 <span class="active_badge">Active</span> 
+                                            </div>
+                                            <div class="col-md-9 text-right">
+                                                <p class="date_sta">15-08-2022 - 21-08-2022 </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 p-3">
+                                <div class="off_card_layout">
+                                    <img src="../../assets/images/giftcard.jpg" width="100%" class="off_card_image">
+                                    <div class="off_card_details">
+                                        <p class="off_gift_title">Summer Saving Upto 10%</p>
+                                        <p class="off_gift_sub_title">Discount and Wallert Points With Sabb</p>
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                 <span class="active_badge">Active</span> 
+                                            </div>
+                                            <div class="col-md-9 text-right">
+                                                <p class="date_sta">15-08-2022 - 21-08-2022 </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                </div>
+              </div>
+
+              <!-- InActive Card Content-->
+              <div class="in_ac_cards gif_inactive_card_space">
+                <div class="row">
+                  <div class="col-md-3 p-3">
+                    <div class="off_card_layout">
+                      <img src="../../assets/images/giftcard.jpg" width="100%" class="off_card_image" />
+                      <div class="off_card_details">
+                        <p class="off_gift_title">Summer Saving Upto 10%</p>
+                        <p class="off_gift_sub_title">Discount and Wallert Points With Sabb</p>
+                        <div class="row mt-2">
+                          <div class="col-md-3">
+                            <span class="inactive_badge">Inactive</span>
+                          </div>
+                          <div class="col-md-9 text-right">
+                            <p class="date_sta">15-08-2022 - 21-08-2022</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <div class="col-md-3 p-3">
+                                <div class="off_card_layout">
+                                    <img src="../../assets/images/giftcard.jpg" width="100%" class="off_card_image">
+                                    <div class="off_card_details">
+                                        <p class="off_gift_title">Summer Saving Upto 10%</p>
+                                        <p class="off_gift_sub_title">Discount and Wallert Points With Sabb</p>
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                <span class="inactive_badge">Inactive</span> 
+                                            </div>
+                                            <div class="col-md-9 text-right">
+                                                <p class="date_sta">15-08-2022 - 21-08-2022 </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 p-3">
+                                <div class="off_card_layout">
+                                    <img src="../../assets/images/giftcard.jpg" width="100%" class="off_card_image">
+                                    <div class="off_card_details">
+                                        <p class="off_gift_title">Summer Saving Upto 10%</p>
+                                        <p class="off_gift_sub_title">Discount and Wallert Points With Sabb</p>
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                <span class="inactive_badge">Inactive</span> 
+                                            </div>
+                                            <div class="col-md-9 text-right">
+                                                <p class="date_sta">15-08-2022 - 21-08-2022 </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 p-3">
+                                <div class="off_card_layout">
+                                    <img src="../../assets/images/giftcard.jpg" width="100%" class="off_card_image">
+                                    <div class="off_card_details">
+                                        <p class="off_gift_title">Summer Saving Upto 10%</p>
+                                        <p class="off_gift_sub_title">Discount and Wallert Points With Sabb</p>
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                 <span class="inactive_badge">Inactive</span> 
+                                            </div>
+                                            <div class="col-md-9 text-right">
+                                                <p class="date_sta">15-08-2022 - 21-08-2022 </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Add Gift Card</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+                      <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                        <div class="el-form-item is-required">
+                          <label for="fn.en" class="el-form-item__label">Gift Name English</label>
+                          <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                              <input type="text" class="el-input__inner form-control" formControlName="serviceName" placeholder="Enter Gift Name" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                        <div class="el-form-item is-required">
+                          <label for="fn.en" class="el-form-item__label">Gift Name Arabic</label>
+                          <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                              <input type="text" class="el-input__inner form-control" formControlName="serviceName" placeholder="Enter Gift Name" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                        <div class="el-form-item is-required">
+                          <label for="fn.ar" class="el-form-item__label">Gift Description English</label>
+                          <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                              <textarea type="text" class="form-control" rows="6" placeholder="Enter Gift Description English"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                        <div class="el-form-item is-required">
+                          <label for="fn.ar" class="el-form-item__label">Gift Description Arabic</label>
+                          <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                              <textarea type="text" class="form-control" rows="6" placeholder="Enter Gift Description English"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+                      <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                        <div class="el-form-item is-required">
+                          <label for="fn.en" class="el-form-item__label">Validity <span style="font-size: 10px">(In Days)</span></label>
+                          <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                              <select class="line-input el-input form-control" style="margin-top: 0">
+                                <option>-Select-</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                        <div class="el-form-item is-required">
+                          <label for="fn.ar" class="el-form-item__label">Price</label>
+                          <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                              <input type="text" class="el-input__inner form-control" formControlName="serviceNameArabic" placeholder="Enter Price" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+                      <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                        <div class="el-form-item is-required">
+                          <label for="fn.en" class="el-form-item__label">Image</label>
+                          <div class="el-form-item__content">
+                            <div class="line-input el-input">
+                              <input type="file" class="el-input__inner form-control" formControlName="serviceName" id="files_department" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                        <div class="el-form-item is-required">
+                          <label for="fn.ar" class="el-form-item__label">Image Preview</label>
+                          <div class="el-form-item__content" id="beforefilepreview"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="el-row" style="margin-left: -15px; margin-right: -15px">
+                      <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px">
+                        <div class="el-form-item is-required">
+                          <label for="fn.ar" class="el-form-item__label">Status</label>
+                          <div class="el-form-item__content">
+                            <select class="line-input el-input form-control">
+                              <option>- Select -</option>
+                              <option value="Active">Active</option>
+                              <option value="InActive">InActive</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer text-right">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                    <button type="button" class="el-button el-button--primary save">Add</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+</div>
+<div class="progress" style="width: 0%; height: 2px; background-color: rgb(122, 195, 254); opacity: 0"></div>
+<div
+  role="tooltip"
+  id="el-tooltip-7343"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2005; display: none"
+>
+  Employee
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-7647"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2010; display: none"
+>
+  Patient
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-9477"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2028; display: none"
+>
+  Appointment
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
+<div
+  role="tooltip"
+  id="el-tooltip-9129"
+  aria-hidden="true"
+  class="el-tooltip__popper is-dark"
+  style="transform-origin: center bottom; z-index: 2030; display: none"
+>
+  Accounts
+  <div x-arrow="" class="popper__arrow" style="left: 8px"></div>
+</div>
