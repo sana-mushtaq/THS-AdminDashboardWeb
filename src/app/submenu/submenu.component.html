@@ -1,26 +1,35 @@
 <nav class="nav-bar">
-      <a routerLink="dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png"
-            width="60%"></a>
+
+      <a routerLink="dashboard" class="logo hidden-xs-only"><img src="assets/images/Taib_logo_Trans.png" width="60%"></a>
+      
       <ul class="onlyemployee admin-menu-nurse dclass">
-         <li><a routerLink="../nurse" class="light-blue-text active-nurse"><i class="f-size14 icon-bonnet"></i> Nurse</a></li>
-         <li><a routerLink="../technician" class="thick-blue-text active-technician"><i class="icon-flask"></i> Lab Technician</a></li>
-         <li><a routerLink="../physiotherapist" class="light-green-text active-physiotherapist"><i class="icon-rehabilitation"></i> Physiotherapist</a></li>
-         <li><a routerLink="../general-physician" class="yellow-text active-physician"><i class="icon-receptionist"></i> General Physician</a></li>         
+            
+            <li><a routerLink="../nurse" class="light-blue-text active-nurse"><i class="f-size14 icon-bonnet"></i> Nurse</a></li>
+            <li><a routerLink="../technician" class="thick-blue-text active-technician"><i class="icon-flask"></i> Lab Technician</a></li>
+            <li><a routerLink="../physiotherapist" class="light-green-text active-physiotherapist"><i class="icon-rehabilitation"></i> Physiotherapist</a></li>
+            <li><a routerLink="../general-physician" class="yellow-text active-physician"><i class="icon-receptionist"></i> General Physician</a></li>         
+
       </ul>
 
       <ul class="onlypatient admin-menu-patient dclass">
+
             <li><a routerLink="../patientlist" class="router-link-exact-active pink-text" [routerLinkActive]="['active']"><i class="icon-checklist"></i> Patient List</a></li>
             <li><a routerLink="../unregistered-patientlist" class="router-link-exact-active pink-text" [routerLinkActive]="['active']"><i class="icon-checklist"></i>Un Verified List</a></li>
             <!-- <li><a routerLink="../adddoc" class="light-blue-text"><i class="f-size16 icon-circle-plus"></i> Add Document </a></li>
             <li><a routerLink="../doclist" class="yellow-text"><i class="icon-checklist"></i> Document List </a></li> -->
+
       </ul>
 
       <ul class="onlylab admin-menu-labs dclass">
+
             <li><a routerLink="../lab-dashboard1" class="router-link-exact-active blue-text active-labs"><i class="icon-dashboard"></i> Dashboard </a></li>
             <li><a routerLink="../lab-list" class="router-link-exact-active blue-text active-labview"><i class="icon-invoice2"></i> Labs List </a></li>
             <li><a routerLink="../lab-appointment-swap" class="router-link-exact-active blue-text appoint-labview"><i class="icon-calendar"></i> Appointment List </a></li>
+
       </ul>
+
       <ul class="onlypackage admin-menu-packages dclass">
+
             <li><a routerLink="../nurse-packagelist" class="router-link-exact-active light-blue-text active-category"> <i class="icon-bonnet"></i>Package Categories</a></li>
             <li><a routerLink="../labtech-packagelist" class="router-link-exact-active light-blue-text active-labpackage"><i class="icon-flask"></i> Lab Package </a></li>
             <li><a routerLink="../services" class="router-link-exact-active light-blue-text active-testcategory"><i class="icon-rehabilitation"></i> Lab Test Category </a></li>
@@ -28,8 +37,11 @@
             <li><a routerLink="../others" class="router-link-exact-active light-blue-text active-otherslist"><i class="icon-flask"></i> Services </a></li>
             <li><a routerLink="../other-service-category" class="router-link-exact-active light-blue-text" [routerLinkActive]="['active']"><i class="icon-flask"></i> Service Categories </a></li>
             <li><a routerLink="../escort-service" [routerLinkActive]="['active']" class="router-link-exact-active blue-text"><i class="icon-group-setting"></i> Escort Service</a></li>
+
       </ul>
+
       <ul class="onlygift dclass">
+
             <li><a routerLink="../gifts-promotion" class="router-link-exact-active blue-text active-promotion"><i class="icon-invoice2"></i> Promotions </a></li>
             <li><a routerLink="../gifts" class="router-link-exact-active blue-text active-gifts"><i class="icon-gift"></i> Gifts </a></li>
             <li><a routerLink="../promotion-history" class="router-link-exact-active blue-text active-promotionhistory"><i class="icon-calendar"></i> Promotion History </a></li>
@@ -37,31 +49,45 @@
             <li><a routerLink="../gift-logs" [routerLinkActive]="['active']" class="router-link-exact-active blue-text active-giftlog"><i class="icon-checklist"></i> Gifts Logs </a></li>
             
       </ul>
+
       <ul class="onlyemployer dclass">
+
             <li><a routerLink="../employers" class="router-link-exact-active blue-text active-employers"><i class="icon-invoice2"></i> Employers </a></li>
             <li><a routerLink="../service-request" class="router-link-exact-active blue-text active-servicerequest"><i class="icon-settingscms"></i> Service Requests </a></li>
             <li><a routerLink="../employer-package" class="router-link-exact-active blue-text active-packages"><i class="icon-package"></i> Packages</a></li>
       </ul>
+
       <ul class="onlysetting dclass">
+
             <li><a routerLink="../application-setting" class="router-link-exact-active active blue-text"><i class="icon-group-setting"></i> Application</a></li>
             <li><a routerLink="../appointment-setting" class="yellow-text"><i class="icon-event-setting"></i> Appointment Settings</a></li>
             <li><a routerLink="../schedule-setting" class="red-text"><i class="icon-schedule-setting"></i> Schedule Settings</a></li>
             <li><a routerLink="../patient-source" class="red-text"><i class="icon-settings"></i> Patient Source</a></li>
             <li><a routerLink="../insurance-list" [routerLinkActive]="['active']" class="router-link-exact-active blue-text"><i class="icon-group-setting"></i> Insurance Providers</a></li>
+
+            <!-- THS-23 BY SANA -->
+            <li><a routerLink="../branch/view-all" class="blue-text"><i class="icon-home"></i>Branch Management</a></li>
+
       </ul>
+
       <!-- INSURANCE -->
       <ul class="onlyissurance dclass">
+
             <li><a routerLink="../insurance-list" [routerLinkActive]="['active']" class="router-link-exact-active blue-text"><i class="icon-group-setting"></i> Insurance List</a></li>
             <li><a routerLink="../insurance-appointments" [routerLinkActive]="['active']" class="router-link-exact-active blue-text appoint-insurance"><i class="icon-calendar"></i> Appointment List </a></li>
+
       </ul>
 
       <!-- SERVICE REQUESTS -->
       <ul class="onlyservicerequests dclass">
+      
             <li><a routerLink="/appointments" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="router-link-exact-active blue-text"><i class="icon-group-setting"></i> Appointments</a></li>
             <li><a routerLink="/insurance-appointments" [routerLinkActive]="['active']" class="router-link-exact-active blue-text appoint-insurance"><i class="el-tooltip item icon-files" aria-describedby="el-tooltip-3636" tabindex="0"></i>  Insurance Requests</a></li>
             <li><a routerLink="/program-requests" [routerLinkActive]="['active']" class="router-link-exact-active blue-text programs-insurance"><i class="el-tooltip item icon-video" aria-describedby="el-tooltip-3636" tabindex="0"></i>  Programs Requests</a></li>
             <li><a routerLink="/escort-requests" [routerLinkActive]="['active']" class="router-link-exact-active blue-text appoint-escort"><i class="el-tooltip item icon-files" aria-describedby="el-tooltip-3636" tabindex="0"></i>  Escort Requests</a></li>
             <li><a routerLink="/appointments/add" [routerLinkActive]="['active']" class="router-link-exact-active blue-text appoint-escort"><i class="el-tooltip item icon-plus" aria-describedby="el-tooltip-3636" tabindex="0"></i>  New Appointment</a></li>
             <!-- <li><a routerLink="../insurance-appointments" [routerLinkActive]="['active']" class="router-link-exact-active blue-text appoint-insurance"><i class="icon-calendar"></i> Children and Escort Requests</a></li> -->
+      
       </ul>
+
 </nav>
