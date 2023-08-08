@@ -113,6 +113,8 @@ import { AppointmentsNewComponent } from "./appointments/appointments-new/appoin
 
 /* THS-23 BY SANA */
 import { BranchViewComponent } from "./branch/branch-view/branch-view.component";
+import { ServiceViewComponent } from './service/service-view/service-view.component';
+import { CaretgoryViewComponent } from './service_category/caretgory-view/caretgory-view.component';
 
 const routes: Routes = [
  { path: '', component: HomeComponent },
@@ -225,7 +227,9 @@ const routes: Routes = [
  { path:'add-program', component: AddProgramComponent },
 
  //THS-23 BY SANA
- { path: 'branches/view', component: BranchViewComponent },
+ { path: 'branch/view-all', component: BranchViewComponent },
+ { path: 'service/view-all', component: ServiceViewComponent },
+ { path: 'category/view-all', component: CaretgoryViewComponent },
 ];
 
 @NgModule({

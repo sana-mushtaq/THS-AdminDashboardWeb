@@ -133,10 +133,9 @@ import { AddProgramComponent } from './add-program/add-program.component';
 
 import { AppointmentsNewComponent } from "./appointments/appointments-new/appointments-new.component";
 import { AgmCoreModule } from '@agm/core';
-import { ViewAllComponent } from './branch/view-all/view-all.component';
-import { ViewAllBranchesComponent } from './branch/view-all-branches/view-all-branches.component';
-import { BranchesViewComponent } from './branch/branches-view/branches-view.component';
 import { BranchViewComponent } from './branch/branch-view/branch-view.component';
+import { ServiceViewComponent } from './service/service-view/service-view.component';
+import { CaretgoryViewComponent } from './service_category/caretgory-view/caretgory-view.component';
 
 @NgModule({
   declarations: [
@@ -254,11 +253,10 @@ import { BranchViewComponent } from './branch/branch-view/branch-view.component'
     GiftCardLogsComponent,
     AddProgramComponent,
     AppointmentsNewComponent,
-    ViewAllComponent,
-    ViewAllBranchesComponent,
-    BranchesViewComponent,
-    BranchViewComponent
-  ],
+    BranchViewComponent,
+    ServiceViewComponent,
+    CaretgoryViewComponent
+    ],
   imports: [
     BrowserModule, 
     AgmCoreModule.forRoot({

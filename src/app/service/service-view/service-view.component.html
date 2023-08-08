@@ -1,0 +1,659 @@
+<div id="app">
+
+    <!-- page section -->
+    <section class="el-container">
+    
+        <div>
+            
+            <!-- main menu bar-->
+            <menu class="menu-bar lab-hide">
+    
+                <a routerLink="javascript:void(0);" class="toggle-menu">
+    
+                    <div class="inactive">
+                        
+                        <span class="bar bar1"></span>
+                        <span class="bar"></span>
+                        <span class="bar bar3"></span>
+                  
+                    </div>
+
+                </a>
+                
+                <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+          
+            </menu>
+            
+            <!-- app side bar-->
+            <app-sidebar class="lab-hide"></app-sidebar>
+
+            <!-- app sub menu -->
+            <div>
+            
+                <app-submenu></app-submenu>
+            
+            </div>
+
+            <!-- top nav bar in the right side -->
+            <nav class="nav-bar-none"></nav>
+        
+        </div>
+
+        <!-- right side or the main component content -->
+        <main class="el-main">
+      
+            <app-header></app-header>
+
+            <!-- branch wrapper -->
+            <div class="auto-flex-start-gap20-column max-height relative">
+
+                <div class="auto-flex-start-space-between-gap10">
+
+                    <p class="large">All Services</p>
+                    <button class="primary-bg padding-10 secondary-color bold" (click)="addService()">Add a New Service</button>
+
+                    <div class="auto-flex-start-gap10-column">
+
+                        <!-- display a list of categories -->
+                        <table class="table">
+
+                            <th>ID</th>
+                            <th>Icon</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Current Offers</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+
+                            <!-- display a list of service providers already assigned -->
+                            <tr *ngFor="let service of serviceList; let serviceIndex = index">
+
+                                <td>
+                                    <p> {{ service.id }} </p>
+                                </td>
+
+                                <td>
+                                    <img class="medImg" [src]="service.icon" *ngIf="service.icon && service.icon.length>0">
+                                </td>
+
+                                <td class="cursor-pointer" (click)="openServiceDetails(service, serviceIndex)">
+                                    <p> {{ service.title }} </p>
+                                    <hr class="hr-black" />
+                                    <p> {{ service.title_arabic }} </p>
+                                </td>
+
+                                <td>
+                                    <p> {{ service.category_title }} </p>
+                                </td>
+
+                                <td>
+                                    <p> {{ service.price }} </p>
+                                </td>
+
+                                <th>
+                                    <p> {{ service.coupon_code }} </p>
+                                </th>
+
+                                <th>
+                                    <p class="dark-green-bg padding-5 secondary-color fit-content" *ngIf="service.active">Active</p>
+                                    <p class="red-bg padding-5 secondary-color fit-content" *ngIf="!service.active">Deactivated</p>
+                                </th>
+                            
+                                <td class="auto-flex-center-gap10-no-set-width">
+                                    <button class="glass-bg padding-5 border-radius-10 border-none" (click)="updateServiceStatus(service, serviceIndex, true)" *ngIf="!service.active">activate</button>
+                                    <button class="glass-bg padding-5 border-radius-10 border-none" (click)="updateServiceStatus(service, serviceIndex, false)" *ngIf="service.active">deactivate</button>
+                                    <button class="glass-bg padding-5 border-radius-10 border-none" (click)="editService(service, serviceIndex)">edit</button>
+                                    <button class="red-bg bold secondary-color padding-5 border-radius-10" (click)="deleteService(service, serviceIndex)">remove</button>
+                                </td>
+
+                            </tr>
+
+                        </table>
+                                            
+                    </div>
+
+                    <!-- Service Details -->
+                    <div class="fixed dialog" *ngIf="serviceDetailsToggle">
+
+                        <div class="popup">
+
+                            <div class="content white-bg scrollable-div">
+
+                                <button class="close" (click)="closeServiceDetails()">x</button>
+
+                                <div class="auto-flex-center-gap20">
+
+                                    <div class="auto-flex-center-start-gap20">
+
+                                        <img src="selectedService.icon" class="medImg" *ngIf="selectedService.icon && selectedService.icon.length>0"/>
+                                        
+                                        <div class="auto-flex-start-gap10-column">
+
+                                            <div class="auto-flex-center-start-gap10">
+
+                                                <p class="bold med"> {{ selectedService.title }} </p>
+                                                <p class="dark-green-bg padding-10 fit-content secondary-color" *ngIf="selectedService.active"> Active </p>
+                                                <p class="red-bg padding-10 fit-content secondary-color" *ngIf="!selectedService.active"> Deactivated </p>
+
+                                            </div>
+
+                                            <hr class="hr-black" />
+
+                                            <div class="auto-flex-start-gap10">
+
+                                                <p class="bold">URL:</p>
+                                                <p> {{ selectedService.url }} </p>
+                                            
+                                            </div>
+
+                                            <div class="auto-flex-start-gap10">
+
+                                                <p class="bold">Title AR:</p>
+                                                <p> {{ selectedService.title_arabic }} </p>
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap10">
+
+                                                <p class="bold">Price:</p>
+                                                <p> {{ selectedService.price }} </p>
+
+                                                <p class="bold">Cost:</p>
+                                                <p> {{ selectedService.cost }} </p>
+                                                
+                                                <p class="bold">Coupon Code:</p>
+                                                <p *ngIf="selectedService.coupon_code">Coupon: {{ selectedService.coupon_code }}</p>
+
+                                            </div>
+                                        
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="auto-flex-center-start-gap20">
+                                        
+                                        <div class="auto-flex-start-gap10">
+
+                                            <p class="bold">Description:</p>
+                                            <p> {{ selectedService.description }} </p>
+
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="auto-flex-center-start-gap20">
+                                        
+                                        <div class="auto-flex-start-gap10">
+
+                                            <p class="bold">Description AR:</p>
+                                            <p> {{ selectedService.description_arabic }} </p>
+
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="auto-flex-center-start-gap20">
+                                        
+                                        <div class="auto-flex-start-gap10">
+
+                                            <p class="bold">Instructions:</p>
+                                            <p> {{ selectedService.instructions }} </p>
+
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="auto-flex-center-start-gap20">
+                                        
+                                        <div class="auto-flex-start-gap10">
+
+                                            <p class="bold">Instructions AR:</p>
+                                            <p> {{ selectedService.instructions_arabic }} </p>
+
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="auto-flex-center-start-gap20">
+                                        
+                                        <div class="auto-flex-start-gap10">
+
+                                            <p class="bold">FAQ:</p>
+                                            <p> {{ selectedService.faq }} </p>
+
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="auto-flex-center-start-gap20">
+                                        
+                                        <div class="auto-flex-start-gap10">
+
+                                            <p class="bold">FAQ AR:</p>
+                                            <p> {{ selectedService.faq_arabic }} </p>
+
+                                        </div>
+                                        
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Add Service-->
+                    <div class="fixed dialog" *ngIf="addNewServiceToggle">
+
+                        <div class="popup">
+
+                            <div class="content white-bg scrollable-div">
+
+                                <button class="close" (click)="closeAddService()">x</button>
+
+                                <form [formGroup]="addServiceForm" (ngSubmit)="createService()">
+
+                                    <div class="auto-flex-center-gap20">
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-center-start-gap20-no-set-width">
+                                        
+                                                <input type="file" accept="image/*" name="uploadfile" id="service_icon" style="display:none;"/>
+                                                <label class="glass-bg padding-10 cursor-pointer" for="service_icon">Upload Icon</label>
+    
+                                            </div>
+    
+                                            <div class="auto-flex-center-start-gap20-no-set-width">
+                                            
+                                                <input type="file" accept="image/*" name="uploadfile" id="service_image" style="display:none;"/>
+                                                <label class="glass-bg padding-10 cursor-pointer" for="service_image">Upload Image</label>
+    
+                                            </div>
+                                            
+                                            <div class="auto-flex-center-start-gap20-no-set-width">
+                                            
+                                                <input type="file" accept="image/*" name="uploadfile" id="service_banner" style="display:none;"/>
+                                                <label class="glass-bg padding-10 cursor-pointer" for="service_banner">Upload Banner</label>
+    
+                                            </div>    
+
+                                        </div>
+  
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Category</p>
+                                                <select class="input-global" formControlName="category_id">
+                                                    <option *ngFor="let category of categoryList" [value]="category.id"> {{ category.title }}</option>
+                                                </select>
+                                            
+                                            </div>
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Service Type</p>
+                                                <select class="input-global" formControlName="service_type">
+                                                    <option value="service">Service</option>
+                                                    <option value="labtest">Lab Test</option>
+                                                    <option value="labpackage">Lab Package</option>
+                                                </select>
+                                            
+                                            </div>
+                                        
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Title</p>
+                                                <input class="input-global" formControlName="title" type="text" />    
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Title Arabic</p>
+                                                <input class="input-global" formControlName="title_arabic" type="text" />
+            
+                                            </div>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap10-column">
+
+                                                <p class="bold">URL</p>
+                                                <input class="input-global" formControlName="url" type="text" />    
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Description</p>
+                                                <textarea class="input-global" formControlName="description" type="text"></textarea>   
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Description Arabic</p>
+                                                <textarea class="input-global" formControlName="description_arabic" type="text"></textarea>
+            
+                                            </div>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Title Tag</p>
+                                                <input class="input-global" formControlName="title_tag" type="text" />    
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Meta Tag</p>
+                                                <input class="input-global" formControlName="meta_tag" type="text" />
+            
+                                            </div>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Instructions</p>
+                                                <textarea class="input-global" formControlName="instructions" type="text"></textarea>    
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Instructions Arabic</p>
+                                                <textarea class="input-global" formControlName="instructions_arabic" type="text"></textarea>    
+            
+                                            </div>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Price</p>
+                                                <input class="input-global" formControlName="price" type="number" />    
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Cost</p>
+                                                <input class="input-global" formControlName="cost" type="number" />
+            
+                                            </div>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Active</p>
+                                                <input class="input-global"  style="width:auto" formControlName="active" type="checkbox" />    
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Whatsapp URL</p>
+                                                <input class="input-global" formControlName="whatsapp_url" type="text" />
+            
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="auto-flex-center-gap10">
+
+                                            <button class="primary-bg max-width padding-10 secondary-color" type="submit">Add Service</button>
+
+                                        </div>
+
+                                    </div>
+
+                                </form>                            
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Edit Service-->
+                    <div class="fixed dialog" *ngIf="editServiceToggle">
+
+                        <div class="popup">
+
+                            <div class="content white-bg scrollable-div">
+
+                                <button class="close" (click)="closeEditService()">x</button>
+
+                                <div class="auto-flex-center-gap20">
+
+                                    <div class="auto-flex-center-start-gap20">
+
+                                        <div class="auto-flex-center-start-gap20-no-set-width">
+                                    
+                                            <input type="file" accept="image/*" name="uploadfile" id="service_icon" style="display:none;"/>
+                                            <label class="glass-bg padding-10 cursor-pointer" for="service_icon">Upload Icon</label>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20-no-set-width">
+                                        
+                                            <input type="file" accept="image/*" name="uploadfile" id="service_image" style="display:none;"/>
+                                            <label class="glass-bg padding-10 cursor-pointer" for="service_image">Upload Image</label>
+
+                                        </div>
+                                        
+                                        <div class="auto-flex-center-start-gap20-no-set-width">
+                                        
+                                            <input type="file" accept="image/*" name="uploadfile" id="service_banner" style="display:none;"/>
+                                            <label class="glass-bg padding-10 cursor-pointer" for="service_banner">Upload Banner</label>
+
+                                        </div>    
+
+                                    </div>
+
+                                    <div class="auto-flex-center-start-gap20">
+
+                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                            <p class="bold">Category</p>
+                                            <select class="input-global" [(ngModel)]="selectedService.category_id">
+                                                <option *ngFor="let category of categoryList" [value]="category.id"> {{ category.title }}</option>
+                                            </select>
+                                        
+                                        </div>
+
+                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                            <p class="bold">Service Type</p>
+                                            <select class="input-global" [(ngModel)]="selectedService.service_type">
+                                                <option value="service">Service</option>
+                                                <option value="labtest">Lab Test</option>
+                                                <option value="labpackage">Lab Package</option>
+                                            </select>
+                                        
+                                        </div>
+                                    
+                                    </div>
+
+                                    <div class="auto-flex-center-start-gap20">
+
+                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                            <p class="bold">Title</p>
+                                            <input class="input-global" [(ngModel)]="selectedService.title" type="text" />    
+
+                                        </div>
+
+                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                            <p class="bold">Title Arabic</p>
+                                            <input class="input-global" [(ngModel)]="selectedService.title_arabic" type="text" />
+        
+                                        </div>
+
+                                    </div>
+
+                                    <div class="auto-flex-center-start-gap20">
+
+                                        <div class="auto-flex-start-gap10-column">
+
+                                            <p class="bold">URL</p>
+                                            <input class="input-global" [(ngModel)]="selectedService.url" type="text" />    
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="auto-flex-center-start-gap20">
+
+                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                            <p class="bold">Description</p>
+                                            <textarea class="input-global" [(ngModel)]="selectedService.description" type="text"></textarea>   
+
+                                        </div>
+
+                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                            <p class="bold">Description Arabic</p>
+                                            <textarea class="input-global" [(ngModel)]="selectedService.description_arabic" type="text"></textarea>
+        
+                                        </div>
+
+                                    </div>
+
+                                    <div class="auto-flex-center-start-gap20">
+
+                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                            <p class="bold">Title Tag</p>
+                                            <input class="input-global" [(ngModel)]="selectedService.title_tag" type="text" />    
+
+                                        </div>
+
+                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                            <p class="bold">Meta Tag</p>
+                                            <input class="input-global" [(ngModel)]="selectedService.meta_tag" type="text" />
+        
+                                        </div>
+
+                                    </div>
+
+                                    <div class="auto-flex-center-start-gap20">
+
+                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                            <p class="bold">Instructions</p>
+                                            <textarea class="input-global" [(ngModel)]="selectedService.instructions" type="text"></textarea>    
+
+                                        </div>
+
+                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                            <p class="bold">Instructions Arabic</p>
+                                            <textarea class="input-global" [(ngModel)]="selectedService.instructions_arabic" type="text"></textarea>    
+        
+                                        </div>
+
+                                    </div>
+
+                                    <div class="auto-flex-center-start-gap20">
+
+                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                            <p class="bold">FAQ</p>
+                                            <textarea class="input-global" [(ngModel)]="selectedService.faq" type="text"></textarea>    
+
+                                        </div>
+
+                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                            <p class="bold">FAQ Arabic</p>
+                                            <textarea class="input-global" [(ngModel)]="selectedService.faq_arabic" type="text"></textarea>    
+        
+                                        </div>
+
+                                    </div>
+
+                                    <div class="auto-flex-center-start-gap20">
+
+                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                            <p class="bold">Price</p>
+                                            <input class="input-global" [(ngModel)]="selectedService.price" type="number" />    
+
+                                        </div>
+
+                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                            <p class="bold">Cost</p>
+                                            <input class="input-global" [(ngModel)]="selectedService.cost" type="number" />
+        
+                                        </div>
+
+                                    </div>
+
+                                    <div class="auto-flex-center-start-gap20">
+
+
+                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                            <p class="bold">Whatsapp URL</p>
+                                            <input class="input-global" [(ngModel)]="selectedService.whatsapp_url" type="text" />
+        
+                                        </div>
+
+                                    </div>
+
+                                    <div class="auto-flex-center-gap10">
+
+                                        <button class="primary-bg max-width padding-10 secondary-color" (click)="updateService()">Update Service Details</button>
+
+                                    </div>
+
+                                </div>
+                   
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+    
+    </section>
+
+</div>

@@ -1,0 +1,232 @@
+<div id="app">
+
+    <!-- page section -->
+    <section class="el-container">
+    
+        <div>
+            
+            <!-- main menu bar-->
+            <menu class="menu-bar lab-hide">
+    
+                <a routerLink="javascript:void(0);" class="toggle-menu">
+    
+                    <div class="inactive">
+                        
+                        <span class="bar bar1"></span>
+                        <span class="bar"></span>
+                        <span class="bar bar3"></span>
+                  
+                    </div>
+
+                </a>
+                
+                <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+          
+            </menu>
+            
+            <!-- app side bar-->
+            <app-sidebar class="lab-hide"></app-sidebar>
+
+            <!-- app sub menu -->
+            <div>
+            
+                <app-submenu></app-submenu>
+            
+            </div>
+
+            <!-- top nav bar in the right side -->
+            <nav class="nav-bar-none"></nav>
+        
+        </div>
+
+        <!-- right side or the main component content -->
+        <main class="el-main">
+      
+            <app-header></app-header>
+
+            <!-- category wrapper -->
+            <div class="auto-flex-start-gap20-column max-height relative">
+
+                <div class="auto-flex-start-space-between-gap10">
+
+                    <p class="large">All Categories</p>
+                    <button class="primary-bg padding-10 secondary-color bold" (click)="addCategory()">Add a New Category</button>
+
+                    <div class="auto-flex-center-gap10-column">
+
+                        <!-- display a list of categories -->
+                        <table class="table">
+
+                            <th>ID</th>
+                            <th>Icon</th>
+                            <th>Title</th>
+                            <th>Banner</th>
+                            <th>Image</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+
+                            <!-- display a list of service providers already assigned -->
+                            <tr *ngFor="let category of categoryList; let categoryIndex = index">
+
+                                <td>
+                                    <p> {{ category.id }} </p>
+                                </td>
+
+                                <td>
+                                    <img class="medImg" [src]="category.icon" *ngIf="category.icon.length>0">
+                                </td>
+
+                                <td>
+                                    <p> {{ category.title }} </p>
+                                    <hr class="hr-black" />
+                                    <p> {{ category.title_arabic }} </p>
+                                </td>
+
+                                <td>
+                                    <img class="medImg" [src]="category.banner" *ngIf="category.banner.length>0">
+                                </td>
+
+                                <td>
+                                    <img class="medImg" [src]="category.image" *ngIf="category.image.length>0">
+                                </td>
+
+                                <td>
+                                    <p class="dark-green-bg padding-5 secondary-color fit-content" *ngIf="category.active"> Active </p>
+                                    <p class="red-bg padding-5 secondary-color fit-content" *ngIf="!category.active"> Deactivated </p>
+                                </td>
+                            
+                                <td class="auto-flex-center-gap10-no-set-width">
+                                    <button class="glass-bg padding-5 border-radius-10 border-none" (click)="updateCategoryStatus(category, categoryIndex, true)" *ngIf="!category.active">activate</button>
+                                    <button class="glass-bg padding-5 border-radius-10 border-none" (click)="updateCategoryStatus(category, categoryIndex, false)" *ngIf="category.active">deactivate</button>
+                                    <button class="glass-bg padding-5 border-radius-10 border-none" (click)="editCategory(category, categoryIndex)">edit</button>
+                                    <button class="red-bg bold secondary-color padding-5 border-radius-10" (click)="deleteCategory(category, categoryIndex)">remove</button>
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                        <!-- Add categoyy-->
+                        <div class="fixed dialog" *ngIf="addNewCategoryToggle">
+
+                            <div class="popup">
+
+                                <div class="content white-bg scrollable-div">
+
+                                    <button class="close" (click)="closeAddCategory()">x</button>
+
+                                    <form [formGroup]="addCategoryForm" (ngSubmit)="createCategory()">
+
+                                        <div class="auto-flex-center-gap20">
+                                            
+                                            <div class="auto-flex-center-start-gap20">
+                                            
+                                                <input type="file" accept="image/*" name="uploadfile" id="category_icon" style="display:none;"/>
+                                                <label class="glass-bg padding-10 cursor-pointer" for="category_icon">Upload Icon</label>
+
+                                            </div>
+
+                                            <div class="auto-flex-center-start-gap20">
+                                            
+                                                <input type="file" accept="image/*" name="uploadfile" id="category_image" style="display:none;"/>
+                                                <label class="glass-bg padding-10 cursor-pointer" for="category_image">Upload Image</label>
+
+                                            </div>
+
+                                            <div class="auto-flex-center-start-gap20">
+                                            
+                                                <input type="file" accept="image/*" name="uploadfile" id="category_banner" style="display:none;"/>
+                                                <label class="glass-bg padding-10 cursor-pointer" for="category_banner">Upload Banner</label>
+
+                                            </div>
+
+                                            <div class="auto-flex-center-start-gap20">
+
+                                                <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                    <p class="bold">Title</p>
+                                                    <input class="input-global" formControlName="title" type="text" />    
+
+                                                </div>
+
+                                                <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                    <p class="bold">Title Arabic</p>
+                                                    <input class="input-global" formControlName="title_arabic" type="text" />
+                
+                                                </div>
+
+                                            </div>
+                                            
+
+                                            <div class="auto-flex-center-gap10">
+
+                                                <button class="primary-bg max-width padding-10 secondary-color" type="submit">Add Category</button>
+
+                                            </div>
+
+                                        </div>
+
+                                    </form>                            
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Edit category-->
+                        <div class="fixed dialog" *ngIf="editCategoryToggle">
+                            
+                            <div class="popup">
+
+                                <div class="content white-bg scrollable-div">
+
+                                    <button class="close" (click)="closeEditCategory()">x</button>
+                                    
+                                    <!-- edit content -->
+                                    <div class="auto-flex-center-gap20">
+                                        
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Title</p>
+                                                <input class="input-global" [(ngModel)]="selectedCategory.title" type="text" />    
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Title Arabic</p>
+                                                <input class="input-global" [(ngModel)]="selectedCategory.title_arabic" type="text" />
+            
+                                            </div>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-gap10">
+
+                                            <button class="primary-bg max-width padding-10 secondary-color" (click)="updateCategory()">Save Category Information</button>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+    
+    </section>
+
+</div>

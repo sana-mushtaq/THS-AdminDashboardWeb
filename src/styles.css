@@ -2389,6 +2389,7 @@ div.dt-buttons .dt-button {
     --light : #f7f8fa;
     --dark : #333;
     --buttons : #f7f8fa;
+    --secondary-color: #ffffff;
 }
 .bg-theme-light{ background-color: var(--light);}
 .btn-theme{
@@ -2419,3 +2420,2127 @@ div.dt-buttons .dt-button {
 .fw-medium{ font-weight: 600;}
 .text-theme{ color: var(--primary);}
 .cursor-pointer{ cursor: pointer; }
+
+
+
+/* THS - 23  CSS ADDED BY SANA FOR ALL THE NEW COMPONENENTS */
+
+.button-global {
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    font-weight: 700;
+    font-family: var(--primary-font);
+    cursor: pointer;
+}
+
+/*Form*/
+.form-global {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+}
+
+
+.input-global {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1px solid #2222224b;
+    background: #fafafa;
+    color: #222;
+    font-weight: 500;
+}
+
+.select-global {
+    padding: 10px 30px !important;
+    background: var(--gray-color);
+    border: solid 1px var(--secondary-color);
+    cursor: pointer;
+    width: 100%;
+    font-family: var(--primary-font);
+    font-weight: 500;
+}
+
+.textarea-global {
+    padding: 10px;
+    border-radius: 5px;
+    resize: none;
+    background: var(--gray-color);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 700;
+    font-family: var(--primary-font);
+}
+
+.textarea-global:hover {
+    background: var(--secondary-color);
+    color: black;
+}
+
+.textarea-global:focus {
+    background: var(--secondary-color);
+    color: black;
+}
+
+.section-global {
+
+    background: var(--gray-color);
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    border: 1.5px solid #ffffff;
+    padding: 60px;
+}
+
+
+.error {
+    padding: 5px 10px;
+    background-color: var(--red-color-dark);
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.decoration-none {
+    text-decoration: none;
+}
+
+/*Width Height CSS*/
+.max-width {
+    width: 100%;
+}
+.fit-content {
+    width: fit-content;
+}
+
+.width-auto {
+    width: auto;
+}
+
+.width-min-40 {
+    min-width: 40px;
+}
+
+.width-min-70 {
+    min-width: 70px;
+}
+
+.width-min-100 {
+    min-width: 100px;
+}
+.width-min-110 {
+    min-width: 110px;
+}
+.width-min-150 {
+    min-width: 150px;
+}
+
+.width-min-170 {
+    min-width: 170px;
+}
+
+.width-min-180 {
+    min-width: 180px;
+}
+
+.width-min-200 {
+    min-width: 200px;
+}
+
+.width-min-250 {
+    min-width: 250px;
+}
+
+.width-min-270 {
+    min-width: 270px;
+}
+
+.width-min-300 {
+    min-width: 300px;
+}
+
+.width-min-340 {
+    min-width: 340px;
+}
+
+.width-min-500 {
+    min-width: 500px
+}
+
+.width-min-550 {
+    min-width: 550px
+}
+
+.width-max-50 {
+    max-width: 50px
+}
+
+.width-max-100 {
+    max-width: 100px
+}
+
+.width-max-120 {
+    max-width: 120px
+}
+
+.width-max-130 {
+    max-width: 130px
+}
+
+.width-max-140 {
+    max-width: 140px
+}
+
+.width-max-150 {
+    max-width: 150px
+}
+
+.width-max-170 {
+    max-width: 170px
+}
+
+.width-max-180 {
+    max-width: 180px
+}
+
+.width-max-200 {
+    max-width: 200px
+}
+
+.width-max-220 {
+    max-width: 220px
+}
+
+.width-max-250 {
+    max-width: 250px
+}
+
+.width-max-270 {
+    max-width: 270px
+}
+
+.width-max-300 {
+    max-width: 300px
+}
+
+.width-max-340 {
+    max-width: 300px
+}
+
+.width-max-360 {
+    max-width: 360px
+}
+
+.width-max-400 {
+    max-width: 400px
+}
+
+.width-max-500 {
+    max-width: 500px
+}
+
+.width-max-550 {
+    max-width: 550px
+}
+
+.width-max-600 {
+    max-width: 600px
+}
+
+.width-max-650 {
+    max-width: 650px
+}
+
+.width-max-700 {
+    max-width: 700px
+}
+
+.width-max-800 {
+    max-width: 800px
+}
+
+.width-max-840 {
+    max-width: 840px
+}
+
+
+.width-40 {
+    width: 40px;
+}
+
+.width-100 {
+    width: 100px;
+}
+
+.width-130 {
+    width: 130px;
+}
+
+.width-200 {
+    width: 200px;
+}
+
+.width-300 {
+    width: 300px;
+}
+
+.width-340 {
+    width: 340px;
+}
+
+.width-400 {
+    width: 400px;
+}
+
+.width-500 {
+    width: 500px;
+}
+
+.width-550 {
+    width: 550px;
+}
+
+.width-25Percent {
+    width: 25%;
+}
+
+.width-30Percent {
+    width: 30%;
+}
+
+.width-45Percent {
+    width: 45%;
+}
+
+.width-half {
+    width: 48%;
+}
+.width-50Percent {
+    width: 50%;
+}
+
+.width-65Percent {
+    width: 65%;
+}
+
+.width-70Percent {
+    width: 70%;
+}
+
+.width-90Percent {
+    width: 90%;
+}
+
+.max-height {
+    min-height: 100%;
+}
+
+.min-height-150 {
+    min-height: 150px;
+}
+
+.min-height-200 {
+    min-height: 200px;
+}
+
+.min-height-220 {
+    min-height: 220px;
+}
+
+.min-height-300 {
+    min-height: 300px;
+}
+
+.min-height-400 {
+    min-height: 400px;
+}
+
+.min-height-100vh {
+    min-height: 100vh;
+}
+
+.height-max-100 {
+    max-height: 100px;
+}
+
+.height-max-150 {
+    max-height: 150px;
+}
+
+.height-max-200 {
+    max-height: 200px;
+    overflow: auto;
+}
+
+.height-max-250 {
+    max-height: 250px;
+    overflow: auto;
+}
+
+.height-max-300 {
+    max-height: 300px;
+    overflow: auto;
+}
+
+.height-max-400 {
+    max-height: 400px;
+    overflow: auto;
+}
+
+.max-height-600 {
+    max-height: 600px;
+    overflow: auto;
+}
+
+.max-height-600-hidden {
+    max-height: 600px;
+    overflow: hidden;
+}
+
+.max-height-100vh {
+    max-height: 100vh;
+    overflow: auto;
+}
+
+.height-100 {
+    height: 100px;
+}
+
+.height-400 {
+    height: 400px;
+}
+
+/*Font CSS*/
+/*Font Size*/
+.xxxlarge {
+    font-size: 80px;
+    line-height: 85px;
+}
+
+.xxlarge {
+    font-size: 60px;
+    line-height: 65px;
+}
+
+.xlarge {
+    font-size: 50px;
+    line-height: 65px;
+}
+
+.large {
+    font-size: 40px;
+    line-height: 45px;
+}
+
+.xmed {
+    font-size: 30px;
+    line-height: 35px;
+}
+
+.med {
+    font-size: 20px;
+    line-height: 25px;
+}
+
+.small {
+    font-size: 16px;
+    line-height: 21px;
+}
+
+.xsmall {
+    font-size: 14px;
+    line-height: 19px;
+}
+
+.font-size-10 {
+    font-size: 10px;
+}
+
+.xxsmall {
+    font-size: 8px;
+    line-height: 10px;
+}
+
+/*Font Weight*/
+.bold {
+    font-weight: 700;
+}
+
+.simBold {
+    font-weight: 500;
+}
+
+.regular {
+    font-weight: 400;
+}
+
+.light {
+    font-weight: 300;
+}
+
+/*Text Align*/
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+/*Text-Transform*/
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+/*Image CSS*/
+.xxxxlargeImg {
+    width: 700px;
+    height: 700px;
+}
+
+.xxxlargeImg {
+    width: 500px;
+    height: 500px;
+}
+
+.xxxlargeImg-350 {
+    width: 350px;
+    height: 350px;
+}
+
+.xxlargeImg {
+    width: 250px;
+    height: 250px;
+}
+
+.xlargeImg {
+    width: 180px;
+    height: 180px;
+}
+
+.largeImg {
+    width: 150px;
+    height: 150px;
+}
+
+.xxmedImg {
+    width: 100px;
+    height: 100px;
+}
+
+.xmedImg {
+    width: 80px;
+    height: 80px;
+}
+
+.medImg {
+    width: 70px;
+    height: 70px;
+}
+
+.smallImg {
+    width: 50px;
+    height: 50px;
+}
+
+.xxsmallImg {
+    width: 40px;
+    height: 40px;
+}
+
+.xsmallImg {
+    width: 30px;
+    height: 30px;
+}
+
+.img-20 {
+    width: 20px;
+    height: 20px;
+}
+.img-16 {
+    width: 16px;
+    height: 16px;
+}
+
+.img25 {
+    width: 25%;
+}
+
+/*Button*/
+.button-glass {
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--secondary-color);
+    text-transform: capitalize;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0));
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.button-primary {
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--secondary-color);
+    text-transform: capitalize;
+    background: var(--primary-color);
+}
+
+.button-warning {
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--warning-color);
+    text-transform: capitalize;
+    background: var(--warning-color-light);
+}
+
+.border-radius-5 {
+    border-radius: 5px;
+}
+
+.border-radius-10 {
+    border-radius: 10px;
+}
+
+.border-none {
+    border: none;
+}
+
+/* HR */
+.hr-black {
+    border: 1px solid #222;
+    border-top: 1px solid #222;
+    width: 100%;
+}
+
+/*Bg*/
+
+.primary-bg {
+    background: var(--primary);
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1.5px solid #ffffff;
+}
+
+.primary-bg-light {
+    background: var(--primary-color-light);
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1.5px solid #ffffff;
+}
+
+.white-bg {
+    background: #ffffff;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1.5px solid #ffffff;
+}
+
+.dark-green-bg{
+    background: #205807;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1.5px solid #ffffff;
+}
+
+.red-bg{
+    background: #ef2b2b;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1.5px solid #ffffff;
+}
+
+.transparent-bg {
+    background: transparent;
+}
+
+.glass-bg {
+    background: #f7f8fa;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.offwhite-bg {
+    background: #fafafa;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1.5px solid #ffffff;
+}
+
+/* Colors */
+.secondary-color {
+    color: var(--secondary-color);
+}
+
+/*Margins*/
+.margin-20 {
+    margin: 20px;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.margin-bottom-40 {
+    margin-bottom: 40px;
+}
+
+.margin-bottom-60 {
+    margin-bottom: 60px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.margin-top-40 {
+    margin-top: 40px;
+}
+
+.margin-top-60 {
+    margin-top: 60px;
+}
+
+.margin-left-auto {
+    margin-left: auto;
+}
+
+.margin-right-auto {
+    margin-right: auto;
+}
+
+.margin-left-right-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.margin-left-right-20 {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.margin-top-bottom-10 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.margin-top-bottom-20 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/*Padding*/
+.padding-none {
+    padding: 0;
+}
+
+.padding-3 {
+    padding: 3px;
+}
+
+.padding-5 {
+    padding: 5px;
+}
+
+.padding-10 {
+    padding: 10px;
+}
+
+.padding-20 {
+    padding: 20px;
+}
+
+.padding-40 {
+    padding: 40px;
+}
+
+.padding-60 {
+    padding: 60px;
+}
+
+.padding-bottom-10 {
+    padding-bottom: 10px;
+}
+
+.padding-bottom-20 {
+    padding-bottom: 20px;
+}
+
+.padding-bottom-40 {
+    padding-bottom: 40px;
+}
+
+.padding-bottom-60 {
+    padding-bottom: 60px;
+}
+
+.padding-top-20 {
+    padding-top: 20px;
+}
+
+.padding-top-40 {
+    padding-top: 40px;
+}
+
+.padding-top-50 {
+    padding-top: 60px;
+}
+
+.padding-top-60 {
+    padding-top: 60px;
+}
+
+.padding-left-right-30 {
+    padding-left: 30px;
+    padding-right: 30px
+}
+
+/*Position*/
+/*relative*/
+.relative {
+    position: relative;
+}
+
+.fixed {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+/*absolute*/
+.absolute {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.absolute-middle {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.absolute-right {
+    position: absolute;
+    left: auto;
+    right: 0;
+}
+
+.absolute-left {
+    position: absolute;
+    left: 0;
+    right: auto;
+}
+
+.absolute-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.absolute-top-30 {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+}
+
+.absolute-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.absolute-top-right {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.absolute-top-right-0 {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.absolute-top-right-10 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.absolute-top-right-25 {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+}
+
+.absolute-top-left-0 {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.absolute-top-left-10 {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.absolute-top-left-25 {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+}
+
+.absolute-top-left-30 {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.absolute-top-left-25-40N {
+    position: absolute;
+    top: 25px;
+    left: -40px;
+}
+
+.absolute-bottom-right-0 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.absolute-bottom-right-5 {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.absolute-bottom-right-10 {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.absolute-bottom-right-25 {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+}
+
+.absolute-bottom-right-5n {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+}
+
+.absolute-bottom-left-0 {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+
+.absolute-bottom-left-10 {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.absolute-bottom-left-25 {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+}
+
+.absolute-bottom-right-left-10 {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px
+}
+
+.absolute-top-bottom-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.absolute-top-bottom-left {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.fixed-top-15Percent-25 {
+    position: fixed;
+    top: 15%;
+    right: 25px;
+    z-index: 1;
+}
+
+/*Overflow*/
+.overflow-auto {
+    overflow: auto;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.overflow-visible {
+    overflow: visible;
+}
+
+/*Flex*/
+.auto-flex-start-gap5-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 5px;
+    width: 100%;
+}
+
+.auto-flex-start-gap10-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 10px;
+    width: 100%;
+}
+
+.auto-flex-start-gap20-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 20px;
+    width: 100%;
+}
+
+.auto-flex-start-gap30-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 30px;
+    width: 100%;
+}
+
+.auto-flex-start-gap40-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 40px;
+    width: 100%;
+}
+
+.auto-flex-start-gap5-column-no-set-width {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 5px;
+}
+
+.auto-flex-start-gap10-column-no-set-width {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 10px;
+}
+
+.auto-flex-start-gap20-column-no-set-width {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 20px;
+}
+
+.auto-flex-start-center-gap20-column-no-set-width {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+    gap: 20px;
+}
+
+.auto-flex-start-no-gap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.auto-flex-start-gap5 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 5px;
+}
+
+.auto-flex-start-gap10 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+}
+
+.auto-flex-start-gap20 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+}
+
+.auto-flex-start-gap40 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 40px;
+}
+
+.auto-flex-justify-gap10 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: justify;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 40px;
+}
+
+.auto-flex-start-gap5-no-set-width {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.auto-flex-start-gap10-no-set-width {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.auto-flex-start-gap20-no-set-width {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.auto-flex-start-gap5-no-wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    width: 100%;
+    gap: 5px;
+    overflow: auto;
+}
+
+.auto-flex-center-gap10-no-set-width-no-wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    gap: 10px;
+    overflow: auto;
+}
+
+.auto-flex-center-gap10-no-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    gap: 10px;
+    overflow: auto;
+}
+
+.auto-flex-start-gap10-no-wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    width: 100%;
+    gap: 10px;
+    overflow: auto;
+}
+
+.auto-flex-start-gap20-no-wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    width: 100%;
+    gap: 20px;
+    overflow: auto;
+}
+
+.auto-flex-start-gap40-no-wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    width: 100%;
+    gap: 40px;
+    overflow: auto;
+}
+
+.auto-flex-start-gap10-no-set-width-no-wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    gap: 10px;
+    overflow: auto;
+}
+
+.auto-flex-start-gap20-no-set-width-no-wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    gap: 20px;
+    overflow: auto;
+}
+
+.auto-flex-center-no-gap-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+}
+
+.auto-flex-center-gap5-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    gap: 5px;
+}
+
+.auto-flex-center-gap10-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.auto-flex-center-gap20-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.auto-flex-center-gap30-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    gap: 30px;
+}
+
+.auto-flex-center-gap40-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    gap: 40px;
+}
+
+.auto-flex-center-gap60-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    gap: 60px;
+}
+
+.auto-flex-center-gap100-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    gap: 100px;
+}
+
+.auto-flex-center-no-gap-column-no-set-width {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.auto-flex-center-gap5-column-no-set-width {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    gap: 5px;
+}
+
+.auto-flex-center-gap10-column-no-set-width {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    gap: 10px;
+}
+
+.auto-flex-center-gap20-column-no-set-width {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    gap: 20px;
+}
+
+.auto-flex-center-gap30-column-no-set-width {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    gap: 30px;
+}
+
+.auto-flex-center-gap40-column-no-set-width {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    gap: 40px;
+}
+
+.auto-flex-center-no-gap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.auto-flex-center-gap5 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 5px;
+}
+
+.auto-flex-center-gap10 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+}
+
+.auto-flex-center-gap20 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+}
+
+.auto-flex-center-gap30 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 30px;
+}
+
+.auto-flex-center-gap40 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 40px;
+}
+
+.auto-flex-center-gap60 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 60px;
+}
+
+.auto-flex-end-gap10 {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    align-content: flex-end;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+}
+
+.auto-flex-center-no-gap-no-set-width {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.auto-flex-center-gap5-no-set-width {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.auto-flex-center-gap10-no-set-width {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.auto-flex-center-gap20-no-set-width {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.auto-flex-center-gap40-no-set-width {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.auto-flex-center-gap5-no-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 5px;
+}
+
+.auto-flex-center-gap20-no-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 20px;
+}
+
+.auto-flex-start-stretch-gap5 {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 5px;
+}
+
+.auto-flex-start-stretch-gap10 {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+}
+
+.auto-flex-start-stretch-gap20 {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+}
+
+.auto-flex-start-stretch-gap5-no-set-width {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.auto-flex-start-stretch-gap5-no-wrap {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 5px;
+}
+
+.auto-flex-start-stretch-gap10-column-no-set-width {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.auto-flex-start-stretch-gap20-column-no-set-width {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.auto-flex-center-stretch-gap10 {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+}
+
+.auto-flex-center-stretch-gap20 {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+}
+
+.auto-flex-start-space-between-gap10 {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+}
+
+.auto-flex-start-space-between-no-gap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.auto-flex-space-between-gap5 {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: space-between;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 100%;
+}
+
+.auto-flex-space-between-gap10 {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.auto-flex-space-between-gap20 {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+.auto-flex-space-between-center-gap20 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+.auto-flex-space-between-gap40-no-set-width {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.auto-flex-space-between-gap60-no-set-width {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: space-between;
+    flex-wrap: wrap;
+    gap: 60px;
+}
+
+.auto-flex-start-space-between-no-gap-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: space-between;
+    width: 100%;
+}
+
+.auto-flex-space-between-gap10-column-no-set-width {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: space-between;
+    gap: 10px;
+}
+
+.auto-flex-space-between-gap10-no-set-width {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: space-between;
+    gap: 10px;
+}
+
+.auto-flex-space-between-gap10-column {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: space-between;
+    gap: 10px;
+}
+
+.auto-flex-space-between-gap20-column {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: space-between;
+    gap: 20px;
+}
+
+.auto-flex-space-between-no-gap-no-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    width: 100%;
+    overflow: auto;
+}
+
+.auto-flex-space-between-gap5-no-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    gap: 5px;
+    width: 100%;
+    overflow: auto;
+}
+
+.auto-flex-space-between-gap10-no-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    gap: 10px;
+    width: 100%;
+    overflow: auto;
+}
+
+.auto-flex-space-between-gap20-no-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    gap: 20px;
+    width: 100%;
+    overflow: auto;
+}
+
+.auto-flex-center-space-between-gap10 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+}
+
+.auto-flex-center-space-between-gap20 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+}
+
+.auto-flex-center-space-between-gap40 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 40px;
+}
+
+.auto-flex-center-space-between-gap60 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 60px;
+}
+
+.auto-flex-center-space-between-gap20-no-set-width {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.auto-flex-space-around-gap10 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    align-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+}
+
+.auto-flex-space-around-gap20 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    align-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+}
+
+.auto-flex-space-around-gap40 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    align-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 40px;
+}
+
+.auto-flex-center-start-gap10-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    align-content: flex-start;
+    gap: 10px;
+    width: 100%;
+}
+
+.auto-flex-center-start-gap20-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    align-content: flex-start;
+    gap: 20px;
+    width: 100%;
+}
+
+.auto-flex-center-start-gap10 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.auto-flex-center-start-gap20 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+.auto-flex-center-start-gap5-no-set-width {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.auto-flex-center-start-gap10-no-set-width {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.auto-flex-center-start-gap20-no-set-width {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.auto-flex-center-end-gap10 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    align-content: flex-end;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+}
+
+.auto-flex-center-end-gap10-no-set-width {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    align-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.auto-flex-end-center-gap20 {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    align-content: flex-end;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+}
+
+.auto-flex-start-center-gap10 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.auto-flex-start-center-gap20 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+.auto-flex-start-center-gap40 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    width: 100%;
+}
+
+.auto-flex-start-center-start-gap10 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.flex-flow-column {
+    flex-flow: column;
+}
+
+.flex-grow {
+    display: flex;
+    flex-grow: 1;
+}
+
+.flex-grow-center-gap10-column {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.flex-grow-start-gap10-column {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.hide {
+    display: none;
+}
+
+.overlay {
+    flex-direction: column;
+    display: flex;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    align-content: center;
+    align-items: center;
+    place-content: center;
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.dialog {
+    height: 100%;
+    background-color: #000000b2;
+    width: 100%;
+}
+.popup {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    max-height: 100%;
+    padding: 20px;
+    background: var(--gray-color);
+    border-radius: 10px;
+    position: relative;
+    transition: all 5s ease-in-out;
+    align-content: center;
+}
+
+.popup .content .close {
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #222;
+}
+
+.popup .content {
+    width: 800px;
+    min-height: 500px;
+    max-height: 70%;
+    overflow: auto;
+    transition: all 5s ease-in-out;
+}
+
+.popup .content-1200 {
+    width: 1200px;
+    max-height: 70%;
+    overflow: auto;
+    transition: all 5s ease-in-out;
+}
+
+/* Customize the scrollbar */
+.scrollable-div::-webkit-scrollbar {
+    width: 7px;
+    height: 5px;
+    border-radius: 20px;
+}
+
+/* Handle */
+.scrollable-div::-webkit-scrollbar-thumb {
+    background: #0144e4; 
+    border-radius: 20px;
+}
+
+/* Handle on hover */
+.scrollable-div::-webkit-scrollbar-thumb:hover {
+    background: #0144e4;
+    border-radius: 20px;
+}
