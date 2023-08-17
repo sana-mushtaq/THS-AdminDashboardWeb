@@ -2,25 +2,12 @@
 
 	'use strict';
 	// Mean Menu JS
-	(function($) {
-		'use strict';
-		
-		$(document).ready(function(){ 
-			$('.mean-menu').meanmenu({ 
-				meanScreenWidth: "991"
-			}); 
-		});
-	})(jQuery);
-
+	$('.mean-menu').meanmenu({
+		meanScreenWidth: "991"
+	});
 
 	// Nice Select JS
-	(function($) {
-		'use strict';
-		
-		$(document).ready(function(){ 
-			$('select').niceSelect()(jQuery);
-		});
-	})(jQuery);
+	$('select').niceSelect();
 
 	// Header Sticky
 	$(window).on('scroll', function () {
@@ -44,42 +31,28 @@
 	});
 
 	// Odometer JS
-
-	(function($) {
-		'use strict';
-		
-		$(document).ready(function(){ 
-			$('.odometer').appear(function (e) {
-				var odo = $(".odometer");
-				odo.each(function () {
-					var countNumber = $(this).attr("data-count");
-					$(this).html(countNumber);
-				});
-			});
+	$('.odometer').appear(function (e) {
+		var odo = $(".odometer");
+		odo.each(function () {
+			var countNumber = $(this).attr("data-count");
+			$(this).html(countNumber);
 		});
-	})(jQuery);
+	});
 
 	// Others Option For Responsive JS
 	$(".others-option-for-responsive .dot-menu").on("click", function () {
 		$(".others-option-for-responsive .container .container").toggleClass("active");
 	});
 
-
 	// Popup Video JS
-	(function($) {
-		'use strict';
-		
-		$(document).ready(function(){ 
-			$('.popup-youtube, .popup-vimeo').magnificPopup({
-				disableOn: 300,
-				type: 'iframe',
-				mainClass: 'mfp-fade',
-				removalDelay: 160,
-				preloader: false,
-				fixedContentPos: false,
-			});
-		});
-	})(jQuery);
+	$('.popup-youtube, .popup-vimeo').magnificPopup({
+		disableOn: 300,
+		type: 'iframe',
+		mainClass: 'mfp-fade',
+		removalDelay: 160,
+		preloader: false,
+		fixedContentPos: false,
+	});
 
 	// Skill JS
 	$('.skill-bar').each(function () {

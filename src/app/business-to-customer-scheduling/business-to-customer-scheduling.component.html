@@ -1,0 +1,32 @@
+<!-- THS-25 -->
+<!-- This component is used to display services -->
+<div class="page-layout">
+
+    <div class="main-div">
+
+        <!-- google map wrapper -->
+        <div class="google-map-wrapper">
+    
+            <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Address" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" />
+            
+            <agm-map [latitude]="centerLat" [longitude]="centerLng" [zoom]="zoom" (mapClick)="onMapClick($event)" class="auto-flex-start-center-gap10 max-width height-600 width-600">
+                
+                <agm-marker *ngIf="selectedLat && selectedLng" [latitude]="selectedLat"  [longitude]="selectedLng" [markerDraggable]="true" (dragEnd)="onMarkerDragEnd($event)" class=" border-radius-10"></agm-marker>
+            
+            </agm-map>
+    
+            <div *ngIf="selectedLat && selectedLng">
+            
+                Selected Latitude: {{ selectedLat }}
+            
+                Selected Longitude: {{ selectedLng }}
+
+                <button (click)="getNearbyBranches()">Get Services</button>
+            </div>
+            
+        
+        </div>
+
+    </div>
+    
+</div>

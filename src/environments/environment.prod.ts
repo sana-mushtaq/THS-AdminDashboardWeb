@@ -54,7 +54,6 @@ export const environment = {
   getResultReadingRequestListURL: "getAdminResultReadingList",
 
   fileUploadURL: "fileUpload",
-  imageUploadURL: "fileUploadImage",
 
   //SA LAB API'S
   getAdminLabDashboardURL: "getLabWiseSummary",

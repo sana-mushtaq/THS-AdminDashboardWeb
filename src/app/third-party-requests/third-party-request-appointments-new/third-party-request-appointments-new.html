@@ -145,101 +145,15 @@
               <div class="pl-4"><p class="m-0"><b>Email</b></p><p class="m-0">{{selection.patient.emailId}}</p></div>
               <div class="pl-4"><p class="m-0"><b>Dob</b></p><p class="m-0">{{selection.patient.dob}}</p></div>
               <div class="pl-4"><p class="m-0"><b>Dependents</b></p><p class="m-0">{{patientDependents.length}}</p></div>
-              <div *ngIf="selection.confirmed == false" class="pl-4"><button (click)="selection.confirmed = true; searchInput.value=''" type="button" class="btn btn-theme">Continue</button></div>
+              <div *ngIf="selection.confirmed == false" class="pl-4"><button (click)="searchInput.value='';onConfirmPatient();" type="button" class="btn btn-theme">Continue</button></div>
               <div *ngIf="selection.confirmed == true" class="pl-4"><button (click)="selection.confirmed = false; searchInput.value=''" type="button" class="btn btn-theme">Edit</button></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SELECT SERVICES -->
-        <div class="col-md-12" [hidden]="selection.isServicesConfirmed || ( selection.patient | json ) == '{}' || !selection.confirmed">
-          <div class="row">
-            <div class="col-md-9">
-              <div class="service-area">
-                <h4 class="mb-2">Select Service:</h4>
-                <div class="row">
-                  <div class="col-md-4">
-                    <label for="service-type">Service Type</label>
-                    <select class="form-control theme-control" id="service-type" [value]="selection.serviceType" (change)="onChangeServiceType( $event.target )">
-                      <option value="lab-package">Lab Test Packages</option>
-                      <option value="lab-individual">Lab Test Individual</option>
-                      <option value="other">Other Services</option>
-                    </select>
-                  </div>
-                  <div class="col-md-8">
-                    <label for="service-search">Search</label>
-                    <div class="d-flex">
-                      <div class="flex-grow-1 mr-2"><input (keyup.enter)="onSearchSevice()" #searchSearviceInput type="text" class="form-control theme-control" id="service-search" placeholder="Search Service" /></div>
-                      <div><button class="btn btn-theme" type="button" (click)="onSearchSevice()"><i class="icon-search"></i> Search</button></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="category-wrapper mt-3 custom-scroll d-flex">
-                  <div class="category" [ngClass]="(selection.categoryId==category.id) ? 'active' : ''" *ngFor="let category of serviceCategories" (click)="getServiceByCategory( category.id, category?.sectorId || null )">
-                    <div class="category-img">
-                      <img [src]="category?.icon || 'assets/images/taib-logo.png'" [alt]="category.name" [ngClass]="(category?.icon) ? '' : 'default'">
-                    </div>
-                    <p class="m-0">{{category.name}}</p>
-                  </div>
-                </div>
-                <div class="category-detail-wrapper mt-3">
-                  <div class="row g-1">
-                    <ng-container *ngIf="services.length == 0">
-                      <div class="col-md-12 text-center">
-                        <p class="m-0">No service found against applied filters.</p>
-                        <p class="m-0">Try changing/clearing filters to see more results</p>
-                      </div>
-                    </ng-container>
-                    <div class="col-md-3 mb-3" *ngFor="let service of services">
-                      <div class="category-card" (click)="onSelectSevice( service )">
-                        <img [src]="service?.icon || 'assets/images/taib-logo.png'" [ngClass]="(service?.icon) ? '' : 'default'" [alt]="service.name">
-                        <div>
-                          <h5>{{service.name}} ({{service.name_ar}})</h5>
-                          <h4 class="text-primary">SAR {{service.price}}</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <ng-container *ngIf="selection.services.length > 0">
-                <table class="table table-sm align-middle align-items-center table-hover mt-3">
-                  <thead>
-                    <tr>
-                      <th>Service</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let service of selection.services; let sIndex=index">
-                      <td>
-                        <p class="m-0">{{service.name}}</p>
-                        <select class="form-control my-1" (change)="onChangeServicePatient( sIndex, $event )">
-                          <option [value]="selection.patient.userId">{{selection.patient.firstName}} {{selection.patient.lastName}} (Self)</option>
-                          <option *ngFor="let patient of patientDependents" [value]="patient.userId">{{patient.firstName}} {{patient.lastName}}</option>
-                        </select>
-                        <p class="m-0 fw-bold">SAR {{service.price}}</p>
-                      </td>
-                      <td>
-                        <button (click)="onRemoveService(sIndex)" class="btn btn-danger btn-sm"><i class="icon-trash"></i></button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <button (click)="selection.isServicesConfirmed=true" class="btn btn-theme d-block ml-auto">Continue</button>
-              </ng-container>
-              <ng-container *ngIf="selection.services.length == 0">
-                No Service Selected
-              </ng-container>
             </div>
           </div>
         </div>
 
         <!-- <div class="col-md-12" [hidden]="selection.services.length == 0 || !selection.isServicesConfirmed || ( selection.patient | json ) == '{}' || !selection.confirmed"></div> -->
         <div class="col-md-12" [hidden]="selection.services.length == 0 || !selection.isServicesConfirmed || ( selection.patient | json ) == '{}' || !selection.confirmed">
-          <form [formGroup]="personalInfo" (ngSubmit)="onSubmit()">
+          <form [formGroup]="personalInfo" (ngSubmit)="onCreateAppointment()">
             <div class="row">
               <div class="col-md-3">
                 <div class="bg-theme-light p-3 rounded-10 preview-card">
@@ -254,23 +168,6 @@
                         </div>
                       </div>
                     </ng-container>
-
-                    <a [hidden]="isCompleted || paymentLink!=''" class="mb-2 d-block w-auto text-theme" type="button" (click)="selection.isServicesConfirmed=false"><i class="icon-pencil"></i> Edit Services</a>
-
-                    <form [formGroup]="customItemForm">
-                      <ng-container formArrayName="items">
-                        <ng-container *ngFor="let _ of items.controls; let i=index">
-                          <div [formGroupName]="i" class="d-flex align-items-center mb-1">
-                            <div><input formControlName="description" type="text" placeholder="Description" class="form-control form-control-sm"></div>
-                            <div class="ml-1" style="width: 120px;"><input formControlName="price" (keyup)="calculateExtraItemTotal()" min="0" type="number" placeholder="Amount" class="form-control form-control-sm"></div>
-                            <div class="ml-1" [hidden]="isCompleted || paymentLink!=''"><a (click)="removeItem(i)" class="text-danger" type="button"><i class="icon-trash"></i></a></div>
-                          </div>
-                        </ng-container>
-                      </ng-container>
-                    </form>
-                    <div class="d-flex" [hidden]="isCompleted || paymentLink!=''">
-                      <div class="flex-grow-1"><a class="text-primary" type="button" (click)="addItem()"><i class="icon-plus"></i> Add Item</a></div>
-                    </div>
                     
                     <hr class="my-2">
                     <div class="d-flex align-items-center"><div class="label">Name</div><div>{{selection.patient.firstName}} {{selection.patient.lastName}}</div></div>
@@ -279,65 +176,15 @@
                     <div class="d-flex align-items-center"><div class="label">Time</div><div>{{personalInfo.get('time')?.value || 'N/A'}}</div></div>
                     <hr class="my-2">
                    
-                    <ng-container *ngIf="(selection.quote | json) != '{}'">
-                      <div *ngIf="selection.quote.extraTotal>0" class="d-flex align-items-center"><div class="flex-grow-1">Items total</div><div>{{selection.quote.extraTotal}} SAR</div></div>
-                      <div class="d-flex align-items-center"><div class="flex-grow-1">Service Charges</div><div>{{selection.quote.origional}} SAR</div></div>
-                      <div class="d-flex align-items-center"><div class="flex-grow-1">Vat</div><div>{{selection.quote.vat}} SAR</div></div>
-                      <div class="d-flex align-items-center" *ngIf="selection.quote.homeVist > 0"><div class="flex-grow-1">Home Visit</div><div>{{selection.quote.homeVist}} SAR</div></div>
-                      <div class="d-flex align-items-center"><div class="flex-grow-1">Total</div><div><h6 class="m-0 text-theme fw-medium">{{selection.quote.total}} SAR</h6></div></div>
-                    </ng-container>
-                    <ng-container *ngIf="(selection.quote | json) == '{}'">
-                      <div *ngIf="extraTotal>0" class="d-flex align-items-center"><div class="flex-grow-1">Items total</div><div>{{extraTotal}} SAR</div></div>
+                    <ng-container>
                       <div class="d-flex align-items-center"><div class="flex-grow-1">Service Charges</div><div>{{getSelectedServicesTotal()}} SAR</div></div>
                       <div class="d-flex align-items-center"><div class="flex-grow-1">VAT</div><div>{{getCalculation('vat', getSelectedServicesTotal())}} SAR</div></div>
-                      <div class="d-flex align-items-center">
-                        <div class="flex-grow-1">Home Visit</div>
-                        <div>
-                          <ng-container *ngIf="![null, undefined, '', 0, '0'].includes(homeVistCharges) && !toggleHomeVisit">
-                            <h6 class="m-0 fw-medium">{{homeVistCharges}} SAR <i style="cursor: pointer;" (click)="toggleHomeVisit=!toggleHomeVisit" class="icon-pencil"></i></h6>
-                          </ng-container>
-                          <a *ngIf="!isCompleted && !toggleHomeVisit && paymentLink=='' && ( ['', 0, '0'].includes(homeVistCharges))" (click)="toggleHomeVisit=!toggleHomeVisit" class="w-100" type="button"><h6 class="m-0">Apply</h6></a>
-                        </div>
-                      </div>
-
-                      <div *ngIf="toggleHomeVisit && !isCompleted" class="mb-2">
-                        <input #homeCharges class="form-control theme-control123 mb-2" type="number" min="0" placeholder="Enter amount" [value]="homeVistCharges">
-                          <div class="text-right">
-                            <button  (click)="toggleHomeVisit=!toggleHomeVisit" class="btn btn-danger rounded-10 btn-sm mr-1" type="button">Cancel</button>
-                            <button (click)="homeVistCharges=homeCharges.value;toggleHomeVisit=!toggleHomeVisit" class="btn btn-theme btn-sm" type="button">Apply</button>
-                          </div>
-                      </div>
-
-                      <!--SANA , adding discount field-->
-                      <div class="d-flex align-items-center">
-                        <div class="flex-grow-1">Discount/Co-pay</div>
-                        <div>
-                          <ng-container *ngIf="![null, undefined, '', 0, '0'].includes(discountCharges) && !toggleDiscount">
-                            <h6 class="m-0 fw-medium">{{discountCharges}} SAR <i style="cursor: pointer;" (click)="toggleDiscount=!toggleDiscount" class="icon-pencil"></i></h6>
-                          </ng-container>
-                          <a *ngIf="!isCompleted && !toggleDiscount && paymentLink=='' && ( ['', 0, '0'].includes(discountCharges))" (click)="toggleDiscount=!toggleDiscount" class="w-100" type="button"><h6 class="m-0">Apply</h6></a>
-                        </div>
-                      </div>
-
-                      <div *ngIf="toggleDiscount && !isCompleted" class="mb-2">
-                        <input #discCharges class="form-control theme-control123 mb-2" type="number" min="0" placeholder="Enter amount" [value]="discountCharges">
-                          <div class="text-right">
-                            <button  (click)="toggleDiscount=!toggleDiscount" class="btn btn-danger rounded-10 btn-sm mr-1" type="button">Cancel</button>
-                            <button (click)="discountCharges=discCharges.value;toggleDiscount=!toggleDiscount" class="btn btn-theme btn-sm" type="button">Apply</button>
-                          </div>
-                      </div>
-
-                    
                       <div class="d-flex align-items-center"><div class="flex-grow-1">Total</div><div><h6 class="m-0 text-theme fw-medium">{{getCalculation('final', getSelectedServicesTotal())}} SAR</h6></div></div>
                     </ng-container>
 
                     <hr class="my-2">
-                    
-
                     <ng-container *ngIf="!isCompleted && !toggleHomeVisit">
-                      <button (click)="onConfirmService()" *ngIf="needConfirmationIds.includes( selection.service.id ) && !isServiceConfirmed" [disabled]="personalInfo.invalid" class="btn btn-theme w-100 mb-2" type="button">Confirm</button>
-                      <button class="btn btn-theme w-100 mb-2" type="submit" [disabled]="personalInfo.invalid || paymentLink!='' || ( needConfirmationIds.includes( selection.service.id ) && !isServiceConfirmed )">Get Link & Send SMS</button>
-                      <button class="btn btn-theme w-100 mb-2" [disabled]="personalInfo.invalid || paymentLink!='' || ( needConfirmationIds.includes( selection.service.id ) && !isServiceConfirmed )" (click)="copyMessage('SA9515000455129898180008', 'iban')" type="button">Copy IBAN</button>
+                      <button class="btn btn-theme w-100 mb-2" type="submit">Create</button>
                       <button class="btn btn-danger w-100 rounded-10" (click)="onReset(); patientList=[]" type="button">Cancel</button>
                     </ng-container>
                   </div>

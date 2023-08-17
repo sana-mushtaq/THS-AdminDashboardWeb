@@ -111,6 +111,6 @@ export enum FileUploadType {
   Employee = 7,
   EmployeePackage = 9,
   EmployeeAppointmentResult = 10,
-  CommonServiceCategoryImage = 11,
-  InsuranceProviderLogoImage = 12,
+  CommonServiceCategoryImage= 11,
+  InsuranceProviderLogoImage= 12,
 }

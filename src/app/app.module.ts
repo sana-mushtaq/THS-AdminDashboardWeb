@@ -96,7 +96,6 @@ import { OthersComponent } from "./others/others.component";
 import { GeneralphysicianComponent } from "./generalphysician/generalphysician.component";
 import { AddPhysicianComponent } from "./add-physician/add-physician.component";
 import { ViewPhysicianComponent } from "./view-physician/view-physician.component";
-import { AddAppointmentsComponent } from "./add-appointments/add-appointments.component";
 import { GiftPromotionComponent } from "./gift-promotion/gift-promotion.component";
 import { GiftsComponent } from "./gifts/gifts.component";
 import { PromotionHistoryComponent } from "./promotion-history/promotion-history.component";
@@ -133,12 +132,12 @@ import { AddProgramComponent } from './add-program/add-program.component';
 
 import { AppointmentsNewComponent } from "./appointments/appointments-new/appointments-new.component";
 import { AgmCoreModule } from '@agm/core';
-import { BranchViewComponent } from './branch/branch-view/branch-view.component';
-import { ServiceViewComponent } from './service/service-view/service-view.component';
-import { CaretgoryViewComponent } from './service_category/caretgory-view/caretgory-view.component';
+import { ThirdPartyRequestsComponent } from './third-party-requests/third-party-requests.component';
+import { ThirdPartyRequestViewComponent } from "./third-party-requests/third-party-request-view/third-party-request-view.component";
+import { ThirdPartyRequestsAppointmentsNewComponent } from "./third-party-requests/third-party-request-appointments-new/third-party-request-appointments-new";
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     HomeComponent,
     HeaderComponent,
@@ -220,7 +219,6 @@ import { CaretgoryViewComponent } from './service_category/caretgory-view/caretg
     GeneralphysicianComponent,
     AddPhysicianComponent,
     ViewPhysicianComponent,
-    AddAppointmentsComponent,
     GiftPromotionComponent,
     GiftsComponent,
     PromotionHistoryComponent,
@@ -253,10 +251,10 @@ import { CaretgoryViewComponent } from './service_category/caretgory-view/caretg
     GiftCardLogsComponent,
     AddProgramComponent,
     AppointmentsNewComponent,
-    BranchViewComponent,
-    ServiceViewComponent,
-    CaretgoryViewComponent
-    ],
+      ThirdPartyRequestsComponent,
+      ThirdPartyRequestViewComponent,
+      ThirdPartyRequestsAppointmentsNewComponent
+   ],
   imports: [
     BrowserModule, 
     AgmCoreModule.forRoot({

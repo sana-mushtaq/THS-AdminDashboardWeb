@@ -1,0 +1,115 @@
+<div id="app">
+  <section class="el-container">
+    <div>
+      <menu class="menu-bar lab-hide">
+        <a routerLink="javascript:void(0);" class="toggle-menu">
+          <div class="inactive"><span class="bar bar1"></span><span class="bar"></span><span class="bar bar3"></span></div>
+        </a>
+        <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+      </menu>
+      <app-sidebar class="lab-hide"></app-sidebar>
+      <app-submenu></app-submenu>
+      <nav class="nav-bar-none"></nav>
+    </div>
+    <main class="el-main">
+      <app-header></app-header>
+
+      <div class="d-flex">
+        <div class="flex-grow-1"><button routerLink="/third-party-requests" class="btn btn-primary py-2" style="line-height: 0;"><i class="icon-arrow-left h2"></i></button></div>
+        <div><button routerLink="/third-party-requests/{{request_id}}/appointment" class="btn btn-primary py-2">Create Appointment</button></div>
+      </div>
+     
+      
+      <ng-container *ngIf="( appointmentRequest | json ) != '{}'">
+        <div class="row my-4">
+          <div class="col-md-3">
+            <h4>Request No (Bupa)</h4>
+            <p class="m-0">{{appointmentRequest.requestNoBupa}}</p>
+          </div>
+          <div class="col-md-3">
+            <h4>Request No (Provider)</h4>
+            <p class="m-0">{{appointmentRequest.requestNoProvider}}</p>
+          </div>
+          <div class="col-md-3">
+            <h4>Case Episode</h4>
+            <p class="m-0">{{appointmentRequest.caseEpisode}}</p>
+          </div>
+          <div class="col-md-3">
+            <h4>Last Updated</h4>
+            <p class="m-0">{{appointmentRequest.lastUpdateRequest | date : 'medium'}}</p>
+          </div>
+        </div>
+        <h3 class="text-primary">Patient Info</h3>
+        <div class="row mt-4">
+          <div class="col-md-3 mb-3">
+            <h4>Patient Name</h4>
+            <p class="m-0">{{appointmentRequest.name}}</p>
+          </div>
+          <div class="col-md-3 mb-3">
+            <h4>Mobile Number</h4>
+            <p class="m-0">{{appointmentRequest.mobileNumber}}</p>
+          </div>
+          <div class="col-md-3 mb-3">
+            <h4>Preffered Language</h4>
+            <p class="m-0 text-capitalize">{{appointmentRequest.preferredLanguage}}</p>
+          </div>
+          <div class="col-md-3 mb-3">
+            <h4>Technician Gender</h4>
+            <p class="m-0" *ngIf="appointmentRequest.technicianGender == 0">Male</p>
+            <p class="m-0" *ngIf="appointmentRequest.technicianGender == 1">Female</p>
+            <p class="m-0" *ngIf="appointmentRequest.technicianGender > 1">Any</p>
+          </div>
+          <div class="col-md-3 mb-3">
+            <h4>Membership Type</h4>
+            <p class="m-0">{{appointmentRequest.membershipType}}</p>
+          </div>
+          <div class="col-md-3 mb-3">
+            <h4>Membership Number</h4>
+            <p class="m-0">{{appointmentRequest.membershipNumber}}</p>
+          </div>
+          <div class="col-md-3 mb-3">
+            <h4>Pre Auth Number</h4>
+            <p class="m-0">{{appointmentRequest.preAuthNumber}}</p>
+          </div>
+        </div>
+        <h3 class="text-primary mt-2 mb-4">Appointment Info</h3>
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <h4>Date Time</h4>
+            <p class="m-0">{{appointmentRequest.visitDate}} {{appointmentRequest.visitTime}}</p>
+          </div>
+          <div class="col-md-3 mb-3">
+            <h4>Priority</h4>
+            <p class="m-0 badge badge-danger" style="font-size: 14px;font-weight: normal;" *ngIf="appointmentRequest.technicianGender == 0">HIGH</p>
+            <p class="m-0 badge badge-warning" *ngIf="appointmentRequest.technicianGender == 1">MEDIUM</p>
+            <p class="m-0 text-black" *ngIf="appointmentRequest.technicianGender == 2">LOW</p>
+          </div>
+          <div class="col-md-3 mb-3">
+            <h4>Address</h4>
+            <p class="m-0">Lat: {{appointmentRequest.latitude}}, Lng: {{appointmentRequest.longitude}}</p>
+            <p class="m-0"><a href="https://maps.google.com/?q={{appointmentRequest.latitude}},{{appointmentRequest.longitude}}"  target="_blank">View On Map</a></p>
+          </div>
+          <div class="col-md-3 mb-3">
+            <h4>Time Slot Approval</h4>
+            <p class="m-0">{{appointmentRequest.timeslotApproval}}</p>
+          </div>
+          <div class="col-md-3 mb-3">
+            <h4>Speciality</h4>
+            <p class="m-0">{{appointmentRequest.speciality.name}}</p>
+          </div>
+          <div class="col-md-3 mb-3">
+            <h4>Is Updated?</h4>
+            <p class="m-0 badge badge-danger" style="font-size: 14px;font-weight: normal;" *ngIf="appointmentRequest.updateRequest == 1">Yes</p>
+            <p class="m-0" *ngIf="appointmentRequest.updateRequest != 1">No</p>
+          </div>
+          <div class="col-md-12 mb-3">
+            <div class="bg-white border p-3 rounded">
+              <h4 class="mb-3">Notes (Bupa)</h4>
+              <p class="m-0">{{appointmentRequest.bupaNotes}}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </main>
+  </section>
+</div>

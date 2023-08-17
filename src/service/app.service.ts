@@ -242,16 +242,6 @@ export class AppService {
     return this._httpClient.post(fileUploadUrl, formData);
   }
   
-  fileUploadImage(imageFile) {
-
-    const formData: FormData = new FormData();
-    let fileUploadUrl = AppConstants.imageUploadURL;
-    formData.append("uploadedImage", imageFile, imageFile.name);
-    formData.append("fileName", imageFile.name);
-    return this._httpClient.post(fileUploadUrl, formData);
-
-  }
-
   getAdminLabDashboard(params: any) {
     // let reqParams = {};
     return this._httpClient.post<any>(AppConstants.getAdminLabDashboardURL, params);

@@ -6,20 +6,21 @@ import { MapsAPILoader} from '@agm/core';
 import * as moment from "moment";
 import { NationalIdValidator } from "src/validators/nationalIdValidator";
 import Swal from "sweetalert2";
+import { ActivatedRoute } from "@angular/router";
+import { MirthService } from "src/service/mirth.service";
 declare var google: any;
 declare var $: any;
 
 @Component({
-  selector: 'app-appointments-new',
-  templateUrl: './appointments-new.component.html',
-  styleUrls: ['./appointments-new.component.css']
+  selector: 'app-third-party-request-appointments-new',
+  templateUrl: './third-party-request-appointments-new.html',
+  styleUrls: ['./third-party-request-appointments-new.css']
 })
-export class AppointmentsNewComponent implements OnInit {
+export class ThirdPartyRequestsAppointmentsNewComponent implements OnInit {
   @ViewChild('searchSearviceInput') searchSearviceInput? : ElementRef<HTMLInputElement>;
   @ViewChild('searchAddress') searchAddress? : ElementRef<HTMLInputElement>;
   public todayDate : any = moment( new Date(Date.now()) ).format('YYYY-MM-DD');
   public patientList : Array<any> = [];
-  public customItemForm : FormGroup;
   public patientForm : FormGroup;
   public personalInfo : FormGroup;
   public isAddingPatient : boolean = false;
@@ -53,6 +54,7 @@ export class AppointmentsNewComponent implements OnInit {
   public extraTotal : any = 0;
   public accessLevel : number = 0;
   public patientDependents : Array<any> = [];
+  public appointmentRequest : any = {};
 
   constructor(
     private cd : ChangeDetectorRef,
@@ -60,8 +62,16 @@ export class AppointmentsNewComponent implements OnInit {
     private ngZone: NgZone,
     private fb : FormBuilder,
     private patientService: PatientsService,
+    private route : ActivatedRoute,
+    private mirthServices : MirthService
   ) {
 
+    this.route.params.subscribe({
+      next : ( params : any) => {
+        const id = params?.id || null;
+        this.getRequest(id);
+      }
+    });
     // notValid
 
     this.patientForm = this.fb.group({
@@ -87,36 +97,20 @@ export class AppointmentsNewComponent implements OnInit {
       source : ['', [Validators.required]],
       adminNotes : ['']
     });
-
-    this.customItemForm = this.fb.group({
-      items : this.fb.array([])
-    });
-
-    this.customItemForm.valueChanges.subscribe({
-      next : ( form : any ) => {
-        this.calculateExtraItemTotal();
-      }
-    });
   }
 
-  get items() : FormArray { return this.customItemForm.get('items') as FormArray }
-  addItem(){
-    this.items.push(
-      this.fb.group({
-        description : [''],
-        price       : ['', [Validators.required]] 
-      })
-    );
-  }
-  removeItem( index : number ){ this.items.removeAt(index); this.calculateExtraItemTotal(); }
-  calculateExtraItemTotal(){
-    this.extraTotal = 0;
-    for (let index = 0; index < this.items.value.length; index++) {
-      const price : any = this.items.value[index].price || 0;
-      if( !['', null, undefined].includes( price ) ){
-        this.extraTotal += parseFloat( price );
-      }
-    }
+  getRequest( id : any ){
+    this.mirthServices.getSingleRequest( id ).subscribe({
+      next : ( res : any ) => {
+        if( res.request.length > 0 ){
+          this.appointmentRequest = res.request[0];
+          this.onSearchPatient(this.appointmentRequest.mobileNumber);
+        }else{
+          Swal.fire('Error', 'Request not found', 'error' );
+        }
+      },
+      error: ( err : any ) => { Swal.fire('Error', err.error.message, 'error' ); }
+    });
   }
 
   ngOnInit() {
@@ -139,16 +133,10 @@ export class AppointmentsNewComponent implements OnInit {
       $('.onlylabmenu').removeClass('dclass');
     }
 
-    // $("input.timepicker").timepicker({
-    //   timeFormat: "hh:mm p",
-    //   interval: 15,
-    // });
-    // Get Categories
-    this.getCategories();
-
     this.patientService.getPatientSources().subscribe({
       next : ( res : any )=>{
         this.patientSources = res.result;
+        this.patientSources = this.patientSources.filter( (item) => item.sourceName=='Bupa');
       }
     });
 
@@ -238,60 +226,17 @@ export class AppointmentsNewComponent implements OnInit {
   }
 
   /*******************************************************************
-   * ON CHANGE SERVICE TYPT
-   *******************************************************************/
-  onChangeServiceType( input : any ){
-    // if( input.value == 'other' ){
-    //   this.selection.services = [];
-    // }
-    // else if( this.selection.serviceType == 'other' && ['lab-package', 'lab-individual'].includes( input.value )){
-    //   this.selection.services = [];
-    // }
-    this.selection.serviceType = input.value;
-    this.getCategories();
-  }
-
-  /*******************************************************************
-   * ON SEARCH SERVICES BY TYPE [Packages/Individual/Other]
-   *******************************************************************/
-  onSearchSevice(){
-    const value : string =  this.searchSearviceInput?.nativeElement.value || '';
-    if( value.trim() != '' ){
-      // Unselect Category & empty services
-      this.selection.categoryId = -1;
-      this.selection.sectorId = -1;
-      this.services = [];
-      // Search Searvices
-      this.patientService.searchServicesByType( { 
-        query : value,
-        type : this.selection.serviceType 
-      } ).subscribe({
-        next  : ( res : any ) => {
-          this.services = res.services;
-        },
-        error : ( err : any ) => { Swal.fire("Error", err.error.message, "error"); }
-      });
-    }
-  }
-
-  /*******************************************************************
    * ON Select Service
    *******************************************************************/
   onSelectSevice( service : any ){
-    let notValid : Array<any> = ['', null, undefined, false, 0, '0'];
-    if( !notValid.includes( service.name ) && !notValid.includes( service.price ) && !notValid.includes( service.id )  ){
-      service.primaryPatientId = this.selection.patient.userId;
-      service.patientId = this.selection.patient.userId;
-      service.patientName = this.selection.patient.firstName+' '+this.selection.patient.lastName;
-      this.selection.services.push( service );
-    }else{
-      Swal.fire('Invalid service or this service is incomplete');
-    }
-    this.isServiceConfirmed = false;
-  }
- 
-  onRemoveService( index : number ){
-    this.selection.services.splice( index, 1 );
+    service.primaryPatientId = this.selection.patient.userId;
+    service.patientId = this.selection.patient.userId;
+    service.patientName = this.selection.patient.firstName+' '+this.selection.patient.lastName;
+    service.price = 0;
+    this.selection.services.push( service );
+    this.selection.isServicesConfirmed = true;
+    this.isServiceConfirmed = true;
+    console.log( this.selection );
   }
 
   getSelectedServicesTotal(){
@@ -306,87 +251,23 @@ export class AppointmentsNewComponent implements OnInit {
   }
 
   getCalculation( type : any, total : any ){
-    let homeVisit = ( ['', 0, '0'].includes(this.homeVistCharges) ) ? 0 : parseFloat( this.homeVistCharges );
-    
-    let discount = ( ['', 0, '0'].includes(this.discountCharges) ) ? 0 : parseFloat( this.discountCharges );
-
     let vat = 0;
 
     if( this.selection.services.length == 0 ){
       return 0;
     }
     
-
-    let isResident : boolean = false;
-    if( ( this.selection.patient.idType == '' || this.selection.patient.idType == 'nationalId' ) && this.selection.patient.nationalId.length > 0 && this.selection.patient.nationalId[0] == '1' ){
-      isResident = true;
-    }
-    
-    if( !isResident ){ 
-      vat = 15;
-    }
-
     switch ( type ) {
       case 'vat':
-        return Math.round((parseFloat(total)+homeVisit+parseFloat(this.extraTotal)) * (vat / 100));
+        return Math.round(0);
 
       case 'final':
-        return Math.round(this.getCalculation('vat', total)+total+homeVisit+parseFloat(this.extraTotal));
+        return Math.round(this.getCalculation('vat', total)+total);
 
       default:
         break;
     }
     return 0;
-  }
-
-  onConfirmService(){
-    let message : string = 'Service : '+this.selection.service.name+'\n';
-    message += 'Patient Name: '+this.selection.patient.firstName+' '+this.selection.patient.lastName+'\n';
-    message += 'Address: '+this.personalInfo.get('address')?.value+'\n';
-    message += 'Service Date: '+this.personalInfo.get('date')?.value+'\n';
-    message += 'Service Time: '+this.personalInfo.get('time')?.value+'\n';
-    message += 'Service Price: '+this.selection.service.price+'\n';
-    this.copyMessage( message );
-    this.isServiceConfirmed = true;
-  }
-
-  /*******************************************************************
-   * GET CATEGORIES
-   *******************************************************************/
-  getCategories(){
-    this.serviceCategories = [];
-
-    this.patientService.serviceCategories( { type : this.selection.serviceType } ).subscribe({
-      next : ( res : any ) => {
-        this.serviceCategories = res.categories;
-        if( this.serviceCategories.length > 0 ){
-          this.getServiceByCategory( this.serviceCategories[0].id, this.serviceCategories[0]?.sectorId || null );
-        }
-      },
-      error : ( err : any ) => { Swal.fire("Error.", err.error.message, "error"); }
-    });
-  }
-  /*******************************************************************
-   * GET SERVICES BY CATEGORIES
-   *******************************************************************/
-  getServiceByCategory( id : any, sectorId : any = null ){
-    if( this.searchSearviceInput?.nativeElement ){
-      this.searchSearviceInput.nativeElement.value = '';
-    }
-    this.services = [];
-    this.selection.categoryId = id;
-    this.selection.sectorId = sectorId;
-
-    this.patientService.getServicesByCategory( { 
-      catId : this.selection.categoryId, 
-      sectorId : this.selection.sectorId,
-      type : this.selection.serviceType 
-    } ).subscribe({
-      next  : ( res : any ) => {
-        this.services = res.services;
-      },
-      error : ( err : any ) => { Swal.fire("Error.", err.error.message, "error"); }
-    });
   }
   /*******************************************************************
    * ON SEARCH PATIENT
@@ -436,24 +317,17 @@ export class AppointmentsNewComponent implements OnInit {
     this.toggleHomeVisit = false;
     this.toggleDiscount = false;
     this.patientDependents = [];
-    this.getPatientDependents( patient.userId );
   }
 
-  getPatientDependents( patientId : any ){
-    this.patientService.getPatientDependents( patientId ).subscribe({
-      next : ( res : any ) => { 
-        this.patientDependents = PatientUser.getPatientList( res );
-      },
-      error: ( err : any ) => { Swal.fire("Error.", err.error.message, "error"); }
-    });
-  }
-
-  onChangeServicePatient( serviceIndex : any, event : any ){
-    let patient : Array<any> = this.patientDependents.filter( ( patient : any ) => patient.userId == event.target.value );
-    this.selection.services[serviceIndex].patientId = event.target.value;
-    if( patient.length > 0 ){
-      this.selection.services[serviceIndex].patientName = patient[0].firstName+' '+patient[0].lastName;
-    }
+  onConfirmPatient(){
+    this.selection.confirmed = true;
+    this.onSelectSevice( JSON.parse(this.appointmentRequest.speciality) );
+    this.lat = parseFloat(this.appointmentRequest.latitude);
+    this.lng = parseFloat(this.appointmentRequest.longitude);
+    this.getAddress( this.lat, this.lng);
+    this.personalInfo.get('source').patchValue( this.patientSources[0].sourceId );
+    this.personalInfo.get('date').patchValue( this.appointmentRequest.visitDate );
+    this.personalInfo.get('time').patchValue( this.appointmentRequest.visitTime );
   }
 
   onReset(){
@@ -476,10 +350,6 @@ export class AppointmentsNewComponent implements OnInit {
     this.paymentLink = "";
     this.paymentId = "";
     this.isCompleted = false;
-
-    this.customItemForm = this.fb.group({
-      items : this.fb.array([])
-    });
     this.extraTotal = 0;
 
     this.discountCharges = 0;
@@ -545,16 +415,15 @@ export class AppointmentsNewComponent implements OnInit {
       service : this.selection.services,
       type    : this.selection.serviceType,
       price   : this.selection.quote?.total || this.getCalculation('final', this.getSelectedServicesTotal()),
-      paymentLink : this.paymentLink,
-      paymentId : this.paymentId,
       gender : this.personalInfo.get('gender').value,
       source : this.personalInfo.get('source').value,
+      request_no_bupa: this.appointmentRequest.requestNoBupa,
       adminNotes : this.personalInfo.get('adminNotes').value,
       lat : this.lat,
       lng : this.lng,
     };
 
-    this.patientService.createAppointment( data ).subscribe({
+    this.mirthServices.createAppointment( data ).subscribe({
       next  : ( res : any ) => {
         Swal.fire("Success", res.message, 'success' );
         this.isCompleted = true;

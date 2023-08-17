@@ -2709,6 +2709,10 @@ div.dt-buttons .dt-button {
     width: 550px;
 }
 
+.width-600 {
+    width: 600px;
+}
+
 .width-25Percent {
     width: 25%;
 }
@@ -2764,6 +2768,10 @@ div.dt-buttons .dt-button {
     min-height: 400px;
 }
 
+.min-height-600 {
+    min-height: 600px;
+}
+
 .min-height-100vh {
     min-height: 100vh;
 }
@@ -2817,6 +2825,10 @@ div.dt-buttons .dt-button {
 
 .height-400 {
     height: 400px;
+}
+
+.height-600 {
+    height: 600px;
 }
 
 /*Font CSS*/
@@ -4543,4 +4555,25 @@ div.dt-buttons .dt-button {
 .scrollable-div::-webkit-scrollbar-thumb:hover {
     background: #0144e4;
     border-radius: 20px;
+}
+
+/*Div*/
+.main-div{
+    max-width: 1200px;
+    padding: 10px;
+    margin: 0 auto;
+  }
+
+.main-div-half{
+max-width: 600px;
+padding: 10px;
+margin: 0 auto;
+}
+
+.page-layout {
+    flex-direction: column;
+    justify-content: center;
+    min-height: 95vh;
+    overflow: hidden;
+    padding: 60px 10px;
 }
