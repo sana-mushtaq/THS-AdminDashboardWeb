@@ -112,6 +112,18 @@ import { ThirdPartyRequestsComponent } from './third-party-requests/third-party-
 import { ThirdPartyRequestViewComponent } from "./third-party-requests/third-party-request-view/third-party-request-view.component";
 import { ThirdPartyRequestsAppointmentsNewComponent } from "./third-party-requests/third-party-request-appointments-new/third-party-request-appointments-new";
 
+
+/* LOGIN */
+import { LoginComponent } from './website/auth/login/login.component';
+import { ForgetPasswordComponent } from './website/auth/forget-password/forget-password.component';
+import { RegisterComponent } from './website/auth/register/register.component';
+import { AllServicesComponent } from './website/services/all-services/all-services.component';
+import { AllCategoriesComponent } from './website/categories/all-categories/all-categories.component';
+import { UserProfileComponent } from './user-dashboard/user-profile/user-profile.component';
+import { ServiceDetailsComponent } from './website/services/service-details/service-details.component';
+import { CartComponent } from './website/checkout/cart/cart.component';
+import { AppointmentScheduleComponent } from './website/checkout/appointment-schedule/appointment-schedule.component';
+
 const routes: Routes = [
  { path: '', component: HomeComponent},
  { path: 'dashboard', component: DashboardComponent},
@@ -222,7 +234,19 @@ const routes: Routes = [
  { path:'add-program', component:AddProgramComponent},
  { path:'third-party-requests', component: ThirdPartyRequestsComponent},
  { path:'third-party-requests/:id', component: ThirdPartyRequestViewComponent},
- { path:'third-party-requests/:id/appointment', component: ThirdPartyRequestsAppointmentsNewComponent}
+ { path:'third-party-requests/:id/appointment', component: ThirdPartyRequestsAppointmentsNewComponent},
+
+ /* LOGIN */
+ { path:'login', component: LoginComponent },
+ { path:'forget-password', component: ForgetPasswordComponent },
+ { path:'register', component: RegisterComponent },
+ { path: 'medical-services', component: AllServicesComponent },
+ { path: 'medical-category', component: AllCategoriesComponent },
+ { path: 'user/profile', component: UserProfileComponent },
+ { path: 'medical-services/service-detail', component: ServiceDetailsComponent },
+ { path: 'checkout/cart', component: CartComponent },
+ { path: 'checkout/schedule', component: AppointmentScheduleComponent }
+
 ];
 
 @NgModule({

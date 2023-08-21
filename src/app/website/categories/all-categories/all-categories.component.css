@@ -1,0 +1,22 @@
+/* Customize the tab headers */
+.mat-tab-label {
+    color: var(--web-font-primary-light);
+    border-bottom: 2px solid #6c757d33;
+    font-weight: 700;
+    opacity: 1.0 !important;
+    transition: none;
+    padding: 10px 20px !important;
+  }
+  
+  .mat-tab-label-active {
+    color: var(--blue-color);
+    border-bottom: 2px solid var(--blue-color);
+    font-weight: 700;
+    opacity: 1.0 !important;
+    transition: none;
+    padding: 10px 20px !important;
+}
+
+.blue-border {
+    border: 1px solid var(--blue-color);
+}

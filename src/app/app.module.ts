@@ -9,6 +9,8 @@ import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 import { NgSelect2Module } from 'ng-select2';
 import { NgxSummernoteModule } from 'node_modules/ngx-summernote';
 import * as $ from "jquery";
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -135,6 +137,15 @@ import { AgmCoreModule } from '@agm/core';
 import { ThirdPartyRequestsComponent } from './third-party-requests/third-party-requests.component';
 import { ThirdPartyRequestViewComponent } from "./third-party-requests/third-party-request-view/third-party-request-view.component";
 import { ThirdPartyRequestsAppointmentsNewComponent } from "./third-party-requests/third-party-request-appointments-new/third-party-request-appointments-new";
+import { LoginComponent } from './website/auth/login/login.component';
+import { ForgetPasswordComponent } from './website/auth/forget-password/forget-password.component';
+import { RegisterComponent } from './website/auth/register/register.component';
+import { AllServicesComponent } from './website/services/all-services/all-services.component';
+import { UserProfileComponent } from './user-dashboard/user-profile/user-profile.component';
+import { AllCategoriesComponent } from './website/categories/all-categories/all-categories.component';
+import { ServiceDetailsComponent } from './website/services/service-details/service-details.component';
+import { CartComponent } from './website/checkout/cart/cart.component';
+import { AppointmentScheduleComponent } from './website/checkout/appointment-schedule/appointment-schedule.component';
 
 @NgModule({
   declarations: [	
@@ -253,7 +264,16 @@ import { ThirdPartyRequestsAppointmentsNewComponent } from "./third-party-reques
     AppointmentsNewComponent,
       ThirdPartyRequestsComponent,
       ThirdPartyRequestViewComponent,
-      ThirdPartyRequestsAppointmentsNewComponent
+      ThirdPartyRequestsAppointmentsNewComponent,
+      LoginComponent,
+      ForgetPasswordComponent,
+      RegisterComponent,
+      AllServicesComponent,
+      UserProfileComponent,
+      AllCategoriesComponent,
+      ServiceDetailsComponent,
+      CartComponent,
+      AppointmentScheduleComponent
    ],
   imports: [
     BrowserModule, 
@@ -262,7 +282,7 @@ import { ThirdPartyRequestsAppointmentsNewComponent } from "./third-party-reques
       libraries: ['places']
     }),
     AppRoutingModule, HttpClientModule, MatSnackBarModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule,NgSelect2Module, NgMultiSelectDropDownModule.forRoot(), 
-    NgxSummernoteModule
+    NgxSummernoteModule, MatTabsModule
   ],
   providers: [
     LoaderService,
