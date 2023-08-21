@@ -113,6 +113,10 @@ import { ThirdPartyRequestViewComponent } from "./third-party-requests/third-par
 import { ThirdPartyRequestsAppointmentsNewComponent } from "./third-party-requests/third-party-request-appointments-new/third-party-request-appointments-new";
 
 
+/* THS-23 BY SANA */
+import { BranchViewComponent } from './branch/branch-view/branch-view.component';
+import { ServiceViewComponent } from './service/service-view/service-view.component';
+import { CaretgoryViewComponent } from './service_category/caretgory-view/caretgory-view.component';
 /* LOGIN */
 import { LoginComponent } from './website/auth/login/login.component';
 import { ForgetPasswordComponent } from './website/auth/forget-password/forget-password.component';
@@ -236,7 +240,12 @@ const routes: Routes = [
  { path:'third-party-requests/:id', component: ThirdPartyRequestViewComponent},
  { path:'third-party-requests/:id/appointment', component: ThirdPartyRequestsAppointmentsNewComponent},
 
- /* LOGIN */
+  //THS-23 BY SANA
+{ path: 'branch/view-all', component: BranchViewComponent },
+{ path: 'service/view-all', component: ServiceViewComponent },
+{ path: 'category/view-all', component: CaretgoryViewComponent },
+
+ /* LOGIN */ 
  { path:'login', component: LoginComponent },
  { path:'forget-password', component: ForgetPasswordComponent },
  { path:'register', component: RegisterComponent },
