@@ -146,7 +146,9 @@ import { AllCategoriesComponent } from './website/categories/all-categories/all-
 import { ServiceDetailsComponent } from './website/services/service-details/service-details.component';
 import { CartComponent } from './website/checkout/cart/cart.component';
 import { AppointmentScheduleComponent } from './website/checkout/appointment-schedule/appointment-schedule.component';
-
+import { ServiceViewComponent } from "./service/service-view/service-view.component";
+import { CaretgoryViewComponent } from "./service_category/caretgory-view/caretgory-view.component";
+import { BranchViewComponent  } from "./branch/branch-view/branch-view.component";
 @NgModule({
   declarations: [	
     AppComponent,
@@ -262,18 +264,21 @@ import { AppointmentScheduleComponent } from './website/checkout/appointment-sch
     GiftCardLogsComponent,
     AddProgramComponent,
     AppointmentsNewComponent,
-      ThirdPartyRequestsComponent,
-      ThirdPartyRequestViewComponent,
-      ThirdPartyRequestsAppointmentsNewComponent,
-      LoginComponent,
-      ForgetPasswordComponent,
-      RegisterComponent,
-      AllServicesComponent,
-      UserProfileComponent,
-      AllCategoriesComponent,
-      ServiceDetailsComponent,
-      CartComponent,
-      AppointmentScheduleComponent
+    ThirdPartyRequestsComponent,
+    ThirdPartyRequestViewComponent,
+    ThirdPartyRequestsAppointmentsNewComponent,
+    LoginComponent,
+    ForgetPasswordComponent,
+    RegisterComponent,
+    AllServicesComponent,
+    UserProfileComponent,
+    AllCategoriesComponent,
+    ServiceDetailsComponent,
+    CartComponent,
+    AppointmentScheduleComponent,
+    ServiceViewComponent,
+    CaretgoryViewComponent,
+    BranchViewComponent
    ],
   imports: [
     BrowserModule, 
