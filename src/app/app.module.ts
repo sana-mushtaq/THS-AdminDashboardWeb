@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
@@ -10,7 +10,8 @@ import { NgSelect2Module } from 'ng-select2';
 import { NgxSummernoteModule } from 'node_modules/ngx-summernote';
 import * as $ from "jquery";
 import {MatTabsModule} from '@angular/material/tabs';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -149,6 +150,17 @@ import { AppointmentScheduleComponent } from './website/checkout/appointment-sch
 import { ServiceViewComponent } from "./service/service-view/service-view.component";
 import { CaretgoryViewComponent } from "./service_category/caretgory-view/caretgory-view.component";
 import { BranchViewComponent  } from "./branch/branch-view/branch-view.component";
+import { CustomAlertComponent } from './website/custom-alert/custom-alert.component';
+
+//INITIALIZATION BY SANA
+import { InitializationService  } from "src/service/initialization.service";
+import { WebsiteDataService } from "src/service/website-data.service";
+import { CheckoutAppointmentComponent } from './website/checkout/checkout-appointment/checkout-appointment.component';
+import { PaymentConfirmationComponent } from './website/checkout/payment-confirmation/payment-confirmation.component';
+import { CheckoutHeaderComponent } from './website/checkout-header/checkout-header.component';
+import { BusinessToBusinessSchedulingComponent } from './business-to-business-scheduling/business-to-business-scheduling.component';
+import { CheckoutFooterComponent } from './website/checkout-footer/checkout-footer.component';
+
 @NgModule({
   declarations: [	
     AppComponent,
@@ -278,7 +290,13 @@ import { BranchViewComponent  } from "./branch/branch-view/branch-view.component
     AppointmentScheduleComponent,
     ServiceViewComponent,
     CaretgoryViewComponent,
-    BranchViewComponent
+    BranchViewComponent,
+    CustomAlertComponent,
+    CheckoutAppointmentComponent,
+    PaymentConfirmationComponent,
+    CheckoutHeaderComponent,
+    BusinessToBusinessSchedulingComponent,
+    CheckoutFooterComponent
    ],
   imports: [
     BrowserModule, 
@@ -287,10 +305,11 @@ import { BranchViewComponent  } from "./branch/branch-view/branch-view.component
       libraries: ['places']
     }),
     AppRoutingModule, HttpClientModule, MatSnackBarModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule,NgSelect2Module, NgMultiSelectDropDownModule.forRoot(), 
-    NgxSummernoteModule, MatTabsModule
+    NgxSummernoteModule, MatTabsModule, NgxPaginationModule, Ng2SearchPipeModule
   ],
   providers: [
-    LoaderService,
+    InitializationService,
+    LoaderService, WebsiteDataService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy },

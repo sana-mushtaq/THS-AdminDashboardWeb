@@ -1,74 +1,120 @@
-<div class="web auto-flex-start-gap40-column main-div">
+<div class="web auto-flex-start-gap40-column main-div padding-bottom-0 padding-top-40">
 
-    <!-- Current Location-->
-    <div class="auto-flex-center-start-gap20 cursor-pointer">
+    <div class="auto-flex-center-space-between-gap20 light-gray-bg padding-10 padding-left-right-30">
+
+        <!-- Current Location-->
+        <div class="auto-flex-center-start-gap20-no-set-width cursor-pointer desktop" (click)="showCurrentLocation()">
+
+            <img class="smallImg" src="assets/images/web/icons/location.svg" />
+
+            <div class="auto-flex-start-gap5-column-no-set-width width-max-500">
+
+                <p class="med bold">Current location</p>
+                <p class="web-font-primary-light width-300">{{ locationName }}</p>
+
+            </div>
+
+        </div>
+
+        <a href="https://www.taibsa.com/" target="_blank">
+            <img class="xxmedImg" src="assets/images/web/logo.svg" />
+        </a>
+
+        <div class="auto-flex-center-gap20-no-set-width desktop">
+
+            <a class="xsmall web-font-primary bold" href="www.taibsa.com" target="_blank">Home</a>
+            <a class="xsmall web-font-primary bold" href="/medical-services">Services</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/blog" target="_blank">Blog</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/medical-calculator" target="_blank">Calculator</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/contact" target="_blank">Contact</a>
+ 
+            <div class="auto-flex-center-gap5-no-set-width cursor-pointer" *ngIf="cartData && cartData.length>0">
+
+                <a class="xsmall web-font-primary bold" href="/checkout/cart"><img class="img-20" src="assets/images/web/icons/cart.svg" /></a>
+                <div class="auto-flex-center-gap10 border-radius-100 red-bg border-none height-16 width-16 text-center padding-15">
+
+                    <a class="xsmall secondary-color" href="/checkout/cart">{{ cartLength }}</a>
+    
+                </div>
+ 
+            </div>
+         
+        </div>
+
+        <div class="mobile auto-flex-center-gap10-no-set-width padding-10 white-bg">
+
+            <a class="xsmall web-font-primary bold" (click)="openMenu()">
+                <img class="xsmallImg" src="assets/images/web/icons/menu.svg" />
+            </a>
+
+        </div>
+
+        <div class="white-bg fixed mobile z-index menu-mobile mobile padding-none" id="menuBar">
+
+            <a class="xsmall web-font-primary bold absolute-top-right-30" (click)="closeMenu()"><img class="img-20" src="assets/images/web/icons/close.svg" /></a>
+
+            <div class="auto-flex-start-gap20-column padding-20">
+
+            <a class="xsmall web-font-primary bold" href="www.taibsa.com" target="_blank">Home</a>
+            <a class="xsmall web-font-primary bold" href="/medical-services">Services</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/blog" target="_blank">Blog</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/medical-calculator" target="_blank">Calculator</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/contact" target="_blank">Contact</a>
+
+            <div class="auto-flex-center-gap5-no-set-width">
+
+                <a class="xsmall web-font-primary bold"><img class="img-20" src="assets/images/web/icons/cart.svg" /></a>
+                <div class="auto-flex-center-gap10 border-radius-100 red-bg border-none height-16 width-16 text-center padding-15">
+
+                    <a class="xsmall secondary-color " *ngIf="cartData && cartData.length>0">{{ cartData.length }}</a>
+
+                </div>
+
+            </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="web auto-flex-start-gap40-column main-div padding-top-40">
+
+     <!-- Current Location-->
+     <div class="auto-flex-center-start-gap20 mobile cursor-pointer" (click)="showCurrentLocation()">
 
         <img class="smallImg" src="assets/images/web/icons/location.svg" />
 
-        <div class="auto-flex-start-gap5-column-no-set-width">
+        <div class="auto-flex-start-gap5-column-no-set-width width-max-500">
 
             <p class="med bold">Current location</p>
-            <p class="web-font-primary-light">Middleton, Tennessee(TN), 38052</p>
+            <p class="web-font-primary-light width-300">{{ locationName }}</p>
 
         </div>
 
     </div>
 
     <!-- Top Category -->
-    <div class="auto-flex-center-space-between-gap20">
+    <div class="auto-flex-center-space-between-gap20 place-stretch">
 
-        <div class="auto-flex-center-space-between-gap20-no-set-width width-half light-yellow-bg">
+        <div class="auto-flex-center-space-between-gap20-no-set-width width-half lightest-blue-bg padding-none cursor-pointer" *ngFor="let category of topCategories; let topCategoryIndex = index">
 
-            <div class="auto-flex-start-gap10-column-no-set-width width-max-300">
+            <div class="auto-flex-start-gap10-column-no-set-width width-max-300 padding-20 padding-top-40 padding-bottom-40" (click)="navigateToCategory(category.id)">
 
-                <p class="xmed bold capitalize">Top category</p>
-                <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
-
-            </div>
-
-            <img class="xxmedImg" src="assets/images/web/auth/login_illustration.svg" />
-
-        </div>
-
-        <div class="auto-flex-center-space-between-gap20-no-set-width width-half light-yellow-bg">
-
-            <div class="auto-flex-start-gap10-column-no-set-width width-max-300">
-
-                <p class="xmed bold capitalize">Top category</p>
-                <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
+                <p class="med bold capitalize"> {{ category.title }} </p>
+                <p class="web-font-primary-light"> {{ category.description }} </p>
 
             </div>
 
-            <img class="xxmedImg" src="assets/images/web/auth/login_illustration.svg" />
+            <div class="auto-flex-center-gap10-column-no-set-width white-bg border-none relative self-stretch width-160 max-height margin-top-20 margin-right-20 border-bottom-left-bottom-right-0 phone-max-height-150">
 
-        </div>
-
-        <div class="auto-flex-center-space-between-gap20-no-set-width width-half light-yellow-bg">
-
-            <div class="auto-flex-start-gap10-column-no-set-width width-max-300">
-
-                <p class="xmed bold capitalize">Top category</p>
-                <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
+                <img class="xxxmedImg absolute-bottom-unset" [src]="category.icon" />
 
             </div>
 
-            <img class="xxmedImg" src="assets/images/web/auth/login_illustration.svg" />
-
         </div>
-
-        <div class="auto-flex-center-space-between-gap20-no-set-width width-half light-yellow-bg">
-
-            <div class="auto-flex-start-gap10-column-no-set-width width-max-300">
-
-                <p class="xmed bold capitalize">Top category</p>
-                <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
-
-            </div>
-
-            <img class="xxmedImg" src="assets/images/web/auth/login_illustration.svg" />
-
-        </div>
-
     
     </div>
 
@@ -77,226 +123,71 @@
 
         <p class="xmed bold capitalize">Categories</p>
         
-        <div class="auto-flex-start-gap20-no-wrap overflow-auto padding-bottom-20">
+        <div class="auto-flex-start-gap20-no-wrap overflow-auto padding-bottom-20 place-stretch scroll-bar">
 
-            <div class="auto-flex-center-gap10-column-no-set-width white-bg padding-left-right-30 gray-border cursor-pointer">
+            <div class="auto-flex-center-gap10-column-no-set-width white-bg cursor-pointer border-radius-20 width-min-150 padding-10 item-hover" (click)="navigateToCategory(category.id)" *ngFor="let category of allCategories; let categoryIndex = index">
 
-                <img class="xsmallImg" src="assets/images/web/auth/login_illustration.svg" />
-                <p class="bold capitalize">Pizza</p>
-
-            </div>
-            <div class="auto-flex-center-gap10-column-no-set-width white-bg padding-left-right-30 gray-border cursor-pointer">
-
-                <img class="xsmallImg" src="assets/images/web/auth/login_illustration.svg" />
-                <p class="bold capitalize">Pizza</p>
+                <img class="medImg" [src]="category.icon" />
+                <p class="bold capitalize web-font-primary-light xsmall text-center">{{ category.title }}</p>
 
             </div>
-            <div class="auto-flex-center-gap10-column-no-set-width white-bg padding-left-right-30 gray-border cursor-pointer">
-
-                <img class="xsmallImg" src="assets/images/web/auth/login_illustration.svg" />
-                <p class="bold capitalize">Pizza</p>
-
-            </div>
-            <div class="auto-flex-center-gap10-column-no-set-width white-bg padding-left-right-30 gray-border cursor-pointer">
-
-                <img class="xsmallImg" src="assets/images/web/auth/login_illustration.svg" />
-                <p class="bold capitalize">Pizza</p>
-
-            </div>
-            <div class="auto-flex-center-gap10-column-no-set-width white-bg padding-left-right-30 gray-border cursor-pointer">
-
-                <img class="xsmallImg" src="assets/images/web/auth/login_illustration.svg" />
-                <p class="bold capitalize">Pizza</p>
-
-            </div>
-            <div class="auto-flex-center-gap10-column-no-set-width white-bg padding-left-right-30 gray-border cursor-pointer">
-
-                <img class="xsmallImg" src="assets/images/web/auth/login_illustration.svg" />
-                <p class="bold capitalize">Pizza</p>
-
-            </div>
-            <div class="auto-flex-center-gap10-column-no-set-width white-bg padding-left-right-30 gray-border cursor-pointer">
-
-                <img class="xsmallImg" src="assets/images/web/auth/login_illustration.svg" />
-                <p class="bold capitalize">Pizza</p>
-
-            </div>
-            <div class="auto-flex-center-gap10-column-no-set-width white-bg padding-left-right-30 gray-border cursor-pointer">
-
-                <img class="xsmallImg" src="assets/images/web/auth/login_illustration.svg" />
-                <p class="bold capitalize">Pizza</p>
-
-            </div>
-
-            <div class="auto-flex-center-gap10-column-no-set-width white-bg padding-left-right-30 gray-border cursor-pointer">
-
-                <img class="xsmallImg" src="assets/images/web/auth/login_illustration.svg" />
-                <p class="bold capitalize">Pizza</p>
-
-            </div>
-
-            <div class="auto-flex-center-gap10-column-no-set-width white-bg padding-left-right-30 gray-border cursor-pointer">
-
-                <img class="xsmallImg" src="assets/images/web/auth/login_illustration.svg" />
-                <p class="bold capitalize">Pizza</p>
-
-            </div>
-
         </div>
 
     </div>
 
-    <!-- Category -->
-    <div class="auto-flex-start-gap20-column">
+    <!-- Services -->
+    <div class="auto-flex-center-gap30-column" *ngFor="let item of topServices">
 
-        <p class="xmed bold capitalize">Category</p>
+        <div class="auto-flex-start-gap20-column">
 
-        <div class="auto-flex-start-center-gap20-no-wrap overflow-auto padding-bottom-20">
-
-            <div class="auto-flex-center-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative">
-
-                <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none">200 SAR</p>
-
-                <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="assets/images/web/img.svg">
-
-                <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
-
-                    <p class="med bold capitalize">Service name</p>
-                    <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
-
+            <p class="xmed bold capitalize">{{ item.category_data.title }}</p>
+    
+            <div class="auto-flex-start-center-gap20-no-wrap overflow-auto padding-bottom-20 place-stretch scroll-bar-gray">
+    
+                <div class="auto-flex-space-between-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative" (click)="navigateToService(service.id)" *ngFor="let service of item.services">
+    
+                    <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none z-index">{{ service.price }} SAR</p>
+                    
+                    <div class="linear-gradient-blue absolute height-160 border-top-left-right-10"></div>
+                    <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="assets/images/web/img.svg">
+    
+                    <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
+    
+                        <p class="med bold capitalize">{{ service.title }}</p>
+                        <p class="web-font-primary-light"> {{ service.description | slice:0:90 }}...  </p>
+    
+                    </div>
+    
+                    <div class="auto-flex-end-gap10">
+    
+                        <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 padding-top-bottom-5 xsmall">view more</button>
+    
+                    </div>
+    
                 </div>
-
-                <div class="auto-flex-end-gap10">
-
-                    <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 xsmall">view more</button>
-
+    
+                <div class="auto-flex-center-gap20-column-no-set-width cursor-pointer" (click)="showMore(item.category_data.url)">
+    
+                    <img class="smallImg" src="assets/images/web/icons/plus.svg" />
+                    <p class="xsmall bold lowercase text-center">show more</p>
+    
                 </div>
-
+    
             </div>
-
-            <div class="auto-flex-center-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative">
-
-                <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none">200 SAR</p>
-
-                <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="assets/images/web/img.svg">
-
-                <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
-
-                    <p class="med bold capitalize">Service name</p>
-                    <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
-
-                </div>
-
-                <div class="auto-flex-end-gap10">
-
-                    <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 xsmall">view more</button>
-
-                </div>
-
-            </div>
-
-            <div class="auto-flex-center-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative">
-
-                <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none">200 SAR</p>
-
-                <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="assets/images/web/img.svg">
-
-                <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
-
-                    <p class="med bold capitalize">Service name</p>
-                    <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
-
-                </div>
-
-                <div class="auto-flex-end-gap10">
-
-                    <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 xsmall">view more</button>
-
-                </div>
-
-            </div>
-
-            <div class="auto-flex-center-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative">
-
-                <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none">200 SAR</p>
-
-                <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="assets/images/web/img.svg">
-
-                <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
-
-                    <p class="med bold capitalize">Service name</p>
-                    <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
-
-                </div>
-
-                <div class="auto-flex-end-gap10">
-
-                    <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 xsmall">view more</button>
-
-                </div>
-
-            </div>
-
-            <div class="auto-flex-center-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative">
-
-                <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none">200 SAR</p>
-
-                <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="assets/images/web/img.svg">
-
-                <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
-
-                    <p class="med bold capitalize">Service name</p>
-                    <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
-
-                </div>
-
-                <div class="auto-flex-end-gap10">
-
-                    <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 xsmall">view more</button>
-
-                </div>
-
-            </div>
-
-            <div class="auto-flex-center-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative">
-
-                <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none">200 SAR</p>
-
-                <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="assets/images/web/img.svg">
-
-                <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
-
-                    <p class="med bold capitalize">Service name</p>
-                    <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
-
-                </div>
-
-                <div class="auto-flex-end-gap10">
-
-                    <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 xsmall">view more</button>
-
-                </div>
-
-            </div>
-
-            <div class="auto-flex-center-gap20-column-no-set-width">
-
-                <img class="smallImg" src="assets/images/web/icons/plus.svg" />
-                <p class="xsmall bold lowercase text-center">show more</p>
-
-            </div>
-
+        
         </div>
     
     </div>
 
-
     <!-- Location Modal -->
-    <div class="auto-flex-center-gap10 fixed dialog" style="display: none;">
+    <div class="auto-flex-center-gap10 fixed dialog" *ngIf="userCurrentLocation">
 
         <div class="popup">
 
-            <div class="auto-flex-center-gap30-column white-bg overflow-auto max-height-500 border-radius-20 width-max-600">
+            <div class="auto-flex-center-gap30-column-no-set-width padding-40 white-bg overflow-auto max-height-500 border-radius-20 width-600 max-width relative">
+
+                <a class="xsmall web-font-primary bold absolute-top-right-30 cursor-pointer" (click)="userCurrentLocation = !userCurrentLocation"><img class="img-20" src="assets/images/web/icons/close.svg" /></a>
+
 
                 <div class="auto-flex-center-start-gap20">
 
@@ -307,9 +198,7 @@
 
                 <div class="auto-flex-start-gap20-column box-shadow padding-none border-radius-10 gray-border">
                     
-                    <agm-map class="max-width height-200 border-top-left-right-10 overflow-hidden" [streetViewControl]="false" [zoomControl]="false" [mapTypeControl]="false">
-                
-                        <agm-marker class="border-radius-10"></agm-marker>
+                    <agm-map class="max-width height-200 border-top-left-right-10 overflow-hidden" [latitude]="centerLat" [longitude]="centerLng" [zoom]="zoom" [streetViewControl]="false" [zoomControl]="false" [mapTypeControl]="false">
                     
                     </agm-map>
 
@@ -317,18 +206,18 @@
 
                         <div class="auto-flex-start-gap10 width-max-300">
 
-                            <p class="bold">New York</p>
-                            <p class="web-font-primary-light">Middleton, Tennessee(TN), 38052</p>
+                            <p class="bold">{{ cityName }}</p>
+                            <p class="web-font-primary-light"> {{ locationName }} </p>
     
                         </div>
                         
-                        <img class="smallImg" src="assets/images/web/icons/edit.svg" />
+                        <img class="smallImg" src="assets/images/web/icons/edit.svg" (click)="openMap()" />
 
                     </div>
               
                 </div>
 
-                <div class="auto-flex-center-start-gap20 cursor-pointer">
+                <div class="auto-flex-center-start-gap20 cursor-pointer" (click)="addNewAddress()">
 
                     <img class="xsmallImg" src="assets/images/web/icons/plus_black.svg" />
                     <p class="xsmall bold lowercase text-center capitalize">Add new address</p>
@@ -343,23 +232,23 @@
     </div>
 
     <!-- Location Modal Select -->
-    <div class="auto-flex-center-gap10 fixed dialog" style="display: none;">
+    <div class="auto-flex-center-gap10 fixed dialog" *ngIf="selectMapLocation">
 
         <div class="popup">
 
-            <div class="auto-flex-center-gap30-column white-bg overflow-auto max-height-500 border-radius-20 width-max-600 relative padding-none border-none">
+            <div class="auto-flex-center-gap30-column-no-set-width white-bg overflow-auto max-height-500 border-radius-20 width-600 relative padding-none border-none">
 
                 <div class="auto-flex-center-gap20-column box-shadow padding-none border-radius-10 gray-border">
 
-                    <input class="input-global absolute-top-10 z-index width-90Percent" type="text" placeholder="Search" />
+                    <input #search class="input-global absolute-top-10 z-index width-90Percent" type="text" placeholder="Search" />
 
-                    <agm-map class="max-width height-300 width-600 border-top-left-right-10 overflow-hidden" [streetViewControl]="false" [zoomControl]="false" [mapTypeControl]="false">
+                    <agm-map class="max-width height-300 width-600 phone-300 border-top-left-right-10 overflow-hidden" [latitude]="centerLat" [longitude]="centerLng" [zoom]="zoom" [streetViewControl]="false" [zoomControl]="false" [mapTypeControl]="false" (mapClick)="onMapClick($event)" >
                 
-                        <agm-marker class="border-radius-10"></agm-marker>
+                        <agm-marker *ngIf="selectedLat && selectedLng" [latitude]="selectedLat"  [longitude]="selectedLng" [markerDraggable]="true" (dragEnd)="onMarkerDragEnd($event)"  class="border-radius-10"></agm-marker>
                     
                     </agm-map>
 
-                    <button class="primary-bg padding-10 border-none box-shadow absolute-bottom-10 width-300 z-index">Confirm</button>
+                    <button *ngIf="placeSelected" class="primary-bg padding-10 border-none box-shadow absolute-bottom-10 width-300 phone-width-150 z-index" (click)="onConfirmLocation()">Confirm</button>
                 
                 </div>
 
@@ -370,18 +259,18 @@
     </div>
 
     <!-- Add new address -->
-    <div class="auto-flex-center-gap10 fixed dialog" style="display: none;">
+    <div class="auto-flex-center-gap10 fixed dialog" *ngIf="addNewAddressToggle">
 
         <div class="popup">
 
             <div class="auto-flex-start-gap20-column white-bg overflow-auto max-height-500 border-radius-20 width-min-600 phone-min-width">
-
+                
                 <div class="auto-flex-start-no-gap-column">
 
                     <div class="auto-flex-center-space-between-gap20">
 
                         <p class="med bold capitalize">Add new address</p>
-                        <img class="xsmallImg" src="assets/images/web/icons/close.svg" />
+                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/close.svg" (click)="discardAddress()" />
     
                     </div>
     
@@ -389,29 +278,34 @@
 
                 </div>
 
-                <div class="auto-flex-start-gap10 web-font-primary-light">
+                <form class="auto-flex-start-gap10" [formGroup]="addressForm" (ngSubmit)="createAddress()">
 
-                    <p class="xsmall bold">Address line 1</p>
-                    <input class="input-global" type="text" placeholder="Enter address" />
+                    <div class="auto-flex-start-gap10 web-font-primary-light">
+
+                        <p class="xsmall bold">Address line 1</p>
+                        <input class="input-global" type="text" formControlName="address_line1"  placeholder="Enter address" />
+                        <p *ngIf="addressForm.get('address_line1').hasError('invalidAddressLine1')" class="xsmall red-color">Enter adress line</p>
+
+                    </div>    
+    
+                    <div class="auto-flex-start-gap10 web-font-primary-light">
+    
+                        <p class="xsmall bold">Address line 2</p>
+                        <input class="input-global" type="text" placeholder="Enter address (optional)" />
+            
+                    </div>    
+    
+                    <p *ngIf="addressForm.get('latitude').hasError('invalidLocation') || addressForm.get('longitude').hasError('invalidLocation')" class="xsmall red-color">Please select valid location</p>
+                    
+                    <div class="auto-flex-end-gap10">
         
-                </div>    
-
-                <div class="auto-flex-start-gap10 web-font-primary-light">
-
-                    <p class="xsmall bold">Address line 2</p>
-                    <input class="input-global" type="text" placeholder="Enter address (optional)" />
-        
-                </div>    
-
-     
-                <div class="auto-flex-center-start-gap20 cursor-pointer">
-
-                    <img class="xsmallImg" src="assets/images/web/icons/plus_black.svg" />
-                    <p class="xsmall bold lowercase text-center capitalize">Add new address</p>
-
-                </div>
-
-
+                        <!-- continue button -->
+                        <button class="primary-bg padding-10 box-shadow width-200 xsmall phone-width-auto" type="submit">Save changes</button>
+    
+                    </div>
+                    
+                </form>
+            
             </div>
 
         </div>
@@ -420,3 +314,5 @@
 
 
 </div>
+
+<app-checkout-footer></app-checkout-footer>

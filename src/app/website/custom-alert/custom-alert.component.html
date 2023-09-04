@@ -1,0 +1,29 @@
+<div class="fixed">
+
+    <div class="dialog auto-flex-center-gap20-column padding-20">
+    
+        <div class="auto-flex-start-gap20-column width-max-500 phone-max-width white-bg">
+    
+            <div class="auto-flex-center-start-gap10">
+    
+                <img class="xsmallImg" src="assets/images/web/icons/x.svg" />
+                <p class="med bold">{{ title }}</p>
+    
+            </div>
+    
+            <p class="web-font-primary-light">{{ message }}</p>
+    
+            <hr class="hr-black" />
+    
+            <div class="auto-flex-end-gap10">
+    
+                <button class="white-bg padding-10 gray-border web-font-primary-light" (click)="onCancelClick()" *ngIf="showCancel">{{ cancelButtonText }}</button>
+                <button class="red-bg padding-10 secondary-color" (click)="onContinueClick()" *ngIf="showConfirm">{{ continueButtonText }}</button>
+    
+            </div>
+    
+        </div>
+    
+    </div>
+
+</div>

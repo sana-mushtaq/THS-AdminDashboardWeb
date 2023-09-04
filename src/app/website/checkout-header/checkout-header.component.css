@@ -1,0 +1,23 @@
+.border-radius-100 {
+    border-radius: 100%;
+}
+.height-16 {
+    height: 16px;
+}
+.width-16 {
+    width: 16px;
+}
+.padding-15{
+    padding: 15px;
+}
+.menu-mobile{
+    width: 0%;
+    overflow-x: hidden;
+    transition: 0.5s;
+    top: 0;
+    left: unset;
+}
+a:hover{
+    text-decoration: none;
+    color: var(--secondary-color);
+}

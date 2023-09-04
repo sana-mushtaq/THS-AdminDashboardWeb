@@ -18,68 +18,77 @@
     </div>
 
     <!-- Account Details -->
-    <div class="auto-flex-center-gap20-column padding-40">
+    <div class="auto-flex-center-gap20-column padding-40" #account_details>
 
         <div class="auto-flex-start-gap30-column padding-20 main-div">
 
             <h3 class="xxlarge bold capitalize">Account details</h3>
             <p class="web-font-primary-light">Enter your data that you will use for entering.</p>
     
-            <div class="auto-flex-center-gap20-column">
+            <form class="auto-flex-start-gap10" [formGroup]="accountDetailsForm" (ngSubmit)="accountDetails()">
                 
-                <!-- register input fields -->
-                <div class="auto-flex-start-gap20">
+                <div class="auto-flex-center-gap20-column">
+                
+                    <!-- register input fields -->
+                    <div class="auto-flex-start-gap20">
 
-                    <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
-                        <p class="xsmall bold">Email</p>
-                        <input class="input-global" type="email" placeholder="name@example.com" />
-            
-                    </div>    
+                            <p class="xsmall bold">Email</p>
+                            <input class="input-global" type="email" formControlName="email" placeholder="name@example.com" />
+                            <p *ngIf="accountDetailsForm.get('email').hasError('invalidEmail')" class="xsmall red-color">Enter valid email</p>
 
-                    <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                
+                        </div>    
 
-                        <p class="xsmall bold">Phone Number</p>
-                        <input class="input-global" type="tel" placeholder="966 XX XXXXXXX" />
-            
-                    </div>    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                            <p class="xsmall bold">Phone Number</p>
+                            <input class="input-global" type="tel" formControlName="phone_number" placeholder="966 XX XXXXXXXXX" />
+                            <p *ngIf="accountDetailsForm.get('phone_number').hasError('invalidPhoneNumber')" class="xsmall red-color">Enter valid phone number</p>
+
+                        </div>    
+
+                    </div>
+
+                    <div class="auto-flex-start-gap20">
+
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                            <p class="xsmall bold">Password</p>
+                            <input class="input-global" type="password" formControlName="password" placeholder="min. 8 characters" />
+                            <p *ngIf="accountDetailsForm.get('password').hasError('invalidPassword')" class="xsmall red-color">Enter valid password</p>
+                
+                        </div>    
+
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                            <p class="xsmall bold">Confirm Password</p>
+                            <input class="input-global" type="password" formControlName="confirm_password" placeholder="min. 8 characters" />
+                            <p *ngIf="accountDetailsForm.get('confirm_password').hasError('invalidCPassword')" class="xsmall red-color">Enter valid password</p>
+                            <p *ngIf="accountDetailsForm.get('confirm_password').hasError('invalidCPasswordNotMatched')" class="xsmall red-color">Password does not match</p>
+
+                        </div>    
+
+                    </div>
 
                 </div>
+        
+                <div class="auto-flex-end-gap10">
 
-                <div class="auto-flex-start-gap20">
-
-                    <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-
-                        <p class="xsmall bold">Password</p>
-                        <input class="input-global" type="password" placeholder="min. 8 characters" />
-            
-                    </div>    
-
-                    <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-
-                        <p class="xsmall bold">Confirm Password</p>
-                        <input class="input-global" type="password" placeholder="min. 8 characters" />
-            
-                    </div>    
+                    <!-- continue button -->
+                    <button class="primary-bg padding-10 capitalize box-shadow width-300">continue</button>
 
                 </div>
-
-            </div>
-    
-            <div class="auto-flex-end-gap10">
-
-                <!-- continue button -->
-                <button class="primary-bg padding-10 capitalize box-shadow width-300">continue</button>
-
-            </div>
             
+            </form>
         
             <!-- sign up -->
              <!-- remember me -->
              <div class="auto-flex-start-center-gap10">
     
-                <p class="xsmall bold web-font-primary-light">Don’t have an account?</p>
-                <p class="xsmall bold blue-color">Sign up</p>
+                <p class="xsmall bold web-font-primary-light">Alreay have an account?</p>
+                <p class="xsmall bold blue-color cursor-pointer">Sign in</p>
     
             </div>
 
@@ -88,7 +97,7 @@
     </div>
 
     <!-- Confirmation -->
-    <div class="auto-flex-center-gap20-column padding-40">
+    <div class="auto-flex-center-gap20-column padding-40 hide" #account_confirmation>
 
         <div class="auto-flex-start-gap30-column padding-20 main-div">
 
@@ -101,7 +110,7 @@
                 <div class="auto-flex-start-gap10-column web-font-primary-light">
 
                     <p class="xsmall bold">Confirmation code</p>
-                    <input class="input-global" type="email" placeholder="XXX - XXX" />
+                    <input class="input-global" type="text" [(ngModel)]="verificationCodeInput" placeholder="XXX - XXX" />
         
                 </div>    
 
@@ -111,14 +120,14 @@
             <div class="auto-flex-end-gap10">
 
                 <!-- continue button -->
-                <button class="primary-bg padding-10 capitalize box-shadow width-300">continue</button>
+                <button class="primary-bg padding-10 capitalize box-shadow width-300" (click)="verifyCode()">continue</button>
 
             </div>
             
              <div class="auto-flex-start-center-gap10">
     
-                <p class="xsmall bold web-font-primary-light">Don’t have an account?</p>
-                <p class="xsmall bold blue-color">Sign up</p>
+                <p class="xsmall bold web-font-primary-light">Alreay have an account?</p>
+                <p class="xsmall bold blue-color">Sign in</p>
     
             </div>
 
@@ -127,74 +136,129 @@
     </div>
 
     <!-- Personal Info -->
-    <div class="auto-flex-center-gap20-column padding-40">
+    <div class="auto-flex-center-gap20-column padding-40 hide" #account_setup>
 
         <div class="auto-flex-start-gap30-column padding-20 main-div">
 
             <h3 class="xxlarge bold capitalize">Personal info</h3>
             <p class="web-font-primary-light">Enter your additional information</p>
     
-            <div class="auto-flex-center-gap20-column">
+            <form class="auto-flex-start-gap10" [formGroup]="accountSetupForm" (ngSubmit)="accountSetup()">
+
+                <div class="auto-flex-center-gap20-column">
                 
-                <!-- register input fields -->
-                <div class="auto-flex-start-gap20">
-
-                    <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-
-                        <p class="xsmall bold">First name</p>
-                        <input class="input-global" type="text" placeholder="Enter your first name" />
-            
-                    </div>    
-
-                    <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-
-                        <p class="xsmall bold">Last name</p>
-                        <input class="input-global" type="text" placeholder="Enter your last name" />
-            
-                    </div>    
-
-                </div>
-
-                <div class="auto-flex-start-gap20">
-
-                    <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-
-                        <p class="xsmall bold">Date of birth</p>
-                        <input class="input-global" type="date" placeholder="Enter your dob" />
-            
-                    </div>    
-
-                    <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-
-                        <p class="xsmall bold">Gender</p>
-                        <select class="input-global">
-
-                            <option value="1">Male</option>
-                            <option value="2">Female</option>
-
-                        </select>
-
-
-                    </div>    
-
-                </div>
-
-            </div>
+                    <!-- register input fields -->
+                    <div class="auto-flex-start-gap20">
     
-            <div class="auto-flex-end-gap10">
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+    
+                            <p class="xsmall bold">First name</p>
+                            <input class="input-global" type="text" formControlName="first_name" placeholder="Enter your first name" />
+                            <p *ngIf="accountSetupForm.get('first_name').hasError('invalidFName')" class="xsmall red-color">Enter valid first name</p>
 
-                <!-- continue button -->
-                <button class="primary-bg padding-10 capitalize box-shadow width-300">continue</button>
+                        </div>    
+    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+    
+                            <p class="xsmall bold">Last name</p>
+                            <input class="input-global" type="text" formControlName="last_name" placeholder="Enter your last name" />
 
-            </div>
-            
+                        </div>    
+    
+                    </div>
+    
+                    <div class="auto-flex-start-gap20">
+    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+    
+                            <p class="xsmall bold">Date of birth</p>
+                            <input class="input-global" type="date" formControlName="dob" placeholder="Enter your dob" />
+                            
+                        </div>    
+    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+    
+                            <p class="xsmall bold">Gender</p>
+                            <select class="input-global" formControlName="gender">
+                                
+                                <option disabled></option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+    
+                            </select>
+                            <p *ngIf="accountSetupForm.get('gender').hasError('invalidGender')" class="xsmall red-color">Select gender</p>
+
+                        </div>    
+    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+    
+                            <p class="xsmall bold">Nationality</p>
+                            <select class="input-global" formControlName="nationality">
+                                
+                                <option disabled></option>
+                                <option value="saudi">Saudi</option>
+                                <option value="non_saudi">Non Saudi</option>
+    
+                            </select>
+
+                            <p *ngIf="accountSetupForm.get('nationality').hasError('invalidNationality')" class="xsmall red-color">Select nationality</p>
+                        
+                        </div>  
+                        
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+    
+                            <p class="xsmall bold">Id Type</p>
+                            <select class="input-global" formControlName="id_type">
+    
+                                <option disabled></option>
+                                <option value="national_id">National ID</option>
+                                <option value="iqama">Iqama</option>
+                                <option value="passport">Passport</option>
+    
+                            </select>
+                            <p *ngIf="accountSetupForm.get('id_type').hasError('invalidIdType')" class="xsmall red-color">Select Id type</p>
+                
+                        </div>   
+                        
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+    
+                            <p class="xsmall bold">Id Number</p>
+                            <input class="input-global" type="text" formControlName="id_number" placeholder="Enter your Id number" />
+                            <p *ngIf="accountSetupForm.get('id_number').hasError('invalidIdNumber')" class="xsmall red-color">Enter valid Id number</p>
+
+                        </div>   
+    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+    
+                            <p class="xsmall bold">Marital Status</p>
+                            <select class="input-global" formControlName="marital_status">
+    
+                                <option value="single">Single</option>
+                                <option value="married">Married</option>
+    
+                            </select>
+    
+                        </div>  
+    
+                    </div>
+    
+                </div>
         
+                <div class="auto-flex-end-gap10">
+    
+                    <!-- continue button -->
+                    <button class="primary-bg padding-10 capitalize box-shadow width-300" type="submit">continue</button>
+    
+                </div>
+
+            </form>
+           
             <!-- sign up -->
              <!-- remember me -->
              <div class="auto-flex-start-center-gap10">
     
-                <p class="xsmall bold web-font-primary-light">Don’t have an account?</p>
-                <p class="xsmall bold blue-color">Sign up</p>
+                <p class="xsmall bold web-font-primary-light">Alreay have an account?</p>
+                <p class="xsmall bold blue-color cursor-pointer">Sign in</p>
     
             </div>
 
@@ -202,5 +266,16 @@
 
     </div>
 
+    <!-- Incorrect Verification Code -->
+    <app-custom-alert *ngIf="showVerificationAlert" [title]="'Verification Error'" [message]="'An error occurred while verifying your code.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
+    <!-- Incorrect Phone Number -->
+    <app-custom-alert *ngIf="showInvalidPhoneNumber" [title]="'Invalid Phone Number'" [message]="'Your phone number is invalid.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+
+    <!-- An Error occured while creating user. Try again later -->
+    <app-custom-alert *ngIf="showErrorCreatingUser" [title]="'Error'" [message]="'An error occured while creating your user. Try again later.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+
+    <!-- User already exists-->
+    <app-custom-alert *ngIf="showUserAlreadyExist" [title]="'User Already Exists'" [message]="'This user already exist in our system.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    
 </div>

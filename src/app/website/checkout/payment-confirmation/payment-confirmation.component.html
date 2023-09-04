@@ -1,0 +1,77 @@
+<app-checkout-header></app-checkout-header>
+
+<div class="web auto-flex-start-gap40-column main-div padding-top-40" *ngIf="verified">
+
+    <div class="auto-flex-center-gap20-column gray-border border-radius-20 padding-20" *ngIf="paymentCaptured">
+
+        <p class="med bold">Appointment Booking Confirmation</p>
+
+        <p class="light-green-bg padding-5 green-color fit-content" >Your appointment has been booked successfully</p>
+
+        <div class="auto-flex-center-gap10">
+
+            <p class="text-right">Appointment Id: </p>
+            <p>{{ appointmentId }}</p>
+
+        </div>
+
+        <div class="auto-flex-center-gap10">
+
+            <p class="text-right">Name:</p>
+            <p>{{ name }}</p>
+
+        </div>
+        
+        <div class="auto-flex-center-gap10">
+
+            <p class="text-right">Date:</p>
+            <p>{{ date }}</p>
+
+        </div>
+        
+        <div class="auto-flex-center-gap10">
+
+            <p class="text-right">Time: </p>
+            <p>{{ time }}</p>
+
+        </div>
+   
+        <div class="auto-flex-center-gap5-column" *ngIf="cartData.length>0">
+
+            <p *ngFor="let cartItem of cartData">{{ cartItem.title }}</p>
+
+        </div>
+
+    </div>
+
+    <div class="auto-flex-center-gap20-column gray-border border-radius-20 padding-20" *ngIf="!paymentCaptured">
+        
+        <p class="med bold">Appointment Booking Confirmation</p>
+
+        <p class="light-red-bg padding-5 red-color fit-content">We couldn't process your payment and appointment.</p>
+
+    </div>
+
+    <div class="auto-flex-center-gap20-column light-gray-bg border-radius-20 padding-none">
+  
+        <div class="auto-flex-start-gap5">
+
+            <div class="auto-flex-center-gap10">
+        
+                <a href="https://app.adjust.com/dqbwu8c" target="_blank">
+                    <img class="largeImg" src="assets/images/web/icons/apple.svg" />
+                </a>
+
+                <a href="https://app.adjust.com/dqbwu8c" target="_blank">
+                    <img class="largeImg" src="assets/images/web/icons/google.svg" />
+                </a>
+
+            </div>
+            
+        </div> 
+  
+    </div>
+    
+    <a class="primary-bg max-width padding-10 text-center" href="/">Go to home page</a>
+
+</div>

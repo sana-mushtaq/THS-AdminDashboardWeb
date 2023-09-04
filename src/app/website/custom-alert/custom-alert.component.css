@@ -1,0 +1,15 @@
+.red-bg{
+    background-color: #FF5C60;
+}
+
+.gray-border {
+    border: 1.5px solid #83859C;
+}
+@media only screen and (max-width: 1090px) {
+
+    .phone-max-width {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+}

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: "root" })
 export class PatientsService {
@@ -8,8 +9,9 @@ export class PatientsService {
     private httpOptions : any  = { headers: new HttpHeaders({ "Content-Type": "application/json" }) };
     private serverUrl : string = environment.domainName;
     private patientUrl : string = this.serverUrl+'care-provider/patients';
+    private patientUrlUpdated : string = this.serverUrl+'users/patients';
 
-    constructor(private _httpClient: HttpClient) {}
+    constructor(private _httpClient: HttpClient, private router: Router,) {}
 
     search( query : string ){
         return this._httpClient.post<any>(this.patientUrl+'/search', { query : query } );
@@ -64,4 +66,80 @@ export class PatientsService {
     approveManualPayment( body : any ){
         return this._httpClient.post<any>(this.patientUrl+'/approve-manual-payment', body ); 
     }
+
+    // THS-25 BY SANA
+    registerUser( body ) {
+        
+        return this._httpClient.post<any>(this.patientUrlUpdated+'/register', body ); 
+
+    }
+
+    verifyPatient( body ) {
+        
+        return this._httpClient.post<any>(this.patientUrlUpdated+'/verifyUser', body ); 
+
+    }
+
+    signInWithEmailAndPassword( body ) {
+
+        return this._httpClient.post<any>(this.patientUrlUpdated+'/signInWithEmailAndPassword', body );
+
+    }
+
+    getProfileInformation ( body ) {
+
+        return this._httpClient.post<any>(this.patientUrlUpdated+'/getPatientProfileInfo', body );
+
+    }
+
+    createDependent( body ) {
+
+        return this._httpClient.post<any>(this.patientUrlUpdated+'/createDependant', body );
+
+    }
+
+    updateDependent( body ) {
+
+        return this._httpClient.post<any>(this.patientUrlUpdated+'/updateDependant', body );
+
+    }
+
+    getDependantsList( body ) {
+
+        return this._httpClient.post<any>(this.patientUrlUpdated+'/getDependantsList', body );
+
+    }
+
+    deleteDependent( body ) {
+
+        return this._httpClient.post<any>(this.patientUrlUpdated+'/deleteDependant', body );
+
+    }
+
+    createAddress( body ) {
+
+        return this._httpClient.post<any>(this.patientUrlUpdated+'/createAddress', body );
+
+    }
+
+    updateAddress( body ) {
+
+        return this._httpClient.post<any>(this.patientUrlUpdated+'/updateAddress', body );
+
+    }
+
+    getAppointmentList( body ) {
+
+        return this._httpClient.post<any>(this.patientUrlUpdated+'/getAppointmentList', body );
+
+    }
+
+    logout() {
+
+        localStorage.removeItem("THSUserId")
+        localStorage.removeItem("THSToken")
+        this.router.navigate(['/login'])
+
+     }
+
 }

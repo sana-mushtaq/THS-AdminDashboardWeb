@@ -1,0 +1,4 @@
+.selected-date {
+    border: 1.5px solid var(--blue-color); /* Apply a border to the selected date */
+    border-radius: 15px;
+}

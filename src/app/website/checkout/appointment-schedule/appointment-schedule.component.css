@@ -20,3 +20,78 @@
 .border-radius-20{
     border-radius: 20px;
 }
+.calendar {
+    text-align: center;
+    margin: 20px;
+  }
+  
+.calendar-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 10px;
+}
+
+.header-text {
+flex: 1;
+text-align: center;
+}
+  
+.arrow-button {
+background: none;
+border: none;
+cursor: pointer;
+padding: 0;
+}
+
+.arrow-button img {
+width: 24px;
+height: 24px;
+}
+
+.week {
+display: flex;
+flex-direction: column;
+}
+
+.day-labels {
+display: flex;
+justify-content: space-between;
+margin-bottom: 10px;
+font-weight: bold;
+}
+
+.day-label {
+flex: 1;
+text-align: center;
+}
+
+.days {
+display: flex;
+justify-content: space-between;
+}
+
+.day {
+flex: 1;
+padding: 10px;
+}
+
+.selected-date {
+    border: 1.5px solid var(--blue-color); /* Apply a border to the selected date */
+    border-radius: 15px;
+}
+
+.text-area-color {
+    background-color: #EDEEF2;
+}
+
+@media only screen and (max-width: 500px) {
+
+    .phone-no-gap {
+        gap: 0px;
+    }
+    .xxxSmallImg{
+        width: 16px;
+        height: 16px;
+    }
+}

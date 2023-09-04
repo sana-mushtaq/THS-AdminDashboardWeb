@@ -1,0 +1,67 @@
+<div class="web auto-flex-start-gap40-column main-div padding-bottom-0 padding-top-40">
+
+    <div class="auto-flex-center-space-between-gap20 white-bg padding-10 padding-left-right-30">
+
+        <a href="https://www.taibsa.com/" target="_blank">
+            <img class="xxmedImg" src="assets/images/web/logo.svg" />
+        </a>
+
+        <div class="auto-flex-center-gap20-no-set-width desktop">
+
+            <a class="xsmall web-font-primary bold" href="www.taibsa.com" target="_blank">Home</a>
+            <a class="xsmall web-font-primary bold" href="/medical-services">Services</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/blog" target="_blank">Blog</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/medical-calculator" target="_blank">Calculator</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/contact" target="_blank">Contact</a>
+ 
+            <div class="auto-flex-center-gap5-no-set-width cursor-pointer" *ngIf="cartData && cartData.length>0">
+
+                <a class="xsmall web-font-primary bold" href="/checkout/cart"><img class="img-20" src="assets/images/web/icons/cart.svg" /></a>
+                <div class="auto-flex-center-gap10 border-radius-100 red-bg border-none height-16 width-16 text-center padding-15">
+
+                    <a class="xsmall secondary-color" href="/checkout/cart">{{ cartLength }}</a>
+    
+                </div>
+ 
+            </div>
+         
+        </div>
+
+        <div class="mobile auto-flex-center-gap10-no-set-width padding-10 white-bg">
+
+            <a class="xsmall web-font-primary bold" (click)="openMenu()">
+                <img class="xsmallImg" src="assets/images/web/icons/menu.svg" />
+            </a>
+
+        </div>
+
+        <div class="white-bg fixed mobile z-index menu-mobile mobile padding-none" id="menuBar">
+
+            <a class="xsmall web-font-primary bold absolute-top-right-30" (click)="closeMenu()"><img class="img-20" src="assets/images/web/icons/close.svg" /></a>
+
+            <div class="auto-flex-start-gap20-column padding-20">
+
+            <a class="xsmall web-font-primary bold" href="www.taibsa.com" target="_blank">Home</a>
+            <a class="xsmall web-font-primary bold" href="/medical-services">Services</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/blog" target="_blank">Blog</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/medical-calculator" target="_blank">Calculator</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/contact" target="_blank">Contact</a>
+
+            <div class="auto-flex-center-gap5-no-set-width">
+
+                <a class="xsmall web-font-primary bold"><img class="img-20" src="assets/images/web/icons/cart.svg" /></a>
+                <div class="auto-flex-center-gap10 border-radius-100 red-bg border-none height-16 width-16 text-center padding-15">
+
+                    <a class="xsmall secondary-color " *ngIf="cartData && cartData.length>0">{{ cartData.length }}</a>
+
+                </div>
+
+            </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

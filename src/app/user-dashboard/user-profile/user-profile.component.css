@@ -24,3 +24,10 @@
 .width-300 {
     min-width: 300px;
 }
+
+.item-selected {
+    border: 1.5px solid var(--blue-color);
+}
+.gap-10 {
+    margin: 10px;
+}

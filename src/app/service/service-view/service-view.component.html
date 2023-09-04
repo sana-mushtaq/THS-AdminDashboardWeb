@@ -45,29 +45,34 @@
             <app-header></app-header>
 
             <!-- branch wrapper -->
-            <div class="auto-flex-start-gap20-column max-height relative">
+            <div class="web auto-flex-start-gap30-column max-height relative">
 
                 <div class="auto-flex-start-space-between-gap10">
 
                     <p class="large">All Services</p>
                     <button class="primary-bg padding-10 secondary-color bold" (click)="addService()">Add a New Service</button>
 
-                    <div class="auto-flex-start-gap10-column">
+                    <input class="input-global" type="text" placeholder="Search service by id, title, category and price" [(ngModel)]="searchText" />
 
-                        <!-- display a list of categories -->
-                        <table class="table">
+                    <div class="auto-flex-start-gap10 padding-none border-radius-20 gray-border">
 
-                            <th>ID</th>
-                            <th>Icon</th>
-                            <th>Title</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Current Offers</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                        <table class="custom-table web-font-primary-light overflow-hidden">
 
-                            <!-- display a list of service providers already assigned -->
-                            <tr *ngFor="let service of serviceList; let serviceIndex = index">
+                            <thead class="custom-table-thead">
+                                <tr>
+                                    <th class="padding-20">ID</th>
+                                    <th class="padding-20">Icon</th>
+                                    <th class="padding-20">Title</th>
+                                    <th class="padding-20">Category</th>
+                                    <th class="padding-20">Price</th>
+                                    <th class="padding-20">Status</th>
+                                    <th class="padding-20 text-right">Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr *ngFor="let service of displayedServiceList | filter: searchText; let serviceIndex = index; ">
 
                                 <td>
                                     <p> {{ service.id }} </p>
@@ -79,8 +84,6 @@
 
                                 <td class="cursor-pointer" (click)="openServiceDetails(service, serviceIndex)">
                                     <p> {{ service.title }} </p>
-                                    <hr class="hr-black" />
-                                    <p> {{ service.title_arabic }} </p>
                                 </td>
 
                                 <td>
@@ -91,25 +94,47 @@
                                     <p> {{ service.price }} </p>
                                 </td>
 
-                                <th>
-                                    <p> {{ service.coupon_code }} </p>
-                                </th>
-
-                                <th>
-                                    <p class="dark-green-bg padding-5 secondary-color fit-content" *ngIf="service.active">Active</p>
-                                    <p class="red-bg padding-5 secondary-color fit-content" *ngIf="!service.active">Deactivated</p>
-                                </th>
+                                <td>
+                                    <p class="light-green-bg padding-5 green-color fit-content" *ngIf="service.active"> Active </p>
+                                    <p class="light-red-bg padding-5 red-color fit-content" *ngIf="!service.active"> Deactivated </p>
+                                </td>
                             
                                 <td class="auto-flex-center-gap10-no-set-width">
-                                    <button class="glass-bg padding-5 border-radius-10 border-none" (click)="updateServiceStatus(service, serviceIndex, true)" *ngIf="!service.active">activate</button>
-                                    <button class="glass-bg padding-5 border-radius-10 border-none" (click)="updateServiceStatus(service, serviceIndex, false)" *ngIf="service.active">deactivate</button>
-                                    <button class="glass-bg padding-5 border-radius-10 border-none" (click)="editService(service, serviceIndex)">edit</button>
-                                    <button class="red-bg bold secondary-color padding-5 border-radius-10" (click)="deleteService(service, serviceIndex)">remove</button>
+
+                                    <div class="auto-flex-center-gap5-column">
+
+                                        <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceStatus(service, serviceIndex, true)" *ngIf="!service.active">activate</button>
+                                        <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceStatus(service, serviceIndex, false)" *ngIf="service.active">deactivate</button>
+                                   
+                                        <div class="auto-flex-center-gap5">
+
+                                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/edit.svg" (click)="editService(service, serviceIndex)"/>
+                                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/delete.svg" (click)="deleteService(service, serviceIndex)"/>
+        
+                                        </div>
+
+                                    </div>
+                                                                    
                                 </td>
+
 
                             </tr>
 
                         </table>
+
+                        <div class="auto-flex-start-gap10">
+                            
+                            <hr class="hr-black" />
+
+                            <ul class="pagination auto-flex-center-gap5">
+
+                                <li class="page-item border-none" *ngFor="let page of totalPageNumbers(); let i = index">
+                                    <a class="page-link border-none blue-color padding-5 cursor-pointer" (click)="setPage(i)">{{ page }}</a>
+                                </li>
+
+                            </ul>       
+                        
+                        </div>                  
                                             
                     </div>
 
@@ -250,7 +275,7 @@
 
                         <div class="popup">
 
-                            <div class="content white-bg scrollable-div">
+                            <div class="content white-bg scrollable-div web-font-primary-light">
 
                                 <button class="close" (click)="closeAddService()">x</button>
 
@@ -309,14 +334,14 @@
 
                                         <div class="auto-flex-center-start-gap20">
 
-                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                                 <p class="bold">Title</p>
                                                 <input class="input-global" formControlName="title" type="text" />    
 
                                             </div>
 
-                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                                 <p class="bold">Title Arabic</p>
                                                 <input class="input-global" formControlName="title_arabic" type="text" />
@@ -327,7 +352,7 @@
 
                                         <div class="auto-flex-center-start-gap20">
 
-                                            <div class="auto-flex-start-gap10-column">
+                                            <div class="auto-flex-start-gap5-column">
 
                                                 <p class="bold">URL</p>
                                                 <input class="input-global" formControlName="url" type="text" />    
@@ -338,14 +363,14 @@
 
                                         <div class="auto-flex-center-start-gap20">
 
-                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                                 <p class="bold">Description</p>
                                                 <textarea class="input-global" formControlName="description" type="text"></textarea>   
 
                                             </div>
 
-                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                                 <p class="bold">Description Arabic</p>
                                                 <textarea class="input-global" formControlName="description_arabic" type="text"></textarea>
@@ -356,14 +381,14 @@
 
                                         <div class="auto-flex-center-start-gap20">
 
-                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                                 <p class="bold">Title Tag</p>
                                                 <input class="input-global" formControlName="title_tag" type="text" />    
 
                                             </div>
 
-                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                                 <p class="bold">Meta Tag</p>
                                                 <input class="input-global" formControlName="meta_tag" type="text" />
@@ -374,14 +399,14 @@
 
                                         <div class="auto-flex-center-start-gap20">
 
-                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                                 <p class="bold">Instructions</p>
                                                 <textarea class="input-global" formControlName="instructions" type="text"></textarea>    
 
                                             </div>
 
-                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                                 <p class="bold">Instructions Arabic</p>
                                                 <textarea class="input-global" formControlName="instructions_arabic" type="text"></textarea>    
@@ -392,14 +417,14 @@
 
                                         <div class="auto-flex-center-start-gap20">
 
-                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                                 <p class="bold">Price</p>
                                                 <input class="input-global" formControlName="price" type="number" />    
 
                                             </div>
 
-                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                                 <p class="bold">Cost</p>
                                                 <input class="input-global" formControlName="cost" type="number" />
@@ -410,14 +435,14 @@
 
                                         <div class="auto-flex-center-start-gap20">
 
-                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                                 <p class="bold">Active</p>
                                                 <input class="input-global"  style="width:auto" formControlName="active" type="checkbox" />    
 
                                             </div>
 
-                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                                 <p class="bold">Whatsapp URL</p>
                                                 <input class="input-global" formControlName="whatsapp_url" type="text" />
@@ -448,7 +473,7 @@
 
                         <div class="popup">
 
-                            <div class="content white-bg scrollable-div">
+                            <div class="content white-bg scrollable-div web-font-primary-light">
 
                                 <button class="close" (click)="closeEditService()">x</button>
 
@@ -481,7 +506,7 @@
 
                                     <div class="auto-flex-center-start-gap20">
 
-                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                             <p class="bold">Category</p>
                                             <select class="input-global" [(ngModel)]="selectedService.category_id">
@@ -490,7 +515,7 @@
                                         
                                         </div>
 
-                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                             <p class="bold">Service Type</p>
                                             <select class="input-global" [(ngModel)]="selectedService.service_type">
@@ -505,14 +530,14 @@
 
                                     <div class="auto-flex-center-start-gap20">
 
-                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                             <p class="bold">Title</p>
                                             <input class="input-global" [(ngModel)]="selectedService.title" type="text" />    
 
                                         </div>
 
-                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                             <p class="bold">Title Arabic</p>
                                             <input class="input-global" [(ngModel)]="selectedService.title_arabic" type="text" />
@@ -523,7 +548,7 @@
 
                                     <div class="auto-flex-center-start-gap20">
 
-                                        <div class="auto-flex-start-gap10-column">
+                                        <div class="auto-flex-start-gap5-column">
 
                                             <p class="bold">URL</p>
                                             <input class="input-global" [(ngModel)]="selectedService.url" type="text" />    
@@ -534,14 +559,14 @@
 
                                     <div class="auto-flex-center-start-gap20">
 
-                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                             <p class="bold">Description</p>
                                             <textarea class="input-global" [(ngModel)]="selectedService.description" type="text"></textarea>   
 
                                         </div>
 
-                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                             <p class="bold">Description Arabic</p>
                                             <textarea class="input-global" [(ngModel)]="selectedService.description_arabic" type="text"></textarea>
@@ -552,14 +577,14 @@
 
                                     <div class="auto-flex-center-start-gap20">
 
-                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                             <p class="bold">Title Tag</p>
                                             <input class="input-global" [(ngModel)]="selectedService.title_tag" type="text" />    
 
                                         </div>
 
-                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                             <p class="bold">Meta Tag</p>
                                             <input class="input-global" [(ngModel)]="selectedService.meta_tag" type="text" />
@@ -570,14 +595,14 @@
 
                                     <div class="auto-flex-center-start-gap20">
 
-                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                             <p class="bold">Instructions</p>
                                             <textarea class="input-global" [(ngModel)]="selectedService.instructions" type="text"></textarea>    
 
                                         </div>
 
-                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                             <p class="bold">Instructions Arabic</p>
                                             <textarea class="input-global" [(ngModel)]="selectedService.instructions_arabic" type="text"></textarea>    
@@ -588,14 +613,14 @@
 
                                     <div class="auto-flex-center-start-gap20">
 
-                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                             <p class="bold">FAQ</p>
                                             <textarea class="input-global" [(ngModel)]="selectedService.faq" type="text"></textarea>    
 
                                         </div>
 
-                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                             <p class="bold">FAQ Arabic</p>
                                             <textarea class="input-global" [(ngModel)]="selectedService.faq_arabic" type="text"></textarea>    
@@ -606,14 +631,14 @@
 
                                     <div class="auto-flex-center-start-gap20">
 
-                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                             <p class="bold">Price</p>
                                             <input class="input-global" [(ngModel)]="selectedService.price" type="number" />    
 
                                         </div>
 
-                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                             <p class="bold">Cost</p>
                                             <input class="input-global" [(ngModel)]="selectedService.cost" type="number" />
@@ -625,7 +650,7 @@
                                     <div class="auto-flex-center-start-gap20">
 
 
-                                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
 
                                             <p class="bold">Whatsapp URL</p>
                                             <input class="input-global" [(ngModel)]="selectedService.whatsapp_url" type="text" />

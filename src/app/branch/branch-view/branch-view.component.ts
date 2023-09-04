@@ -1,5 +1,5 @@
 /* THS-23 */
-import { Component, OnInit } from '@angular/core'
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core'
 import { Branch } from "src/model/dashboard/branch.model"
 import { Serviceprovide } from 'src/model/dashboard/serviceprovide.model'
 import { BranchService  } from 'src/service/branch.service'
@@ -7,9 +7,12 @@ import Swal from 'sweetalert2'
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { APIResponse } from 'src/utils/app-enum'
 import { AppService } from 'src/service/app.service'
-import { ServiceproviderService} from 'src/service/serviceprovider.service'
+import { ServiceproviderService } from 'src/service/serviceprovider.service'
 import { IDropdownSettings, } from 'ng-multiselect-dropdown';
 import { ServiceService } from 'src/service/service.service'
+import { environment } from 'src/environments/environment'
+import { MapsAPILoader } from '@agm/core';
+declare var google: any;
 
 @Component({
   selector: 'app-branch-view',
@@ -19,11 +22,26 @@ import { ServiceService } from 'src/service/service.service'
 
 export class BranchViewComponent implements OnInit {
 
+
+  @ViewChild('search') searchElementRef: ElementRef
+  @ViewChild('search1') searchElementRef1: ElementRef
+  
+  public serverUrl : string = environment.domainName
+
+  //locations
+  place: any
+  placeSelected: boolean = false
+  zoom: number = 15
+  centerLat: number = 24.7136
+  centerLng: number = 46.6753
+  selectedLat: number
+  selectedLng: number
+
   //create a variable branch of type array
-  branchList: Branch [] = []
-  serviceProviderList: Serviceprovide [] = []
-  serviceProviderListAssigned: Serviceprovide [] = []
-  serviceProviderAssignedServices = []
+  branchList: any = []
+  serviceProviderList: any = []
+  serviceProviderListAssigned: any = []
+  serviceProviderAssignedServices: any = []
 
   //multiselect dropdown settings
   spList = []
@@ -104,7 +122,9 @@ export class BranchViewComponent implements OnInit {
     private _appService: AppService,
     private fb : FormBuilder,
     private _serviceProvider: ServiceproviderService,
-    private _service: ServiceService
+    private _service: ServiceService,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone,
     ) {
     
     //this will be called at first to get a list of branches
@@ -133,6 +153,23 @@ export class BranchViewComponent implements OnInit {
 
     })
 
+    
+    this.addServiceProviderForm = this.fb.group({
+
+      'first_name': ['', [ Validators.required, Validators.minLength(4) ]],
+      'last_name': [''],
+      'phone_number':['', [ Validators.required, Validators.minLength(9) ]], 
+      'email': ['', [ Validators.required, Validators.email ]],
+      'gender': [2, [ Validators.required]],
+      'nationality': ['', [ Validators.required]],
+      'password': ['', [ Validators.required]],
+      'medical_license': [''],
+      'medical_license_expiry_date': [''],
+      'branch_id' : ['', [ Validators.required]],
+
+    })
+
+    /* TO BE REPLACED LATER
     this.addServiceProviderForm = this.fb.group({
 
       'first_name': ['', [ Validators.required, Validators.minLength(4) ]],
@@ -156,7 +193,8 @@ export class BranchViewComponent implements OnInit {
       'medical_license_expiry_date': [''],
       'branch_id' : ['', [ Validators.required]],
 
-    })
+    })*/
+
 
     //this will be used for dropdown settings
     this.spSettings = {
@@ -170,7 +208,10 @@ export class BranchViewComponent implements OnInit {
       textField: 'title',
       allowSearchFilter: true
     }
-  
+
+    //first we will get user location and display on the header
+    this.getUserLocation()
+   
   }
 
   getBranchList() {
@@ -233,7 +274,12 @@ export class BranchViewComponent implements OnInit {
 
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+    // Use the Google Maps Geocoding API to convert the searchLocation to coordinates
+    this.mapsAPILoader.load().then(() => {})
+
+   }
 
   //the followng function will be used to assign branch data based on selected opertion
   assignBranchData( currentBranch, index ) {
@@ -276,6 +322,12 @@ export class BranchViewComponent implements OnInit {
 
     this.addNewBranchToggle = true
 
+    setTimeout(()=>{
+
+      this.initializeAutocompleteAndConfirm()
+
+    }, 500)
+
   }
 
   //this will open add a nwe service provider pop up
@@ -292,6 +344,12 @@ export class BranchViewComponent implements OnInit {
     
     this.assignBranchData( currentBranch, index )
     this.editBranchInformationToggle = true
+
+    setTimeout(()=>{
+
+      this.initializeAutocompleteAndConfirm1()
+
+    }, 500)
 
   }
 
@@ -321,7 +379,8 @@ export class BranchViewComponent implements OnInit {
         if( res.status === APIResponse.Success) {
 
           this.serviceProviderList = res.data
-
+          
+          this.serviceProviderList.forEach(d=> { console.log(d) })
           let selectedBranchId = this.selectedBranch.id
 
           this.serviceProviderListAssigned = this.serviceProviderList.filter( sp => {
@@ -330,6 +389,7 @@ export class BranchViewComponent implements OnInit {
 
           })
           
+          console.log(this.serviceProviderListAssigned)
           let spListDataUnAssigned = this.serviceProviderList.filter( sp => {
 
             return sp.branch_id === null
@@ -1084,5 +1144,222 @@ export class BranchViewComponent implements OnInit {
     })
 
   }
+
+   // Method to initialize Autocomplete and map when the button is clicked
+  initializeAutocompleteAndConfirm() {
+
+    // Use this.searchAddress.nativeElement instead of #search
+    const input = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement)
+
+    input.addListener('place_changed', () => {
+
+      this.ngZone.run(() => {
+
+        this.place = input.getPlace()
+        this.placeSelected = true; // Set the flag to indicate a place has been selected
+      
+      })
+
+    })
+
+  }
+
+  initializeAutocompleteAndConfirm1() {
+
+    // Use this.searchAddress.nativeElement instead of #search
+    const input = new google.maps.places.Autocomplete(this.searchElementRef1.nativeElement)
+
+    input.addListener('place_changed', () => {
+
+      this.ngZone.run(() => {
+
+        this.place = input.getPlace()
+        this.placeSelected = true; // Set the flag to indicate a place has been selected
+      
+      })
+
+    })
+
+  }
+
+  getUserLocation() {
+
+    
+    if (navigator.geolocation) {
+    
+      const options = {
+        enableHighAccuracy: true, // Request higher accuracy
+        timeout: 5000,            // Maximum time to wait for a result
+        maximumAge: 0             // Don't use cached data
+      }
+
+      navigator.geolocation.getCurrentPosition((position) => {
+        
+        // Set the center of the map to the user's current location
+        this.centerLat = position.coords.latitude
+        this.centerLng = position.coords.longitude
+
+        // Set the marker's initial position to the user's current location
+        this.selectedLat = position.coords.latitude
+        this.selectedLng = position.coords.longitude
+
+        this.addBranchForm.patchValue({
+          latitude: this.selectedLat
+        })
+
+        this.addBranchForm.patchValue({
+          longitude: this.selectedLng
+        })
+
+        // Get the location name using the Google Maps Places API
+        const geocoder = new google.maps.Geocoder()
+        const latlng = { lat: this.centerLat, lng: this.centerLng }
+    
+        geocoder.geocode({ location: latlng }, (results, status) => {
+
+          if (status === google.maps.GeocoderStatus.OK) {
+          
+            if (results[0]) {
+          
+              const locationName = results[0].formatted_address
+              this.addBranchForm.patchValue({
+                location: locationName
+              })
+      
+              // You can use the locationName as needed
+            } else {
+          
+              console.error("No results found.")
+          
+            }
+          
+          } else {
+            
+            console.error("Geocoder failed due to: " + status)
+          
+          }
+
+        })
+
+      }, (error) => {
+
+        console.error("Error getting location:", error)
+
+      }, options)
+
+    } else {
+    
+        console.error("Geolocation is not supported by this browser.")
+    
+      }
+    
+  }
+
+  onMapClick(event) {
+
+    this.selectedLat = event.coords.lat
+    this.selectedLng = event.coords.lng
+
+    this.addBranchForm.patchValue({
+      latitude: this.selectedLat
+    })
+
+    this.addBranchForm.patchValue({
+      longitude: this.selectedLng
+    })
+
+  }
+
+  onMarkerDragEnd(event) {
+
+    this.selectedLat = event.coords.lat
+    this.selectedLng = event.coords.lng
+
+    // Update the center of the map to the dragged marker's position
+    this.centerLat = this.selectedLat
+    this.centerLng = this.selectedLng
+
+    this.placeSelected = true
+
+    this.addBranchForm.patchValue({
+      latitude: this.selectedLat
+    })
+
+    this.addBranchForm.patchValue({
+      longitude: this.selectedLng
+    })
+
+  }
+
+  onConfirmLocation() {
+
+    if (this.place && this.place.geometry && this.place.geometry.location) {
+      
+      this.selectedLat = this.place.geometry.location.lat()
+      this.selectedLng = this.place.geometry.location.lng()
+  
+    }
+
+    this.centerLat = this.selectedLat
+    this.centerLng = this.selectedLng
+
+    this.placeSelected = false
+
+  } 
+
+  onMapClick1(event) {
+
+    this.selectedLat = event.coords.lat
+    this.selectedLng = event.coords.lng
+
+    this.editBranchForm.patchValue({
+      latitude: this.selectedLat
+    })
+
+    this.editBranchForm.patchValue({
+      longitude: this.selectedLng
+    })
+
+  }
+
+  onMarkerDragEnd1(event) {
+
+    this.selectedLat = event.coords.lat
+    this.selectedLng = event.coords.lng
+
+    // Update the center of the map to the dragged marker's position
+    this.centerLat = this.selectedLat
+    this.centerLng = this.selectedLng
+
+    this.placeSelected = true
+
+    this.editBranchForm.patchValue({
+      latitude: this.selectedLat
+    })
+
+    this.selectedBranch.latitude = this.selectedLat as any
+    this.selectedBranch.longitude = this.selectedLng as any
+
+    this.editBranchForm.patchValue({
+      longitude: this.selectedLng
+    })
+
+  }
+
+  onConfirmLocation1() {
+
+    if (this.place && this.place.geometry && this.place.geometry.location) {
+      
+      this.selectedLat = this.place.geometry.location.lat()
+      this.selectedLng = this.place.geometry.location.lng()
+  
+    }
+
+    this.centerLat = this.selectedLat
+    this.centerLng = this.selectedLng
+
+    this.placeSelected = false
+
+  } 
 
 }

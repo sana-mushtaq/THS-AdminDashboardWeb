@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { WebsiteDataService } from 'src/service/website-data.service';
+import { UtilService } from 'src/utils/util.service';
 
 @Component({
   selector: 'app-service-details',
@@ -7,9 +10,94 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServiceDetailsComponent implements OnInit {
 
-  constructor() { }
+  serviceId: string
+  currentService: any
+  serviceVariants: any
+  cartData: any = []
+
+  showErrorCart: boolean = false
+
+  constructor(
+    private route: ActivatedRoute,
+    private dataService: WebsiteDataService,
+    private _utilService: UtilService
+  ) {}
 
   ngOnInit(): void {
+
+    this.route.params.subscribe(params => {
+
+      this.serviceId = params['serviceId'];
+
+      this.dataService.data$.subscribe((res) => {
+
+        if (res) {
+
+          this.currentService = res.services.filter(service => {
+
+            return service.id === Number(this.serviceId)
+
+          })
+
+          this.currentService = this.currentService[0]
+
+          this.serviceVariants = res.services.filter(service => {
+
+            return Number(service.primary_service_id) === Number(this.currentService.id)
+
+          })
+
+        }
+
+      })
+
+    })
+
   }
+
+  addToCart(service) {
+
+    //first we will check that cart is empty or contains services from same category
+    this.cartData = this._utilService.getCartData()
+
+    let checkCategory = this.cartData.filter(category => {
+
+      return service.category_id !== category.category_id
+
+    })
+
+    if(this.cartData.length === 0 || checkCategory.length === 0) {
+
+      let cartItem = {
+
+        'id': service.id,
+        'title': service.title,
+        'price': service.price,
+        'icon': service.icon,
+        'category_id': service.category_id,
+        'description': service.description,
+        'user': null
+      }
+
+      this.cartData.push(cartItem)
+      this._utilService.addToCart(this.cartData)
+
+    } else {
+
+      this.showErrorCart = true
+
+    }
+
+  }
+
+  handleCancelClick(): void {}
+
+  //alert continue button handler
+  handleContinueClick(): void {
+
+    this.showErrorCart = false
+
+  }
+
 
 }

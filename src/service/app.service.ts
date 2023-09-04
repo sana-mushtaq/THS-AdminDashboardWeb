@@ -583,4 +583,11 @@ export class AppService {
     return this._httpClient.post<any>(AppConstants.getGiftLogURL, reqParams);
   }
 
+  /* THS-25 */
+  sendSMS(body) {
+
+    return this._httpClient.post<any>(AppConstants.sendVerificationSMS, body);
+  
+  }
+
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 // import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   MatSnackBar,
@@ -7,6 +8,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar'
 import { AlertType, MaxFileSize } from './app-constants';
+import { WebsiteDataService } from 'src/service/website-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,8 @@ import { AlertType, MaxFileSize } from './app-constants';
 export class UtilService {
 
   constructor(
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private websiteDataService: WebsiteDataService
   ) { }
 
   static checkMaxFileSize(files, maxFileSizeType) {
@@ -66,4 +69,32 @@ export class UtilService {
       verticalPosition: verticalPosition,
     });
   }
+
+
+  //THS-25 BY SANA
+  addToCart(cartData) {
+
+    localStorage.setItem("THSCart", JSON.stringify(cartData))
+    this.websiteDataService.updateCartLength();
+
+
+  }
+  
+  removeFromCart(itemIndex) {
+
+    let cartData = JSON.parse(localStorage.getItem("THSCart") as any)
+    cartData.splice(itemIndex, 1)
+    localStorage.setItem("THSCart", JSON.stringify(cartData))
+    this.websiteDataService.updateCartLength();
+
+  }
+
+  getCartData() {
+
+    let cartData = JSON.parse(localStorage.getItem("THSCart")) || []
+    
+    return cartData
+
+  }
+
 }

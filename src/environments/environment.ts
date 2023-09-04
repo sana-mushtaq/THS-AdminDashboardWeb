@@ -150,5 +150,8 @@ export const environment = {
 
   //GIFT LOG
 
-  getGiftLogURL:"getGiftLog"
+  getGiftLogURL:"getGiftLog",
+
+  sendVerificationSMS: "account/verification/sms"
+
 };

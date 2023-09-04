@@ -1,15 +1,489 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UtilService } from 'src/utils/util.service';
+import { BusinessToCustomerSchedulingService } from 'src/service/business-to-customer-scheduling.service';
+import { APIResponse } from 'src/utils/app-enum';
+import { formatDate } from '@angular/common';
+import { WebsocketService  } from 'src/service/web-socket.service';
+import { Subscription } from 'rxjs';
+import { WebsiteDataService } from 'src/service/website-data.service';
+import { PatientsService } from 'src/service/patient.service';
 
 @Component({
   selector: 'app-appointment-schedule',
   templateUrl: './appointment-schedule.component.html',
   styleUrls: ['./appointment-schedule.component.css']
 })
+
 export class AppointmentScheduleComponent implements OnInit {
 
-  constructor() { }
+  loginAlert: boolean = false
+
+  userId: any
+  cartData: any = []
+  totalCost: number = 0
+  
+  //calendar
+  currentDate: Date = new Date()
+  currentWeek: Date[] = []
+  currentMonthAndYear: string = ''
+
+  selectedDate: Date | null = null
+
+  serviceProvidersServices: any
+  userDependants: any = []
+
+  //date & time to store in local storage
+  preferredTime: any
+  preferredDate: any
+
+  private fetchedData: any = {
+    serviceProviders: [],
+    appointments: []
+  }
+
+  private dataSubscription: Subscription;
+
+  timeSlots: string[] = [] // Array to hold time slots
+
+  constructor(
+    private router: Router,
+    private _utilService: UtilService,
+    private _b2c: BusinessToCustomerSchedulingService,
+    private websocketService: WebsocketService,
+    private dataService: WebsiteDataService,
+    private _patientService: PatientsService
+  ) {     
+
+    for (let hour = 12; hour <= 23; hour++) {
+
+      this.timeSlots.push(this.formatTimeSlot(hour))
+
+    }
+    
+  }
 
   ngOnInit(): void {
+
+    
+    this.userId = localStorage.getItem("THSUserId")
+    
+    if(this.userId !== null) {
+  
+      this.cartData = this._utilService.getCartData()
+
+      if(!this.cartData || this.cartData.length === 0) {
+
+        this.router.navigate(['/medical-services'])
+
+      } else {
+
+        let services = this.cartData
+
+        let data = {
+
+          services: services
+        }
+
+        this._b2c.verifyTotal(data).subscribe({
+          
+          next : ( res : any ) => {
+    
+            //in case of success the api returns 0 as a status code
+            if( res.status === APIResponse.Success ) {
+
+              //after fetching all service providers we will now check if their gender match with selected user or not 
+            this.totalCost = res.data
+
+            } else {
+    
+          
+            }
+            
+          },
+          error: ( err: any ) => {
+            
+            console.log(err)
+    
+          }
+      
+        }) 
+        
+      }
+    
+    } else {
+
+      this.loginAlert = true
+
+    }
+
+    let data = {
+
+      user_id: this.userId
+
+    }
+
+    this._patientService.getDependantsList(data).subscribe({
+
+      next : ( res : any ) => {
+
+        //in case of success the api returns 0 as a status code
+        if( res.status === APIResponse.Success ) {
+            
+          res.data.forEach(dependant => {
+
+            this.userDependants.push(dependant)
+
+          })
+              
+        } 
+        
+      },
+
+      error: ( err: any ) => {}
+  
+    })
+
+    this.websocketService.connect(); // Assuming you have a connect() method in your service
+    
+    this.dataSubscription = this.websocketService.onData().subscribe(data => {
+
+      this.fetchedData = data
+      this.dataService.data$.subscribe((res) => {
+
+        if (res) {
+
+          // ... handle the received data here
+          let services = res.services
+          let filteredServices = []
+
+          this.cartData.forEach(cartItem => {
+
+            let temp = services.filter(service => {
+
+              return service.id === cartItem.id
+
+            })
+
+            if( temp.length > 0 ) {
+
+              filteredServices.push(temp[0])
+              
+            }
+
+          })
+
+          let spData  = {
+
+            services: filteredServices,
+            patients: this.userDependants
+
+          }
+  
+          this._b2c.checkServiceProviderEligibilty(spData).subscribe({
+      
+            next : ( ress : any ) => {
+      
+              //in case of success the api returns 0 as a status code
+              if( ress.status === APIResponse.Success ) {
+
+                //after fetching all service providers we will now check if their gender match with selected user or not 
+                this.serviceProvidersServices = ress.data
+
+                this.selectCurrentDay()
+                this.generateWeek()
+                this.updateCurrentMonthAndYear()
+
+              } else {
+      
+             
+              }
+              
+            },
+            error: ( err: any ) => {
+              
+              console.log(err)
+      
+            }
+        
+          }) 
+  
+        }
+  
+      })
+
+    })
+
+  }
+
+  selectCurrentDay() {
+
+    this.selectDate(new Date())
+
+  }
+
+  generateWeek() {
+ 
+    this.currentWeek = []
+
+    for (let i = 0; i < 7; i++) {
+
+      const day = new Date(this.currentDate)
+      day.setDate(this.currentDate.getDate() + i)
+      this.currentWeek.push(day)
+
+    }
+
+  }
+
+  updateCurrentMonthAndYear() {
+
+    this.currentMonthAndYear = formatDate(this.currentDate, 'MMMM y', 'en-US')
+
+  }
+
+  goToNextWeek() {
+
+    this.currentDate.setDate(this.currentDate.getDate() + 7)
+    this.generateWeek()
+    this.updateCurrentMonthAndYear()
+
+  }
+
+  goToPreviousWeek() {
+
+    this.currentDate.setDate(this.currentDate.getDate() - 7)
+    this.generateWeek()
+    this.updateCurrentMonthAndYear()
+
+  }
+
+  selectDate(date: Date) {
+  
+    this.selectedDate = date
+    this.calculateTimeSlots()
+
+  }
+
+  isPreviousDisabled(): boolean {
+
+    const today = new Date()
+    const firstDateOfWeek = this.currentWeek[0]
+
+    return firstDateOfWeek <= today
+
+  }
+
+  ngOnDestroy() {
+
+    this.dataSubscription.unsubscribe() // Unsubscribe from the data stream
+
+  }
+
+  sendMessage(message: string): void {
+
+    this.websocketService.sendMessage(message);
+
+  }
+
+  formatTimeSlot(hour: number): string {
+
+    const amPm = hour >= 12 ? 'pm' : 'am'
+
+    const formattedHour = hour > 12 ? hour - 12 : hour
+  
+    return `${formattedHour === 0 ? 12 : formattedHour}:00${amPm}`
+
+  }
+
+  //this function will calculate time slots if date is selected 
+  calculateTimeSlots() {
+    // Assuming fetchedData.appointments contains the list of appointments
+  
+    if (!this.selectedDate || this.cartData.length === 0) {
+      // No selected date or no services in cart, return empty time slots
+      this.timeSlots = []
+      return
+
+    }
+
+    // If cart contains only 1 service
+    if (this.cartData.length === 1) {
+
+      const serviceId = this.cartData[0].id;
+
+      // Get all service providers for the selected service
+      const sps = this.serviceProvidersServices[serviceId].filter(sps => {
+        return sps.service_id === serviceId;
+      });
+
+      const formattedSelectedDate = this.formatSelectedDate(this.selectedDate);
+
+      this.setPreferredDate(formattedSelectedDate)
+
+      // Get unique scheduled times for appointments of the selected service on the selected date
+      const uniqueScheduledTimes = [...new Set(this.fetchedData.appointments
+        .filter(app => sps.some(sp => sp.user_id === app.serviceAssigneeId) &&
+                        app.serviceDate === formattedSelectedDate)
+        .map(app => app.serviceTime)
+      )];
+      
+      // Function to check if a time slot is available
+      const isTimeSlotAvailable = (timeSlot: string) => {
+        return !uniqueScheduledTimes.includes(timeSlot);
+      };
+  
+      this.timeSlots = [];
+      // Generate time slots and filter unavailable ones
+      for (let hour = 12; hour <= 23; hour++) {
+        const timeSlot = this.formatTimeSlot(hour);
+        if (isTimeSlotAvailable(timeSlot)) {
+          this.timeSlots.push(timeSlot);
+        }
+      }
+    } else {
+      
+      const formattedSelectedDate = this.formatSelectedDate(this.selectedDate);
+
+      this.setPreferredDate(formattedSelectedDate)
+
+      // Rest of your logic for handling multiple services and common providers
+      const selectedServiceIds = this.cartData.map(item => item.id)
+
+      // Create a list to store time slots to be removed
+      const timeSlotsToRemove = []
+      
+      // Iterate through the available time slots
+      for (let hour = 12; hour <= 23; hour++) {
+
+        const timeSlot = this.formatTimeSlot(hour)
+
+        // Check if all service providers are booked at this time slot
+        const allProvidersBooked = this.fetchedData.appointments.every(app => {
+
+          return selectedServiceIds.includes(app.service_id) && app.serviceTime === timeSlot
+
+        })
+
+        if (allProvidersBooked) {
+
+          timeSlotsToRemove.push(timeSlot)
+
+        }
+
+      }
+      
+      // Remove the time slots that need to be removed
+      this.timeSlots = this.timeSlots.filter(slot => !timeSlotsToRemove.includes(slot))
+
+    }
+  
+  }
+  
+  findAllCommonServiceProviders() {
+
+    if (this.cartData.length <= 1) {
+
+      // If there's only one service or no services, return an empty array
+      return []
+
+    }
+  
+    const serviceIds = this.cartData.map(item => item.id)
+  
+    // Find the providers for the first service in the cart
+    const providersOfFirstService = this.serviceProvidersServices[serviceIds[0]]
+  
+    if (!providersOfFirstService) {
+    
+      return []
+    
+    }
+  
+    // Check if each provider of the first service provides all other services in the cart
+    const commonProviders = providersOfFirstService.filter(provider => {
+      
+      return serviceIds.every(serviceId => {
+
+        const providersForService = this.serviceProvidersServices[serviceId]
+
+        return providersForService && providersForService.some(p => p.user_id === provider.user_id)
+
+      })
+  
+    })
+  
+    return commonProviders.map(provider => provider.user_id);
+
+  }
+    
+  isTimeSlotBooked(providerIds: string[], timeSlot: string) {
+
+    return this.fetchedData.appointments.some(appointment => {
+
+      return providerIds.includes(appointment.serviceAssigneeId) &&
+      
+      appointment.serviceTime === timeSlot 
+    
+    })
+ 
+  }
+
+  // Assuming selectedDate is a Date object
+  formatSelectedDate(selectedDate: Date) {
+
+    const year = selectedDate.getFullYear()
+    const month = String(selectedDate.getMonth() + 1).padStart(2, '0')
+    const day = String(selectedDate.getDate()).padStart(2, '0')
+
+    return `${year}-${month}-${day}`
+
+  }
+
+  setPreferredTimeSlot(time) {
+
+    this.preferredTime = time
+
+  }
+
+  setPreferredDate(date) {
+
+    this.preferredDate = date
+  
+  }
+    
+  proceedToPay() {
+
+    let patient_note = (document.getElementById("patient_note") as any).value
+    let data = {
+
+      cartData: this.cartData,
+      preferredTime: this.preferredTime,
+      preferredDate: this.selectedDate,
+      patient_note: patient_note
+
+    }
+
+    localStorage.setItem("THSPaylaod", JSON.stringify(data))
+    this.router.navigate(['/checkout/confirmation'])
+  
+  }
+
+  navigateToCart() {
+
+    this.router.navigate(['/checkout/cart'])
+
+  }
+
+  handleCancelClick(): void {
+
+  }
+
+  //alert continue button handler
+  handleContinueClick(): void {
+
+    this.router.navigate(['/login'])
+
   }
 
 }

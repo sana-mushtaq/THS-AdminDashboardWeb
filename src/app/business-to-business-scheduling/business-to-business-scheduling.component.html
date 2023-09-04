@@ -1,0 +1,285 @@
+<div id="app">
+
+    <!-- page section -->
+    <section class="el-container">
+
+        <div>
+
+            <!-- main menu bar-->
+            <menu class="menu-bar lab-hide">
+
+                <a routerLink="javascript:void(0);" class="toggle-menu">
+
+                    <div class="inactive">
+
+                        <span class="bar bar1"></span>
+                        <span class="bar"></span>
+                        <span class="bar bar3"></span>
+
+                    </div>
+
+                </a>
+
+                <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+
+            </menu>
+
+            <!-- app side bar-->
+            <app-sidebar class="lab-hide"></app-sidebar>
+
+            <!-- app sub menu -->
+            <div>
+
+                <app-submenu></app-submenu>
+
+            </div>
+
+            <!-- top nav bar in the right side -->
+            <nav class="nav-bar-none"></nav>
+
+        </div>
+
+        <!-- right side or the main component content -->
+        <main class="el-main">
+
+            <app-header></app-header>
+
+            <!-- category wrapper -->
+            <div class="web auto-flex-start-gap30-column max-height relative">
+
+                <div class="auto-flex-start-gap20">
+
+                    <div class="auto-flex-center-space-between-gap20">
+
+                        <input class="white-bg padding-10 box-shadow bold" type="file" (change)="handleFileInput($event)" accept=".xlsx">
+                        <button class="primary-bg padding-10 secondary-color bold" (click)="downloadTemplate()">Download template</button>
+
+                    </div>
+
+                    <div class="auto-flex-start-gap10 padding-none border-radius-20 gray-border">
+
+                        <table class="custom-table web-font-primary-light overflow-hidden">
+
+                            <thead class="custom-table-thead">
+                                <tr>
+                                    <th class="padding-20">Name</th>
+                                    <th class="padding-20">Phone</th>
+                                    <th class="padding-20">City</th>
+                                    <th class="padding-20">Request date</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr class="cursor-pointer" *ngFor="let record of records; let recordIndex = index;" (click)="openRecordDetail(record)">
+
+                                <td>
+                                    <p> {{ record['Name'] }} </p>
+                                </td>
+
+                            
+                                <td class="cursor-pointer">
+                                    <p> {{ record['Phone'] }} </p>
+                                </td>
+
+                                <td>
+                                    <p> {{ record['City'] }} </p>
+                                </td>
+
+                                <td>
+                                    <p> {{ record['Request date'] }} </p>
+                                </td>
+
+                            </tr>
+
+                        </table>
+                                              
+                    </div>
+
+                    <div class="fixed dialog" *ngIf="openRecord && records.length > 0">
+
+                        <div class="popup" style="max-height: 800px;">
+
+                            <div class="content auto-flex-start-gap10-column white-bg box-shadow" style="width: 1000px; max-height: 800px;">
+
+                                <div class="auto-flex-end-gap10">
+
+                                    <button class="close" (click)="openRecord = !openRecord; currentRecord={}" style="opacity: 1;">x</button>
+
+                                </div>
+
+                                <div class="auto-flex-start-gap20">
+    
+                                    <div class="auto-flex-start-gap5-column-no-set-width width-half">
+    
+                                        <ng-multiselect-dropdown class="max-width" *ngIf="branchList.length>0 && branchSettings" [settings]="branchSettings" [data]="branchList" [placeholder]="'Select branch'" (onSelect)="setPreferredBranch($event)" (onDeSelect)="unsetPreferredBranch($event)"></ng-multiselect-dropdown>
+    
+                                    </div>
+    
+                                    <div class="auto-flex-start-gap5-column-no-set-width width-half">
+    
+                                        <ng-multiselect-dropdown class="max-width" *ngIf="allServices.length>0 && serviceSettings" [settings]="serviceSettings" [data]="allServices" [placeholder]="'Select service'" (onSelect)="setPreferredService($event)" (onDeSelect)="unsetPreferredService($event)"></ng-multiselect-dropdown>
+    
+                                    </div>
+    
+                                    <div class="auto-flex-start-gap5-column-no-set-width width-half">
+    
+                                        <p class="bold">Name</p>
+                                        <p>{{ currentRecord.Name }}</p>
+    
+                                    </div>
+    
+                                    <div class="auto-flex-start-gap5-column-no-set-width width-half">
+    
+                                        <p class="bold">Phone</p>
+                                        <p>{{ currentRecord.Phone }}</p>
+    
+                                    </div>
+    
+                                    <div class="auto-flex-start-gap5-column-no-set-width width-half">
+    
+                                        <p class="bold">Gender</p>
+                                        <p>{{ currentRecord.Gender }}</p>
+    
+                                    </div>
+    
+                                    <div class="auto-flex-start-gap5-column-no-set-width width-half">
+    
+                                        <p class="bold">District</p>
+                                        <p>{{ currentRecord.District }}</p>
+    
+                                    </div>
+    
+                                    <div class="auto-flex-start-gap5-column-no-set-width width-half">
+    
+                                        <p class="bold">City</p>
+                                        <p>{{ currentRecord.City }}</p>
+    
+                                    </div>
+    
+                                    <div class="auto-flex-start-gap5-column-no-set-width width-half">
+    
+                                        <p class="bold">Request date</p>
+                                        <p>{{ currentRecord['Request date'] }}</p>
+    
+                                    </div>
+    
+                                    <div class="auto-flex-start-gap5-column-no-set-width width-half">
+    
+                                        <p class="bold">Sent date</p>
+                                        <p>{{ currentRecord['Sent date'] }}</p>
+    
+                                    </div>
+    
+                                    <div class="auto-flex-start-gap5-column-no-set-width width-half">
+    
+                                        <p class="bold">Region</p>
+                                        <p>{{ currentRecord['Region'] }}</p>
+    
+                                    </div>
+    
+                                    <div class="auto-flex-start-gap5-column">
+    
+                                        <p class="bold">Date</p>
+                                        <input class="input-global" type="date" (change)="setPreferredDate($event.target)" id="date"/>
+    
+                                    </div>
+    
+    
+                                    <div class="time-slots auto-flex-start-gap10" *ngIf="timeSlots.length>0">
+    
+                                        <p class="gray-border padding-10 padding-left-right-30 blue-color border-radius-10 max-width width-max-150 text-center cursor-pointer" *ngFor="let timeSlot of timeSlots" (click)="setPreferredTimeSlot(timeSlot)" [ngClass]="{ 'selected-date': preferredTime === timeSlot }">{{ timeSlot }}</p>
+                        
+                                    </div>   
+                                    
+                                    <div class="auto-flex-start-gap5-column">
+    
+                                        <p>Operator notes</p>
+                                        <textarea class="input-global" type="text" id="adminNotes"></textarea>
+                       
+                                    </div>
+    
+                                    <div class="auto-flex-start-gap5-column relative">
+    
+                                        <input #search class="input-global absolute-top-10 z-index" type="text" placeholder="Search" />
+    
+                                        <agm-map class="max-width height-300 width-800 border-top-left-right-10 overflow-hidden" [latitude]="centerLat" [longitude]="centerLng" [zoom]="zoom" [streetViewControl]="false" [zoomControl]="false" [mapTypeControl]="false" (mapClick)="onMapClick($event)" >
+                                    
+                                            <agm-marker *ngIf="selectedLat && selectedLng" [latitude]="selectedLat"  [longitude]="selectedLng" [markerDraggable]="true" (dragEnd)="onMarkerDragEnd($event)"  class="border-radius-10"></agm-marker>
+                                        
+                                        </agm-map>
+    
+                                    </div>
+    
+                                    <div class="auto-flex-start-gap5-column-no-set-width width-half">
+    
+                                        <p class="bold">Latitude</p>
+                                        <p>{{ currentRecord.Latitude }}</p>
+    
+                                    </div>
+    
+                                    <div class="auto-flex-start-gap5-column-no-set-width width-half">
+    
+                                        <p class="bold">Longitude</p>
+                                        <p>{{ currentRecord.Longitude }}</p>
+    
+                                    </div>
+    
+                                    <div class="auto-flex-start-gap5-column-no-set-width width-half">
+    
+                                        <p class="bold">Location</p>
+                                        <p>{{ currentRecord.Location }}</p>
+    
+                                    </div>
+    
+                                    <div class="auto-flex-center-gap20">
+    
+                                        <button class="primary-bg padding-10 secondary-color bold max-width" (click)="createAppointment(currentRecord)">Create appointment</button>
+    
+                                    </div>                                 
+    
+                                </div>
+    
+                                <div>
+    
+                                </div>
+    
+                            </div>
+    
+                            <div>
+    
+                                <!--
+                                <div class="auto-flex-center-gap10-column">
+    
+                                    <div class="auto-flex-center-gap20">
+    
+                                        <button class="primary-bg padding-10 secondary-color bold width-150" (click)="onPrevious()" [disabled]="currentPage === 0">Previous</button>
+                                        <button class="primary-bg padding-10 secondary-color bold width-150" (click)="onNext()" [disabled]="currentPage === totalRecords - 1">Next</button>    
+        
+                                    </div>
+        
+                                    <p>Current Page: {{ currentPage + 1 }} / Total Records: {{ totalRecords }}</p>
+    
+                                </div>             
+                                -->
+                            </div>    
+
+                        </div>
+                        
+                    </div>
+
+                    <div class="auto-flex-start-gap20" *ngIf="records.length<=0">
+
+                        <p class="light-green-bg green-color text-center"> Record not found. Please upload valid excel file </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </section>
+
+</div>

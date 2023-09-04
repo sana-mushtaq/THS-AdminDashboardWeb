@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { WebsiteDataService } from 'src/service/website-data.service';
 
 @Component({
   selector: 'app-all-categories',
@@ -7,10 +9,78 @@ import { Component, OnInit, ViewEncapsulation} from '@angular/core';
   encapsulation: ViewEncapsulation.None 
 })
 export class AllCategoriesComponent implements OnInit {
+  
+  categoryUrl: string
+  currentCategory: any
+  allServices: any
+  topServices: any = {}
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private dataService: WebsiteDataService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+
+    this.getComponentData()
+  
   }
+   
+   getComponentData() {
+ 
+    this.route.params.subscribe(params => {
 
+      this.categoryUrl = params['categoryUrl']
+
+      this.dataService.data$.subscribe((res) => {
+ 
+        if (res) {
+        
+          this.currentCategory = res.categories.find(
+
+            category => category.url === this.categoryUrl
+
+          )
+ 
+         if (this.currentCategory) {
+          
+          this.topServices = res.services.filter(
+          
+            service => service.category_id === this.currentCategory.id
+          
+          )
+          
+          this.topServices.splice(0, 4)
+ 
+           this.allServices = res.services
+
+          }
+  
+        }
+  
+      })
+
+    })
+  
+   }
+
+   navigateToService(serviceId) {
+
+    let service = this.allServices.filter(s => {
+
+      return s.id === serviceId
+
+    })
+
+    // Set the category ID in the service and navigate to the dynamic category URL
+    this.dataService.setServiceId(service[0].id);
+
+    // Use the Router service to navigate to the dynamic category URL with query parameter
+    this.router.navigate(['/medical-services', service[0].id])
+
+  }
+ 
 }

@@ -19,7 +19,7 @@ export class ServiceViewComponent implements OnInit {
   categoryList: Servicecategory [] = []
   
   //create a variable serviceList of type array
-  serviceList: Service [] = []
+  serviceList: any = []
 
   addNewServiceToggle: boolean = false
   serviceDetailsToggle: boolean = false
@@ -59,7 +59,16 @@ export class ServiceViewComponent implements OnInit {
   // forms
   public addServiceForm : FormGroup
   public editServiceForm : FormGroup
-  
+
+  //pagination
+  itemsPerPage: number = 25 // Number of items to display per page
+  currentPage: number = 1 // Current page number
+  displayedServiceList:any = [] // To hold services for the current page
+  // Calculate the total number of pages
+  totalItems: number = this.serviceList.length
+  totalPages: number = Math.ceil(this.totalItems / this.itemsPerPage)
+  searchText: string = '';
+
   constructor(
     private _serviceCategory: ServicecategoryService,
     private _service: ServiceService,
@@ -185,6 +194,11 @@ export class ServiceViewComponent implements OnInit {
           if( res.status === APIResponse.Success) {
     
             this.serviceList = res.data
+            console.log(this.serviceList.length)
+            this.displayedServiceList = this.serviceList.splice(0, 25)
+
+            this.totalItems = this.serviceList.length
+            this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage)
     
           } else {
     
@@ -234,6 +248,7 @@ export class ServiceViewComponent implements OnInit {
 
               //when the service is created the system should return an id of the newly created category
               this.serviceList.push(res.data)
+              this.displayedServiceList.push(res.data)
               this.addNewServiceToggle = false
               
               //reset form
@@ -314,6 +329,7 @@ export class ServiceViewComponent implements OnInit {
 
               //now we will splice the branch data from array
               this.serviceList[this.selectedServiceIndex].active = status
+              this.displayedServiceList[this.selectedServiceIndex].active = status
               this.unassignServiceData()
               
               Swal.fire(res.message)
@@ -466,6 +482,7 @@ export class ServiceViewComponent implements OnInit {
 
               //now we will splice the branch data from array
               this.serviceList.splice(this.selectedServiceIndex, 1)
+              this.displayedServiceList.splice(this.selectedServiceIndex, 1)
               this.unassignServiceData()
               
               Swal.fire(res.message)
@@ -489,6 +506,36 @@ export class ServiceViewComponent implements OnInit {
       }
 
     })
+
+  }
+
+  //pagination
+  setPage(pageNumber: number) {
+
+    this.currentPage = pageNumber + 1 // Page numbers start from 1
+    this.updateDisplayedServices();
+
+  }
+
+  // Update displayed services based on pagination
+  updateDisplayedServices() {
+
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage
+    const endIndex = startIndex + this.itemsPerPage
+
+    if (this.currentPage > this.totalPages) {
+
+      this.currentPage = this.totalPages
+
+    }
+
+    this.displayedServiceList = this.serviceList.slice(startIndex, endIndex)
+
+  }
+
+  totalPageNumbers(): number[] {
+
+    return Array(this.totalPages).fill(0).map((_, index) => index + 1)
 
   }
   

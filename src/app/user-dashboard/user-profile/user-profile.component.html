@@ -7,9 +7,11 @@
 
         <div class="auto-flex-start-gap5-column-no-set-width">
 
-            <p class="med bold">Full name</p>
-            <p class="web-font-primary-light">user id</p>
-
+            <p class="med bold" *ngIf="userData">{{ userData.first_name }} {{ userData.last_name }}</p>
+            <p class="web-font-primary-light" *ngIf="userData">PAT{{ userData.id }}</p>
+            <p class="web-font-primary-light" *ngIf="userData">{{ userData.phone_number }}</p>
+            <button class="border-none padding-5 light-red-bg red-color" *ngIf="userData" (click)="logout()">logout</button>
+            
         </div>
 
     </div>
@@ -17,7 +19,7 @@
     <!-- tabs -->
     <div class="auto-flex-center-space-between-gap20">
 
-        <div class="auto-flex-start-gap20-no-set-width width-half gray-border border-radius-20 padding-20">
+        <div #personalInfo class="auto-flex-start-gap20-no-set-width width-half gray-border border-radius-20 padding-20 item-selected cursor-pointer" (click)="displayBlock('userInfo')">
 
             <img class="smallImg" src="assets/images/web/icons/account.svg" />
             
@@ -30,7 +32,7 @@
 
         </div>
 
-        <div class="auto-flex-start-gap20-no-set-width width-half gray-border border-radius-20 padding-20">
+        <div #appointmentInfo class="auto-flex-start-gap20-no-set-width width-half gray-border border-radius-20 padding-20 cursor-pointer" (click)="displayBlock('appointmentInfo')">
 
             <img class="smallImg" src="assets/images/web/icons/appointment.svg" />
             
@@ -46,7 +48,7 @@
     </div>
 
     <!-- users tab-->
-    <div class="auto-flex-start-gap10">
+    <div class="auto-flex-start-gap10" *ngIf="displayUserInfo">
        
         <!-- users -->
         <div class="auto-flex-start-gap20-column border-radius-20 gray-border padding-20">
@@ -64,28 +66,14 @@
 
                 <div class="hr-black-vertical min-height-100"></div>
 
-                <div class="auto-flex-center-gap10-column-no-set-width">
+                <div class="auto-flex-center-gap10-column-no-set-width cursor-pointer" *ngFor="let dependant of userDependants; let dependantIndex = index" (click)="showDependant(dependantIndex)">
 
                     <img class="medImg" src="assets/images/web/icons/user.svg" />
-                    <p class="bold">Dependent</p>
+                    <p class="bold"> {{ dependant.first_name }} {{ dependant.last_name }}</p>
 
                 </div>
 
-                <div class="auto-flex-center-gap10-column-no-set-width">
-
-                    <img class="medImg" src="assets/images/web/icons/user.svg" />
-                    <p class="bold">Dependent</p>
-
-                </div>
-
-                <div class="auto-flex-center-gap10-column-no-set-width">
-
-                    <img class="medImg" src="assets/images/web/icons/user.svg" />
-                    <p class="bold">Dependent</p>
-
-                </div>
-
-                <div class="border-radius-100 gray-border padding-10 cursor-pointer">
+                <div class="border-radius-100 gray-border padding-10 cursor-pointer" (click)="addDependant()">
 
                     <img class="xsmallImg" src="assets/images/web/icons/plus.svg" />
 
@@ -94,59 +82,285 @@
             </div>
 
             <!-- add dependent -->
-            <div class="auto-flex-center-gap20-column">
+            <div class="auto-flex-center-gap20-column" *ngIf="addDependantToggle">
                     
-                <!-- register input fields -->
-                <div class="auto-flex-center-space-between-gap20">
+                <form class="auto-flex-start-gap10" [formGroup]="addDependantForm" (ngSubmit)="createDependant()">
 
-                    <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <!-- input fields -->
+                    <div class="auto-flex-center-space-between-gap20">
 
-                        <p class="xsmall bold">First name</p>
-                        <input class="input-global" type="text" placeholder="Enter your first name" />
-            
-                    </div>    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
-                    <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">First name</p>
+                            <input class="input-global" type="text" formControlName="first_name" placeholder="Enter your first name" />
+                            <p *ngIf="addDependantForm.get('first_name').hasError('invalidFName')" class="xsmall red-color">Enter valid first name</p>
 
-                        <p class="xsmall bold">Last name</p>
-                        <input class="input-global" type="text" placeholder="Enter your last name" />
-            
-                    </div>    
+                        </div>    
 
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                            <p class="xsmall bold">Last name</p>
+                            <input class="input-global" type="text" formControlName="last_name"  placeholder="Enter your last name" />
+
+                        </div>    
+
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                            <p class="xsmall bold">Email</p>
+                            <input class="input-global" type="email" formControlName="email" placeholder="name@example.com" />
+                            <p *ngIf="addDependantForm.get('email').hasError('invalidEmail')" class="xsmall red-color">Enter valid email</p>
+
+                        </div>    
+
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                            <p class="xsmall bold">Phone Number</p>
+                            <input class="input-global" type="tel" formControlName="phone_number" placeholder="966 XX XXXXXXXXX" />
+                            <p *ngIf="addDependantForm.get('phone_number').hasError('invalidPhoneNumber')" class="xsmall red-color">Enter valid phone number</p>
+
+                        </div>    
+
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                            <p class="xsmall bold">Date of birth</p>
+                            <input class="input-global" type="date" formControlName="dob" placeholder="Enter your dob" />
+                
+                        </div>    
+
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                            <p class="xsmall bold">Gender</p>
+                            <select class="input-global" formControlName="gender">
+                                
+                                <option disabled></option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+    
+                            </select>
+                            <p *ngIf="addDependantForm.get('gender').hasError('invalidGender')" class="xsmall red-color">Select gender</p>
+
+
+                        </div>    
+
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                            <p class="xsmall bold">Nationality</p>
+                            <select class="input-global" formControlName="nationality">
+                                
+                                <option disabled></option>
+                                <option value="saudi">Saudi</option>
+                                <option value="non_saudi">Non Saudi</option>
+    
+                            </select>
+                            <p *ngIf="addDependantForm.get('nationality').hasError('invalidNationality')" class="xsmall red-color">Select nationality</p>
+
+                        </div>    
+
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                            <p class="xsmall bold">Id Type</p>
+                            <select class="input-global" formControlName="id_type">
+    
+                                <option disabled></option>
+                                <option value="national_id">National ID</option>
+                                <option value="iqama">Iqama</option>
+                                <option value="passport">Passport</option>
+    
+                            </select>
+                            <p *ngIf="addDependantForm.get('id_type').hasError('invalidIdType')" class="xsmall red-color">Select Id type</p>
+
+                        </div>    
+
+                        
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                            <p class="xsmall bold">Id Number</p>
+                            <input class="input-global" type="text" formControlName="id_number" placeholder="Enter your Id number" />
+                            <p *ngIf="addDependantForm.get('id_number').hasError('invalidIdNumber')" class="xsmall red-color">Enter valid Id number</p>
+
+                        </div>    
+
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                            <p class="xsmall bold">Marital Status</p>
+                            <select class="input-global" formControlName="marital_status">
+    
+                                <option value="single">Single</option>
+                                <option value="married">Married</option>
+    
+                            </select>
+
+                        </div>    
+
+                        <!--
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                            <p class="xsmall bold">Relationship Type</p>
+                            <select class="input-global" formControlName="relationship_type">
+                                
+                                <option disabled></option>
+                                <option value="daughter">Daughter</option>
+                                <option value="son">Son</option>
+                                <option value="wife">Wife</option>
+                                <option value="other">Other</option>
+    
+                            </select>
+                            <p *ngIf="addDependantForm.get('relationship_type').hasError('invalidRelationshipType')" class="xsmall red-color">Select relationship type</p>
+
+                        </div>    
+                        -->
+
+                    </div>
+
+                    <div class="auto-flex-end-gap10">
+
+                        <!-- continue button -->
+                        <button class="white-bg padding-10 gray-border web-font-primary-light xsmall" (click)="discardAddDependant()">Discard Changes</button>
+                        <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" type="submit">Add dependent</button>
+
+                    </div>
+
+                </form>
+               
+            </div>
+
+            <!-- dependent details and update-->
+            <div class="auto-flex-center-gap10 fixed dialog z-index" *ngIf="showDependantDetails" style="z-index: 1000;">
+
+                <div class="popup">
+        
+                    <div class="auto-flex-start-gap20-column relative white-bg overflow-auto max-height-500 border-radius-20 width-min-600 width-max-600 phone-min-width phone-max-height-70Percent">
+        
+                        <img class="xsmallImg absolute-top-right-10 cursor-pointer" src="assets/images/web/icons/delete.svg" (click)="confirmDeleteDependant()" />
+                        <!-- input fields -->
+                        <div class="auto-flex-center-space-between-gap20">
+        
+                            <div class="auto-flex-start-gap5-column">
+        
+                                <p class="med bold">{{ dependantData.first_name }} {{ dependantData.last_name }}</p>
+                                <p class="web-font-primary-light">PAT{{ dependantData.id }}</p>
+                                <p class="web-font-primary-light">{{ dependantData.phone_number }}</p>
+                                
+                            </div>
+        
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+        
+                                <p class="xsmall bold">First name</p>
+                                <input class="input-global" type="text" [(ngModel)]="dependantData.first_name" placeholder="Enter your first name" />
+                                <p *ngIf="updateDependantForm.get('first_name').hasError('invalidFName')" class="xsmall red-color">Enter valid first name</p>
+        
+                            </div>    
+        
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+        
+                                <p class="xsmall bold">Last name</p>
+                                <input class="input-global" type="text" [(ngModel)]="dependantData.last_name"  placeholder="Enter your last name" />
+        
+                            </div>    
+        
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+        
+                                <p class="xsmall bold">Date of birth</p>
+                                <input class="input-global" type="date" [(ngModel)]="dependantData.dob" placeholder="Enter your dob" />
+                    
+                            </div>    
+        
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+        
+                                <p class="xsmall bold">Gender</p>
+                                <select class="input-global" [(ngModel)]="dependantData.gender">
+                                    
+                                    <option disabled></option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+        
+                                </select>
+                                <p *ngIf="updateDependantForm.get('gender').hasError('invalidGender')" class="xsmall red-color">Select gender</p>
+        
+                            </div>    
+        
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+        
+                                <p class="xsmall bold">Nationality</p>
+                                <select class="input-global" [(ngModel)]="dependantData.nationality">
+                                    
+                                    <option disabled></option>
+                                    <option value="saudi">Saudi</option>
+                                    <option value="non_saudi">Non Saudi</option>
+        
+                                </select>
+                                <p *ngIf="updateDependantForm.get('nationality').hasError('invalidNationality')" class="xsmall red-color">Select nationality</p>
+        
+                            </div>    
+        
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+        
+                                <p class="xsmall bold">Id Type</p>
+                                <select class="input-global" [(ngModel)]="dependantData.id_type">
+        
+                                    <option disabled></option>
+                                    <option value="national_id">National ID</option>
+                                    <option value="iqama">Iqama</option>
+                                    <option value="passport">Passport</option>
+        
+                                </select>
+                                <p *ngIf="updateDependantForm.get('id_type').hasError('invalidIdType')" class="xsmall red-color">Select Id type</p>
+        
+                            </div>    
+        
+                            
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+        
+                                <p class="xsmall bold">Id Number</p>
+                                <input class="input-global" type="text" [(ngModel)]="dependantData.id_number" placeholder="Enter your Id number" />
+                                <p *ngIf="updateDependantForm.get('id_number').hasError('invalidIdNumber')" class="xsmall red-color">Enter valid Id number</p>
+        
+                            </div>    
+        
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+        
+                                <p class="xsmall bold">Marital Status</p>
+                                <select class="input-global" [(ngModel)]="dependantData.marital_status">
+        
+                                    <option value="single">Single</option>
+                                    <option value="married">Married</option>
+        
+                                </select>
+        
+                            </div>    
+
+                            
+                            <!--
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                                <p class="xsmall bold">Relationship Type</p>
+                                <select class="input-global" [(ngModel)]="dependantData.relationship_type">
+                                    
+                                    <option value="daughter">Daughter</option>
+                                    <option value="son">Son</option>
+                                    <option value="wife">Wife</option>
+                                    <option value="other">Other</option>
+        
+                                </select>
+                                <p *ngIf="updateDependantForm.get('relationship_type').hasError('invalidRelationshipType')" class="xsmall red-color">Select relationship type</p>
+
+                            </div>    
+                            -->
+                        
+                        </div>
+        
+                        <div class="auto-flex-end-gap10">
+        
+                            <!-- continue button -->
+                            <button class="white-bg padding-10 gray-border web-font-primary-light xsmall" (click)="discardUpdateDependant()">Close</button>
+                            <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" (click)="updateDependant()">Update dependent</button>
+        
+                        </div>
+        
+                    </div>
+        
                 </div>
-
-                <div class="auto-flex-center-space-between-gap20">
-
-                    <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-
-                        <p class="xsmall bold">Date of birth</p>
-                        <input class="input-global" type="date" placeholder="Enter your dob" />
-            
-                    </div>    
-
-                    <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-
-                        <p class="xsmall bold">Gender</p>
-                        <select class="input-global">
-
-                            <option value="1">Male</option>
-                            <option value="2">Female</option>
-
-                        </select>
-
-
-                    </div>    
-
-                </div>
-
-                <div class="auto-flex-end-gap10">
-
-                    <!-- continue button -->
-                    <button class="white-bg padding-10 gray-border web-font-primary-light xsmall">Discard Changes</button>
-                    <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto">Add depend</button>
-
-                </div>
-
+        
             </div>
 
         </div>
@@ -158,23 +372,25 @@
 
             <div class="auto-flex-start-center-gap20-no-wrap overflow-auto padding-bottom-20">
 
-                <div class="auto-flex-start-gap20-no-set-width gray-border border-radius-10 padding-10 relative width-300 max-width">
+                <div class="auto-flex-start-gap20-no-set-width gray-border border-radius-10 padding-10 relative width-300 max-width" *ngFor="let address of userLocations; let addressIndex = index">
 
                     <img class="xxxmedImg cover border-radius-10" src="assets/images/web/icons/map.svg" />
 
                     <div class="auto-flex-start-gap10-column-no-set-width">
 
-                        <p class="bold">City</p>
-                        <p class="xsmall web-font-primary-light">Country</p>
-                        <p class="web-font-primary-light">Address line</p>
+                        <p class="web-font-primary-light bold">{{ address.address_name }}</p>
+                        <p class="web-font-primary-light" *ngIf="address.city.length>0">{{ address.city }}</p>
+                        <p class="web-font-primary-light" *ngIf="address.country.length>0">{{ address.country }}</p>
+                        <p class="web-font-primary-light">{{ address.address_line1 }}</p>
+                        <p class="web-font-primary-light">{{ address.address_line2 }}</p>
 
                     </div>
 
-                    <img class="xsmallImg absolute-top-right-10" src="assets/images/web/icons/delete.svg" />
+                    <img class="xsmallImg absolute-top-right-10 cursor-pointer" src="assets/images/web/icons/delete.svg" (click)="removeAddress(addressIndex)" />
 
                 </div>
 
-                <div class="border-radius-100 gray-border padding-10 cursor-pointer">
+                <div class="border-radius-100 gray-border padding-10 cursor-pointer" (click)="addLocation()">
 
                     <img class="xsmallImg" src="assets/images/web/icons/plus.svg" />
 
@@ -182,59 +398,81 @@
 
             </div>
 
-            <div class="auto-flex-center-gap30-column white-bg overflow-auto max-height-500 border-radius-20 max-width relative padding-none border-none">
-
-                <div class="auto-flex-center-gap20-column box-shadow padding-none border-radius-10 gray-border">
-
-                    <input class="input-global absolute-top-10 z-index width-90Percent" type="text" placeholder="Search" />
-
-                    <agm-map class="max-width height-300 border-top-left-right-10 overflow-hidden" [streetViewControl]="false" [zoomControl]="false" [mapTypeControl]="false">
+            <div class="auto-flex-center-gap30-column" *ngIf="showLocationMap">
                 
-                        <agm-marker class="border-radius-10"></agm-marker>
-                    
-                    </agm-map>
+                
+                <div class="auto-flex-center-gap30-column white-bg overflow-auto max-height-500 border-radius-20 max-width relative padding-none border-none">
+                
+                    <input #search class="input-global z-index width-90Percent absolute-top-10" type="text" [(ngModel)]="searchLocation" placeholder="Search location" />
 
-                    <button class="primary-bg padding-10 border-none box-shadow absolute-bottom-10 width-300 z-index xsmall">Confirm</button>
+                    <div class="auto-flex-center-gap20-column box-shadow padding-none border-radius-10 gray-border">                
+
+                        <button *ngIf="placeSelected" class="primary-bg padding-10 border-none box-shadow absolute-bottom-10 width-300 z-index xsmall" (click)="onConfirmLocation()">Confirm</button>
+                
+                        <agm-map [latitude]="centerLat" [longitude]="centerLng" [zoom]="zoom" (mapClick)="onMapClick($event)" class="max-width height-300 border-top-left-right-10 overflow-hidden">
+                
+                            <agm-marker *ngIf="selectedLat && selectedLng" [latitude]="selectedLat"  [longitude]="selectedLng" [markerDraggable]="true" (dragEnd)="onMarkerDragEnd($event)" class=" border-radius-10"></agm-marker>
+                        
+                        </agm-map>
+
+                    </div>
                 
                 </div>
+                
+                <!-- add address -->
 
-            </div>
+                <form class="auto-flex-start-gap10" [formGroup]="addressForm" (ngSubmit)="createAddress()">
+                
+                    <div class="auto-flex-center-gap20-column">
+                
+                        <!-- address input fields -->
+                        <div class="auto-flex-center-space-between-gap20">
+        
+                            <div class="auto-flex-start-gap10-column web-font-primary-light">
+        
+                                <p class="xsmall bold">Address Name</p>
+                                <input class="input-global" type="text" formControlName="address_name" placeholder="Enter address name" />
+                                <p *ngIf="addressForm.get('address_name').hasError('invalidAddressName')" class="xsmall red-color">Enter address name</p>
     
-            <!-- add address -->
-            <div class="auto-flex-center-gap20-column">
-            
-                <!-- address input fields -->
-                <div class="auto-flex-center-space-between-gap20">
+                            </div>    
 
-                    <div class="auto-flex-start-gap10-column web-font-primary-light">
-
-                        <p class="xsmall bold">Address line 1</p>
-                        <input class="input-global" type="text" placeholder="Enter address" />
-            
-                    </div>    
-
-                    <div class="auto-flex-start-gap10-column web-font-primary-light">
-
-                        <p class="xsmall bold">Address line 2</p>
-                        <input class="input-global" type="text" placeholder="Enter address (optional)" />
-            
-                    </div>    
-
-                </div>
-
-                <div class="auto-flex-end-gap10">
-
-                    <!-- continue button -->
-                    <button class="white-bg padding-10 gray-border web-font-primary-light xsmall">Discard Changes</button>
-                    <button class="primary-bg padding-10 box-shadow width-200 xsmall phone-width-auto">Save changes</button>
-
-                </div>
-
+                            <div class="auto-flex-start-gap10-column web-font-primary-light">
+        
+                                <p class="xsmall bold">Address line 1</p>
+                                <input class="input-global" type="text" formControlName="address_line1" placeholder="Enter address" />
+                                <p *ngIf="addressForm.get('address_line1').hasError('invalidAddressLine1')" class="xsmall red-color">Enter address line</p>
+    
+                            </div>    
+        
+                            <div class="auto-flex-start-gap10-column web-font-primary-light">
+        
+                                <p class="xsmall bold">Address line 2</p>
+                                <input class="input-global" type="text" placeholder="Enter address (optional)" />
+                    
+                            </div>   
+                            
+                            <p *ngIf="addressForm.get('latitude').hasError('invalidLocation') || addressForm.get('longitude').hasError('invalidLocation')" class="xsmall red-color">Please select valid location</p>
+        
+                        </div>
+        
+                        <div class="auto-flex-end-gap10">
+        
+                            <!-- continue button -->
+                            <button class="white-bg padding-10 gray-border web-font-primary-light xsmall" (click)="discardAddress()">Discard Changes</button>
+                            <button class="primary-bg padding-10 box-shadow width-200 xsmall phone-width-auto" type="submit">Save changes</button>
+        
+                        </div>
+        
+                    </div>
+        
+                </form>
+                
             </div>
 
         </div>
 
-        <!--payment methods-->
+        <!--
+      
         <div class="auto-flex-start-gap20-column border-radius-20 gray-border padding-20">
 
             <p class="med bold">Payment methods</p>
@@ -279,10 +517,9 @@
                     
             </div>
 
-            <!-- add payment -->
+      
             <div class="auto-flex-center-gap20-column">
             
-                <!-- payment input fields -->
                 <div class="auto-flex-center-space-between-gap20">
 
                     <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
@@ -321,20 +558,20 @@
 
                 <div class="auto-flex-end-gap10">
 
-                    <!-- continue button -->
                     <button class="white-bg padding-10 gray-border web-font-primary-light xsmall">Discard Changes</button>
-                    <button class="primary-bg padding-10 box-shadow width-200 xsmall phone-width-auto">Add depend</button>
+                    <button class="primary-bg padding-10 box-shadow width-200 xsmall phone-width-auto">Add Payment Method</button>
 
                 </div>
 
             </div>
-
+       
         </div>
+    -->
 
     </div>
 
      <!-- appointments tab-->
-    <div class="auto-flex-start-gap10 padding-none border-radius-20 gray-border overflow-hidden">
+    <div class="auto-flex-start-gap10 padding-none border-radius-20 gray-border overflow-hidden" *ngIf="displayAppointmentInfo">
 
         <table class="custom-table web-font-primary-light">
 
@@ -348,10 +585,10 @@
 
             <tbody>
 
-                <tr>
-                    <td><p>1234455</p></td>
-                    <td><p class="table-content">1234455</p></td>
-                    <td><p>1234455</p></td>
+                <tr *ngFor="let appointment of userAppointments">
+                    <td><p>APP{{ appointment.appointmentId }}</p></td>
+                    <td><p class="table-content gap-10" *ngFor="let service of appointment.services">{{ service.serviceName }}</p></td>
+                    <td><p>{{ appointment.serviceDate | date:'yyyy-MM-dd' }} - {{ appointment.serviceTime }}</p></td>
                 </tr>
 
                 <tr>
@@ -372,5 +609,23 @@
 
 
     </div>
+
+    <!-- User already exists-->
+    <app-custom-alert *ngIf="showUserAlreadyExist" [title]="'User Already Exists'" [message]="'This user already exist in our system.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+
+    <!-- An Error occured while creating user. Try again later -->
+    <app-custom-alert *ngIf="showErrorCreatingDependant" [title]="'Error'" [message]="'An error occured while creating denpendant. Try again later.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+
+    <!-- An Error occured while updating user. Try again later -->
+    <app-custom-alert *ngIf="showErrorUpdatingDependant" [title]="'Error'" [message]="'An error occured while updating denpendant. Try again later.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+
+    <!-- An Error occured while updating user. Try again later -->
+    <app-custom-alert *ngIf="showDeleteDependant" [title]="'Remove Dependant'" [message]="'Are you sure you want to remove this user: ' + dependantData.first_name + ' ' + dependantData.last_name" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="cancelDeleteDependant()" (continueClick)="deleteDependant()" [showCancel]="true" [showConfirm]="true"></app-custom-alert>
+
+    <!-- An Error occured while deleting user. Try again later -->
+    <app-custom-alert *ngIf="showErrorDeletingDependant" [title]="'Error'" [message]="'An error occured while removing denpendant. Try again later.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    
+    <!-- An Error occured while updating user. Try again later -->
+    <app-custom-alert *ngIf="showErrorUpdatingAddress" [title]="'Error'" [message]="'An error occured while updating addresses. Try again later.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
 </div>

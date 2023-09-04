@@ -1,0 +1,84 @@
+<app-checkout-header></app-checkout-header>
+
+<div class="web auto-flex-start-gap40-column main-div padding-top-40">
+
+    <div class="auto-flex-start-gap20-column gray-border border-radius-20 padding-20">
+
+        <p class="med bold">Discount and facilitation</p>
+
+        <div class="auto-flex-start-gap5" *ngIf="!this.promoApplied">
+
+            <p class="xsmall bold web-font-primary-light">Coupon code</p>
+            <div class="auto-flex-start-gap10">
+        
+                
+                <input class="input-global width-max-500 max-width" type="text"  placeholder="coupon code" id="coupon_code"/>
+                <button class="primary-bg padding-10 width-max-150 max-width capitalize box-shadow" (click)="verifyDiscount()">verify</button>
+
+            </div>
+            <p class="light-red-bg padding-5 red-color fit-content" *ngIf="invalidPromoMessage">Invalid promo code</p>
+            
+        </div> 
+
+    </div>
+
+    <div class="auto-flex-start-gap10-column gray-border border-radius-20 padding-20">
+
+        <p class="med bold">Invoice</p>
+
+        <div class="auto-flex-center-space-between-gap20 padding-10" *ngFor="let cart of cartData; let cartIndex = index;">
+
+            <div class="auto-flex-start-gap10-column-no-set-width width-max-300 max-width">
+
+                <p class="bold">{{ cart.title }}</p>
+
+            </div>
+
+            <div class="auto-flex-start-gap10-column-no-set-width width-max-300 max-width">
+
+                <p class="bold">SAR {{ cart.price }}</p>
+
+            </div>
+
+            <div class="auto-flex-start-gap10-column-no-set-width width-max-300">
+                
+                <img class="xxsmallImg cursor-pointer" src="assets/images/web/icons/delete.svg" (click)="removeFromCart(cartIndex)" />
+
+            </div>
+            
+            <hr class="hr-black" />
+
+        </div>
+
+        <div class="auto-flex-start-gap20-column">
+
+            <p class="med bold">Payment summary</p>
+
+            <div class="auto-flex-start-gap20-column">
+    
+                <div class="auto-flex-center-space-between-gap20">
+                    
+                    <p class="web-font-primary-light">Subtotal</p>
+                    <p class="web-font-primary-light bold">SAR {{ total }}</p>
+    
+                </div>    
+    
+                <div class="auto-flex-center-space-between-gap20">
+                    
+                    <p class="web-font-primary-light">Total (tax incl.)</p>
+                    <p class="web-font-primary-light bold blue-color">SAR 6000</p>
+    
+                </div>    
+    
+            </div>    
+
+        </div>
+
+    </div>
+
+    <button class="primary-bg max-width padding-10" (click)="payAndBook()">Pay & book</button>
+
+         <!-- Cart error -->
+         <app-custom-alert *ngIf="errorOccured" [title]="'Error'" [message]="'An error occurred. Try agin later'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Confirm'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+
+</div>

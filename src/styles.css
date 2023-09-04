@@ -2391,12 +2391,18 @@ div.dt-buttons .dt-button {
     --buttons : #f7f8fa;
     --secondary-color: #ffffff;
     --blue-color: #1F62FB;
+    --light-blue-color: #D8E4FF;
     --yellow-color: #FFF7E7;
     --web-font: 'Nunito', sans-serif;
     --web-font-primary: #010101;
     --web-font-primary-light: #545563; 
     --web-font-primary-gray: #83859C;
 }
+
+a:hover{
+    text-decoration: none !important;
+}
+
 .bg-theme-light{ background-color: var(--light);}
 .btn-theme{
     background-color: var(--primary) !important;
@@ -2707,6 +2713,18 @@ div.dt-buttons .dt-button {
     width: 130px;
 }
 
+.width-150 {
+    width: 150px;
+}
+
+.width-160 {
+    width: 160px;
+}
+
+.width-180 {
+    width: 180px;
+}
+
 .width-200 {
     width: 200px;
 }
@@ -2916,10 +2934,17 @@ div.dt-buttons .dt-button {
     line-height: 21px;
 }
 
+.small-font {
+    font-size: 16px;
+    line-height: 21px;
+}
+
 .xsmall {
     font-size: 14px;
     line-height: 19px;
 }
+
+
 
 .font-size-10 {
     font-size: 10px;
@@ -2991,6 +3016,10 @@ div.dt-buttons .dt-button {
 .xxxlargeImg-350 {
     width: 350px;
     height: 350px;
+}
+.xxxlargeImg-500 {
+    width: 500px;
+    height: 200px;
 }
 
 .xxlargeImg-350 {
@@ -3114,6 +3143,10 @@ div.dt-buttons .dt-button {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
 }
+.border-bottom-left-bottom-right-0{
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
 
 .border-none {
     border: none;
@@ -3179,6 +3212,12 @@ div.dt-buttons .dt-button {
     box-sizing: border-box;
     border-radius: 10px;
 }
+.lightest-blue-bg{
+    background: var(--light-blue-color);
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
 
 .dark-green-bg{
     background: #205807;
@@ -3187,9 +3226,23 @@ div.dt-buttons .dt-button {
     border-radius: 10px;
     border: 1.5px solid #ffffff;
 }
+.light-green-bg{
+    background: #E8F9F1;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1.5px solid #ffffff;
+}
 
 .red-bg{
     background: #ef2b2b;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1.5px solid #ffffff;
+}
+.light-red-bg{
+    background: #FFEAEA;
     padding: 20px;
     box-sizing: border-box;
     border-radius: 10px;
@@ -3221,6 +3274,10 @@ div.dt-buttons .dt-button {
     border-radius: 10px;
 }
 
+
+.web-font-primary {
+    color: var(--web-font-primary);
+}
 /* Colors */
 
 .web-font-primary-light {
@@ -3234,10 +3291,20 @@ div.dt-buttons .dt-button {
 .blue-color{
     color: var(--blue-color);
 }
-
+.green-color{
+    color: #205807;
+}
+.red-color{
+    color: #ef2b2b;
+}
 /*Margins*/
 .margin-20 {
     margin: 20px;
+}
+
+
+.margin-bottom-0 {
+    margin-bottom: 0px;
 }
 
 .margin-bottom-10 {
@@ -3262,6 +3329,10 @@ div.dt-buttons .dt-button {
 
 .margin-top-20 {
     margin-top: 20px;
+}
+
+.margin-right-20 {
+    margin-right: 20px;
 }
 
 .margin-top-40 {
@@ -3327,6 +3398,10 @@ div.dt-buttons .dt-button {
 
 .padding-60 {
     padding: 60px;
+}
+
+.padding-bottom-0 {
+    padding-bottom: 0px;
 }
 
 .padding-bottom-10 {
@@ -3449,6 +3524,13 @@ div.dt-buttons .dt-button {
     right: 0;
 }
 
+.absolute-bottom-unset {
+    position: absolute;
+    bottom: 0;
+    left: unset;
+    right: unset;
+}
+
 .absolute-top-right {
     position: absolute;
     top: 10px;
@@ -3471,6 +3553,12 @@ div.dt-buttons .dt-button {
     position: absolute;
     top: 25px;
     right: 25px;
+}
+
+.absolute-top-right-30 {
+    position: absolute;
+    top: 30px;
+    right: 30px;
 }
 
 .absolute-top-left-0 {
@@ -4083,6 +4171,15 @@ div.dt-buttons .dt-button {
     gap: 10px;
 }
 
+.auto-flex-end-gap10-no-set-width {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
 .auto-flex-center-no-gap-no-set-width {
     display: flex;
     align-items: center;
@@ -4377,6 +4474,15 @@ div.dt-buttons .dt-button {
     align-content: space-between;
     gap: 20px;
 }
+.auto-flex-space-between-gap20-column-no-set-width {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: space-between;
+    gap: 20px;
+}
 
 .auto-flex-space-between-no-gap-no-wrap {
     display: flex;
@@ -4435,6 +4541,17 @@ div.dt-buttons .dt-button {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    align-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+}
+
+
+.auto-flex-start-space-between-gap20 {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
     align-content: space-between;
     flex-wrap: wrap;
     width: 100%;
@@ -4751,6 +4868,10 @@ div.dt-buttons .dt-button {
     border-radius: 20px;
 }
 
+.linear-gradient-blue{
+    background: linear-gradient(to right, #0B57F98F, #495C8500);
+}
+
 /*Div*/
 .main-div{
     max-width: 1200px;
@@ -4796,6 +4917,56 @@ margin: 0 auto;
     width: fit-content;
     border-radius: 10px;
 }
+
+.item-selected {
+    border: 1.5px solid var(--blue-color);
+}
+.self-stretch {
+    align-self: stretch;
+}
+
+.item-hover {
+    transition: all 0.3s ease;
+}
+
+.item-hover:hover {
+    border: 2px solid #4E60FF;
+    background-color: #F3F4FF;
+}
+
+.scroll-bar {
+
+    &::-webkit-scrollbar {
+     width: 5px;
+     height: 5px;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+     background-color: var(--secondary-color);
+     border-radius: 10px;
+  
+     &:hover {
+      background: rgba(222,100,89,10);
+     }
+    }
+  }
+
+  .scroll-bar-gray {
+
+    &::-webkit-scrollbar {
+     width: 100%;
+     height: 5px;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+     background-color: var(--blue-color);
+     border-radius: 10px;
+  
+     &:hover {
+      background: rgba(222,100,89,10);
+     }
+    }
+  }
 
 @media only screen and (min-width: 1099px) {
   
@@ -4886,6 +5057,9 @@ margin: 0 auto;
         width: 200px;
         height: 200px;
     }
+    .xxxlargeImg-500 {
+        width: 250px;
+    }
 
     .xxlargeImg-350 {
         width: 250px;
@@ -4901,6 +5075,9 @@ margin: 0 auto;
     .width-max-350 {
         width: 250px;
     }
+    .width-max-500 {
+        max-width: 250px;
+    }
 
     .min-height-100vh{
         min-height: auto;
@@ -4910,6 +5087,10 @@ margin: 0 auto;
     }
     .phone-height-180{
         height: 180px;
+    }
+    
+    .phone-max-height-70Percent {
+        max-height: 70%;
     }
     
     .phone-min-width {

@@ -435,4 +435,8 @@ export class AppConstants {
   public static get getGiftLogURL(): string {
     return `${environment.domainName}${environment.getGiftLogURL}`;
   }
+
+  public static get sendVerificationSMS(): string {
+    return `${environment.domainName}${environment.sendVerificationSMS}`;
+  }
 }

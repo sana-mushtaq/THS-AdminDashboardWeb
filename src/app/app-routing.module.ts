@@ -127,6 +127,9 @@ import { UserProfileComponent } from './user-dashboard/user-profile/user-profile
 import { ServiceDetailsComponent } from './website/services/service-details/service-details.component';
 import { CartComponent } from './website/checkout/cart/cart.component';
 import { AppointmentScheduleComponent } from './website/checkout/appointment-schedule/appointment-schedule.component';
+import { CheckoutAppointmentComponent } from './website/checkout/checkout-appointment/checkout-appointment.component';
+import { PaymentConfirmationComponent } from './website/checkout/payment-confirmation/payment-confirmation.component';
+import { BusinessToBusinessSchedulingComponent } from './business-to-business-scheduling/business-to-business-scheduling.component';
 
 const routes: Routes = [
  { path: '', component: HomeComponent},
@@ -244,17 +247,20 @@ const routes: Routes = [
 { path: 'branch/view-all', component: BranchViewComponent },
 { path: 'service/view-all', component: ServiceViewComponent },
 { path: 'category/view-all', component: CaretgoryViewComponent },
+{ path: 'b2b', component: BusinessToBusinessSchedulingComponent },
 
  /* LOGIN */ 
- { path:'login', component: LoginComponent },
- { path:'forget-password', component: ForgetPasswordComponent },
- { path:'register', component: RegisterComponent },
+ { path: 'login', component: LoginComponent },
+ { path: 'forget-password', component: ForgetPasswordComponent },
+ { path: 'register', component: RegisterComponent },
  { path: 'medical-services', component: AllServicesComponent },
- { path: 'medical-category', component: AllCategoriesComponent },
+ { path: 'medical-category/:categoryUrl', component: AllCategoriesComponent },
  { path: 'user/profile', component: UserProfileComponent },
- { path: 'medical-services/service-detail', component: ServiceDetailsComponent },
+ { path: 'medical-services/:serviceId', component: ServiceDetailsComponent },
  { path: 'checkout/cart', component: CartComponent },
- { path: 'checkout/schedule', component: AppointmentScheduleComponent }
+ { path: 'checkout/schedule', component: AppointmentScheduleComponent },
+ { path: 'checkout/confirmation', component: CheckoutAppointmentComponent },
+ { path: 'checkout/payment-confirmation', component: PaymentConfirmationComponent }
 
 ];
 

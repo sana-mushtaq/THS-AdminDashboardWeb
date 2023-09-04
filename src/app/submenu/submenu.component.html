@@ -48,6 +48,12 @@
             <li><a routerLink="../schedule-setting" class="red-text"><i class="icon-schedule-setting"></i> Schedule Settings</a></li>
             <li><a routerLink="../patient-source" class="red-text"><i class="icon-settings"></i> Patient Source</a></li>
             <li><a routerLink="../insurance-list" [routerLinkActive]="['active']" class="router-link-exact-active blue-text"><i class="icon-group-setting"></i> Insurance Providers</a></li>
+    
+           <!-- THS-23,25, 26 BY SANA -->
+           <li><a routerLink="/branch/view-all" class="blue-text"><i class="icon-home"></i>Branch Management</a></li>
+           <li><a routerLink="/service/view-all" class="blue-text"><i class="icon-package"></i>Service Management</a></li>
+           <li><a routerLink="/category/view-all" class="blue-text"><i class="icon-package"></i>Category Management</a></li>
+
       </ul>
       <!-- INSURANCE -->
       <ul class="onlyissurance dclass">
@@ -63,6 +69,8 @@
             <li><a routerLink="/escort-requests" [routerLinkActive]="['active']" class="router-link-exact-active blue-text appoint-escort"><i class="el-tooltip item icon-files" aria-describedby="el-tooltip-3636" tabindex="0"></i>  Escort Requests</a></li>
             <li><a routerLink="/third-party-requests" [routerLinkActive]="['active']" class="router-link-exact-active blue-text appoint-escort"><i class="el-tooltip item icon-files" aria-describedby="el-tooltip-3636" tabindex="0"></i>  Third Party Requests</a></li>
             <li><a routerLink="/appointments/add" [routerLinkActive]="['active']" class="router-link-exact-active blue-text appoint-escort"><i class="el-tooltip item icon-plus" aria-describedby="el-tooltip-3636" tabindex="0"></i>  New Appointment</a></li>
+            <li><a routerLink="/b2b" [routerLinkActive]="['active']" class="router-link-exact-active blue-text appoint-escort"><i class="icon-group-setting" aria-describedby="el-tooltip-3636" tabindex="0"></i> B2B </a></li>
+
             <!-- <li><a routerLink="../insurance-appointments" [routerLinkActive]="['active']" class="router-link-exact-active blue-text appoint-insurance"><i class="icon-calendar"></i> Children and Escort Requests</a></li> -->
       </ul>
 </nav>
