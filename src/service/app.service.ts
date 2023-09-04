@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient, HttpParams } from "@angular/common/http";
 import { AppConstants } from "../utils/app-constants";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
@@ -588,6 +589,12 @@ export class AppService {
 
     return this._httpClient.post<any>(AppConstants.sendVerificationSMS, body);
   
+  }
+
+  sendWhatsappNotification( body : any ) {
+
+    return this._httpClient.post<any>( environment.domainName+'whatsapp/send-notification', body)
+
   }
 
 }

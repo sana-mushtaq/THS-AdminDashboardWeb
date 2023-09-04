@@ -534,7 +534,7 @@
           <h2>Send Notification</h2>
        </div>
        <div class="modal-body">
-        <form class="el-form newform el-form--label-top" id="departmentForm" >
+        <form class="el-form newform el-form--label-top" id="departmentForm" [formGroup]="notificationForm">
 
             
 
@@ -662,6 +662,7 @@
                                         <ng-multiselect-dropdown
                                             [settings]="dropdownSettings"
                                             [data]="dropdownList"
+                                            formControlName="patients"
                                         >
                                         </ng-multiselect-dropdown>
                                     <div
@@ -739,7 +740,7 @@
 
             </div>
         </form>
-        <form class="el-form newform el-form--label-top" id="departmentForm" >
+        <form class="el-form newform el-form--label-top" id="departmentForm" [formGroup]="notificationForm" (ngSubmit)="onSendNotification()">
 
             
             <div class="el-row" style="margin-left: -15px; margin-right: -15px;margin-top:1%">
@@ -751,12 +752,18 @@
                             <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
                                 placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
  
-                            <input type="text" class="el-input__inner"  placeholder="Enter Campaign Title" />
- 
-                            <div
-                                class="invalid-feedback">
-                                <span>This value is required.</span>
-                            </div>
+                            <input formControlName="title" type="text" class="el-input__inner"  placeholder="Enter Campaign Title" />
+
+                            <!-- Description Validation -->
+                            <ng-container *ngIf="notificationForm.get('title')?.errors && ( notificationForm.get('title')?.touched || notificationForm.get('title')?.dirty )">
+                                
+                                <!-- Required Validation -->
+                                <div class="invalid-feedback" [ngClass]="notificationForm.get('title')?.hasError('required') ? 'd-block' : ''">
+                                    <span>This value is required.</span>
+                                </div>
+
+                            </ng-container>
+
                             </div>
                         </div>
                     </div>
@@ -770,12 +777,14 @@
                             <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
                                 placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
  
-                            <input type="text" class="el-input__inner"  placeholder="Enter Campaign Title in Arabic" />
+                            <input formControlName="title_ar" type="text" class="el-input__inner"  placeholder="Enter Campaign Title in Arabic" />
  
-                            <div
-                                class="invalid-feedback">
-                                <span>This value is required.</span>
-                            </div>
+                            <ng-container *ngIf="notificationForm.get('title_ar')?.errors && ( notificationForm.get('title_ar')?.touched || notificationForm.get('title_ar')?.dirty )">
+                                <div class="invalid-feedback" [ngClass]="notificationForm.get('title_ar')?.hasError('required') ? 'd-block' : ''">
+                                    <span>This value is required.</span>
+                                </div>
+                            </ng-container>
+
                             </div>
                         </div>
                     </div>
@@ -791,13 +800,18 @@
                              <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
                                  placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
  
-                             <input type="text" class="el-input__inner" 
-                                 placeholder="Enter Notification Title" />
+                                <input type="text" class="el-input__inner" placeholder="Enter Notification Title" formControlName="title" />
  
-                             <div
-                                 class="invalid-feedback">
-                                 <span>This value is required.</span>
-                             </div>
+                                <!-- Description Validation -->
+                                <ng-container *ngIf="notificationForm.get('title')?.errors && ( notificationForm.get('title')?.touched || notificationForm.get('title')?.dirty )">
+                                    
+                                    <!-- Required Validation -->
+                                    <div class="invalid-feedback" [ngClass]="notificationForm.get('title')?.hasError('required') ? 'd-block' : ''">
+                                        <span>This value is required.</span>
+                                    </div>
+
+                                </ng-container>
+                            
                              </div>
                          </div>
                      </div>
@@ -811,13 +825,18 @@
                              <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
                                  placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
  
-                             <input type="text" class="el-input__inner" 
-                                 placeholder="Enter Notification Title in Arabic" />
- 
-                             <div
-                                 class="invalid-feedback">
-                                 <span>This value is required.</span>
-                             </div>
+                                <input type="text" class="el-input__inner" placeholder="Enter Notification Title in Arabic" formControlName="title_ar" />
+
+                                <!-- Description Validation -->
+                                <ng-container *ngIf="notificationForm.get('title_ar')?.errors && ( notificationForm.get('title_ar')?.touched || notificationForm.get('title_ar')?.dirty )">
+                                    
+                                    <!-- Required Validation -->
+                                    <div class="invalid-feedback" [ngClass]="notificationForm.get('title_ar')?.hasError('required') ? 'd-block' : ''">
+                                        <span>This value is required.</span>
+                                    </div>
+
+                                </ng-container>
+
                              </div>
                          </div>
                      </div>
@@ -833,7 +852,7 @@
                             <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
                                 placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
 
-                            <input type="text" class="el-input__inner" 
+                            <input type="text" class="el-input__inner"
                                 placeholder="Enter Notification Title" />
 
                             <div
@@ -881,13 +900,18 @@
                              <!-- <input id="departmentNameArabic" type="text" autocomplete="off"
                                  placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
  
-                             <textarea class="el-input__inner" 
-                                 placeholder="Enter Notification Content" rows="5" style="height: auto;"></textarea>
- 
-                             <div
-                                 class="invalid-feedback">
-                                 <span>This value is required.</span>
-                             </div>
+                                <textarea class="el-input__inner" placeholder="Enter Notification Content" rows="5" style="height: auto;" formControlName="description"></textarea>
+                                
+                                <!-- Description Validation -->
+                                <ng-container *ngIf="notificationForm.get('description')?.errors && ( notificationForm.get('description')?.touched || notificationForm.get('description')?.dirty )">
+                                    
+                                    <!-- Required Validation -->
+                                    <div class="invalid-feedback" [ngClass]="notificationForm.get('description')?.hasError('required') ? 'd-block' : ''">
+                                        <span>This value is required.</span>
+                                    </div>
+
+                                </ng-container>
+
                              </div>
                          </div>
                      </div>
@@ -902,13 +926,18 @@
                                  placeholder="Enter Package Name in Arabic" class="el-input__inner"> -->
  
 
-                            <textarea class="el-input__inner" 
-                                placeholder="Enter Notification Content in Arabic" rows="5" style="height: auto;"></textarea>
- 
-                             <div
-                                 class="invalid-feedback">
-                                 <span>This value is required.</span>
-                             </div>
+                                <textarea class="el-input__inner" placeholder="Enter Notification Content in Arabic" rows="5" style="height: auto;" formControlName="description_ar"></textarea>
+                                
+                                <!-- Description Validation -->
+                                <ng-container *ngIf="notificationForm.get('description_ar')?.errors && ( notificationForm.get('description_ar')?.touched || notificationForm.get('description_ar')?.dirty )">
+                                    
+                                    <!-- Required Validation -->
+                                    <div class="invalid-feedback" [ngClass]="notificationForm.get('description_ar')?.hasError('required') ? 'd-block' : ''">
+                                        <span>This value is required.</span>
+                                    </div>
+
+                                </ng-container>
+
                              </div>
                          </div>
                      </div>
