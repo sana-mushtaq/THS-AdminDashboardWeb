@@ -26,6 +26,12 @@ export class BusinessToCustomerSchedulingService {
     return this._httpClient.post<any>( this.b2cUrl+'/serviceProviderEligibility', body)
 
   }
+
+  getServiceProviderService(body) {
+
+    return this._httpClient.post<any>( this.b2cUrl+'/getServiceProviderService', body)
+
+  }
     
   verifyTotal(body) {
 
@@ -68,6 +74,12 @@ export class BusinessToCustomerSchedulingService {
   createB2B(body) {
 
     return this._httpClient.post<any>(this.b2cUrl+'/createB2B', body)
+
+  }
+
+  getB2B(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/getB2B', body)
 
   }
 

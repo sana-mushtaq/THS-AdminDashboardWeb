@@ -18,6 +18,7 @@ export class CheckoutAppointmentComponent implements OnInit {
   cartData: any = []
   userId: any
   total: number = 0
+  total_inc_cost: number = 0
   userDependants: any = []
   userData: any
   discountType: number = -1
@@ -84,6 +85,8 @@ export class CheckoutAppointmentComponent implements OnInit {
 
               })
 
+              this.getTotal()
+
               
             } else {
     
@@ -146,21 +149,11 @@ export class CheckoutAppointmentComponent implements OnInit {
               }
 
             })
-
-            let spData  = {
-
-              services: filteredServices,
-              patients: this.userDependants
-
-            }
-
           }
     
         })
 
     }
-
-    this.getTotal()
 
   }
 
@@ -179,7 +172,20 @@ export class CheckoutAppointmentComponent implements OnInit {
         return a+b
   
       })
+
+      if(!this.userData.id_number.startsWith("1")) {
+
+        const taxRate = 0.15;
+        const taxAmount = this.total * taxRate;
   
+        this.total_inc_cost =  Math.round(this.total + taxAmount);
+  
+      } else {
+
+        this.total_inc_cost =  Math.round(this.total);
+
+      }
+
     } else {
 
       this.total = 0

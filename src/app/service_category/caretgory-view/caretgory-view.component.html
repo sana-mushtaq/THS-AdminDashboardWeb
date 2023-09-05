@@ -78,7 +78,7 @@
                                     </td>
     
                                     <td>
-                                        <img class="smallImg" [src]="category.icon" *ngIf="category.icon && category.icon.length>0">
+                                        <img class="smallImg" src="{{serverUrl}}{{category.icon}}" *ngIf="category.icon && category.icon.length>0">
                                     </td>
     
                                     <td>
@@ -123,22 +123,25 @@
                                         <div class="auto-flex-center-gap20">
                                             
                                             <div class="auto-flex-center-start-gap20">
-                                            
-                                                <input type="file" accept="image/*" name="uploadfile" id="category_icon" style="display:none;"/>
+                                                
+                                                <img class="medImg" src="{{serverUrl}}{{addCategoryForm.get('icon').value}}">
+                                                <input type="file" accept="image/*" name="uploadfile" id="category_icon" (change)="updateImage($event, 'icon', 'add')" style="display:none;"/>
                                                 <label class="glass-bg padding-10 cursor-pointer" for="category_icon">Upload Icon</label>
 
                                             </div>
 
                                             <div class="auto-flex-center-start-gap20">
                                             
-                                                <input type="file" accept="image/*" name="uploadfile" id="category_image" style="display:none;"/>
+                                                <img class="medImg" src="{{serverUrl}}{{addCategoryForm.get('image').value}}">
+                                                <input type="file" accept="image/*" name="uploadfile" id="category_image" (change)="updateImage($event, 'image', 'add')" style="display:none;"/>
                                                 <label class="glass-bg padding-10 cursor-pointer" for="category_image">Upload Image</label>
 
                                             </div>
 
                                             <div class="auto-flex-center-start-gap20">
                                             
-                                                <input type="file" accept="image/*" name="uploadfile" id="category_banner" style="display:none;"/>
+                                                <img class="medImg" src="{{serverUrl}}{{addCategoryForm.get('banner').value}}">
+                                                <input type="file" accept="image/*" name="uploadfile" id="category_banner" (change)="updateImage($event, 'banner', 'add')" style="display:none;"/>
                                                 <label class="glass-bg padding-10 cursor-pointer" for="category_banner">Upload Banner</label>
 
                                             </div>
@@ -190,6 +193,30 @@
                                     <!-- edit content -->
                                     <div class="auto-flex-center-gap20">
                                         
+                                        <div class="auto-flex-center-start-gap20">
+                                                
+                                            <img class="medImg" src="{{serverUrl}}{{selectedCategory.icon}}">
+                                            <input type="file" accept="image/*" name="uploadfile" id="category_icon" (change)="updateImage($event, 'icon', 'edit')" style="display:none;"/>
+                                            <label class="glass-bg padding-10 cursor-pointer" for="category_icon">Upload Icon</label>
+
+                                        </div>
+                                        
+                                        <div class="auto-flex-center-start-gap20">
+                                                
+                                            <img class="medImg" src="{{serverUrl}}{{selectedCategory.image}}">
+                                            <input type="file" accept="image/*" name="uploadfile" id="category_icon" (change)="updateImage($event, 'icon', 'edit')" style="display:none;"/>
+                                            <label class="glass-bg padding-10 cursor-pointer" for="category_icon">Upload image</label>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+                                                
+                                            <img class="medImg" src="{{serverUrl}}{{selectedCategory.banner}}">
+                                            <input type="file" accept="image/*" name="uploadfile" id="category_icon" (change)="updateImage($event, 'icon', 'edit')" style="display:none;"/>
+                                            <label class="glass-bg padding-10 cursor-pointer" for="category_icon">Upload banner</label>
+
+                                        </div>
+
                                         <div class="auto-flex-center-start-gap20">
 
                                             <div class="auto-flex-start-gap5-column-no-set-width width-half">

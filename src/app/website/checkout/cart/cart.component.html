@@ -64,7 +64,7 @@
             <div class="auto-flex-center-space-between-gap20">
                 
                 <p class="web-font-primary-light">Total (tax incl.)</p>
-                <p class="web-font-primary-light bold blue-color">SAR 6000</p>
+                <p class="web-font-primary-light bold blue-color">SAR {{ total_inc_cost }}</p>
 
             </div>    
 
@@ -74,11 +74,13 @@
 
     </div>
 
-     <!-- Cart error -->
-     <app-custom-alert *ngIf="loginAlert" [title]="'User not logged in'" [message]="'Please log in to continue'" [cancelButtonText]="'Cancel'" [continueButtonText]="'login'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <!-- Cart error -->
+    <app-custom-alert *ngIf="loginAlert" [title]="'User not logged in'" [message]="'Please log in to continue'" [cancelButtonText]="'Cancel'" [continueButtonText]="'login'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
-      <!-- Cart error -->
-      <app-custom-alert *ngIf="wrongService" [title]="'Service selection error'" [message]="'You have selected a service that is not provided by a service provider relative to your gender. Please choose a dependent or remove the service.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Confirm'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClickService()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <!-- Cart error -->
+    <app-custom-alert *ngIf="wrongService" [title]="'Service selection error'" [message]="'You have selected a service that is not provided by a service provider relative to your gender. Please choose a dependent or remove the service.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Confirm'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClickService()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
 
 </div>
+
+<app-checkout-footer></app-checkout-footer>

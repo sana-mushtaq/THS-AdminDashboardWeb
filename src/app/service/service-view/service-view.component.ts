@@ -6,6 +6,8 @@ import Swal from 'sweetalert2'
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { Service } from 'src/model/dashboard/service.model'
 import { ServiceService } from 'src/service/service.service'
+import { AppService } from 'src/service/app.service'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-service-view',
@@ -14,6 +16,8 @@ import { ServiceService } from 'src/service/service.service'
 })
 
 export class ServiceViewComponent implements OnInit {
+
+  public serverUrl : string = environment.domainName
 
   //create a variable categoryList of type array
   categoryList: Servicecategory [] = []
@@ -50,7 +54,8 @@ export class ServiceViewComponent implements OnInit {
     active: false,
     whatsapp_url: '',
     category_title: '',
-    coupon_code: ''
+    coupon_code: '',
+    top: false
 
   }
   
@@ -72,7 +77,8 @@ export class ServiceViewComponent implements OnInit {
   constructor(
     private _serviceCategory: ServicecategoryService,
     private _service: ServiceService,
-    private fb : FormBuilder
+    private fb : FormBuilder,
+    private _appService: AppService,
   ) { 
 
     this.getCategoryList()
@@ -82,8 +88,8 @@ export class ServiceViewComponent implements OnInit {
     this.addServiceForm = this.editServiceForm = this.fb.group({
      
       'category_id' : [-1, [ Validators.required]],
-      'service_type': ['', [ Validators.required]],
-      'url': ['', [ Validators.required]],
+      'service_type': [''],
+      'url': [''],
       'title': ['', [ Validators.required]],
       'title_arabic': [''],
       'description': [''],
@@ -99,14 +105,19 @@ export class ServiceViewComponent implements OnInit {
       'banner': [''],
       'price': [0, [ Validators.required]],
       'cost': [0],
-      'active': [false, [ Validators.required]],
-      'whatsapp_url': ['']
+      'active': [false],
+      'whatsapp_url': [''],
+      'top': [0]
 
     })
 
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    $('#nav_settings').addClass('active');
+    $('.onlysetting').removeClass('dclass');
+    $('.onlyadmin').removeClass('dclass');
+  }
 
   //the following function will fetch category list
   getCategoryList() {
@@ -174,7 +185,8 @@ export class ServiceViewComponent implements OnInit {
       active: false,
       whatsapp_url: '',
       category_title: '',
-      coupon_code: ''
+      coupon_code: '',
+      top: false
     
     }
 
@@ -195,7 +207,9 @@ export class ServiceViewComponent implements OnInit {
     
             this.serviceList = res.data
             console.log(this.serviceList.length)
-            this.displayedServiceList = this.serviceList.splice(0, 25)
+
+            this.displayedServiceList = this.serviceList
+         //   this.displayedServiceList = this.serviceList.splice(0, 25)
 
             this.totalItems = this.serviceList.length
             this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage)
@@ -224,6 +238,7 @@ export class ServiceViewComponent implements OnInit {
     this.addNewServiceToggle = true
 
   }
+
   //the following function will close add new service pop up
   closeAddService() {
 
@@ -246,9 +261,15 @@ export class ServiceViewComponent implements OnInit {
             //in case of success the api returns 0 as a status code
             if( res.status === APIResponse.Success ) {
 
+              let category_id = this.addServiceForm.get('category_id').value
+
+              let categoryName = this.categoryList.filter(el => { return Number(el.id) === Number(category_id) })
+              res.data['category_title'] = categoryName[0].title
+
               //when the service is created the system should return an id of the newly created category
-              this.serviceList.push(res.data)
-              this.displayedServiceList.push(res.data)
+              this.serviceList.unshift(res.data);
+              this.displayedServiceList.unshift(res.data);
+
               this.addNewServiceToggle = false
               
               //reset form
@@ -539,4 +560,87 @@ export class ServiceViewComponent implements OnInit {
 
   }
   
+  updateImage( event, type, operation) {
+
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+
+      const selectedFile = inputElement.files[0];
+      // Now, you can call your image upload function with selectedFile.
+      this.uploadImage(selectedFile, type, operation);
+
+    }
+  
+  }
+
+  //the following function will upload an image to the server
+  uploadImage(selectedFile, type, operation) {
+
+      this._appService.fileUploadImage( selectedFile ).subscribe( ( response: any ) => {
+
+        if (response.status == APIResponse.Success) {
+          
+          let result = response.message
+
+          if(operation === 'add') {
+
+            if(type === 'icon') {
+
+              this.addServiceForm.get('icon').patchValue(result)
+
+            }
+
+            if(type === 'image') {
+
+              this.addServiceForm.get('cover_image').patchValue(result)
+
+            }
+
+            if(type === 'banner') {
+
+              this.addServiceForm.get('banner').patchValue(result)
+
+            }
+
+
+          }
+          
+          if(operation === 'edit') {
+
+            if(type === 'icon') {
+
+              this.selectedService.icon = result
+
+            }
+
+            if(type === 'image') {
+
+              this.selectedService.cover_image = result
+
+            }
+
+            if(type === 'banner') {
+
+              this.selectedService.banner = result
+              
+            }
+
+          }
+        
+        } 
+      
+      })
+
+  }
+
+  // Assuming you have a method to update the filtered list based on searchText
+  updateDisplayedServiceList() {
+
+    this.displayedServiceList = this.serviceList.filter(service =>
+    
+      service.name.toLowerCase().includes(this.searchText.toLowerCase())
+    
+    );
+  }
+
 }

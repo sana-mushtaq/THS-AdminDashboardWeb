@@ -28,6 +28,8 @@ export class AppService {
     return this._httpClient.post<any>(AppConstants.getProviderAppointmentListURL, reqParams);
   }
 
+
+
   getPractiseUserForSector(userRoleId: string) {
     let reqParams = {
       userRoleId: userRoleId,

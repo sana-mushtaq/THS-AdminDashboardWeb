@@ -26,6 +26,20 @@ export class ServiceproviderService {
 
     }
 
+    //the following function will create a service provider in the backed based on the parameters receieved
+    updateServiceProvider(body) {
+
+      return this._httpClient.post<any>( this.serviceProviderUrl+'/updateServiceProvider', body )
+
+    }
+
+            //the following function will create a service provider in the backed based on the parameters receieved
+    deleteServiceProvider(body) {
+
+      return this._httpClient.post<any>( this.serviceProviderUrl+'/deleteServiceProvider', body )
+
+    }
+
     //the following function will assign branch to service provider
     assignBranch(body) {
 

@@ -59,9 +59,6 @@ export class BranchViewComponent implements OnInit {
   //branch action toggles
   editBranchInformationToggle: Boolean = false
   addNewBranchToggle: Boolean = false
-  assignServiceProviderToggle: Boolean = false
-  addNewServiceProviderToggle: Boolean = false
-  serviceProviderServiceToggle: Boolean = false
   
   //this will be used for the currently selected branch on frontend
   selectedBranch: Branch = {
@@ -115,7 +112,6 @@ export class BranchViewComponent implements OnInit {
   // forms
   public addBranchForm : FormGroup
   public editBranchForm : FormGroup
-  public addServiceProviderForm : FormGroup
   
   constructor( 
     private _branchService: BranchService,
@@ -148,53 +144,10 @@ export class BranchViewComponent implements OnInit {
       description_arabic: [''],
       image: ['' || null],
       radius: [0, [ Validators.required ]],
-      active: [0, [ Validators.required ]],
+      active: [0],
       additional_cost_radius: [0],
 
     })
-
-    
-    this.addServiceProviderForm = this.fb.group({
-
-      'first_name': ['', [ Validators.required, Validators.minLength(4) ]],
-      'last_name': [''],
-      'phone_number':['', [ Validators.required, Validators.minLength(9) ]], 
-      'email': ['', [ Validators.required, Validators.email ]],
-      'gender': [2, [ Validators.required]],
-      'nationality': ['', [ Validators.required]],
-      'password': ['', [ Validators.required]],
-      'medical_license': [''],
-      'medical_license_expiry_date': [''],
-      'branch_id' : ['', [ Validators.required]],
-
-    })
-
-    /* TO BE REPLACED LATER
-    this.addServiceProviderForm = this.fb.group({
-
-      'first_name': ['', [ Validators.required, Validators.minLength(4) ]],
-      'last_name': [''],
-      'dob': [''],
-      'phone_number':['', [ Validators.required, Validators.minLength(9) ]], 
-      'email': ['', [ Validators.required, Validators.email ]],
-      'gender': [2, [ Validators.required]],
-      'nationality': ['', [ Validators.required]],
-      'marital_status': [''],
-      'address': ['', [ Validators.required, Validators.minLength(4) ]],
-      'profile_image': [''],
-      'id_type': ['', [ Validators.required]],
-      'id_number': ['', [ Validators.required]],
-      'password': ['', [ Validators.required]],
-      'type': ['', [ Validators.required]],
-      'start_time': ['', [ Validators.required]],
-      'end_time': ['', [ Validators.required]],
-      'location': [''],
-      'medical_license': [''],
-      'medical_license_expiry_date': [''],
-      'branch_id' : ['', [ Validators.required]],
-
-    })*/
-
 
     //this will be used for dropdown settings
     this.spSettings = {
@@ -276,10 +229,14 @@ export class BranchViewComponent implements OnInit {
 
   ngOnInit(): void {
 
+    $('#nav_settings').addClass('active');
+    $('.onlysetting').removeClass('dclass');
+    $('.onlyadmin').removeClass('dclass');
+    
     // Use the Google Maps Geocoding API to convert the searchLocation to coordinates
     this.mapsAPILoader.load().then(() => {})
 
-   }
+  }
 
   //the followng function will be used to assign branch data based on selected opertion
   assignBranchData( currentBranch, index ) {
@@ -330,15 +287,6 @@ export class BranchViewComponent implements OnInit {
 
   }
 
-  //this will open add a nwe service provider pop up
-  addServiceProvider() {
-
-    this.unassignBranchData()
-    this.assignServiceProviderToggle = false
-    this.addNewServiceProviderToggle = true
-
-  }
-
   //this will trigger edit branch popup and assign current branch informtaion to selectedBranch
   editBranch( currentBranch, index ) {
     
@@ -357,7 +305,6 @@ export class BranchViewComponent implements OnInit {
   assignServiceProvider( currentBranch, index ) {
 
     this.assignBranchData( currentBranch, index )
-    this.assignServiceProviderToggle = true
 
     this.getServiceProviders()
 
@@ -503,20 +450,6 @@ export class BranchViewComponent implements OnInit {
 
   }
 
-  //this will close service provider popup
-  closeAssignServiceProvider() {
-
-    this.unassignBranchData()
-    this.assignServiceProviderToggle = false
-
-  }
-
-  closeAddNewServiceProvider() {
-
-    this.addNewServiceProviderToggle = false
-
-  }
-
   //this will call activate branch and set the branch.active to false
   activateBranch( currentBranch, index ) {
 
@@ -652,10 +585,6 @@ export class BranchViewComponent implements OnInit {
     //now owe will check if out form is valid or not
     if (this.editBranchForm.valid) {
 
-      //first we will call upload image function then initialize the result bac
-      await this.uploadImage()
-
-
       let editForm = this.editBranchForm.value
       let branch_id = this.selectedBranch.id
 
@@ -708,6 +637,7 @@ export class BranchViewComponent implements OnInit {
   //this function will create a new branch
   createBranch() {
 
+    console.log(this.addBranchForm.value)
     //now owe will check if out form is valid or not
     if (this.addBranchForm.valid) {
 
@@ -751,74 +681,7 @@ export class BranchViewComponent implements OnInit {
     }
   
   }
-
-  //this function will create a new service provider
-  createServiceProvider() {
-
-    //now owe will check if out form is valid or not
-    if (this.addServiceProviderForm.valid) {
-
-      //we will submit the data if it is valid
-      this._serviceProvider.createServiceProvider(this.addServiceProviderForm.value).subscribe({
   
-        next : ( res : any ) => {
-  
-          //in case of success the api returns 0 as a status code
-          if( res.status === APIResponse.Success ) {
-
-            //when the service provider is created the system should return an id of the newly created service provider
-            this.serviceProviderList.push(res.data)
-            this.addNewServiceProviderToggle = false
-
-            //reset form
-            this.addServiceProviderForm.reset()
-          
-            Swal.fire(res.message)
-
-          } else {
-  
-            //if it is unable to add service provider data it will return an error
-            Swal.fire(res.message)
-  
-          }
-          
-        },
-        error: ( err: any ) => {
-  
-          console.log(err)
-  
-        }
-    
-      })
-    
-    } else {
-      
-      Swal.fire("Please check your data before submiting")
-    
-    }
-  
-  }
-
-  updateImage( event ) {
-
-    this.selectedFile = event.files.item(0)
-  
-  }
-  //the following function will upload an image to the server
-  uploadImage() {
-
-    this._appService.fileUploadImage( this.selectedFile ).subscribe( ( response: any ) => {
-
-      if (response.status == APIResponse.Success) {
-        
-        this.selectedBranch.image = response.message
-        return
-      }
-    
-    })
-
-  }
-
   //the following function will be executed when service provider will be selected
   onSPSelect(item: any) {
 
@@ -872,15 +735,15 @@ export class BranchViewComponent implements OnInit {
           this.selectedSPs = []
           this.spList = []
           this.serviceProviderListAssigned = []
-          this.assignServiceProviderToggle = false
+        //  this.assignServiceProviderToggle = false
 
         } else {
 
           this.selectedSPs = []
           this.spList = []
           this.serviceProviderListAssigned = []
-          this.assignServiceProviderToggle = false
-
+       //  this.assignServiceProviderToggle = false
+ 
           //if it is unable to get branch data it will return an error
           Swal.fire(res.message)
 
@@ -917,209 +780,6 @@ export class BranchViewComponent implements OnInit {
           this.serviceProviderListAssigned = this.serviceProviderListAssigned.filter( sp => {
 
             return sp.id !== id
-
-          })
-
-          //after assiging branch to a service provider we will reset the data
-          Swal.fire(res.message)
-
-        } else {
-
-          
-          //if it is unable to get branch data it will return an error
-          Swal.fire(res.message)
-
-        }
-        
-      },
-      error: ( err: any ) => {
-
-        console.log(err)
-
-      }
-    
-    })
-
-  }
-
-  //this will trigger a pop up for service provider to assign services
-  serviceProviderServices(spData) {
-    
-    this.serviceProviderServiceToggle = true
-    this.selectedServiceProvider = spData
-    this.serviceListRenderer = true
-    this.getAssignedServices(spData.id)
-
-  }
-
-  closeServiceProviderServices() {
-
-    this.serviceProviderServiceToggle = false
-
-    //reinitialze service provider object
-    this.selectedServiceProvider = {
-
-      id: -1,
-      first_name: '',
-      last_name: '',
-      email: '',
-      phone_number: '',
-      gender: 2,
-      nationality: '',
-      address: '',
-      profile_image: '',
-      type: '',
-      unavailable: '',
-      busy: '',
-      start_time: '',
-      end_time: '',
-      medical_license: '',
-      medical_license_expiry_date: '',
-      branch_id: -1,      
-      title: '' //branch_title
-
-    }
-
-    this.serviceListRenderer = false
-    this.selectedServiceSps = []
-    this.serviceProviderAssignedServices = []
-
-  }
-
-  //the following function will be executed when service provider will be selected
-  onServiceSelect(item: any) {
-
-    this.selectedServiceSps.push(item.id)
-
-  }
-
-  //the following function will be executed when service provider will be deselected
-  onServiceDeSelect(item: any) {
-
-    this.selectedServiceSps = this.selectedServiceSps.filter(i => i !== item.id)
-
-  }
-
-  //the following function will be executed when all services will be selected
-  onServiceSelectAll(item: any) {
-
-    this.selectedServiceSps = item.map( i=> {
-
-      return i.id
-
-    })
-
-  }
-
-  //the following function will be executed when all services will be desleetced
-  onServiceDeSelectAll() {
-
-    this.selectedServiceSps = []
-
-  }
-
-  updateServicesForServiceProvider() {
-
-    let data = {
-
-      user_id: this.selectedServiceProvider.id,
-      service_id: this.selectedServiceSps
-
-    }
-
-    this._serviceProvider.assignServices(data).subscribe({
-  
-      next : ( res : any ) => {
-
-        //in case of success the api returns 0 as a status code
-        if( res.status === APIResponse.Success) {
-          
-          //after assiging service to a service provider we will reset the data
-          this.closeServiceProviderServices()
-
-        } else {
-
-          this.closeServiceProviderServices()
-
-          //if it is unable to get branch data it will return an error
-          Swal.fire(res.message)
-
-        }
-        
-      },
-      error: ( err: any ) => {
-
-        console.log(err)
-
-      }
-    
-    })
-
-  }
-
-  //the following function will fetch services assigned to service provider
-  getAssignedServices(user_id) {
-
-    let data = {
-
-      user_id: user_id
-
-    }
-
-    this._serviceProvider.getAssignedServices(data).subscribe({
-  
-      next : ( res : any ) => {
-
-        //in case of success the api returns 0 as a status code
-        if( res.status === APIResponse.Success) {
-          
-          //after assiging service to a service provider we will reset the data
-          this.serviceProviderAssignedServices = res.data
-
-          this.serviceListFiltered = this.serviceList.filter((elem) => {
-
-            return !this.serviceProviderAssignedServices.some((ele) => ele.service_id === elem.id)
-          
-          })
-
-        } else {
-
-          //if it is unable to get branch data it will return an error
-          Swal.fire(res.message)
-
-        }
-        
-      },
-      error: ( err: any ) => {
-
-        console.log(err)
-
-      }
-    
-    })
-
-  }
-
-  //tthe following function will unassign ersvice to a service provider
-  unassignServiceServiceProvider(service_id) {
-
-    let data = {
-
-      service_id: service_id,
-
-    }
-
-    this._serviceProvider.unassignService(data).subscribe({
-  
-      next : ( res : any ) => {
-
-        //in case of success the api returns 0 as a status code
-        if( res.status === APIResponse.Success) {
-
-          //now we will pop the record from serviceProviderAssignedServices
-          this.serviceProviderAssignedServices = this.serviceProviderAssignedServices.filter( sp => {
-
-            return sp.id !== service_id
 
           })
 
@@ -1361,5 +1021,53 @@ export class BranchViewComponent implements OnInit {
     this.placeSelected = false
 
   } 
+
+  updateImage( event, type, operation) {
+
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+
+      const selectedFile = inputElement.files[0];
+      // Now, you can call your image upload function with selectedFile.
+      this.uploadImage(selectedFile, type, operation);
+
+    }
+  
+  }
+
+  //the following function will upload an image to the server
+  uploadImage(selectedFile, type, operation) {
+
+      this._appService.fileUploadImage( selectedFile ).subscribe( ( response: any ) => {
+
+        if (response.status == APIResponse.Success) {
+          
+          let result = response.message
+
+          if(operation === 'add') {
+
+            if(type === 'icon') {
+
+              this.addBranchForm.get('image').patchValue(result)
+
+            }
+
+          }
+          
+          if(operation === 'edit') {
+
+            if(type === 'icon') {
+
+              this.selectedBranch.image = result
+
+            }
+
+          }
+        
+        } 
+      
+      })
+
+  }
 
 }

@@ -24,6 +24,7 @@ export class Service {
     whatsapp_url: string
     category_title: string
     coupon_code: string
+    top: boolean
 
     static getServiceList( data ): Service[] {
   
@@ -58,6 +59,7 @@ export class Service {
           service_data.whatsapp_url = service.whatsapp_url
           service_data.category_title = service.category_title
           service_data.coupon_code = service.coupon_code
+          service_data.top = service.top
           
           serviceList.push(service_data)
         

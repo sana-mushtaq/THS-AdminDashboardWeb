@@ -25,6 +25,7 @@ export class CartComponent implements OnInit {
   userData: any
   serviceProvidersServices: any
   servicesSelected: any = {}
+  total_inc_cost: number = 0
 
   //service time slots 
   timeSlots: string[] = []
@@ -85,6 +86,20 @@ export class CartComponent implements OnInit {
           if( res.status === APIResponse.Success ) {
             
             this.userData = res.data
+
+            if(!this.userData.id_number.startsWith("1")) {
+
+              const taxRate = 0.15;
+              const taxAmount = this.total * taxRate;
+        
+              this.total_inc_cost =  Math.round(this.total + taxAmount);
+        
+            } else {
+      
+              this.total_inc_cost =  Math.round(this.total);
+      
+            }
+            
             this.userDependants[0] = res.data
             
             this.cartData.forEach(cartItem => {
@@ -213,6 +228,13 @@ export class CartComponent implements OnInit {
         return a+b
   
       })
+
+
+      // Calculate the tax amount (15%)
+      const taxRate = 0.15;
+      const taxAmount = this.total * taxRate;
+
+      this.total_inc_cost =  Math.round(this.total + taxAmount);
   
     } else {
 
@@ -281,22 +303,24 @@ export class CartComponent implements OnInit {
   
           }
           
-          this.router.navigate(['/checkout/schedule'])
   
         } else {
     
-          this.wrongService = true
+          //this.wrongService = true
 
         }
 
       } else {
 
-        this.wrongService = true
+        //this.wrongService = true
         
       }
 
 
     })
+
+    this.router.navigate(['/checkout/schedule'])
+
  
   }
 

@@ -80,6 +80,12 @@ export class PatientsService {
 
     }
 
+    verifyIfPatientExists( body ) {
+        
+        return this._httpClient.post<any>(this.patientUrlUpdated+'/verifyIfPatientExists', body ); 
+
+    }
+
     signInWithEmailAndPassword( body ) {
 
         return this._httpClient.post<any>(this.patientUrlUpdated+'/signInWithEmailAndPassword', body );
@@ -131,6 +137,18 @@ export class PatientsService {
     getAppointmentList( body ) {
 
         return this._httpClient.post<any>(this.patientUrlUpdated+'/getAppointmentList', body );
+
+    }
+
+    changePatientPassword( body ) {
+
+        return this._httpClient.post<any>(this.patientUrlUpdated+'/changePatientPassword', body );
+
+    }
+
+    getUserLocations( body ) {
+
+        return this._httpClient.post<any>(this.patientUrlUpdated+'/getUserLocations', body );
 
     }
 

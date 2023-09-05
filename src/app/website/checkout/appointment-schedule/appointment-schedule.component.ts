@@ -22,6 +22,7 @@ export class AppointmentScheduleComponent implements OnInit {
   userId: any
   cartData: any = []
   totalCost: number = 0
+  total_inc_cost: number = 0
   
   //calendar
   currentDate: Date = new Date()
@@ -94,6 +95,12 @@ export class AppointmentScheduleComponent implements OnInit {
 
               //after fetching all service providers we will now check if their gender match with selected user or not 
             this.totalCost = res.data
+
+            // Calculate the tax amount (15%)
+            const taxRate = 0.15;
+            const taxAmount = this.totalCost * taxRate;
+
+            this.total_inc_cost =  Math.round(this.totalCost + taxAmount);
 
             } else {
     
@@ -317,17 +324,30 @@ export class AppointmentScheduleComponent implements OnInit {
         return sps.service_id === serviceId;
       });
 
-      const formattedSelectedDate = this.formatSelectedDate(this.selectedDate);
+      // Convert the selected date to "YYYY-MM-DD" format
+      const selectedDate = this.formatSelectedDate(this.selectedDate);
 
-      this.setPreferredDate(formattedSelectedDate)
+      this.setPreferredDate(selectedDate);
 
-      // Get unique scheduled times for appointments of the selected service on the selected date
-      const uniqueScheduledTimes = [...new Set(this.fetchedData.appointments
-        .filter(app => sps.some(sp => sp.user_id === app.serviceAssigneeId) &&
-                        app.serviceDate === formattedSelectedDate)
-        .map(app => app.serviceTime)
-      )];
-      
+      const uniqueScheduledTimes = this.fetchedData.appointments
+        .filter(app => {
+          // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
+          return (
+            app.serviceAssigneeId !== null &&
+            sps.some(sp => sp.user_id === app.serviceAssigneeId) &&
+            app.serviceDate === selectedDate
+            //mpare only the date part
+            // You can add a time condition here if needed
+          );
+        }).map(app => {
+          // Convert the database time format (e.g., "2023-09-04T19:00:00.000Z") to time slots format (e.g., "4:00pm")
+          const dbTime = app.serviceTime;
+          const [hours, minutes] = dbTime.split(':');
+          const ampm = hours >= 12 ? 'pm' : 'am';
+          const formattedTime = `${(hours % 12) || 12}:${minutes}${ampm}`;
+          return formattedTime;
+      });
+
       // Function to check if a time slot is available
       const isTimeSlotAvailable = (timeSlot: string) => {
         return !uniqueScheduledTimes.includes(timeSlot);

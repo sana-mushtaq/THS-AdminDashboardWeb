@@ -1,0 +1,20 @@
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    margin-right: 15px;
+}
+.custom-radio .el-radio__inner {margin-right: 10px;}
+
+.nav-link {
+    color: #585858;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 5px;
+    margin-right: 10px;
+  }
+  .nav-link.active {
+    border-bottom: 3px solid #FF5AA4;
+  }
+  .inactive_card_space {
+    display: none;
+  }

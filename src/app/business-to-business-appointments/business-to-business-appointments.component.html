@@ -1,0 +1,102 @@
+<div id="app">
+
+  <!-- page section -->
+  <section class="el-container">
+  
+      <div>
+          
+          <!-- main menu bar-->
+          <menu class="menu-bar lab-hide">
+  
+              <a routerLink="javascript:void(0);" class="toggle-menu">
+  
+                  <div class="inactive">
+                      
+                      <span class="bar bar1"></span>
+                      <span class="bar"></span>
+                      <span class="bar bar3"></span>
+                
+                  </div>
+
+              </a>
+              
+              <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+        
+          </menu>
+          
+          <!-- app side bar-->
+          <app-sidebar class="lab-hide"></app-sidebar>
+
+          <!-- app sub menu -->
+          <div>
+          
+              <app-submenu></app-submenu>
+          
+          </div>
+
+          <!-- top nav bar in the right side -->
+          <nav class="nav-bar-none"></nav>
+      
+      </div>
+
+      <!-- right side or the main component content -->
+      <main class="el-main">
+    
+          <app-header></app-header>
+
+          <!-- category wrapper -->
+          <div class="web auto-flex-start-gap30-column max-height relative">
+
+              <div class="auto-flex-start-gap20">
+              
+                  <div class="auto-flex-start-gap10 padding-none border-radius-20 gray-border">
+
+                      <table class="custom-table web-font-primary-light overflow-hidden">
+
+                          <thead class="custom-table-thead">
+                              <tr>
+                                  <th class="padding-20">appointmentId</th>
+                                  <th class="padding-20">Name</th>
+                                  <th class="padding-20">Date</th>
+                                  <th class="padding-20">Time</th>
+                              </tr>
+                          </thead>
+
+                          <tbody>
+
+                              <tr *ngFor="let app of b2bList; let b2bIndex = index">
+
+                                  <td>
+                                      <p> {{ app.appointmentId }} </p>
+                                  </td>
+
+                                  <td>
+                                      <p> {{ app.b2bUserData['Name'] }} </p>
+                                  </td>
+
+                                  <td>
+                                    <p> {{ app.serviceDate }} </p>
+                                  </td>
+
+                                  <td>
+                                    <p> {{ app.serviceTime }} </p>
+                                  </td>
+                                                                
+                                  </tr>
+
+                          </tbody>
+
+                      </table>
+
+
+                  </div>
+
+              </div>
+
+          </div>
+
+      </main>
+  
+  </section>
+
+</div>

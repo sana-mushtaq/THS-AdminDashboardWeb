@@ -6,12 +6,12 @@
 
             <div class="auto-flex-start-gap20-column-no-set-width width-max-500">
 
-                <h3 class="large bold secondary-color">A few steps to create your restaurant or personal account</h3>
-                <p>Lorem ipsum dolor sit amet, magna scaevola his ei. Cum te paulo probatus molestiae, eirmod assentior eum ne, et omnis antiopam mel.</p>
+                <h3 class="large bold secondary-color">{{ currentTitle }}</h3>
+                <p>{{ currentDesc }}</p>
         
             </div>
     
-            <img class="xxxlargeImg-350" src="assets/images/web/auth/login_illustration.svg" />    
+            <img class="xxxlargeImg-350" [src]="currentImage" />    
 
         </div>
 

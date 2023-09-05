@@ -178,7 +178,7 @@
     
                                     </div>
     
-                                    <div class="auto-flex-start-gap5-column">
+                                    <div class="auto-flex-start-gap5-column" *ngIf="displayDate">
     
                                         <p class="bold">Date</p>
                                         <input class="input-global" type="date" (change)="setPreferredDate($event.target)" id="date"/>
@@ -186,7 +186,7 @@
                                     </div>
     
     
-                                    <div class="time-slots auto-flex-start-gap10" *ngIf="timeSlots.length>0">
+                                    <div class="time-slots auto-flex-start-gap10" *ngIf="timeSlots.length>0 && displayTime">
     
                                         <p class="gray-border padding-10 padding-left-right-30 blue-color border-radius-10 max-width width-max-150 text-center cursor-pointer" *ngFor="let timeSlot of timeSlots" (click)="setPreferredTimeSlot(timeSlot)" [ngClass]="{ 'selected-date': preferredTime === timeSlot }">{{ timeSlot }}</p>
                         

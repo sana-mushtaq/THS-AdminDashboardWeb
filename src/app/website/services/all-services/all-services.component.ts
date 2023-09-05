@@ -6,6 +6,10 @@ import { APIResponse } from 'src/utils/app-enum';
 import { WebsiteDataService } from 'src/service/website-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UtilService } from 'src/utils/util.service';
+import { environment } from 'src/environments/environment'
+import { PatientsService } from 'src/service/patient.service';
+import { Subject } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 declare var google: any;
 
@@ -16,6 +20,10 @@ declare var google: any;
 })
 export class AllServicesComponent implements OnInit {
 
+  private initializationSubject = new Subject<void>()
+
+  public serverUrl : string = environment.domainName
+  
   data$ = this.dataService.data$;
 
     //html elemets 
@@ -46,6 +54,9 @@ export class AllServicesComponent implements OnInit {
   cartData: any = []
   cartLength: number = 0; // Store the cart length here
 
+  userId: any
+  userLocations: any = []
+
   // forms
   public addressForm : FormGroup
 
@@ -58,6 +69,7 @@ export class AllServicesComponent implements OnInit {
     private ngZone: NgZone,
     private fb : FormBuilder,
     private _utilService: UtilService,
+    private _patientService: PatientsService,
     ) { 
 
       this.addressForm = this.fb.group({
@@ -84,6 +96,47 @@ export class AllServicesComponent implements OnInit {
     this.dataService.cartLength$.subscribe(length => {
       this.cartLength = length;
     });
+
+
+    this.userId = localStorage.getItem("THSUserId")
+
+    if(this.userId !== null) {
+
+      let data = {
+
+        user_id: this.userId
+
+      }
+      //first we will get user profile information
+      this._patientService.getUserLocations(data).subscribe({
+      
+        next : ( res : any ) => {
+
+          //in case of success the api returns 0 as a status code
+          if( res.status === APIResponse.Success ) {
+
+            if(res.data['saved_location']) {
+
+              this.userLocations = JSON.parse(res.data['saved_location'])
+
+            } else {
+
+              this.userLocations  = []
+
+            }
+
+           
+
+          }
+          
+        },
+        error: ( err: any ) => {
+
+        }
+    
+      })
+
+    }
   
   }
   
@@ -115,11 +168,11 @@ export class AllServicesComponent implements OnInit {
         this.topCategories.slice(0, 4)
 
         /* Temporary hold */
-        this.allServices.forEach(s => {
+        /*this.allServices.forEach(s => {
 
           s.top = 1
 
-        })
+        })*/
 
         // now we will filter all top Services and assign them to TopServices object with respect to each category
         this.allCategories.forEach(category => {
@@ -483,6 +536,39 @@ export class AllServicesComponent implements OnInit {
   closeMenu() {
 
     document.getElementById("menuBar").style.width = '0%'
+
+  }
+
+  setCurrentLocation( location ) {
+
+    this.selectedLat = location.latitude
+    this.selectedLng = location.longitude
+    this.centerLat = location.latitude
+    this.centerLng = location.longitude
+
+    this.locationName = location.location
+
+    let data = {
+
+      user_latitude: this.centerLat,
+      user_longitude: this.centerLng
+    
+    }
+
+    return this.initializationSubject.pipe(
+
+      switchMap(async () => this.dataService.getData(data)),
+      
+      catchError(error => {
+      
+        console.error('Error initializing app:', error)
+      
+        throw error
+      
+      })
+    
+    )
+
 
   }
   

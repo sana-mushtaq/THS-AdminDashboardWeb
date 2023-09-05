@@ -80,6 +80,7 @@ export enum PractiseUserRoles {
   Nurse = 2,
   Physiotherapist = 3,
   GeneralPhysician = 4,
+  All = 5
 }
 
 export enum ServiceSectors {

@@ -14,6 +14,7 @@ export class AppConstants {
     return `${environment.domainName}${environment.getProviderAppointmentListURL}`;
   }
 
+
   public static get getPatientListURL(): string {
     return `${environment.domainName}${environment.getPatientListURL}`;
   }

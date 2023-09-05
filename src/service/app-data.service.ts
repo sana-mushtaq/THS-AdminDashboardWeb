@@ -14,6 +14,7 @@ export class AppDataService {
 
   constructor() {
     this.currentAppointmentSubject = new BehaviorSubject<any>(null);
+    console.log(this.currentAppointmentSubject)
     this.selectedAppointment = this.currentAppointmentSubject.asObservable();
 
     this.currentProviderStaffSubject = new BehaviorSubject<any>(null);

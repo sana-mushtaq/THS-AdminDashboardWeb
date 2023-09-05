@@ -4,6 +4,8 @@ import { APIResponse } from 'src/utils/app-enum'
 import { ServicecategoryService } from 'src/service/servicecategory.service'
 import Swal from 'sweetalert2'
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms"
+import { AppService } from 'src/service/app.service'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-caretgory-view',
@@ -12,6 +14,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms"
 })
 
 export class CaretgoryViewComponent implements OnInit {
+
+  public serverUrl : string = environment.domainName
 
   //create a variable categoryList of type array
   categoryList: Servicecategory [] = []
@@ -61,7 +65,8 @@ export class CaretgoryViewComponent implements OnInit {
   constructor(
     private _serviceCategory: ServicecategoryService,
     private fb : FormBuilder,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private _appService: AppService,
   ) { 
 
     this.getCategoryList()
@@ -96,6 +101,11 @@ export class CaretgoryViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    $('#nav_settings').addClass('active');
+    $('.onlysetting').removeClass('dclass');
+    $('.onlyadmin').removeClass('dclass');
+    
   }
 
   //the following function will initialize selected category and its data
@@ -754,4 +764,78 @@ export class CaretgoryViewComponent implements OnInit {
 
   }
   
+  updateImage( event, type, operation) {
+
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+
+      const selectedFile = inputElement.files[0];
+      // Now, you can call your image upload function with selectedFile.
+      this.uploadImage(selectedFile, type, operation);
+
+    }
+  
+  }
+
+  //the following function will upload an image to the server
+  uploadImage(selectedFile, type, operation) {
+
+      this._appService.fileUploadImage( selectedFile ).subscribe( ( response: any ) => {
+
+        if (response.status == APIResponse.Success) {
+          
+          let result = response.message
+
+          if(operation === 'add') {
+
+            if(type === 'icon') {
+
+              this.addCategoryForm.get('icon').patchValue(result)
+
+            }
+
+            if(type === 'image') {
+
+              this.addCategoryForm.get('image').patchValue(result)
+
+            }
+
+            if(type === 'banner') {
+
+              this.addCategoryForm.get('banner').patchValue(result)
+
+            }
+
+
+          }
+          
+          if(operation === 'edit') {
+
+            if(type === 'icon') {
+
+              this.selectedCategory.icon = result
+
+            }
+
+            if(type === 'image') {
+
+              this.selectedCategory.image = result
+
+            }
+
+            if(type === 'banner') {
+
+              this.selectedCategory.banner = result
+              
+            }
+
+
+          }
+        
+        } 
+      
+      })
+
+  }
+
 }

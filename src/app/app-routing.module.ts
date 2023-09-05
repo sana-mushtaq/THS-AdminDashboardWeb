@@ -117,6 +117,8 @@ import { ThirdPartyRequestsAppointmentsNewComponent } from "./third-party-reques
 import { BranchViewComponent } from './branch/branch-view/branch-view.component';
 import { ServiceViewComponent } from './service/service-view/service-view.component';
 import { CaretgoryViewComponent } from './service_category/caretgory-view/caretgory-view.component';
+import { ServiceproviderComponent } from './serviceprovider/serviceprovider.component';
+
 /* LOGIN */
 import { LoginComponent } from './website/auth/login/login.component';
 import { ForgetPasswordComponent } from './website/auth/forget-password/forget-password.component';
@@ -130,9 +132,11 @@ import { AppointmentScheduleComponent } from './website/checkout/appointment-sch
 import { CheckoutAppointmentComponent } from './website/checkout/checkout-appointment/checkout-appointment.component';
 import { PaymentConfirmationComponent } from './website/checkout/payment-confirmation/payment-confirmation.component';
 import { BusinessToBusinessSchedulingComponent } from './business-to-business-scheduling/business-to-business-scheduling.component';
+import { BusinessToBusinessAppointmentsComponent } from './business-to-business-appointments/business-to-business-appointments.component';
 
 const routes: Routes = [
- { path: '', component: HomeComponent},
+ { path: '', component: AllServicesComponent},
+ { path: 'admin-login', component: HomeComponent},
  { path: 'dashboard', component: DashboardComponent},
  { path: 'users', component: EmployeesComponent},
  { path: 'doctor', component: DoctorsComponent},
@@ -145,6 +149,7 @@ const routes: Routes = [
  { path: 'adddoc', component: AdddocComponent},
  { path: 'doclist', component: DoclistComponent},
  { path: 'appointments', component: AppointmentsComponent},
+ { path: 'b2b-appointments', component: BusinessToBusinessAppointmentsComponent},
  { path: 'appointments/add', component: AppointmentsNewComponent},
  { path: 'lab-dashboard1', component: AccountsComponent},
  { path: 'labdashboard', component: LabDashboardComponent},
@@ -248,6 +253,7 @@ const routes: Routes = [
 { path: 'service/view-all', component: ServiceViewComponent },
 { path: 'category/view-all', component: CaretgoryViewComponent },
 { path: 'b2b', component: BusinessToBusinessSchedulingComponent },
+{ path: 'service-provider/view-all', component: ServiceproviderComponent },
 
  /* LOGIN */ 
  { path: 'login', component: LoginComponent },

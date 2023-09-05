@@ -42,8 +42,7 @@ export class PaymentConfirmationComponent implements OnInit {
           tap_id: id
 
         }
-
-            
+  
         this._b2c.verifyAppointment(data).subscribe({
       
           next : ( resss : any ) => {

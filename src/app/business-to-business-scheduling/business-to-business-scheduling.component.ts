@@ -8,6 +8,8 @@ import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
 import { HttpClient } from '@angular/common/http';
 import { MapsAPILoader } from '@agm/core';
+import { WebsocketService } from 'src/service/web-socket.service';
+import { Subscription } from 'rxjs';
 
 declare var google: any;
 
@@ -20,6 +22,11 @@ declare var google: any;
 export class BusinessToBusinessSchedulingComponent implements OnInit {
 
   @ViewChild('search') searchElementRef: ElementRef
+
+  serviceProvidersServices: any
+
+  displayDate: boolean = false
+  displayTime: boolean = false
 
   //popup
   openRecord = false
@@ -56,6 +63,13 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
   preferredService: any
   preferredBranch: any
 
+  private dataSubscription: Subscription;
+
+  private fetchedData: any = {
+    serviceProviders: [],
+    appointments: []
+  }
+
   constructor(
     private dataService: WebsiteDataService,
     private _branchService: BranchService,
@@ -63,6 +77,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
     private http: HttpClient,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
+    private websocketService: WebsocketService,
   ) {
 
       this.serviceSettings = {
@@ -94,11 +109,28 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
   ngOnInit(): void { 
 
-     //this will be called at first to get a list of branches
-     this.getBranchList()
+    $(".onlyadmin").removeClass("dclass");
+    $('.onlyservicerequests').show();
+    $(".nav-link").click(function () {
+      $(".nav-link").removeClass("active");
+      $(this).addClass("active");
+    });
+    $(".dropdown-check-list").hover(function () {
+      $("#items").toggle();
+    });
 
-     this.mapsAPILoader.load().then(() => {})
+    //this will be called at first to get a list of branches
+    this.getBranchList()
 
+    this.mapsAPILoader.load().then(() => {})
+
+    this.websocketService.connect(); // Assuming you have a connect() method in your service
+  
+    this.dataSubscription = this.websocketService.onData().subscribe(data => {
+
+      this.fetchedData = data
+ 
+     })
   }
 
   ngAfterViewInit(): void {
@@ -257,7 +289,19 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
   setPreferredDate(date){
 
-    this.preferredDate = date.value
+    this.displayTime = false
+    if(this.preferredBranch && this.preferredService) {
+
+      this.preferredDate = date.value
+
+      this.getAvailableTimeSlots()
+
+
+    } else {
+
+      alert('Select branch and service')
+
+    }
 
   }
 
@@ -265,11 +309,23 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
     this.preferredBranch = item.id
 
+    if(this.preferredBranch && this.preferredService) {
+
+      this.displayDate = true
+
+    }
+
   }
 
   setPreferredService(item) {
 
     this.preferredService = item.id
+
+    if(this.preferredBranch && this.preferredService) {
+
+      this.displayDate = true
+
+    }
 
   }
 
@@ -338,8 +394,9 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
         scheduled_date: this.preferredDate,
         scheduled_time: this.preferredTime,
         category_id: category_id,
-        userData: record,
-        admin_notes: admin_notes
+        userData: JSON.stringify(record),
+        admin_notes: admin_notes,
+        //service_provide_id: this.preferredServiceProvider
 
       }
 
@@ -360,8 +417,11 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
             (document.getElementById("adminNotes") as any).value = '';
             (document.getElementById("date") as any).value = '';
-            
-            alert('Appointment successfully created')
+
+            this.openRecord = false
+            this.displayTime = false
+
+            alert('Appointment created successfully')
   
           } else {
   
@@ -665,6 +725,98 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
       this.initializeAutocompleteAndConfirm()
 
     }, 500)
+
+  }
+
+  getAvailableTimeSlots() {
+    
+    const serviceId = this.preferredService
+
+    let spData  = {
+
+      service_id: serviceId,
+
+    }
+
+    this._b2c.getServiceProviderService(spData).subscribe({
+
+      next : ( ress : any ) => {
+
+        //in case of success the api returns 0 as a status code
+        if( ress.status === APIResponse.Success ) {
+
+          //after fetching all service providers we will now check if their gender match with selected user or not 
+          this.serviceProvidersServices = ress.data
+
+        
+            // Get all service providers for the selected service
+          const sps = this.serviceProvidersServices.filter(sps => {
+            return sps.service_id === serviceId;
+          });
+
+          // Convert the selected date to "YYYY-MM-DD" format
+          const formattedSelectedDate = this.preferredDate;
+
+          const uniqueScheduledTimes = this.fetchedData.appointments
+            .filter(app => {
+              // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
+              return (
+                app.serviceAssigneeId !== null &&
+                sps.some(sp => sp.user_id === app.serviceAssigneeId) &&
+                app.serviceDate === formattedSelectedDate
+                //mpare only the date part
+                // You can add a time condition here if needed
+              );
+            }).map(app => {
+              // Convert the database time format (e.g., "2023-09-04T19:00:00.000Z") to time slots format (e.g., "4:00pm")
+              const dbTime = app.serviceTime;
+              const [hours, minutes] = dbTime.split(':');
+              const ampm = hours >= 12 ? 'pm' : 'am';
+              const formattedTime = `${(hours % 12) || 12}:${minutes}${ampm}`;
+              return formattedTime;
+          });
+
+
+          // Function to check if a time slot is available
+          const isTimeSlotAvailable = (timeSlot: string) => {
+            return !uniqueScheduledTimes.includes(timeSlot);
+          };
+      
+          this.timeSlots = [];
+          // Generate time slots and filter unavailable ones
+          for (let hour = 12; hour <= 23; hour++) {
+            const timeSlot = this.formatTimeSlot(hour);
+            if (isTimeSlotAvailable(timeSlot)) {
+              this.timeSlots.push(timeSlot);
+            }
+          }
+          this.displayTime = true
+
+
+        } else {
+
+       
+        }
+        
+      },
+      error: ( err: any ) => {
+        
+        console.log(err)
+
+      }
+  
+    }) 
+
+  }
+
+   // Assuming selectedDate is a Date object
+   formatSelectedDate(selectedDate: Date) {
+
+    const year = selectedDate.getFullYear()
+    const month = String(selectedDate.getMonth() + 1).padStart(2, '0')
+    const day = String(selectedDate.getDate()).padStart(2, '0')
+
+    return `${year}-${month}-${day}`
 
   }
 

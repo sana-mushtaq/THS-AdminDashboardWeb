@@ -52,7 +52,7 @@
                     <p class="large">All Services</p>
                     <button class="primary-bg padding-10 secondary-color bold" (click)="addService()">Add a New Service</button>
 
-                    <input class="input-global" type="text" placeholder="Search service by id, title, category and price" [(ngModel)]="searchText" />
+                    <input class="input-global" type="text" placeholder="Search service by id, title, category and price" (ngModelChange)="updateDisplayedServiceList()" [(ngModel)]="searchText" />
 
                     <div class="auto-flex-start-gap10 padding-none border-radius-20 gray-border">
 
@@ -79,7 +79,7 @@
                                 </td>
 
                                 <td>
-                                    <img class="medImg" [src]="service.icon" *ngIf="service.icon && service.icon.length>0">
+                                    <img class="medImg" src="{{serverUrl}}{{service.icon}}" *ngIf="service.icon && service.icon.length>0">
                                 </td>
 
                                 <td class="cursor-pointer" (click)="openServiceDetails(service, serviceIndex)">
@@ -286,24 +286,27 @@
                                         <div class="auto-flex-center-start-gap20">
 
                                             <div class="auto-flex-center-start-gap20-no-set-width">
-                                        
-                                                <input type="file" accept="image/*" name="uploadfile" id="service_icon" style="display:none;"/>
+                                                 
+                                                <img class="medImg" src="{{serverUrl}}{{addServiceForm.get('icon').value}}">
+                                                <input type="file" accept="image/*" name="uploadfile" id="service_icon" (change)="updateImage($event, 'icon', 'add')" style="display:none;"/>
                                                 <label class="glass-bg padding-10 cursor-pointer" for="service_icon">Upload Icon</label>
     
                                             </div>
     
                                             <div class="auto-flex-center-start-gap20-no-set-width">
-                                            
-                                                <input type="file" accept="image/*" name="uploadfile" id="service_image" style="display:none;"/>
-                                                <label class="glass-bg padding-10 cursor-pointer" for="service_image">Upload Image</label>
+                                               
+                                                <img class="medImg" src="{{serverUrl}}{{addServiceForm.get('cover_image').value}}">
+                                                <input type="file" accept="image/*" name="uploadfile" id="service_cover_image" (change)="updateImage($event, 'image', 'add')" style="display:none;"/>
+                                                <label class="glass-bg padding-10 cursor-pointer" for="service_cover_image">Upload Icon</label>
     
                                             </div>
                                             
                                             <div class="auto-flex-center-start-gap20-no-set-width">
-                                            
-                                                <input type="file" accept="image/*" name="uploadfile" id="service_banner" style="display:none;"/>
-                                                <label class="glass-bg padding-10 cursor-pointer" for="service_banner">Upload Banner</label>
-    
+                                                
+                                                <img class="medImg" src="{{serverUrl}}{{addServiceForm.get('banner').value}}">
+                                                <input type="file" accept="image/*" name="uploadfile" id="service_banner" (change)="updateImage($event, 'banner', 'add')" style="display:none;"/>
+                                                <label class="glass-bg padding-10 cursor-pointer" for="service_banner">Upload Icon</label>
+
                                             </div>    
 
                                         </div>
@@ -451,6 +454,17 @@
 
                                         </div>
 
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Top</p>
+                                                <input class="input-global"  style="width:auto" formControlName="top" type="checkbox" />    
+
+                                            </div>
+
+                                        </div>
+
 
                                         <div class="auto-flex-center-gap10">
 
@@ -483,22 +497,27 @@
 
                                         <div class="auto-flex-center-start-gap20-no-set-width">
                                     
-                                            <input type="file" accept="image/*" name="uploadfile" id="service_icon" style="display:none;"/>
+                                            <img class="medImg" src="{{serverUrl}}{{selectedService.icon}}">
+                                            <input type="file" accept="image/*" name="uploadfile" id="service_icon" (change)="updateImage($event, 'icon', 'edit')" style="display:none;"/>
                                             <label class="glass-bg padding-10 cursor-pointer" for="service_icon">Upload Icon</label>
 
                                         </div>
 
                                         <div class="auto-flex-center-start-gap20-no-set-width">
                                         
-                                            <input type="file" accept="image/*" name="uploadfile" id="service_image" style="display:none;"/>
-                                            <label class="glass-bg padding-10 cursor-pointer" for="service_image">Upload Image</label>
+                                            <img class="medImg" src="{{serverUrl}}{{selectedService.cover_image}}">
+                                            <input type="file" accept="image/*" name="uploadfile" id="service_cover_image" (change)="updateImage($event, 'image', 'edit')" style="display:none;"/>
+                                            <label class="glass-bg padding-10 cursor-pointer" for="service_cover_image">Upload Icon</label>
+
 
                                         </div>
                                         
                                         <div class="auto-flex-center-start-gap20-no-set-width">
                                         
-                                            <input type="file" accept="image/*" name="uploadfile" id="service_banner" style="display:none;"/>
-                                            <label class="glass-bg padding-10 cursor-pointer" for="service_banner">Upload Banner</label>
+                                            <img class="medImg" src="{{serverUrl}}{{selectedService.banner}}">
+                                            <input type="file" accept="image/*" name="uploadfile" id="service_banner" (change)="updateImage($event, 'banner', 'edit')" style="display:none;"/>
+                                            <label class="glass-bg padding-10 cursor-pointer" for="service_banner">Upload Icon</label>
+
 
                                         </div>    
 
@@ -649,6 +668,12 @@
 
                                     <div class="auto-flex-center-start-gap20">
 
+                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
+        
+                                            <p class="bold">Top</p>
+                                            <input class="input-global"  [(ngModel)]="selectedService.top" style="width:auto" type="checkbox" /> 
+
+                                        </div>
 
                                         <div class="auto-flex-start-gap5-column-no-set-width width-half">
 

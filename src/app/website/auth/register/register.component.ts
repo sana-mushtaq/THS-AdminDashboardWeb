@@ -29,6 +29,9 @@ export class RegisterComponent implements OnInit {
 
   // userdata
   userData: any
+  currentImage = 'assets/images/web/register.svg'
+  currentTitle = 'Simple steps to start your healing journey'
+  currentDesc = 'More than 100 home medical services for you and your family.'
 
   constructor(
     private fb : FormBuilder,
@@ -140,7 +143,6 @@ export class RegisterComponent implements OnInit {
 
               // Perform your account details processing here
               let verification_code = this.generateRandomCode()
-              console.log(verification_code)
               let phone_number = this.accountDetailsForm.get('phone_number').value
               let data = {
 
@@ -192,7 +194,7 @@ export class RegisterComponent implements OnInit {
       })
 
     }
-  
+    
   }
 
   verifyCode() {
@@ -205,6 +207,11 @@ export class RegisterComponent implements OnInit {
         //now we will display relevent div
         this.renderer.addClass(this.accountDetailsHTML.nativeElement, 'hide')
         this.renderer.addClass(this.accountConfirmationHTML.nativeElement, 'hide')
+
+        this.currentImage = 'assets/images/web/accountDetails.svg'
+        this.currentTitle = 'High qualified medical staff'
+        this.currentDesc = 'For all home medical care services for you and your family in one place.'
+
         this.renderer.removeClass(this.accountSetupHTML.nativeElement, 'hide')
 
 

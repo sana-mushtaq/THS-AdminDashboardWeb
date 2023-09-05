@@ -160,6 +160,8 @@ import { PaymentConfirmationComponent } from './website/checkout/payment-confirm
 import { CheckoutHeaderComponent } from './website/checkout-header/checkout-header.component';
 import { BusinessToBusinessSchedulingComponent } from './business-to-business-scheduling/business-to-business-scheduling.component';
 import { CheckoutFooterComponent } from './website/checkout-footer/checkout-footer.component';
+import { ServiceproviderComponent } from './serviceprovider/serviceprovider.component';
+import { BusinessToBusinessAppointmentsComponent } from './business-to-business-appointments/business-to-business-appointments.component';
 
 @NgModule({
   declarations: [	
@@ -296,7 +298,9 @@ import { CheckoutFooterComponent } from './website/checkout-footer/checkout-foot
     PaymentConfirmationComponent,
     CheckoutHeaderComponent,
     BusinessToBusinessSchedulingComponent,
-    CheckoutFooterComponent
+    CheckoutFooterComponent,
+    ServiceproviderComponent,
+    BusinessToBusinessAppointmentsComponent
    ],
   imports: [
     BrowserModule, 

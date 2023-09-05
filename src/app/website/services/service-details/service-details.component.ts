@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WebsiteDataService } from 'src/service/website-data.service';
 import { UtilService } from 'src/utils/util.service';
 
@@ -16,12 +16,21 @@ export class ServiceDetailsComponent implements OnInit {
   cartData: any = []
 
   showErrorCart: boolean = false
+  cartLength: number = 0; // Store the cart length here
 
   constructor(
     private route: ActivatedRoute,
     private dataService: WebsiteDataService,
-    private _utilService: UtilService
-  ) {}
+    private _utilService: UtilService,
+    private router: Router,
+
+  ) {
+
+    this.dataService.cartLength$.subscribe(length => {
+      this.cartLength = length;
+    });
+    
+  }
 
   ngOnInit(): void {
 
@@ -39,13 +48,21 @@ export class ServiceDetailsComponent implements OnInit {
 
           })
 
-          this.currentService = this.currentService[0]
+          if(this.currentService.length>0) {
 
-          this.serviceVariants = res.services.filter(service => {
+            this.currentService = this.currentService[0]
 
-            return Number(service.primary_service_id) === Number(this.currentService.id)
+            this.serviceVariants = res.services.filter(service => {
+  
+              return Number(service.primary_service_id) === Number(this.currentService.id)
+  
+            })
 
-          })
+          } else {
+
+            this.router.navigate([''])
+
+          } 
 
         }
 
