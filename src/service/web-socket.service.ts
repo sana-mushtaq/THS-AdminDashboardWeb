@@ -9,8 +9,12 @@ import { environment } from 'src/environments/environment';
 export class WebsocketService {
   private socket: Socket;
   private serverUrl: string = environment.domainName; // Update this to your WebSocket server URL
+  constructor() {
 
-  constructor() {}
+    console.log(this.serverUrl)
+
+    
+  }
 
   connect(): void {
     this.socket = io(`${this.serverUrl}`); // Connect to the server
