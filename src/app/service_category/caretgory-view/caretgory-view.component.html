@@ -162,6 +162,13 @@
                 
                                                 </div>
 
+                                                <div class="auto-flex-start-gap5-column-no-set-width width-half">
+        
+                                                    <p class="bold">Top</p>
+                                                    <input class="input-global" formControlName="top" style="width:auto" type="checkbox" /> 
+        
+                                                </div>
+
                                             </div>
                                             
 
@@ -204,16 +211,16 @@
                                         <div class="auto-flex-center-start-gap20">
                                                 
                                             <img class="medImg" src="{{serverUrl}}{{selectedCategory.image}}">
-                                            <input type="file" accept="image/*" name="uploadfile" id="category_icon" (change)="updateImage($event, 'icon', 'edit')" style="display:none;"/>
-                                            <label class="glass-bg padding-10 cursor-pointer" for="category_icon">Upload image</label>
+                                            <input type="file" accept="image/*" name="uploadfile" id="category_image" (change)="updateImage($event, 'image', 'edit')" style="display:none;"/>
+                                            <label class="glass-bg padding-10 cursor-pointer" for="category_image">Upload image</label>
 
                                         </div>
 
                                         <div class="auto-flex-center-start-gap20">
                                                 
                                             <img class="medImg" src="{{serverUrl}}{{selectedCategory.banner}}">
-                                            <input type="file" accept="image/*" name="uploadfile" id="category_icon" (change)="updateImage($event, 'icon', 'edit')" style="display:none;"/>
-                                            <label class="glass-bg padding-10 cursor-pointer" for="category_icon">Upload banner</label>
+                                            <input type="file" accept="image/*" name="uploadfile" id="category_banner" (change)="updateImage($event, 'banner', 'edit')" style="display:none;"/>
+                                            <label class="glass-bg padding-10 cursor-pointer" for="category_banner">Upload banner</label>
 
                                         </div>
 
@@ -232,6 +239,15 @@
                                                 <input class="input-global" [(ngModel)]="selectedCategory.title_arabic" type="text" />
             
                                             </div>
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+        
+                                                <p class="bold">Top</p>
+                                                <input class="input-global" [(ngModel)]="selectedCategory.top" style="width:auto" type="checkbox" /> 
+    
+                                            </div>
+
+                                            
 
                                         </div>
 

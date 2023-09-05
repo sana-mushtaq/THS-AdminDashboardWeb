@@ -42,9 +42,9 @@
                         </div>    
 
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-
+                              
                             <p class="xsmall bold">Phone Number</p>
-                            <input class="input-global" type="tel" formControlName="phone_number" placeholder="966 XX XXXXXXXXX" />
+                            <input class="input-global" type="tel" formControlName="phone_number" placeholder="966 XX XXXXXXXXX" (keypress)="restrictInput($event)" />
                             <p *ngIf="accountDetailsForm.get('phone_number').hasError('invalidPhoneNumber')" class="xsmall red-color">Enter valid phone number</p>
 
                         </div>    

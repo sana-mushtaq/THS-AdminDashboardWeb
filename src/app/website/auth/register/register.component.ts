@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
       this.accountDetailsForm = this.fb.group({
   
         email: ['', [ Validators.required, Validators.email ]],
-        phone_number: ['', [Validators.required, /*Validators.pattern('^(966|\\+966|0)(5|6|9)[0-9]{8}$')*/]],
+        phone_number: ['', [Validators.required, Validators.pattern('^(966|\\+966|0)(5|6|9)[0-9]{8}$')]],
         password: ['', [ Validators.required, Validators.minLength(8) ]],
         confirm_password: ['', [ Validators.required, Validators.minLength(8) ]]
  
@@ -63,8 +63,27 @@ export class RegisterComponent implements OnInit {
   }
     
   ngOnInit(): void {
+
+    
   }
 
+  restrictInput(event: any) {
+  
+    const input = event.key;
+    const phoneControl = this.accountDetailsForm.get('phone_number');
+  
+    if (!/^\d$/.test(input)) {
+  
+      event.preventDefault();
+  
+    } else if (phoneControl.value === '966' && input !== '5') {
+  
+      event.preventDefault();
+  
+    }
+  
+  }
+  
   //here we will generate 6 digit random code to be use for verification purposes
   generateRandomCode() {
 

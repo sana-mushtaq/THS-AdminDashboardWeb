@@ -20,3 +20,13 @@
 .border-radius-20{
     border-radius: 20px;
 }
+
+@media only screen and (max-width: 500px) {
+
+    .phone-max-width{
+        width: 100%;
+        max-width: 100%;
+    }
+    
+}
+

@@ -30,7 +30,7 @@ export class CaretgoryViewComponent implements OnInit {
   editSubCategoryToggle: boolean = false
 
   //this will be used for the currently selected category on frontend
-  selectedCategory: Servicecategory = {
+  selectedCategory: any = {
     id: -1,
     title: '',
     title_arabic: '',
@@ -41,7 +41,7 @@ export class CaretgoryViewComponent implements OnInit {
   }
 
   //this will be used for the currently selected sub category on frontend
-  selectedSubCategory: Servicesubcategory = {
+  selectedSubCategory: any = {
     id: -1,
     title: '',
     title_arabic: '',
@@ -70,7 +70,7 @@ export class CaretgoryViewComponent implements OnInit {
   ) { 
 
     this.getCategoryList()
-    this.getSubCategoryList()
+    //this.getSubCategoryList()
 
     //now we will initialize service category form
     this.addCategoryForm = this.editCategoryForm =this.fb.group({
@@ -80,7 +80,8 @@ export class CaretgoryViewComponent implements OnInit {
       icon: [''],
       image: [''],
       banner: [''],
-      active: [false]
+      active: [false],
+      top: [0]
 
     })
 
@@ -94,7 +95,8 @@ export class CaretgoryViewComponent implements OnInit {
       icon: [''],
       image: [''],
       banner: [''],
-      active: [false]
+      active: [false],
+      top: [0]
 
     })
 

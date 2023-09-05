@@ -1,6 +1,6 @@
-<div class="web auto-flex-start-gap40-column main-div padding-bottom-0 padding-top-40">
+<div class="web auto-flex-start-gap40-column main-div">
 
-    <div class="auto-flex-center-space-between-gap20 light-gray-bg padding-10 padding-left-right-30">
+    <div class="auto-flex-center-space-between-gap20 light-gray-bg border-none border-radius-0 padding-left-right-30">
 
         <!-- Current Location-->
         <div class="auto-flex-center-start-gap20-no-set-width cursor-pointer desktop" (click)="showCurrentLocation()">
@@ -49,7 +49,7 @@
 
         </div>
 
-        <div class="white-bg fixed mobile z-index menu-mobile mobile padding-none" id="menuBar">
+        <div class="light-gray-bg fixed mobile z-index menu-mobile mobile padding-none" id="menuBar">
 
             <a class="xsmall web-font-primary bold absolute-top-right-30" (click)="closeMenu()"><img class="img-20" src="assets/images/web/icons/close.svg" /></a>
 
@@ -80,7 +80,7 @@
 
 </div>
 
-<div class="web auto-flex-start-gap40-column main-div padding-top-40">
+<div class="web auto-flex-start-gap40-column main-div padding-top-20 padding-20" style="padding: 20px;">
 
      <!-- Current Location-->
      <div class="auto-flex-center-start-gap20 mobile cursor-pointer" (click)="showCurrentLocation()">
@@ -99,18 +99,18 @@
     <!-- Top Category -->
     <div class="auto-flex-center-space-between-gap20 place-stretch">
 
-        <div class="auto-flex-center-space-between-gap20-no-set-width width-half lightest-blue-bg padding-none cursor-pointer" *ngFor="let category of topCategories; let topCategoryIndex = index">
+        <div class="auto-flex-center-space-between-gap20-no-set-width width-half lightest-blue-bg padding-20 cursor-pointer" *ngFor="let category of topCategories; let topCategoryIndex = index">
 
-            <div class="auto-flex-start-gap10-column-no-set-width width-max-300 padding-20 padding-top-40 padding-bottom-40" (click)="navigateToCategory(category.id)">
+            <div class="auto-flex-start-gap10-column-no-set-width" (click)="navigateToCategory(category.id)">
 
-                <p class="med bold capitalize"> {{ category.title }} </p>
+                <p class="med bold capitalize width-max-300"> {{ category.title }} </p>
                 <p class="web-font-primary-light"> {{ category.description }} </p>
 
             </div>
 
-            <div class="auto-flex-center-gap10-column-no-set-width white-bg border-none relative self-stretch width-160 max-height margin-top-20 margin-right-20 border-bottom-left-bottom-right-0 phone-max-height-150">
+            <div class="auto-flex-center-gap10-column-no-set-width white-bg padding-none border-none relative self-stretch width-160 max-height margin-top-20 margin-right-20 border-bottom-left-bottom-right-0 phone-max-height-150">
 
-                <img class="xxxmedImg absolute-bottom-unset" src="{{serverUrl}}{{category.icon}}" />
+                <img class="xxxmedImg" src="{{serverUrl}}{{category.image}}" />
 
             </div>
 
@@ -210,14 +210,14 @@
                             <p class="web-font-primary-light"> {{ locationName }} </p>
     
                         </div>
-                        
-                        <img class="smallImg" src="assets/images/web/icons/edit.svg" (click)="openMap()" />
+                        <!--openMap()-->
+                        <img class="smallImg" src="assets/images/web/icons/edit.svg" (click)="navigateToDashboard()" />
 
                     </div>
               
                 </div>
 
-                <div class="auto-flex-center-start-gap20 cursor-pointer" (click)="addNewAddress()">
+                <div class="auto-flex-center-start-gap20 cursor-pointer" (click)="openMap()">
 
                     <img class="xsmallImg" src="assets/images/web/icons/plus_black.svg" />
                     <p class="xsmall bold lowercase text-center">Add new address</p>
@@ -228,12 +228,11 @@
 
                     <div class="auto-flex-start-gap10-no-wrap overflow-auto padding-bottom-20 scroll-bar-gray" *ngFor="let loc of userLocations; let locIndex = index;">
 
-                        <div class="auto-flex-start-gap10-column-no-set-width white-bg box-shadow item-hover cursor-pointer" (click)="setCurrentLocation(loc)">
+                        <div class="auto-flex-start-gap10-column-no-set-width white-bg box-shadow item-hover cursor-pointer width-200" (click)="setCurrentLocation(loc)">
     
                             <p class="xsmall bold">Name: {{ loc.address_name }}</p>
-                            <p class="xsmall">Location: {{ loc.location }}</p>
-                            <p class="xsmall">Longitude: {{ loc.latitude }}</p>
-                            <p class="xsmall">Latitude: {{ loc.longitude }}</p>
+                            <p class="xsmall" *ngIf="loc.city.length>0">City: {{ loc.city }}</p>
+                            <p class="xsmall" *ngIf="loc.address_line1.length>0">Address: {{ loc.address_line1 }} {{ loc.address_line2 }}</p>
     
                         </div>
     

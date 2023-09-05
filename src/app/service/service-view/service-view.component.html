@@ -297,7 +297,7 @@
                                                
                                                 <img class="medImg" src="{{serverUrl}}{{addServiceForm.get('cover_image').value}}">
                                                 <input type="file" accept="image/*" name="uploadfile" id="service_cover_image" (change)="updateImage($event, 'image', 'add')" style="display:none;"/>
-                                                <label class="glass-bg padding-10 cursor-pointer" for="service_cover_image">Upload Icon</label>
+                                                <label class="glass-bg padding-10 cursor-pointer" for="service_cover_image">Upload Image</label>
     
                                             </div>
                                             
@@ -305,7 +305,7 @@
                                                 
                                                 <img class="medImg" src="{{serverUrl}}{{addServiceForm.get('banner').value}}">
                                                 <input type="file" accept="image/*" name="uploadfile" id="service_banner" (change)="updateImage($event, 'banner', 'add')" style="display:none;"/>
-                                                <label class="glass-bg padding-10 cursor-pointer" for="service_banner">Upload Icon</label>
+                                                <label class="glass-bg padding-10 cursor-pointer" for="service_banner">Upload Banner</label>
 
                                             </div>    
 
@@ -507,7 +507,7 @@
                                         
                                             <img class="medImg" src="{{serverUrl}}{{selectedService.cover_image}}">
                                             <input type="file" accept="image/*" name="uploadfile" id="service_cover_image" (change)="updateImage($event, 'image', 'edit')" style="display:none;"/>
-                                            <label class="glass-bg padding-10 cursor-pointer" for="service_cover_image">Upload Icon</label>
+                                            <label class="glass-bg padding-10 cursor-pointer" for="service_cover_image">Upload Image</label>
 
 
                                         </div>
@@ -516,7 +516,7 @@
                                         
                                             <img class="medImg" src="{{serverUrl}}{{selectedService.banner}}">
                                             <input type="file" accept="image/*" name="uploadfile" id="service_banner" (change)="updateImage($event, 'banner', 'edit')" style="display:none;"/>
-                                            <label class="glass-bg padding-10 cursor-pointer" for="service_banner">Upload Icon</label>
+                                            <label class="glass-bg padding-10 cursor-pointer" for="service_banner">Upload Banner</label>
 
 
                                         </div>    

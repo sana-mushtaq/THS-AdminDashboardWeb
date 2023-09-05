@@ -421,6 +421,8 @@ export class AllServicesComponent implements OnInit {
 
     this.placeSelected = false
 
+    this.addNewAddress()
+
     this.getComponentData()
 
   }
@@ -572,4 +574,17 @@ export class AllServicesComponent implements OnInit {
 
   }
   
+  navigateToDashboard() {
+
+    if(this.userId !== null) {
+
+      this.router.navigate(['/user/profile'])
+
+    } else {
+
+      this.router.navigate(['/login'])
+
+    }
+
+  }
 }

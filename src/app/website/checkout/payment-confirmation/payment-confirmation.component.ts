@@ -114,7 +114,7 @@ export class PaymentConfirmationComponent implements OnInit {
                     
                               //if payment is captured then we wil generate an appointment by passing data
                             
-                              this.appointmentId = res.data.appointment_id
+                              this.appointmentId = res.data
                               this.paymentCaptured = true
                               this.verified = true
 

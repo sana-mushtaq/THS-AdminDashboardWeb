@@ -41,7 +41,7 @@ export class ForgetPasswordComponent implements OnInit {
 
       this.forgotPasswordForm = this.fb.group({
   
-        phone_number: ['', [Validators.required, /*Validators.pattern('^(966|\\+966|0)(5|6|9)[0-9]{8}$')*/]],
+        phone_number: ['', [Validators.required, Validators.pattern('^(966|\\+966|0)(5|6|9)[0-9]{8}$')]],
 
       })
 

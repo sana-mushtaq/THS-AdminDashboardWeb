@@ -2436,7 +2436,7 @@ a:hover{
 
 /* THS - 23  CSS ADDED BY SANA FOR ALL THE NEW COMPONENENTS */
 .web {
-    padding: 100px 60px;
+    padding: 0px 0px;
     color: var(--web-font-primary);
     font-family: var(--web-font);
     line-height: 20px;
@@ -3268,7 +3268,7 @@ a:hover{
 }
 
 .light-gray-bg{
-    background: #D2CACA33;
+    background: #F6F4F4;
     padding: 20px;
     box-sizing: border-box;
     border-radius: 10px;
@@ -4874,7 +4874,9 @@ a:hover{
 
 /*Div*/
 .main-div{
-    max-width: 1200px;
+    /*max-width: 1200px;*/
+
+    width: 100%;
     margin: 0 auto;
   }
 
@@ -4979,7 +4981,7 @@ margin: 0 auto;
   @media only screen and (max-width: 1099px) {
     
     .web{
-        padding: 40px 20px;
+        padding: 0px 0px;
     }
 
     .desktop{
