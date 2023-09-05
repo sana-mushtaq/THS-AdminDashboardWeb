@@ -1,7 +1,7 @@
 export const environment = {
   //domainName: "http://147.182.222.195/services/",
-  domainName: "https://taib.sa/services/", // Prod URL
-  // domainName: "https://annztechnology.com/", // UAT URL
+  //domainName: "https://taib.sa/services/", // Prod URL
+   domainName: "http://146.190.173.225/services/", // UAT URL
 
   production: true,
 
@@ -54,7 +54,8 @@ export const environment = {
   getResultReadingRequestListURL: "getAdminResultReadingList",
 
   fileUploadURL: "fileUpload",
-
+  imageUploadURL: "fileUploadImage",
+  
   //SA LAB API'S
   getAdminLabDashboardURL: "getLabWiseSummary",
   getServiceProviderListURL: "getServiceProviderList",
