@@ -41,7 +41,7 @@ export class ForgetPasswordComponent implements OnInit {
 
       this.forgotPasswordForm = this.fb.group({
   
-        phone_number: ['', [Validators.required, Validators.pattern('^(966|\\+966|0)(5|6|9)[0-9]{8}$')]],
+        phone_number: ['', [Validators.required, Validators.pattern(/^(966|\+966|0)?(5|9)[0-9]{8}$/)]],
 
       })
 
@@ -154,7 +154,7 @@ export class ForgetPasswordComponent implements OnInit {
     const randomCode = Math.floor(Math.random() * (max - min + 1)) + min
 
     this.verificationCode = randomCode.toString().padStart(codeLength, '0')
-  
+  console.log(this.verificationCode)
     // Clear the code after 10 minutes
     setTimeout(() => {
 
