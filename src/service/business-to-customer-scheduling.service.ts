@@ -89,5 +89,11 @@ export class BusinessToCustomerSchedulingService {
 
   }
 
+  fetchb2bServiceProviders(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/fetchb2bServiceProviders', body)
+
+  }
+
     
 }

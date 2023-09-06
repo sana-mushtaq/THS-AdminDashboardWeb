@@ -121,6 +121,16 @@
                                         <ng-multiselect-dropdown class="max-width" *ngIf="allServices.length>0 && serviceSettings" [settings]="serviceSettings" [data]="allServices" [placeholder]="'Select service'" (onSelect)="setPreferredService($event)" (onDeSelect)="unsetPreferredService($event)"></ng-multiselect-dropdown>
     
                                     </div>
+
+                                    <div class="auto-flex-start-gap5-column-no-set-width width-half" *ngIf="displaySp">
+    
+                                        <select class="input-global">
+                                            <option disabled></option>
+                                            <option *ngFor="let sp of allSP" class="input-global" [value]="sp.user_id" (change)="setPreferredServiceP($event)">{{sp.firstName}} {{sp.lastName}}</option>
+
+                                        </select>
+    
+                                    </div>
     
                                     <div class="auto-flex-start-gap5-column-no-set-width width-half">
     

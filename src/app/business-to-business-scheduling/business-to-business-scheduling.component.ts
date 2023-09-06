@@ -27,6 +27,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
   displayDate: boolean = false
   displayTime: boolean = false
+  displaySp: boolean = false
 
   //popup
   openRecord = false
@@ -43,11 +44,13 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
   branchList: any = []
   serviceSettings: IDropdownSettings = {}
   branchSettings: IDropdownSettings = {}
+  spSettings: IDropdownSettings = {}
   records: any[] = []; // Array to store the records
   currentPage = 0; // Current page index
   pageSize = 1; // Number of records to display per page
   allServices: any = []
 
+  allSP: any = []
   currentRecord: any = {}
 
   //the following displays allowed headers for excel sheet
@@ -62,6 +65,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
   preferredService: any
   preferredBranch: any
+  preferredServiceP: any
 
   private dataSubscription: Subscription;
 
@@ -89,6 +93,14 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
       }
 
       this.branchSettings = {
+        idField: 'id',
+        textField: 'title',
+        allowSearchFilter: true,
+        singleSelection: true, // Set to true for single selection
+        enableCheckAll: false,
+      }
+
+      this.spSettings = {
         idField: 'id',
         textField: 'title',
         allowSearchFilter: true,
@@ -149,7 +161,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
       
         // ... handle the received data here
         this.allServices = res.services
-            
+            console.log(this.allServices)
       }
 
     })
@@ -183,6 +195,43 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
       }
    
     })
+
+  }
+
+  getSp(){
+
+    console.log(this.preferredService)
+    let data ={
+
+      branch_id: this.preferredBranch,
+      service_id: this.preferredService
+    }
+
+      //now we will get a list of branches from the backend
+      this._b2c.fetchb2bServiceProviders(data).subscribe({
+   
+        next : ( res : any ) => {
+  
+          //in case of success the api returns 0 as a status code
+          if( res.status === APIResponse.Success) {
+  
+            this.allSP = res.data
+  
+          } else {
+  
+            //if it is unable to get branch data it will return an error
+            Swal.fire(res.message)
+  
+          }
+          
+        },
+        error: ( err: any ) => {
+  
+          console.log(err)
+  
+        }
+     
+      })
 
   }
   
@@ -311,6 +360,8 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
     if(this.preferredBranch && this.preferredService) {
 
+      this.getSp()
+      this.displaySp = true
       this.displayDate = true
 
     }
@@ -323,9 +374,17 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
     if(this.preferredBranch && this.preferredService) {
 
+      this.getSp()
+      this.displaySp = true
       this.displayDate = true
 
     }
+
+  }
+
+  setPreferredServiceP(item) {
+
+    this.preferredServiceP = item.id
 
   }
 
@@ -338,6 +397,12 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
   unsetPreferredService(item) {
 
     this.preferredService = null
+
+  }
+
+  unsetPreferredServiceP(item) {
+
+    this.preferredServiceP = null
 
   }
 
@@ -393,6 +458,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
         branch_id: this.preferredBranch,
         scheduled_date: this.preferredDate,
         scheduled_time: this.preferredTime,
+        serviceAssigneeId: this.preferredServiceP,
         category_id: category_id,
         userData: JSON.stringify(record),
         admin_notes: admin_notes,
@@ -411,6 +477,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
             this.preferredTime = null
             this.preferredService = null
             this.preferredBranch = null
+            this.preferredServiceP = null
 
             let index = this.records.indexOf(record)
             this.records.splice(index,1);
