@@ -375,7 +375,7 @@ export class AppointmentScheduleComponent implements OnInit {
 
   ngOnDestroy() {
 
-    this.dataSubscription.unsubscribe() // Unsubscribe from the data stream
+    //this.dataSubscription.unsubscribe() // Unsubscribe from the data stream
 
   }
 
