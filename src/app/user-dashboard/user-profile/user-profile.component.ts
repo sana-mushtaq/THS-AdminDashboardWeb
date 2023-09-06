@@ -3,6 +3,7 @@ import { PatientsService } from 'src/service/patient.service';
 import { APIResponse } from 'src/utils/app-enum';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { MapsAPILoader } from '@agm/core';
+import { Router } from '@angular/router';
 declare var google: any;
 
 @Component({
@@ -57,7 +58,8 @@ export class UserProfileComponent implements OnInit {
     private fb : FormBuilder,
     private _patientService: PatientsService,
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone ) { 
+    private ngZone: NgZone,
+    private router: Router ) { 
 
       this.addDependantForm = this.fb.group({
   
@@ -342,6 +344,8 @@ export class UserProfileComponent implements OnInit {
                 if( res.status === APIResponse.Success ) {
 
                   this.userDependants.push(res.data)
+                  this.addDependantToggle = false
+                  this.addDependantForm.reset()
 
                 } else {
 
@@ -783,7 +787,6 @@ export class UserProfileComponent implements OnInit {
     if (this.addressForm.invalid) {
 
       // Display error messages
-
       if (this.addressForm.get('address_name').invalid) {
       
         this.addressForm.get('address_name').setErrors({ invalidAddressName: true })
@@ -904,6 +907,25 @@ export class UserProfileComponent implements OnInit {
   logout() {
 
     this._patientService.logout()
+
+  }
+
+  navigate(link) {
+
+    this.router.navigate([link])
+  }
+
+  navigateToLogin() {
+
+    if(this.userId !== null) {
+
+      this.router.navigate(['/user/profile'])
+
+    } else {
+
+      this.router.navigate(['/login'])
+
+    }
 
   }
 

@@ -24,7 +24,9 @@ export class CheckoutAppointmentComponent implements OnInit {
   discountType: number = -1
   promoApplied: boolean = false
   invalidPromoMessage: boolean = false
+  discountAmount: string = ''
 
+  vatApplied = -1
   constructor(
     private _utilService: UtilService,
     private router: Router,
@@ -179,17 +181,32 @@ export class CheckoutAppointmentComponent implements OnInit {
         const taxAmount = this.total * taxRate;
   
         this.total_inc_cost =  Math.round(this.total + taxAmount);
+
+        this.vatApplied = 1
   
       } else {
 
         this.total_inc_cost =  Math.round(this.total);
 
+        this.vatApplied = 0
+
       }
+
+      let dicountStorage = {
+
+        discountType: null,
+        discountAmount: null,
+        vatApplied: this.vatApplied
+
+      }
+      
+      localStorage.setItem("THSDiscount", JSON.stringify(dicountStorage))
 
     } else {
 
       this.total = 0
       this.router.navigate(['/medical-services'])
+      
 
     }
 
@@ -211,7 +228,8 @@ export class CheckoutAppointmentComponent implements OnInit {
     let data = {
 
       services: services,
-      userData: this.userData
+      userData: this.userData,
+      total_inc_cost: this.total_inc_cost
 
     }
 
@@ -228,7 +246,7 @@ export class CheckoutAppointmentComponent implements OnInit {
 
             userData: this.userDependants,
             paymentURL: res.data.paymentLink,
- 
+          
           }
 
           localStorage.setItem("THSAppointmentRequest", JSON.stringify(data))
@@ -320,6 +338,16 @@ export class CheckoutAppointmentComponent implements OnInit {
               let appliedDiscount = this.total
   
               let promoAmount = parseInt(filteredPromo[0].promoValue);
+
+              let dicountStorage = {
+
+                discountType: filteredPromo[0].promoType,
+                discountAmount: filteredPromo[0].promoValue,
+                vatApplied: this.vatApplied
+
+              }
+              
+              localStorage.setItem("THSDiscount", JSON.stringify(dicountStorage))
   
               //this will deduct SAR in type is 1
               if(filteredPromo[0].promoType === 1) {
@@ -327,6 +355,22 @@ export class CheckoutAppointmentComponent implements OnInit {
                 this.discountType = 1
                 appliedDiscount = appliedDiscount - promoAmount
                 this.total = appliedDiscount
+
+                if(!this.userData.id_number.startsWith("1")) {
+
+                  const taxRate = 0.15;
+                  const taxAmount = this.total * taxRate;
+            
+                  this.total_inc_cost =  Math.round(this.total + taxAmount);
+
+                  this.discountAmount = `SAR ${promoAmount}`
+
+                } else {
+          
+                  this.total_inc_cost =  Math.round(this.total);
+          
+                  this.discountAmount = `SAR ${promoAmount}`
+                }
   
               }
               //if type is 2 then percentage will get deduct
@@ -335,6 +379,24 @@ export class CheckoutAppointmentComponent implements OnInit {
                 this.discountType = 2
                 appliedDiscount = appliedDiscount - ((appliedDiscount ) * (promoAmount / 100))
                 this.total = appliedDiscount
+
+                if(!this.userData.id_number.startsWith("1")) {
+
+                  const taxRate = 0.15;
+                  const taxAmount = this.total * taxRate;
+            
+                  this.total_inc_cost =  Math.round(this.total + taxAmount);
+
+                  this.discountAmount = `${promoAmount}%`
+            
+                } else {
+          
+                  this.total_inc_cost =  Math.round(this.total);
+
+                  this.discountAmount = `${promoAmount}%`
+          
+                }
+
               }
   
               //this.discountCost = appliedDiscount;

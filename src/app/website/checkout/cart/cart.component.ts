@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment'
 export class CartComponent implements OnInit {
 
   public serverUrl : string = environment.domainName
-
+  errorMessage = ``
   wrongService: boolean = false
   loginAlert: boolean = false
 
@@ -136,7 +136,6 @@ export class CartComponent implements OnInit {
 
         //in case of success the api returns 0 as a status code
         if( res.status === APIResponse.Success ) {
-            console.log(this.userDependants)
           res.data.forEach(dependant => {
 
             this.userDependants.push(dependant)
@@ -186,11 +185,26 @@ export class CartComponent implements OnInit {
       
             next : ( ress : any ) => {
       
+             
               //in case of success the api returns 0 as a status code
               if( ress.status === APIResponse.Success ) {
 
                 //after fetching all service providers we will now check if their gender match with selected user or not 
                 this.serviceProvidersServices = ress.data
+
+                let patients = spData.patients
+                const patientIds = patients.map(pat => pat.gender)
+                const uniquePatientGender = [...new Set(patientIds)]
+                //if only 1 patient exixts
+                if( uniquePatientGender.length === 1 ) {
+
+                  //filter service providers which are not equal to patients gender
+                  this.serviceProvidersServices = this.serviceProvidersServices.filter(sp => {
+
+                      return sp.gender === Number(uniquePatientGender[0])
+                  })
+
+              }
 
               } else {
       
@@ -275,6 +289,8 @@ export class CartComponent implements OnInit {
   //here we will verify service provider gender wr.t. patient
   verifyServiceProviderGender() {
 
+    let errorCount = 0
+    
     //lets start with one patient and one service only
     this.cartData.forEach(cartItem => {
 
@@ -308,7 +324,9 @@ export class CartComponent implements OnInit {
           
   
         } else {
-    
+  
+          errorCount = errorCount + 1
+          this.errorMessage = this.errorMessage + ', ' + `${cartItem.title}`
           //this.wrongService = true
 
         }
@@ -322,7 +340,15 @@ export class CartComponent implements OnInit {
 
     })
 
-    this.router.navigate(['/checkout/schedule'])
+    if(errorCount>0) {
+
+      this.wrongService = true
+
+    } else {
+
+      this.router.navigate(['/checkout/schedule'])
+
+    }
 
  
   }
@@ -366,6 +392,16 @@ export class CartComponent implements OnInit {
 
     this.wrongService = false
     this.loginAlert = false
+
+  }
+
+  navigateToServiceDetail(id) {
+
+    // Set the category ID in the service and navigate to the dynamic category URL
+    this.dataService.setServiceId(id);
+
+    // Use the Router service to navigate to the dynamic category URL with query parameter
+    this.router.navigate(['/medical-services', id])
 
   }
 

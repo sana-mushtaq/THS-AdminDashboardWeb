@@ -817,6 +817,18 @@ export class BranchViewComponent implements OnInit {
 
         this.place = input.getPlace()
         this.placeSelected = true; // Set the flag to indicate a place has been selected
+
+        if (this.place.geometry && this.place.geometry.location) {
+          this.selectedLat = this.place.geometry.location.lat();
+          this.selectedLng = this.place.geometry.location.lng();
+
+          this.centerLat = this.selectedLat
+          this.centerLng = this.selectedLng
+          
+          // Set the map center to the selected location
+          this.place.setCenter(this.place.geometry.location);
+          this.place.setZoom(15); // You can adjust the zoom level as needed
+        }
       
       })
 
@@ -835,6 +847,18 @@ export class BranchViewComponent implements OnInit {
 
         this.place = input.getPlace()
         this.placeSelected = true; // Set the flag to indicate a place has been selected
+
+        if (this.place.geometry && this.place.geometry.location) {
+          this.selectedLat = this.place.geometry.location.lat();
+          this.selectedLng = this.place.geometry.location.lng();
+
+          this.centerLat = this.selectedLat
+          this.centerLng = this.selectedLng
+          
+          // Set the map center to the selected location
+          this.place.setCenter(this.place.geometry.location);
+          this.place.setZoom(15); // You can adjust the zoom level as needed
+        }
       
       })
 
@@ -928,6 +952,7 @@ export class BranchViewComponent implements OnInit {
       longitude: this.selectedLng
     })
 
+    this.placeSelected = true
   }
 
   onMarkerDragEnd(event) {

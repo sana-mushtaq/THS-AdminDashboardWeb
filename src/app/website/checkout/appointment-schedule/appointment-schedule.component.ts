@@ -18,7 +18,7 @@ import { PatientsService } from 'src/service/patient.service';
 export class AppointmentScheduleComponent implements OnInit {
 
   loginAlert: boolean = false
-
+  errorOccured: boolean = false
   userId: any
   cartData: any = []
   totalCost: number = 0
@@ -85,6 +85,7 @@ export class AppointmentScheduleComponent implements OnInit {
           services: services
         }
 
+
         this._b2c.verifyTotal(data).subscribe({
           
           next : ( res : any ) => {
@@ -95,15 +96,41 @@ export class AppointmentScheduleComponent implements OnInit {
               //after fetching all service providers we will now check if their gender match with selected user or not 
             this.totalCost = res.data
 
-            // Calculate the tax amount (15%)
-            const taxRate = 0.15;
-            const taxAmount = this.totalCost * taxRate;
+            let user_data = {
 
-            this.total_inc_cost =  Math.round(this.totalCost + taxAmount);
-
-            } else {
-    
+              user_id: this.userId
           
+            }
+
+            this._patientService.getProfileInformation(user_data).subscribe({
+      
+              next : ( res : any ) => {
+        
+                //in case of success the api returns 0 as a status code
+                if( res.status === APIResponse.Success ) {
+        
+                    if(!res.data.id_number.startsWith("1")) {
+
+                      const taxRate = 0.15;
+                      const taxAmount = this.totalCost * taxRate;
+                
+                      this.total_inc_cost =  Math.round(this.totalCost + taxAmount);
+                
+                    } else {
+              
+                      this.total_inc_cost =  Math.round(this.totalCost);
+              
+                    }
+                  
+                  
+                } 
+                
+              },
+          
+            })
+
+           
+
             }
             
           },
@@ -358,7 +385,7 @@ export class AppointmentScheduleComponent implements OnInit {
   }
 
   selectDate(date: Date) {
-  
+
     this.selectedDate = date
     this.calculateTimeSlots()
 
@@ -416,6 +443,7 @@ export class AppointmentScheduleComponent implements OnInit {
         return sps.service_id === serviceId;
       });
 
+
       // Convert the selected date to "YYYY-MM-DD" format
       const selectedDate = this.formatSelectedDate(this.selectedDate);
 
@@ -445,6 +473,7 @@ export class AppointmentScheduleComponent implements OnInit {
         return !uniqueScheduledTimes.includes(timeSlot);
       };
   
+
       this.timeSlots = [];
       // Generate time slots and filter unavailable ones
       for (let hour = 12; hour <= 23; hour++) {
@@ -464,26 +493,54 @@ export class AppointmentScheduleComponent implements OnInit {
 
       // Create a list to store time slots to be removed
       const timeSlotsToRemove = []
-      
-      // Iterate through the available time slots
-      for (let hour = 12; hour <= 23; hour++) {
+      const serviceId = this.cartData.map(i=> i.id);
 
-        const timeSlot = this.formatTimeSlot(hour)
+      const serviceIds = this.cartData.map(item => item.id);
 
-        // Check if all service providers are booked at this time slot
-        const allProvidersBooked = this.fetchedData.appointments.every(app => {
+      // Get all service providers for the selected services
+      let sps = serviceIds.map(serviceId => {
+        return this.serviceProvidersServices[serviceId].filter(sp => sp.service_id === serviceId);
+      });
+      // Flatten the array of arrays into a single array of service providers
+      const flattenedProviders = [].concat(...sps);
+      sps = flattenedProviders;
 
-          return selectedServiceIds.includes(app.service_id) && app.serviceTime === timeSlot
+      let sd = this.formatSelectedDate(this.selectedDate).toString()
 
-        })
+  
+      const uniqueScheduledTimes = this.fetchedData.appointments
+      .filter(app => {
+        // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
+        return (
+          app.serviceAssigneeId !== null &&
+          sps.some(sp => sp.user_id === app.serviceAssigneeId) &&
+          app.serviceDate === sd
+          //mpare only the date part
+          // You can add a time condition here if needed
+        );
+      }).map(app => {
+        // Convert the database time format (e.g., "2023-09-04T19:00:00.000Z") to time slots format (e.g., "4:00pm")
+        const dbTime = app.serviceTime;
+        const [hours, minutes] = dbTime.split(':');
+        const ampm = hours >= 12 ? 'pm' : 'am';
+        const formattedTime = `${(hours % 12) || 12}:${minutes}${ampm}`;
+        return formattedTime;
+    });
 
-        if (allProvidersBooked) {
+    // Function to check if a time slot is available
+    const isTimeSlotAvailable = (timeSlot: string) => {
+      return !uniqueScheduledTimes.includes(timeSlot);
+    };
 
-          timeSlotsToRemove.push(timeSlot)
 
-        }
-
+    this.timeSlots = [];
+    // Generate time slots and filter unavailable ones
+    for (let hour = 12; hour <= 23; hour++) {
+      const timeSlot = this.formatTimeSlot(hour);
+      if (isTimeSlotAvailable(timeSlot)) {
+        this.timeSlots.push(timeSlot);
       }
+    }
       
       // Remove the time slots that need to be removed
       this.timeSlots = this.timeSlots.filter(slot => !timeSlotsToRemove.includes(slot))
@@ -566,18 +623,26 @@ export class AppointmentScheduleComponent implements OnInit {
     
   proceedToPay() {
 
-    let patient_note = (document.getElementById("patient_note") as any).value
-    let data = {
+    if(!this.preferredDate || !this.preferredTime) {
 
-      cartData: this.cartData,
-      preferredTime: this.preferredTime,
-      preferredDate: this.selectedDate,
-      patient_note: patient_note
+     this.errorOccured = true
 
+    } else {
+
+      let patient_note = (document.getElementById("patient_note") as any).value
+      let data = {
+  
+        cartData: this.cartData,
+        preferredTime: this.preferredTime,
+        preferredDate: this.formatSelectedDate(this.selectedDate),
+        patient_note: patient_note
+  
+      }
+  
+      localStorage.setItem("THSPaylaod", JSON.stringify(data))
+      this.router.navigate(['/checkout/confirmation'])
     }
 
-    localStorage.setItem("THSPaylaod", JSON.stringify(data))
-    this.router.navigate(['/checkout/confirmation'])
   
   }
 
@@ -596,6 +661,12 @@ export class AppointmentScheduleComponent implements OnInit {
 
     this.router.navigate(['/login'])
 
+  }
+
+  handleContinueClickTimeDate() {
+
+    this.errorOccured = false
+    
   }
 
 }

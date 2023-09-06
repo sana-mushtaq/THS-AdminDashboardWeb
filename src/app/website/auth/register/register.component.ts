@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@ang
 import { AppService } from 'src/service/app.service';
 import { APIResponse } from 'src/utils/app-enum';
 import { PatientsService } from 'src/service/patient.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -37,12 +38,13 @@ export class RegisterComponent implements OnInit {
     private fb : FormBuilder,
     private renderer: Renderer2,
     private _appService: AppService,
-    private _patientService: PatientsService) {
+    private _patientService: PatientsService,
+    private router: Router) {
 
       this.accountDetailsForm = this.fb.group({
   
         email: ['', [ Validators.required, Validators.email ]],
-        phone_number: ['', [Validators.required, Validators.pattern('^(966|\\+966|0)(5|6|9)[0-9]{8}$')]],
+        phone_number: ['', [Validators.required,/* Validators.pattern('^(966|\\+966|0)(5|6|9)[0-9]{8}$')*/]],
         password: ['', [ Validators.required, Validators.minLength(8) ]],
         confirm_password: ['', [ Validators.required, Validators.minLength(8) ]]
  
@@ -102,6 +104,7 @@ export class RegisterComponent implements OnInit {
 
     }, 10 * 60 * 1000) // 10 minutes in milliseconds
 
+    console.log(this.verificationCode)
     return this.verificationCode
 
   }
@@ -317,8 +320,10 @@ export class RegisterComponent implements OnInit {
           if( res.status === APIResponse.Success ) {
 
             this.userData =  res.data.result
-            localStorage.setItem("THSUserId", JSON.stringify(this.userData))
+            localStorage.setItem("THSUserId", JSON.stringify(this.userData.id))
             localStorage.setItem('THSToken',  res.data.token)
+
+            this.router.navigate(['/user/profile'])
 
           } else {
   

@@ -93,7 +93,7 @@ a:hover{
     }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (min-width: 361px) and (max-width: 500px) {
 
     .phone-static {
         position: static;
@@ -123,6 +123,10 @@ a:hover{
     .phone-width-150{
         width: 150px;
     }
+
+    .phone-width-120{
+        width: 120px;
+    }
     .xxxmedImg{
         width: 120px;
         height: 120px;
@@ -141,5 +145,16 @@ a:hover{
     }
     .width-max-phone-130{
         max-width: 130px;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+
+    .phone-width-100{
+        width: 100px !important;
+    }
+    .xxxmedImg{
+        width: 80px !important;
+        height: 80px !important;
     }
 }

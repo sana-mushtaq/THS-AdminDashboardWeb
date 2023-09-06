@@ -82,7 +82,7 @@
                                     <img class="medImg" src="{{serverUrl}}{{service.icon}}" *ngIf="service.icon && service.icon.length>0">
                                 </td>
 
-                                <td class="cursor-pointer" (click)="openServiceDetails(service, serviceIndex)">
+                                <td class="cursor-pointer" (click)="editService(service, serviceIndex)">
                                     <p> {{ service.title }} </p>
                                 </td>
 
@@ -137,138 +137,6 @@
                         
                         </div>   -->          
                                             
-                    </div>
-
-                    <!-- Service Details -->
-                    <div class="fixed dialog" *ngIf="serviceDetailsToggle">
-
-                        <div class="popup">
-
-                            <div class="content white-bg scrollable-div">
-
-                                <button class="close" (click)="closeServiceDetails()">x</button>
-
-                                <div class="auto-flex-center-gap20">
-
-                                    <div class="auto-flex-center-start-gap20">
-
-                                        <img src="selectedService.icon" class="medImg" *ngIf="selectedService.icon && selectedService.icon.length>0"/>
-                                        
-                                        <div class="auto-flex-start-gap10-column">
-
-                                            <div class="auto-flex-center-start-gap10">
-
-                                                <p class="bold med"> {{ selectedService.title }} </p>
-                                                <p class="dark-green-bg padding-10 fit-content secondary-color" *ngIf="selectedService.active"> Active </p>
-                                                <p class="red-bg padding-10 fit-content secondary-color" *ngIf="!selectedService.active"> Deactivated </p>
-
-                                            </div>
-
-                                            <hr class="hr-black" />
-
-                                            <div class="auto-flex-start-gap10">
-
-                                                <p class="bold">URL:</p>
-                                                <p> {{ selectedService.url }} </p>
-                                            
-                                            </div>
-
-                                            <div class="auto-flex-start-gap10">
-
-                                                <p class="bold">Title AR:</p>
-                                                <p> {{ selectedService.title_arabic }} </p>
-
-                                            </div>
-
-                                            <div class="auto-flex-start-gap10">
-
-                                                <p class="bold">Price:</p>
-                                                <p> {{ selectedService.price }} </p>
-
-                                                <p class="bold">Cost:</p>
-                                                <p> {{ selectedService.cost }} </p>
-                                                
-                                                <p class="bold">Coupon Code:</p>
-                                                <p *ngIf="selectedService.coupon_code">Coupon: {{ selectedService.coupon_code }}</p>
-
-                                            </div>
-                                        
-                                        </div>
-                                        
-                                    </div>
-
-                                    <div class="auto-flex-center-start-gap20">
-                                        
-                                        <div class="auto-flex-start-gap10">
-
-                                            <p class="bold">Description:</p>
-                                            <p> {{ selectedService.description }} </p>
-
-                                        </div>
-                                        
-                                    </div>
-
-                                    <div class="auto-flex-center-start-gap20">
-                                        
-                                        <div class="auto-flex-start-gap10">
-
-                                            <p class="bold">Description AR:</p>
-                                            <p> {{ selectedService.description_arabic }} </p>
-
-                                        </div>
-                                        
-                                    </div>
-
-                                    <div class="auto-flex-center-start-gap20">
-                                        
-                                        <div class="auto-flex-start-gap10">
-
-                                            <p class="bold">Instructions:</p>
-                                            <p> {{ selectedService.instructions }} </p>
-
-                                        </div>
-                                        
-                                    </div>
-
-                                    <div class="auto-flex-center-start-gap20">
-                                        
-                                        <div class="auto-flex-start-gap10">
-
-                                            <p class="bold">Instructions AR:</p>
-                                            <p> {{ selectedService.instructions_arabic }} </p>
-
-                                        </div>
-                                        
-                                    </div>
-
-                                    <div class="auto-flex-center-start-gap20">
-                                        
-                                        <div class="auto-flex-start-gap10">
-
-                                            <p class="bold">FAQ:</p>
-                                            <p> {{ selectedService.faq }} </p>
-
-                                        </div>
-                                        
-                                    </div>
-
-                                    <div class="auto-flex-center-start-gap20">
-                                        
-                                        <div class="auto-flex-start-gap10">
-
-                                            <p class="bold">FAQ AR:</p>
-                                            <p> {{ selectedService.faq_arabic }} </p>
-
-                                        </div>
-                                        
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
                     </div>
 
                     <!-- Add Service-->

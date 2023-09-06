@@ -1,6 +1,6 @@
 <app-checkout-header></app-checkout-header>
 
-<div class="web auto-flex-start-gap40 main-div padding-top-20" style="padding: 20px;">
+<div class="web auto-flex-start-gap40 main-div-max padding-top-20" style="padding: 20px;">
 
     <div class="auto-flex-start-gap10-column-no-set-width gray-border flex-grow border-radius-20 padding-20">
 
@@ -13,13 +13,13 @@
                 <img class="xxxmedImg cover border-radius-10" *ngIf="cart.icon && cart.icon.length>0" src="{{serverUrl}}{{cart.icon}}" />
                 <img class="xxxmedImg cover border-radius-10" *ngIf="!cart.icon || cart.icon.length<=0" style="object-fit: fill;" src="assets/images/web/logo.svg" />
     
-                                <p class="med bold blue-color">SAR {{ cart.price }}</p>
+                <p class="med bold blue-color">SAR {{ cart.price }}</p>
 
             </div>
 
             <div class="auto-flex-start-gap10-column-no-set-width width-max-300">
 
-                <p class="med bold">{{ cart.title }}</p>
+                <p class="med bold cursor-pointer" (click)="navigateToServiceDetail(cart.id)">{{ cart.title }}</p>
                 <p class="web-font-primary-light" *ngIf="!cart.showFullDescription">{{ cart.description | slice:0:90 }}...</p>
                 <p class="web-font-primary-light" *ngIf="cart.showFullDescription">{{ cart.description }}</p>
                 <p class="web-font-primary-light cursor-pointer" *ngIf="!cart.showFullDescription" (click)="toggleDescription(cartIndex)">show more</p>
@@ -50,7 +50,7 @@
     
     </div>
 
-    <div class="auto-flex-start-gap20-column-no-set-width width-500 flex-grow max-width phone-max-width gray-border border-radius-20 padding-20">
+    <div class="auto-flex-start-gap20-column-no-set-width width-300 flex-grow max-width phone-max-width gray-border border-radius-20 padding-20">
 
         <p class="med bold">Payment summary</p>
 
@@ -80,7 +80,8 @@
     <app-custom-alert *ngIf="loginAlert" [title]="'User not logged in'" [message]="'Please log in to continue'" [cancelButtonText]="'Cancel'" [continueButtonText]="'login'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Cart error -->
-    <app-custom-alert *ngIf="wrongService" [title]="'Service selection error'" [message]="'You have selected a service that is not provided by a service provider relative to your gender. Please choose a dependent or remove the service.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Confirm'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClickService()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="wrongService" [title]="'Service selection error'"   [message]="'You have selected a service that is not provided by a service provider relative to your gender. Please choose a dependent or remove the service. Service(s) are: ' + errorMessage"
+    [cancelButtonText]="'Cancel'" [continueButtonText]="'Confirm'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClickService()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
 
 </div>

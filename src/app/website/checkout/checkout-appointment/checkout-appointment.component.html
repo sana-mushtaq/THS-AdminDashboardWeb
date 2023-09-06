@@ -1,8 +1,8 @@
 <app-checkout-header></app-checkout-header>
 
-<div class="web auto-flex-start-gap40-column main-div padding-top-20" style="padding: 20px;">
+<div class="web auto-flex-start-gap40-column main-div-max padding-top-20" style="padding: 20px;">
 
-    <div class="auto-flex-start-gap20-column gray-border border-radius-20 padding-20">
+    <div class="auto-flex-start-gap20-column gray-border border-radius-20 padding-20" *ngIf="!this.promoApplied">
 
         <p class="med bold">Discount and facilitation</p>
 
@@ -61,6 +61,13 @@
                     <p class="web-font-primary-light">Subtotal</p>
                     <p class="web-font-primary-light bold">SAR {{ total }}</p>
     
+                </div>   
+                
+                <div class="auto-flex-center-space-between-gap20" *ngIf="discountAmount.length>0">
+                    
+                    <p class="web-font-primary-light">Discount</p>
+                    <p class="web-font-primary-light bold">- {{ discountAmount }}</p>
+    
                 </div>    
     
                 <div class="auto-flex-center-space-between-gap20">
@@ -78,8 +85,8 @@
 
     <button class="primary-bg max-width padding-10" (click)="payAndBook()">Pay & book</button>
 
-         <!-- Cart error -->
-         <app-custom-alert *ngIf="errorOccured" [title]="'Error'" [message]="'An error occurred. Try agin later'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Confirm'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <!-- Cart error -->
+    <app-custom-alert *ngIf="errorOccured" [title]="'Error'" [message]="'An error occurred. Try agin later'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Confirm'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
 </div>
 

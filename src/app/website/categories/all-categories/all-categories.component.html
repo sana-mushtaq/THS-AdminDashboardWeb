@@ -1,6 +1,6 @@
 <app-checkout-header></app-checkout-header>
 
-<div class="web auto-flex-start-gap30-column main-div padding-top-20" *ngIf="currentCategory && currentCategory.title.length>0"  style="padding: 20px;">
+<div class="web auto-flex-start-gap30-column main-div-max padding-top-20" *ngIf="currentCategory && currentCategory.title.length>0"  style="padding: 20px;">
 
     <!-- Category header -->
     <div class="auto-flex-center-start-gap20 cursor-pointer" >
@@ -316,7 +316,7 @@
 
             <div class="auto-flex-center-space-between-gap20">
 
-                <div class="auto-flex-center-start-gap20-no-set-width gray-border border-radius-10 padding-10 relative width-half" *ngFor="let service of allServices; let serviceIndex = index">
+                <div class="auto-flex-center-start-gap20-no-set-width gray-border border-radius-10 padding-10 relative width-half" *ngFor="let service of allServices.slice(0, itemsToShowInitially); let serviceIndex = index">
 
                     <img class="xxxmedImg cover border-radius-10" *ngIf="service.icon && service.icon.length>0" src="{{serverUrl}}{{service.icon}}" />
                     <img class="xxxmedImg cover border-radius-10" *ngIf="!service.icon || service.icon.length<=0" style="object-fit: fill;" src="assets/images/web/logo.svg" />
@@ -332,6 +332,12 @@
     
             </div>
             
+            <div class="auto-flex-center-gap20">
+
+                <button class="primary-bg padding-10 capitalize box-shadow xsmall width-max-300 max-width" *ngIf="allServices.length>10" (click)="loadMoreItems()">Load More</button>
+
+            </div>
+
         </div>  
 
     </div>

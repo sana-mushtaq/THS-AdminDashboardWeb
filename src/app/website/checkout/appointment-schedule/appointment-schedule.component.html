@@ -1,6 +1,6 @@
 <app-checkout-header></app-checkout-header>
 
-<div class="web auto-flex-start-gap40-column main-div padding-top-20" style="padding: 20px;">
+<div class="web auto-flex-start-gap40-column main-div-max padding-top-20" style="padding: 20px;">
 
     <div class="auto-flex-center-start-gap20 width-max-550 padding-20 cursor-pointer" (click)="navigateToCart()">
 
@@ -112,6 +112,7 @@
 
     <!-- Cart error -->
     <app-custom-alert *ngIf="loginAlert" [title]="'User not logged in'" [message]="'Please log in to continue'" [cancelButtonText]="'Cancel'" [continueButtonText]="'login'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="errorOccured" [title]="'Date or time not selected'" [message]="'Please select date and time to proceed'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Confirm'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClickTimeDate()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
 </div>
 

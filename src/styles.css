@@ -2401,6 +2401,7 @@ div.dt-buttons .dt-button {
 
 a:hover{
     text-decoration: none !important;
+    color: var(--blue-color) !important;
 }
 
 .bg-theme-light{ background-color: var(--light);}
@@ -4879,6 +4880,14 @@ a:hover{
     width: 100%;
     margin: 0 auto;
   }
+
+  .main-div-max{
+    /*max-width: 1200px;*/
+
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
 
 .main-div-half{
 max-width: 600px;

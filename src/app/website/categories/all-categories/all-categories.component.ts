@@ -13,6 +13,9 @@ export class AllCategoriesComponent implements OnInit {
   
   public serverUrl : string = environment.domainName
 
+  // Define variables for controlling the number of items to display.
+  itemsToShowInitially = 10;
+  itemsToLoadMore = 10;
 
   categoryUrl: string
   currentCategory: any
@@ -87,4 +90,9 @@ export class AllCategoriesComponent implements OnInit {
 
   }
  
+  // Function to load more items
+  loadMoreItems() {
+    this.itemsToShowInitially += this.itemsToLoadMore;
+  }
+  
 }

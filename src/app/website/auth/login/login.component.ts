@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  userId: any
   rememberMe: boolean = false
   credentialsError: boolean = false
 
@@ -32,7 +32,18 @@ export class LoginComponent implements OnInit {
 
    }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+
+    this.userId = localStorage.getItem("THSUserId")
+
+    if(this.userId !== null) { 
+
+      this.router.navigate(['/user/profile'])
+
+
+    }
+
+  }
 
   //this function will authenticate and log in user
   login() {

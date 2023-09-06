@@ -112,6 +112,12 @@ export class ServiceDetailsComponent implements OnInit {
       this.cartData.push(cartItem)
       this._utilService.addToCart(this.cartData)
 
+      if(this.cartLength === 1) {
+
+      
+
+      }
+
     } else {
 
       this.showErrorCart = true

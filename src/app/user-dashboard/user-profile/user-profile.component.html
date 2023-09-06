@@ -1,4 +1,6 @@
-<div class="web auto-flex-start-gap40-column main-div">
+<app-checkout-header></app-checkout-header>
+
+<div class="web auto-flex-start-gap40-column main-div-max padding-top-40" style="padding: 20px;">
 
     <!-- full name and user id -->
     <div class="auto-flex-center-start-gap20 cursor-pointer">
@@ -629,3 +631,5 @@
     <app-custom-alert *ngIf="showErrorUpdatingAddress" [title]="'Error'" [message]="'An error occured while updating addresses. Try again later.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
 </div>
+
+<app-checkout-footer></app-checkout-footer>

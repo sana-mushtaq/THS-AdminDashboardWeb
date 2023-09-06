@@ -20,6 +20,8 @@ declare var google: any;
 })
 export class AllServicesComponent implements OnInit {
 
+  showErrorUpdatingAddress: boolean = false
+
   private initializationSubject = new Subject<void>()
 
   public serverUrl : string = environment.domainName
@@ -74,6 +76,9 @@ export class AllServicesComponent implements OnInit {
 
       this.addressForm = this.fb.group({
 
+        address_name: ['', Validators.required],
+        city: [''],
+        country: [''],
         latitude: ['', [ Validators.required ]],
         longitude: ['', [ Validators.required ]],
         address_line1: ['', [ Validators.required ]],
@@ -279,9 +284,19 @@ export class AllServicesComponent implements OnInit {
                 const cityName = component.long_name
 
                 this.cityName = cityName
+
+                this.addressForm.get('city').setValue( cityName )
+
                 return cityName // You can use the cityName as needed
 
               }
+
+                // Check for the country component
+                if (component.types.includes("country")) {
+                  
+                  this.addressForm.get('country').setValue( component.long_name )
+                
+                }
 
             }
 
@@ -338,6 +353,8 @@ export class AllServicesComponent implements OnInit {
 
     this.selectedLat = event.coords.lat
     this.selectedLng = event.coords.lng
+
+    this.placeSelected = true
 
     this.userAddress = {
               
@@ -400,6 +417,19 @@ export class AllServicesComponent implements OnInit {
 
         this.place = input.getPlace()
         this.placeSelected = true; // Set the flag to indicate a place has been selected
+
+        if (this.place.geometry && this.place.geometry.location) {
+          this.selectedLat = this.place.geometry.location.lat();
+          this.selectedLng = this.place.geometry.location.lng();
+
+          this.centerLat = this.selectedLat
+          this.centerLng = this.selectedLng
+          
+          // Set the map center to the selected location
+          this.place.setCenter(this.place.geometry.location);
+          this.place.setZoom(15); // You can adjust the zoom level as needed
+        }
+
       
       })
 
@@ -443,6 +473,12 @@ export class AllServicesComponent implements OnInit {
     if (this.addressForm.invalid) {
 
       // Display error messages
+      if (this.addressForm.get('address_name').invalid) {
+      
+        this.addressForm.get('address_name').setErrors({ invalidAddressName: true })
+
+      }
+
       if (this.addressForm.get('address_line1').invalid) {
       
         this.addressForm.get('address_line1').setErrors({ invalidAddressLine1: true })
@@ -476,7 +512,57 @@ export class AllServicesComponent implements OnInit {
       this.selectMapLocation = false
       this.userCurrentLocation = false
       this.addNewAddressToggle = false
-      this.addressForm.reset()
+      //this.addressForm.reset()
+
+
+      if(this.userId !== null) {
+
+        //we will perform some actions to store user location
+        let address_data = {
+
+          user_id: this.userId,
+          address: {
+
+            address_name: this.addressForm.get('address_name').value,
+            city: this.addressForm.get('city').value,
+            country: this.addressForm.get('country').value,
+            latitude: this.addressForm.get('latitude').value,
+            longitude: this.addressForm.get('longitude').value,
+            address_line1: this.addressForm.get('address_line1').value,
+            address_line2: this.addressForm.get('address_line2').value
+
+          }
+
+        }
+
+        this._patientService.createAddress(address_data).subscribe({
+
+          next : ( res : any ) => {
+    
+            //in case of success the api returns 0 as a status code
+            if( res.status === APIResponse.Success ) {
+
+              this.userLocations.push(address_data.address)
+              this.addressForm.reset()
+
+            } else {
+    
+              //if it is unable to add category data it will return an error
+              this.showErrorUpdatingAddress = true
+              
+            }
+            
+          },
+    
+          error: ( err: any ) => {
+            
+            this.showErrorUpdatingAddress = true
+
+          }
+    
+        })
+
+      }
 
     }
 
@@ -592,4 +678,34 @@ export class AllServicesComponent implements OnInit {
 
     this.router.navigate([link])
   }
+
+  closeMap() {
+
+    this.selectMapLocation = false
+  }
+
+  navigateToLogin() {
+
+    if(this.userId !== null) {
+
+      this.router.navigate(['/user/profile'])
+
+    } else {
+
+      this.router.navigate(['/login'])
+
+    }
+
+  }
+
+  
+  handleCancelClick(): void {}
+
+  //alert continue button handler
+  handleContinueClick(): void {
+
+    this.showErrorUpdatingAddress = false
+
+  }
+  
 }
