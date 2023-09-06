@@ -5,12 +5,17 @@
     <!-- Service header -->
     <div class="auto-flex-center-start-gap20-no-set-width width-half">
 
-        <div class="auto-flex-start-gap20-column-no-set-width">
+        <div class="auto-flex-start-gap20-column">
 
             <p class="med bold">Service Details</p>
-            <p class="web-font-primary-light" *ngIf="!sanitizedWhatsappUrl">{{ currentService.description }}</p>
 
-            <iframe *ngIf="currentService" [src]="getSafeUrl(currentService.whatsapp_url)" frameborder="0" style="height: 600px; width: 100%; border: 0px;"></iframe>
+            
+            <ng-container *ngIf="currentService && currentService.whatsapp_url">
+                <iframe [src]="getSafeUrl(currentService.whatsapp_url)" frameborder="0" style="height: 800px; width: 100%; border: 0px;"></iframe>
+              </ng-container>
+              <ng-container *ngIf="!currentService || !currentService.whatsapp_url">
+                <p class="web-font-primary-light" *ngIf="!sanitizedWhatsappUrl">{{ currentService.description }}</p>
+              </ng-container>
 
             <p class="med bold" *ngIf="serviceVariants && serviceVariants.length>0">Variants</p>
             <div class="auto-flex-start-gap10-column" *ngIf="serviceVariants && serviceVariants.length>0">
