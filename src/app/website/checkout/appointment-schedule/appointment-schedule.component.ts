@@ -66,11 +66,6 @@ export class AppointmentScheduleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
-    this.selectCurrentDay()
-    this.generateWeek()
-    this.updateCurrentMonthAndYear()
-    
     this.userId = localStorage.getItem("THSUserId")
     
     if(this.userId !== null) {
@@ -155,9 +150,102 @@ export class AppointmentScheduleComponent implements OnInit {
   
     })
 
-    this.websocketService.connect(); // Assuming you have a connect() method in your service
+    //this.websocketService.connect(); // Assuming you have a connect() method in your service
     
-    this.dataSubscription = this.websocketService.onData().subscribe(data => {
+    let sa =  {
+      user_id: this.userId
+    }
+
+    this._b2c.getSocketData(sa).subscribe({
+      
+      next : ( res : any ) => {
+
+        //in case of success the api returns 0 as a status code
+        if( res.status === APIResponse.Success ) {
+
+          //after fetching all service providers we will now check if their gender match with selected user or not 
+          this.fetchedData = res.data
+          console.log(this.fetchedData)
+
+          this.dataService.data$.subscribe((res) => {
+
+            if (res) {
+    
+              // ... handle the received data here
+              let services = res.services
+              let filteredServices = []
+    
+              this.cartData.forEach(cartItem => {
+    
+                let temp = services.filter(service => {
+    
+                  return service.id === cartItem.id
+    
+                })
+    
+                if( temp.length > 0 ) {
+    
+                  filteredServices.push(temp[0])
+                  
+                }
+    
+              })
+    
+              let spData  = {
+    
+                services: filteredServices,
+                patients: this.userDependants
+    
+              }
+    
+              this._b2c.checkServiceProviderEligibilty(spData).subscribe({
+          
+                next : ( ress : any ) => {
+          
+                  //in case of success the api returns 0 as a status code
+                  if( ress.status === APIResponse.Success ) {
+    
+                    //after fetching all service providers we will now check if their gender match with selected user or not 
+                    this.serviceProvidersServices = ress.data
+    
+                    this.selectCurrentDay()
+                    this.generateWeek()
+                    this.updateCurrentMonthAndYear()
+    
+                  } else {
+          
+                 
+                  }
+                  
+                },
+                error: ( err: any ) => {
+                  
+                  console.log(err)
+          
+                }
+            
+              }) 
+      
+            }
+      
+          })
+
+        } else {
+
+       
+        }
+        
+      },
+      error: ( err: any ) => {
+        
+        console.log(err)
+
+      }
+  
+    }) 
+
+    
+    /*this.dataSubscription = this.websocketService.onData().subscribe(data => {
 
       this.fetchedData = data
       this.dataService.data$.subscribe((res) => {
@@ -223,7 +311,7 @@ export class AppointmentScheduleComponent implements OnInit {
   
       })
 
-    })
+    })*/
 
   }
 

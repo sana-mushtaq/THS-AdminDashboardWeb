@@ -83,5 +83,11 @@ export class BusinessToCustomerSchedulingService {
 
   }
 
+  getSocketData(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/getSocketData', body)
+
+  }
+
     
 }
