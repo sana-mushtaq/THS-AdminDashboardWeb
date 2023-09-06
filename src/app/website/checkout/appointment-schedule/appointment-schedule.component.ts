@@ -67,6 +67,10 @@ export class AppointmentScheduleComponent implements OnInit {
   ngOnInit(): void {
 
     
+    this.selectCurrentDay()
+    this.generateWeek()
+    this.updateCurrentMonthAndYear()
+    
     this.userId = localStorage.getItem("THSUserId")
     
     if(this.userId !== null) {
@@ -186,10 +190,6 @@ export class AppointmentScheduleComponent implements OnInit {
             patients: this.userDependants
 
           }
-  
-          this.selectCurrentDay()
-          this.generateWeek()
-          this.updateCurrentMonthAndYear()
 
           this._b2c.checkServiceProviderEligibilty(spData).subscribe({
       
