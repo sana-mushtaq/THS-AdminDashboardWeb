@@ -40,14 +40,14 @@
             
             <div class="auto-flex-start-center-gap10">
                 
-                <a  [routerLink]="['/forget-password']" class="xsmall bold blue-color">Forgot password</a>
+                <a (click)="naviagateToForgetPassword()" class="xsmall bold blue-color">Forgot password</a>
             
             </div>
            
              <div class="auto-flex-start-center-gap10">
     
                 <p class="xsmall bold web-font-primary-light">Don’t have an account?</p>
-                <a  [routerLink]="['/register']" class="xsmall bold blue-color">Sign up</a>
+                <a  (click)="naviagateToRegister()" class="xsmall bold blue-color">Sign up</a>
     
             </div>
 

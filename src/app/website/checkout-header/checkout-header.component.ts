@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { WebsiteDataService } from 'src/service/website-data.service';
 import { UtilService } from 'src/utils/util.service';
 
@@ -15,7 +16,8 @@ export class CheckoutHeaderComponent implements OnInit {
 
   constructor(
     private _utilService: UtilService,
-    private _websiteDataService: WebsiteDataService
+    private _websiteDataService: WebsiteDataService,
+    private router: Router
   ) { 
 
     this.cartData = this._utilService.getCartData()
@@ -40,6 +42,11 @@ export class CheckoutHeaderComponent implements OnInit {
 
     document.getElementById("menuBar").style.width = '0%'
 
+  }
+
+  navigate(link) {
+
+    this.router.navigate([link])
   }
 
 }

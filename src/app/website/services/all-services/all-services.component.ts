@@ -587,4 +587,9 @@ export class AllServicesComponent implements OnInit {
     }
 
   }
+
+  navigate(link) {
+
+    this.router.navigate([link])
+  }
 }
