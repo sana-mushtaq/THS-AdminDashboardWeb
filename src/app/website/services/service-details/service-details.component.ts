@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WebsiteDataService } from 'src/service/website-data.service';
 import { UtilService } from 'src/utils/util.service';
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-service-details',
@@ -9,6 +10,8 @@ import { UtilService } from 'src/utils/util.service';
   styleUrls: ['./service-details.component.css']
 })
 export class ServiceDetailsComponent implements OnInit {
+
+  public serverUrl : string = environment.domainName
 
   serviceId: string
   currentService: any

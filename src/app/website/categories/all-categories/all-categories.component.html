@@ -290,12 +290,12 @@
                     
             <div class="auto-flex-center-space-between-gap20 padding-bottom-20 place-stretch phone-scroll scroll-bar-gray">
 
-                <div class="auto-flex-start-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-500 relative" (click)="navigateToService(service.id)" *ngFor="let service of topServices; let serviceIndex = index">
+                <div class="auto-flex-start-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-half phone-300 relative" (click)="navigateToService(service.id)" *ngFor="let service of topServices; let serviceIndex = index">
     
                     <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10 border-none z-index">{{ service.price }} SAR</p>
     
                     <div class="linear-gradient-blue absolute height-200 border-top-left-right-10"></div>
-                    <img class="xxxlargeImg-500 height-200 cover border-top-left-right-10" src="assets/images/web/img.svg">
+                    <img class="xxxlargeImg-500 height-200 cover border-top-left-right-10 max-width" style="width: 100%;" src="{{serverUrl}}{{service.icon}}">
     
                     <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
     
@@ -318,7 +318,8 @@
 
                 <div class="auto-flex-center-start-gap20-no-set-width gray-border border-radius-10 padding-10 relative width-half" *ngFor="let service of allServices; let serviceIndex = index">
 
-                    <img class="xxxmedImg cover border-radius-10" src="assets/images/web/example.svg" />
+                    <img class="xxxmedImg cover border-radius-10" *ngIf="service.icon && service.icon.length>0" src="{{serverUrl}}{{service.icon}}" />
+                    <img class="xxxmedImg cover border-radius-10" *ngIf="!service.icon || service.icon.length<=0" style="object-fit: fill;" src="assets/images/web/logo.svg" />
 
                     <div class="auto-flex-start-gap10-column-no-set-width">
 

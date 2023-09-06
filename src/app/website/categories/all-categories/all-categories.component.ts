@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WebsiteDataService } from 'src/service/website-data.service';
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-all-categories',
@@ -10,6 +11,9 @@ import { WebsiteDataService } from 'src/service/website-data.service';
 })
 export class AllCategoriesComponent implements OnInit {
   
+  public serverUrl : string = environment.domainName
+
+
   categoryUrl: string
   currentCategory: any
   allServices: any
@@ -49,11 +53,11 @@ export class AllCategoriesComponent implements OnInit {
           
           this.topServices = res.services.filter(
           
-            service => service.category_id === this.currentCategory.id
+            service => service.category_id === this.currentCategory.id && service.top === 1
           
           )
-          
-          this.topServices.splice(0, 4)
+
+          this.topServices = this.topServices.splice(0, 4)
  
            this.allServices = res.services
 

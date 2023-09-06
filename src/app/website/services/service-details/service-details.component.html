@@ -74,7 +74,8 @@
                
             </div>
     
-            <img class="xxxmedImg cover border-radius-10" src="assets/images/web/example.svg" />
+            <img class="xxxmedImg cover border-radius-10" *ngIf="currentService.icon && currentService.icon.length>0" src="{{serverUrl}}{{currentService.icon}}" />
+            <img class="xxxmedImg cover border-radius-10" *ngIf="!currentService.icon || currentService.icon.length<=0" style="object-fit: fill;" src="assets/images/web/logo.svg" />
     
         </div>
 

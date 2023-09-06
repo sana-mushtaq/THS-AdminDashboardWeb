@@ -5,6 +5,7 @@ import { PatientsService } from 'src/service/patient.service';
 import { WebsiteDataService } from 'src/service/website-data.service';
 import { APIResponse } from 'src/utils/app-enum';
 import { UtilService } from 'src/utils/util.service';
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-cart',
@@ -14,6 +15,8 @@ import { UtilService } from 'src/utils/util.service';
 })
 
 export class CartComponent implements OnInit {
+
+  public serverUrl : string = environment.domainName
 
   wrongService: boolean = false
   loginAlert: boolean = false

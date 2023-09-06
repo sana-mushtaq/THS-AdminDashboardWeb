@@ -10,8 +10,10 @@
 
             <div class="auto-flex-center-gap10-column-no-set-width">
 
-                <img class="xxmedImg cover border-radius-10" src="assets/images/web/example.svg" />
-                <p class="med bold blue-color">SAR {{ cart.price }}</p>
+                <img class="xxxmedImg cover border-radius-10" *ngIf="cart.icon && cart.icon.length>0" src="{{serverUrl}}{{cart.icon}}" />
+                <img class="xxxmedImg cover border-radius-10" *ngIf="!cart.icon || cart.icon.length<=0" style="object-fit: fill;" src="assets/images/web/logo.svg" />
+    
+                                <p class="med bold blue-color">SAR {{ cart.price }}</p>
 
             </div>
 

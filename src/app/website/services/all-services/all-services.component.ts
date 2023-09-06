@@ -165,7 +165,7 @@ export class AllServicesComponent implements OnInit {
 
         })
 
-        this.topCategories.slice(0, 4)
+        this.topCategories = this.topCategories.slice(0, 4)
 
         /* Temporary hold */
         /*this.allServices.forEach(s => {
