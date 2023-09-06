@@ -8,10 +8,12 @@
         <div class="auto-flex-start-gap20-column-no-set-width">
 
             <p class="med bold">Service Details</p>
-            <p class="web-font-primary-light">{{ currentService.description }}</p>
+            <p class="web-font-primary-light" *ngIf="!sanitizedWhatsappUrl">{{ currentService.description }}</p>
 
-            <p class="med bold" *ngIf="serviceVariants.length>0">Variants</p>
-            <div class="auto-flex-start-gap10-column" *ngIf="serviceVariants.length>0">
+            <iframe #iframeId frameborder="0" style="height: 600px; width: 100%; border: 0px;"></iframe>
+
+            <p class="med bold" *ngIf="serviceVariants && serviceVariants.length>0">Variants</p>
+            <div class="auto-flex-start-gap10-column" *ngIf="serviceVariants && serviceVariants.length>0">
 
                 <div class="auto-flex-center-space-between-gap20">
 
@@ -54,10 +56,10 @@
 
             </div>
             
-            <p class="med bold" *ngIf="currentService.instructions && currentService.instructions.length>0">Instructions</p>
-            <p class="web-font-primary-light" *ngIf="currentService.instructions && currentService.instructions.length>0">{{ currentService.instructions }}</p>
-            <p class="med bold" *ngIf="currentService.faq && currentService.faq.length>0">FAQ</p>
-            <p class="web-font-primary-light" *ngIf="currentService.faq && currentService.faq.length>0">{{ currentService.faq }}</p>
+            <p class="med bold" *ngIf="currentService && currentService.instructions && currentService.instructions.length>0">Instructions</p>
+            <p class="web-font-primary-light" *ngIf="currentService && currentService.instructions && currentService.instructions.length>0">{{ currentService.instructions }}</p>
+            <p class="med bold" *ngIf="currentService && currentService.faq && currentService.faq.length>0">FAQ</p>
+            <p class="web-font-primary-light" *ngIf="currentService && currentService.faq && currentService.faq.length>0">{{ currentService.faq }}</p>
 
         </div>
 

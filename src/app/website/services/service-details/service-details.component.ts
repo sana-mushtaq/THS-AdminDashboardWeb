@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WebsiteDataService } from 'src/service/website-data.service';
 import { UtilService } from 'src/utils/util.service';
 import { environment } from 'src/environments/environment'
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-service-details',
@@ -20,12 +23,18 @@ export class ServiceDetailsComponent implements OnInit {
 
   showErrorCart: boolean = false
   cartLength: number = 0; // Store the cart length here
+  sanitizedWhatsappUrl: SafeResourceUrl;
 
+  @ViewChild('iframeId') iframe: ElementRef;
+
+  
   constructor(
     private route: ActivatedRoute,
     private dataService: WebsiteDataService,
     private _utilService: UtilService,
     private router: Router,
+    private sanitizer: DomSanitizer,
+    private http: HttpClient
 
   ) {
 
@@ -50,6 +59,14 @@ export class ServiceDetailsComponent implements OnInit {
             return service.id === Number(this.serviceId)
 
           })
+
+          this.sanitizedWhatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.currentService[0].whatsapp_url);
+
+          this.http.get("https://www.taibsa.com/medical-services-copy/home-care-after-surgery", { responseType: 'text' }).subscribe((html) => {
+            const html_src = `data:text/html;charset=utf-8,${html}`;
+            this.iframe.nativeElement.src = html_src;
+          });
+
 
           if(this.currentService.length>0) {
 
@@ -117,6 +134,10 @@ export class ServiceDetailsComponent implements OnInit {
 
     this.showErrorCart = false
 
+  }
+
+  getSafeUrl( url : string ){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
 
