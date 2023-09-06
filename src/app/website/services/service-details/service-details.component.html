@@ -10,7 +10,7 @@
             <p class="med bold">Service Details</p>
             <p class="web-font-primary-light" *ngIf="!sanitizedWhatsappUrl">{{ currentService.description }}</p>
 
-            <iframe #iframeId frameborder="0" style="height: 600px; width: 100%; border: 0px;"></iframe>
+            <iframe *ngIf="currentService" [src]="getSafeUrl(currentService.whatsapp_url)" frameborder="0" style="height: 600px; width: 100%; border: 0px;"></iframe>
 
             <p class="med bold" *ngIf="serviceVariants && serviceVariants.length>0">Variants</p>
             <div class="auto-flex-start-gap10-column" *ngIf="serviceVariants && serviceVariants.length>0">
