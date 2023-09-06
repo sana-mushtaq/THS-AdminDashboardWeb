@@ -187,6 +187,10 @@ export class AppointmentScheduleComponent implements OnInit {
 
           }
   
+          this.selectCurrentDay()
+          this.generateWeek()
+          this.updateCurrentMonthAndYear()
+
           this._b2c.checkServiceProviderEligibilty(spData).subscribe({
       
             next : ( ress : any ) => {
