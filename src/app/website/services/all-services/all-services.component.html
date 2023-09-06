@@ -23,17 +23,17 @@
         <div class="auto-flex-center-gap20-no-set-width desktop">
 
             <a class="xsmall web-font-primary bold" href="www.taibsa.com" target="_blank">Home</a>
-            <a class="xsmall web-font-primary bold" href="#/medical-services">Services</a>
+            <a class="xsmall web-font-primary bold" [routerLink]="['/medical-services']">Services</a>
             <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/blog" target="_blank">Blog</a>
             <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/medical-calculator" target="_blank">Calculator</a>
             <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/contact" target="_blank">Contact</a>
  
             <div class="auto-flex-center-gap5-no-set-width cursor-pointer" *ngIf="cartData && cartData.length>0">
 
-                <a class="xsmall web-font-primary bold" href="#/checkout/cart"><img class="img-20" src="assets/images/web/icons/cart.svg" /></a>
+                <a class="xsmall web-font-primary bold" [routerLink]="['/checkout/cart']"><img class="img-20" src="assets/images/web/icons/cart.svg" /></a>
                 <div class="auto-flex-center-gap10 border-radius-100 red-bg border-none height-16 width-16 text-center padding-15">
 
-                    <a class="xsmall secondary-color" href="#/checkout/cart">{{ cartLength }}</a>
+                    <a class="xsmall secondary-color"  [routerLink]="['/checkout/cart']">{{ cartLength }}</a>
     
                 </div>
  
@@ -56,7 +56,7 @@
             <div class="auto-flex-start-gap20-column padding-20">
 
             <a class="xsmall web-font-primary bold" href="www.taibsa.com" target="_blank">Home</a>
-            <a class="xsmall web-font-primary bold" href="#/medical-services">Services</a>
+            <a class="xsmall web-font-primary bold" [routerLink]="['/medical-services']">Services</a>
             <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/blog" target="_blank">Blog</a>
             <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/medical-calculator" target="_blank">Calculator</a>
             <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/contact" target="_blank">Contact</a>
