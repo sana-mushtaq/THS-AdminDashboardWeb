@@ -54,6 +54,7 @@ export class AllCategoriesComponent implements OnInit {
  
          if (this.currentCategory) {
           
+          console.log(this.currentCategory)
           this.topServices = res.services.filter(
           
             service => service.category_id === this.currentCategory.id && service.top === 1
@@ -62,7 +63,12 @@ export class AllCategoriesComponent implements OnInit {
 
           this.topServices = this.topServices.splice(0, 4)
  
-           this.allServices = res.services
+          this.allServices = res.services
+
+          this.allServices = this.allServices.filter(service => {
+
+            return service.category_id === this.currentCategory.id
+          })
 
           }
   

@@ -105,7 +105,7 @@ export class ServiceproviderComponent implements OnInit {
 
     this.serviceSettings = {
       idField: 'id',
-      textField: 'title',
+      textField: 'title_arabic',
       allowSearchFilter: true
     }
 

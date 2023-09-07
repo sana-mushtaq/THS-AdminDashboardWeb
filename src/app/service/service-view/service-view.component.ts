@@ -206,8 +206,7 @@ export class ServiceViewComponent implements OnInit {
           if( res.status === APIResponse.Success) {
     
             this.serviceList = res.data
-            console.log(this.serviceList.length)
-
+            
             this.displayedServiceList = this.serviceList
          //   this.displayedServiceList = this.serviceList.splice(0, 25)
 
@@ -267,7 +266,7 @@ export class ServiceViewComponent implements OnInit {
               res.data['category_title'] = categoryName[0].title
 
               //when the service is created the system should return an id of the newly created category
-              this.serviceList.unshift(res.data);
+             // this.serviceList.unshift(res.data);
               this.displayedServiceList.unshift(res.data);
 
               this.addNewServiceToggle = false
@@ -475,7 +474,7 @@ export class ServiceViewComponent implements OnInit {
     Swal.fire({
 
       title: 'Confirmation',
-      text: `By confirming yes, this branch "${currentService.title}" will be deleted`,
+      text: `By confirming yes, service named "${currentService.title}" will be deleted`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#0144e4',

@@ -335,7 +335,7 @@
             
             <div class="auto-flex-center-gap20">
 
-                <button class="primary-bg padding-10 capitalize box-shadow xsmall width-max-300 max-width" *ngIf="allServices.length>10" (click)="loadMoreItems()">Load More</button>
+                <button class="primary-bg padding-10 capitalize box-shadow xsmall width-max-300 max-width" *ngIf="allServices.length>10 && itemsToShowInitially<allServices.length" (click)="loadMoreItems()">Load More</button>
 
             </div>
 

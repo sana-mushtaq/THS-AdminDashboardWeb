@@ -61,7 +61,7 @@ export class BranchViewComponent implements OnInit {
   addNewBranchToggle: Boolean = false
   
   //this will be used for the currently selected branch on frontend
-  selectedBranch: Branch = {
+  selectedBranch: any = {
     id: -1,
     title: '',
     title_arabic: '',
@@ -76,7 +76,7 @@ export class BranchViewComponent implements OnInit {
     image: '',
     radius: 0,
     active: 0,
-    additional_cost_radius: 0,
+    //additional_cost_radius: 0,
     user_id: {}
   }
 
@@ -145,7 +145,7 @@ export class BranchViewComponent implements OnInit {
       image: ['' || null],
       radius: [0, [ Validators.required ]],
       active: [0],
-      additional_cost_radius: [0],
+      //additional_cost_radius: [0],
 
     })
 
@@ -264,7 +264,7 @@ export class BranchViewComponent implements OnInit {
       image: '',
       radius: 0,
       active: 0,
-      additional_cost_radius: 0,
+    //  additional_cost_radius: 0,
       user_id: {}
     }
     this.selectedBranchIndex = -1
@@ -379,7 +379,7 @@ export class BranchViewComponent implements OnInit {
       Swal.fire({
 
         title: 'Confirmation',
-        text: `By confirming yes, this branch "${currentBranch.title}" will be deleted`,
+        text: `By confirming yes, a branch named "${currentBranch.title}" will be deleted`,
         icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#0144e4',
@@ -458,7 +458,7 @@ export class BranchViewComponent implements OnInit {
     Swal.fire({
 
       title: 'Confirmation',
-      text: `By confirming yes, this branch "${currentBranch.title}" will be activiated`,
+      text: `By confirming yes, a branch named "${currentBranch.title}" will be activiated`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#0144e4',
@@ -521,7 +521,7 @@ export class BranchViewComponent implements OnInit {
     Swal.fire({
 
       title: 'Confirmation',
-      text: `By confirming yes, this branch "${currentBranch.title}" will be deactiavated`,
+      text: `By confirming yes, a branch named "${currentBranch.title}" will be deactiavated`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#0144e4',

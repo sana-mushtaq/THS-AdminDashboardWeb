@@ -84,7 +84,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
       this.serviceSettings = {
         idField: 'id',
-        textField: 'title',
+        textField: 'title_arabic',
         allowSearchFilter: true,
         singleSelection: true, // Set to true for single selection
         enableCheckAll: false,

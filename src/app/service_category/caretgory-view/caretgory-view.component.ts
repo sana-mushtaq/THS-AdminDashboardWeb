@@ -501,7 +501,7 @@ export class CaretgoryViewComponent implements OnInit {
     Swal.fire({
 
       title: 'Confirmation',
-      text: `By confirming yes, this branch "${currentCategory.title}" will be deleted`,
+      text: `By confirming yes, a category named "${currentCategory.title}" will be deleted`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#0144e4',
@@ -562,7 +562,7 @@ export class CaretgoryViewComponent implements OnInit {
     Swal.fire({
 
       title: 'Confirmation',
-      text: `By confirming yes, this branch "${currentCategory.title}" will be deleted`,
+      text: `By confirming yes, a category named "${currentCategory.title}" will be deleted`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#0144e4',
