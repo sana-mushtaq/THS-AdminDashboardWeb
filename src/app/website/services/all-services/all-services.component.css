@@ -95,6 +95,9 @@ a:hover{
 
 @media only screen and (min-width: 361px) and (max-width: 500px) {
 
+    .phone-max-300 {
+        max-width: 300px;
+    }
     .phone-static {
         position: static;
     }
@@ -149,7 +152,9 @@ a:hover{
 }
 
 @media only screen and (max-width: 360px) {
-
+    .phone-max-300 {
+        max-width: 300px;
+    }
     .phone-width-100{
         width: 100px !important;
     }
