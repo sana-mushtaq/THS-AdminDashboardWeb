@@ -289,6 +289,7 @@ export class CartComponent implements OnInit {
   //here we will verify service provider gender wr.t. patient
   verifyServiceProviderGender() {
 
+    this.errorMessage = ``
     let errorCount = 0
     
     //lets start with one patient and one service only

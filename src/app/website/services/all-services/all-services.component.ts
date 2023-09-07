@@ -20,6 +20,11 @@ declare var google: any;
 })
 export class AllServicesComponent implements OnInit {
 
+  // Define variables for controlling the number of items to display.
+  itemsToShowInitially = 3;
+  itemsToLoadMore = 3;
+  displayedCategories: any[] = [];
+
   showErrorUpdatingAddress: boolean = false
 
   private initializationSubject = new Subject<void>()
@@ -197,10 +202,12 @@ export class AllServicesComponent implements OnInit {
 
           }
 
+        
+
         })
 
         this.topServices = Object.values(this.topServices)
-
+       this.displayedCategories = this.topServices.slice(0, this.itemsToShowInitially);
       }
 
     })
@@ -698,7 +705,6 @@ export class AllServicesComponent implements OnInit {
 
   }
 
-  
   handleCancelClick(): void {}
 
   //alert continue button handler
@@ -707,5 +713,12 @@ export class AllServicesComponent implements OnInit {
     this.showErrorUpdatingAddress = false
 
   }
-  
+
+  loadMoreCategories() {
+    // Load more categories when "Load More" button is clicked
+    const currentLength = this.displayedCategories.length;
+    const remainingCategories = this.topServices.slice(currentLength, currentLength + this.itemsToLoadMore);
+    this.displayedCategories = [...this.displayedCategories, ...remainingCategories];
+  }
+
 }

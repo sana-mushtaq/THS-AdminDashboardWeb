@@ -8,7 +8,6 @@ import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
 import { HttpClient } from '@angular/common/http';
 import { MapsAPILoader } from '@agm/core';
-import { WebsocketService } from 'src/service/web-socket.service';
 import { Subscription } from 'rxjs';
 
 declare var google: any;
@@ -81,7 +80,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
     private http: HttpClient,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private websocketService: WebsocketService,
   ) {
 
       this.serviceSettings = {
@@ -136,13 +134,34 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
     this.mapsAPILoader.load().then(() => {})
 
-    this.websocketService.connect(); // Assuming you have a connect() method in your service
-  
-    this.dataSubscription = this.websocketService.onData().subscribe(data => {
+    let sa =  {
+      user_id: 1
 
-      this.fetchedData = data
- 
-     })
+    }
+
+    this._b2c.getSocketData(sa).subscribe({
+      
+      next : ( res : any ) => {
+
+        //in case of success the api returns 0 as a status code
+        if( res.status === APIResponse.Success ) {
+
+          //after fetching all service providers we will now check if their gender match with selected user or not 
+          this.fetchedData = res.data
+
+        } else {
+
+       
+        }
+        
+      },
+      error: ( err: any ) => {
+        
+        console.log(err)
+
+      }
+  
+    }) 
   }
 
   ngAfterViewInit(): void {
@@ -161,7 +180,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
       
         // ... handle the received data here
         this.allServices = res.services
-            console.log(this.allServices)
       }
 
     })
@@ -200,7 +218,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
   getSp(){
 
-    console.log(this.preferredService)
     let data ={
 
       branch_id: this.preferredBranch,
@@ -835,7 +852,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
           // Convert the selected date to "YYYY-MM-DD" format
           const formattedSelectedDate = this.preferredDate;
-
           const uniqueScheduledTimes = this.fetchedData.appointments
             .filter(app => {
               // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
@@ -854,6 +870,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
               const formattedTime = `${(hours % 12) || 12}:${minutes}${ampm}`;
               return formattedTime;
           });
+
 
 
           // Function to check if a time slot is available

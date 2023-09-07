@@ -144,7 +144,7 @@
     </div>
 
     <!-- Services -->
-    <div class="auto-flex-center-gap30-column" *ngFor="let item of topServices">
+    <div class="auto-flex-center-gap30-column" *ngFor="let item of displayedCategories">
 
         <div class="auto-flex-start-gap20-column" *ngIf="item.services.length>0">
 
@@ -186,6 +186,13 @@
         </div>
     
     </div>
+
+    <div class="auto-flex-center-gap20">
+
+        <button class="primary-bg padding-10 capitalize box-shadow xsmall width-max-300 max-width" (click)="loadMoreCategories()" *ngIf="allCategories && displayedCategories.length<allCategories.length">Load More</button>
+
+    </div>
+
 
     <!-- Location Modal -->
     <div class="auto-flex-center-gap10 fixed dialog" *ngIf="userCurrentLocation" style="z-index: 1000;">

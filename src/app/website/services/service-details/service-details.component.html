@@ -61,10 +61,10 @@
 
             </div>
             
-            <p class="med bold" *ngIf="currentService && currentService.instructions && currentService.instructions.length>0">Instructions</p>
-            <p class="web-font-primary-light" *ngIf="currentService && currentService.instructions && currentService.instructions.length>0">{{ currentService.instructions }}</p>
-            <p class="med bold" *ngIf="currentService && currentService.faq && currentService.faq.length>0">FAQ</p>
-            <p class="web-font-primary-light" *ngIf="currentService && currentService.faq && currentService.faq.length>0">{{ currentService.faq }}</p>
+            <p class="med bold" *ngIf="currentService && !currentService.whatsapp_url && currentService.instructions && currentService.instructions.length>0">Instructions</p>
+            <p class="web-font-primary-light" *ngIf="currentService && !currentService.whatsapp_url && currentService.instructions && currentService.instructions.length>0">{{ currentService.instructions }}</p>
+            <p class="med bold" *ngIf="currentService && !currentService.whatsapp_url && currentService.faq && currentService.faq.length>0">FAQ</p>
+            <p class="web-font-primary-light" *ngIf="currentService && !currentService.whatsapp_url && currentService.faq && currentService.faq.length>0">{{ currentService.faq }}</p>
 
         </div>
 
