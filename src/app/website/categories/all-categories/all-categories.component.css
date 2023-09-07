@@ -61,3 +61,16 @@
   }
 
 }
+@media only screen and (max-width: 500px) {
+    
+  .phone-60{
+
+    width: 60px;
+    height: 60px;
+
+  }
+  .phone-padding-none {
+    padding: 0px;
+  }
+
+}

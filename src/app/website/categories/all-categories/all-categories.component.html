@@ -1,17 +1,18 @@
 <app-checkout-header></app-checkout-header>
 
-<div class="web auto-flex-start-gap30-column main-div-max padding-top-20" *ngIf="currentCategory && currentCategory.title.length>0"  style="padding: 20px;">
+   <!-- Category header -->
+   <div class="web auto-flex-center-start-gap20 cursor-pointer border-none"  *ngIf="currentCategory && currentCategory.title.length>0">
 
-    <!-- Category header -->
-    <div class="auto-flex-center-start-gap20 cursor-pointer" >
+    <div class="auto-flex-center-start-gap20 lightest-blue-bg border-none" style="border-radius: 0px;">
 
-        <div class="auto-flex-start-gap5-column-no-set-width">
-
-            <p class="large bold">{{ currentCategory.title }}</p>
-
-        </div>
+        <img class="xmedImg white-bg border-radius-20 padding-5 phone-60" src="{{serverUrl}}{{currentCategory.icon}}" />
+        <p class="large bold">{{ currentCategory.title }}</p>
 
     </div>
+
+</div>
+
+<div class="web auto-flex-start-gap30-column main-div-max padding-top-20" *ngIf="currentCategory && currentCategory.title.length>0"  style="padding: 20px;">
 
     <!--tabs-->
     <div class="auto-flex-start-gap10">
@@ -286,7 +287,7 @@
         </mat-tab-group>
         -->
 
-        <div class="auto-flex-start-gap30-column padding-20">
+        <div class="auto-flex-start-gap30-column padding-none">
                     
             <div class="auto-flex-center-space-between-gap20 padding-bottom-20 place-stretch phone-scroll scroll-bar-gray">
 

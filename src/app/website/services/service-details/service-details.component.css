@@ -1,0 +1,11 @@
+@media only screen and (max-width: 1150px) {
+
+    .phone-max-width{
+
+        width: 100%;
+
+    }
+    .phone-width{
+        max-width: 100%;
+    }
+}

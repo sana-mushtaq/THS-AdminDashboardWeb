@@ -1,14 +1,35 @@
 <app-checkout-header></app-checkout-header>
 
-<div class="web auto-flex-start-gap40 main-div phone-vertical-reverse main-div-max padding-top-20" style="padding: 20px;">
+<!--phone-vertical-reverse -->
+<div class="web auto-flex-start-gap40 main-div main-div-max padding-top-20" style="padding: 20px;">
 
-    <!-- Service header -->
-    <div class="auto-flex-center-start-gap20-no-set-width width-half">
+    <div class="auto-flex-start-gap10-column-no-set-width width-max-400 max-width box-shadow border-radius-20 padding-20 flex-grow phone-width">
 
         <div class="auto-flex-start-gap20-column">
+        
+            <img class="xxmedImg cover border-radius-10 light-gray-bg padding-5" *ngIf="currentService.icon && currentService.icon.length>0" src="{{serverUrl}}{{currentService.icon}}" />
+            <img class="xxmedImg cover border-radius-10 light-gray-bg padding-5" *ngIf="!currentService.icon || currentService.icon.length<=0" style="object-fit: fill;" src="assets/images/web/logo.svg" />
+    
+            <div class="auto-flex-start-gap20-column-no-set-width">
+    
+                <p class="med bold">{{ currentService.title }}</p>
+                <p class="med" style="font-family: system-ui">{{ currentService.title_arabic }}</p>
+                <p class="bold blue-color">SAR {{ currentService.price }}</p>
+               
+            </div>
+    
+         
+        </div>
 
-            <p class="med bold">Service Details</p>
+        <button class="primary-bg padding-10 padding-left-right-30 max-width" (click)="addToCart(currentService)">Add to cart</button>
+        
+    </div>
+    
 
+    <!-- Service header -->
+    <div class="auto-flex-center-start-gap20-no-set-width flex-grow phone-max-width">
+
+        <div class="auto-flex-start-gap20-column">
             
             <ng-container *ngIf="currentService && currentService.whatsapp_url">
                 <iframe [src]="getSafeUrl(currentService.whatsapp_url)" frameborder="0" style="height: 800px; width: 100%; border: 0px;"></iframe>
@@ -70,27 +91,7 @@
 
     </div>
 
-    <div class="auto-flex-start-gap10-column-no-set-width width-half box-shadow border-radius-20 padding-20">
-
-        <div class="auto-flex-center-space-between-gap20">
-        
-            <div class="auto-flex-start-gap10-column-no-set-width">
-    
-                <p class="med bold">{{ currentService.title }}</p>
-                <p class="med bold" style="font-family: system-ui">{{ currentService.title_arabic }}</p>
-                <p class="bold blue-color">SAR {{ currentService.price }}</p>
-               
-            </div>
-    
-            <img class="xxxmedImg cover border-radius-10" *ngIf="currentService.icon && currentService.icon.length>0" src="{{serverUrl}}{{currentService.icon}}" />
-            <img class="xxxmedImg cover border-radius-10" *ngIf="!currentService.icon || currentService.icon.length<=0" style="object-fit: fill;" src="assets/images/web/logo.svg" />
-    
-        </div>
-
-        <button class="primary-bg padding-10 padding-left-right-30 max-width" (click)="addToCart(currentService)">Add to cart</button>
-        
-    </div>
-    
+ 
     <!-- Cart error -->
     <app-custom-alert *ngIf="showErrorCart" [title]="'Can not add item'" [message]="'Please select services from one category only'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 

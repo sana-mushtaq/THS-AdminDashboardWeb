@@ -63,8 +63,8 @@ export class UserProfileComponent implements OnInit {
 
       this.addDependantForm = this.fb.group({
   
-        email: ['', [ Validators.required, Validators.email ]],
-        phone_number: ['', [Validators.required, /*Validators.pattern('^(966|\\+966|0)(5|6|9)[0-9]{8}$')*/]],
+        email: [' '],
+        phone_number: [' '],
         first_name: ['', [ Validators.required, Validators.minLength(4) ]],
         last_name: [''],
         dob: [''],
@@ -251,7 +251,7 @@ export class UserProfileComponent implements OnInit {
     if (this.addDependantForm.invalid) {
 
       // Display error messages
-      if (this.addDependantForm.get('email').invalid) {
+  /*    if (this.addDependantForm.get('email').invalid) {
       
         this.addDependantForm.get('email').setErrors({ invalidEmail: true })
 
@@ -262,7 +262,7 @@ export class UserProfileComponent implements OnInit {
         this.addDependantForm.get('phone_number').setErrors({ invalidPhoneNumber: true })
       
       }
-
+*/
       if (this.addDependantForm.get('first_name').invalid) {
       
         this.addDependantForm.get('first_name').setErrors({ invalidFName: true })
@@ -302,14 +302,61 @@ export class UserProfileComponent implements OnInit {
 
     } else {
 
-      //if form is valid then fist we will verify if user already exists or not
+      /*//if form is valid then fist we will verify if user already exists or not
       let data  = {
 
         phone_number: this.addDependantForm.get('phone_number').value,
         email: this.addDependantForm.get('email').value
       
-      } 
+      } */
 
+         //if user verifcation is valid then we will create a dependant
+         let data = {
+
+          primary_user_id: this.userId,
+          email: this.addDependantForm.get('email').value,
+          phone_number: this.addDependantForm.get('phone_number').value,
+          first_name: this.addDependantForm.get('first_name').value,
+          last_name: this.addDependantForm.get('last_name').value,
+          dob: this.addDependantForm.get('dob').value,
+          gender: this.addDependantForm.get('gender').value,
+          nationality: this.addDependantForm.get('nationality').value,
+          id_type: this.addDependantForm.get('id_type').value,
+          id_number: this.addDependantForm.get('id_number').value,
+          marital_status: this.addDependantForm.get('marital_status').value,
+         // relationship_type: this.addDependantForm.get('relationship_type').value
+
+        }
+
+        this._patientService.createDependent(data).subscribe({
+
+          next : ( res : any ) => {
+
+            //in case of success the api returns 0 as a status code
+            if( res.status === APIResponse.Success ) {
+
+              this.userDependants.push(res.data)
+              this.addDependantToggle = false
+              this.addDependantForm.reset()
+
+            } else {
+
+              //if it is unable to add category data it will return an error
+              this.showErrorCreatingDependant = true
+
+            }
+            
+          },
+
+          error: ( err: any ) => {
+            
+            this.showErrorCreatingDependant = true
+
+          }
+
+        })
+
+      /*
        //now we will send 6 digits random code to user's valid phone number
        this._patientService.verifyPatient(data).subscribe({
   
@@ -379,6 +426,7 @@ export class UserProfileComponent implements OnInit {
         }
     
       })
+      */
 
     }
 
