@@ -155,7 +155,6 @@ export class AllServicesComponent implements OnInit {
   
   ngAfterViewInit(): void {
 
-   this.getComponentData()
  
   }
   
@@ -253,6 +252,7 @@ export class AllServicesComponent implements OnInit {
       // Set the marker's initial position to the user's current location
       this.selectedLat = position.coords.latitude
       this.selectedLng = position.coords.longitude
+      this.getComponentData()
 
       this.userAddress = {
         

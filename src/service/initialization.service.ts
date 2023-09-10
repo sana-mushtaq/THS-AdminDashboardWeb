@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, from } from 'rxjs';
+import { Observable, Subject, defer, from, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { WebsiteDataService } from './website-data.service';
 
@@ -18,31 +18,31 @@ export class InitializationService {
   constructor(private dataService: WebsiteDataService) {}
 
   initializeApp(): Observable<any> {
+    return new Observable(observer => {
+        this.getUserLocation(); // Assuming getUserLocation is asynchronous
 
-    this.getUserLocation()
+        // Assuming getUserLocation eventually sets this.centerLat and this.centerLng
+        let data = {
+            user_latitude: this.centerLat,
+            user_longitude: this.centerLng
+        };
+        console.log(data);
 
-    let data = {
+        this.initializationSubject.pipe(
+            switchMap(async () => this.dataService.getData(data)),
+            catchError(error => {
+                console.error('Error initializing app:', error);
+                observer.error(error);
+                throw error;
+            })
+        ).subscribe(() => {
+            observer.next(); // Signal completion
+            observer.complete();
+        });
+    });
+}
 
-      user_latitude: this.centerLat,
-      user_longitude: this.centerLng
-    
-    }
 
-    return this.initializationSubject.pipe(
-
-      switchMap(async () => this.dataService.getData(data)),
-      
-      catchError(error => {
-      
-        console.error('Error initializing app:', error)
-      
-        throw error
-      
-      })
-    
-    )
-  
-  }
 
   private getUserLocation() {
   
@@ -61,6 +61,9 @@ export class InitializationService {
           this.centerLng = position.coords.longitude
           this.selectedLat = position.coords.latitude
           this.selectedLng = position.coords.longitude
+
+          console.log(this.selectedLat)
+          console.log(this.selectedLng)
           
           // Emit a signal that user location is ready
           this.initializationSubject.next() // No argument needed here
