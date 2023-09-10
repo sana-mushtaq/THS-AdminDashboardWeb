@@ -155,7 +155,7 @@ export class AllServicesComponent implements OnInit {
   
   ngAfterViewInit(): void {
 
- 
+    this.getComponentData()
   }
   
   getComponentData() {

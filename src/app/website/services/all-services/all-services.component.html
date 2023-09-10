@@ -240,9 +240,9 @@
 
                 </div>
 
-                <div class="auto-flex-start-gap10-no-wrap" *ngIf="userLocations.length>0">
+                <div class="auto-flex-start-gap10-no-wrap overflow-auto" *ngIf="userLocations.length>0">
 
-                    <div class="auto-flex-start-gap10-column-no-set-width overflow-auto padding-bottom-20 scroll-bar-gray" *ngFor="let loc of userLocations; let locIndex = index;">
+                    <div class="auto-flex-start-gap10-column-no-set-width padding-bottom-20 scroll-bar-gray" *ngFor="let loc of userLocations; let locIndex = index;">
 
                         <div class="auto-flex-start-gap10-column-no-set-width white-bg box-shadow item-hover cursor-pointer width-200" (click)="setCurrentLocation(loc)">
     
