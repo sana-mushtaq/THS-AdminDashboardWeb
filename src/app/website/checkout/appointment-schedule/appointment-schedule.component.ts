@@ -475,11 +475,31 @@ export class AppointmentScheduleComponent implements OnInit {
   
 
       this.timeSlots = [];
-      // Generate time slots and filter unavailable ones
+      const currentDate = new Date();
+      const currentHour = currentDate.getHours();
+      const currentDateString = currentDate.toISOString().slice(0, 10); // Get current date in "yyyy-mm-dd" format
+      
+      // Calculate 3 hours later from the current time
+      const threeHoursLater = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
+      const threeHoursLaterHour = threeHoursLater.getHours();
+      
       for (let hour = 12; hour <= 23; hour++) {
         const timeSlot = this.formatTimeSlot(hour);
-        if (isTimeSlotAvailable(timeSlot)) {
-          this.timeSlots.push(timeSlot);
+        
+        // Check if the selectedDate is today
+        if (selectedDate === currentDateString) {
+          // Calculate the hour 3 hours later for the current day
+          const threeHoursLaterCurrent = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
+          const threeHoursLaterCurrentHour = threeHoursLaterCurrent.getHours();
+      
+          if (hour < currentHour && hour < threeHoursLaterCurrentHour) {
+            continue; // Skip past time slots for today
+          }
+        } else {
+          // For future dates, include all time slots
+          if (isTimeSlotAvailable(timeSlot)) {
+            this.timeSlots.push(timeSlot);
+          }
         }
       }
     } else {
@@ -534,14 +554,35 @@ export class AppointmentScheduleComponent implements OnInit {
 
 
     this.timeSlots = [];
-    // Generate time slots and filter unavailable ones
+    const currentDate = new Date();
+    const currentHour = currentDate.getHours();
+    const currentDateString = currentDate.toISOString().slice(0, 10); // Get current date in "yyyy-mm-dd" format
+    
+    // Calculate 3 hours later from the current time
+    const threeHoursLater = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
+    const threeHoursLaterHour = threeHoursLater.getHours();
+    
     for (let hour = 12; hour <= 23; hour++) {
       const timeSlot = this.formatTimeSlot(hour);
-      if (isTimeSlotAvailable(timeSlot)) {
-        this.timeSlots.push(timeSlot);
+       // Convert the selected date to "YYYY-MM-DD" format
+       const selectedDate = this.formatSelectedDate(this.selectedDate);
+
+      // Check if the selectedDate is today
+      if (selectedDate === currentDateString) {
+        // Calculate the hour 3 hours later for the current day
+        const threeHoursLaterCurrent = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
+        const threeHoursLaterCurrentHour = threeHoursLaterCurrent.getHours();
+    
+        if (hour < currentHour && hour < threeHoursLaterCurrentHour) {
+          continue; // Skip past time slots for today
+        }
+      } else {
+        // For future dates, include all time slots
+        if (isTimeSlotAvailable(timeSlot)) {
+          this.timeSlots.push(timeSlot);
+        }
       }
     }
-      
       // Remove the time slots that need to be removed
       this.timeSlots = this.timeSlots.filter(slot => !timeSlotsToRemove.includes(slot))
 
