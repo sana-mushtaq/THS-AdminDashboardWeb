@@ -104,7 +104,7 @@
     </div>
 
     <!-- Top Category -->
-    <div class="auto-flex-center-space-between-gap20 place-stretch">
+    <div class="auto-flex-center-space-between-gap20 place-stretch" *ngIf="allServices && allServices.length>0">
 
         <div class="auto-flex-center-space-between-gap20-no-set-width width-half lightest-blue-bg padding-20 cursor-pointer" [style.background-color]="category.bg_color" *ngFor="let category of topCategories; let topCategoryIndex = index">
 
@@ -126,7 +126,7 @@
     </div>
 
     <!-- All Ctegories -->
-    <div class="auto-flex-start-gap20-column light-gray-bg">
+    <div class="auto-flex-start-gap20-column light-gray-bg" *ngIf="allServices && allServices.length>0">
 
         <p class="xmed bold capitalize">Categories</p>
         
@@ -143,50 +143,52 @@
     </div>
 
     <!-- Services -->
-    <div class="auto-flex-center-gap30-column" *ngFor="let item of displayedCategories">
+    <div  *ngIf="allServices && allServices.length>0">
+        <div class="auto-flex-center-gap30-column" *ngFor="let item of displayedCategories">
 
-        <div class="auto-flex-start-gap20-column" *ngIf="item.services.length>0">
+            <div class="auto-flex-start-gap20-column" *ngIf="item.services.length>0">
 
-            <p class="xmed bold capitalize">{{ item.category_data.title }}</p>
-    
-            <div class="auto-flex-start-center-gap20-no-wrap overflow-auto padding-bottom-20 place-stretch scroll-bar-gray">
-    
-                <div class="auto-flex-space-between-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative" (click)="navigateToService(service.id)" *ngFor="let service of item.services">
-    
-                    <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none z-index">{{ service.price }} SAR</p>
-                    
-                    <div class="linear-gradient-blue absolute height-160 border-top-left-right-10"></div>
-                    <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="{{serverUrl}}{{service.cover_image}}">
-    
-                    <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
-    
-                        <p class="med bold capitalize">{{ service.title }}</p>
-                        <p class="web-font-primary-light"> {{ service.description | slice:0:90 }}...  </p>
-    
+                <p class="xmed bold capitalize">{{ item.category_data.title }}</p>
+        
+                <div class="auto-flex-start-center-gap20-no-wrap overflow-auto padding-bottom-20 place-stretch scroll-bar-gray">
+        
+                    <div class="auto-flex-space-between-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative" (click)="navigateToService(service.id)" *ngFor="let service of item.services">
+        
+                        <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none z-index">{{ service.price }} SAR</p>
+                        
+                        <div class="linear-gradient-blue absolute height-160 border-top-left-right-10"></div>
+                        <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="{{serverUrl}}{{service.cover_image}}">
+        
+                        <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
+        
+                            <p class="med bold capitalize">{{ service.title }}</p>
+                            <p class="web-font-primary-light"> {{ service.description | slice:0:90 }}...  </p>
+        
+                        </div>
+        
+                        <div class="auto-flex-end-gap10">
+        
+                            <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 padding-top-bottom-5 xsmall">view more</button>
+        
+                        </div>
+        
                     </div>
-    
-                    <div class="auto-flex-end-gap10">
-    
-                        <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 padding-top-bottom-5 xsmall">view more</button>
-    
+        
+                    <div class="auto-flex-center-gap20-column-no-set-width cursor-pointer" (click)="showMore(item.category_data.url)">
+        
+                        <img class="smallImg" src="assets/images/web/icons/plus.svg" />
+                        <p class="xsmall bold lowercase text-center">show more</p>
+        
                     </div>
-    
+        
                 </div>
-    
-                <div class="auto-flex-center-gap20-column-no-set-width cursor-pointer" (click)="showMore(item.category_data.url)">
-    
-                    <img class="smallImg" src="assets/images/web/icons/plus.svg" />
-                    <p class="xsmall bold lowercase text-center">show more</p>
-    
-                </div>
-    
+            
             </div>
         
         </div>
-    
     </div>
 
-    <div class="auto-flex-center-gap20">
+    <div class="auto-flex-center-gap20" *ngIf="allServices && allServices.length>0">
 
         <button class="primary-bg padding-10 capitalize box-shadow xsmall width-max-300 max-width" (click)="loadMoreCategories()" *ngIf="allCategories && displayedCategories.length<allCategories.length">Load More</button>
 
@@ -352,6 +354,11 @@
     <!-- An Error occured while updating user. Try again later -->
     <app-custom-alert *ngIf="showErrorUpdatingAddress" [title]="'Error'" [message]="'An error occured while saving address in your account but you can use this address to book service.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
+    <div class="auto-flex-center-gap10 lightest-blue-bg" *ngIf="allServices && allServices.length<=0">
+
+        <p class="bold">No services found. Please change your location.</p>
+
+    </div>
 
 </div>
 

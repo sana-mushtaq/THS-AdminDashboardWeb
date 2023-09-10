@@ -25,8 +25,8 @@ export class WebsiteDataService {
   }
 
   setData(data: any) {
-    
-    this.dataSubject.next(data)
+
+    this.dataSubject.next({...data})
 
   }
 
@@ -63,12 +63,9 @@ export class WebsiteDataService {
   
           //in case of success the api returns 0 as a status code
           if( res.status === APIResponse.Success ) {
-  
+            
             this.setData(res.data)
-  
-            this.data$.subscribe((data) => {
-  
-           })          
+    
   
           } else {
   

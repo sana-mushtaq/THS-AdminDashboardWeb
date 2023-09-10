@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { ApplicationRef, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BusinessToCustomerSchedulingService } from 'src/service/business-to-customer-scheduling.service';
@@ -63,6 +63,7 @@ export class AllServicesComponent implements OnInit {
 
   userId: any
   userLocations: any = []
+  changed: boolean = false
 
   // forms
   public addressForm : FormGroup
@@ -77,6 +78,8 @@ export class AllServicesComponent implements OnInit {
     private fb : FormBuilder,
     private _utilService: UtilService,
     private _patientService: PatientsService,
+    private cdr: ChangeDetectorRef,
+    private appRef: ApplicationRef
     ) { 
 
       this.addressForm = this.fb.group({
@@ -158,57 +161,73 @@ export class AllServicesComponent implements OnInit {
   
   getComponentData() {
 
+    this.changed = false
     // This is where you should place your component-specific initialization code
     // that relies on the fetched data from dataService
+    let data = {
+
+      user_latitude: this.centerLat,
+      user_longitude: this.centerLng
+    
+    }
+
+    this.dataService.getData(data)
+
     this.dataService.data$.subscribe((res) => {
 
-      if (res) {
-      
-        // ... handle the received data here
-        this.allCategories = res.categories
-        this.allServices = res.services
-        this.branch_id = res.branch
-        //top 4 categories
-        this.topCategories = this.allCategories.filter(category => {
+        if (res) {
 
-          return category['top'] === 1
+          this.allServices = []
+          this.allCategories = []
+          this.topCategories = []
+          this.topServices= []
+          this.displayedCategories = []
 
-        })
-
-        this.topCategories = this.topCategories.slice(0, 4)
-
-        /* Temporary hold */
-        /*this.allServices.forEach(s => {
-
-          s.top = 1
-
-        })*/
-
-        // now we will filter all top Services and assign them to TopServices object with respect to each category
-        this.allCategories.forEach(category => {
-
-          let services = this.allServices.filter(service => {
-          
-            return service.top === 1 && service.category_id === category.id
-          
+          // ... handle the received data here
+          this.allCategories = res.categories
+          this.allServices = res.services
+  
+          this.branch_id = res.branch
+          //top 4 categories
+          this.topCategories = this.allCategories.filter(category => {
+  
+            return category['top'] === 1
+  
           })
+  
+          this.topCategories = this.topCategories.slice(0, 4)
+  
+          /* Temporary hold */
+          /*this.allServices.forEach(s => {
+  
+            s.top = 1
+  
+          })*/
+  
+          // now we will filter all top Services and assign them to TopServices object with respect to each category
+          this.allCategories.forEach(category => {
 
-          let id = category.id.toString()
-
-          this.topServices[id] = {
-
-            category_data: category,
-            services: services,
-
-          }
-
-        
-
-        })
-
-        this.topServices = Object.values(this.topServices)
-       this.displayedCategories = this.topServices.slice(0, this.itemsToShowInitially);
-      }
+            let services = this.allServices.filter(service => {
+            
+              return service.top === 1 && service.category_id === category.id
+            
+            })
+            
+            let id = category.id.toString()
+            this.topServices[id] = {
+  
+              category_data: category,
+              services: services,
+  
+            }
+  
+          
+  
+          })
+          this.topServices = Object.values(this.topServices)
+          this.displayedCategories = this.topServices.slice(0, this.itemsToShowInitially);
+ 
+        }
 
     })
     
@@ -433,8 +452,13 @@ export class AllServicesComponent implements OnInit {
           this.centerLng = this.selectedLng
           
           // Set the map center to the selected location
-          this.place.setCenter(this.place.geometry.location);
-          this.place.setZoom(15); // You can adjust the zoom level as needed
+
+         // const newCenter = new google.maps.LatLng(this.selectedLat, this.selectedLng); // San Francisco
+          //this.place.setCenter(newCenter);
+
+
+          //this.place.setCenter(this.place.geometry.location);
+         // this.place.setZoom(15); // You can adjust the zoom level as needed
         }
 
       
@@ -457,10 +481,8 @@ export class AllServicesComponent implements OnInit {
     this.centerLng = this.selectedLng
 
     this.placeSelected = false
-
-    this.addNewAddress()
-
     this.getComponentData()
+    this.addNewAddress()
 
   }
   
