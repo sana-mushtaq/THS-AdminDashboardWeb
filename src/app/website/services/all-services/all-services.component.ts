@@ -177,7 +177,7 @@ export class AllServicesComponent implements OnInit {
 
     this.dataService.data$.subscribe((res) => {
 
-        if (res) {
+        if (res && res !== null && res.services.length>0) {
 
           this.allServices = []
           this.allCategories = []
