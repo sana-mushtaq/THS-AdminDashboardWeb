@@ -218,9 +218,9 @@
     <!-- Location Modal -->
     <div class="auto-flex-center-gap10 fixed dialog" *ngIf="userCurrentLocation" style="z-index: 1000;">
 
-        <div class="popup">
+        <div class="popup" style="width: 100%;">
 
-            <div class="auto-flex-start-gap20-column-no-set-width padding-40 white-bg overflow-auto max-height-500 border-radius-20 width-600 max-width relative phone-max-300 phone-max-width">
+            <div class="auto-flex-start-gap20-column-no-set-width padding-40 white-bg overflow-auto max-height-500 border-radius-20 width-600 max-width relative" style="width: 100%;">
 
                 <div class="auto-flex-end-gap10">
 
@@ -228,7 +228,7 @@
 
                 </div>
 
-                <div class="auto-flex-center-gap20-column-no-set-width">
+                <div class="auto-flex-center-gap20-column">
     
                     <div class="auto-flex-start-gap20-column box-shadow padding-none border-radius-10 gray-border">
                         
@@ -245,13 +245,13 @@
         
                             </div>
                             <!--openMap()-->
-                            <img class="smallImg cursor-pointer" src="assets/images/web/icons/edit.svg" (click)="navigateToDashboard()" />
+                            <img class="smallImg cursor-pointer" src="assets/images/web/icons/edit.svg" (click)="openMap()" />
     
                         </div>
                   
                     </div>
     
-                    <div class="auto-flex-center-start-gap20 cursor-pointer" (click)="openMap()">
+                    <div class="auto-flex-center-start-gap20 cursor-pointer" (click)="openMap()" *ngIf="userId!==null">
     
                         <img class="xsmallImg" src="assets/images/web/icons/plus_black.svg" />
                         <p class="xsmall bold lowercase text-center">Add new address</p>

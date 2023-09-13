@@ -614,7 +614,17 @@ export class AllServicesComponent implements OnInit {
 
     this.placeSelected = false
     this.getComponentData()
-    this.addNewAddress()
+
+    if(this.userId) {
+
+      this.addNewAddress()
+
+    } else {
+
+      this.selectMapLocation = false
+      this.userCurrentLocation = false
+
+    }
 
   }
   
