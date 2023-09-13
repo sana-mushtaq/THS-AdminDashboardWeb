@@ -51,7 +51,7 @@ export class ServiceDetailsComponent implements OnInit {
 
       this.dataService.data$.subscribe((res) => {
 
-        if (res && res !== null && res.services.length>0) {
+        if (res && res !== null && res.services && res.services.length>0) {
 
           this.currentService = res.services.filter(service => {
 
