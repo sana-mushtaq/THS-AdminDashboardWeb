@@ -27,6 +27,24 @@ export class InitializationService {
             user_longitude: this.centerLng
         };
 
+        let session = JSON.parse(sessionStorage.getItem('userLocation'))
+
+        if(session === undefined || session === null || session === 'undefined') {
+
+        
+        } else {
+
+            // Set the center of the map to the user's current location
+            this.centerLat = session.latitude
+            this.centerLng = session.longitude
+
+            data = {
+              user_latitude: this.centerLat,
+              user_longitude: this.centerLng
+          }
+
+        }
+        
         this.initializationSubject.pipe(
             switchMap(async () => this.dataService.getData(data)),
             catchError(error => {
