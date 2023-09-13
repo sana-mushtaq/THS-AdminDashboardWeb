@@ -467,6 +467,7 @@ export class AppointmentScheduleComponent implements OnInit {
           return formattedTime;
       });
 
+      console.log(this.fetchedData.appointments)
       // Function to check if a time slot is available
       const isTimeSlotAvailable = (timeSlot: string) => {
         return !uniqueScheduledTimes.includes(timeSlot);
@@ -506,20 +507,20 @@ export class AppointmentScheduleComponent implements OnInit {
       }
 
            // Check if the selectedDate is today
-           if (selectedDate === currentDateString) {
-            // Calculate the hour 3 hours later for the current day
-            const threeHoursLaterCurrent = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
-            const threeHoursLaterCurrentHour = threeHoursLaterCurrent.getHours();
+      if (selectedDate === currentDateString) {
+      // Calculate the hour 3 hours later for the current day
+      const threeHoursLaterCurrent = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
+      const threeHoursLaterCurrentHour = threeHoursLaterCurrent.getHours();
 
-            for (let hour = threeHoursLaterCurrentHour; hour <= 23; hour++) {
-              const timeSlot = this.formatTimeSlot(hour);
-              if (isTimeSlotAvailable(timeSlot)) {
-                this.timeSlots.push(timeSlot);
-              }
-            }
-        
-    
-          } 
+      for (let hour = threeHoursLaterCurrentHour; hour <= 23; hour++) {
+        const timeSlot = this.formatTimeSlot(hour);
+        if (isTimeSlotAvailable(timeSlot)) {
+          this.timeSlots.push(timeSlot);
+        }
+      }
+  
+
+    } 
 
 
       
