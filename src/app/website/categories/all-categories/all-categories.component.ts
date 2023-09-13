@@ -54,7 +54,6 @@ export class AllCategoriesComponent implements OnInit {
  
          if (this.currentCategory) {
           
-          console.log(this.currentCategory)
           this.topServices = res.services.filter(
           
             service => service.category_id === this.currentCategory.id && service.top === 1

@@ -50,9 +50,9 @@
             <div class="auto-flex-center-gap5-no-set-width">
 
                 <a class="xsmall web-font-primary bold"  (click)="navigate('/checkout/cart')"><img class="img-20" src="assets/images/web/icons/cart.svg" /></a>
-                <div class="auto-flex-center-gap10 border-radius-100 red-bg border-none height-16 width-16 text-center padding-15">
+                <div class="auto-flex-center-gap10 border-radius-100 red-bg border-none height-16 width-16 text-center padding-15" *ngIf="cartLength>0">
 
-                    <a class="xsmall secondary-color " *ngIf="cartData && cartData.length>0">{{ cartData.length }}</a>
+                    <a class="xsmall secondary-color">{{ cartLength }}</a>
 
                 </div>
 

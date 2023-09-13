@@ -16,6 +16,8 @@ export class ServiceDetailsComponent implements OnInit {
 
   public serverUrl : string = environment.domainName
 
+  addedToCart = []
+
   serviceId: string
   currentService: any
   serviceVariants: any
@@ -49,7 +51,7 @@ export class ServiceDetailsComponent implements OnInit {
 
       this.dataService.data$.subscribe((res) => {
 
-        if (res) {
+        if (res && res !== null && res.services.length>0) {
 
           this.currentService = res.services.filter(service => {
 
@@ -76,6 +78,10 @@ export class ServiceDetailsComponent implements OnInit {
             this.router.navigate([''])
 
           } 
+
+        } else {
+
+          this.router.navigate([''])
 
         }
 
@@ -112,11 +118,16 @@ export class ServiceDetailsComponent implements OnInit {
       this.cartData.push(cartItem)
       this._utilService.addToCart(this.cartData)
 
-      if(this.cartLength === 1) {
 
+      const newMessage = { text: 'Service added to cart.', visible: true };
+      this.addedToCart.push(newMessage);
+
+    // Set a timeout to hide the message after a certain duration (e.g., 3 seconds)
+      setTimeout(() => {
       
-
-      }
+        this.hideMessage(newMessage);
+      
+      }, 2000); // 3000 milliseconds = 3 secon
 
     } else {
 
@@ -124,6 +135,24 @@ export class ServiceDetailsComponent implements OnInit {
 
     }
 
+  }
+
+  hideMessage(message: any) {
+    // Set visibility to false to trigger the fade-out animation
+    message.visible = false;
+
+    // Remove the message from the array after the fade-out animation completes
+    setTimeout(() => {
+      this.removeMessage(message);
+    }, 500); // 500 milliseconds (adjust as needed for your animation duration)
+  }
+
+  removeMessage(message: any) {
+    // Remove the message from the array
+    const index = this.addedToCart.indexOf(message);
+    if (index !== -1) {
+      this.addedToCart.splice(index, 1);
+    }
   }
 
   handleCancelClick(): void {}

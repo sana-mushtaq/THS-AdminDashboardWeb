@@ -73,4 +73,10 @@
     padding: 0px;
   }
 
+  .phone-max-150 {
+
+    max-width: 150px;
+
+  }
+
 }

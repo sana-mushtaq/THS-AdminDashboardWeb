@@ -77,7 +77,8 @@
                                     <td>{{user.firstName}} {{user.lastName}}</td>
                                     <td>{{user.mobileNumber}}</td>
                                     <td>{{user.emailId}}</td>
-                                    <td>{{user.gender}}</td>
+                                    <td *ngIf="user.gender===1">Male</td>
+                                    <td *ngIf="user.gender===2">Female</td>
 
                                     <td>
                                     

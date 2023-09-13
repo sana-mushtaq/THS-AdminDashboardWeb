@@ -8,8 +8,8 @@ import { WebsiteDataService } from './website-data.service';
 })
 export class InitializationService {
 
-  centerLat: number = 24.7136
-  centerLng: number = 46.6753
+  centerLat: number = 0
+  centerLng: number = 0
   selectedLat: number
   selectedLng: number
 
@@ -26,7 +26,6 @@ export class InitializationService {
             user_latitude: this.centerLat,
             user_longitude: this.centerLng
         };
-        console.log(data);
 
         this.initializationSubject.pipe(
             switchMap(async () => this.dataService.getData(data)),
@@ -61,9 +60,6 @@ export class InitializationService {
           this.centerLng = position.coords.longitude
           this.selectedLat = position.coords.latitude
           this.selectedLng = position.coords.longitude
-
-          console.log(this.selectedLat)
-          console.log(this.selectedLng)
           
           // Emit a signal that user location is ready
           this.initializationSubject.next() // No argument needed here

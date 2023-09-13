@@ -42,6 +42,7 @@ export class BranchViewComponent implements OnInit {
   serviceProviderList: any = []
   serviceProviderListAssigned: any = []
   serviceProviderAssignedServices: any = []
+  
 
   //multiselect dropdown settings
   spList = []
@@ -59,6 +60,7 @@ export class BranchViewComponent implements OnInit {
   //branch action toggles
   editBranchInformationToggle: Boolean = false
   addNewBranchToggle: Boolean = false
+  assignServiceProviderToggle: Boolean = false
   
   //this will be used for the currently selected branch on frontend
   selectedBranch: any = {
@@ -308,6 +310,8 @@ export class BranchViewComponent implements OnInit {
 
     this.getServiceProviders()
 
+    this.assignServiceProviderToggle = true
+
   }
 
   //the following function will fetch a list of service providers from the backend
@@ -327,7 +331,6 @@ export class BranchViewComponent implements OnInit {
 
           this.serviceProviderList = res.data
           
-          this.serviceProviderList.forEach(d=> { console.log(d) })
           let selectedBranchId = this.selectedBranch.id
 
           this.serviceProviderListAssigned = this.serviceProviderList.filter( sp => {
@@ -336,7 +339,6 @@ export class BranchViewComponent implements OnInit {
 
           })
           
-          console.log(this.serviceProviderListAssigned)
           let spListDataUnAssigned = this.serviceProviderList.filter( sp => {
 
             return sp.branch_id === null
@@ -347,7 +349,7 @@ export class BranchViewComponent implements OnInit {
           
           assignFullName.forEach(sp => {
 
-            sp.fullName = `${sp.first_name} ${sp.last_name} (${sp.type})`
+            sp.fullName = `${sp.first_name} ${sp.last_name}`
           
           })
           
@@ -637,7 +639,6 @@ export class BranchViewComponent implements OnInit {
   //this function will create a new branch
   createBranch() {
 
-    console.log(this.addBranchForm.value)
     //now owe will check if out form is valid or not
     if (this.addBranchForm.valid) {
 
@@ -732,10 +733,10 @@ export class BranchViewComponent implements OnInit {
         if( res.status === APIResponse.Success) {
           
           //after assiging branch to a service provider we will reset the data
-          this.selectedSPs = []
-          this.spList = []
-          this.serviceProviderListAssigned = []
-        //  this.assignServiceProviderToggle = false
+         // this.selectedSPs = []
+          //this.spList = []
+          //this.serviceProviderListAssigned = []
+          this.assignServiceProviderToggle = false
 
         } else {
 
@@ -763,6 +764,7 @@ export class BranchViewComponent implements OnInit {
   //the following function will unassign branch for the service provider
   unassignBranch(id) {
 
+    console.log(id)
     let data = {
 
       user_id: id,
@@ -1092,6 +1094,14 @@ export class BranchViewComponent implements OnInit {
         } 
       
       })
+
+  }
+
+  //this will close service provider popup
+  closeAssignServiceProvider() {
+
+    this.unassignBranchData()
+    this.assignServiceProviderToggle = false
 
   }
 

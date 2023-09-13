@@ -307,7 +307,7 @@
     
                     <div class="auto-flex-end-gap10">
 
-                        <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 padding-top-bottom-5 xsmall">view more</button>
+                        <button class="primary-bg padding-10 uppercase box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 padding-top-bottom-5 xsmall">view more</button>
     
                     </div>
     
@@ -324,9 +324,9 @@
 
                     <div class="auto-flex-start-gap10-column-no-set-width">
 
-                        <p class="width-max-300">{{ service.title }}</p>
+                        <p class="width-max-300 phone-max-150">{{ service.title }}</p>
                         <p class="bold">{{ service.price }} SAR</p>
-                        <button class="white-bg padding-10 padding-left-right-30 blue-color blue-border" (click)="navigateToService(service.id)">View service</button>
+                        <button class="white-bg padding-10 padding-left-right-30 blue-color blue-border uppercase" (click)="navigateToService(service.id)">View service</button>
                     </div>
         
                 </div>
@@ -335,7 +335,7 @@
             
             <div class="auto-flex-center-gap20">
 
-                <button class="primary-bg padding-10 capitalize box-shadow xsmall width-max-300 max-width" *ngIf="allServices.length>10 && itemsToShowInitially<allServices.length" (click)="loadMoreItems()">Load More</button>
+                <button class="primary-bg padding-10 uppercase box-shadow xsmall width-max-300 max-width" *ngIf="allServices.length>10 && itemsToShowInitially<allServices.length" (click)="loadMoreItems()">Load More</button>
 
             </div>
 

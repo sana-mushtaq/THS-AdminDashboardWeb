@@ -10,6 +10,8 @@ export class WebsiteDataService {
 
   private dataSubject = new BehaviorSubject<any>(null)
   public data$ = this.dataSubject.asObservable()
+  private locationSubject = new BehaviorSubject<any>(null)
+  public location$ = this.dataSubject.asObservable()
   private categoryId: number
   private serviceId: number
   public cartLengthSubject = new BehaviorSubject<number>(0);

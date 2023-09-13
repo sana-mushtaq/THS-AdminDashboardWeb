@@ -192,7 +192,6 @@ export class AppointmentScheduleComponent implements OnInit {
 
           //after fetching all service providers we will now check if their gender match with selected user or not 
           this.fetchedData = res.data
-          console.log(this.fetchedData)
 
           this.dataService.data$.subscribe((res) => {
 
@@ -482,7 +481,7 @@ export class AppointmentScheduleComponent implements OnInit {
       // Calculate 3 hours later from the current time
       const threeHoursLater = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
       const threeHoursLaterHour = threeHoursLater.getHours();
-      
+
       for (let hour = 12; hour <= 23; hour++) {
         const timeSlot = this.formatTimeSlot(hour);
         
@@ -491,10 +490,13 @@ export class AppointmentScheduleComponent implements OnInit {
           // Calculate the hour 3 hours later for the current day
           const threeHoursLaterCurrent = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
           const threeHoursLaterCurrentHour = threeHoursLaterCurrent.getHours();
-      
           if (hour < currentHour && hour < threeHoursLaterCurrentHour) {
             continue; // Skip past time slots for today
+            
           }
+
+
+          
         } else {
           // For future dates, include all time slots
           if (isTimeSlotAvailable(timeSlot)) {
@@ -502,6 +504,25 @@ export class AppointmentScheduleComponent implements OnInit {
           }
         }
       }
+
+           // Check if the selectedDate is today
+           if (selectedDate === currentDateString) {
+            // Calculate the hour 3 hours later for the current day
+            const threeHoursLaterCurrent = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
+            const threeHoursLaterCurrentHour = threeHoursLaterCurrent.getHours();
+
+            for (let hour = threeHoursLaterCurrentHour; hour <= 23; hour++) {
+              const timeSlot = this.formatTimeSlot(hour);
+              if (isTimeSlotAvailable(timeSlot)) {
+                this.timeSlots.push(timeSlot);
+              }
+            }
+        
+    
+          } 
+
+
+      
     } else {
       
       const formattedSelectedDate = this.formatSelectedDate(this.selectedDate);

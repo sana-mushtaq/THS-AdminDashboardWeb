@@ -28,7 +28,7 @@
             <div class="auto-flex-start-gap10-column-no-set-width">
 
                 <p class="bold">Account</p>
-                <p class="web-font-primary-light capitalize">personal informatiom</p>
+                <p class="web-font-primary-light capitalize">personal information</p>
 
             </div>
 
@@ -55,11 +55,21 @@
         <!-- users -->
         <div class="auto-flex-start-gap20-column border-radius-20 gray-border padding-20">
 
-            <p class="med bold">Users</p>
+            <div class="auto-flex-center-start-gap10 cursor-pointer" (click)="addDependant()">
 
-            <div class="auto-flex-start-center-gap20-no-wrap overflow-auto padding-bottom-20">
+                <p class="med bold">Users</p>
 
-                <div class="auto-flex-center-gap10-column-no-set-width">
+                <div class="gray-border padding-5 border-radius-100">
+
+                    <img class="img-20" src="assets/images/web/icons/plus.svg" />
+
+                </div>
+
+            </div>
+
+            <div class="auto-flex-start-gap20-no-wrap overflow-auto padding-bottom-20 place-stretch">
+
+                <div class="auto-flex-center-gap10-column-no-set-width width-min-100">
 
                     <img class="medImg" src="assets/images/web/icons/user.svg" />
                     <p class="bold">Main</p>
@@ -68,16 +78,10 @@
 
                 <div class="hr-black-vertical min-height-100"></div>
 
-                <div class="auto-flex-center-gap10-column-no-set-width cursor-pointer" *ngFor="let dependant of userDependants; let dependantIndex = index" (click)="showDependant(dependantIndex)">
+                <div class="auto-flex-center-gap10-column-no-set-width cursor-pointer width-min-100" *ngFor="let dependant of userDependants; let dependantIndex = index" (click)="showDependant(dependantIndex)">
 
                     <img class="medImg" src="assets/images/web/icons/user.svg" />
                     <p class="bold"> {{ dependant.first_name }} {{ dependant.last_name }}</p>
-
-                </div>
-
-                <div class="border-radius-100 gray-border padding-10 cursor-pointer" (click)="addDependant()">
-
-                    <img class="xsmallImg" src="assets/images/web/icons/plus.svg" />
 
                 </div>
                     
@@ -372,7 +376,17 @@
         <!-- addresses -->
         <div class="auto-flex-start-gap20-column border-radius-20 gray-border padding-20">
 
-            <p class="med bold">Addresses</p>
+            <div class="auto-flex-center-start-gap10 cursor-pointer" (click)="addLocation()">
+
+                <p class="med bold">Addresses</p>
+                
+                <div class="gray-border padding-5 border-radius-100">
+
+                    <img class="img-20" src="assets/images/web/icons/plus.svg" />
+
+                </div>
+
+            </div>
 
             <div class="auto-flex-start-center-gap20-no-wrap overflow-auto padding-bottom-20">
 
@@ -380,23 +394,17 @@
 
                     <img class="xxxmedImg cover border-radius-10" src="assets/images/web/icons/map.svg" />
 
-                    <div class="auto-flex-start-gap10-column-no-set-width">
+                    <div class="auto-flex-start-gap10-column-no-set-width" style="max-width: 100px;">
 
                         <p class="web-font-primary-light bold">{{ address.address_name }}</p>
-                        <p class="web-font-primary-light" *ngIf="address.city.length>0">{{ address.city }}</p>
-                        <p class="web-font-primary-light" *ngIf="address.country.length>0">{{ address.country }}</p>
+                        <p class="web-font-primary-light" *ngIf="address && address.city && address.city.length>0">{{ address.city }}</p>
+                        <p class="web-font-primary-light" *ngIf="address && address.country && address.country.length>0">{{ address.country }}</p>
                         <p class="web-font-primary-light">{{ address.address_line1 }}</p>
                         <p class="web-font-primary-light">{{ address.address_line2 }}</p>
 
                     </div>
 
                     <img class="xsmallImg absolute-top-right-10 cursor-pointer" src="assets/images/web/icons/delete.svg" (click)="removeAddress(addressIndex)" />
-
-                </div>
-
-                <div class="border-radius-100 gray-border padding-10 cursor-pointer" (click)="addLocation()">
-
-                    <img class="xsmallImg" src="assets/images/web/icons/plus.svg" />
 
                 </div>
 

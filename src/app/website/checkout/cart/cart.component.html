@@ -70,7 +70,7 @@
 
             </div>    
 
-            <button class="primary-bg max-width padding-10" (click)="checkout()">checkout</button>
+            <button class="primary-bg max-width padding-10 uppercase" (click)="checkout()">checkout</button>
 
         </div>
 
@@ -80,7 +80,7 @@
     <app-custom-alert *ngIf="loginAlert" [title]="'User not logged in'" [message]="'Please log in to continue'" [cancelButtonText]="'Cancel'" [continueButtonText]="'login'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Cart error -->
-    <app-custom-alert *ngIf="wrongService" [title]="'Service selection error'"   [message]="'You have selected a service that is not provided by a service provider relative to your gender. Please choose a dependent or remove the service. Service(s) are: ' + errorMessage"
+    <app-custom-alert *ngIf="wrongService" [title]="'Service selection error'"   [message]="'You have selected a service that is not provided by a service provider relevant to your gender. Please choose a dependent or remove the following services' + errorMessage"
     [cancelButtonText]="'Cancel'" [continueButtonText]="'Confirm'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClickService()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
 

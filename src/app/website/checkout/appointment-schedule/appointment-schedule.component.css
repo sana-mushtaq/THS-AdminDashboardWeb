@@ -85,6 +85,15 @@ padding: 10px;
     background-color: #EDEEF2;
 }
 
+@media only screen and (max-width: 1090px) {
+
+    .phone-no-wrap{
+        flex-wrap: nowrap;
+        overflow: auto;
+    }
+    
+}
+
 @media only screen and (max-width: 500px) {
 
     .phone-no-gap {
@@ -94,4 +103,5 @@ padding: 10px;
         width: 16px;
         height: 16px;
     }
+
 }

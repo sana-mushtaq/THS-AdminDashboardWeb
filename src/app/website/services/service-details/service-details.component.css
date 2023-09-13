@@ -9,3 +9,18 @@
         max-width: 100%;
     }
 }
+
+
+.message {
+    /* Your message container styles */
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+  
+  .fade-in {
+    opacity: 1;
+  }
+  
+  .fade-out {
+    opacity: 0;
+  }

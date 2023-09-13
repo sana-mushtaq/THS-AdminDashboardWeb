@@ -3006,21 +3006,17 @@ a:hover{
 
 .xxxxlargeImg {
     width: 700px;
-    height: 700px;
 }
 
 .xxxlargeImg {
     width: 500px;
-    height: 500px;
 }
 
 .xxxlargeImg-350 {
     width: 350px;
-    height: 350px;
 }
 .xxxlargeImg-500 {
     width: 500px;
-    height: 200px;
 }
 
 .xxlargeImg-350 {
@@ -3029,61 +3025,49 @@ a:hover{
 
 .xxlargeImg {
     width: 250px;
-    height: 250px;
 }
 
 .xlargeImg {
     width: 180px;
-    height: 180px;
 }
 
 .largeImg {
     width: 150px;
-    height: 150px;
 }
 
 .xxxmedImg {
     width: 120px;
-    height: 120px;
 }
 
 .xxmedImg {
     width: 100px;
-    height: 100px;
 }
 
 .xmedImg {
     width: 80px;
-    height: 80px;
 }
 
 .medImg {
     width: 70px;
-    height: 70px;
 }
 
 .smallImg {
     width: 50px;
-    height: 50px;
 }
 
 .xxsmallImg {
     width: 40px;
-    height: 40px;
 }
 
 .xsmallImg {
     width: 30px;
-    height: 30px;
 }
 
 .img-20 {
     width: 20px;
-    height: 20px;
 }
 .img-16 {
     width: 16px;
-    height: 16px;
 }
 
 .img25 {
@@ -3178,7 +3162,10 @@ a:hover{
 
 /*Shadows*/
 .box-shadow{
-    box-shadow: 0px 8px 20px 0px #4E60FF29;
+    box-shadow: 0px 8px 20px #4E60FF29;
+}
+.box-shadow-16-50{
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.5);
 }
 
 /*Bg*/
@@ -5052,7 +5039,6 @@ margin: 0 auto;
 
     .xxxmedImg {
         width: 100px;
-        height: 100px;
     }
 
     .xxmedImg{
@@ -5066,7 +5052,6 @@ margin: 0 auto;
     }
     .xxxlargeImg-350 {
         width: 200px;
-        height: 200px;
     }
     .xxxlargeImg-500 {
         width: 250px;

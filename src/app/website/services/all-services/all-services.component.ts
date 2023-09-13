@@ -32,6 +32,7 @@ export class AllServicesComponent implements OnInit {
   public serverUrl : string = environment.domainName
   
   data$ = this.dataService.data$;
+  location$ = this.dataService.location$;
 
     //html elemets 
   @ViewChild('search') searchElementRef: ElementRef
@@ -39,8 +40,8 @@ export class AllServicesComponent implements OnInit {
   userCurrentLocation: boolean = false
   selectMapLocation: boolean = false
   zoom: number = 15
-  centerLat: number = 24.7136
-  centerLng: number = 46.6753
+  centerLat: number = 0
+  centerLng: number = 0
   selectedLat: number
   selectedLng: number
   locationName: string
@@ -163,12 +164,14 @@ export class AllServicesComponent implements OnInit {
     this.changed = false
     // This is where you should place your component-specific initialization code
     // that relies on the fetched data from dataService
+
     let data = {
 
       user_latitude: this.centerLat,
       user_longitude: this.centerLng
     
     }
+    sessionStorage.setItem('userLocation', JSON.stringify(this.userAddress))
 
     this.dataService.getData(data)
 
@@ -232,41 +235,43 @@ export class AllServicesComponent implements OnInit {
     
   }
 
-  getUserLocation() {
+  sessionStorageExixst() {
 
-    
-  if (navigator.geolocation) {
-  
-    const options = {
-      enableHighAccuracy: true, // Request higher accuracy
-      timeout: 5000,            // Maximum time to wait for a result
-      maximumAge: 0             // Don't use cached data
+    let session = sessionStorage.getItem('userLocation')
+
+    if(session === undefined || session === null || session === 'undefined') {
+
+      return false
+
+    } else {
+
+      return true
+
     }
 
-    navigator.geolocation.getCurrentPosition((position) => {
-      
+  }
+
+  getUserLocation() {
+
+    if(this.sessionStorageExixst()) {
+
+      let session = JSON.parse(sessionStorage.getItem('userLocation'))
+
       // Set the center of the map to the user's current location
-      this.centerLat = position.coords.latitude
-      this.centerLng = position.coords.longitude
+      this.centerLat = session.latitude
+      this.centerLng = session.longitude
 
       // Set the marker's initial position to the user's current location
-      this.selectedLat = position.coords.latitude
-      this.selectedLng = position.coords.longitude
+      this.selectedLat = session.latitude
+      this.selectedLng = session.longitude
+
       this.getComponentData()
-
-      this.userAddress = {
-        
-        latitude: this.selectedLat,
-        longitude: this.selectedLng,
-        address_line1: '',
-        address_line2: ''
-
-      }
-
+    
       let data = {
 
         user_address: this.userAddress,
         branch_id: this.branch_id
+
       }
 
       localStorage.setItem("THSAppointmentAddress", JSON.stringify(data))
@@ -341,16 +346,130 @@ export class AllServicesComponent implements OnInit {
 
       })
 
-    }, (error) => {
+    } else {
 
-      console.error("Error getting location:", error)
-
-    }, options)
-
-  } else {
+      if (navigator.geolocation) {
   
-      console.error("Geolocation is not supported by this browser.")
-  
+        const options = {
+          enableHighAccuracy: true, // Request higher accuracy
+          timeout: 5000,            // Maximum time to wait for a result
+          maximumAge: 0             // Don't use cached data
+        }
+    
+        navigator.geolocation.getCurrentPosition((position) => {
+          
+          // Set the center of the map to the user's current location
+          this.centerLat = position.coords.latitude
+          this.centerLng = position.coords.longitude
+    
+          // Set the marker's initial position to the user's current location
+          this.selectedLat = position.coords.latitude
+          this.selectedLng = position.coords.longitude
+    
+          this.userAddress = {
+            
+            latitude: this.selectedLat,
+            longitude: this.selectedLng,
+            address_line1: '',
+            address_line2: ''
+    
+          }
+    
+          sessionStorage.setItem('userLocation', JSON.stringify(this.userAddress))
+    
+          this.getComponentData()
+    
+          let data = {
+    
+            user_address: this.userAddress,
+            branch_id: this.branch_id
+          }
+    
+          localStorage.setItem("THSAppointmentAddress", JSON.stringify(data))
+    
+          // Get the location name using the Google Maps Places API
+          const geocoder = new google.maps.Geocoder()
+          const latlng = { lat: this.centerLat, lng: this.centerLng }
+      
+          geocoder.geocode({ location: latlng }, (results, status) => {
+    
+            if (status === google.maps.GeocoderStatus.OK) {
+            
+              if (results[0]) {
+            
+                const locationName = results[0].formatted_address
+                this.locationName = locationName
+           
+                this.userAddress = {
+                  
+                  latitude: this.selectedLat,
+                  longitude: this.selectedLng,
+                  address_line1: locationName,
+                  address_line2: ''
+    
+                }
+    
+                let data = {
+    
+                  user_address: this.userAddress,
+                  branch_id: this.branch_id
+                }
+    
+                localStorage.setItem("THSAppointmentAddress", JSON.stringify(data))
+    
+                const addressComponents = results[0].address_components
+    
+                for (const component of addressComponents) {
+    
+                  if (component.types.includes("locality")) {
+    
+                    const cityName = component.long_name
+    
+                    this.cityName = cityName
+    
+                    this.addressForm.get('city').setValue( cityName )
+    
+                    return cityName // You can use the cityName as needed
+    
+                  }
+    
+                    // Check for the country component
+                    if (component.types.includes("country")) {
+                      
+                      this.addressForm.get('country').setValue( component.long_name )
+                    
+                    }
+    
+                }
+    
+                // You can use the locationName as needed
+              } else {
+            
+                console.error("No results found.")
+            
+              }
+            
+            } else {
+             
+              console.error("Geocoder failed due to: " + status)
+            
+            }
+    
+          })
+    
+        }, (error) => {
+    
+          console.error("Error getting location:", error)
+    
+        }, options)
+    
+    
+      } else {
+      
+          console.error("Geolocation is not supported by this browser.")
+      
+        }
+    
     }
   
   }
@@ -390,6 +509,7 @@ export class AllServicesComponent implements OnInit {
       address_line2: ''
 
     }
+    sessionStorage.setItem('userLocation', JSON.stringify(this.userAddress))
 
     let data = {
 
@@ -665,26 +785,7 @@ export class AllServicesComponent implements OnInit {
 
     this.locationName = location.location
 
-    let data = {
-
-      user_latitude: this.centerLat,
-      user_longitude: this.centerLng
-    
-    }
-
-    return this.initializationSubject.pipe(
-
-      switchMap(async () => this.dataService.getData(data)),
-      
-      catchError(error => {
-      
-        console.error('Error initializing app:', error)
-      
-        throw error
-      
-      })
-    
-    )
+    this.getComponentData()
 
 
   }
@@ -705,7 +806,9 @@ export class AllServicesComponent implements OnInit {
 
   navigate(link) {
 
+    this.closeMenu()
     this.router.navigate([link])
+
   }
 
   closeMap() {

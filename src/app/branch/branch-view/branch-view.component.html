@@ -92,14 +92,6 @@
 
                             </div>   
 
-                            <!-- branch radius additional cost -->
-                            <div class="auto-flex-center-start-gap20">
-
-                                <p class="bold">Additional Cost:</p>    
-                                <p> {{ branch.additional_cost_radius }} </p>    
-
-                            </div>
-
                             <!-- branch radius -->
                             <div class="auto-flex-center-start-gap20">
 
@@ -123,6 +115,13 @@
 
                             <button class="glass-bg padding-10 border-none width-100" (click)="editBranch(branch, branchIndex)">Edit</button>
                             <button class="glass-bg padding-10 border-none width-100" (click)="deleteBranch(branch, branchIndex)">Delete</button>
+
+                        </div>
+
+                        
+                        <div class="auto-flex-center-gap10">
+
+                            <button class="glass-bg padding-10 border-none max-width" (click)="assignServiceProvider(branch, branchIndex)">Assign Service Provider</button>
 
                         </div>
 
@@ -414,6 +413,75 @@
                     </div>
 
                 </div>
+
+                <!-- Assign Service Provider -->
+                <div class="fixed dialog" *ngIf="assignServiceProviderToggle">
+
+                    <div class="popup">
+
+                        <div class="content white-bg scrollable-div web-font-primary-light" style="max-height: 600px; overflow: auto;">
+
+                            <button class="close" (click)="closeAssignServiceProvider()">x</button>
+                            <div class="auto-flex-start-space-between-gap10">
+
+                                <button class="primary-bg padding-10 secondary-color bold" *ngIf="selectedSPs.length>0" (click)="assignSelectedServiceProviderToBranch()">Assign Selected Service Providers to Branch</button>
+
+                            </div>
+
+                            <hr class="hr-black" />
+
+                            <!-- list of service providers -->
+                            <div class="auto-flex-center-start-gap10">
+
+                                <ng-multiselect-dropdown class="max-width" *ngIf="spList.length>0 && spSettings" [settings]="spSettings" [data]="spList" (onSelect)="onSPSelect($event)" (onDeSelect)="onSPDeSelect($event)" (onSelectAll)="onSPSelectAll($event)" (onDeSelectAll)="onSPDeSelectAll()"></ng-multiselect-dropdown>
+
+                            </div>
+
+                            <!-- now we will display a list of service providers to assign, it will also dis-->
+                            <table class="table">
+
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Branch</th>
+                                <th>Gender</th>
+                                <th>Actions</th>
+
+                                <!-- display a list of service providers already assigned -->
+                                <tr *ngFor="let sp of serviceProviderListAssigned">
+                                    
+                                    <td>
+                                        <p> {{ sp.id }} </p>
+                                    </td>
+
+                                    <td>
+                                        <p> {{ sp.first_name }} {{ sp.last_name }} </p>
+                                    </td>
+
+                                    <td>
+                                        <p> {{ sp.title }} </p>
+                                    </td>
+
+                                    <td>
+                                        <p *ngIf="sp.gender===1">Male</p>
+                                        <p *ngIf="sp.gender===2">Female</p>
+                                        <p *ngIf="sp.gender===3">Any</p>
+                                    </td>    
+
+                                    <td class="auto-flex-center-gap10-no-set-width">
+                                        <button class="red-bg bold secondary-color padding-5 border-radius-10" (click)="unassignBranch(sp.id)">remove</button>
+                                    </td>
+
+
+
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+                    
+                </div> 
 
             </div>
 

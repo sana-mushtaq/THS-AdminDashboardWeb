@@ -59,9 +59,14 @@ a:hover{
 .border-radius-0{
     border-radius: 0px;
 }
-
+.mobile-category{
+    display: none;
+}
+.width-half-screen {
+    width: 48%;
+}
 @media only screen and (max-width: 1150px) {
-    
+   
     .phone-static {
         position: static;
     }
@@ -83,7 +88,6 @@ a:hover{
     }
     .xxxmedImg{
         width: 120px;
-        height: 120px;
     }
     .phone-max-height-150{
         height: 150px;
@@ -91,8 +95,19 @@ a:hover{
     .self-stretch {
         align-self: flex-end;
     }
+    .width-max-500{
+        max-width: 500px;
+    }
 }
-
+@media only screen and (max-width: 850px) {
+    .desktop-category {
+        display: none;
+    }
+    .mobile-category{
+        display: flex;
+    }
+    
+}
 @media only screen and (min-width: 361px) and (max-width: 500px) {
 
     .phone-max-300 {
@@ -132,7 +147,6 @@ a:hover{
     }
     .xxxmedImg{
         width: 120px;
-        height: 120px;
     }
     .phone-max-height-150{
         height: 150px;
@@ -149,6 +163,12 @@ a:hover{
     .width-max-phone-130{
         max-width: 130px;
     }
+    .width-max-500{
+        max-width: 300px;
+    }
+    .phone-max-width{
+        max-width: 100%;
+    }
 }
 
 @media only screen and (max-width: 360px) {
@@ -160,6 +180,5 @@ a:hover{
     }
     .xxxmedImg{
         width: 80px !important;
-        height: 80px !important;
     }
 }

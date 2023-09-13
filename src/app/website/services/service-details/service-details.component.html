@@ -1,14 +1,14 @@
 <app-checkout-header></app-checkout-header>
 
 <!--phone-vertical-reverse -->
-<div class="web auto-flex-start-gap40 main-div main-div-max padding-top-20" style="padding: 20px;">
+<div class="web auto-flex-start-gap40 main-div main-div-max padding-top-20" style="padding: 20px;" *ngIf="currentService">
 
     <div class="auto-flex-start-gap10-column-no-set-width width-max-400 max-width box-shadow border-radius-20 padding-20 flex-grow phone-width">
 
         <div class="auto-flex-start-gap20-column">
         
-            <img class="xxmedImg cover border-radius-10 light-gray-bg padding-5" *ngIf="currentService.icon && currentService.icon.length>0" src="{{serverUrl}}{{currentService.icon}}" />
-            <img class="xxmedImg cover border-radius-10 light-gray-bg padding-5" *ngIf="!currentService.icon || currentService.icon.length<=0" style="object-fit: fill;" src="assets/images/web/logo.svg" />
+            <img class="xxmedImg cover border-radius-10 light-gray-bg padding-5" *ngIf="currentService && currentService.icon && currentService.icon.length>0" src="{{serverUrl}}{{currentService.icon}}" />
+            <img class="xxmedImg cover border-radius-10 light-gray-bg padding-5" *ngIf="!currentService && (!currentService.icon || currentService.icon.length<=0)" style="object-fit: fill;" src="assets/images/web/logo.svg" />
     
             <div class="auto-flex-start-gap20-column-no-set-width">
     
@@ -21,13 +21,19 @@
          
         </div>
 
-        <button class="primary-bg padding-10 padding-left-right-30 max-width" (click)="addToCart(currentService)">Add to cart</button>
+        <button class="primary-bg padding-10 padding-left-right-30 max-width uppercase" (click)="addToCart(currentService)">Add to cart</button>
+        <div class="auto-flex-start-gap10-column" *ngIf="addedToCart.length>0">
+
+            <p class="light-green-bg green-color padding-5 text-center max-width message" [class.fade-in]="msg.visible" [class.fade-out]="!msg.visible" *ngFor="let msg of addedToCart">  {{ msg.text }}
+            </p>
+
+        </div>
         
     </div>
     
 
     <!-- Service header -->
-    <div class="auto-flex-center-start-gap20-no-set-width flex-grow phone-max-width">
+    <div class="auto-flex-center-start-gap20-no-set-width flex-grow phone-max-width box-shadow padding-20 border-radius-20">
 
         <div class="auto-flex-start-gap20-column">
             

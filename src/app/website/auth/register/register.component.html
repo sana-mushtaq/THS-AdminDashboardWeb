@@ -1,4 +1,4 @@
-<div class="web auto-flex-center-space-between-no-gap-column padding-none">
+<div class="web auto-flex-center-space-between-no-gap-column padding-none direction-reverse">
 
     <div class="auto-flex-center-space-between-gap20 primary-bg border-radius-0 border-none">
 
@@ -20,7 +20,7 @@
     <!-- Account Details -->
     <div class="auto-flex-center-gap20-column padding-40" #account_details>
 
-        <div class="auto-flex-start-gap30-column padding-20 main-div">
+        <div class="auto-flex-start-gap20-column padding-20 main-div">
 
             <h3 class="xxlarge bold capitalize">Account details</h3>
             <p class="web-font-primary-light">Enter your data that you will use for entering.</p>
@@ -30,7 +30,7 @@
                 <div class="auto-flex-center-gap20-column">
                 
                     <!-- register input fields -->
-                    <div class="auto-flex-start-gap20">
+                    <div class="auto-flex-center-space-between-gap20">
 
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
@@ -48,10 +48,6 @@
                             <p *ngIf="accountDetailsForm.get('phone_number').hasError('invalidPhoneNumber')" class="xsmall red-color">Enter valid phone number</p>
 
                         </div>    
-
-                    </div>
-
-                    <div class="auto-flex-start-gap20">
 
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
@@ -88,7 +84,7 @@
              <div class="auto-flex-start-center-gap10">
     
                 <p class="xsmall bold web-font-primary-light">Alreay have an account?</p>
-                <p class="xsmall bold blue-color cursor-pointer">Sign in</p>
+                <p class="xsmall bold blue-color cursor-pointer" (click)="naviagteToLogin()">Sign in</p>
     
             </div>
 
@@ -99,7 +95,7 @@
     <!-- Confirmation -->
     <div class="auto-flex-center-gap20-column padding-40 hide" #account_confirmation>
 
-        <div class="auto-flex-start-gap30-column padding-20 main-div">
+        <div class="auto-flex-start-gap20-column padding-20 main-div">
 
             <h3 class="xxlarge bold capitalize">Confirmation</h3>
             <p class="web-font-primary-light">Enter your security code that we sent to your phone</p>
@@ -138,7 +134,7 @@
     <!-- Personal Info -->
     <div class="auto-flex-center-gap20-column padding-40 hide" #account_setup>
 
-        <div class="auto-flex-start-gap30-column padding-20 main-div">
+        <div class="auto-flex-start-gap20-column padding-20 main-div">
 
             <h3 class="xxlarge bold capitalize">Personal info</h3>
             <p class="web-font-primary-light">Enter your additional information</p>
