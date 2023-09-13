@@ -171,7 +171,7 @@ export class AllServicesComponent implements OnInit {
       user_longitude: this.centerLng
     
     }
-    sessionStorage.setItem('userLocation', JSON.stringify(this.userAddress))
+    sessionStorage.setItem('userLocation', JSON.stringify(data))
 
     this.dataService.getData(data)
 
@@ -229,6 +229,10 @@ export class AllServicesComponent implements OnInit {
           this.topServices = Object.values(this.topServices)
           this.displayedCategories = this.topServices.slice(0, this.itemsToShowInitially);
  
+        } else {
+
+          this.allServices = []
+        
         }
 
     })
@@ -466,6 +470,7 @@ export class AllServicesComponent implements OnInit {
     
       } else {
       
+          this.allServices = []
           console.error("Geolocation is not supported by this browser.")
       
         }
