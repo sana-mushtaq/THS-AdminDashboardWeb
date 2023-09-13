@@ -171,7 +171,14 @@ export class AllServicesComponent implements OnInit {
       user_longitude: this.centerLng
     
     }
-    sessionStorage.setItem('userLocation', JSON.stringify(data))
+
+    let sessionDate = {
+
+      latitude: this.centerLat,
+      longitude: this.centerLng
+
+    }
+    sessionStorage.setItem('userLocation', JSON.stringify(sessionDate))
 
     this.dataService.getData(data)
 
