@@ -110,6 +110,9 @@ a:hover{
 }
 @media only screen and (min-width: 361px) and (max-width: 500px) {
 
+    .width-600{
+        width: 300px;
+    }
     .phone-max-300 {
         max-width: 300px;
     }
@@ -132,9 +135,7 @@ a:hover{
     .width-160{
         width: 130px;
     }
-    .width-600 {
-        width: auto;
-    }
+  
     .phone-300{
         width: 300px;
     }
@@ -180,5 +181,9 @@ a:hover{
     }
     .xxxmedImg{
         width: 80px !important;
+    }
+
+    .width-600{
+        width: 300px;
     }
 }
