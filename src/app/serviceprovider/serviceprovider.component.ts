@@ -305,7 +305,7 @@ export class ServiceproviderComponent implements OnInit {
 
   //the following function will update service and its data
   updateServiceProvider() {
-console.log(this.selectedServiceProvider)
+
     //now we will assign the data of currentService to editServiceForm
     this.editServiceProviderForm.patchValue(this.selectedServiceProvider)
 
