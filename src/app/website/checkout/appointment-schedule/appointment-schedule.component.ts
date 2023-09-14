@@ -442,35 +442,54 @@ export class AppointmentScheduleComponent implements OnInit {
         return sps.service_id === serviceId;
       });
 
-
       // Convert the selected date to "YYYY-MM-DD" format
       const selectedDate = this.formatSelectedDate(this.selectedDate);
 
       this.setPreferredDate(selectedDate);
 
       const uniqueScheduledTimes = this.fetchedData.appointments
-        .filter(app => {
-          // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
-          return (
-            app.serviceAssigneeId !== null &&
-            sps.some(sp => sp.user_id === app.serviceAssigneeId) &&
-            app.serviceDate === selectedDate
-            //mpare only the date part
-            // You can add a time condition here if needed
-          );
-        }).map(app => {
-          // Convert the database time format (e.g., "2023-09-04T19:00:00.000Z") to time slots format (e.g., "4:00pm")
-          const dbTime = app.serviceTime;
-          const [hours, minutes] = dbTime.split(':');
-          const ampm = hours >= 12 ? 'pm' : 'am';
-          const formattedTime = `${(hours % 12) || 12}:${minutes}${ampm}`;
-          return formattedTime;
+      .filter(app => {
+        // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
+        return (
+          app.serviceAssigneeId !== null &&
+          sps.some(sp => sp.user_id === app.serviceAssigneeId) &&
+          app.serviceDate === selectedDate
+          //mpare only the date part
+          // You can add a time condition here if needed
+        );
+      }).map(app => {
+        // Convert the database time format (e.g., "2023-09-04T19:00:00.000Z") to time slots format (e.g., "4:00pm")
+        const dbTime = app.serviceTime;
+        const [hours, minutes] = dbTime.split(':');
+        const ampm = hours >= 12 ? 'pm' : 'am';
+        const formattedTime = `${(hours % 12) || 12}:${minutes}${ampm}`;
+        return formattedTime;
       });
 
 
+      console.log(uniqueScheduledTimes)
+      // Count the occurrences of each time slot
+      const timeSlotCounts = {};
+      uniqueScheduledTimes.forEach(time => {
+      
+        timeSlotCounts[time] = (timeSlotCounts[time] || 0) + 1;
+    
+      });
+
+      console.log(timeSlotCounts)
+
+      // Filter the time slots where all service providers are booked
+      const filteredTimeSlots = Object.keys(timeSlotCounts).filter(time => {
+      
+        return timeSlotCounts[time] === sps.length;
+      
+      });
+
       // Function to check if a time slot is available
       const isTimeSlotAvailable = (timeSlot: string) => {
-        return !uniqueScheduledTimes.includes(timeSlot);
+        
+        return !filteredTimeSlots.includes(timeSlot);
+
       };
   
 
@@ -511,8 +530,9 @@ export class AppointmentScheduleComponent implements OnInit {
       // Calculate the hour 3 hours later for the current day
       const threeHoursLaterCurrent = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
       const threeHoursLaterCurrentHour = threeHoursLaterCurrent.getHours();
+      const roundedHour = Math.ceil(threeHoursLaterCurrent.getMinutes() / 60);
 
-      for (let hour = threeHoursLaterCurrentHour; hour <= 23; hour++) {
+      for (let hour = threeHoursLaterCurrentHour + roundedHour; hour <= 23; hour++) {
         const timeSlot = this.formatTimeSlot(hour);
        
         if (isTimeSlotAvailable(timeSlot)) {
@@ -571,11 +591,26 @@ export class AppointmentScheduleComponent implements OnInit {
         return formattedTime;
     });
 
+    const timeSlotCounts = {};
+    uniqueScheduledTimes.forEach(time => {
+    
+      timeSlotCounts[time] = (timeSlotCounts[time] || 0) + 1;
+  
+    });
+
+    // Filter the time slots where all service providers are booked
+    const filteredTimeSlots = Object.keys(timeSlotCounts).filter(time => {
+    
+      return timeSlotCounts[time] === sps.length;
+    
+    });
+
     // Function to check if a time slot is available
     const isTimeSlotAvailable = (timeSlot: string) => {
-      return !uniqueScheduledTimes.includes(timeSlot);
-    };
+      
+      return !filteredTimeSlots.includes(timeSlot);
 
+    };
 
     this.timeSlots = [];
     const currentDate = new Date();
@@ -622,8 +657,8 @@ export class AppointmentScheduleComponent implements OnInit {
                 // Calculate the hour 3 hours later for the current day
                 const threeHoursLaterCurrent = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
                 const threeHoursLaterCurrentHour = threeHoursLaterCurrent.getHours();
-    
-                for (let hour = threeHoursLaterCurrentHour; hour <= 23; hour++) {
+                const roundedHour = Math.ceil(threeHoursLaterCurrent.getMinutes() / 60);
+                for (let hour = threeHoursLaterCurrentHour+ roundedHour; hour <= 23; hour++) {
                   const timeSlot = this.formatTimeSlot(hour);
                   if (isTimeSlotAvailable(timeSlot)) {
                     

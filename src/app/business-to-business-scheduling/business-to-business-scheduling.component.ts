@@ -475,7 +475,8 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
   setPreferredServiceP(item) {
 
-    this.preferredServiceP = item.id
+    console.log(item.target.value)
+    this.preferredServiceP = item.target.value
 
   }
 
@@ -541,7 +542,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
       }
 
-
       let data = {
 
         service_name: service_name,
@@ -556,6 +556,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
         //service_provide_id: this.preferredServiceProvider
 
       }
+      console.log(data)
 
       this._b2c.createB2B(data).subscribe({
     
@@ -946,10 +947,26 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
           });
 
 
+                      // Count the occurrences of each time slot
+            const timeSlotCounts = {};
+            uniqueScheduledTimes.forEach(time => {
+            
+              timeSlotCounts[time] = (timeSlotCounts[time] || 0) + 1;
+          
+            });
+
+            console.log(timeSlotCounts)
+
+            // Filter the time slots where all service providers are booked
+            const filteredTimeSlots = Object.keys(timeSlotCounts).filter(time => {
+            
+              return timeSlotCounts[time] === sps.length;
+            
+            });
 
           // Function to check if a time slot is available
           const isTimeSlotAvailable = (timeSlot: string) => {
-            return !uniqueScheduledTimes.includes(timeSlot);
+            return !filteredTimeSlots.includes(timeSlot);
           };
       
           this.timeSlots = [];

@@ -43,7 +43,8 @@ export class PaymentConfirmationComponent implements OnInit {
           tap_id: id
 
         }
-  /*
+  
+        
         this._b2c.verifyPaymentStatus(data).subscribe({
               
           next : ( ress : any ) => {
@@ -150,8 +151,9 @@ export class PaymentConfirmationComponent implements OnInit {
     
           }
       
-        }) */
-        this._b2c.verifyAppointment(data).subscribe({
+        }) 
+        
+        /*this._b2c.verifyAppointment(data).subscribe({
       
           next : ( resss : any ) => {
     
@@ -280,7 +282,7 @@ export class PaymentConfirmationComponent implements OnInit {
     
           }
       
-        }) 
+        }) */
     
       }
     
