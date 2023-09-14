@@ -467,7 +467,7 @@ export class AppointmentScheduleComponent implements OnInit {
           return formattedTime;
       });
 
-      console.log(this.fetchedData.appointments)
+
       // Function to check if a time slot is available
       const isTimeSlotAvailable = (timeSlot: string) => {
         return !uniqueScheduledTimes.includes(timeSlot);
@@ -514,16 +514,18 @@ export class AppointmentScheduleComponent implements OnInit {
 
       for (let hour = threeHoursLaterCurrentHour; hour <= 23; hour++) {
         const timeSlot = this.formatTimeSlot(hour);
+       
         if (isTimeSlotAvailable(timeSlot)) {
+      
+          if(timeSlot !== '10:00am' && timeSlot !== '11:00am')
           this.timeSlots.push(timeSlot);
+       
         }
+      
       }
   
-
     } 
 
-
-      
     } else {
       
       const formattedSelectedDate = this.formatSelectedDate(this.selectedDate);
@@ -606,7 +608,11 @@ export class AppointmentScheduleComponent implements OnInit {
             } else {
               // For future dates, include all time slots
               if (isTimeSlotAvailable(timeSlot)) {
-                this.timeSlots.push(timeSlot);
+                if(timeSlot !== '10:00am' && timeSlot !== '11:00am'){
+
+                  this.timeSlots.push(timeSlot);
+
+                }
               }
             }
           }
@@ -620,7 +626,13 @@ export class AppointmentScheduleComponent implements OnInit {
                 for (let hour = threeHoursLaterCurrentHour; hour <= 23; hour++) {
                   const timeSlot = this.formatTimeSlot(hour);
                   if (isTimeSlotAvailable(timeSlot)) {
-                    this.timeSlots.push(timeSlot);
+                    
+                    if(timeSlot !== '10:00am' && timeSlot !== '11:00am'){
+
+                      this.timeSlots.push(timeSlot);
+    
+                    }
+                    
                   }
                 }
             

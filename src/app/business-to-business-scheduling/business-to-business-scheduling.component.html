@@ -211,7 +211,7 @@
     
                                     <div class="auto-flex-start-gap5-column relative">
     
-                                        <input #search class="input-global absolute-top-10 z-index" type="text" placeholder="Search" />
+                                        <input #search (keyup)="onChangeAddress()" class="input-global absolute-top-10 z-index" type="text" placeholder="Search" />
     
                                         <agm-map class="max-width height-300 width-800 border-top-left-right-10 overflow-hidden" [latitude]="centerLat" [longitude]="centerLng" [zoom]="zoom" [streetViewControl]="false" [zoomControl]="false" [mapTypeControl]="false" (mapClick)="onMapClick($event)" >
                                     

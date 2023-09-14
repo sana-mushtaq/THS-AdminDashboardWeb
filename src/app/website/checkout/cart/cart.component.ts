@@ -104,6 +104,24 @@ export class CartComponent implements OnInit {
             }
             
             this.userDependants[0] = res.data
+    
+            this._patientService.getDependantsList(data).subscribe({
+
+              next : ( res : any ) => {
+                //in case of success the api returns 0 as a status code
+                if( res.status === APIResponse.Success ) {
+                  res.data.forEach(dependant => {
+        
+                    this.userDependants.push(dependant)
+        
+                  })
+                      
+                } 
+                
+              },
+              error: ( err: any ) => {}
+          
+              })
             
             this.cartData.forEach(cartItem => {
 
@@ -128,25 +146,6 @@ export class CartComponent implements OnInit {
         
         }
     
-      })
-
-      this._patientService.getDependantsList(data).subscribe({
-
-      next : ( res : any ) => {
-
-        //in case of success the api returns 0 as a status code
-        if( res.status === APIResponse.Success ) {
-          res.data.forEach(dependant => {
-
-            this.userDependants.push(dependant)
-
-          })
-              
-        } 
-        
-      },
-      error: ( err: any ) => {}
-  
       })
 
       //after getting dependants, we have to check if a particular service is provided by servoce provider and his gender matches with 
@@ -184,7 +183,6 @@ export class CartComponent implements OnInit {
           this._b2c.checkServiceProviderEligibilty(spData).subscribe({
       
             next : ( ress : any ) => {
-      
              
               //in case of success the api returns 0 as a status code
               if( ress.status === APIResponse.Success ) {
@@ -303,6 +301,7 @@ export class CartComponent implements OnInit {
         return pid.id === patient
 
       })
+
 
       if(patientGender.length>0){
 

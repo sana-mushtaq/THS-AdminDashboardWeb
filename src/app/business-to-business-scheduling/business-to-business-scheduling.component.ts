@@ -169,7 +169,81 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
     this.getComponentData()
   
   }
+
+  onChangeAddress() {
+
+    const value : string = (this.searchElementRef.nativeElement.value as string).trim();
+    // FROM GOOGLE MAP
+    if( value.includes('google.com/maps/place/')) {
+
+      let params = value.substring( (value.indexOf( "@" )+1), (value.indexOf( "/data" ) - 4));
+      let coords = params.split(',');
+      let lat : any = coords[0];
+      let lng : any = coords[1];
+
+      if( lat != '' && lng != '' ) {
+
+        this.selectedLat = Number(lat)
+        this.selectedLng = Number(lng)
+        this.centerLat = Number(lat)
+        this.centerLng = Number(lng)
+
+        this.getAddress( this.selectedLat, this.selectedLng)
+
+      }
+
+    }
+    // FROM WHATSAPP LOCATION
+    else if( value.includes('google.com/maps')) {
+
+      let params = value.substring((value.indexOf( "q=" )+2), value.length)
+      let latlngString = params.substring( 0, params.indexOf( "&z=" ))
+
+      let lat : any = latlngString.substring(0, params.indexOf( "%2C" ))
+      let lng : any = latlngString.substring(params.indexOf( "%2C" )+3, latlngString.length)
+
+      if(lat != '' && lng != '') {
+
+        this.selectedLat = Number(lat)
+        this.selectedLng = Number(lng)
+        this.centerLat = Number(lat)
+        this.centerLng = Number(lng)
+        
+        this.getAddress( this.selectedLat, this.selectedLng)
+
+      }
+
+    }
+
+  }
    
+  getAddress( latitude : any, longitude : any ){
+
+    const geocoder = new google.maps.Geocoder()
+    geocoder.geocode({ 'location': { lat: latitude, lng: longitude } }, ( results : Array<any>, status : any) => {
+      
+      if( status == 'OK' ){
+      
+        if( results.length > 0 ){
+      
+          this.searchElementRef.nativeElement.value = results[0].formatted_address;
+
+        } else{
+          
+          Swal.fire('No result found');
+
+        }
+      
+      } else{
+      
+        Swal.fire( 'Error', 'Geocoder failed due to: ' + status, 'error');
+      
+      }
+
+    });
+
+  }
+
   getComponentData() {
 
     // This is where you should place your component-specific initialization code

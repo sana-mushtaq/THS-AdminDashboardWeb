@@ -197,6 +197,10 @@ export class AllServicesComponent implements OnInit {
           this.allServices = res.services
   
           this.branch_id = res.branch
+          
+          localStorage.setItem("THSBranch", this.branch_id)
+
+
           //top 4 categories
           this.topCategories = this.allCategories.filter(category => {
   
@@ -277,7 +281,8 @@ export class AllServicesComponent implements OnInit {
       this.selectedLng = session.longitude
 
       this.getComponentData()
-    
+      
+
       let data = {
 
         user_address: this.userAddress,
@@ -389,7 +394,7 @@ export class AllServicesComponent implements OnInit {
           sessionStorage.setItem('userLocation', JSON.stringify(this.userAddress))
     
           this.getComponentData()
-    
+
           let data = {
     
             user_address: this.userAddress,

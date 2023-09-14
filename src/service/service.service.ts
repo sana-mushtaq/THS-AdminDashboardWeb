@@ -18,6 +18,12 @@ export class ServiceService {
       return this._httpClient.get<any>( this.serviceUrl+'/getServiceList')
 
     }
+
+    getServiceListForCart(body) {
+
+      return this._httpClient.post<any>( this.serviceUrl+'/getServiceListForCart', body)
+
+    }
     
     //the following function will fetch all the branches from the backend
     getServiceListToAssign() {
