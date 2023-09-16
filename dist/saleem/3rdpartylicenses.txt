@@ -91,6 +91,12 @@ MIT
 @angular/router
 MIT
 
+@ngx-translate/core
+MIT
+
+@ngx-translate/http-loader
+SEE LICENSE IN LICENSE
+
 @socket.io/component-emitter
 MIT
 (The MIT License)
