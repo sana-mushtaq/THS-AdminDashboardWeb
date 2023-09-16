@@ -21,7 +21,7 @@ export class LanguageService {
   setLanguage(lang: string) {
   
     // Set the language for ngx-translate
-  
+  console.log(lang)
     this.translate.use(lang);
 
     // You can also implement logic to set text direction based on the language (LTR or RTL)
