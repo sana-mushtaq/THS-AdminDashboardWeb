@@ -16,6 +16,9 @@
 .border-top-right-0{
     border-top-right-radius: 0px;
 }
+.border-top-left-0{
+    border-top-left-radius: 0px;
+}
 
 .border-radius-20{
     border-radius: 20px;
@@ -24,6 +27,12 @@
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
+
+.border-bottom-right-top-right-0{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
 
 .place-stretch {
     place-items: stretch;
@@ -170,6 +179,9 @@ a:hover{
     .phone-max-width{
         max-width: 100%;
     }
+    .phone-max-width-auto{
+        max-width: 240px;
+    }
 }
 
 @media only screen and (max-width: 360px) {
@@ -185,5 +197,8 @@ a:hover{
 
     .width-600{
         width: 300px;
+    }
+    .phone-max-width-auto{
+        max-width: 240px;
     }
 }

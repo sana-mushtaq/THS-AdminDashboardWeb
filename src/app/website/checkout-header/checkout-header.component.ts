@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LanguageService } from 'src/service/language.service';
 import { PatientsService } from 'src/service/patient.service';
 import { WebsiteDataService } from 'src/service/website-data.service';
 import { UtilService } from 'src/utils/util.service';
@@ -19,6 +20,7 @@ export class CheckoutHeaderComponent implements OnInit {
     private _websiteDataService: WebsiteDataService,
     private router: Router,
     private _patientService: PatientsService,
+    public languageService: LanguageService
   ) { 
 
     this.cartData = this._utilService.getCartData()
@@ -64,6 +66,29 @@ export class CheckoutHeaderComponent implements OnInit {
 
     }
 
+  }
+
+  switchLanguage(lang: string) {
+
+    this.languageService.setLanguage(lang);
+    this.onLanguageChange(lang);
+    this.closeMenu()
+  }
+
+  onLanguageChange(language: string) {
+
+    const currentLanguage = this.languageService.getCurrentLanguage();
+    const body = document.getElementsByTagName('body')[0];
+  
+    if (language === 'ar') {
+      body.setAttribute('dir', 'rtl');
+      body.classList.add('web-font-ar');
+      body.classList.remove('web-font');
+    } else {
+      body.setAttribute('dir', 'ltr');
+      body.classList.add('web-font');
+      body.classList.remove('web-font-ar');
+    }
   }
 
 }

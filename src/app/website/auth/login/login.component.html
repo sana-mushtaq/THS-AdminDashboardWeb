@@ -4,50 +4,50 @@
 
         <div class="auto-flex-start-gap20-column width-max-550 padding-20">
 
-            <h3 class="xxlarge bold">Login</h3>
-            <p class="web-font-primary-light">Sign in with your data that you entered during your registration.</p>
+            <h3 class="xxlarge bold">{{ 'auth.loginTitle' | translate }}</h3>
+            <p class="web-font-primary-light">{{ 'auth.loginDesc' | translate }}</p>
     
             <form class="auto-flex-start-gap10" [formGroup]="credentialsForm" (ngSubmit)="login()">
             
                 <div class="auto-flex-start-gap10-column web-font-primary-light">
         
-                    <p class="xsmall bold">Mobile number</p>
+                    <p class="xsmall bold">{{ 'inputFields.mobileNumber' | translate }}</p>
                     <input class="input-global" type="tel" formControlName="mobileNumber" placeholder="966 XX XXXXXXXXX" />
-                    <p *ngIf="credentialsForm.get('mobileNumber').hasError('invalidMobile')" class="xsmall red-color">Enter valid mobile number</p>
+                    <p *ngIf="credentialsForm.get('mobileNumber').hasError('invalidMobile')" class="xsmall red-color">{{ 'inputFields.validMobile' | translate }}</p>
 
                 </div>
         
                 <div class="auto-flex-start-gap10-column web-font-primary-light">
         
-                    <p class="xsmall bold">Password</p>
-                    <input class="input-global" type="password" formControlName="password" placeholder="min. 8 characters" />
-                    <p *ngIf="credentialsForm.get('password').hasError('invalidPassword')" class="xsmall red-color">Password is required</p>
+                    <p class="xsmall bold">{{ 'inputFields.password' | translate }}</p>
+                    <input class="input-global" type="password" formControlName="password" placeholder="{{ 'inputFields.password_placeholder' | translate }}" />
+                    <p *ngIf="credentialsForm.get('password').hasError('invalidPassword')" class="xsmall red-color">{{ 'inputFields.validPassword' | translate }}</p>
 
                 </div>
         
                 <div class="auto-flex-center-start-gap10">
                 
                     <input class="input-global width-auto" type="checkbox" id="rememberMe" />
-                    <label for="rememberMe" class="xsmall bold web-font-primary-light margin-bottom-0 cursor-pointer">Keep me logged in</label>
+                    <label for="rememberMe" class="xsmall bold web-font-primary-light margin-bottom-0 cursor-pointer">{{ 'auth.keepMe' | translate }}</label>
         
                 </div>
         
-                <button class="primary-bg padding-10 max-width capitalize box-shadow">login</button>
+                <button class="primary-bg padding-10 max-width capitalize box-shadow">{{ 'auth.login' | translate }}</button>
 
-                <p class="text-center xsmall red-color max-width" *ngIf="credentialsError">Authentication failed. Try again</p>
+                <p class="text-center xsmall red-color max-width" *ngIf="credentialsError">{{ 'auth.loginError' | translate }}</p>
             
             </form>
             
             <div class="auto-flex-start-center-gap10">
                 
-                <a (click)="naviagateToForgetPassword()" class="xsmall bold blue-color">Forgot password</a>
+                <a (click)="naviagateToForgetPassword()" class="xsmall bold blue-color cursor-pointer">{{ 'auth.forgotPassword' | translate }}</a>
             
             </div>
            
              <div class="auto-flex-start-center-gap10">
     
-                <p class="xsmall bold web-font-primary-light">Don’t have an account?</p>
-                <a  (click)="naviagateToRegister()" class="xsmall bold blue-color">Sign up</a>
+                <p class="xsmall bold web-font-primary-light">{{ 'auth.dontHaveAccount' | translate }}</p>
+                <a (click)="naviagateToRegister()" class="xsmall bold blue-color cursor-pointer">{{ 'auth.signUp' | translate }}</a>
     
             </div>
 
@@ -61,8 +61,8 @@
 
         <div class="auto-flex-start-gap10-column">
 
-            <h3 class="large bold secondary-color">Welcome to Taib Home Medical Care</h3>
-            <p class="width-max-500">We offer you and your family a range of home medical services, which include doctor visits, laboratory tests, physiotherapy, nursing, and more.</p>
+            <h3 class="large bold secondary-color">{{ 'auth.loginMessage' | translate }}</h3>
+            <p class="width-max-500">{{ 'auth.loginMessageDesc' | translate }}</p>
     
         </div>
 

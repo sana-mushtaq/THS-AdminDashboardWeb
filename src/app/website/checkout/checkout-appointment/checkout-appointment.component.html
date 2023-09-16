@@ -4,19 +4,19 @@
 
     <div class="auto-flex-start-gap20-column gray-border border-radius-20 padding-20" *ngIf="!this.promoApplied">
 
-        <p class="med bold">Discount and facilitation</p>
+        <p class="med bold">{{ 'cart.discount' | translate }}</p>
 
         <div class="auto-flex-start-gap5" *ngIf="!this.promoApplied">
 
-            <p class="xsmall bold web-font-primary-light">Coupon code</p>
+            <p class="xsmall bold web-font-primary-light">{{ 'cart.couponCode' | translate }}</p>
             <div class="auto-flex-start-gap10">
         
                 
-                <input class="input-global width-max-500 max-width" type="text"  placeholder="coupon code" id="coupon_code"/>
-                <button class="primary-bg padding-10 width-max-150 max-width box-shadow uppercase" (click)="verifyDiscount()">verify</button>
+                <input class="input-global width-max-500 max-width" type="text"  placeholder="{{ 'cart.couponCode' | translate }}" id="coupon_code"/>
+                <button class="primary-bg padding-10 width-max-150 max-width box-shadow uppercase" (click)="verifyDiscount()">{{ 'cart.verify' | translate }}</button>
 
             </div>
-            <p class="light-red-bg padding-5 red-color fit-content" *ngIf="invalidPromoMessage">Invalid promo code</p>
+            <p class="light-red-bg padding-5 red-color fit-content" *ngIf="invalidPromoMessage">{{ 'cart.invalidCouponCode' | translate }}</p>
             
         </div> 
 
@@ -24,7 +24,7 @@
 
     <div class="auto-flex-start-gap10-column gray-border border-radius-20 padding-20">
 
-        <p class="med bold">Invoice</p>
+        <p class="med bold">{{ 'cart.invoice' | translate }}</p>
 
         <div class="auto-flex-center-space-between-gap20 padding-10 gray-border border-radius-10" *ngFor="let cart of cartData; let cartIndex = index;" style="flex-wrap: nowrap;">
 
@@ -36,7 +36,7 @@
 
             <div class="auto-flex-end-gap10-no-set-width width-max-300 max-width">
 
-                <p class="bold">SAR {{ cart.price }}</p>
+                <p class="bold">{{ 'header.sar' | translate }} {{ cart.price }}</p>
 
             </div>
 
@@ -44,28 +44,28 @@
 
         <div class="auto-flex-start-gap20-column">
 
-            <p class="med bold">Payment summary</p>
+            <p class="med bold">{{ 'cart.paymentSummary' | translate }}</p>
 
             <div class="auto-flex-start-gap20-column">
     
                 <div class="auto-flex-center-space-between-gap20">
                     
-                    <p class="web-font-primary-light">Subtotal</p>
-                    <p class="web-font-primary-light bold">SAR {{ total }}</p>
+                    <p class="web-font-primary-light">{{ 'cart.subtotal' | translate }}</p>
+                    <p class="web-font-primary-light bold">{{ 'header.sar' | translate }} {{ total }}</p>
     
                 </div>   
                 
                 <div class="auto-flex-center-space-between-gap20" *ngIf="discountAmount.length>0">
                     
-                    <p class="web-font-primary-light">Discount</p>
+                    <p class="web-font-primary-light">{{ 'cart.discount' | translate }}</p>
                     <p class="web-font-primary-light bold">- {{ discountAmount }}</p>
     
                 </div>    
     
                 <div class="auto-flex-center-space-between-gap20">
                     
-                    <p class="web-font-primary-light">Total (tax incl.)</p>
-                    <p class="web-font-primary-light bold blue-color">SAR {{ total_inc_cost }}</p>
+                    <p class="web-font-primary-light">{{ 'cart.totalTax' | translate }}</p>
+                    <p class="web-font-primary-light bold blue-color">{{ 'header.sar' | translate }} {{ total_inc_cost }}</p>
     
                 </div>    
     
@@ -75,10 +75,10 @@
 
     </div>
 
-    <button class="primary-bg max-width padding-10 uppercase" (click)="payAndBook()">Pay & book</button>
+    <button class="primary-bg max-width padding-10 uppercase" (click)="payAndBook()">{{ 'cart.payBook' | translate }}</button>
 
     <!-- Cart error -->
-    <app-custom-alert *ngIf="errorOccured" [title]="'Error'" [message]="'An error occurred. Try agin later'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Confirm'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="errorOccured" [title]="'messages.error' | translate" [message]="'messages.tryAgain'" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue | translate'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
 </div>
 

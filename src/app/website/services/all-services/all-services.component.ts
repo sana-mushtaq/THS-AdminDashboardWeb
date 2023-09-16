@@ -1,4 +1,4 @@
-import { ApplicationRef, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { ApplicationRef, ChangeDetectorRef, Component, ElementRef, Inject, NgZone, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BusinessToCustomerSchedulingService } from 'src/service/business-to-customer-scheduling.service';
@@ -10,6 +10,8 @@ import { environment } from 'src/environments/environment'
 import { PatientsService } from 'src/service/patient.service';
 import { Subject } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
+import { LanguageService } from 'src/service/language.service';
+import { DOCUMENT } from '@angular/common';
 
 declare var google: any;
 
@@ -80,9 +82,14 @@ export class AllServicesComponent implements OnInit {
     private _utilService: UtilService,
     private _patientService: PatientsService,
     private cdr: ChangeDetectorRef,
-    private appRef: ApplicationRef
+    private appRef: ApplicationRef,
+    public languageService: LanguageService,
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document,
     ) { 
 
+      let x = this.languageService.getCurrentLanguage()
+      console.log(x)
       this.addressForm = this.fb.group({
 
         address_name: ['', Validators.required],
@@ -871,6 +878,29 @@ export class AllServicesComponent implements OnInit {
     const currentLength = this.displayedCategories.length;
     const remainingCategories = this.topServices.slice(currentLength, currentLength + this.itemsToLoadMore);
     this.displayedCategories = [...this.displayedCategories, ...remainingCategories];
+  }
+
+  switchLanguage(lang: string) {
+
+    this.languageService.setLanguage(lang);
+    this.onLanguageChange(lang);
+    this.closeMenu()
+  }
+
+  onLanguageChange(language: string) {
+
+    const currentLanguage = this.languageService.getCurrentLanguage();
+    const body = document.getElementsByTagName('body')[0];
+  
+    if (language === 'ar') {
+      body.setAttribute('dir', 'rtl');
+      body.classList.add('web-font-ar');
+      body.classList.remove('web-font');
+    } else {
+      body.setAttribute('dir', 'ltr');
+      body.classList.add('web-font');
+      body.classList.remove('web-font-ar');
+    }
   }
 
 }

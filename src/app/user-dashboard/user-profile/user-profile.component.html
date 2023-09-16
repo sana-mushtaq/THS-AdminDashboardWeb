@@ -12,7 +12,7 @@
             <p class="med bold" *ngIf="userData">{{ userData.first_name }} {{ userData.last_name }}</p>
             <p class="web-font-primary-light" *ngIf="userData">PAT{{ userData.id }}</p>
             <p class="web-font-primary-light" *ngIf="userData">{{ userData.phone_number }}</p>
-            <button class="border-none padding-5 light-red-bg red-color" *ngIf="userData" (click)="logout()">logout</button>
+            <button class="border-none padding-5 light-red-bg red-color" *ngIf="userData" (click)="logout()">{{ 'header.logout' | translate }}</button>
             
         </div>
 
@@ -27,8 +27,8 @@
             
             <div class="auto-flex-start-gap10-column-no-set-width">
 
-                <p class="bold">Account</p>
-                <p class="web-font-primary-light capitalize">personal information</p>
+                <p class="bold">{{ 'patientProfile.account' | translate }}</p>
+                <p class="web-font-primary-light capitalize">{{ 'patientProfile.personalInformation' | translate }}</p>
 
             </div>
 
@@ -40,8 +40,8 @@
             
             <div class="auto-flex-start-gap10-column-no-set-width">
 
-                <p class="bold">Appointments</p>
-                <p class="web-font-primary-light capitalize">Appointments' informatiom</p>
+                <p class="bold">{{ 'patientProfile.appointments' | translate }}</p>
+                <p class="web-font-primary-light capitalize">{{ 'patientProfile.appointmentInformation' | translate }}</p>
 
             </div>
 
@@ -57,7 +57,7 @@
 
             <div class="auto-flex-center-start-gap10 cursor-pointer" (click)="addDependant()">
 
-                <p class="med bold">Users</p>
+                <p class="med bold">{{ 'patientProfile.users' | translate }}</p>
 
                 <div class="gray-border padding-5 border-radius-100">
 
@@ -72,7 +72,7 @@
                 <div class="auto-flex-center-gap10-column-no-set-width width-min-100">
 
                     <img class="medImg" src="assets/images/web/icons/user.svg" />
-                    <p class="bold">Main</p>
+                    <p class="bold">{{ 'patientProfile.users' | translate }}</p>
 
                 </div>
 
@@ -97,17 +97,17 @@
 
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
-                            <p class="xsmall bold">First name</p>
-                            <input class="input-global" type="text" formControlName="first_name" placeholder="Enter your first name" />
-                            <p *ngIf="addDependantForm.get('first_name').hasError('invalidFName')" class="xsmall red-color">Enter valid first name</p>
+                            <p class="xsmall bold">{{ 'inputFields.firstName' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="first_name" placeholder="{{ 'inputFields.firstName_placeholder' | translate }}" />
+                            <p *ngIf="addDependantForm.get('first_name').hasError('invalidFName')" class="xsmall red-color">{{ 'inputFields.firstName' | translate }}</p>
 
                         </div>    
 
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
-                            <p class="xsmall bold">Last name</p>
-                            <input class="input-global" type="text" formControlName="last_name"  placeholder="Enter your last name" />
-
+                            <p class="xsmall bold">{{ 'inputFields.lastName' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="last_name"  placeholder="{{ 'inputFields.lastName_placeholder' | translate }}" />
+                            
                         </div>    
 
                         <!--
@@ -130,72 +130,70 @@
                         
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
-                            <p class="xsmall bold">Date of birth</p>
-                            <input class="input-global" type="date" formControlName="dob" placeholder="Enter your dob" />
-                
+                            <p class="xsmall bold">{{ 'inputFields.dob' | translate }}</p>
+                            <input class="input-global" type="date" formControlName="dob" placeholder="{{ 'inputFields.dob_placeholder' | translate }}" />
+                        
                         </div>    
 
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
-                            <p class="xsmall bold">Gender</p>
+                            <p class="xsmall bold">{{ 'inputFields.gender' | translate }}</p>
                             <select class="input-global" formControlName="gender">
                                 
                                 <option disabled></option>
-                                <option value="1">Male</option>
-                                <option value="2">Female</option>
+                                <option value="1">{{ 'inputFields.male' | translate }}</option>
+                                <option value="2">{{ 'inputFields.female' | translate }}</option>
     
                             </select>
-                            <p *ngIf="addDependantForm.get('gender').hasError('invalidGender')" class="xsmall red-color">Select gender</p>
-
-
+                            <p *ngIf="addDependantForm.get('gender').hasError('invalidGender')" class="xsmall red-color">{{ 'inputFields.validGender' | translate }}</p>
+                            
                         </div>    
 
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
-                            <p class="xsmall bold">Nationality</p>
+                            <p class="xsmall bold">{{ 'inputFields.nationality' | translate }}</p>
                             <select class="input-global" formControlName="nationality">
                                 
                                 <option disabled></option>
-                                <option value="saudi">Saudi</option>
-                                <option value="non_saudi">Non Saudi</option>
-    
+                                <option value="saudi">{{ 'inputFields.saudi' | translate }}</option>
+                                <option value="non_saudi">{{ 'inputFields.nonSaudi' | translate }}</option>
+
                             </select>
-                            <p *ngIf="addDependantForm.get('nationality').hasError('invalidNationality')" class="xsmall red-color">Select nationality</p>
+                            <p *ngIf="addDependantForm.get('nationality').hasError('invalidNationality')" class="xsmall red-color">{{ 'inputFields.selectNationality' | translate }}</p>
 
                         </div>    
 
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
-                            <p class="xsmall bold">Id Type</p>
+                            <p class="xsmall bold">{{ 'inputFields.idType' | translate }}</p>
                             <select class="input-global" formControlName="id_type">
     
                                 <option disabled></option>
-                                <option value="national_id">National ID</option>
-                                <option value="iqama">Iqama</option>
-                                <option value="passport">Passport</option>
-    
+                                <option value="national_id">{{ 'inputFields.nationalId' | translate }}</option>
+                                <option value="iqama">{{ 'inputFields.iqama' | translate }}</option>
+                                <option value="passport">{{ 'inputFields.passport' | translate }}</option>
                             </select>
-                            <p *ngIf="addDependantForm.get('id_type').hasError('invalidIdType')" class="xsmall red-color">Select Id type</p>
+                            <p *ngIf="addDependantForm.get('id_type').hasError('invalidIdType')" class="xsmall red-color">{{ 'inputFields.selectIdType' | translate }}</p>
 
                         </div>    
 
                         
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
-                            <p class="xsmall bold">Id Number</p>
-                            <input class="input-global" type="text" formControlName="id_number" placeholder="Enter your Id number" />
-                            <p *ngIf="addDependantForm.get('id_number').hasError('invalidIdNumber')" class="xsmall red-color">Enter valid Id number</p>
+                            <p class="xsmall bold">{{ 'inputFields.isNumber' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="id_number" placeholder="{{ 'inputFields.idNumber_placeholder' | translate }}" />
+                            <p *ngIf="addDependantForm.get('id_number').hasError('invalidIdNumber')" class="xsmall red-color">{{ 'inputFields.validIdNumber' | translate }}</p>
 
                         </div>    
 
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
-                            <p class="xsmall bold">Marital Status</p>
+                            <p class="xsmall bold">{{ 'inputFields.maritalStatus' | translate }}</p>
                             <select class="input-global" formControlName="marital_status">
     
-                                <option value="single">Single</option>
-                                <option value="married">Married</option>
-    
+                                <option value="single">{{ 'inputFields.single' | translate }}</option>
+                                <option value="married">{{ 'inputFields.married' | translate }}</option>
+
                             </select>
 
                         </div>    
@@ -223,8 +221,8 @@
                     <div class="auto-flex-end-gap10">
 
                         <!-- continue button -->
-                        <button class="white-bg padding-10 gray-border web-font-primary-light xsmall" (click)="discardAddDependant()">Discard Changes</button>
-                        <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" type="submit">Add dependent</button>
+                        <button class="white-bg padding-10 gray-border web-font-primary-light xsmall" (click)="discardAddDependant()">{{ 'patientProfile.discardChanges' | translate }}</button>
+                        <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" type="submit">{{ 'patientProfile.addDependant' | translate }}</button>
 
                     </div>
 
@@ -253,85 +251,85 @@
         
                             <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
         
-                                <p class="xsmall bold">First name</p>
-                                <input class="input-global" type="text" [(ngModel)]="dependantData.first_name" placeholder="Enter your first name" />
-                                <p *ngIf="updateDependantForm.get('first_name').hasError('invalidFName')" class="xsmall red-color">Enter valid first name</p>
-        
+                                <p class="xsmall bold">{{ 'inputFields.firstName' | translate }}</p>
+                                <input class="input-global" type="text" [(ngModel)]="dependantData.first_name" placeholder="{{ 'inputFields.firstName_placeholder' | translate }}" />
+                                <p *ngIf="updateDependantForm.get('first_name').hasError('invalidFName')" class="xsmall red-color">{{ 'inputFields.firstName' | translate }}</p>
+                                
                             </div>    
         
                             <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
         
-                                <p class="xsmall bold">Last name</p>
-                                <input class="input-global" type="text" [(ngModel)]="dependantData.last_name"  placeholder="Enter your last name" />
-        
+                                <p class="xsmall bold">{{ 'inputFields.lastName' | translate }}</p>
+                                <input class="input-global" type="text" [(ngModel)]="dependantData.last_name"  placeholder="{{ 'inputFields.lastName_placeholder' | translate }}" />
+                                 
                             </div>    
         
                             <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-        
-                                <p class="xsmall bold">Date of birth</p>
-                                <input class="input-global" type="date" [(ngModel)]="dependantData.dob" placeholder="Enter your dob" />
+                          
+                                <p class="xsmall bold">{{ 'inputFields.dob' | translate }}</p>
+                                <input class="input-global" type="date" [(ngModel)]="dependantData.dob" placeholder="{{ 'inputFields.dob_placeholder' | translate }}" />
                     
                             </div>    
         
                             <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
         
-                                <p class="xsmall bold">Gender</p>
+                                <p class="xsmall bold">{{ 'inputFields.gender' | translate }}</p>
                                 <select class="input-global" [(ngModel)]="dependantData.gender">
                                     
                                     <option disabled></option>
-                                    <option value="1">Male</option>
-                                    <option value="2">Female</option>
+                                    <option value="1">{{ 'inputFields.male' | translate }}</option>
+                                    <option value="2">{{ 'inputFields.female' | translate }}</option>
         
                                 </select>
-                                <p *ngIf="updateDependantForm.get('gender').hasError('invalidGender')" class="xsmall red-color">Select gender</p>
+                                <p *ngIf="updateDependantForm.get('gender').hasError('invalidGender')" class="xsmall red-color">{{ 'inputFields.validGender' | translate }}</p>
         
                             </div>    
         
                             <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-        
-                                <p class="xsmall bold">Nationality</p>
+    
+                                <p class="xsmall bold">{{ 'inputFields.nationality' | translate }}</p>
                                 <select class="input-global" [(ngModel)]="dependantData.nationality">
                                     
                                     <option disabled></option>
-                                    <option value="saudi">Saudi</option>
-                                    <option value="non_saudi">Non Saudi</option>
+                                    <option value="saudi">{{ 'inputFields.saudi' | translate }}</option>
+                                    <option value="non_saudi">{{ 'inputFields.nonSaudi' | translate }}</option>
         
                                 </select>
-                                <p *ngIf="updateDependantForm.get('nationality').hasError('invalidNationality')" class="xsmall red-color">Select nationality</p>
+                                <p *ngIf="updateDependantForm.get('nationality').hasError('invalidNationality')" class="xsmall red-color">{{ 'inputFields.selectNationality' | translate }}</p>
         
                             </div>    
         
                             <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
         
-                                <p class="xsmall bold">Id Type</p>
+                                <p class="xsmall bold">>{{ 'inputFields.idType' | translate }}</p>
                                 <select class="input-global" [(ngModel)]="dependantData.id_type">
         
                                     <option disabled></option>
-                                    <option value="national_id">National ID</option>
-                                    <option value="iqama">Iqama</option>
-                                    <option value="passport">Passport</option>
-        
+                                    <option value="national_id">{{ 'inputFields.nationalId' | translate }}</option>
+                                    <option value="iqama">{{ 'inputFields.iqama' | translate }}</option>
+                                    <option value="passport">{{ 'inputFields.passport' | translate }}</option>
+
                                 </select>
-                                <p *ngIf="updateDependantForm.get('id_type').hasError('invalidIdType')" class="xsmall red-color">Select Id type</p>
-        
+                                <p *ngIf="updateDependantForm.get('id_type').hasError('invalidIdType')" class="xsmall red-color">{{ 'inputFields.selectIdType' | translate }}</p>
+
                             </div>    
         
                             
                             <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
         
-                                <p class="xsmall bold">Id Number</p>
-                                <input class="input-global" type="text" [(ngModel)]="dependantData.id_number" placeholder="Enter your Id number" />
-                                <p *ngIf="updateDependantForm.get('id_number').hasError('invalidIdNumber')" class="xsmall red-color">Enter valid Id number</p>
+                                <p class="xsmall bold">{{ 'inputFields.isNumber' | translate }}</p>
+                                <input class="input-global" type="text" [(ngModel)]="dependantData.id_number" placeholder="{{ 'inputFields.idNumber_placeholder' | translate }}" />
+                                <p *ngIf="updateDependantForm.get('id_number').hasError('invalidIdNumber')" class="xsmall red-color">{{ 'inputFields.validIdNumber' | translate }}</p>
         
                             </div>    
         
                             <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-        
-                                <p class="xsmall bold">Marital Status</p>
+
+                                <p class="xsmall bold">{{ 'inputFields.maritalStatus' | translate }}</p>
                                 <select class="input-global" [(ngModel)]="dependantData.marital_status">
-        
-                                    <option value="single">Single</option>
-                                    <option value="married">Married</option>
+          
+                                    <option value="single">{{ 'inputFields.single' | translate }}</option>
+                                    <option value="married">{{ 'inputFields.married' | translate }}</option>
         
                                 </select>
         
@@ -360,8 +358,8 @@
                         <div class="auto-flex-end-gap10">
         
                             <!-- continue button -->
-                            <button class="white-bg padding-10 gray-border web-font-primary-light xsmall" (click)="discardUpdateDependant()">Close</button>
-                            <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" (click)="updateDependant()">Update dependent</button>
+                            <button class="white-bg padding-10 gray-border web-font-primary-light xsmall" (click)="discardUpdateDependant()">{{ 'messages.cancel' | translate }}</button>
+                            <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" (click)="updateDependant()">{{ 'allServices.saveChanges' | translate }}</button>
         
                         </div>
         
@@ -378,7 +376,7 @@
 
             <div class="auto-flex-center-start-gap10 cursor-pointer" (click)="addLocation()">
 
-                <p class="med bold">Addresses</p>
+                <p class="med bold">{{ 'patientProfile.addresses' | translate }}</p>
                 
                 <div class="gray-border padding-5 border-radius-100">
 
@@ -412,14 +410,13 @@
 
             <div class="auto-flex-center-gap30-column" *ngIf="showLocationMap">
                 
-                
                 <div class="auto-flex-center-gap30-column white-bg overflow-auto max-height-500 border-radius-20 max-width relative padding-none border-none">
                 
-                    <input #search class="input-global z-index width-90Percent absolute-top-10" type="text" [(ngModel)]="searchLocation" placeholder="Search location" />
+                    <input #search class="input-global z-index width-90Percent absolute-top-10" type="text" [(ngModel)]="searchLocation" placeholder="{{'patientProfile.searchLocation' | translate }}" />
 
                     <div class="auto-flex-center-gap20-column box-shadow padding-none border-radius-10 gray-border">                
 
-                        <button *ngIf="placeSelected" class="primary-bg padding-10 border-none box-shadow absolute-bottom-10 width-300 z-index xsmall" (click)="onConfirmLocation()">Confirm</button>
+                        <button *ngIf="placeSelected" class="primary-bg padding-10 border-none box-shadow absolute-bottom-10 width-300 z-index xsmall" (click)="onConfirmLocation()">{{'allServices.confirmLocation' | translate }}</button>
                 
                         <agm-map [latitude]="centerLat" [longitude]="centerLng" [zoom]="zoom" (mapClick)="onMapClick($event)" class="max-width height-300 border-top-left-right-10 overflow-hidden">
                 
@@ -441,37 +438,37 @@
                         <div class="auto-flex-center-space-between-gap20">
         
                             <div class="auto-flex-start-gap10-column web-font-primary-light">
-        
-                                <p class="xsmall bold">Address Name</p>
-                                <input class="input-global" type="text" formControlName="address_name" placeholder="Enter address name" />
-                                <p *ngIf="addressForm.get('address_name').hasError('invalidAddressName')" class="xsmall red-color">Enter address name</p>
+                                
+                                <p class="xsmall bold">{{ 'allServices.addressName' | translate }}</p>
+                                <input class="input-global" type="text" formControlName="address_name" placeholder="{{ 'allServices.addressName_1_placeholder' | translate }}" />
+                                <p *ngIf="addressForm.get('address_name').hasError('invalidAddressName')" class="xsmall red-color">{{ 'allServices.addressName_1_placeholder' | translate }}</p>
     
                             </div>    
 
                             <div class="auto-flex-start-gap10-column web-font-primary-light">
         
-                                <p class="xsmall bold">Address line 1</p>
-                                <input class="input-global" type="text" formControlName="address_line1" placeholder="Enter address" />
-                                <p *ngIf="addressForm.get('address_line1').hasError('invalidAddressLine1')" class="xsmall red-color">Enter address line</p>
-    
+                                <p class="xsmall bold">{{ 'allServices.addressLine_1' | translate }}</p>
+                                <input class="input-global" type="text" formControlName="address_line1" placeholder="{{ 'allServices.addressLine_1_placeholder' | translate }}" />
+                                <p *ngIf="addressForm.get('address_line1').hasError('invalidAddressLine1')" class="xsmall red-color">{{ 'allServices.addressLine_1' | translate }}</p>
+
                             </div>    
         
                             <div class="auto-flex-start-gap10-column web-font-primary-light">
         
-                                <p class="xsmall bold">Address line 2</p>
-                                <input class="input-global" type="text" placeholder="Enter address (optional)" />
-                    
+                                <p class="xsmall bold">{{ 'allServices.addressLine_2' | translate }}</p>
+                                <input class="input-global" type="text" placeholder="{{ 'allServices.addressLine_2_placeholder' | translate }}" />
+                          
                             </div>   
                             
-                            <p *ngIf="addressForm.get('latitude').hasError('invalidLocation') || addressForm.get('longitude').hasError('invalidLocation')" class="xsmall red-color">Please select valid location</p>
+                            <p *ngIf="addressForm.get('latitude').hasError('invalidLocation') || addressForm.get('longitude').hasError('invalidLocation')" class="xsmall red-color">{{ 'allServices.enterValidLocation' | translate }}</p>
         
                         </div>
         
                         <div class="auto-flex-end-gap10">
         
                             <!-- continue button -->
-                            <button class="white-bg padding-10 gray-border web-font-primary-light xsmall" (click)="discardAddress()">Discard Changes</button>
-                            <button class="primary-bg padding-10 box-shadow width-200 xsmall phone-width-auto" type="submit">Save changes</button>
+                            <button class="white-bg padding-10 gray-border web-font-primary-light xsmall" (click)="discardAddress()">{{ 'messages.cancel' | translate }}</button>
+                            <button class="primary-bg padding-10 box-shadow width-200 xsmall phone-width-auto" type="submit">{{ 'allServices.saveChanges' | translate }}</button>
         
                         </div>
         
@@ -587,11 +584,11 @@
 
         <table class="custom-table web-font-primary-light">
 
-            <thead class="custom-table-thead">
+            <thead class="custom-table-thead" style="text-align: start;">
                 <tr>
-                    <th class="padding-20"><p>Appointment Id</p></th>
-                    <th class="padding-20"><p>Service Name</p></th>
-                    <th class="padding-20"><p>Date & time</p></th>
+                    <th class="padding-20"><p>{{ 'patientProfile.appointmentId' | translate }}</p></th>
+                    <th class="padding-20"><p>{{ 'patientProfile.serviceName' | translate }}</p></th>
+                    <th class="padding-20"><p>{{ 'patientProfile.dateTime' | translate }}</p></th>
                 </tr>
             </thead>
 
@@ -623,22 +620,22 @@
     </div>
 
     <!-- User already exists-->
-    <app-custom-alert *ngIf="showUserAlreadyExist" [title]="'User Already Exists'" [message]="'This user already exist in our system.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
-
+    <app-custom-alert *ngIf="showUserAlreadyExist" [title]="'messages.userAlreadyExistTitle'" [message]="'messages.userAlreadyExistDesc'" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+  
     <!-- An Error occured while creating user. Try again later -->
-    <app-custom-alert *ngIf="showErrorCreatingDependant" [title]="'Error'" [message]="'An error occured while creating denpendant. Try again later.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showErrorCreatingDependant" [title]="'messages.error' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- An Error occured while updating user. Try again later -->
-    <app-custom-alert *ngIf="showErrorUpdatingDependant" [title]="'Error'" [message]="'An error occured while updating denpendant. Try again later.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showErrorUpdatingDependant" [title]="'messages.error' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- An Error occured while updating user. Try again later -->
-    <app-custom-alert *ngIf="showDeleteDependant" [title]="'Remove Dependant'" [message]="'Are you sure you want to remove this user: ' + dependantData.first_name + ' ' + dependantData.last_name" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="cancelDeleteDependant()" (continueClick)="deleteDependant()" [showCancel]="true" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showDeleteDependant" [title]="'Remove Dependant'" [message]="'messages.sureRemovingUser' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="cancelDeleteDependant()" (continueClick)="deleteDependant()" [showCancel]="true" [showConfirm]="true"></app-custom-alert>
 
     <!-- An Error occured while deleting user. Try again later -->
-    <app-custom-alert *ngIf="showErrorDeletingDependant" [title]="'Error'" [message]="'An error occured while removing denpendant. Try again later.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showErrorDeletingDependant" [title]="'messages.error' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
     
     <!-- An Error occured while updating user. Try again later -->
-    <app-custom-alert *ngIf="showErrorUpdatingAddress" [title]="'Error'" [message]="'An error occured while updating addresses. Try again later.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showErrorUpdatingAddress" [title]="'messages.error' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
 </div>
 

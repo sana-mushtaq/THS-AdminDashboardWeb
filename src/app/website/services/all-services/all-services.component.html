@@ -9,7 +9,7 @@
 
             <div class="auto-flex-start-gap5-column-no-set-width width-max-500">
 
-                <p class="med bold">Current location</p>
+                <p class="med bold">{{ 'allServices.currentLocation' | translate }}</p>
                 <p class="web-font-primary-light width-300">{{ locationName }}</p>
 
             </div>
@@ -22,11 +22,26 @@
 
         <div class="auto-flex-center-gap20-no-set-width desktop">
 
-            <a class="xsmall web-font-primary bold cursor-pointer" (click)="navigate('/')">Home</a>
-            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/blog">Blog</a>
-            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/medical-calculator">Calculator</a>
-            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/contact">Contact</a>
- 
+            <a class="xsmall web-font-primary bold cursor-pointer" (click)="navigate('/')">{{ 'header.home' | translate }}</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/blog">{{ 'header.blog' | translate }}</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/medical-calculator">{{ 'header.calculator' | translate }}</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/contact">{{ 'header.contact' | translate }}</a>
+            
+            <a class="auto-flex-center-gap10-no-set-width xsmall web-font-primary bold gray-border padding-5 border-radius-10 cursor-pointer" (click)="switchLanguage('ar')" *ngIf="languageService.getCurrentLanguage() === 'en'">
+            
+                <img class="xsmallImg" src="assets/images/web/icons/saFlag.svg" />
+                <p>عربي</p>
+            
+            </a>    
+
+            <a class="auto-flex-center-gap10-no-set-width xsmall web-font-primary bold gray-border padding-5 border-radius-10 cursor-pointer" (click)="switchLanguage('en')" *ngIf="languageService.getCurrentLanguage() === 'ar'">
+            
+                <img class="xsmallImg" src="assets/images/web/icons/ukFlag.svg" />
+                <p>En</p>
+            
+            </a>    
+
+
             <div class="auto-flex-center-gap5-no-set-width cursor-pointer">
 
                 <a class="xsmall web-font-primary bold" (click)="navigate('/checkout/cart')"><img class="img-20" src="assets/images/web/icons/cart.svg" /></a>
@@ -39,7 +54,7 @@
             </div>
 
             
-            <a class="xsmall lightest-blue-bg cursor-pointer padding-10 border-none" (click)="navigateToLogin()" *ngIf="userId === null">Patient login</a>
+            <a class="xsmall lightest-blue-bg cursor-pointer padding-10 border-none" (click)="navigateToLogin()" *ngIf="userId === null">{{ 'header.patientLogin' | translate }}</a>
             <a class="xsmall lightest-blue-bg cursor-pointer padding-10 border-none" (click)="navigateToLogin()" *ngIf="userId !== null"><img class="img-20" src="assets/images/web/icons/account_login.svg" /></a>
          
         </div>
@@ -54,16 +69,28 @@
 
         <div class="light-gray-bg fixed mobile z-index menu-mobile mobile padding-none" id="menuBar" style="z-index: 10000;">
 
-            <a class="xsmall web-font-primary bold absolute-top-right-30" (click)="closeMenu()"><img class="img-20" src="assets/images/web/icons/close.svg" /></a>
+            <a class="xsmall web-font-primary bold" [class.absolute-top-right-30]="languageService.getCurrentLanguage() === 'en'" [class.absolute-top-left-30]="languageService.getCurrentLanguage() === 'ar'" (click)="closeMenu()"><img class="img-20" src="assets/images/web/icons/close.svg" /></a>
 
             <div class="auto-flex-start-gap20-column padding-20">
 
-                <a class="xsmall web-font-primary bold" href="www.taibsa.com">Home</a>
-                <a class="xsmall web-font-primary bold" (click)="navigate('/medical-services')">Services</a>
-                <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/blog">Blog</a>
-                <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/medical-calculator">Calculator</a>
-                <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/contact">Contact</a>
-
+                <a class="xsmall web-font-primary bold" href="www.taibsa.com">{{ 'header.home' | translate }}</a>
+                <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/blog">{{ 'header.blog' | translate }}</a>
+                <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/medical-calculator">{{ 'header.calculator' | translate }}</a>
+                <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/contact">{{ 'header.contact' | translate }}</a>
+                <a class="auto-flex-center-gap10-no-set-width xsmall web-font-primary bold gray-border padding-5 border-radius-10 cursor-pointer" (click)="switchLanguage('ar')" *ngIf="languageService.getCurrentLanguage() === 'en'">
+            
+                    <img class="xsmallImg" src="assets/images/web/icons/saFlag.svg" />
+                    <p>عربي</p>
+                
+                </a>    
+    
+                <a class="auto-flex-center-gap10-no-set-width xsmall web-font-primary bold gray-border padding-5 border-radius-10 cursor-pointer" (click)="switchLanguage('en')" *ngIf="languageService.getCurrentLanguage() === 'ar'">
+                
+                    <img class="xsmallImg" src="assets/images/web/icons/ukFlag.svg" />
+                    <p>En</p>
+                
+                </a>    
+    
                 <div class="auto-flex-center-gap5-no-set-width">
 
                     <a class="xsmall web-font-primary bold" (click)="navigate('/checkout/cart')"><img class="img-20" src="assets/images/web/icons/cart.svg" /></a>
@@ -75,7 +102,7 @@
 
                 </div>
                         
-                <a class="xsmall lightest-blue-bg cursor-pointer padding-10 border-none" (click)="navigateToLogin()" *ngIf="userId === null">Patient login</a>
+                <a class="xsmall lightest-blue-bg cursor-pointer padding-10 border-none" (click)="navigateToLogin()" *ngIf="userId === null">{{ 'header.patientLogin' | translate }}</a>
                 <a class="xsmall lightest-blue-bg cursor-pointer padding-10 border-none" (click)="navigateToLogin()" *ngIf="userId !== null"><img class="img-20" src="assets/images/web/icons/account_login.svg" /></a>
 
             </div>
@@ -91,11 +118,11 @@
      <!-- Current Location-->
     <div class="auto-flex-center-start-gap20 mobile cursor-pointer padding-10 border-radius-10" (click)="showCurrentLocation()" style="background-image: url('assets/images/web/location.svg'); background-size: cover;">
 
-        <img class="smallImg" src="assets/images/web/icons/location.svg" />
+        <img class="smallImg phone-xSmallImg" src="assets/images/web/icons/location.svg" />
 
-        <div class="auto-flex-start-gap5-column-no-set-width width-max-500">
+        <div class="auto-flex-start-gap5-column-no-set-width width-max-500 phone-max-width-auto">
 
-            <p class="med bold">Current location</p>
+            <p class="med bold">{{ 'allServices.currentLocation' | translate }}</p>
             <p class="web-font-primary-light width-max-300">{{ locationName }}</p>
 
         </div>
@@ -109,8 +136,8 @@
 
             <div class="auto-flex-start-gap10-column-no-set-width width-max-300 phone-width-120 padding-bottom-20">
 
-                <p class="med bold capitalize width-max-350"> {{ category.title }} </p>
-                <p class="web-font-primary-light width-max-350 width-max-phone-130"> {{ category.description }} </p>
+                <p class="med bold capitalize width-max-350"> {{ languageService.getCurrentLanguage() === 'ar' ? category.title_arabic : category.title }} </p>
+                <p class="web-font-primary-light width-max-350 width-max-phone-130"> {{ languageService.getCurrentLanguage() === 'ar' ? category.description_arabic : category.description }} </p>
 
             </div>
 
@@ -131,8 +158,8 @@
 
             <div class="auto-flex-start-gap10-column">
 
-                <p class="med bold capitalize"> {{ category.title }} </p>
-                <p class="web-font-primary-light"> {{ category.description }} </p>
+                <p class="med bold capitalize">{{ languageService.getCurrentLanguage() === 'ar' ? category.title_arabic : category.title }}</p>
+                <p class="web-font-primary-light"> {{ languageService.getCurrentLanguage() === 'ar' ? category.description_arabic : category.description }} </p>
 
             </div>
 
@@ -149,14 +176,14 @@
     <!-- All Ctegories -->
     <div class="auto-flex-start-gap20-column light-gray-bg" *ngIf="allServices && allServices.length>0">
 
-        <p class="xmed bold capitalize">Categories</p>
+        <p class="xmed bold capitalize">{{ 'allServices.categories' | translate }}</p>
         
         <div class="auto-flex-start-gap20-no-wrap overflow-auto padding-bottom-20 place-stretch scroll-bar">
 
             <div class="auto-flex-center-gap10-column-no-set-width white-bg cursor-pointer border-radius-20 width-min-150 padding-10 item-hover" (click)="navigateToCategory(category.id)" *ngFor="let category of allCategories; let categoryIndex = index">
 
                 <img class="medImg" src="{{serverUrl}}{{category.icon}}" />
-                <p class="bold capitalize web-font-primary-light xsmall text-center">{{ category.title }}</p>
+                <p class="bold capitalize web-font-primary-light xsmall text-center">{{ languageService.getCurrentLanguage() === 'ar' ? category.title_arabic : category.title }}</p>
 
             </div>
         </div>
@@ -169,28 +196,29 @@
 
             <div class="auto-flex-start-gap20-column" *ngIf="item.services.length>0">
 
-                <p class="xmed bold capitalize">{{ item.category_data.title }}</p>
+                <p class="xmed bold capitalize">{{ languageService.getCurrentLanguage() === 'ar' ? item.category_data.title_arabic : item.category_data.title }}</p>
         
                 <div class="auto-flex-start-center-gap20-no-wrap overflow-auto padding-bottom-20 place-stretch scroll-bar-gray">
         
                     <div class="auto-flex-space-between-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative" (click)="navigateToService(service.id)" *ngFor="let service of item.services">
         
-                        <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none z-index">{{ service.price }} SAR</p>
+                        <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none z-index">{{ service.price }} {{ 'header.sar' | translate }}</p>
                         
                         <div class="linear-gradient-blue absolute height-160 border-top-left-right-10"></div>
                         <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="{{serverUrl}}{{service.cover_image}}">
         
                         <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
         
-                            <p class="med bold capitalize">{{ service.title }}</p>
-                            <p class="web-font-primary-light"> {{ service.description | slice:0:90 }}...  </p>
+                            <p class="med bold capitalize">{{ languageService.getCurrentLanguage() === 'ar' ? service.title_arabic : service.title }}</p>
+                            <p class="web-font-primary-light">   {{ (languageService.getCurrentLanguage() === 'ar' ? (service.description_arabic | translate) : (service.description | translate)) | slice:0:90 }}...</p>
         
                         </div>
         
                         <div class="auto-flex-end-gap10">
         
-                            <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 padding-top-bottom-5 xsmall">view more</button>
-        
+                            <button *ngIf="languageService.getCurrentLanguage() === 'en'" class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 padding-top-bottom-5 xsmall">{{ 'allServices.viewMore' | translate }}</button>
+                            <button *ngIf="languageService.getCurrentLanguage() === 'ar'" class="primary-bg padding-10 capitalize box-shadow border-none border-bottom-right-top-right-0 border-top-left-0 padding-left-right-30 padding-top-bottom-5 xsmall">{{ 'allServices.viewMore' | translate }}</button>
+
                         </div>
         
                     </div>
@@ -198,7 +226,7 @@
                     <div class="auto-flex-center-gap20-column-no-set-width cursor-pointer width-min-100" (click)="showMore(item.category_data.url)">
         
                         <img class="smallImg" src="assets/images/web/icons/plus.svg" />
-                        <p class="xsmall bold lowercase text-center">show more</p>
+                        <p class="xsmall bold lowercase text-center">{{ 'allServices.loadMore' | translate }}</p>
         
                     </div>
         
@@ -211,7 +239,7 @@
 
     <div class="auto-flex-center-gap20" *ngIf="allServices && allServices.length>0">
 
-        <button class="primary-bg padding-10 box-shadow xsmall width-max-300 max-width uppercase" (click)="loadMoreCategories()" *ngIf="allCategories && displayedCategories.length<allCategories.length">Load More</button>
+        <button class="primary-bg padding-10 box-shadow xsmall width-max-300 max-width uppercase" (click)="loadMoreCategories()" *ngIf="allCategories && displayedCategories.length<allCategories.length">{{ 'allServices.loadMore' | translate }}</button>
 
     </div>
 
@@ -248,7 +276,7 @@
                             <div class="auto-flex-center-gap10-no-set-width cursor-pointer" (click)="openMap()">
 
                                 <img class="smallImg cursor-pointer" src="assets/images/web/icons/edit.svg" (click)="openMap()" />
-                                <p class="xsmall bold">Edit location</p>
+                                <p class="xsmall bold">{{ 'allServices.editLocation' | translate }}</p>
  
                             </div>
     
@@ -259,7 +287,7 @@
                     <div class="auto-flex-center-start-gap20 cursor-pointer" (click)="openMap()" *ngIf="userId!==null">
     
                         <img class="xsmallImg" src="assets/images/web/icons/plus_black.svg" />
-                        <p class="xsmall bold lowercase text-center">Add new address</p>
+                        <p class="xsmall bold lowercase text-center">{{ 'allServices.addNewAddress' | translate }}</p>
     
                     </div>
     
@@ -269,9 +297,9 @@
     
                             <div class="auto-flex-start-gap10-column-no-set-width white-bg box-shadow item-hover cursor-pointer width-200" (click)="setCurrentLocation(loc)">
         
-                                <p class="xsmall bold">Name: {{ loc.address_name }}</p>
-                                <p class="xsmall" *ngIf="loc.city && loc.city.length>0">City: {{ loc.city }}</p>
-                                <p class="xsmall" *ngIf="loc.address_line1 && loc.address_line1.length>0">Address: {{ loc.address_line1 }} {{ loc.address_line2 }}</p>
+                                <p class="xsmall bold">{{ 'allServices.addressName' | translate }}: {{ loc.address_name }}</p>
+                                <p class="xsmall" *ngIf="loc.city && loc.city.length>0">{{ 'allServices.addressCity' | translate }}: {{ loc.city }}</p>
+                                <p class="xsmall" *ngIf="loc.address_line1 && loc.address_line1.length>0">{{ 'allServices.addressLine' | translate }}: {{ loc.address_line1 }} {{ loc.address_line2 }}</p>
         
                             </div>
         
@@ -296,7 +324,7 @@
 
                 <div class="auto-flex-center-gap20-column box-shadow padding-none border-radius-10 gray-border" (click)="$event.stopPropagation()">
 
-                    <input #search class="input-global absolute-top-10 z-index width-90Percent" type="text" placeholder="Search" />
+                    <input #search class="input-global absolute-top-10 z-index width-90Percent" type="text" placeholder="{{ 'patientProfile.searchLocation' | translate }}" />
 
                     <agm-map class="max-width height-300 width-600 phone-300 border-top-left-right-10 overflow-hidden" [latitude]="centerLat" [longitude]="centerLng" [zoom]="zoom" [streetViewControl]="false" [zoomControl]="false" [mapTypeControl]="false" (mapClick)="onMapClick($event)" >
                 
@@ -304,7 +332,7 @@
                     
                     </agm-map>
 
-                    <button *ngIf="placeSelected" class="primary-bg padding-10 border-none box-shadow absolute-bottom-10 width-300 phone-width-150 z-index uppercase box-shadow-16-50" (click)="onConfirmLocation()">Confirm</button>
+                    <button *ngIf="placeSelected" class="primary-bg padding-10 border-none box-shadow absolute-bottom-10 width-300 phone-width-150 z-index uppercase box-shadow-16-50" (click)="onConfirmLocation()">{{ 'allServices.confirmLocation' | translate }}</button>
                 
                 </div>
 
@@ -325,7 +353,7 @@
 
                     <div class="auto-flex-center-space-between-gap20">
 
-                        <p class="med bold capitalize">Add new address</p>
+                        <p class="med bold capitalize">{{ 'allServices.addNewAddress' | translate }}</p>
                         <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/close.svg" (click)="discardAddress()" />
     
                     </div>
@@ -338,33 +366,33 @@
 
                     <div class="auto-flex-start-gap10-column web-font-primary-light">
         
-                        <p class="xsmall bold">Address Name</p>
-                        <input class="input-global" type="text" formControlName="address_name" placeholder="Enter address name" />
-                        <p *ngIf="addressForm.get('address_name').hasError('invalidAddressName')" class="xsmall red-color">Enter address name</p>
+                        <p class="xsmall bold">{{ 'allServices.addressName' | translate }}</p>
+                        <input class="input-global" type="text" formControlName="address_name" placeholder="{{ 'allServices.addressName_1_placeholder' | translate }}" />
+                        <p *ngIf="addressForm.get('address_name').hasError('invalidAddressName')" class="xsmall red-color">{{ 'allServices.addressName_1_placeholder' | translate }}</p>
 
                     </div>    
 
                     <div class="auto-flex-start-gap10 web-font-primary-light">
 
-                        <p class="xsmall bold">Address line 1</p>
-                        <input class="input-global" type="text" formControlName="address_line1"  placeholder="Enter address" />
-                        <p *ngIf="addressForm.get('address_line1').hasError('invalidAddressLine1')" class="xsmall red-color">Enter adress line</p>
+                        <p class="xsmall bold">{{ 'allServices.addressLine_1' | translate }}</p>
+                        <input class="input-global" type="text" formControlName="address_line1"  placeholder="{{ 'allServices.addressLine_1_placeholder' | translate }}" />
+                        <p *ngIf="addressForm.get('address_line1').hasError('invalidAddressLine1')" class="xsmall red-color">{{ 'allServices.addressLine_1' | translate }}</p>
 
                     </div>    
     
                     <div class="auto-flex-start-gap10 web-font-primary-light">
     
-                        <p class="xsmall bold">Address line 2</p>
-                        <input class="input-global" type="text" placeholder="Enter address (optional)" />
+                        <p class="xsmall bold">{{ 'allServices.addressLine_2' | translate }}</p>
+                        <input class="input-global" type="text" placeholder="{{ 'allServices.addressLine_2_placeholder' | translate }}" />
             
                     </div>    
     
-                    <p *ngIf="addressForm.get('latitude').hasError('invalidLocation') || addressForm.get('longitude').hasError('invalidLocation')" class="xsmall red-color">Please select valid location</p>
+                    <p *ngIf="addressForm.get('latitude').hasError('invalidLocation') || addressForm.get('longitude').hasError('invalidLocation')" class="xsmall red-color">{{ 'allServices.enterValidLocation' | translate }}</p>
                     
                     <div class="auto-flex-end-gap10">
         
                         <!-- continue button -->
-                        <button class="primary-bg padding-10 box-shadow width-200 xsmall phone-width-auto uppercase" type="submit">Save changes</button>
+                        <button class="primary-bg padding-10 box-shadow width-200 xsmall phone-width-auto uppercase" type="submit">{{ 'allServices.saveChanges' | translate }}</button>
     
                     </div>
                     
@@ -381,7 +409,7 @@
 
     <div class="auto-flex-center-gap10 lightest-blue-bg" *ngIf="allServices && allServices.length<=0">
 
-        <p class="bold">No services found. Please change your location.</p>
+        <p class="bold">{{ 'allServices.noServiceFound' | translate }}</p>
 
     </div>
 

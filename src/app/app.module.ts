@@ -163,6 +163,16 @@ import { CheckoutFooterComponent } from './website/checkout-footer/checkout-foot
 import { ServiceproviderComponent } from './serviceprovider/serviceprovider.component';
 import { BusinessToBusinessAppointmentsComponent } from './business-to-business-appointments/business-to-business-appointments.component';
 
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+// Create a loader for translation files
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+
 @NgModule({
   declarations: [	
     AppComponent,
@@ -309,7 +319,16 @@ import { BusinessToBusinessAppointmentsComponent } from './business-to-business-
       libraries: ['places']
     }),
     AppRoutingModule, HttpClientModule, MatSnackBarModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule,NgSelect2Module, NgMultiSelectDropDownModule.forRoot(), 
-    NgxSummernoteModule, MatTabsModule, NgxPaginationModule, Ng2SearchPipeModule
+    NgxSummernoteModule, MatTabsModule, NgxPaginationModule, Ng2SearchPipeModule,
+
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
+    
   ],
   providers: [
     InitializationService,

@@ -5,27 +5,27 @@
     <div class="auto-flex-center-start-gap20 width-max-550 padding-20 cursor-pointer" (click)="navigateToCart()">
 
         <img class="xxxsmallImg" src="assets/images/web/icons/back_arrow.svg" >
-        <p class="xsmall bold web-font-primary-light">Back to schedule</p>
+        <p class="xsmall bold web-font-primary-light">{{ 'cart.backToSchedule' | translate }}</p>
 
     </div>
 
     <div class="auto-flex-start-gap20-column gray-border border-radius-20 padding-20">
 
-        <p class="med bold">Payment summary</p>
+        <p class="med bold">{{ 'cart.paymentSummary' | translate }}</p>
 
         <div class="auto-flex-start-gap20-column">
 
             <div class="auto-flex-center-space-between-gap20">
                 
-                <p class="web-font-primary-light">Subtotal</p>
-                <p class="web-font-primary-light bold">SAR {{ totalCost }}</p>
+                <p class="web-font-primary-light">{{ 'cart.subtotal' | translate }}</p>
+                <p class="web-font-primary-light bold">{{ 'header.sar' | translate }} {{ totalCost }}</p>
 
             </div>    
 
             <div class="auto-flex-center-space-between-gap20">
                 
-                <p class="web-font-primary-light">Total (tax incl.)</p>
-                <p class="web-font-primary-light bold blue-color">SAR {{ total_inc_cost }}</p>
+                <p class="web-font-primary-light">{{ 'cart.totalTax' | translate }}</p>
+                <p class="web-font-primary-light bold blue-color">{{ 'header.sar' | translate }} {{ total_inc_cost }}</p>
 
             </div>    
 
@@ -35,7 +35,7 @@
 
     <div class="auto-flex-start-gap20-column gray-border border-radius-20 padding-20">
 
-        <p class="med bold">Date & time</p>
+        <p class="med bold">{{ 'cart.dateTime' | translate }}</p>
 
         <div class="auto-flex-center-space-between-gap20">
 
@@ -45,15 +45,15 @@
 
                     <div class="auto-flex-center-space-between-gap20 calendar-header">
 
-                        <button class="arrow-button" [disabled]="isPreviousDisabled()" (click)="goToPreviousWeek()">
-                        <img class="xxxsmallImg" src="assets/images/web/icons/prev.svg" />
-                      </button>
+                        <button class="arrow-button" [disabled]="isPreviousDisabled()" (click)="goToPreviousWeek()" [style.transform]="languageService.getCurrentLanguage() === 'ar' ? 'rotate(180deg)' : 'rotate(0)'">
+                            <img class="xxxsmallImg" src="assets/images/web/icons/prev.svg"  />
+                        </button>
 
-                      <div class="header-text small-font bold">{{ currentMonthAndYear }}</div>
+                        <div class="header-text small-font bold">{{ currentMonthAndYear }}</div>
 
-                      <button class="arrow-button" (click)="goToNextWeek()">
-                        <img class="xxxsmallImg" src="assets/images/web/icons/next.svg" />
-                      </button>
+                        <button class="arrow-button" (click)="goToNextWeek()" [style.transform]="languageService.getCurrentLanguage() === 'ar' ? 'rotate(180deg)' : 'rotate(0)'">
+                            <img class="xxxsmallImg" src="assets/images/web/icons/next.svg" />
+                        </button>
 
                     </div>
 
@@ -94,7 +94,7 @@
 
     <div class="auto-flex-start-gap20-column gray-border border-radius-20 padding-20">
 
-        <p class="med bold">Notes</p>
+        <p class="med bold">{{ 'cart.notes' | translate }}</p>
 
         <div class="auto-flex-center-space-between-gap20">
 
@@ -108,11 +108,11 @@
 
     </div>
 
-    <button class="primary-bg max-width padding-10 uppercase" (click)="proceedToPay()">Continue</button>
+    <button class="primary-bg max-width padding-10 uppercase" (click)="proceedToPay()">{{ 'messages.continue' | translate }}</button>
 
     <!-- Cart error -->
-    <app-custom-alert *ngIf="loginAlert" [title]="'User not logged in'" [message]="'Please log in to continue'" [cancelButtonText]="'Cancel'" [continueButtonText]="'login'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
-    <app-custom-alert *ngIf="errorOccured" [title]="'Date or time not selected'" [message]="'Please select date and time to proceed'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Confirm'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClickTimeDate()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="loginAlert" [title]="'messages.userNotLoggedInTitle' | translate" [message]="'messages.userNotLoggedInTitleDesc' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'auth.login' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="errorOccured" [title]="'messages.dateTimeTitle' | translate" [message]="'messages.dateTimeDesc' | translate" [cancelButtonText]="'cart.cancel'" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClickTimeDate()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
 </div>
 

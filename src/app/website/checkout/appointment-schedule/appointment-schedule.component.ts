@@ -8,6 +8,7 @@ import { WebsocketService  } from 'src/service/web-socket.service';
 import { Subscription } from 'rxjs';
 import { WebsiteDataService } from 'src/service/website-data.service';
 import { PatientsService } from 'src/service/patient.service';
+import { LanguageService } from 'src/service/language.service';
 
 @Component({
   selector: 'app-appointment-schedule',
@@ -53,7 +54,9 @@ export class AppointmentScheduleComponent implements OnInit {
     private _b2c: BusinessToCustomerSchedulingService,
     private websocketService: WebsocketService,
     private dataService: WebsiteDataService,
-    private _patientService: PatientsService
+    private _patientService: PatientsService,
+    public languageService: LanguageService
+
   ) {     
 
     for (let hour = 12; hour <= 23; hour++) {

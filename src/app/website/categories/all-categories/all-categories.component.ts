@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WebsiteDataService } from 'src/service/website-data.service';
 import { environment } from 'src/environments/environment'
+import { LanguageService } from 'src/service/language.service';
 
 @Component({
   selector: 'app-all-categories',
@@ -25,7 +26,8 @@ export class AllCategoriesComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private dataService: WebsiteDataService,
-    private router: Router
+    private router: Router,
+    public languageService: LanguageService
   ) {}
 
   ngOnInit(): void {}

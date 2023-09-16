@@ -12,16 +12,15 @@
     
             <div class="auto-flex-start-gap20-column-no-set-width">
     
-                <p class="med bold">{{ currentService.title }}</p>
-                <p class="med" style="font-family: system-ui">{{ currentService.title_arabic }}</p>
-                <p class="bold blue-color">SAR {{ currentService.price }}</p>
+                <p class="med bold">{{ languageService.getCurrentLanguage() === 'ar' ? currentService.title_arabic : currentService.title }}</p>
+                <p class="bold blue-color">{{ 'header.sar' | translate }} {{ currentService.price }}</p>
                
             </div>
     
          
         </div>
 
-        <button class="primary-bg padding-10 padding-left-right-30 max-width uppercase" (click)="addToCart(currentService)">Add to cart</button>
+        <button class="primary-bg padding-10 padding-left-right-30 max-width uppercase" (click)="addToCart(currentService)">{{ 'cart.addToCart' | translate }}</button>
         <div class="auto-flex-start-gap10-column" *ngIf="addedToCart.length>0">
 
             <p class="light-green-bg green-color padding-5 text-center max-width message" [class.fade-in]="msg.visible" [class.fade-out]="!msg.visible" *ngFor="let msg of addedToCart">  {{ msg.text }}
@@ -31,7 +30,6 @@
         
     </div>
     
-
     <!-- Service header -->
     <div class="auto-flex-center-start-gap20-no-set-width flex-grow phone-max-width box-shadow padding-20 border-radius-20">
 
@@ -39,13 +37,13 @@
             
             <ng-container *ngIf="currentService && currentService.whatsapp_url">
                 <iframe [src]="getSafeUrl(currentService.whatsapp_url)" frameborder="0" style="height: 800px; width: 100%; border: 0px;"></iframe>
-              </ng-container>
-            
-            
+            </ng-container>
+                    
             <div class="auto-flex-start-gap20-column width-max-600 phone-max-width">
 
-                <p class="web-font-primary-light" *ngIf="!currentService || !currentService.whatsapp_url">{{ currentService.description }}</p>
-           
+                <p class="web-font-primary-light" *ngIf="!currentService || !currentService.whatsapp_url">   {{ (languageService.getCurrentLanguage() === 'ar' ? (currentService.description_arabic | translate) : (currentService.description | translate)) }}</p>
+
+        
                 <p class="med bold" *ngIf="serviceVariants && serviceVariants.length>0">Variants</p>
                 <div class="auto-flex-start-gap10-column" *ngIf="serviceVariants && serviceVariants.length>0">
     
@@ -89,11 +87,13 @@
                     </div>
     
                 </div>
-                
-                <p class="med bold" *ngIf="currentService && !currentService.whatsapp_url && currentService.instructions && currentService.instructions.length>0">Instructions</p>
-                <p class="web-font-primary-light" *ngIf="currentService && !currentService.whatsapp_url && currentService.instructions && currentService.instructions.length>0">{{ currentService.instructions }}</p>
-                <p class="med bold" *ngIf="currentService && !currentService.whatsapp_url && currentService.faq && currentService.faq.length>0">FAQ</p>
-                <p class="web-font-primary-light" *ngIf="currentService && !currentService.whatsapp_url && currentService.faq && currentService.faq.length>0">{{ currentService.faq }}</p>
+
+
+                <p class="med bold" *ngIf="currentService && !currentService.whatsapp_url && currentService.instructions && currentService.instructions.length>0"> {{ (languageService.getCurrentLanguage() === 'ar' ? 'التعليمات' : 'Instructions') }}</p>
+
+                <p class="web-font-primary-light" *ngIf="currentService && !currentService.whatsapp_url && currentService.instructions && currentService.instructions.length>0">{{ (languageService.getCurrentLanguage() === 'ar' ? (currentService.instructions_arabic | translate) : (currentService.instructions | translate)) }}</p>
+                <p class="med bold" *ngIf="currentService && !currentService.whatsapp_url && currentService.faq && currentService.faq.length>0">{{ (languageService.getCurrentLanguage() === 'ar' ? 'الأسئلة الأكثر شيوعاً' : 'FAQ') }}</p>
+                <p class="web-font-primary-light" *ngIf="currentService && !currentService.whatsapp_url && currentService.faq && currentService.faq.length>0">{{ (languageService.getCurrentLanguage() === 'ar' ? (currentService.faq_arabic | translate) : (currentService.faq | translate)) }}</p>
     
 
             </div>
@@ -102,10 +102,7 @@
 
     </div>
 
- 
     <!-- Cart error -->
-    <app-custom-alert *ngIf="showErrorCart" [title]="'Can not add item'" [message]="'Please select services from one category only'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showErrorCart" [title]="'messages.cartErrorCategoryTitle' | translate" [message]="'messages.cartErrorCategoryDesc' | translate" [cancelButtonText]="'messages.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
 </div>
-
-<app-checkout-footer></app-checkout-footer>

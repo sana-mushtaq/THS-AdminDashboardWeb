@@ -3,6 +3,7 @@
 
 /*@import url('../fonts/0265b98b68ecf1b3d801b5df4dc155e7.css');*/
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@200;400;500;700&display=swap');
 @font-face {
     font-family: 'icomoon';
     src: url('assets/fonts/icomoon.eot?687bl0');
@@ -2394,11 +2395,18 @@ div.dt-buttons .dt-button {
     --light-blue-color: #D8E4FF;
     --yellow-color: #FFF7E7;
     --web-font: 'Nunito', sans-serif;
+    --web-font-ar: 'Noto Sans Arabic', sans-serif;
     --web-font-primary: #010101;
     --web-font-primary-light: #545563; 
     --web-font-primary-gray: #83859C;
 }
 
+.web-font{
+    font-family: 'Nunito', sans-serif;
+}
+.web-font-ar{
+    font-family: 'Noto Sans Arabic', sans-serif;
+}
 a:hover{
     text-decoration: none !important;
     color: var(--blue-color) !important;
@@ -2439,13 +2447,13 @@ a:hover{
 .web {
     padding: 0px 0px;
     color: var(--web-font-primary);
-    font-family: var(--web-font);
     line-height: 20px;
     letter-spacing: 0.1px;
     font-weight: 500;
 }
 
 .web p {
+    text-align: start;
     margin: 0px;
 }
 
@@ -3756,6 +3764,15 @@ a:hover{
     gap: 20px;
 }
 
+.auto-flex-space-between-gap20-column-no-set-width {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: space-between;
+    gap: 20px;
+}
+
 .auto-flex-start-center-gap20-column-no-set-width {
     display: flex;
     flex-direction: column;
@@ -4463,7 +4480,6 @@ a:hover{
     gap: 20px;
 }
 .auto-flex-space-between-gap20-column-no-set-width {
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -5050,6 +5066,9 @@ margin: 0 auto;
     .xxsmallImg{
       width: 30px;
     }
+    .phone-xSmallImg{
+        width: 30px;
+    }
     .xxxlargeImg-350 {
         width: 200px;
     }
@@ -5114,5 +5133,8 @@ margin: 0 auto;
     }
     .phone-vertical-reverse {
         flex-direction: column-reverse;
+    }
+    .phone-max-width-auto{
+        max-width: auto;
     }
   }

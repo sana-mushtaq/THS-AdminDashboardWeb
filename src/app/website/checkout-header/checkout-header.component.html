@@ -8,10 +8,23 @@
 
         <div class="auto-flex-center-gap20-no-set-width desktop">
 
-            <a class="xsmall web-font-primary bold cursor-pointer" (click)="navigate('/')">Home</a>
-            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/blog">Blog</a>
-            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/medical-calculator">Calculator</a>
-            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/contact">Contact</a>
+            <a class="xsmall web-font-primary bold cursor-pointer" (click)="navigate('/')">{{ 'header.home' | translate }}</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/blog">{{ 'header.blog' | translate }}</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/medical-calculator">{{ 'header.calculator' | translate }}</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/contact">{{ 'header.contact' | translate }}</a>
+            <a class="auto-flex-center-gap10-no-set-width xsmall web-font-primary bold gray-border padding-5 border-radius-10 cursor-pointer" (click)="switchLanguage('ar')" *ngIf="languageService.getCurrentLanguage() === 'en'">
+            
+                <img class="xsmallImg" src="assets/images/web/icons/saFlag.svg" />
+                <p>عربي</p>
+            
+            </a>    
+
+            <a class="auto-flex-center-gap10-no-set-width xsmall web-font-primary bold gray-border padding-5 border-radius-10 cursor-pointer" (click)="switchLanguage('en')" *ngIf="languageService.getCurrentLanguage() === 'ar'">
+            
+                <img class="xsmallImg" src="assets/images/web/icons/ukFlag.svg" />
+                <p>En</p>
+            
+            </a>    
  
             <div class="auto-flex-center-gap5-no-set-width cursor-pointer" *ngIf="cartLength>0">
 
@@ -24,7 +37,7 @@
  
             </div>
 
-            <a class="xsmall lightest-blue-bg cursor-pointer padding-10 border-none" (click)="navigateToLogin()" *ngIf="userId === null">Patient login</a>
+            <a class="xsmall lightest-blue-bg cursor-pointer padding-10 border-none" (click)="navigateToLogin()" *ngIf="userId === null">{{ 'header.patientLogin' | translate }}</a>
             <a class="xsmall lightest-blue-bg cursor-pointer padding-10 border-none" (click)="navigateToLogin()" *ngIf="userId !== null"><img class="img-20" src="assets/images/web/icons/account_login.svg" /></a>
         </div>
 
@@ -38,15 +51,27 @@
 
         <div class="light-gray-bg fixed mobile z-index menu-mobile mobile padding-none" id="menuBar" style="z-index: 10000;">
 
-            <a class="xsmall web-font-primary bold absolute-top-right-30" (click)="closeMenu()"><img class="img-20" src="assets/images/web/icons/close.svg" /></a>
+            <a class="xsmall web-font-primary bold" [class.absolute-top-right-30]="languageService.getCurrentLanguage() === 'en'" [class.absolute-top-left-30]="languageService.getCurrentLanguage() === 'ar'" (click)="closeMenu()"><img class="img-20" src="assets/images/web/icons/close.svg" /></a>
 
             <div class="auto-flex-start-gap20-column padding-20">
 
-            <a class="xsmall web-font-primary bold" (click)="navigate('/')">Home</a>
-            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/blog">Blog</a>
-            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/medical-calculator">Calculator</a>
-            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/contact">Contact</a>
+            <a class="xsmall web-font-primary bold" (click)="navigate('/')">{{ 'header.home' | translate }}</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/blog">{{ 'header.blog' | translate }}</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/medical-calculator">{{ 'header.calculator' | translate }}</a>
+            <a class="xsmall web-font-primary bold" href="https://www.taibsa.com/contact">{{ 'header.contact' | translate }}</a>
+            <a class="auto-flex-center-gap10-no-set-width xsmall web-font-primary bold gray-border padding-5 border-radius-10 cursor-pointer" (click)="switchLanguage('ar')" *ngIf="languageService.getCurrentLanguage() === 'en'">
+            
+                <img class="xsmallImg" src="assets/images/web/icons/saFlag.svg" />
+                <p>عربي</p>
+            
+            </a>    
 
+            <a class="auto-flex-center-gap10-no-set-width xsmall web-font-primary bold gray-border padding-5 border-radius-10 cursor-pointer" (click)="switchLanguage('en')" *ngIf="languageService.getCurrentLanguage() === 'ar'">
+            
+                <img class="xsmallImg" src="assets/images/web/icons/ukFlag.svg" />
+                <p>En</p>
+            
+            </a>    
             <div class="auto-flex-center-gap5-no-set-width">
 
                 <a class="xsmall web-font-primary bold"  (click)="navigate('/checkout/cart')"><img class="img-20" src="assets/images/web/icons/cart.svg" /></a>
@@ -59,7 +84,7 @@
             </div>
 
             
-            <a class="xsmall lightest-blue-bg cursor-pointer padding-10 border-none" (click)="navigateToLogin()" *ngIf="userId === null">Patient login</a>
+            <a class="xsmall lightest-blue-bg cursor-pointer padding-10 border-none" (click)="navigateToLogin()" *ngIf="userId === null">{{ 'header.patientLogin' | translate }}</a>
             <a class="xsmall lightest-blue-bg cursor-pointer padding-10 border-none" (click)="navigateToLogin()" *ngIf="userId !== null"><img class="img-20" src="assets/images/web/icons/account_login.svg" /></a>
             </div>
 

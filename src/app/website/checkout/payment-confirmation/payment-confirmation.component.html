@@ -4,34 +4,34 @@
 
     <div class="auto-flex-center-gap20-column gray-border border-radius-20 padding-20" *ngIf="paymentCaptured">
 
-        <p class="med bold">Appointment Booking Confirmation</p>
+        <p class="med bold">{{ 'cart.appointmentBookingConfirmation' | translate }}</p>
 
-        <p class="light-green-bg padding-5 green-color fit-content" >Your appointment has been booked successfully</p>
+        <p class="light-green-bg padding-5 green-color fit-content">{{ 'cart.successAppointment' | translate }}</p>
 
         <div class="auto-flex-center-gap10">
 
-            <p class="text-right">Appointment Id: </p>
+            <p class="text-right">{{ 'cart.appointmentId' | translate }}: </p>
             <p>{{ appointmentId }}</p>
 
         </div>
 
         <div class="auto-flex-center-gap10">
 
-            <p class="text-right">Name:</p>
+            <p class="text-right">{{ 'cart.patientName' | translate }}:</p>
             <p>{{ name }}</p>
 
         </div>
         
         <div class="auto-flex-center-gap10">
 
-            <p class="text-right">Date:</p>
+            <p class="text-right">{{ 'cart.date' | translate }}:</p>
             <p>{{ date }}</p>
 
         </div>
         
         <div class="auto-flex-center-gap10">
 
-            <p class="text-right">Time: </p>
+            <p class="text-right">{{ 'cart.time' | translate }}: </p>
             <p>{{ time }}</p>
 
         </div>
@@ -46,9 +46,9 @@
 
     <div class="auto-flex-center-gap20-column gray-border border-radius-20 padding-20" *ngIf="!paymentCaptured">
         
-        <p class="med bold text-center">Appointment Booking Confirmation</p>
+        <p class="med bold text-center">{{ 'cart.appointmentBookingConfirmation' | translate }}</p>
 
-        <p class="light-red-bg padding-5 red-color fit-content">We couldn't process your payment and appointment.</p>
+        <p class="light-red-bg padding-5 red-color fit-content">{{ 'cart.appointmentBookingConfirmationError' | translate }}</p>
 
     </div>
 
@@ -72,7 +72,7 @@
   
     </div>
     
-    <a class="primary-bg max-width padding-10 text-center uppercase" href="/">Go to home page</a>
+    <a class="primary-bg max-width padding-10 text-center uppercase" href="/">{{ 'cart.goToHomePage' | translate }}</a>
 
 </div>
 

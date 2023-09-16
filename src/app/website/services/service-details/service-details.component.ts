@@ -5,6 +5,7 @@ import { UtilService } from 'src/utils/util.service';
 import { environment } from 'src/environments/environment'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
+import { LanguageService } from 'src/service/language.service';
 
 
 @Component({
@@ -33,8 +34,8 @@ export class ServiceDetailsComponent implements OnInit {
     private _utilService: UtilService,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private http: HttpClient
-
+    private http: HttpClient,
+    public languageService: LanguageService
   ) {
 
     this.dataService.cartLength$.subscribe(length => {
@@ -60,8 +61,6 @@ export class ServiceDetailsComponent implements OnInit {
           })
 
           this.sanitizedWhatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.currentService[0].whatsapp_url);
-
-
 
           if(this.currentService.length>0) {
 
@@ -119,7 +118,17 @@ export class ServiceDetailsComponent implements OnInit {
       this._utilService.addToCart(this.cartData)
 
 
-      const newMessage = { text: 'Service added to cart.', visible: true };
+      let newMessage = {}
+      
+      if(this.languageService.getCurrentLanguage() === 'en') {
+        newMessage = { text: 'Service added to cart.', visible: true };
+
+      } 
+      if(this.languageService.getCurrentLanguage() === 'ar') {
+        newMessage = { text: 'تمت إضافة الخدمة إلى السلة', visible: true };
+
+      } 
+    
       this.addedToCart.push(newMessage);
 
     // Set a timeout to hide the message after a certain duration (e.g., 3 seconds)

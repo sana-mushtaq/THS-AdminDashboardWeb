@@ -18,7 +18,14 @@ const UserRole = {
   styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit {
-  constructor(private _appService: AppService, private router: Router, private appUtil: UtilService) {}
+  constructor(private _appService: AppService, private router: Router, private appUtil: UtilService) {
+    const body = document.getElementsByTagName('body')[0];
+      body.setAttribute('dir', 'ltr');
+      body.classList.add('web-font');
+      body.classList.remove('web-font-ar');
+
+
+  }
   ngOnInit(): void {}
 
   loginClicked() {

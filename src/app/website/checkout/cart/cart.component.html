@@ -4,7 +4,7 @@
 
     <div class="auto-flex-start-gap10-column-no-set-width gray-border flex-grow border-radius-20 padding-20">
 
-        <p class="med bold">My cart</p>
+        <p class="med bold">{{ 'cart.cartTitle' | translate }}</p>
 
         <div class="auto-flex-center-space-between-gap20" *ngFor="let cart of cartData; let cartIndex = index;">
 
@@ -13,7 +13,7 @@
                 <img class="xxxmedImg cover border-radius-10" *ngIf="cart.icon && cart.icon.length>0" src="{{serverUrl}}{{cart.icon}}" />
                 <img class="xxxmedImg cover border-radius-10" *ngIf="!cart.icon || cart.icon.length<=0" style="object-fit: fill;" src="assets/images/web/logo.svg" />
     
-                <p class="med bold blue-color">SAR {{ cart.price }}</p>
+                <p class="med bold blue-color">{{ 'header.sar' | translate }} {{ cart.price }}</p>
 
             </div>
 
@@ -22,8 +22,8 @@
                 <p class="med bold cursor-pointer" (click)="navigateToServiceDetail(cart.id)">{{ cart.title }}</p>
                 <p class="web-font-primary-light" *ngIf="!cart.showFullDescription">{{ cart.description | slice:0:90 }}...</p>
                 <p class="web-font-primary-light" *ngIf="cart.showFullDescription">{{ cart.description }}</p>
-                <p class="web-font-primary-light cursor-pointer" *ngIf="!cart.showFullDescription" (click)="toggleDescription(cartIndex)">show more</p>
-                <p class="web-font-primary-light cursor-pointer" *ngIf="cart.showFullDescription"(click)="toggleDescription(cartIndex)">show less</p>
+                <p class="web-font-primary-light cursor-pointer" *ngIf="!cart.showFullDescription" (click)="toggleDescription(cartIndex)">{{ 'cart.showMore' | translate }}</p>
+                <p class="web-font-primary-light cursor-pointer" *ngIf="cart.showFullDescription"(click)="toggleDescription(cartIndex)">{{ 'cart.showLess' | translate }}</p>
                
 
             </div>
@@ -52,36 +52,36 @@
 
     <div class="auto-flex-start-gap20-column-no-set-width width-300 flex-grow max-width phone-max-width gray-border border-radius-20 padding-20">
 
-        <p class="med bold">Payment summary</p>
+        <p class="med bold">{{ 'cart.paymentSummary' | translate }}</p>
 
         <div class="auto-flex-start-gap20-column">
 
             <div class="auto-flex-center-space-between-gap20">
                 
-                <p class="web-font-primary-light">Subtotal</p>
-                <p class="web-font-primary-light bold">SAR {{ total }}</p>
+                <p class="web-font-primary-light">{{ 'cart.subtotal' | translate }}</p>
+                <p class="web-font-primary-light bold">{{ 'header.sar' | translate }} {{ total }}</p>
 
             </div>    
 
             <div class="auto-flex-center-space-between-gap20">
                 
-                <p class="web-font-primary-light">Total (tax incl.)</p>
-                <p class="web-font-primary-light bold blue-color">SAR {{ total_inc_cost }}</p>
+                <p class="web-font-primary-light">{{ 'cart.totalTax' | translate }}</p>
+                <p class="web-font-primary-light bold blue-color">{{ 'header.sar' | translate }} {{ total_inc_cost }}</p>
 
             </div>    
 
-            <button class="primary-bg max-width padding-10 uppercase" (click)="checkout()">checkout</button>
+            <button class="primary-bg max-width padding-10 uppercase" (click)="checkout()">{{ 'cart.checkout' | translate }}</button>
 
         </div>
 
     </div>
 
     <!-- Cart error -->
-    <app-custom-alert *ngIf="loginAlert" [title]="'User not logged in'" [message]="'Please log in to continue'" [cancelButtonText]="'Cancel'" [continueButtonText]="'login'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="loginAlert" [title]="'messages.userNotLoggedInTitle' | translate" [message]="'messages.userNotLoggedInTitleDesc' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'auth.login' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Cart error -->
-    <app-custom-alert *ngIf="wrongService" [title]="'Service selection error'"   [message]="'You have selected a service that is not provided by a service provider relevant to your gender. Please choose a dependent or remove the following services' + errorMessage"
-    [cancelButtonText]="'Cancel'" [continueButtonText]="'Confirm'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClickService()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="wrongService" [title]="'messages.serviceSelectionTitle' | translate" [message]="('messages.serviceSelectionDesc' | translate) + errorMessage"
+    [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'cart.confirm' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClickService()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
 
 </div>

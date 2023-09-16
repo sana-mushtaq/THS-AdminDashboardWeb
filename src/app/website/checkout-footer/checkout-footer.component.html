@@ -13,10 +13,10 @@
                         <img class="xmedImg" src="assets/images/web/logo.svg" />
                     </a>
 
-                    <p class="bold">Navigation</p>
-                    <a class="xsmall web-font-primary-light" (click)="navigate('/')">Home</a>
-                    <a class="xsmall web-font-primary-light" href="https://www.taibsa.com/blog">Blog</a>
-                    <a class="xsmall web-font-primary-light" href="https://www.taibsa.com/contact">Contact</a>
+                    <p class="bold">{{ 'header.navigation' | translate }}</p>
+                    <a class="xsmall web-font-primary-light" (click)="navigate('/')">{{ 'header.home' | translate }}</a>
+                    <a class="xsmall web-font-primary-light" href="https://www.taibsa.com/blog">{{ 'header.blog' | translate }}</a>
+                    <a class="xsmall web-font-primary-light" href="https://www.taibsa.com/contact">{{ 'header.contact' | translate }}</a>
     
                     <a (click)="navigate('/')" class="desktop cursor-pointer">
                         <img class="xmedImg" src="assets/images/web/logo.svg" />
@@ -26,16 +26,16 @@
         
                 <div class="auto-flex-start-gap10-column-no-set-width phone-max-width">
         
-                    <p class="bold">Tools</p>
-                    <a class="xsmall web-font-primary-light" href="https://www.taibsa.com/medical-calculator">Calculator</a>
+                    <p class="bold">{{ 'header.tools' | translate }}</p>
+                    <a class="xsmall web-font-primary-light" href="https://www.taibsa.com/medical-calculator">{{ 'header.calculator' | translate }}</a>
         
                 </div>
         
                 <div class="auto-flex-start-gap10-column-no-set-width phone-max-width">
         
-                    <p class="bold">Policies</p>
-                    <a class="xsmall web-font-primary-light" href="https://www.taibsa.com/terms-conditions">Terms and conditions</a>
-                    <a class="xsmall web-font-primary-light" href="https://www.taibsa.com/privacy-policy" >Privacy policy</a>
+                    <p class="bold">{{ 'header.policies' | translate }}</p>
+                    <a class="xsmall web-font-primary-light" href="https://www.taibsa.com/terms-conditions">{{ 'header.terms' | translate }}</a>
+                    <a class="xsmall web-font-primary-light" href="https://www.taibsa.com/privacy-policy" >{{ 'header.privacy' | translate }}</a>
         
                 </div>
 
@@ -81,7 +81,7 @@
 
         <div class="auto-flex-center-gap10-column">
 
-            <p class="xsmall web-font-primary-light">Prince Majid Road, Al Rabwah, Jeddah 23449, Kingdom of Saudi Arabia</p>
+            <p class="xsmall web-font-primary-light">{{ 'header.copyright' | translate }}</p>
             <p class="xsmall web-font-primary-light">966920033271</p>
 
         </div>

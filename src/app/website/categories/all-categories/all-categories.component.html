@@ -1,12 +1,12 @@
 <app-checkout-header></app-checkout-header>
 
    <!-- Category header -->
-   <div class="web auto-flex-center-start-gap20 cursor-pointer border-none"  *ngIf="currentCategory && currentCategory.title.length>0">
+<div class="web auto-flex-center-start-gap20 cursor-pointer border-none"  *ngIf="currentCategory && currentCategory.title.length>0">
 
     <div class="auto-flex-center-start-gap20 lightest-blue-bg border-none" style="border-radius: 0px;">
 
         <img class="xmedImg white-bg border-radius-20 padding-5 phone-60" src="{{serverUrl}}{{currentCategory.icon}}" />
-        <p class="large bold">{{ currentCategory.title }}</p>
+        <p class="large bold">{{ languageService.getCurrentLanguage() === 'ar' ? currentCategory.title_arabic : currentCategory.title }}</p>
 
     </div>
 
@@ -291,24 +291,25 @@
                     
             <div class="auto-flex-center-space-between-gap20 padding-bottom-20 place-stretch phone-scroll scroll-bar-gray">
 
-                <div class="auto-flex-start-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-half phone-300 relative" (click)="navigateToService(service.id)" *ngFor="let service of topServices; let serviceIndex = index">
+                <div class="auto-flex-space-between-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-half phone-300 relative" (click)="navigateToService(service.id)" *ngFor="let service of topServices; let serviceIndex = index">
     
-                    <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10 border-none z-index">{{ service.price }} SAR</p>
+                    <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10 border-none z-index">{{ service.price }} {{ 'header.sar' | translate }}</p>
     
                     <div class="linear-gradient-blue absolute height-200 border-top-left-right-10"></div>
                     <img class="xxxlargeImg-500 height-200 cover border-top-left-right-10 max-width" style="width: 100%;" src="{{serverUrl}}{{service.cover_image}}">
     
                     <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
     
-                        <p class="med bold capitalize">{{ service.title }}</p>
-                        <p class="web-font-primary-light">{{ service.description | slice:0:90 }}...</p>
+                        <p class="med bold capitalize">{{ languageService.getCurrentLanguage() === 'ar' ? service.title_arabic : service.title }}</p>
+                        <p class="web-font-primary-light"> {{ (languageService.getCurrentLanguage() === 'ar' ? (service.description_arabic | translate) : (service.description | translate)) | slice:0:90 }}...</p>
     
                     </div>
     
                     <div class="auto-flex-end-gap10">
 
-                        <button class="primary-bg padding-10 uppercase box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 padding-top-bottom-5 xsmall">view more</button>
-    
+                        <button *ngIf="languageService.getCurrentLanguage() === 'en'" class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 padding-top-bottom-5 xsmall">{{ 'allServices.viewMore' | translate }}</button>
+                        <button *ngIf="languageService.getCurrentLanguage() === 'ar'" class="primary-bg padding-10 capitalize box-shadow border-none border-bottom-right-top-right-0 border-top-left-0 padding-left-right-30 padding-top-bottom-5 xsmall">{{ 'allServices.viewMore' | translate }}</button>
+
                     </div>
     
                 </div>
@@ -324,9 +325,9 @@
 
                     <div class="auto-flex-start-gap10-column-no-set-width">
 
-                        <p class="width-max-300 phone-max-150">{{ service.title }}</p>
-                        <p class="bold">{{ service.price }} SAR</p>
-                        <button class="white-bg padding-10 padding-left-right-30 blue-color blue-border uppercase" (click)="navigateToService(service.id)">View service</button>
+                        <p class="width-max-300 phone-max-150">{{ languageService.getCurrentLanguage() === 'ar' ? service.title_arabic : service.title }}</p>
+                        <p class="bold">{{ service.price }} {{ 'header.sar' | translate }}</p>
+                        <button class="white-bg padding-10 padding-left-right-30 blue-color blue-border uppercase" (click)="navigateToService(service.id)">{{ 'allServices.viewService' | translate }}</button>
                     </div>
         
                 </div>
@@ -335,7 +336,7 @@
             
             <div class="auto-flex-center-gap20">
 
-                <button class="primary-bg padding-10 uppercase box-shadow xsmall width-max-300 max-width" *ngIf="allServices.length>10 && itemsToShowInitially<allServices.length" (click)="loadMoreItems()">Load More</button>
+                <button class="primary-bg padding-10 uppercase box-shadow xsmall width-max-300 max-width" *ngIf="allServices.length>10 && itemsToShowInitially<allServices.length" (click)="loadMoreItems()">{{ 'allServices.loadMore' | translate }}</button>
 
             </div>
 

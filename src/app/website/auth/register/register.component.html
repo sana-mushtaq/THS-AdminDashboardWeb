@@ -22,8 +22,8 @@
 
         <div class="auto-flex-start-gap20-column padding-20 main-div">
 
-            <h3 class="xxlarge bold capitalize">Account details</h3>
-            <p class="web-font-primary-light">Enter your data that you will use for entering.</p>
+            <h3 class="xxlarge bold capitalize">{{ 'auth.accountDetails' | translate }}</h3>
+            <p class="web-font-primary-light">{{ 'auth.accountDetailsDesc' | translate }}</p>
     
             <form class="auto-flex-start-gap10" [formGroup]="accountDetailsForm" (ngSubmit)="accountDetails()">
                 
@@ -34,35 +34,35 @@
 
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
-                            <p class="xsmall bold">Email</p>
+                            <p class="xsmall bold">{{ 'inputFields.email' | translate }}</p>
                             <input class="input-global" type="email" formControlName="email" placeholder="name@example.com" />
-                            <p *ngIf="accountDetailsForm.get('email').hasError('invalidEmail')" class="xsmall red-color">Enter valid email</p>
+                            <p *ngIf="accountDetailsForm.get('email').hasError('invalidEmail')" class="xsmall red-color">{{ 'inputFields.validEmail' | translate }}</p>
 
                 
                         </div>    
 
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
                               
-                            <p class="xsmall bold">Phone Number</p>
+                            <p class="xsmall bold">{{ 'inputFields.mobileNumber' | translate }}</p>
                             <input class="input-global" type="tel" formControlName="phone_number" placeholder="966 XX XXXXXXXXX" (keypress)="restrictInput($event)" />
-                            <p *ngIf="accountDetailsForm.get('phone_number').hasError('invalidPhoneNumber')" class="xsmall red-color">Enter valid phone number</p>
+                            <p *ngIf="accountDetailsForm.get('phone_number').hasError('invalidPhoneNumber')" class="xsmall red-color">{{ 'inputFields.validMobile' | translate }}</p>
 
                         </div>    
 
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
-                            <p class="xsmall bold">Password</p>
-                            <input class="input-global" type="password" formControlName="password" placeholder="min. 8 characters" />
-                            <p *ngIf="accountDetailsForm.get('password').hasError('invalidPassword')" class="xsmall red-color">Enter valid password</p>
+                            <p class="xsmall bold">{{ 'inputFields.password' | translate }}</p>
+                            <input class="input-global" type="password" formControlName="password" placeholder="{{ 'inputFields.password_placeholder' | translate }}" />
+                            <p *ngIf="accountDetailsForm.get('password').hasError('invalidPassword')" class="xsmall red-color">{{ 'inputFields.validPassword_2' | translate }}</p>
                 
                         </div>    
 
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
-                            <p class="xsmall bold">Confirm Password</p>
-                            <input class="input-global" type="password" formControlName="confirm_password" placeholder="min. 8 characters" />
-                            <p *ngIf="accountDetailsForm.get('confirm_password').hasError('invalidCPassword')" class="xsmall red-color">Enter valid password</p>
-                            <p *ngIf="accountDetailsForm.get('confirm_password').hasError('invalidCPasswordNotMatched')" class="xsmall red-color">Password does not match</p>
+                            <p class="xsmall bold">{{ 'inputFields.cPassword' | translate }}</p>
+                            <input class="input-global" type="password" formControlName="confirm_password" placeholder="{{ 'inputFields.password_placeholder' | translate }}" />
+                            <p *ngIf="accountDetailsForm.get('confirm_password').hasError('invalidCPassword')" class="xsmall red-color">{{ 'inputFields.validPassword_2' | translate }}</p>
+                            <p *ngIf="accountDetailsForm.get('confirm_password').hasError('invalidCPasswordNotMatched')" class="xsmall red-color">{{ 'inputFields.validPassword_3' | translate }}</p>
 
                         </div>    
 
@@ -73,7 +73,7 @@
                 <div class="auto-flex-end-gap10">
 
                     <!-- continue button -->
-                    <button class="primary-bg padding-10 capitalize box-shadow width-300">continue</button>
+                    <button class="primary-bg padding-10 capitalize box-shadow width-300">{{ 'messages.continue' | translate }}</button>
 
                 </div>
             
@@ -83,8 +83,8 @@
              <!-- remember me -->
              <div class="auto-flex-start-center-gap10">
     
-                <p class="xsmall bold web-font-primary-light">Alreay have an account?</p>
-                <p class="xsmall bold blue-color cursor-pointer" (click)="naviagteToLogin()">Sign in</p>
+                <p class="xsmall bold web-font-primary-light">{{ 'auth.alreadyHaveAccount' | translate }}</p>
+                <p class="xsmall bold blue-color cursor-pointer" (click)="naviagteToLogin()">{{ 'auth.signIn' | translate }}</p>
     
             </div>
 
@@ -97,15 +97,15 @@
 
         <div class="auto-flex-start-gap20-column padding-20 main-div">
 
-            <h3 class="xxlarge bold capitalize">Confirmation</h3>
-            <p class="web-font-primary-light">Enter your security code that we sent to your phone</p>
+            <h3 class="xxlarge bold capitalize">{{ 'auth.confirmationTitle' | translate }}</h3>
+            <p class="web-font-primary-light">{{ 'auth.confirmationDesc' |translate }}</p>
     
             <div class="auto-flex-center-gap20-column">
                 
                 
                 <div class="auto-flex-start-gap10-column web-font-primary-light">
 
-                    <p class="xsmall bold">Confirmation code</p>
+                    <p class="xsmall bold">{{ 'inputFields.confirmationCode' |translate }}</p>
                     <input class="input-global" type="text" [(ngModel)]="verificationCodeInput" placeholder="XXX - XXX" />
         
                 </div>    
@@ -116,14 +116,14 @@
             <div class="auto-flex-end-gap10">
 
                 <!-- continue button -->
-                <button class="primary-bg padding-10 capitalize box-shadow width-300" (click)="verifyCode()">continue</button>
+                <button class="primary-bg padding-10 capitalize box-shadow width-300" (click)="verifyCode()">{{ 'messages.continue' | translate }}</button>
 
             </div>
             
              <div class="auto-flex-start-center-gap10">
     
-                <p class="xsmall bold web-font-primary-light">Alreay have an account?</p>
-                <p class="xsmall bold blue-color">Sign in</p>
+                <p class="xsmall bold web-font-primary-light">{{ 'auth.alreadyHaveAccount' | translate }}</p>
+                <p class="xsmall bold blue-color cursor-pointer" (click)="naviagteToLogin()">{{ 'auth.signIn' | translate }}</p>
     
             </div>
 
@@ -136,8 +136,8 @@
 
         <div class="auto-flex-start-gap20-column padding-20 main-div">
 
-            <h3 class="xxlarge bold capitalize">Personal info</h3>
-            <p class="web-font-primary-light">Enter your additional information</p>
+            <h3 class="xxlarge bold capitalize">{{ 'auth.personalInformationTitle' | translate }}</h3>
+            <p class="web-font-primary-light">{{ 'auth.personalInformationDesc' | translate }}</p>
     
             <form class="auto-flex-start-gap10" [formGroup]="accountSetupForm" (ngSubmit)="accountSetup()">
 
@@ -148,85 +148,85 @@
     
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
     
-                            <p class="xsmall bold">First name</p>
-                            <input class="input-global" type="text" formControlName="first_name" placeholder="Enter your first name" />
-                            <p *ngIf="accountSetupForm.get('first_name').hasError('invalidFName')" class="xsmall red-color">Enter valid first name</p>
+                            <p class="xsmall bold">{{ 'inputFields.firstName' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="first_name" placeholder="{{ 'inputFields.firstName_placeholder' | translate }}" />
+                            <p *ngIf="accountSetupForm.get('first_name').hasError('invalidFName')" class="xsmall red-color">{{ 'inputFields.firstName' | translate }}</p>
 
                         </div>    
     
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
     
-                            <p class="xsmall bold">Last name</p>
-                            <input class="input-global" type="text" formControlName="last_name" placeholder="Enter your last name" />
+                            <p class="xsmall bold">{{ 'inputFields.lastName' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="last_name" placeholder="{{ 'inputFields.lastName_placeholder' | translate }}" />
 
                         </div>    
     
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
     
-                            <p class="xsmall bold">Date of birth</p>
-                            <input class="input-global" type="date" formControlName="dob" placeholder="Enter your dob" />
+                            <p class="xsmall bold">{{ 'inputFields.dob' | translate }}</p>
+                            <input class="input-global" type="date" formControlName="dob" placeholder="{{ 'inputFields.dob_placeholder' | translate }}" />
                             
                         </div>    
     
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
     
-                            <p class="xsmall bold">Gender</p>
+                            <p class="xsmall bold">{{ 'inputFields.gender' | translate }}</p>
                             <select class="input-global" formControlName="gender">
                                 
                                 <option disabled></option>
-                                <option value="1">Male</option>
-                                <option value="2">Female</option>
+                                <option value="1">{{ 'inputFields.male' | translate }}</option>
+                                <option value="2">{{ 'inputFields.female' | translate }}</option>
     
                             </select>
-                            <p *ngIf="accountSetupForm.get('gender').hasError('invalidGender')" class="xsmall red-color">Select gender</p>
+                            <p *ngIf="accountSetupForm.get('gender').hasError('invalidGender')" class="xsmall red-color">{{ 'inputFields.validGender' | translate }}</p>
 
                         </div>    
     
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
     
-                            <p class="xsmall bold">Nationality</p>
+                            <p class="xsmall bold">{{ 'inputFields.nationality' | translate }}</p>
                             <select class="input-global" formControlName="nationality">
                                 
                                 <option disabled></option>
-                                <option value="saudi">Saudi</option>
-                                <option value="non_saudi">Non Saudi</option>
+                                <option value="saudi">{{ 'inputFields.saudi' | translate }}</option>
+                                <option value="non_saudi">{{ 'inputFields.nonSaudi' | translate }}</option>
     
                             </select>
 
-                            <p *ngIf="accountSetupForm.get('nationality').hasError('invalidNationality')" class="xsmall red-color">Select nationality</p>
+                            <p *ngIf="accountSetupForm.get('nationality').hasError('invalidNationality')" class="xsmall red-color">{{ 'inputFields.selectNationality' | translate }}</p>
                         
                         </div>  
                         
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
     
-                            <p class="xsmall bold">Id Type</p>
+                            <p class="xsmall bold">{{ 'inputFields.idType' | translate }}</p>
                             <select class="input-global" formControlName="id_type">
     
                                 <option disabled></option>
-                                <option value="national_id">National ID</option>
-                                <option value="iqama">Iqama</option>
-                                <option value="passport">Passport</option>
+                                <option value="national_id">{{ 'inputFields.nationalId' | translate }}</option>
+                                <option value="iqama">{{ 'inputFields.iqama' | translate }}</option>
+                                <option value="passport">{{ 'inputFields.passport' | translate }}</option>
     
                             </select>
-                            <p *ngIf="accountSetupForm.get('id_type').hasError('invalidIdType')" class="xsmall red-color">Select Id type</p>
+                            <p *ngIf="accountSetupForm.get('id_type').hasError('invalidIdType')" class="xsmall red-color">{{ 'inputFields.selectIdType' | translate }}</p>
                 
                         </div>   
                         
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
     
-                            <p class="xsmall bold">Id Number</p>
-                            <input class="input-global" type="text" formControlName="id_number" placeholder="Enter your Id number" />
-                            <p *ngIf="accountSetupForm.get('id_number').hasError('invalidIdNumber')" class="xsmall red-color">Enter valid Id number</p>
+                            <p class="xsmall bold">{{ 'inputFields.isNumber' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="id_number" placeholder="{{ 'inputFields.idNumber_placeholder' | translate }}" />
+                            <p *ngIf="accountSetupForm.get('id_number').hasError('invalidIdNumber')" class="xsmall red-color">{{ 'inputFields.validIdNumber' | translate }}</p>
 
                         </div>   
     
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
     
-                            <p class="xsmall bold">Marital Status</p>
+                            <p class="xsmall bold">{{ 'inputFields.maritalStatus' | translate }}</p>
                             <select class="input-global" formControlName="marital_status">
     
-                                <option value="single">Single</option>
-                                <option value="married">Married</option>
+                                <option value="single">{{ 'inputFields.single' | translate }}</option>
+                                <option value="married">{{ 'inputFields.married' | translate }}</option>
     
                             </select>
     
@@ -239,7 +239,7 @@
                 <div class="auto-flex-end-gap10">
     
                     <!-- continue button -->
-                    <button class="primary-bg padding-10 capitalize box-shadow width-300" type="submit">continue</button>
+                    <button class="primary-bg padding-10 capitalize box-shadow width-300" type="submit">{{ 'messages.continue' | translate }}</button>
     
                 </div>
 
@@ -248,10 +248,9 @@
             <!-- sign up -->
              <!-- remember me -->
              <div class="auto-flex-start-center-gap10">
-    
-                <p class="xsmall bold web-font-primary-light">Alreay have an account?</p>
-                <p class="xsmall bold blue-color cursor-pointer">Sign in</p>
-    
+                <p class="xsmall bold web-font-primary-light">{{ 'auth.alreadyHaveAccount' | translate }}</p>
+                <p class="xsmall bold blue-color cursor-pointer" (click)="naviagteToLogin()">{{ 'auth.signIn' | translate }}</p>
+
             </div>
 
         </div>
@@ -259,15 +258,15 @@
     </div>
 
     <!-- Incorrect Verification Code -->
-    <app-custom-alert *ngIf="showVerificationAlert" [title]="'Verification Error'" [message]="'An error occurred while verifying your code.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showVerificationAlert" [title]="'message.verificationErrorTitle' | translate" [message]="'messages.verificationErrorDesc' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Incorrect Phone Number -->
-    <app-custom-alert *ngIf="showInvalidPhoneNumber" [title]="'Invalid Phone Number'" [message]="'Your phone number is invalid.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showInvalidPhoneNumber" [title]="'message.invalidPhoneNumberTitle' | translate" [message]="'message.invalidPhoneNumberDesc' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- An Error occured while creating user. Try again later -->
-    <app-custom-alert *ngIf="showErrorCreatingUser" [title]="'Error'" [message]="'An error occured while creating your user. Try again later.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showErrorCreatingUser" [title]="'messages.error' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- User already exists-->
-    <app-custom-alert *ngIf="showUserAlreadyExist" [title]="'User Already Exists'" [message]="'This user already exist in our system.'" [cancelButtonText]="'Cancel'" [continueButtonText]="'Continue'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showUserAlreadyExist" [title]="'messages.userAlreadyExistTitle'" [message]="'messages.userAlreadyExistDesc'" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
     
 </div>
