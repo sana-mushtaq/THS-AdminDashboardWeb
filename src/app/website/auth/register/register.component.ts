@@ -4,6 +4,7 @@ import { AppService } from 'src/service/app.service';
 import { APIResponse } from 'src/utils/app-enum';
 import { PatientsService } from 'src/service/patient.service';
 import { Router } from '@angular/router';
+import { LanguageService } from 'src/service/language.service';
 
 @Component({
   selector: 'app-register',
@@ -39,7 +40,9 @@ export class RegisterComponent implements OnInit {
     private renderer: Renderer2,
     private _appService: AppService,
     private _patientService: PatientsService,
-    private router: Router) {
+    private router: Router,
+    public languageService: LanguageService,
+    ) {
 
       this.accountDetailsForm = this.fb.group({
   
@@ -62,6 +65,15 @@ export class RegisterComponent implements OnInit {
         marital_status: ['']
 
       })
+
+      const currentLanguage = this.languageService.getCurrentLanguage();
+    
+      if (currentLanguage === 'ar') {
+
+        this.currentTitle = 'خطوات بسيطة لتبدأ رحلتك العلاجية'
+        this.currentDesc = 'أكثر من 100 خدمة طبية منزلية لك ولعائلتك.'
+      }
+
   }
     
   ngOnInit(): void {
@@ -233,6 +245,15 @@ export class RegisterComponent implements OnInit {
         this.currentImage = 'assets/images/web/accountDetails.svg'
         this.currentTitle = 'High qualified medical staff'
         this.currentDesc = 'For all home medical care services for you and your family in one place.'
+
+
+        const currentLanguage = this.languageService.getCurrentLanguage();
+
+      if (currentLanguage === 'ar') {
+
+        this.currentTitle = 'فريق طبي ذو كفاءة عالية'
+        this.currentDesc = 'لجميع خدمات الرعاية الطبية المنزلية لك ولعائلتك في مكان واحد.'
+      }
 
         this.renderer.removeClass(this.accountSetupHTML.nativeElement, 'hide')
 
