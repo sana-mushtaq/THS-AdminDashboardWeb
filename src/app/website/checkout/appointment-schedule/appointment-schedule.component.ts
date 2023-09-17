@@ -540,7 +540,8 @@ export class AppointmentScheduleComponent implements OnInit {
        
         if (isTimeSlotAvailable(timeSlot)) {
       
-          if(timeSlot !== '10:00am' && timeSlot !== '11:00am')
+          if(timeSlot !== '10:00am' && timeSlot !== '11:00am' && timeSlot !== '3:00am' && timeSlot !== '4:00am' && timeSlot !== '5:00am' &&
+          timeSlot !== '6:00am' && timeSlot !== '7:00am' && timeSlot !== '8:00am' && timeSlot !== '9:00am' && timeSlot !== '12:00am' && timeSlot !== '1:00am' && timeSlot !== '2:00am')
           this.timeSlots.push(timeSlot);
        
         }
@@ -646,8 +647,10 @@ export class AppointmentScheduleComponent implements OnInit {
             } else {
               // For future dates, include all time slots
               if (isTimeSlotAvailable(timeSlot)) {
-                if(timeSlot !== '10:00am' && timeSlot !== '11:00am'){
-
+                if(timeSlot !== '10:00am' && timeSlot !== '11:00am' && timeSlot !== '3:00am' && timeSlot !== '4:00am' && timeSlot !== '5:00am' &&
+                timeSlot !== '6:00am' && timeSlot !== '7:00am' && timeSlot !== '8:00am' && timeSlot !== '9:00am' && timeSlot !== '12:00am' && timeSlot !== '1:00am' && timeSlot !== '2:00am') 
+                {
+      
                   this.timeSlots.push(timeSlot);
 
                 }
