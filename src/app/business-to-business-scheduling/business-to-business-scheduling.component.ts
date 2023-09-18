@@ -9,6 +9,7 @@ import * as XLSX from 'xlsx';
 import { HttpClient } from '@angular/common/http';
 import { MapsAPILoader } from '@agm/core';
 import { Subscription } from 'rxjs';
+import { ServiceService } from 'src/service/service.service';
 
 declare var google: any;
 
@@ -80,6 +81,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
     private http: HttpClient,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
+    private _service: ServiceService,
   ) {
 
       this.serviceSettings = {
@@ -162,13 +164,10 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
       }
   
     }) 
+
+    this.getServiceList()
   }
 
-  ngAfterViewInit(): void {
-
-    this.getComponentData()
-  
-  }
 
   onChangeAddress() {
 
@@ -244,20 +243,30 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
   }
 
-  getComponentData() {
+    //the following function will fetch a list of services from backend
+    getServiceList() {
 
-    // This is where you should place your component-specific initialization code
-    // that relies on the fetched data from dataService
-    this.dataService.data$.subscribe((res) => {
-
-      if (res) {
-      
-        // ... handle the received data here
-        this.allServices = res.services
-      }
-
-    })
+      //now we will get a list of categories from the backend
+      this._service.getServiceList().subscribe({
     
+        next : ( res : any ) => {
+    
+          //in case of success the api returns 0 as a status code
+          if( res.status === APIResponse.Success) {
+    
+            this.allServices = res.data
+    
+          }
+          
+        },
+        error: ( err: any ) => {
+    
+          console.log(err)
+    
+        }
+      
+      })
+      
   }
 
   getBranchList() {

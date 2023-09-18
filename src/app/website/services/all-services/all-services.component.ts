@@ -88,8 +88,6 @@ export class AllServicesComponent implements OnInit {
     @Inject(DOCUMENT) private document: Document,
     ) { 
 
-      let x = this.languageService.getCurrentLanguage()
-      console.log(x)
       this.addressForm = this.fb.group({
 
         address_name: ['', Validators.required],

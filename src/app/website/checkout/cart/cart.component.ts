@@ -157,75 +157,74 @@ export class CartComponent implements OnInit {
           let services = res.services
           let filteredServices = []
 
-          this.cartData.forEach(cartItem => {
+            // Loop through each item in the cart
+            this.cartData.forEach(cartItem => {
+              // Use Array.find() to find a service with matching ID
+              const matchingService = services.find(service => service.id === cartItem.id);
 
-            let temp = services.filter(service => {
-
-              return service.id === cartItem.id
-
-            })
-
-            if( temp.length > 0 ) {
-
-              filteredServices.push(temp[0])
-              
-            }
-
-          })
-
-          let spData  = {
-
-            services: filteredServices,
-            patients: this.userDependants
-
-          }
-  
-          this._b2c.checkServiceProviderEligibilty(spData).subscribe({
-      
-            next : ( ress : any ) => {
-             
-              //in case of success the api returns 0 as a status code
-              if( ress.status === APIResponse.Success ) {
-
-                //after fetching all service providers we will now check if their gender match with selected user or not 
-                this.serviceProvidersServices = ress.data
-
-                let patients = spData.patients
-                const patientIds = patients.map(pat => pat.gender)
-                const uniquePatientGender = [...new Set(patientIds)]
-                //if only 1 patient exixts
-                if( uniquePatientGender.length === 1 ) {
-
-                  //filter service providers which are not equal to patients gender
-                  this.serviceProvidersServices = this.serviceProvidersServices.filter(sp => {
-
-                      return sp.gender === Number(uniquePatientGender[0])
-                  })
-
+              // If a matching service is found, add it to the filteredServices array
+              if (matchingService) {
+                filteredServices.push(matchingService);
               }
+            });
+            this.getTotal()
 
-              } else {
-      
-              
-              }
-              
-            },
-            error: ( err: any ) => {
-              
-              console.log(err)
-      
+            // Update the cartData with filteredServices
+            this.cartData = filteredServices;
+            this._utilService.addToCart(this.cartData)
+
+            let spData  = {
+
+              services: filteredServices,
+              patients: this.userDependants
+
             }
+    
+            this._b2c.checkServiceProviderEligibilty(spData).subscribe({
         
-          }) 
-  
+              next : ( ress : any ) => {
+              
+                //in case of success the api returns 0 as a status code
+                if( ress.status === APIResponse.Success ) {
+
+                  //after fetching all service providers we will now check if their gender match with selected user or not 
+                  this.serviceProvidersServices = ress.data
+
+                  let patients = spData.patients
+                  const patientIds = patients.map(pat => pat.gender)
+                  const uniquePatientGender = [...new Set(patientIds)]
+                  //if only 1 patient exixts
+                  if( uniquePatientGender.length === 1 ) {
+
+                    //filter service providers which are not equal to patients gender
+                    this.serviceProvidersServices = this.serviceProvidersServices.filter(sp => {
+
+                        return sp.gender === Number(uniquePatientGender[0])
+                    })
+
+                }
+
+                } else {
+        
+                
+                }
+                
+              },
+              error: ( err: any ) => {
+                
+                console.log(err)
+        
+              }
+          
+            }) 
+    
         }
   
       })
 
     }
 
-    this.getTotal()
-
+   
   }
 
   getTotal() {
