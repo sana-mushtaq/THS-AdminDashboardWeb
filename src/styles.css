@@ -3860,6 +3860,15 @@ a:hover{
     gap: 5px;
 }
 
+.auto-flex-start-center-gap5-no-set-width {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
 .auto-flex-start-gap10-no-set-width {
     display: flex;
     align-items: flex-start;

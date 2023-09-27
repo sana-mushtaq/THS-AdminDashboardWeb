@@ -80,9 +80,9 @@
     <app-custom-alert *ngIf="loginAlert" [title]="'messages.userNotLoggedInTitle' | translate" [message]="'messages.userNotLoggedInTitleDesc' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'auth.login' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Cart error -->
-    <app-custom-alert *ngIf="wrongService" [title]="'messages.serviceSelectionTitle' | translate" [message]="('messages.serviceSelectionDesc' | translate) + errorMessage"
+    <!--<app-custom-alert *ngIf="wrongService" [title]="'messages.serviceSelectionTitle' | translate" [message]="('messages.serviceSelectionDesc' | translate) + errorMessage"
     [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'cart.confirm' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClickService()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
-
+    -->
 
 </div>
 

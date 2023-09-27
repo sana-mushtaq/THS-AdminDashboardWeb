@@ -18,6 +18,8 @@ import { LanguageService } from 'src/service/language.service';
 
 export class AppointmentScheduleComponent implements OnInit {
 
+  allCartCategoriesData: any = {};
+
   loginAlert: boolean = false
   errorOccured: boolean = false
   userId: any
@@ -144,7 +146,45 @@ export class AppointmentScheduleComponent implements OnInit {
           }
       
         }) 
-        
+
+        //here we will identidy cart categories and item associated with each category
+        this.dataService.data$.subscribe((res) => {
+
+          let categories = res.categories
+          this.cartData.forEach(item => {
+
+            let filteredCategories = categories.filter(category => {
+
+              return category.id === item.category_id
+
+            })
+
+            if(filteredCategories.length>0) {
+
+              if(!this.allCartCategoriesData[filteredCategories[0].id]) {
+
+                this.allCartCategoriesData[filteredCategories[0].id] = []
+
+                item['category_title'] = filteredCategories[0].title
+                this.allCartCategoriesData[filteredCategories[0].id].push(item)
+
+              } else {
+
+                item['category_title'] = filteredCategories[0].title
+                this.allCartCategoriesData[filteredCategories[0].id].push(item)
+
+              }
+
+            }
+
+          })
+
+        })
+
+        const dataArray = Object.values(this.allCartCategoriesData) as any;
+        this.allCartCategoriesData = dataArray
+        this.calculateTimeSlots()
+
       }
     
     } else {
@@ -236,7 +276,7 @@ export class AppointmentScheduleComponent implements OnInit {
     
                     //after fetching all service providers we will now check if their gender match with selected user or not 
                     this.serviceProvidersServices = ress.data
-    
+                    
                     this.selectCurrentDay()
                     this.generateWeek()
                     this.updateCurrentMonthAndYear()
@@ -426,8 +466,8 @@ export class AppointmentScheduleComponent implements OnInit {
 
   //this function will calculate time slots if date is selected 
   calculateTimeSlots() {
+
     // Assuming fetchedData.appointments contains the list of appointments
-  
     if (!this.selectedDate || this.cartData.length === 0) {
       // No selected date or no services in cart, return empty time slots
       this.timeSlots = []
@@ -436,7 +476,7 @@ export class AppointmentScheduleComponent implements OnInit {
     }
 
     // If cart contains only 1 service
-    if (this.cartData.length === 1) {
+    /*if (this.cartData.length === 1) {
 
       const serviceId = this.cartData[0].id;
 
@@ -551,19 +591,25 @@ export class AppointmentScheduleComponent implements OnInit {
     } 
 
     } else {
-      
+     */ 
+
+    this.allCartCategoriesData.forEach((data)=> {
+
+      this.timeSlots = []
+      /*for (let hour = 12; hour <= 23; hour++) {
+
+        this.timeSlots.push(this.formatTimeSlot(hour))
+  
+      }*/
+
       const formattedSelectedDate = this.formatSelectedDate(this.selectedDate);
 
       this.setPreferredDate(formattedSelectedDate)
 
-      // Rest of your logic for handling multiple services and common providers
-      const selectedServiceIds = this.cartData.map(item => item.id)
-
       // Create a list to store time slots to be removed
       const timeSlotsToRemove = []
-      const serviceId = this.cartData.map(i=> i.id);
 
-      const serviceIds = this.cartData.map(item => item.id);
+      const serviceIds = data.map(item => item.id);
 
       // Get all service providers for the selected services
       let sps = serviceIds.map(serviceId => {
@@ -574,17 +620,30 @@ export class AppointmentScheduleComponent implements OnInit {
       sps = flattenedProviders;
 
       let sd = this.formatSelectedDate(this.selectedDate).toString()
-
   
+      let day = this.selectedDate
+      console.log(day)
+
+      // Create an array to map the day index to its name
+      const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+      // Create a new Date object from the selected date
+      const dateObject = new Date(day);
+
+      // Get the day index (0 for Sunday, 1 for Monday, etc.)
+      const dayIndex = dateObject.getDay();
+
+      // Get the day name from the dayNames array using the day index
+      const dayName = dayNames[dayIndex].toLowerCase();
+
       const uniqueScheduledTimes = this.fetchedData.appointments
       .filter(app => {
         // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
         return (
           app.serviceAssigneeId !== null &&
           sps.some(sp => sp.user_id === app.serviceAssigneeId) &&
+          sps.some(sp => sp[dayName] !== 0) &&
           app.serviceDate === sd
-          //mpare only the date part
-          // You can add a time condition here if needed
         );
       }).map(app => {
         // Convert the database time format (e.g., "2023-09-04T19:00:00.000Z") to time slots format (e.g., "4:00pm")
@@ -593,99 +652,91 @@ export class AppointmentScheduleComponent implements OnInit {
         const ampm = hours >= 12 ? 'pm' : 'am';
         const formattedTime = `${(hours % 12) || 12}:${minutes}${ampm}`;
         return formattedTime;
-    });
+      });
 
-    const timeSlotCounts = {};
-    uniqueScheduledTimes.forEach(time => {
+      const timeSlotCounts = {};
+      uniqueScheduledTimes.forEach(time => {
+      
+        timeSlotCounts[time] = (timeSlotCounts[time] || 0) + 1;
     
-      timeSlotCounts[time] = (timeSlotCounts[time] || 0) + 1;
+      });
   
-    });
-
-    // Filter the time slots where all service providers are booked
-    const filteredTimeSlots = Object.keys(timeSlotCounts).filter(time => {
-    
-      return timeSlotCounts[time] === sps.length;
-    
-    });
-
-    // Function to check if a time slot is available
-    const isTimeSlotAvailable = (timeSlot: string) => {
+      // Filter the time slots where all service providers are booked
+      const filteredTimeSlots = Object.keys(timeSlotCounts).filter(time => {
       
-      return !filteredTimeSlots.includes(timeSlot);
+        return timeSlotCounts[time] === sps.length;
+      
+      });
+  
+      // Function to check if a time slot is available
+      const isTimeSlotAvailable = (timeSlot: string) => {
+        
+        return !filteredTimeSlots.includes(timeSlot);
+  
+      };
+  
+      const currentDate = new Date();
+      const currentHour = currentDate.getHours();
+      const currentDateString = currentDate.toISOString().slice(0, 10); // Get current date in "yyyy-mm-dd" format
+      const selectedDate = this.formatSelectedDate(this.selectedDate);
+  
+      // Calculate 3 hours later from the current time
+      const threeHoursLater = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
+      const threeHoursLaterHour = threeHoursLater.getHours();
+      
+      // Calculate 3 hours later from the current time
+  
+      for (let hour = 12; hour <= 23; hour++) {
+        const timeSlot = this.formatTimeSlot(hour);
+        
+        // Check if the selectedDate is today
+        if (selectedDate === currentDateString) {
+          // Calculate the hour 3 hours later for the current day
+          const threeHoursLaterCurrent = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
+  
+          const threeHoursLaterCurrentHour = threeHoursLaterCurrent.getHours();
 
-    };
-
-    this.timeSlots = [];
-    const currentDate = new Date();
-    const currentHour = currentDate.getHours();
-    const currentDateString = currentDate.toISOString().slice(0, 10); // Get current date in "yyyy-mm-dd" format
-    const selectedDate = this.formatSelectedDate(this.selectedDate);
-
-    // Calculate 3 hours later from the current time
-    const threeHoursLater = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
-    const threeHoursLaterHour = threeHoursLater.getHours();
-    
-          // Calculate 3 hours later from the current time
-     
-    
-          for (let hour = 12; hour <= 23; hour++) {
-            const timeSlot = this.formatTimeSlot(hour);
+          if (hour < threeHoursLaterCurrentHour) {
             
-            // Check if the selectedDate is today
-            if (selectedDate === currentDateString) {
-              // Calculate the hour 3 hours later for the current day
-              const threeHoursLaterCurrent = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
-              const threeHoursLaterCurrentHour = threeHoursLaterCurrent.getHours();
-              if (hour < currentHour && hour < threeHoursLaterCurrentHour) {
-                continue; // Skip past time slots for today
-                
-              }
-    
-    
-              
-            } else {
-              // For future dates, include all time slots
-              if (isTimeSlotAvailable(timeSlot)) {
-                if(timeSlot !== '10:00am' && timeSlot !== '11:00am' && timeSlot !== '3:00am' && timeSlot !== '4:00am' && timeSlot !== '5:00am' &&
-                timeSlot !== '6:00am' && timeSlot !== '7:00am' && timeSlot !== '8:00am' && timeSlot !== '9:00am' && timeSlot !== '12:00am' && timeSlot !== '1:00am' && timeSlot !== '2:00am') 
-                {
-      
-                  this.timeSlots.push(timeSlot);
+            continue; // Skip past time slots for today
+          
+          } else {
 
-                }
+            if (isTimeSlotAvailable(timeSlot)) {
+              if(timeSlot !== '10:00am' && timeSlot !== '11:00am' && timeSlot !== '3:00am' && timeSlot !== '4:00am' && timeSlot !== '5:00am' &&
+              timeSlot !== '6:00am' && timeSlot !== '7:00am' && timeSlot !== '8:00am' && timeSlot !== '9:00am' && timeSlot !== '12:00am' && timeSlot !== '1:00am' && timeSlot !== '2:00am') 
+              {
+    
+                this.timeSlots.push(timeSlot);
+    
               }
             }
-          }
-    
-               // Check if the selectedDate is today
-               if (selectedDate === currentDateString) {
-                // Calculate the hour 3 hours later for the current day
-                const threeHoursLaterCurrent = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
-                const threeHoursLaterCurrentHour = threeHoursLaterCurrent.getHours();
-                const roundedHour = Math.ceil(threeHoursLaterCurrent.getMinutes() / 60);
-                for (let hour = threeHoursLaterCurrentHour+ roundedHour; hour <= 23; hour++) {
-                  const timeSlot = this.formatTimeSlot(hour);
-                  if (isTimeSlotAvailable(timeSlot)) {
-                    
-                    if(timeSlot !== '10:00am' && timeSlot !== '11:00am' && timeSlot !== '3:00am' && timeSlot !== '4:00am' && timeSlot !== '5:00am' &&
-                timeSlot !== '6:00am' && timeSlot !== '7:00am' && timeSlot !== '8:00am' && timeSlot !== '9:00am' && timeSlot !== '12:00am' && timeSlot !== '1:00am' && timeSlot !== '2:00am') 
-              {
 
-                      this.timeSlots.push(timeSlot);
-    
-                    }
-                    
-                  }
-                }
-            
-        
-              } 
+          }
+        } else {
+          // For future dates, include all time slots
+          if (isTimeSlotAvailable(timeSlot)) {
+            if(timeSlot !== '10:00am' && timeSlot !== '11:00am' && timeSlot !== '3:00am' && timeSlot !== '4:00am' && timeSlot !== '5:00am' &&
+            timeSlot !== '6:00am' && timeSlot !== '7:00am' && timeSlot !== '8:00am' && timeSlot !== '9:00am' && timeSlot !== '12:00am' && timeSlot !== '1:00am' && timeSlot !== '2:00am') 
+            {
+  
+              this.timeSlots.push(timeSlot);
+  
+            }
+          }
+        }
+      }
     
       // Remove the time slots that need to be removed
-      this.timeSlots = this.timeSlots.filter(slot => !timeSlotsToRemove.includes(slot))
+      this.timeSlots = this.timeSlots.filter(slot => !timeSlotsToRemove.includes(slot))  
 
-    }
+      data[0]['timeSlots'] = this.timeSlots 
+  
+    })
+
+   
+  
+  //  }
   
   }
   
@@ -780,6 +831,9 @@ export class AppointmentScheduleComponent implements OnInit {
       }
   
       localStorage.setItem("THSPaylaod", JSON.stringify(data))
+      
+      localStorage.setItem("THSMultiAppointment", JSON.stringify(this.allCartCategoriesData))
+
       this.router.navigate(['/checkout/confirmation'])
     }
 
@@ -807,6 +861,18 @@ export class AppointmentScheduleComponent implements OnInit {
 
     this.errorOccured = false
     
+  }
+
+  setCartDataTimeValue(value, time) {
+
+    this.allCartCategoriesData[value][0]["preferredTime"] = time
+  
+  }
+
+  setCartDataDateValue(value, date) {
+
+    this.allCartCategoriesData[value][0]["selectedDate"] = date
+  
   }
 
 }

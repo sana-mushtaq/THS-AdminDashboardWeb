@@ -8,6 +8,8 @@ import { Service } from 'src/model/dashboard/service.model'
 import { ServiceService } from 'src/service/service.service'
 import { AppService } from 'src/service/app.service'
 import { environment } from 'src/environments/environment'
+import { ServicetagService } from 'src/service/servicetag.service'
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-service-view',
@@ -21,7 +23,10 @@ export class ServiceViewComponent implements OnInit {
 
   //create a variable categoryList of type array
   categoryList: Servicecategory [] = []
-  
+  tagList: any = []
+  tagSettings: IDropdownSettings = {}
+  tagListRenderer: boolean = false
+  selectedServiceTags: any = []
   //create a variable serviceList of type array
   serviceList: any = []
 
@@ -55,7 +60,8 @@ export class ServiceViewComponent implements OnInit {
     whatsapp_url: '',
     category_title: '',
     coupon_code: '',
-    top: false
+    top: false,
+    tag: {}
 
   }
   
@@ -79,10 +85,11 @@ export class ServiceViewComponent implements OnInit {
     private _service: ServiceService,
     private fb : FormBuilder,
     private _appService: AppService,
+    private _serviceTag: ServicetagService,
   ) { 
 
     this.getCategoryList()
-
+    this.getTagList()
     this.getServiceList()
 
     this.addServiceForm = this.editServiceForm = this.fb.group({
@@ -107,9 +114,17 @@ export class ServiceViewComponent implements OnInit {
       'cost': [0],
       'active': [false],
       'whatsapp_url': [''],
-      'top': [0]
+      'top': [0],
+      'tag': ['']
 
     })
+
+    //this will be used for dropdown settings
+    this.tagSettings = {
+      idField: 'id',
+      textField: 'title',
+      allowSearchFilter: true
+    }
 
   }
 
@@ -150,6 +165,38 @@ export class ServiceViewComponent implements OnInit {
   
   }
 
+  //the following function will fetch category list
+  getTagList() {
+
+    //now we will get a list of categories from the backend
+    this._serviceTag.getTagList().subscribe({
+    
+      next : ( res : any ) => {
+  
+        //in case of success the api returns 0 as a status code
+        if( res.status === APIResponse.Success) {
+  
+          this.tagList = res.data
+          this.tagListRenderer = true
+  
+        } else {
+  
+          //if it is unable to get branch data it will return an error
+          Swal.fire(res.message)
+  
+        }
+        
+      },
+      error: ( err: any ) => {
+  
+        console.log(err)
+  
+      }
+  
+    })
+  
+  }
+
   //the following function will initialize selected service and its data
   assignServiceData (currentService, serviceIndex) {
 
@@ -186,7 +233,8 @@ export class ServiceViewComponent implements OnInit {
       whatsapp_url: '',
       category_title: '',
       coupon_code: '',
-      top: false
+      top: false,
+      tag: {}
     
     }
 
@@ -243,7 +291,7 @@ export class ServiceViewComponent implements OnInit {
 
     this.addNewServiceToggle = false
     //this.addServiceForm.reset()
-
+    this.selectedServiceTags = []
   }
 
   //the following function will create a service
@@ -251,8 +299,10 @@ export class ServiceViewComponent implements OnInit {
 
      //now owe will check if out form is valid or not
      if (this.addServiceForm.valid) {
-        
-      //we will submit the data if it is valid
+      
+        this.addServiceForm.get('tag').patchValue(JSON.stringify(this.selectedServiceTags))
+
+        //we will submit the data if it is valid
         this._service.createService(this.addServiceForm.value).subscribe({
     
           next : ( res : any ) => {
@@ -270,6 +320,8 @@ export class ServiceViewComponent implements OnInit {
               this.displayedServiceList.unshift(res.data);
 
               this.addNewServiceToggle = false
+
+              this.selectedServiceTags = []
               
               //reset form
               this.addServiceForm.reset()
@@ -396,8 +448,19 @@ export class ServiceViewComponent implements OnInit {
   editService(currentService, serviceIndex) {
 
     this.assignServiceData( currentService, serviceIndex )
-    console.log(this.selectedService)
     this.editServiceToggle = true
+
+    let tags = JSON.parse(currentService.tag) || []
+    console.log(tags)
+    if(tags && tags.length>0) {
+
+      tags.forEach(t=> {
+
+        this.selectedServiceTags.push(t)
+      
+      })
+    }
+    console.log(this.selectedServiceTags)
 
   }
 
@@ -407,6 +470,7 @@ export class ServiceViewComponent implements OnInit {
     this.editServiceToggle = false
     this.unassignServiceData()
     this.editServiceForm.reset()
+    this.selectedServiceTags = []
 
   }
 
@@ -416,6 +480,8 @@ export class ServiceViewComponent implements OnInit {
     //now we will assign the data of currentService to editServiceForm
     this.editServiceForm.patchValue(this.selectedService)
 
+    console.log(this.selectedServiceTags)
+    this.editServiceForm.get('tag').patchValue(JSON.stringify(this.selectedServiceTags))
     //now owe will check if out form is valid or not
     if (this.editServiceForm.valid) {
 
@@ -439,6 +505,7 @@ export class ServiceViewComponent implements OnInit {
             
             //reset form
             this.editServiceForm.reset()
+            this.selectedServiceTags = []
 
             Swal.fire(res.message)
 
@@ -640,6 +707,77 @@ export class ServiceViewComponent implements OnInit {
       service.name.toLowerCase().includes(this.searchText.toLowerCase())
     
     );
+  }
+
+   //the following function will be executed when service provider will be selected
+  onTagSelect(item: any) {
+
+    let id = item.id
+    this.selectedServiceTags.push(id)
+    
+
+    for (let i = this.selectedServiceTags.length - 1; i >= 0; i--) {
+      const element = this.selectedServiceTags[i];
+
+      // Check if the element is an object or contains an "id" attribute
+      if (element && typeof element === 'object' && 'id' in element) {
+        console.log(element)
+        // Remove the element from the array
+        this.selectedServiceTags.splice(i, 1);
+        i++;
+        if(!this.selectedServiceTags.includes(element.id)) {
+          this.selectedServiceTags.push(element.id)
+
+      }
+    }
+  }
+
+    console.log(this.selectedServiceTags)
+
+  }
+
+  //the following function will be executed when service provider will be deselected
+  onTagDeSelect(item: any) {
+
+    this.selectedServiceTags = this.selectedServiceTags.filter(i => i !== item.id)
+
+  }
+
+  //the following function will be executed when all services will be selected
+  onTagSelectAll(item: any) {
+
+    this.selectedServiceTags = item.map( i=> {
+
+      return i.id
+
+    })
+
+        
+
+    for (let i = this.selectedServiceTags.length - 1; i >= 0; i--) {
+      const element = this.selectedServiceTags[i];
+
+      // Check if the element is an object or contains an "id" attribute
+        // Check if the element is an object or contains an "id" attribute
+        if (element && typeof element === 'object' && 'id' in element) {
+          console.log(element)
+          // Remove the element from the array
+          this.selectedServiceTags.splice(i, 1);
+          i++;
+          if(!this.selectedServiceTags.includes(element.id)) {
+            this.selectedServiceTags.push(element.id)
+  
+        }
+      }
+    }
+
+  }
+
+  //the following function will be executed when all services will be desleetced
+  onTagDeSelectAll() {
+
+    this.selectedServiceTags = []
+
   }
 
 }

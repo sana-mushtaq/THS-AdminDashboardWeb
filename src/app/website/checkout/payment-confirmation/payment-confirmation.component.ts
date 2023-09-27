@@ -44,7 +44,6 @@ export class PaymentConfirmationComponent implements OnInit {
 
         }
   
-        /*
         this._b2c.verifyPaymentStatus(data).subscribe({
               
           next : ( ress : any ) => {
@@ -58,15 +57,14 @@ export class PaymentConfirmationComponent implements OnInit {
                 let appointmentRequest = JSON.parse(localStorage.getItem("THSAppointmentRequest"))
                 let payload =  JSON.parse(localStorage.getItem("THSPaylaod"))
                 let address = JSON.parse(localStorage.getItem("THSAppointmentAddress"))
-                let discount = JSON.parse(localStorage.getItem("THSDiscount")) 
-
-                if(!discount) {
-
-                  discount['discountType'] = null
-                  discount['discountAmount'] = 0
-
-                }
+                let discount = JSON.parse(localStorage.getItem("THSDiscount"))
+                let multiAppointment = JSON.parse(localStorage.getItem("THSMultiAppointment"))
                 
+                multiAppointment = multiAppointment.filter(app => {
+
+                  return app !==null
+                })
+
                 this.cartData = payload.cartData
                 this.date = payload.preferredDate
                 this.time = payload.preferredTime
@@ -98,7 +96,9 @@ export class PaymentConfirmationComponent implements OnInit {
                   insurance_id: null,
                   is_insured: false,
                   insurance_provider_id: null,
-                  category_id: payload.cartData[0].category_id
+                  category_id: payload.cartData[0].category_id,
+                  multiAppointment: multiAppointment,
+                  sourceRef: 'Website'
                 
                 }
 
@@ -114,12 +114,6 @@ export class PaymentConfirmationComponent implements OnInit {
                       this.appointmentId = res.data
                       this.paymentCaptured = true
                       this.verified = true
-
-                      //localStorage.removeItem("THSAppointmentRequest")
-                      //localStorage.removeItem("THSPaylaod")
-                      //localStorage.removeItem("THSAppointmentAddress")
-                      //localStorage.removeItem("THSCart")
-                      //localStorage.removeItem("THSDiscount")
 
                     } else {
             
@@ -151,9 +145,9 @@ export class PaymentConfirmationComponent implements OnInit {
     
           }
       
-        }) */
+        }) 
         
-       this._b2c.verifyAppointment(data).subscribe({
+      /*this._b2c.verifyAppointment(data).subscribe({
       
           next : ( resss : any ) => {
     
@@ -180,6 +174,7 @@ export class PaymentConfirmationComponent implements OnInit {
                         let payload =  JSON.parse(localStorage.getItem("THSPaylaod"))
                         let address = JSON.parse(localStorage.getItem("THSAppointmentAddress"))
                         let discount = JSON.parse(localStorage.getItem("THSDiscount"))
+                        let multiAppointment = JSON.parse(localStorage.getItem("THSMultiAppointment"))
                         
                         this.cartData = payload.cartData
                         this.date = payload.preferredDate
@@ -212,7 +207,9 @@ export class PaymentConfirmationComponent implements OnInit {
                           insurance_id: null,
                           is_insured: false,
                           insurance_provider_id: null,
-                          category_id: payload.cartData[0].category_id
+                          category_id: payload.cartData[0].category_id,
+                          multiAppointment: multiAppointment,
+                          sourceRef: 'Website'
                         
                         }
 
@@ -282,7 +279,7 @@ export class PaymentConfirmationComponent implements OnInit {
     
           }
       
-        }) 
+      }) */
     
       }
     

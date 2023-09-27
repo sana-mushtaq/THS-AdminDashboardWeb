@@ -74,5 +74,17 @@ export class ServiceproviderService {
       return this._httpClient.post<any>( this.serviceProviderUrl+'/unassignService', body )
 
     }
+
+    updateAvailability(body) {
+
+      return this._httpClient.post<any>( this.serviceProviderUrl+'/updateAvailability', body )
+
+    }
+ 
+    getAvailability(body) {
+
+      return this._httpClient.post<any>( this.serviceProviderUrl+'/getAvailability', body )
+
+    }
  
 }

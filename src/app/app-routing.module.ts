@@ -133,6 +133,7 @@ import { CheckoutAppointmentComponent } from './website/checkout/checkout-appoin
 import { PaymentConfirmationComponent } from './website/checkout/payment-confirmation/payment-confirmation.component';
 import { BusinessToBusinessSchedulingComponent } from './business-to-business-scheduling/business-to-business-scheduling.component';
 import { BusinessToBusinessAppointmentsComponent } from './business-to-business-appointments/business-to-business-appointments.component';
+import { ServicetagComponent } from './servicetag/servicetag.component';
 
 const routes: Routes = [
  { path: '', component: AllServicesComponent},
@@ -251,6 +252,7 @@ const routes: Routes = [
   //THS-23 BY SANA
 { path: 'branch/view-all', component: BranchViewComponent },
 { path: 'service/view-all', component: ServiceViewComponent },
+{ path: 'service-tag/view-all', component: ServicetagComponent },
 { path: 'category/view-all', component: CaretgoryViewComponent },
 { path: 'b2b', component: BusinessToBusinessSchedulingComponent },
 { path: 'service-provider/view-all', component: ServiceproviderComponent },

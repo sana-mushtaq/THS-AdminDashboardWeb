@@ -85,6 +85,7 @@
                                         <div class="auto-flex-center-gap5">
 
                                             <button class="glass-bg padding-5 border-none" (click)="serviceProviderServices(user)">services</button>
+                                            <button class="glass-bg padding-5 border-none" (click)="serviceProviderAvailability(user)">availability</button>
                                             <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/edit.svg" (click)="editServiceProvider(user, pcIndex)"/>
                                             <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/delete.svg" (click)="deleteServiceProvider(user, pcIndex)"/>
         
@@ -545,6 +546,202 @@
 
                             </table>
 
+                        </div>
+
+                    </div>
+                    
+                </div> 
+
+                <!-- Service provider availability -->
+                <div class="fixed dialog" *ngIf="serviceProviderAvailabilityToggle">
+
+                    <div class="popup height-600">
+
+                        <div class="content-1200 max-height white-bg scrollable-div">
+
+                            <button class="close" (click)="closeServiceProviderAvailability()">x</button>
+
+                            <div class="auto-flex-start-gap10-column">
+
+                                <div class="auto-flex-start-gap10">
+
+                                    <div class="auto-flex-start-center-gap5-no-set-width" style="flex-wrap: nowrap;">
+
+                                        <input class="input-global" type="checkbox" [(ngModel)]="spAvailabilities.sunday"/>
+                                        <p>Sunday</p>
+
+                                    </div>
+
+                                    <div class="auto-flex-start-gap5-column-no-set-width">
+
+                                        <p>Start time</p>
+                                        <input class="input-global" type="time" [(ngModel)]="spAvailabilities.days.sunday.start_time" />
+                                        
+                                    </div>
+
+                                    <div class="auto-flex-start-gap5-column-no-set-width">
+
+                                        <p>End time</p>
+                                        <input class="input-global" type="time" [(ngModel)]="spAvailabilities.days.sunday.end_time" />                                        
+
+                                    </div>
+
+                                </div>
+
+                                <div class="auto-flex-start-gap10">
+
+                                    <div class="auto-flex-start-center-gap5-no-set-width" style="flex-wrap: nowrap;">
+
+                                        <input class="input-global" type="checkbox" [(ngModel)]="spAvailabilities.monday"/>
+                                        <p>Monday</p>
+
+                                    </div>
+
+                                    <div class="auto-flex-start-gap5-column-no-set-width">
+
+                                        <p>Start time</p>
+                                        <input class="input-global" type="time" [(ngModel)]="spAvailabilities.days.monday.start_time" />
+                                        
+                                    </div>
+
+                                    <div class="auto-flex-start-gap5-column-no-set-width">
+
+                                        <p>End time</p>
+                                        <input class="input-global" type="time" [(ngModel)]="spAvailabilities.days.monday.end_time" />                                        
+
+                                    </div>
+
+                                </div>
+
+                                <div class="auto-flex-start-gap10">
+
+                                    <div class="auto-flex-start-center-gap5-no-set-width" style="flex-wrap: nowrap;">
+
+                                        <input class="input-global" type="checkbox" [(ngModel)]="spAvailabilities.tuesday"/>
+                                        <p>Tuesday</p>
+
+                                    </div>
+
+                                    <div class="auto-flex-start-gap5-column-no-set-width">
+
+                                        <p>Start time</p>
+                                        <input class="input-global" type="time" [(ngModel)]="spAvailabilities.days.tuesday.start_time" />
+                                        
+                                    </div>
+
+                                    <div class="auto-flex-start-gap5-column-no-set-width">
+
+                                        <p>End time</p>
+                                        <input class="input-global" type="time" [(ngModel)]="spAvailabilities.days.tuesday.end_time" />                                        
+
+                                    </div>
+
+                                </div>
+
+                                <div class="auto-flex-start-gap10">
+
+                                    <div class="auto-flex-start-center-gap5-no-set-width" style="flex-wrap: nowrap;">
+
+                                        <input class="input-global" type="checkbox" [(ngModel)]="spAvailabilities.wednesday"/>
+                                        <p>Wednesday</p>
+
+                                    </div>
+
+                                    <div class="auto-flex-start-gap5-column-no-set-width">
+
+                                        <p>Start time</p>
+                                        <input class="input-global" type="time" [(ngModel)]="spAvailabilities.days.wednesday.start_time" />
+                                        
+                                    </div>
+
+                                    <div class="auto-flex-start-gap5-column-no-set-width">
+
+                                        <p>End time</p>
+                                        <input class="input-global" type="time" [(ngModel)]="spAvailabilities.days.wednesday.end_time" />                                        
+
+                                    </div>
+
+                                </div>
+
+                                <div class="auto-flex-start-gap10">
+
+                                    <div class="auto-flex-start-center-gap5-no-set-width" style="flex-wrap: nowrap;">
+
+                                        <input class="input-global" type="checkbox" [(ngModel)]="spAvailabilities.thursday"/>
+                                        <p>Thursday</p>
+
+                                    </div>
+
+                                    <div class="auto-flex-start-gap5-column-no-set-width">
+
+                                        <p>Start time</p>
+                                        <input class="input-global" type="time" [(ngModel)]="spAvailabilities.days.thursday.start_time" />
+                                        
+                                    </div>
+
+                                    <div class="auto-flex-start-gap5-column-no-set-width">
+
+                                        <p>End time</p>
+                                        <input class="input-global" type="time" [(ngModel)]="spAvailabilities.days.thursday.end_time" />                                        
+
+                                    </div>
+
+                                </div>
+
+                                <div class="auto-flex-start-gap10">
+
+                                    <div class="auto-flex-start-center-gap5-no-set-width" style="flex-wrap: nowrap;">
+
+                                        <input class="input-global" type="checkbox" [(ngModel)]="spAvailabilities.friday"/>
+                                        <p>Friday</p>
+
+                                    </div>
+
+                                    <div class="auto-flex-start-gap5-column-no-set-width">
+
+                                        <p>Start time</p>
+                                        <input class="input-global" type="time" [(ngModel)]="spAvailabilities.days.friday.start_time" />
+                                        
+                                    </div>
+
+                                    <div class="auto-flex-start-gap5-column-no-set-width">
+
+                                        <p>End time</p>
+                                        <input class="input-global" type="time" [(ngModel)]="spAvailabilities.days.friday.end_time" />                                        
+
+                                    </div>
+
+                                </div>
+
+                                <div class="auto-flex-start-gap10">
+
+                                    <div class="auto-flex-start-center-gap5-no-set-width" style="flex-wrap: nowrap;">
+
+                                        <input class="input-global" type="checkbox" [(ngModel)]="spAvailabilities.saturday"/>
+                                        <p>Saturday</p>
+
+                                    </div>
+
+                                    <div class="auto-flex-start-gap5-column-no-set-width">
+
+                                        <p>Start time</p>
+                                        <input class="input-global" type="time" [(ngModel)]="spAvailabilities.days.saturday.start_time" />
+                                        
+                                    </div>
+
+                                    <div class="auto-flex-start-gap5-column-no-set-width">
+
+                                        <p>End time</p>
+                                        <input class="input-global" type="time" [(ngModel)]="spAvailabilities.days.saturday.end_time" />                                        
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <button class="primary-bg padding-10 secondary-color bold" (click)="updateServiceProviderAvailability()">Save changes</button>
+            
                         </div>
 
                     </div>

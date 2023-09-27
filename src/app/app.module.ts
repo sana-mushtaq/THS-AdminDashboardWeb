@@ -166,6 +166,7 @@ import { BusinessToBusinessAppointmentsComponent } from './business-to-business-
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ServicetagComponent } from './servicetag/servicetag.component';
 
 // Create a loader for translation files
 export function HttpLoaderFactory(http: HttpClient) {
@@ -310,7 +311,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     BusinessToBusinessSchedulingComponent,
     CheckoutFooterComponent,
     ServiceproviderComponent,
-    BusinessToBusinessAppointmentsComponent
+    BusinessToBusinessAppointmentsComponent,
+    ServicetagComponent
    ],
   imports: [
     BrowserModule, 

@@ -333,6 +333,12 @@
                                             </div>
 
                                         </div>
+                                        
+                                        <div class="auto-flex-center-start-gap10" *ngIf="tagListRenderer">
+
+                                            <ng-multiselect-dropdown class="max-width" *ngIf="tagSettings" [settings]="tagSettings" [data]="tagList" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" (onSelectAll)="onTagSelectAll($event)" (onDeSelectAll)="onTagDeSelectAll()"></ng-multiselect-dropdown>
+
+                                        </div>
 
 
                                         <div class="auto-flex-center-gap10">
@@ -549,6 +555,12 @@
                                             <p class="bold">Iframe URL</p>
                                             <input class="input-global" [(ngModel)]="selectedService.whatsapp_url" type="text" />
         
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap10" *ngIf="tagListRenderer">
+
+                                            <ng-multiselect-dropdown class="max-width" *ngIf="tagSettings" [settings]="tagSettings" [data]="tagList" [(ngModel)]="selectedServiceTags" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" (onSelectAll)="onTagSelectAll($event)" (onDeSelectAll)="onTagDeSelectAll()"></ng-multiselect-dropdown>
+
                                         </div>
 
                                     </div>

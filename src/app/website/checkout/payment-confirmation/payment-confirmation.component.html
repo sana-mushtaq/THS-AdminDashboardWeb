@@ -11,7 +11,7 @@
         <div class="auto-flex-center-gap10">
 
             <p class="text-right">{{ 'cart.appointmentId' | translate }}: </p>
-            <p>{{ appointmentId }}</p>
+            <p *ngFor="let app of appointmentId; let a_index = index">{{ app }} <span *ngIf="a_index+1 !== appointmentId.length">,</span></p>
 
         </div>
 

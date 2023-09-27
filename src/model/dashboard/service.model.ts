@@ -25,6 +25,7 @@ export class Service {
     category_title: string
     coupon_code: string
     top: boolean
+    tag: any
 
     static getServiceList( data ): Service[] {
   
@@ -60,7 +61,8 @@ export class Service {
           service_data.category_title = service.category_title
           service_data.coupon_code = service.coupon_code
           service_data.top = service.top
-          
+          service_data.tag = service.tag
+
           serviceList.push(service_data)
         
         })

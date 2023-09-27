@@ -48,10 +48,14 @@ export class ServiceproviderComponent implements OnInit {
 
   assignServiceProviderToggle: Boolean = false
   serviceProviderServiceToggle: Boolean = false
+  serviceProviderAvailabilityToggle: Boolean = false
 
   public addServiceProviderForm : FormGroup
   public editServiceProviderForm : FormGroup
 
+
+  //service provider availablility
+  spAvailabilities: any = {}
 
   constructor(
     private _appService: AppService,
@@ -687,6 +691,237 @@ export class ServiceproviderComponent implements OnInit {
           this.serviceProviderListAssigned = []
         //  this.assignServiceProviderToggle = false
   
+          //if it is unable to get branch data it will return an error
+          Swal.fire(res.message)
+
+        }
+        
+      },
+      error: ( err: any ) => {
+
+        console.log(err)
+
+      }
+    
+    })
+
+  }
+
+  serviceProviderAvailability(spData) {
+    
+    let data1 = {
+
+      practiceUserId:  spData.parctiseUserId,
+
+    }
+
+    this.selectedServiceProvider = spData
+
+
+    this._serviceProvider.getAvailability(data1).subscribe({
+  
+      next : ( res : any ) => {
+
+        //in case of success the api returns 0 as a status code
+        if( res.status === APIResponse.Success) {
+          
+          //after assiging service to a service provider we will reset the data
+
+          if(res.data.length>0) {
+
+
+            this.spAvailabilities = res.data[0]
+            this.spAvailabilities['days'] = JSON.parse(res.data[0]['days'])
+            
+            this.serviceProviderAvailabilityToggle = true
+
+          } else {
+
+            this.serviceProviderAvailabilityToggle = true
+        
+            this.spAvailabilities = {
+        
+              sunday: true,
+              monday: true,
+              tuesday: true,
+              wednesday: true,
+              thursday: true,
+              friday: true,
+              saturday: true,
+              days:{ 
+                sunday: {
+                start_time: "08:00",
+                end_time: "14:00",
+                spread: {
+                  hour: 1,
+                  minute:0
+                }
+              },
+                monday: {
+                  start_time: "08:00",
+                  end_time: "14:00",
+                  spread: {
+                    hour: 1,
+                    minute:0
+                  }
+                },
+                tuesday: {
+                  start_time: "08:00",
+                  end_time: "14:00",
+                  spread: {
+                    hour: 1,
+                    minute:0
+                  }
+                },
+                wednesday: {
+                  start_time: "08:00",
+                  end_time: "14:00",
+                  spread: {
+                    hour: 1,
+                    minute:0
+                  }
+                },
+                thursday: {
+                  start_time: "08:00",
+                  end_time: "14:00",
+                  spread: {
+                    hour: 1,
+                    minute:0
+                  }
+                },
+                friday: {
+                  start_time: "08:00",
+                  end_time: "14:00",
+                  spread: {
+                    hour: 1,
+                    minute:0
+                  }
+                },
+                saturday: {
+                start_time: "08:00",
+                end_time: "14:00",
+                spread: {
+                  hour: 1,
+                  minute:0
+                }
+              }
+              }
+        
+            }
+        
+          }
+        
+        } else {
+
+          //if it is unable to get branch data it will return an error
+          Swal.fire(res.message)
+
+        }
+        
+      },
+      error: ( err: any ) => {
+
+        console.log(err)
+
+      }
+    
+    })
+
+
+  }
+
+  closeServiceProviderAvailability() {
+
+    this.serviceProviderAvailabilityToggle = false
+
+  }
+
+  updateServiceProviderAvailability() {
+
+
+    
+    let data = {
+      practiceUserId:  this.selectedServiceProvider.parctiseUserId,
+      sunday: this.spAvailabilities.sunday,
+      monday: this.spAvailabilities.monday,
+      tuesday: this.spAvailabilities.tuesday,
+      wednesday: this.spAvailabilities.wednesday,
+      thursday: this.spAvailabilities.thursday,
+      friday: this.spAvailabilities.friday,
+      saturday: this.spAvailabilities.saturday,
+      days: JSON.stringify({ 
+        sunday: {
+        start_time: this.spAvailabilities.days.sunday.start_time,
+        end_time: this.spAvailabilities.days.sunday.end_time,
+        spread: {
+          hour: 1,
+          minute:0
+        }
+      },
+        monday: {
+          start_time: this.spAvailabilities.days.monday.start_time,
+          end_time: this.spAvailabilities.days.monday.end_time,
+          spread: {
+            hour: 1,
+            minute:0
+          }
+        },
+        tuesday: {
+          start_time: this.spAvailabilities.days.tuesday.start_time,
+          end_time: this.spAvailabilities.days.tuesday.end_time,
+          spread: {
+            hour: 1,
+            minute:0
+          }
+        },
+        wednesday: {
+          start_time: this.spAvailabilities.days.wednesday.start_time,
+          end_time: this.spAvailabilities.days.wednesday.end_time,
+          spread: {
+            hour: 1,
+            minute:0
+          }
+        },
+        thursday: {
+          start_time: this.spAvailabilities.days.thursday.start_time,
+          end_time: this.spAvailabilities.days.thursday.end_time,
+          spread: {
+            hour: 1,
+            minute:0
+          }
+        },
+        friday: {
+          start_time: this.spAvailabilities.days.friday.start_time,
+          end_time: this.spAvailabilities.days.friday.end_time,
+          spread: {
+            hour: 1,
+            minute:0
+          }
+        },
+        saturday: {
+        start_time: this.spAvailabilities.days.saturday.start_time,
+        end_time: this.spAvailabilities.days.saturday.end_time,
+        spread: {
+          hour: 1,
+          minute:0
+        }
+      }
+      })
+    }
+
+    this._serviceProvider.updateAvailability(data).subscribe({
+  
+      next : ( res : any ) => {
+
+        //in case of success the api returns 0 as a status code
+        if( res.status === APIResponse.Success) {
+          
+          //after assiging service to a service provider we will reset the data
+          this.serviceProviderAvailabilityToggle = false
+          this.spAvailabilities = {}
+
+        } else {
+
           //if it is unable to get branch data it will return an error
           Swal.fire(res.message)
 

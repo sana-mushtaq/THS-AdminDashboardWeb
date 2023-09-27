@@ -7,7 +7,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { LanguageService } from 'src/service/language.service';
 
-
 @Component({
   selector: 'app-service-details',
   templateUrl: './service-details.component.html',
@@ -95,14 +94,14 @@ export class ServiceDetailsComponent implements OnInit {
     //first we will check that cart is empty or contains services from same category
     this.cartData = this._utilService.getCartData()
 
-    let checkCategory = this.cartData.filter(category => {
+  /*  let checkCategory = this.cartData.filter(category => {
 
       return service.category_id !== category.category_id
 
     })
-
-    if(this.cartData.length === 0 || checkCategory.length === 0) {
-
+*/
+    /*if(this.cartData.length === 0 || checkCategory.length === 0) {
+*/
       let cartItem = {
 
         'id': service.id,
@@ -138,11 +137,11 @@ export class ServiceDetailsComponent implements OnInit {
       
       }, 2000); // 3000 milliseconds = 3 secon
 
-    } else {
+    /*}/* else {
 
       this.showErrorCart = true
 
-    }
+    }*/
 
   }
 
@@ -176,6 +175,5 @@ export class ServiceDetailsComponent implements OnInit {
   getSafeUrl( url : string ){
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
-
 
 }

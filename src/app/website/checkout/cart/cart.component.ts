@@ -230,7 +230,6 @@ export class CartComponent implements OnInit {
   getTotal() {
 
     //calculate total
-
     if(this.cartData.length>0) {
 
       this.total = this.cartData.map(cart => {
@@ -242,7 +241,6 @@ export class CartComponent implements OnInit {
         return a+b
   
       })
-
 
       // Calculate the tax amount (15%)
       const taxRate = 0.15;
@@ -290,7 +288,7 @@ export class CartComponent implements OnInit {
     let errorCount = 0
     
     //lets start with one patient and one service only
-    this.cartData.forEach(cartItem => {
+    /*this.cartData.forEach(cartItem => {
 
       //here we will check and choose for each services and gender
       let patient = cartItem.user.id
@@ -337,7 +335,7 @@ export class CartComponent implements OnInit {
       }
 
 
-    })
+    })*/
 
     if(errorCount>0) {
 
