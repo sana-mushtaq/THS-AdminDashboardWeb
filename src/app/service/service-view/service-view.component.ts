@@ -29,6 +29,7 @@ export class ServiceViewComponent implements OnInit {
   selectedServiceTags: any = []
   //create a variable serviceList of type array
   serviceList: any = []
+  serviceListMultiDropdown: any = []
 
   addNewServiceToggle: boolean = false
   addNewServiceVariantToggle: boolean = false
@@ -83,6 +84,11 @@ export class ServiceViewComponent implements OnInit {
   totalPages: number = Math.ceil(this.totalItems / this.itemsPerPage)
   searchText: string = '';
   serviceSettings: IDropdownSettings = {}
+
+  service_variants: any = []
+
+  currentServiceVariantsToggle: boolean = false 
+  currentServiceVariants: any = []
 
   constructor(
     private _serviceCategory: ServicecategoryService,
@@ -294,7 +300,25 @@ export class ServiceViewComponent implements OnInit {
           if( res.status === APIResponse.Success) {
     
             this.serviceList = res.data
-            
+
+            this.service_variants = this.serviceList.filter(service => {
+
+              return service.primary_service_id !== null
+
+            })
+
+            this.serviceList = this.serviceList.filter(service => {
+
+              return service.primary_service_id === null
+
+            })
+
+            this.serviceListMultiDropdown = this.serviceList.filter(service => {
+
+              return service.active === 1
+
+            })
+
             this.displayedServiceList = this.serviceList
          //   this.displayedServiceList = this.serviceList.splice(0, 25)
 
@@ -945,28 +969,27 @@ export class ServiceViewComponent implements OnInit {
            //in case of success the api returns 0 as a status code
            if( res.status === APIResponse.Success ) {
 
-             let category_id = this.addServiceVariantForm.get('category_id').value
+              let category_id = this.addServiceVariantForm.get('category_id').value
 
-             let categoryName = this.categoryList.filter(el => { return Number(el.id) === Number(category_id) })
-             res.data['category_title'] = categoryName[0].title
+              let categoryName = this.categoryList.filter(el => { return Number(el.id) === Number(category_id) })
+              res.data['category_title'] = categoryName[0].title
 
-             //when the service is created the system should return an id of the newly created category
-            // this.serviceList.unshift(res.data);
-             this.displayedServiceList.unshift(res.data);
+              //when the service is created the system should return an id of the newly created category
+              // this.serviceList.unshift(res.data);
+              this.service_variants.push(res.data);
+              this.addNewServiceVariantToggle = false
 
-             this.addNewServiceToggle = false
+              this.selectedServiceTags = []
+              
+              //reset form
+              this.addServiceVariantForm.reset()
 
-             this.selectedServiceTags = []
-             
-             //reset form
-             this.addServiceVariantForm.reset()
-
-             Swal.fire(res.message)
+              Swal.fire(res.message)
 
            } else {
    
-             //if it is unable to add category data it will return an error
-             Swal.fire(res.message)
+              //if it is unable to add category data it will return an error
+              Swal.fire(res.message)
    
            }
            
@@ -984,6 +1007,45 @@ export class ServiceViewComponent implements OnInit {
      Swal.fire("Please check your data before submiting")
    
    }
+
+  }
+
+  checkIfVariantExists(service_id) {
+
+    let filter = this.service_variants.filter(variant => {
+
+      return Number(variant.primary_service_id) === Number(service_id)
+
+    })
+
+    if(filter.length>0) {
+
+      return true
+
+    } else {
+
+      return false
+
+    }
+
+  }
+
+  openVariants(service_id) {
+
+    this.currentServiceVariants = this.service_variants.filter(variant => {
+
+      return variant.primary_service_id === service_id
+
+    });
+
+    this.currentServiceVariantsToggle = true 
+  }
+
+  closeVariants() {
+
+    this.currentServiceVariantsToggle = false 
+
+    this.currentServiceVariants = []
 
   }
 

@@ -105,6 +105,7 @@
 
                                         <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceStatus(service, serviceIndex, true)" *ngIf="!service.active">activate</button>
                                         <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceStatus(service, serviceIndex, false)" *ngIf="service.active">deactivate</button>
+                                        <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="openVariants(service.id)" *ngIf="checkIfVariantExists(service.id)">variants</button>
                                    
                                         <div class="auto-flex-center-gap5">
 
@@ -357,7 +358,7 @@
 
                     </div>
 
-                    <!-- Add Service Variants-->
+                      <!-- Service variants-->
                     <div class="fixed dialog" *ngIf="addNewServiceVariantToggle">
 
                         <div class="popup">
@@ -366,22 +367,16 @@
 
                                 <button class="close" (click)="closeAddServiceVariant()">x</button>
 
-                                <form [formGroup]="addServiceVariantForm" (ngSubmit)="createServiceVariant()">
+                                <form [formGroup]="addServiceForm" (ngSubmit)="createService()">
 
                                     <div class="auto-flex-center-gap20">
-
-                                        <div class="auto-flex-start-gap5-column">
-    
-                                            <ng-multiselect-dropdown class="max-width" *ngIf="serviceList.length>0 && serviceSettings" [settings]="serviceSettings" [data]="serviceList" [placeholder]="'Select service'" (onSelect)="setPreferredService($event)" (onDeSelect)="unsetPreferredService($event)"></ng-multiselect-dropdown>
-        
-                                        </div>
 
                                         <div class="auto-flex-center-start-gap20">
 
                                             <div class="auto-flex-center-start-gap20-no-set-width">
                                                  
                                                 <img class="medImg" src="{{serverUrl}}{{addServiceForm.get('icon').value}}">
-                                                <input type="file" accept="image/*" name="uploadfile" id="service_icon" (change)="updateImageVraint($event, 'icon', 'add')" style="display:none;"/>
+                                                <input type="file" accept="image/*" name="uploadfile" id="service_icon" (change)="updateImage($event, 'icon', 'add')" style="display:none;"/>
                                                 <label class="glass-bg padding-10 cursor-pointer" for="service_icon">Upload Icon</label>
     
                                             </div>
@@ -389,7 +384,7 @@
                                             <div class="auto-flex-center-start-gap20-no-set-width">
                                                
                                                 <img class="medImg" src="{{serverUrl}}{{addServiceForm.get('cover_image').value}}">
-                                                <input type="file" accept="image/*" name="uploadfile" id="service_cover_image" (change)="updateImageVraint($event, 'image', 'add')" style="display:none;"/>
+                                                <input type="file" accept="image/*" name="uploadfile" id="service_cover_image" (change)="updateImage($event, 'image', 'add')" style="display:none;"/>
                                                 <label class="glass-bg padding-10 cursor-pointer" for="service_cover_image">Upload Image</label>
     
                                             </div>
@@ -397,13 +392,37 @@
                                             <div class="auto-flex-center-start-gap20-no-set-width">
                                                 
                                                 <img class="medImg" src="{{serverUrl}}{{addServiceForm.get('banner').value}}">
-                                                <input type="file" accept="image/*" name="uploadfile" id="service_banner" (change)="updateImageVraint($event, 'banner', 'add')" style="display:none;"/>
+                                                <input type="file" accept="image/*" name="uploadfile" id="service_banner" (change)="updateImage($event, 'banner', 'add')" style="display:none;"/>
                                                 <label class="glass-bg padding-10 cursor-pointer" for="service_banner">Upload Banner</label>
 
                                             </div>    
 
                                         </div>
   
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Category</p>
+                                                <select class="input-global" formControlName="category_id">
+                                                    <option *ngFor="let category of categoryList" [value]="category.id"> {{ category.title }}</option>
+                                                </select>
+                                            
+                                            </div>
+
+                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                <p class="bold">Service Type</p>
+                                                <select class="input-global" formControlName="service_type">
+                                                    <option value="service">Service</option>
+                                                    <option value="labtest">Lab Test</option>
+                                                    <option value="labpackage">Lab Package</option>
+                                                </select>
+                                            
+                                            </div>
+                                        
+                                        </div>
+
                                         <div class="auto-flex-center-start-gap20">
 
                                             <div class="auto-flex-start-gap5-column-no-set-width width-half">
@@ -543,13 +562,114 @@
 
                                         <div class="auto-flex-center-gap10">
 
-                                            <button class="primary-bg max-width padding-10 secondary-color" type="submit">Add Service Variant</button>
+                                            <button class="primary-bg max-width padding-10 secondary-color" type="submit">Add Service</button>
 
                                         </div>
 
                                     </div>
 
                                 </form>                            
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Add Service Variants-->
+                    <div class="fixed dialog" *ngIf="currentServiceVariantsToggle">
+
+                        <div class="popup">
+
+                            <div class="content white-bg scrollable-div web-font-primary-light">
+
+                                <button class="close" (click)="closeVariants()">x</button>
+
+                                <div class="auto-flex-start-gap10 padding-none border-radius-20 gray-border">
+
+                                    <table class="custom-table web-font-primary-light overflow-hidden">
+            
+                                        <thead class="custom-table-thead">
+                                            <tr>
+                                                <th class="padding-20">ID</th>
+                                                <th class="padding-20">Icon</th>
+                                                <th class="padding-20">Title</th>
+                                                <th class="padding-20">Category</th>
+                                                <th class="padding-20">Price</th>
+                                                <th class="padding-20">Status</th>
+                                                <th class="padding-20 text-right">Actions</th>
+                                            </tr>
+                                        </thead>
+            
+                                        <tbody>
+            
+                                            <tr *ngFor="let serviceVariant of currentServiceVariants; let serviceVariantIndex=index;">
+            
+                                            <td>
+                                                <p> {{ serviceVariant.id }} </p>
+                                            </td>
+            
+                                            <td>
+                                                <img class="medImg" src="{{serverUrl}}{{serviceVariant.icon}}" *ngIf="serviceVariant.icon && serviceVariant.icon.length>0">
+                                            </td>
+            
+                                            <td class="cursor-pointer" (click)="editService(serviceVariant, serviceVariantIndex)">
+                                                <p> {{ serviceVariant.title }} <br/>({{serviceVariant.title_arabic}})</p>
+                                            </td>
+            
+                                            <td>
+                                                <p> {{ serviceVariant.category_title }} </p>
+                                            </td>
+            
+                                            <td>
+                                                <p> {{ serviceVariant.price }} </p>
+                                            </td>
+            
+                                            <td>
+                                                <p class="light-green-bg padding-5 green-color fit-content" *ngIf="serviceVariant.active"> Active </p>
+                                                <p class="light-red-bg padding-5 red-color fit-content" *ngIf="!serviceVariant.active"> Deactivated </p>
+                                            </td>
+                                        
+                                            <td class="auto-flex-center-gap10-no-set-width">
+            
+                                                <div class="auto-flex-center-gap5-column">
+            
+                                                    <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceStatus(serviceVariant, serviceVariantIndex, true)" *ngIf="!serviceVariant.active">activate</button>
+                                                    <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceStatus(serviceVariant, serviceVariantIndex, false)" *ngIf="serviceVariant.active">deactivate</button>
+                                               
+                                                    <div class="auto-flex-center-gap5">
+            
+                                                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/edit.svg" (click)="editService(serviceVariant, serviceVariantIndex)"/>
+                                                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/delete.svg" (click)="deleteService(serviceVariant, serviceVariantIndex)"/>
+                    
+                                                    </div>
+            
+                                                </div>
+                                                                                
+                                            </td>
+            
+            
+                                        </tr>
+            
+                                    </table>
+            
+                                    <!--
+                                    <div class="auto-flex-start-gap10">
+                                        
+                                        <hr class="hr-black" />
+            
+                                        <ul class="pagination auto-flex-center-gap5">
+            
+                                            <li class="page-item border-none" *ngFor="let page of totalPageNumbers(); let i = index">
+                                                <a class="page-link border-none blue-color padding-5 cursor-pointer" (click)="setPage(i)">{{ page }}</a>
+                                            </li>
+            
+                                        </ul>       
+                                    
+                                    </div>   -->          
+                                                        
+                                </div>
+                      
 
                             </div>
 
