@@ -13,14 +13,44 @@
             <div class="auto-flex-start-gap20-column-no-set-width">
     
                 <p class="med bold">{{ languageService.getCurrentLanguage() === 'ar' ? currentService.title_arabic : currentService.title }}</p>
-                <p class="bold blue-color">{{ 'header.sar' | translate }} {{ currentService.price }}</p>
+                <p class="bold blue-color"  *ngIf="serviceVariants.length<=0">{{ 'header.sar' | translate }} {{ currentService.price }}</p>
                
+            </div>
+
+            <p class="med bold" *ngIf="serviceVariants && serviceVariants.length>0">Variants</p>
+            <div class="auto-flex-start-gap10-column" *ngIf="serviceVariants && serviceVariants.length>0">
+
+                <div class="auto-flex-center-space-between-gap20">
+
+
+                    <div class="auto-flex-start-gap10-column-no-set-width">
+                        <p class="web-font-primary-light">{{ languageService.getCurrentLanguage() === 'ar' ? currentService.title_arabic : currentService.title }}</p>
+                        <p class="web-font-primary-light width-auto">{{ 'header.sar' | translate }} {{ currentService.price }}</p>    
+
+                    </div>
+                        
+                    <button class="white-bg padding-10 padding-left-right-30 uppercase blue-color blue-border" (click)="addToCart(currentService)">Add to cart</button>
+
+                </div>
+                <hr class="hr-black" style="margin:0px"/>
+                <div class="auto-flex-center-space-between-gap20" *ngFor="let variant of serviceVariants">
+
+                    <div class="auto-flex-start-gap10-column-no-set-width">
+                        <p class="web-font-primary-light">{{ languageService.getCurrentLanguage() === 'ar' ? variant.title_arabic : variant.title }}</p>
+                        <p class="web-font-primary-light width-auto">{{ 'header.sar' | translate }} {{ variant.price }}</p>
+                      
+                    </div>
+
+                    <button class="white-bg padding-10 padding-left-right-30 uppercase blue-color blue-border" (click)="addToCart(variant)">Add to cart</button>
+                    <hr class="hr-black"  style="margin:0px"/>
+                </div>
+
             </div>
     
          
         </div>
 
-        <button class="primary-bg padding-10 padding-left-right-30 max-width uppercase" (click)="addToCart(currentService)">{{ 'cart.addToCart' | translate }}</button>
+        <button *ngIf="serviceVariants.length<=0" class="primary-bg padding-10 padding-left-right-30 max-width uppercase" (click)="addToCart(currentService)">{{ 'cart.addToCart' | translate }}</button>
         <div class="auto-flex-start-gap10-column" *ngIf="addedToCart.length>0">
 
             <p class="light-green-bg green-color padding-5 text-center max-width message" [class.fade-in]="msg.visible" [class.fade-out]="!msg.visible" *ngFor="let msg of addedToCart">  {{ msg.text }}
@@ -41,53 +71,7 @@
                     
             <div class="auto-flex-start-gap20-column width-max-600 phone-max-width">
 
-                <p class="web-font-primary-light" *ngIf="!currentService || !currentService.whatsapp_url">   {{ (languageService.getCurrentLanguage() === 'ar' ? (currentService.description_arabic | translate) : (currentService.description | translate)) }}</p>
-
-        
-                <p class="med bold" *ngIf="serviceVariants && serviceVariants.length>0">Variants</p>
-                <div class="auto-flex-start-gap10-column" *ngIf="serviceVariants && serviceVariants.length>0">
-    
-                    <div class="auto-flex-center-space-between-gap20">
-    
-                        <div class="auto-flex-center-start-gap10-no-set-width">
-    
-                            <input type="checkbox" class="input-global width-auto" />
-                            <p class="web-font-primary-light">24 hours / 1 week</p>
-    
-                        </div>
-    
-                        <p class="web-font-primary-light width-auto">SAR 2000</p>
-    
-                    </div>
-    
-                    <div class="auto-flex-center-space-between-gap20">
-    
-                        <div class="auto-flex-center-start-gap10-no-set-width">
-    
-                            <input type="checkbox" class="input-global width-auto" />
-                            <p class="web-font-primary-light">24 hours / 1 week</p>
-    
-                        </div>
-    
-                        <p class="web-font-primary-light width-auto">SAR 2000</p>
-    
-                    </div>
-    
-                    <div class="auto-flex-center-space-between-gap20">
-    
-                        <div class="auto-flex-center-start-gap10-no-set-width">
-    
-                            <input type="checkbox" class="input-global width-auto" />
-                            <p class="web-font-primary-light">24 hours / 1 week</p>
-    
-                        </div>
-    
-                        <p class="web-font-primary-light width-auto">SAR 2000</p>
-    
-                    </div>
-    
-                </div>
-
+                <p class="web-font-primary-light" *ngIf="!currentService || !currentService.whatsapp_url">{{ (languageService.getCurrentLanguage() === 'ar' ? (currentService.description_arabic | translate) : (currentService.description | translate)) }}</p>
 
                 <p class="med bold" *ngIf="currentService && !currentService.whatsapp_url && currentService.instructions && currentService.instructions.length>0"> {{ (languageService.getCurrentLanguage() === 'ar' ? 'التعليمات' : 'Instructions') }}</p>
 

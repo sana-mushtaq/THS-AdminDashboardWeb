@@ -31,6 +31,8 @@ export class ServiceViewComponent implements OnInit {
   serviceList: any = []
 
   addNewServiceToggle: boolean = false
+  addNewServiceVariantToggle: boolean = false
+
   serviceDetailsToggle: boolean = false
   editServiceToggle: boolean = false
     
@@ -69,6 +71,7 @@ export class ServiceViewComponent implements OnInit {
 
   // forms
   public addServiceForm : FormGroup
+  public addServiceVariantForm : FormGroup
   public editServiceForm : FormGroup
 
   //pagination
@@ -79,6 +82,7 @@ export class ServiceViewComponent implements OnInit {
   totalItems: number = this.serviceList.length
   totalPages: number = Math.ceil(this.totalItems / this.itemsPerPage)
   searchText: string = '';
+  serviceSettings: IDropdownSettings = {}
 
   constructor(
     private _serviceCategory: ServicecategoryService,
@@ -91,6 +95,14 @@ export class ServiceViewComponent implements OnInit {
     this.getCategoryList()
     this.getTagList()
     this.getServiceList()
+
+    this.serviceSettings = {
+      idField: 'id',
+      textField: 'title_arabic',
+      allowSearchFilter: true,
+      singleSelection: true, // Set to true for single selection
+      enableCheckAll: false,
+    }
 
     this.addServiceForm = this.editServiceForm = this.fb.group({
      
@@ -116,6 +128,34 @@ export class ServiceViewComponent implements OnInit {
       'whatsapp_url': [''],
       'top': [0],
       'tag': ['']
+
+    })
+
+    this.addServiceVariantForm = this.fb.group({
+     
+      'category_id' : [-1, [ Validators.required]],
+      'service_type': [''],
+      'url': [''],
+      'title': ['', [ Validators.required]],
+      'title_arabic': [''],
+      'description': [''],
+      'description_arabic': [''],
+      'title_tag': [''],
+      'meta_tag': [''],
+      'instructions': [''],
+      'instructions_arabic': [''],
+      'faq': [''],
+      'faq_arabic': [''],
+      'icon': [''],
+      'cover_image': [''],
+      'banner': [''],
+      'price': [0, [ Validators.required]],
+      'cost': [0],
+      'active': [false],
+      'whatsapp_url': [''],
+      'top': [0],
+      'tag': [''],
+      'primary_service_id': ['', Validators.required],
 
     })
 
@@ -294,6 +334,20 @@ export class ServiceViewComponent implements OnInit {
     this.selectedServiceTags = []
   }
 
+  addServiceVariant() {
+
+    this.addNewServiceVariantToggle = true
+
+  }
+
+  closeAddServiceVariant() {
+    
+    this.addNewServiceVariantToggle = false
+    //this.addServiceForm.reset()
+    this.selectedServiceTags = []
+
+  }
+
   //the following function will create a service
   createService() {
 
@@ -451,17 +505,19 @@ export class ServiceViewComponent implements OnInit {
     this.editServiceToggle = true
 
     let tags = JSON.parse(currentService.tag) || []
-    console.log(tags)
     if(tags && tags.length>0) {
-
       tags.forEach(t=> {
+        this.tagList.filter(tagItem => {
+          if(tagItem.id === t) {
 
-        this.selectedServiceTags.push(t)
+            this.selectedServiceTags.push(tagItem)
+
+          }
+
+        })
       
       })
     }
-    console.log(this.selectedServiceTags)
-
   }
 
   //the following function will close add new catgeory pop up
@@ -480,7 +536,6 @@ export class ServiceViewComponent implements OnInit {
     //now we will assign the data of currentService to editServiceForm
     this.editServiceForm.patchValue(this.selectedService)
 
-    console.log(this.selectedServiceTags)
     this.editServiceForm.get('tag').patchValue(JSON.stringify(this.selectedServiceTags))
     //now owe will check if out form is valid or not
     if (this.editServiceForm.valid) {
@@ -721,7 +776,6 @@ export class ServiceViewComponent implements OnInit {
 
       // Check if the element is an object or contains an "id" attribute
       if (element && typeof element === 'object' && 'id' in element) {
-        console.log(element)
         // Remove the element from the array
         this.selectedServiceTags.splice(i, 1);
         i++;
@@ -732,7 +786,6 @@ export class ServiceViewComponent implements OnInit {
     }
   }
 
-    console.log(this.selectedServiceTags)
 
   }
 
@@ -760,7 +813,6 @@ export class ServiceViewComponent implements OnInit {
       // Check if the element is an object or contains an "id" attribute
         // Check if the element is an object or contains an "id" attribute
         if (element && typeof element === 'object' && 'id' in element) {
-          console.log(element)
           // Remove the element from the array
           this.selectedServiceTags.splice(i, 1);
           i++;
@@ -777,6 +829,161 @@ export class ServiceViewComponent implements OnInit {
   onTagDeSelectAll() {
 
     this.selectedServiceTags = []
+
+  }
+
+  setPreferredService(item) {
+
+    this.addServiceVariantForm.get('primary_service_id').patchValue(item.id)
+
+    let category_id = this.serviceList.filter(sid=>{
+
+      return sid.id === item.id
+
+    })
+
+    if(category_id.length>0) {
+
+      this.addServiceVariantForm.get('category_id').patchValue(category_id[0].category_id)
+
+    }
+
+  }
+
+  unsetPreferredService(item) {
+
+    this.addServiceVariantForm.get('primary_service_id').patchValue('')
+    this.addServiceVariantForm.get('category_id').patchValue('')
+  }
+  
+  updateImageVraint( event, type, operation) {
+
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+
+      const selectedFile = inputElement.files[0];
+      // Now, you can call your image upload function with selectedFile.
+      this.uploadImageVariant(selectedFile, type, operation);
+
+    }
+  
+  }
+
+  //the following function will upload an image to the server
+  uploadImageVariant(selectedFile, type, operation) {
+
+      this._appService.fileUploadImage( selectedFile ).subscribe( ( response: any ) => {
+
+        if (response.status == APIResponse.Success) {
+          
+          let result = response.message
+
+          if(operation === 'add') {
+
+            if(type === 'icon') {
+
+              this.addServiceVariantForm.get('icon').patchValue(result)
+
+            }
+
+            if(type === 'image') {
+
+              this.addServiceVariantForm.get('cover_image').patchValue(result)
+
+            }
+
+            if(type === 'banner') {
+
+              this.addServiceVariantForm.get('banner').patchValue(result)
+
+            }
+
+
+          }
+          
+          if(operation === 'edit') {
+
+            if(type === 'icon') {
+
+              this.selectedService.icon = result
+
+            }
+
+            if(type === 'image') {
+
+              this.selectedService.cover_image = result
+
+            }
+
+            if(type === 'banner') {
+
+              this.selectedService.banner = result
+              
+            }
+
+          }
+        
+        } 
+      
+      })
+
+  }
+
+  //the following function will create a service variant
+  createServiceVariant() {
+
+    //now owe will check if out form is valid or not
+    if (this.addServiceVariantForm.valid) {
+     
+       this.addServiceVariantForm.get('tag').patchValue(JSON.stringify(this.selectedServiceTags))
+
+       //we will submit the data if it is valid
+       this._service.createServiceVariant(this.addServiceVariantForm.value).subscribe({
+   
+         next : ( res : any ) => {
+   
+           //in case of success the api returns 0 as a status code
+           if( res.status === APIResponse.Success ) {
+
+             let category_id = this.addServiceVariantForm.get('category_id').value
+
+             let categoryName = this.categoryList.filter(el => { return Number(el.id) === Number(category_id) })
+             res.data['category_title'] = categoryName[0].title
+
+             //when the service is created the system should return an id of the newly created category
+            // this.serviceList.unshift(res.data);
+             this.displayedServiceList.unshift(res.data);
+
+             this.addNewServiceToggle = false
+
+             this.selectedServiceTags = []
+             
+             //reset form
+             this.addServiceVariantForm.reset()
+
+             Swal.fire(res.message)
+
+           } else {
+   
+             //if it is unable to add category data it will return an error
+             Swal.fire(res.message)
+   
+           }
+           
+         },
+         error: ( err: any ) => {
+   
+           console.log(err)
+   
+         }
+     
+       })
+   
+   } else {
+     
+     Swal.fire("Please check your data before submiting")
+   
+   }
 
   }
 

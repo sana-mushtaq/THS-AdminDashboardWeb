@@ -122,16 +122,6 @@
     
                                     </div>
 
-                                    <div class="auto-flex-start-gap5-column-no-set-width width-half" *ngIf="displaySp">
-    
-                                        <select class="input-global" (change)="setPreferredServiceP($event)">
-                                            <option disabled selected></option>
-                                            <option *ngFor="let sp of allSP" class="input-global" [value]="sp.user_id" >{{sp.firstName}} {{sp.lastName}}</option>
-
-                                        </select>
-    
-                                    </div>
-    
                                     <div class="auto-flex-start-gap5-column-no-set-width width-half">
     
                                         <p class="bold">Name</p>

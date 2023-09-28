@@ -65,7 +65,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
   preferredService: any
   preferredBranch: any
-  preferredServiceP: any
 
   private dataSubscription: Subscription;
 
@@ -482,13 +481,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
   }
 
-  setPreferredServiceP(item) {
-
-    console.log(item.target.value)
-    this.preferredServiceP = item.target.value
-
-  }
-
   unsetPreferredBranch(item) {
 
     this.preferredBranch = null
@@ -498,12 +490,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
   unsetPreferredService(item) {
 
     this.preferredService = null
-
-  }
-
-  unsetPreferredServiceP(item) {
-
-    this.preferredServiceP = null
 
   }
 
@@ -539,13 +525,13 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
       let service_name = fetchService[0].title
       let admin_notes = (document.getElementById("adminNotes") as any).value
 
-      if(record['Gender'] && (record['Gender']).toLowerCase === 'male') {
+      if(record['Gender'] && (record['Gender']) === 'male') {
 
         record['Gender'] = 1
 
       }
 
-      if(record['Gender'] && (record['Gender']).toLowerCase === 'female') {
+      if(record['Gender'] && (record['Gender']) === 'female') {
 
         record['Gender'] = 2
 
@@ -558,7 +544,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
         branch_id: this.preferredBranch,
         scheduled_date: this.preferredDate,
         scheduled_time: this.preferredTime,
-        serviceAssigneeId: this.preferredServiceP,
         category_id: category_id,
         userData: JSON.stringify(record),
         admin_notes: admin_notes,
@@ -578,7 +563,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
             this.preferredTime = null
             this.preferredService = null
             this.preferredBranch = null
-            this.preferredServiceP = null
 
             let index = this.records.indexOf(record)
             this.records.splice(index,1);
@@ -936,42 +920,54 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
           // Convert the selected date to "YYYY-MM-DD" format
           const formattedSelectedDate = this.preferredDate;
+
+  
+          let day = formattedSelectedDate
+    
+          // Create an array to map the day index to its name
+          const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    
+          // Create a new Date object from the selected date
+          const dateObject = new Date(day);
+    
+          // Get the day index (0 for Sunday, 1 for Monday, etc.)
+          const dayIndex = dateObject.getDay();
+    
+          // Get the day name from the dayNames array using the day index
+          const dayName = dayNames[dayIndex].toLowerCase();
+
           const uniqueScheduledTimes = this.fetchedData.appointments
-            .filter(app => {
-              // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
-              return (
-                app.serviceAssigneeId !== null &&
-                sps.some(sp => sp.user_id === app.serviceAssigneeId) &&
-                app.serviceDate === formattedSelectedDate
-                //mpare only the date part
-                // You can add a time condition here if needed
-              );
-            }).map(app => {
-              // Convert the database time format (e.g., "2023-09-04T19:00:00.000Z") to time slots format (e.g., "4:00pm")
-              const dbTime = app.serviceTime;
-              const [hours, minutes] = dbTime.split(':');
-              const ampm = hours >= 12 ? 'pm' : 'am';
-              const formattedTime = `${(hours % 12) || 12}:${minutes}${ampm}`;
-              return formattedTime;
+          .filter(app => {
+            // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
+            return (
+              app.serviceAssigneeId !== null &&
+              sps.some(sp => sp.user_id === app.serviceAssigneeId) &&
+              sps.some(sp => sp[dayName] !== 0) &&
+              app.serviceDate === formattedSelectedDate
+            );
+          }).map(app => {
+            // Convert the database time format (e.g., "2023-09-04T19:00:00.000Z") to time slots format (e.g., "4:00pm")
+            const dbTime = app.serviceTime;
+            const [hours, minutes] = dbTime.split(':');
+            const ampm = hours >= 12 ? 'pm' : 'am';
+            const formattedTime = `${(hours % 12) || 12}:${minutes}${ampm}`;
+            return formattedTime;
           });
 
-
-                      // Count the occurrences of each time slot
-            const timeSlotCounts = {};
-            uniqueScheduledTimes.forEach(time => {
-            
-              timeSlotCounts[time] = (timeSlotCounts[time] || 0) + 1;
+          // Count the occurrences of each time slot
+          const timeSlotCounts = {};
+          uniqueScheduledTimes.forEach(time => {
           
-            });
+            timeSlotCounts[time] = (timeSlotCounts[time] || 0) + 1;
+        
+          });
 
-            console.log(timeSlotCounts)
-
-            // Filter the time slots where all service providers are booked
-            const filteredTimeSlots = Object.keys(timeSlotCounts).filter(time => {
-            
-              return timeSlotCounts[time] === sps.length;
-            
-            });
+          // Filter the time slots where all service providers are booked
+          const filteredTimeSlots = Object.keys(timeSlotCounts).filter(time => {
+          
+            return timeSlotCounts[time] === sps.length;
+          
+          });
 
           // Function to check if a time slot is available
           const isTimeSlotAvailable = (timeSlot: string) => {
@@ -986,13 +982,10 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
               this.timeSlots.push(timeSlot);
             }
           }
+
           this.displayTime = true
 
-
-        } else {
-
-       
-        }
+        } else {}
         
       },
       error: ( err: any ) => {

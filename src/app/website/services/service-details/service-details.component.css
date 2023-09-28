@@ -24,3 +24,8 @@
   .fade-out {
     opacity: 0;
   }
+
+
+  .blue-border{
+    border: 1px solid var(--blue-color);
+  }

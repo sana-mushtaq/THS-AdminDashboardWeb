@@ -71,6 +71,12 @@ export class AllCategoriesComponent implements OnInit {
             return service.category_id === this.currentCategory.id
           })
 
+          this.allServices = this.allServices.filter(service => {
+
+            return service.primary_service_id === null
+          
+          })
+
           }
   
         }

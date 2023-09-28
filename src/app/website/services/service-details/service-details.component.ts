@@ -62,14 +62,16 @@ export class ServiceDetailsComponent implements OnInit {
           this.sanitizedWhatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.currentService[0].whatsapp_url);
 
           if(this.currentService.length>0) {
-
+           
             this.currentService = this.currentService[0]
-
+            console.log(this.currentService)
             this.serviceVariants = res.services.filter(service => {
   
               return Number(service.primary_service_id) === Number(this.currentService.id)
   
             })
+
+            console.log(this.serviceVariants)
 
           } else {
 

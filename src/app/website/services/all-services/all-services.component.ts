@@ -200,6 +200,12 @@ export class AllServicesComponent implements OnInit {
           // ... handle the received data here
           this.allCategories = res.categories
           this.allServices = res.services
+
+          this.allServices = this.allServices.filter(service => {
+
+            return service.primary_service_id === null
+          
+          })
   
           this.branch_id = res.branch
           

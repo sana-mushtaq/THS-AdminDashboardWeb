@@ -51,7 +51,7 @@
 
                     <p class="large">All Services</p>
                     <button class="primary-bg padding-10 secondary-color bold" (click)="addService()">Add a New Service</button>
-
+                    <button class="primary-bg padding-10 secondary-color bold" (click)="addServiceVariant()">Add a New Service Variant</button>
                     <input class="input-global" type="text" placeholder="Search service by id, title, category and price" (ngModelChange)="updateDisplayedServiceList()" [(ngModel)]="searchText" />
 
                     <div class="auto-flex-start-gap10 padding-none border-radius-20 gray-border">
@@ -344,6 +344,206 @@
                                         <div class="auto-flex-center-gap10">
 
                                             <button class="primary-bg max-width padding-10 secondary-color" type="submit">Add Service</button>
+
+                                        </div>
+
+                                    </div>
+
+                                </form>                            
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Add Service Variants-->
+                    <div class="fixed dialog" *ngIf="addNewServiceVariantToggle">
+
+                        <div class="popup">
+
+                            <div class="content white-bg scrollable-div web-font-primary-light">
+
+                                <button class="close" (click)="closeAddServiceVariant()">x</button>
+
+                                <form [formGroup]="addServiceVariantForm" (ngSubmit)="createServiceVariant()">
+
+                                    <div class="auto-flex-center-gap20">
+
+                                        <div class="auto-flex-start-gap5-column">
+    
+                                            <ng-multiselect-dropdown class="max-width" *ngIf="serviceList.length>0 && serviceSettings" [settings]="serviceSettings" [data]="serviceList" [placeholder]="'Select service'" (onSelect)="setPreferredService($event)" (onDeSelect)="unsetPreferredService($event)"></ng-multiselect-dropdown>
+        
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-center-start-gap20-no-set-width">
+                                                 
+                                                <img class="medImg" src="{{serverUrl}}{{addServiceForm.get('icon').value}}">
+                                                <input type="file" accept="image/*" name="uploadfile" id="service_icon" (change)="updateImageVraint($event, 'icon', 'add')" style="display:none;"/>
+                                                <label class="glass-bg padding-10 cursor-pointer" for="service_icon">Upload Icon</label>
+    
+                                            </div>
+    
+                                            <div class="auto-flex-center-start-gap20-no-set-width">
+                                               
+                                                <img class="medImg" src="{{serverUrl}}{{addServiceForm.get('cover_image').value}}">
+                                                <input type="file" accept="image/*" name="uploadfile" id="service_cover_image" (change)="updateImageVraint($event, 'image', 'add')" style="display:none;"/>
+                                                <label class="glass-bg padding-10 cursor-pointer" for="service_cover_image">Upload Image</label>
+    
+                                            </div>
+                                            
+                                            <div class="auto-flex-center-start-gap20-no-set-width">
+                                                
+                                                <img class="medImg" src="{{serverUrl}}{{addServiceForm.get('banner').value}}">
+                                                <input type="file" accept="image/*" name="uploadfile" id="service_banner" (change)="updateImageVraint($event, 'banner', 'add')" style="display:none;"/>
+                                                <label class="glass-bg padding-10 cursor-pointer" for="service_banner">Upload Banner</label>
+
+                                            </div>    
+
+                                        </div>
+  
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Title</p>
+                                                <input class="input-global" formControlName="title" type="text" />    
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Title Arabic</p>
+                                                <input class="input-global" formControlName="title_arabic" type="text" />
+            
+                                            </div>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap5-column">
+
+                                                <p class="bold">URL</p>
+                                                <input class="input-global" formControlName="url" type="text" />    
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Description</p>
+                                                <textarea class="input-global" formControlName="description" type="text"></textarea>   
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Description Arabic</p>
+                                                <textarea class="input-global" formControlName="description_arabic" type="text"></textarea>
+            
+                                            </div>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Title Tag</p>
+                                                <input class="input-global" formControlName="title_tag" type="text" />    
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Meta Tag</p>
+                                                <input class="input-global" formControlName="meta_tag" type="text" />
+            
+                                            </div>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Instructions</p>
+                                                <textarea class="input-global" formControlName="instructions" type="text"></textarea>    
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Instructions Arabic</p>
+                                                <textarea class="input-global" formControlName="instructions_arabic" type="text"></textarea>    
+            
+                                            </div>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Price</p>
+                                                <input class="input-global" formControlName="price" type="number" />    
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Cost</p>
+                                                <input class="input-global" formControlName="cost" type="number" />
+            
+                                            </div>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Active</p>
+                                                <input class="input-global"  style="width:auto" formControlName="active" type="checkbox" />    
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Iframe URL</p>
+                                                <input class="input-global" formControlName="whatsapp_url" type="text" />
+            
+                                            </div>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Top</p>
+                                                <input class="input-global"  style="width:auto" formControlName="top" type="checkbox" />    
+
+                                            </div>
+
+                                        </div>
+                                        
+                                        <div class="auto-flex-center-start-gap10" *ngIf="tagListRenderer">
+
+                                            <ng-multiselect-dropdown class="max-width" *ngIf="tagSettings" [settings]="tagSettings" [data]="tagList" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" (onSelectAll)="onTagSelectAll($event)" (onDeSelectAll)="onTagDeSelectAll()"></ng-multiselect-dropdown>
+
+                                        </div>
+
+
+                                        <div class="auto-flex-center-gap10">
+
+                                            <button class="primary-bg max-width padding-10 secondary-color" type="submit">Add Service Variant</button>
 
                                         </div>
 

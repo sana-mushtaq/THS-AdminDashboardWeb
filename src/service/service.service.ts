@@ -39,6 +39,13 @@ export class ServiceService {
 
     }
 
+    //the following function will create a service provider in the backed based on the parameters receieved
+    createServiceVariant(body) {
+
+      return this._httpClient.post<any>( this.serviceUrl+'/createServiceVariant', body )
+
+    }
+
     //the following function will update service status in the backed based on the parameters receieved
     updateServiceStatus(body) {
 
