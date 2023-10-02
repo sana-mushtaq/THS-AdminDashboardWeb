@@ -1,7 +1,7 @@
 export const environment = {
   //domainName: "http://147.182.222.195/services/",
-  //domainName: "https://taib.sa/services/", // Prod URL
-   domainName: "http://146.190.173.225/api/", // UAT URL
+  domainName: "https://taib.sa/api/", // Prod URL
+   //domainName: "https://146.190.173.225/api/", // UAT URL
 
   production: true,
 
