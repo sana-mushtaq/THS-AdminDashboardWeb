@@ -65,6 +65,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
   preferredService: any
   preferredBranch: any
+  preferredServiceProvider: any
 
   private dataSubscription: Subscription;
 
@@ -116,7 +117,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
       //first we will get user location and display on the header
       this.getUserLocation()
 
-   }
+  }
 
   ngOnInit(): void { 
 
@@ -166,7 +167,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
     this.getServiceList()
   }
-
 
   onChangeAddress() {
 
@@ -242,8 +242,8 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
   }
 
-    //the following function will fetch a list of services from backend
-    getServiceList() {
+  //the following function will fetch a list of services from backend
+  getServiceList() {
 
       //now we will get a list of categories from the backend
       this._service.getServiceList().subscribe({
@@ -314,6 +314,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
           //in case of success the api returns 0 as a status code
           if( res.status === APIResponse.Success) {
   
+            console.log(this.allSP)
             this.allSP = res.data
   
           } else {
@@ -405,7 +406,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
   get totalRecords(): number {
     return this.records.length;
   }
-
 
   onNext(): void {
     if (this.currentPage < this.totalRecords - 1) {
@@ -547,10 +547,9 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
         category_id: category_id,
         userData: JSON.stringify(record),
         admin_notes: admin_notes,
-        //service_provide_id: this.preferredServiceProvider
+        service_provide_id: this.preferredServiceProvider
 
       }
-      console.log(data)
 
       this._b2c.createB2B(data).subscribe({
     
@@ -563,6 +562,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
             this.preferredTime = null
             this.preferredService = null
             this.preferredBranch = null
+            this.preferredServiceProvider = null
 
             let index = this.records.indexOf(record)
             this.records.splice(index,1);
@@ -998,8 +998,8 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
   }
 
-   // Assuming selectedDate is a Date object
-   formatSelectedDate(selectedDate: Date) {
+  // Assuming selectedDate is a Date object
+  formatSelectedDate(selectedDate: Date) {
 
     const year = selectedDate.getFullYear()
     const month = String(selectedDate.getMonth() + 1).padStart(2, '0')
@@ -1009,4 +1009,9 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
   }
 
+  setServiceProvider(event) {
+
+    this.preferredServiceProvider = event.target.value
+
+  }
 }

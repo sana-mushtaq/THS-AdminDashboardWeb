@@ -642,6 +642,12 @@ export class BranchViewComponent implements OnInit {
     //now owe will check if out form is valid or not
     if (this.addBranchForm.valid) {
 
+      if(this.addBranchForm.get('image').value === null) {
+
+        this.addBranchForm.get('image').patchValue('images/image-1693847940912.svg')
+
+      }
+
       //we will submit the data if it is valid
       this._branchService.createBranch(this.addBranchForm.value).subscribe({
   

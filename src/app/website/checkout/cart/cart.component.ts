@@ -6,6 +6,7 @@ import { WebsiteDataService } from 'src/service/website-data.service';
 import { APIResponse } from 'src/utils/app-enum';
 import { UtilService } from 'src/utils/util.service';
 import { environment } from 'src/environments/environment'
+import { LanguageService } from 'src/service/language.service';
 
 @Component({
   selector: 'app-cart',
@@ -38,7 +39,8 @@ export class CartComponent implements OnInit {
     private router: Router,
     private _patientService: PatientsService,
     private _b2c: BusinessToCustomerSchedulingService,
-    private dataService: WebsiteDataService
+    private dataService: WebsiteDataService,
+    public languageService: LanguageService
   ) { }
 
   ngOnInit(): void { }

@@ -267,6 +267,6 @@
     <app-custom-alert *ngIf="showErrorCreatingUser" [title]="'messages.error' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- User already exists-->
-    <app-custom-alert *ngIf="showUserAlreadyExist" [title]="'messages.userAlreadyExistTitle'" [message]="'messages.userAlreadyExistDesc'" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showUserAlreadyExist" [title]="'messages.userAlreadyExistTitle' | translate" [message]="'messages.userAlreadyExistDesc' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
     
 </div>

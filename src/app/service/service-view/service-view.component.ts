@@ -647,11 +647,34 @@ export class ServiceViewComponent implements OnInit {
             if( res.status === APIResponse.Success ) {
 
               //now we will splice the branch data from array
-              this.serviceList.splice(this.selectedServiceIndex, 1)
-              this.displayedServiceList.splice(this.selectedServiceIndex, 1)
-              this.unassignServiceData()
               
-              Swal.fire(res.message)
+              let filter= this.serviceList.filter(s=>{return s.id===currentService.id})
+
+              if(filter.length>0){
+
+                this.serviceList.splice(this.selectedServiceIndex, 1)
+                this.displayedServiceList.splice(this.selectedServiceIndex, 1)
+  
+            
+  
+                this.unassignServiceData()
+                
+                Swal.fire(res.message)
+  
+
+              } else {
+
+                let filter1= this.service_variants.filter(s=>{return s.id===currentService.id})
+                if(filter1.length>0){
+
+                  this.currentServiceVariants.splice(this.selectedServiceIndex,1)
+
+                  this.service_variants = this.service_variants.filter(s=>{return s.id!==currentService.id})
+                  this.unassignServiceData()
+                  Swal.fire(res.message)
+                }
+              }
+              
 
             } else {
     
@@ -956,6 +979,7 @@ export class ServiceViewComponent implements OnInit {
   //the following function will create a service variant
   createServiceVariant() {
 
+    console.log(this.addServiceVariantForm.value)
     //now owe will check if out form is valid or not
     if (this.addServiceVariantForm.valid) {
      
@@ -1046,6 +1070,33 @@ export class ServiceViewComponent implements OnInit {
     this.currentServiceVariantsToggle = false 
 
     this.currentServiceVariants = []
+
+  }
+
+  getTag(tag) {
+
+    let tags = JSON.parse(tag) || []
+
+    let tagTitle = []
+
+    if(tags && tags.length>0) {
+    
+      tags.forEach(t=> {
+        this.tagList.filter(tagItem => {
+    
+          if(tagItem.id === t) {
+
+            tagTitle.push(tagItem.title)
+
+          }
+
+        })
+      
+      })
+
+    }
+
+    return tagTitle
 
   }
 

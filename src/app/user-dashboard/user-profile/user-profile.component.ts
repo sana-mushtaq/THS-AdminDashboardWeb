@@ -961,6 +961,7 @@ export class UserProfileComponent implements OnInit {
   navigate(link) {
 
     this.router.navigate([link])
+  
   }
 
   navigateToLogin() {
@@ -974,6 +975,12 @@ export class UserProfileComponent implements OnInit {
       this.router.navigate(['/login'])
 
     }
+
+  }
+
+  goToServices() {
+
+    this.router.navigate(['/'])
 
   }
 

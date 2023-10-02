@@ -4,7 +4,7 @@
 
     <div class="auto-flex-center-gap20-column gray-border border-radius-20 padding-20" *ngIf="paymentCaptured">
 
-        <p class="med bold">{{ 'cart.appointmentBookingConfirmation' | translate }}</p>
+        <p class="med bold ">{{ 'cart.appointmentBookingConfirmation' | translate }}</p>
 
         <p class="light-green-bg padding-5 green-color fit-content">{{ 'cart.successAppointment' | translate }}</p>
 
@@ -21,21 +21,7 @@
             <p>{{ name }}</p>
 
         </div>
-        
-        <div class="auto-flex-center-gap10">
-
-            <p class="text-right">{{ 'cart.date' | translate }}:</p>
-            <p>{{ date }}</p>
-
-        </div>
-        
-        <div class="auto-flex-center-gap10">
-
-            <p class="text-right">{{ 'cart.time' | translate }}: </p>
-            <p>{{ time }}</p>
-
-        </div>
-   
+     
         <div class="auto-flex-center-gap5-column" *ngIf="cartData.length>0">
 
             <p *ngFor="let cartItem of cartData">{{ cartItem.title }}</p>

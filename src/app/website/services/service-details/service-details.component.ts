@@ -27,6 +27,8 @@ export class ServiceDetailsComponent implements OnInit {
   cartLength: number = 0; // Store the cart length here
   sanitizedWhatsappUrl: SafeResourceUrl;
 
+  cartToggle: boolean = false
+
   constructor(
     private route: ActivatedRoute,
     private dataService: WebsiteDataService,
@@ -131,7 +133,7 @@ export class ServiceDetailsComponent implements OnInit {
       } 
     
       this.addedToCart.push(newMessage);
-
+      this.cartToggle = true
     // Set a timeout to hide the message after a certain duration (e.g., 3 seconds)
       setTimeout(() => {
       
@@ -176,6 +178,12 @@ export class ServiceDetailsComponent implements OnInit {
 
   getSafeUrl( url : string ){
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  goToCart() {
+
+    this.router.navigate(['/checkout/cart'])
+
   }
 
 }

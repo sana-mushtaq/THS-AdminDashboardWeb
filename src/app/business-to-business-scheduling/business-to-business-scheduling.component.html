@@ -110,6 +110,7 @@
 
                                 <div class="auto-flex-start-gap20">
     
+
                                     <div class="auto-flex-start-gap5-column-no-set-width width-half">
     
                                         <ng-multiselect-dropdown class="max-width" *ngIf="branchList.length>0 && branchSettings" [settings]="branchSettings" [data]="branchList" [placeholder]="'Select branch'" (onSelect)="setPreferredBranch($event)" (onDeSelect)="unsetPreferredBranch($event)"></ng-multiselect-dropdown>
@@ -121,6 +122,18 @@
                                         <ng-multiselect-dropdown class="max-width" *ngIf="allServices.length>0 && serviceSettings" [settings]="serviceSettings" [data]="allServices" [placeholder]="'Select service'" (onSelect)="setPreferredService($event)" (onDeSelect)="unsetPreferredService($event)"></ng-multiselect-dropdown>
     
                                     </div>
+
+                                     
+                                    <div class="auto-flex-start-gap5-column-no-set-width width-half" *ngIf="displaySp && currentRecord.Gender.length<=0">
+    
+                                        <select class="input-global" (change)="setServiceProvider($event)"> 
+                                            <option disabled selected></option>
+                                            <option *ngFor="let sp of allSP" [value]="sp.user_id">{{sp.firstName}} {{sp.lastName}}</option>
+
+                                        </select>
+    
+                                    </div>
+
 
                                     <div class="auto-flex-start-gap5-column-no-set-width width-half">
     

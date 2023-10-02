@@ -73,7 +73,8 @@
         "goToHomePage": "Go to home page",
         "confirm": "Confirm",
         "cancel": "Cancel",
-        "invalidCouponCode": "Invalid coupon code"
+        "invalidCouponCode": "Invalid coupon code",
+        "cart": "Cart"
 
     },
 
@@ -123,7 +124,8 @@
         "searchLocation": "Search Location",
         "appointmentId": "Appointment ID",
         "serviceName": "Service Name",
-        "dateTime": "Date & time"
+        "dateTime": "Date & time",
+        "bookService": "Book a service"
 
     },
 

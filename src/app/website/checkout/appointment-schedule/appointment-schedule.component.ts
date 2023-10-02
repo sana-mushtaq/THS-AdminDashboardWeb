@@ -149,7 +149,7 @@ export class AppointmentScheduleComponent implements OnInit {
 
         //here we will identidy cart categories and item associated with each category
         this.dataService.data$.subscribe((res) => {
-
+         
           let categories = res.categories
           this.cartData.forEach(item => {
 
@@ -692,7 +692,7 @@ export class AppointmentScheduleComponent implements OnInit {
         // Check if the selectedDate is today
         if (selectedDate === currentDateString) {
           // Calculate the hour 3 hours later for the current day
-          const threeHoursLaterCurrent = new Date(currentDate.getTime() + 3 * 60 * 60 * 1000);
+          const threeHoursLaterCurrent = new Date(currentDate.getTime() + 4 * 60 * 60 * 1000);
   
           const threeHoursLaterCurrentHour = threeHoursLaterCurrent.getHours();
 
@@ -814,9 +814,33 @@ export class AppointmentScheduleComponent implements OnInit {
     
   proceedToPay() {
 
-    if(!this.preferredDate || !this.preferredTime) {
+    let count = 0
 
-     this.errorOccured = true
+    for(let data of this.allCartCategoriesData) {
+
+      if(!data[0].preferredTime || !data[0].selectedDate) {
+
+        count = count +1
+
+      } else {
+
+        const currentDate = data[0].selectedDate;
+
+        // Add one day to the current date to get the selected date
+        currentDate.setDate(currentDate.getDate() + 1);
+
+        // Convert the selected date to an ISO string in UTC format
+        const selectedDateISO = currentDate.toISOString();
+        data[0]["selectedDate"] = selectedDateISO
+
+      }
+
+      
+    }
+
+    if(count > 0) {
+
+      this.errorOccured = true
 
     } else {
 
@@ -836,7 +860,6 @@ export class AppointmentScheduleComponent implements OnInit {
 
       this.router.navigate(['/checkout/confirmation'])
     }
-
   
   }
 
@@ -870,9 +893,8 @@ export class AppointmentScheduleComponent implements OnInit {
   }
 
   setCartDataDateValue(value, date) {
-
     this.allCartCategoriesData[value][0]["selectedDate"] = date
-  
+
   }
 
 }

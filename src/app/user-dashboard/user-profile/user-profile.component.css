@@ -63,3 +63,7 @@ a:hover{
 .place-stretch {
     place-items: stretch;
   }
+
+  .width-max-80Percent{
+    max-width: 80%;
+  }

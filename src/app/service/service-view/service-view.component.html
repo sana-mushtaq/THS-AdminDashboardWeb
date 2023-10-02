@@ -44,7 +44,7 @@
       
             <app-header></app-header>
 
-            <!-- branch wrapper -->
+            <!-- service wrapper -->
             <div class="web auto-flex-start-gap30-column max-height relative">
 
                 <div class="auto-flex-start-space-between-gap10">
@@ -65,6 +65,7 @@
                                     <th class="padding-20">Title</th>
                                     <th class="padding-20">Category</th>
                                     <th class="padding-20">Price</th>
+                                    <th class="padding-20">Tags</th>
                                     <th class="padding-20">Status</th>
                                     <th class="padding-20 text-right">Actions</th>
                                 </tr>
@@ -92,6 +93,10 @@
 
                                 <td>
                                     <p> {{ service.price }} </p>
+                                </td>
+
+                                <td>
+                                    <p class="cursor-pointer hover-effect glass-bg padding-5 border-radius-10 border-none web-font-primary-light" *ngFor="let tag of getTag(service.tag)"> {{ tag }} </p>
                                 </td>
 
                                 <td>
@@ -358,7 +363,7 @@
 
                     </div>
 
-                      <!-- Service variants-->
+                      <!-- Add Service variants-->
                     <div class="fixed dialog" *ngIf="addNewServiceVariantToggle">
 
                         <div class="popup">
@@ -367,9 +372,16 @@
 
                                 <button class="close" (click)="closeAddServiceVariant()">x</button>
 
-                                <form [formGroup]="addServiceForm" (ngSubmit)="createService()">
+                                <form [formGroup]="addServiceVariantForm" (ngSubmit)="createServiceVariant()">
 
                                     <div class="auto-flex-center-gap20">
+                                    
+                                        <div class="auto-flex-center-start-gap10">
+
+                                            <ng-multiselect-dropdown class="max-width" *ngIf="serviceSettings" [settings]="serviceSettings" [data]="serviceList" (onSelect)="setPreferredService($event)" (onDeSelect)="unsetPreferredService($event)"></ng-multiselect-dropdown>
+
+                                        </div>
+
 
                                         <div class="auto-flex-center-start-gap20">
 
@@ -576,7 +588,7 @@
 
                     </div>
 
-                    <!-- Add Service Variants-->
+                    <!--  Service Variants-->
                     <div class="fixed dialog" *ngIf="currentServiceVariantsToggle">
 
                         <div class="popup">

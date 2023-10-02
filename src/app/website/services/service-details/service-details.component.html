@@ -10,39 +10,26 @@
             <img class="xxmedImg cover border-radius-10 light-gray-bg padding-5" *ngIf="currentService && currentService.icon && currentService.icon.length>0" src="{{serverUrl}}{{currentService.icon}}" />
             <img class="xxmedImg cover border-radius-10 light-gray-bg padding-5" *ngIf="!currentService && (!currentService.icon || currentService.icon.length<=0)" style="object-fit: fill;" src="assets/images/web/logo.svg" />
     
-            <div class="auto-flex-start-gap20-column-no-set-width">
+            <div class="auto-flex-start-gap20-column">
     
                 <p class="med bold">{{ languageService.getCurrentLanguage() === 'ar' ? currentService.title_arabic : currentService.title }}</p>
-                <p class="bold blue-color"  *ngIf="serviceVariants.length<=0">{{ 'header.sar' | translate }} {{ currentService.price }}</p>
-               
+                <p class="bold blue-color">{{ 'header.sar' | translate }} {{ currentService.price }}</p>
+                <button class="primary-bg padding-10 padding-left-right-30 max-width uppercase" (click)="addToCart(currentService)">{{ 'cart.addToCart' | translate }}</button>
+
             </div>
 
-            <p class="med bold" *ngIf="serviceVariants && serviceVariants.length>0">Variants</p>
-            <div class="auto-flex-start-gap10-column" *ngIf="serviceVariants && serviceVariants.length>0">
+            <div class="auto-flex-start-gap10-column gray-border padding-10 border-radius-20" *ngIf="serviceVariants && serviceVariants.length>0">
 
-                <div class="auto-flex-center-space-between-gap20">
-
-
-                    <div class="auto-flex-start-gap10-column-no-set-width">
-                        <p class="web-font-primary-light">{{ languageService.getCurrentLanguage() === 'ar' ? currentService.title_arabic : currentService.title }}</p>
-                        <p class="web-font-primary-light width-auto">{{ 'header.sar' | translate }} {{ currentService.price }}</p>    
-
-                    </div>
-                        
-                    <button class="white-bg padding-10 padding-left-right-30 uppercase blue-color blue-border" (click)="addToCart(currentService)">Add to cart</button>
-
-                </div>
-                <hr class="hr-black" style="margin:0px"/>
                 <div class="auto-flex-center-space-between-gap20" *ngFor="let variant of serviceVariants">
 
                     <div class="auto-flex-start-gap10-column-no-set-width">
-                        <p class="web-font-primary-light">{{ languageService.getCurrentLanguage() === 'ar' ? variant.title_arabic : variant.title }}</p>
-                        <p class="web-font-primary-light width-auto">{{ 'header.sar' | translate }} {{ variant.price }}</p>
+                        <p class="med bold">{{ languageService.getCurrentLanguage() === 'ar' ? variant.title_arabic : variant.title }}</p>
+                        <p class="bold blue-color width-auto">{{ 'header.sar' | translate }} {{ variant.price }}</p>
                       
                     </div>
 
-                    <button class="white-bg padding-10 padding-left-right-30 uppercase blue-color blue-border" (click)="addToCart(variant)">Add to cart</button>
-                    <hr class="hr-black"  style="margin:0px"/>
+                    <button class="primary-bg padding-10 padding-left-right-30 max-width uppercase" (click)="addToCart(variant)">{{ 'cart.addToCart' | translate }}</button>
+                
                 </div>
 
             </div>
@@ -50,13 +37,28 @@
          
         </div>
 
-        <button *ngIf="serviceVariants.length<=0" class="primary-bg padding-10 padding-left-right-30 max-width uppercase" (click)="addToCart(currentService)">{{ 'cart.addToCart' | translate }}</button>
+       
         <div class="auto-flex-start-gap10-column" *ngIf="addedToCart.length>0">
 
-            <p class="light-green-bg green-color padding-5 text-center max-width message" [class.fade-in]="msg.visible" [class.fade-out]="!msg.visible" *ngFor="let msg of addedToCart">  {{ msg.text }}
-            </p>
+            <p class="light-green-bg green-color padding-5 text-center max-width message" [class.fade-in]="msg.visible" [class.fade-out]="!msg.visible" *ngFor="let msg of addedToCart">{{ msg.text }}</p>
 
         </div>
+
+        <button *ngIf="cartToggle" class="auto-flex-center-gap10 primary-bg padding-10 padding-left-right-30 max-width uppercase" (click)="goToCart()">
+       
+            <div class="auto-flex-center-gap10 border-radius-100 red-bg border-none height-16 width-16 text-center padding-10" *ngIf="cartLength>0">
+
+                <a class="xsmall secondary-color">{{ cartLength }}</a>
+
+            </div>
+            <span>
+                <img class="img-20" src="assets/images/web/icons/cart.svg" style="filter: invert(1);"/>
+            </span>
+            {{ 'cart.cart' | translate }}
+            
+        </button>
+
+      
         
     </div>
     
@@ -90,3 +92,6 @@
    <!-- <app-custom-alert *ngIf="showErrorCart" [title]="'messages.cartErrorCategoryTitle' | translate" [message]="'messages.cartErrorCategoryDesc' | translate" [cancelButtonText]="'messages.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 -->
 </div>
+
+
+<app-checkout-footer></app-checkout-footer>

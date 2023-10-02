@@ -480,7 +480,14 @@
 
         </div>
 
-        <!--
+         <!-- users -->
+        <div class="white-bg fixed-bottom max-width padding-10 cursor-pointer auto-flex-center-gap10 gray-border border-radius-20 ">
+
+            <button class="primary-bg text-center width-max-80Percent max-width" (click)="goToServices()">{{ 'patientProfile.bookService' | translate }}</button>
+
+        </div>
+
+         <!--
       
         <div class="auto-flex-start-gap20-column border-radius-20 gray-border padding-20">
 
@@ -600,18 +607,7 @@
                     <td><p>{{ appointment.serviceDate | date:'yyyy-MM-dd' }} - {{ appointment.serviceTime }}</p></td>
                 </tr>
 
-                <tr>
-                    <td><p>1234455</p></td>
-                    <td><p class="table-content">1234455</p></td>
-                    <td><p>1234455</p></td>
-                </tr>
-
-                <tr>
-                    <td><p>1234455</p></td>
-                    <td><p class="table-content">1234455</p></td>
-                    <td><p>1234455</p></td>
-                </tr>
-
+            
             </tbody>
 
         </table>

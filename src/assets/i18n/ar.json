@@ -72,7 +72,8 @@
         "goToHomePage": "الذهاب للصفحة الرئيسية",
         "confirm": "المتابعة",
         "cancel": "إلغاء",
-        "invalidCouponCode": "كود الكوبون غير صحيح"
+        "invalidCouponCode": "كود الكوبون غير صحيح",
+        "cart": "عربة التسوق"
 
     },
 
@@ -122,7 +123,8 @@
         "searchLocation": "ابحث في الموقع",
         "appointmentId": "رقم الموعد",
         "serviceName": "اسم الخدمة",
-        "dateTime": "التاريخ والوقت"
+        "dateTime": "التاريخ والوقت",
+        "bookService": "ابدأ بحجز موعد"
 
     },
 
