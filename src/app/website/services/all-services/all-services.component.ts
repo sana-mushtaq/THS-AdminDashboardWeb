@@ -254,7 +254,14 @@ export class AllServicesComponent implements OnInit {
         } else {
 
           this.allServices = []
-        
+
+          localStorage.removeItem("THSAppointmentAddress")
+          localStorage.removeItem("THSBranch")
+          localStorage.removeItem("THSMultiAppointment")
+          localStorage.removeItem("THSCart")
+          localStorage.removeItem("THSDiscount")
+          localStorage.removeItem("THSPaylaod")
+          
         }
 
     })

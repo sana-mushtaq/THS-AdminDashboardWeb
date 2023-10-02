@@ -691,6 +691,7 @@ export class AppointmentScheduleComponent implements OnInit {
         
         // Check if the selectedDate is today
         if (selectedDate === currentDateString) {
+
           // Calculate the hour 3 hours later for the current day
           const threeHoursLaterCurrent = new Date(currentDate.getTime() + 4 * 60 * 60 * 1000);
   
@@ -702,6 +703,7 @@ export class AppointmentScheduleComponent implements OnInit {
           
           } else {
 
+            if(!(threeHoursLaterCurrentHour >=1 && threeHoursLaterCurrentHour <=11)) {
             if (isTimeSlotAvailable(timeSlot)) {
               if(timeSlot !== '10:00am' && timeSlot !== '11:00am' && timeSlot !== '3:00am' && timeSlot !== '4:00am' && timeSlot !== '5:00am' &&
               timeSlot !== '6:00am' && timeSlot !== '7:00am' && timeSlot !== '8:00am' && timeSlot !== '9:00am' && timeSlot !== '12:00am' && timeSlot !== '1:00am' && timeSlot !== '2:00am') 
@@ -711,7 +713,7 @@ export class AppointmentScheduleComponent implements OnInit {
     
               }
             }
-
+          }
           }
         } else {
           // For future dates, include all time slots

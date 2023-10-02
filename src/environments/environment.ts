@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  domainName: "http://localhost:3000/",
+  domainName: "http://localhost:4000/",
 
   //domainName: "https://taib.sa/services/", // Prod URL
   
