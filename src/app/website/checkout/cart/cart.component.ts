@@ -225,7 +225,8 @@ export class CartComponent implements OnInit {
       })
 
     }
-
+    
+    this.getTotal()
    
   }
 
