@@ -123,6 +123,7 @@
     
                                                 <p class="bold">Branch</p>
                                                 <select class="input-global" formControlName="branch_id">
+                                                    <option value="-1">None</option>
                                                     <option *ngFor="let branch of branchList" [value]="branch.id">{{branch.title}}</option>
                                                 </select>
             
@@ -263,6 +264,7 @@
 
                                             <p class="bold">Branch</p>
                                             <select class="input-global" [(ngModel)]="selectedServiceProvider.serviceProviderId">
+                                                <option value="-1">None</option>
                                                 <option *ngFor="let branch of branchList" [value]="branch.id">{{branch.title}}</option>
                                             </select>
         

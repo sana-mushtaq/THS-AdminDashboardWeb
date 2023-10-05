@@ -77,8 +77,8 @@ export class ForgetPasswordComponent implements OnInit {
       
       } 
 
-       //now we will send 6 digits random code to user's valid phone number
-       this._patientService.verifyIfPatientExists(data).subscribe({
+      //now we will send 6 digits random code to user's valid phone number
+      this._patientService.verifyIfPatientExists(data).subscribe({
   
         next : ( res : any ) => {
 
