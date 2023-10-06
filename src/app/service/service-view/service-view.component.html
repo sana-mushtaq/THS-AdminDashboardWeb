@@ -646,8 +646,8 @@
             
                                                 <div class="auto-flex-center-gap5-column">
             
-                                                    <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceStatus(serviceVariant, serviceVariantIndex, true)" *ngIf="!serviceVariant.active">activate</button>
-                                                    <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceStatus(serviceVariant, serviceVariantIndex, false)" *ngIf="serviceVariant.active">deactivate</button>
+                                                    <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceVariantStatus(serviceVariant, serviceVariantIndex, true)" *ngIf="!serviceVariant.active">activate</button>
+                                                    <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceVariantStatus(serviceVariant, serviceVariantIndex, false)" *ngIf="serviceVariant.active">deactivate</button>
                                                
                                                     <div class="auto-flex-center-gap5">
             

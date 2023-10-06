@@ -432,7 +432,6 @@ export class ServiceViewComponent implements OnInit {
 
   //the following function will update service status based on parameteres recieved
   updateServiceStatus(currentService, serviceIndex, status) {
-
     this.assignServiceData( currentService, serviceIndex )
 
     let buttonText = ''
@@ -480,6 +479,92 @@ export class ServiceViewComponent implements OnInit {
               //now we will splice the branch data from array
               this.serviceList[this.selectedServiceIndex].active = status
               this.displayedServiceList[this.selectedServiceIndex].active = status
+              this.unassignServiceData()
+              
+              Swal.fire(res.message)
+
+            } else {
+    
+              //if it is unable to get branch data it will return an error
+              Swal.fire(res.message)
+    
+            }
+            
+          },
+          error: ( err: any ) => {
+    
+            console.log(err)
+    
+          }
+        
+        })
+
+      }
+
+    })
+
+  }
+
+  updateServiceVariantStatus(currentService, serviceIndex, status) {
+    this.assignServiceData( currentService, serviceIndex )
+
+    let buttonText = ''
+    
+    if(status) {
+
+      buttonText = 'Activate'
+
+    } else {
+
+      buttonText = 'Deactivate'
+
+    }
+    
+    Swal.fire({
+
+      title: 'Confirmation',
+      text: `By confirming yes, the selected service will change its status`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#0144e4',
+      cancelButtonColor: '#d33',
+      confirmButtonText: buttonText
+    
+    })
+    .then( (confirmation) => {
+      
+      if (confirmation.isConfirmed) {
+
+        let data = {
+
+          service_id: currentService.id,
+          active: status
+
+        }
+
+        //now we will delete branch information from the database
+        this._service.updateServiceStatus(data).subscribe({
+    
+          next : ( res : any ) => {
+    
+            //in case of success the api returns 0 as a status code
+            if( res.status === APIResponse.Success ) {
+
+              //now we will splice the branch data from array
+              this.currentServiceVariants[this.selectedServiceIndex].active = status
+             
+             let s_v = this.service_variants.findIndex(s=>{
+
+              return s.id === currentService.id
+
+            })
+
+            if(s_v >-1) {
+
+              this.service_variants[s_v].active = status
+
+            }
+            
               this.unassignServiceData()
               
               Swal.fire(res.message)
