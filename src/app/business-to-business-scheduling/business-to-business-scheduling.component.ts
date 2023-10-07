@@ -465,6 +465,9 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
     }
 
+    this.displayTime = false
+    this.getAvailableTimeSlots()
+
   }
 
   setPreferredService(item) {
@@ -479,18 +482,22 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
     }
 
+    this.displayTime = false
+    this.getAvailableTimeSlots()
+
   }
 
   unsetPreferredBranch(item) {
 
     this.preferredBranch = null
 
+    this.displayTime = false
   }
 
   unsetPreferredService(item) {
 
     this.preferredService = null
-
+    this.displayTime = false
   }
 
   createAppointment(record) {
@@ -1018,6 +1025,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
   setServiceProvider(event) {
 
     this.preferredServiceProvider = event.target.value
-
+    this.displayTime = false
+    this.getAvailableTimeSlots()
   }
 }
