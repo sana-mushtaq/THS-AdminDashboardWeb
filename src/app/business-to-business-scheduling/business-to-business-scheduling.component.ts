@@ -911,10 +911,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
         if( ress.status === APIResponse.Success ) {
 
           //after fetching all service providers we will now check if their gender match with selected user or not 
-          this.serviceProvidersServices = ress.data
-
-          console.log(this.serviceProvidersServices)
-        
+          this.serviceProvidersServices = ress.data        
             // Get all service providers for the selected service
           const sps = this.serviceProvidersServices.filter(sps => {
             return sps.service_id === serviceId;
@@ -938,6 +935,8 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
           // Get the day name from the dayNames array using the day index
           const dayName = dayNames[dayIndex].toLowerCase();
 
+          console.log(formattedSelectedDate)
+
           const uniqueScheduledTimes = this.fetchedData.appointments
           .filter(app => {
             // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
@@ -956,8 +955,12 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
             return formattedTime;
           });
 
+          console.log(uniqueScheduledTimes)
+ 
+ 
           // Count the occurrences of each time slot
           const timeSlotCounts = {};
+ 
           uniqueScheduledTimes.forEach(time => {
           
             timeSlotCounts[time] = (timeSlotCounts[time] || 0) + 1;
@@ -971,6 +974,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
           
           });
 
+          console.log(filteredTimeSlots)
           // Function to check if a time slot is available
           const isTimeSlotAvailable = (timeSlot: string) => {
             return !filteredTimeSlots.includes(timeSlot);
