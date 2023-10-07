@@ -937,7 +937,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
           console.log(formattedSelectedDate)
 
-          const uniqueScheduledTimes = this.fetchedData.appointments
+          let uniqueScheduledTimes = this.fetchedData.appointments
           .filter(app => {
             // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
             return (
@@ -955,7 +955,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
             return formattedTime;
           });
 
-          console.log(uniqueScheduledTimes)
+          uniqueScheduledTimes = new Set(uniqueScheduledTimes);
  
           // Count the occurrences of each time slot
           const timeSlotCounts = {};
