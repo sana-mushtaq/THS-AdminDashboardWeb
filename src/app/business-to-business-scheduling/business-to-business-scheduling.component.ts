@@ -166,6 +166,9 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
     }) 
 
     this.getServiceList()
+
+    this.records = JSON.parse(localStorage.getItem("THS_B2B")) || [];
+
   }
 
   onChangeAddress() {
@@ -383,6 +386,9 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
         this.records.splice(0,1)
 
+
+        localStorage.setItem("THS_B2B", JSON.stringify(this.records));
+
       } else {
         // Headers are not valid
         Swal.fire("Invalid headers in the Excel file.")
@@ -573,6 +579,8 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
             let index = this.records.indexOf(record)
             this.records.splice(index,1);
+
+            localStorage.setItem("THS_B2B", JSON.stringify(this.records));
 
             (document.getElementById("adminNotes") as any).value = '';
             (document.getElementById("date") as any).value = '';
@@ -1028,4 +1036,5 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
     this.displayTime = false
     this.getAvailableTimeSlots()
   }
+
 }
