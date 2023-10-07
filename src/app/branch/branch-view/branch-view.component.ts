@@ -1030,6 +1030,9 @@ export class BranchViewComponent implements OnInit {
     this.selectedLat = event.coords.lat
     this.selectedLng = event.coords.lng
 
+    this.selectedBranch.longitude = this.selectedLng
+    this.selectedBranch.latitude = this.selectedLat
+
     this.editBranchForm.patchValue({
       latitude: this.selectedLat
     })

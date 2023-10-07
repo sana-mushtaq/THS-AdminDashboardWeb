@@ -376,6 +376,7 @@
 
                                     <div class="auto-flex-center-gap20">
                                     
+                                        <p class="bold">Service tags</p>
                                         <div class="auto-flex-center-start-gap10">
 
                                             <ng-multiselect-dropdown class="max-width" *ngIf="serviceSettings" [settings]="serviceSettings" [data]="serviceList" (onSelect)="setPreferredService($event)" (onDeSelect)="unsetPreferredService($event)"></ng-multiselect-dropdown>
@@ -907,6 +908,7 @@
         
                                         </div>
 
+                                        <p class="bold">Service tag</p>
                                         <div class="auto-flex-center-start-gap10" *ngIf="tagListRenderer">
 
                                             <ng-multiselect-dropdown class="max-width" *ngIf="tagSettings" [settings]="tagSettings" [data]="tagList" [(ngModel)]="selectedServiceTags" [placeholder]="'Select tags'" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" (onSelectAll)="onTagSelectAll($event)" (onDeSelectAll)="onTagDeSelectAll()"></ng-multiselect-dropdown>

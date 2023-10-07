@@ -899,6 +899,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
     let spData  = {
 
       service_id: serviceId,
+      branch_id: this.preferredBranch
 
     }
 
@@ -912,6 +913,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
           //after fetching all service providers we will now check if their gender match with selected user or not 
           this.serviceProvidersServices = ress.data
 
+          console.log(this.serviceProvidersServices)
         
             // Get all service providers for the selected service
           const sps = this.serviceProvidersServices.filter(sps => {
