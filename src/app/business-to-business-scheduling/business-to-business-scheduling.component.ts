@@ -957,7 +957,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
           console.log(uniqueScheduledTimes)
  
- 
           // Count the occurrences of each time slot
           const timeSlotCounts = {};
  
@@ -967,6 +966,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
         
           });
 
+          console.log(uniqueScheduledTimes)
           // Filter the time slots where all service providers are booked
           const filteredTimeSlots = Object.keys(timeSlotCounts).filter(time => {
           
