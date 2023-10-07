@@ -345,6 +345,10 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
   }
 
   handleFileInput(event: any): void {
+
+    this.records = []
+    localStorage.removeItem("THS_B2B");
+
     const file = event.target.files[0];
     const reader = new FileReader();
 
