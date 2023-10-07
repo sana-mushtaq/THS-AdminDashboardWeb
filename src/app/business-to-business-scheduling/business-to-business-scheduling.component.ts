@@ -592,6 +592,13 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
             this.openRecord = false
             this.displayTime = false
 
+            this.timeSlots = [];
+            for (let hour = 12; hour <= 23; hour++) {
+
+              this.timeSlots.push(this.formatTimeSlot(hour))
+        
+            }
+            
             Swal.fire("Appointment created successfully")
   
           } else {

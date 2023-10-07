@@ -111,7 +111,7 @@
                         </thead>
                         <tbody>
                           <tr *ngIf="appointmentDetails.requestedServices?.length == 0">
-                            <td colspan="5" class="text-center">0 service(s) booked</td>
+                            <td colspan="5" class="text-center">{{appointmentDetails.serviceDescription}}</td>
                           </tr>
                           <tr *ngFor="let service of appointmentDetails.requestedServices">
                             <td>{{ service.serviceId }}</td>
