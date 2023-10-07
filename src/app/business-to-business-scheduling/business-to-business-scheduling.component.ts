@@ -385,8 +385,8 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
       } else {
         // Headers are not valid
+        Swal.fire("Invalid headers in the Excel file.")
 
-        alert('Invalid headers in the Excel file.')
         console.error('Invalid headers in the Excel file.');
       }
     };
@@ -447,7 +447,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
     } else {
 
-      alert('Select branch and service')
+      Swal.fire("Select branch and service")
 
     }
 
@@ -496,20 +496,20 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
   createAppointment(record) {
 
     if(!this.preferredDate || !this.preferredTime) {
-
-      alert('Select appointment date & time')
-
+      
+      Swal.fire("Select branch and service")
+    
     }
 
     if(!this.preferredService) {
-
-      alert('Select service')
+   
+      Swal.fire("Select branch and service")
 
     }
 
     if(!this.preferredBranch) {
-
-      alert('Select branch')
+      
+      Swal.fire("Select branch and service")
 
     }
 
@@ -573,11 +573,11 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
             this.openRecord = false
             this.displayTime = false
 
-            alert('Appointment created successfully')
+            Swal.fire("Appointment created successfully")
   
           } else {
-  
-            alert("An error occurred while creating an appointment")
+
+            Swal.fire("An error occurred while creating an appointment")
          
           }
           

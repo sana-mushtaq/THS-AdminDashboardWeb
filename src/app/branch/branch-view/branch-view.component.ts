@@ -22,7 +22,6 @@ declare var google: any;
 
 export class BranchViewComponent implements OnInit {
 
-
   @ViewChild('search') searchElementRef: ElementRef
   @ViewChild('search1') searchElementRef1: ElementRef
   
@@ -43,7 +42,6 @@ export class BranchViewComponent implements OnInit {
   serviceProviderListAssigned: any = []
   serviceProviderAssignedServices: any = []
   
-
   //multiselect dropdown settings
   spList = []
   spSettings: IDropdownSettings = {}
@@ -61,6 +59,8 @@ export class BranchViewComponent implements OnInit {
   editBranchInformationToggle: Boolean = false
   addNewBranchToggle: Boolean = false
   assignServiceProviderToggle: Boolean = false
+  
+  showSp: boolean = false
   
   //this will be used for the currently selected branch on frontend
   selectedBranch: any = {
@@ -355,6 +355,7 @@ export class BranchViewComponent implements OnInit {
           
           this.spList = assignFullName
           this.spListRenderer = true
+          this.showSp = true
 
         } else {
 
@@ -749,6 +750,8 @@ export class BranchViewComponent implements OnInit {
           this.selectedSPs = []
           this.spList = []
           this.serviceProviderListAssigned = []
+
+          this.showSp = false
        //  this.assignServiceProviderToggle = false
  
           //if it is unable to get branch data it will return an error
@@ -777,6 +780,7 @@ export class BranchViewComponent implements OnInit {
 
     }
 
+    this.showSp = false
     this._serviceProvider.unassignBranch(data).subscribe({
   
       next : ( res : any ) => {
@@ -784,6 +788,27 @@ export class BranchViewComponent implements OnInit {
         //in case of success the api returns 0 as a status code
         if( res.status === APIResponse.Success) {
 
+
+          let spData = this.serviceProviderListAssigned.filter( sp => {
+
+            return sp.id === id
+
+          })
+          
+          spData.forEach(sp => {
+
+            sp.fullName = `${sp.first_name} ${sp.last_name}`
+          
+          })
+
+          this.spList.push(spData[0])
+
+          setTimeout(()=>{
+
+
+            this.showSp = true
+
+          }, 100)
           //now we will pop the record from serviceProviderListAssigned
           this.serviceProviderListAssigned = this.serviceProviderListAssigned.filter( sp => {
 

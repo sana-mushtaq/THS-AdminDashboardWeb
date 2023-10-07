@@ -342,7 +342,7 @@
                                         
                                         <div class="auto-flex-center-start-gap10" *ngIf="tagListRenderer">
 
-                                            <ng-multiselect-dropdown class="max-width" *ngIf="tagSettings" [settings]="tagSettings" [data]="tagList" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" (onSelectAll)="onTagSelectAll($event)" (onDeSelectAll)="onTagDeSelectAll()"></ng-multiselect-dropdown>
+                                            <ng-multiselect-dropdown class="max-width" *ngIf="tagSettings" [settings]="tagSettings" [placeholder]="'Select tags'" [data]="tagList" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" (onSelectAll)="onTagSelectAll($event)" (onDeSelectAll)="onTagDeSelectAll()"></ng-multiselect-dropdown>
 
                                         </div>
 
@@ -477,6 +477,24 @@
 
                                                 <p class="bold">Description Arabic</p>
                                                 <textarea class="input-global" formControlName="description_arabic" type="text"></textarea>
+            
+                                            </div>
+
+                                        </div>
+                                            
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">FAQ</p>
+                                                <textarea class="input-global" formControlName="faq" type="text"></textarea>    
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">FAQ Arabic</p>
+                                                <textarea class="input-global" [formControlName="faq_arabic" type="text"></textarea>    
             
                                             </div>
 
@@ -891,7 +909,7 @@
 
                                         <div class="auto-flex-center-start-gap10" *ngIf="tagListRenderer">
 
-                                            <ng-multiselect-dropdown class="max-width" *ngIf="tagSettings" [settings]="tagSettings" [data]="tagList" [(ngModel)]="selectedServiceTags" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" (onSelectAll)="onTagSelectAll($event)" (onDeSelectAll)="onTagDeSelectAll()"></ng-multiselect-dropdown>
+                                            <ng-multiselect-dropdown class="max-width" *ngIf="tagSettings" [settings]="tagSettings" [data]="tagList" [(ngModel)]="selectedServiceTags" [placeholder]="'Select tags'" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" (onSelectAll)="onTagSelectAll($event)" (onDeSelectAll)="onTagDeSelectAll()"></ng-multiselect-dropdown>
 
                                         </div>
 

@@ -433,7 +433,7 @@
                             <!-- list of service providers -->
                             <div class="auto-flex-center-start-gap10">
 
-                                <ng-multiselect-dropdown class="max-width" *ngIf="spList.length>0 && spSettings" [settings]="spSettings" [data]="spList" (onSelect)="onSPSelect($event)" (onDeSelect)="onSPDeSelect($event)" (onSelectAll)="onSPSelectAll($event)" (onDeSelectAll)="onSPDeSelectAll()"></ng-multiselect-dropdown>
+                                <ng-multiselect-dropdown class="max-width" *ngIf="spList.length>0 && spSettings && showSp" [settings]="spSettings" [data]="spList" (onSelect)="onSPSelect($event)" (onDeSelect)="onSPDeSelect($event)" (onSelectAll)="onSPSelectAll($event)" (onDeSelectAll)="onSPDeSelectAll()"></ng-multiselect-dropdown>
 
                             </div>
 

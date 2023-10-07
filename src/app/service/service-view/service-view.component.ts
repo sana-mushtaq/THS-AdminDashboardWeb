@@ -646,6 +646,9 @@ export class ServiceViewComponent implements OnInit {
     this.editServiceForm.patchValue(this.selectedService)
 
     this.editServiceForm.get('tag').patchValue(JSON.stringify(this.selectedServiceTags))
+
+
+    this.selectedService['tag'] = JSON.stringify(this.selectedServiceTags)
     //now owe will check if out form is valid or not
     if (this.editServiceForm.valid) {
 
