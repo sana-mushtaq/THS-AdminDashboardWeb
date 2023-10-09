@@ -937,7 +937,7 @@ export class UserProfileComponent implements OnInit {
         //in case of success the api returns 0 as a status code
         if( res.status === APIResponse.Success ) {
           
-          this.userLocations.splice(index,1)
+          this.userLocations = address
     
         } else {
 

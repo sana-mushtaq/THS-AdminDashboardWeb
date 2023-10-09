@@ -388,7 +388,9 @@
 
             <div class="auto-flex-start-center-gap20-no-wrap overflow-auto padding-bottom-20">
 
-                <div class="auto-flex-start-gap20-no-set-width gray-border border-radius-10 padding-10 relative width-300 max-width" *ngFor="let address of userLocations; let addressIndex = index">
+                <div class="auto-flex-start-gap20-no-set-width gray-border border-radius-10 padding-10 relative width-300 max-width" style="place-self: stretch;" *ngFor="let address of userLocations; let addressIndex = index">
+
+                    <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/delete.svg" (click)="removeAddress(addressIndex)"  style="align-self: flex-end;"/>
 
                     <img class="xxxmedImg cover border-radius-10" src="assets/images/web/icons/map.svg" />
 
@@ -402,7 +404,6 @@
 
                     </div>
 
-                    <img class="xsmallImg absolute-top-right-10 cursor-pointer" src="assets/images/web/icons/delete.svg" (click)="removeAddress(addressIndex)" />
 
                 </div>
 
