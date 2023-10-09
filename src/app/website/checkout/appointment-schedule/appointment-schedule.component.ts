@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { WebsiteDataService } from 'src/service/website-data.service';
 import { PatientsService } from 'src/service/patient.service';
 import { LanguageService } from 'src/service/language.service';
+import { InitializationService } from 'src/service/initialization.service';
 
 @Component({
   selector: 'app-appointment-schedule',
@@ -57,7 +58,8 @@ export class AppointmentScheduleComponent implements OnInit {
     private websocketService: WebsocketService,
     private dataService: WebsiteDataService,
     private _patientService: PatientsService,
-    public languageService: LanguageService
+    public languageService: LanguageService,
+    private initializationService: InitializationService
 
   ) {     
 
@@ -149,35 +151,48 @@ export class AppointmentScheduleComponent implements OnInit {
 
         //here we will identidy cart categories and item associated with each category
         this.dataService.data$.subscribe((res) => {
-         
-          let categories = res.categories
-          this.cartData.forEach(item => {
+          if(res){
+            
+            if (Object.keys(res).length === 0) {
 
-            let filteredCategories = categories.filter(category => {
-
-              return category.id === item.category_id
-
-            })
-
-            if(filteredCategories.length>0) {
-
-              if(!this.allCartCategoriesData[filteredCategories[0].id]) {
-
-                this.allCartCategoriesData[filteredCategories[0].id] = []
-
-                item['category_title'] = filteredCategories[0].title
-                this.allCartCategoriesData[filteredCategories[0].id].push(item)
-
-              } else {
-
-                item['category_title'] = filteredCategories[0].title
-                this.allCartCategoriesData[filteredCategories[0].id].push(item)
-
-              }
+              this.router.navigate(['/'])
 
             }
 
-          })
+            let categories = res.categories
+            this.cartData.forEach(item => {
+  
+              let filteredCategories = categories.filter(category => {
+  
+                return category.id === item.category_id
+  
+              })
+  
+              if(filteredCategories.length>0) {
+  
+                if(!this.allCartCategoriesData[filteredCategories[0].id]) {
+  
+                  this.allCartCategoriesData[filteredCategories[0].id] = []
+  
+                  item['category_title'] = filteredCategories[0].title
+                  this.allCartCategoriesData[filteredCategories[0].id].push(item)
+  
+                } else {
+  
+                  item['category_title'] = filteredCategories[0].title
+                  this.allCartCategoriesData[filteredCategories[0].id].push(item)
+  
+                }
+  
+              }
+  
+            })
+  
+          } else {
+
+            this.router.navigate(['/'])
+            
+          }
 
         })
 
@@ -383,7 +398,21 @@ export class AppointmentScheduleComponent implements OnInit {
     })*/
 
   }
-
+  
+  initializeApp(): void {
+    
+    // Call the initialization service method here
+    this.initializationService.initializeApp().subscribe(
+      () => {
+        console.log('App initialized successfully.');
+        // You can perform any other logic after initialization here
+      },
+      error => {
+        console.error('App initialization error:', error);
+        // Handle initialization error here
+      }
+    );
+  }
   selectCurrentDay() {
 
     this.selectDate(new Date())
@@ -660,7 +689,6 @@ export class AppointmentScheduleComponent implements OnInit {
         timeSlotCounts[time] = (timeSlotCounts[time] || 0) + 1;
     
       });
-      console.log(sps.length)
       // Filter the time slots where all service providers are booked
       const filteredTimeSlots = Object.keys(timeSlotCounts).filter(time => {
       

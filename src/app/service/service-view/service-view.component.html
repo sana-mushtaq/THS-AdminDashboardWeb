@@ -96,7 +96,7 @@
                                 </td>
 
                                 <td>
-                                    <p class="cursor-pointer hover-effect glass-bg padding-5 border-radius-10 border-none web-font-primary-light" *ngFor="let tag of getTag(service.tag)"> {{ tag }} </p>
+                                    <p class="cursor-pointer hover-effect glass-bg padding-5 border-radius-10 border-none web-font-primary-light" style="margin:3px" *ngFor="let tag of getTag(service.tag)"> {{ tag }} </p>
                                 </td>
 
                                 <td>
@@ -731,30 +731,6 @@
 
                                         </div>    
 
-                                    </div>
-
-                                    <div class="auto-flex-center-start-gap20">
-
-                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
-
-                                            <p class="bold">Category</p>
-                                            <select class="input-global" [(ngModel)]="selectedService.category_id">
-                                                <option *ngFor="let category of categoryList" [value]="category.id"> {{ category.title }}</option>
-                                            </select>
-                                        
-                                        </div>
-
-                                        <div class="auto-flex-start-gap5-column-no-set-width width-half">
-
-                                            <p class="bold">Service Type</p>
-                                            <select class="input-global" [(ngModel)]="selectedService.service_type">
-                                                <option value="service">Service</option>
-                                                <option value="labtest">Lab Test</option>
-                                                <option value="labpackage">Lab Package</option>
-                                            </select>
-                                        
-                                        </div>
-                                    
                                     </div>
 
                                     <div class="auto-flex-center-start-gap20">

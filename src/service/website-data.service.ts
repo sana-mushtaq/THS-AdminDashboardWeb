@@ -57,12 +57,12 @@ export class WebsiteDataService {
   }
 
   getData(data) {
-    
-      //when we have user location, we wil fetch its nearest branch and its related services
+
+    //when we have user location, we wil fetch its nearest branch and its related services
       this._b2c.businessToCustomerRequest(data).subscribe({
     
         next : ( res : any ) => {
-  
+
           //in case of success the api returns 0 as a status code
           if( res.status === APIResponse.Success ) {
             

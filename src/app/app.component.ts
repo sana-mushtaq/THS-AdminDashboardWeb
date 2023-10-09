@@ -58,6 +58,7 @@ export class AppComponent {
   }
 
   initializeApp(): void {
+    
     // Call the initialization service method here
     this.initializationService.initializeApp().subscribe(
       () => {

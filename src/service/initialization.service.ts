@@ -78,7 +78,6 @@ export class InitializationService {
           this.centerLng = position.coords.longitude
           this.selectedLat = position.coords.latitude
           this.selectedLng = position.coords.longitude
-          
           // Emit a signal that user location is ready
           this.initializationSubject.next() // No argument needed here
         },
