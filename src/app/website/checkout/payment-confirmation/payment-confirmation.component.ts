@@ -168,7 +168,7 @@ export class PaymentConfirmationComponent implements OnInit {
                     if( ress.status === APIResponse.Success ) {
             
                       //if payment is captured then we wil generate an appointment by passing data
-                      if(ress.payment.status === 'CAPTURED') {
+                      if(ress.payment.status === 'CAPTURED' || ress.payment.status === 'CANCELLED') {
 
                         let appointmentRequest = JSON.parse(localStorage.getItem("THSAppointmentRequest"))
                         let payload =  JSON.parse(localStorage.getItem("THSPaylaod"))
