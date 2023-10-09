@@ -165,7 +165,7 @@ export class PaymentConfirmationComponent implements OnInit {
                   next : ( ress : any ) => {
                     console.log(ress.status)
                     //in case of success the api returns 0 as a status code
-                    if( ress.status === APIResponse.Success ) {
+                    if( ress.status === APIResponse.Failed ) {
             
                       //if payment is captured then we wil generate an appointment by passing data
                       if(ress.payment.status === 'CAPTURED' || ress.payment.status === 'CANCELLED') {
