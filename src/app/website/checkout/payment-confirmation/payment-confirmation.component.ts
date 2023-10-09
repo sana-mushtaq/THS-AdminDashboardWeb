@@ -324,6 +324,11 @@ export class PaymentConfirmationComponent implements OnInit {
                         }) 
                         
                         
+                      } else {
+
+                        this.paymentCaptured = false
+                        this.verified = true
+
                       }
             
                     } else {

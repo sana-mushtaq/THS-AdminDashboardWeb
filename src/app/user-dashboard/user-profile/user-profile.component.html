@@ -237,7 +237,7 @@
         
                     <div class="auto-flex-start-gap20-column relative white-bg overflow-auto max-height-500 border-radius-20 width-min-600 width-max-600 phone-min-width phone-max-height-70Percent">
         
-                        <img class="xsmallImg absolute-top-right-10 cursor-pointer" src="assets/images/web/icons/delete.svg" (click)="confirmDeleteDependant()" />
+                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/delete.svg" style="align-self: flex-end;" (click)="confirmDeleteDependant()" />
                         <!-- input fields -->
                         <div class="auto-flex-center-space-between-gap20">
         
@@ -301,7 +301,7 @@
         
                             <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
         
-                                <p class="xsmall bold">>{{ 'inputFields.idType' | translate }}</p>
+                                <p class="xsmall bold">{{ 'inputFields.idType' | translate }}</p>
                                 <select class="input-global" [(ngModel)]="dependantData.id_type">
         
                                     <option disabled></option>
