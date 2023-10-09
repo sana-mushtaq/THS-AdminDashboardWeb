@@ -202,7 +202,7 @@
         
                     <div class="auto-flex-space-between-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative" (click)="navigateToService(service.id)" *ngFor="let service of item.services">
         
-                        <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none z-index">{{ service.price }} {{ 'header.sar' | translate }}</p>
+                        <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none" style="z-index: 2;">{{ service.price }} {{ 'header.sar' | translate }}</p>
                         
                         <div class="linear-gradient-blue absolute height-160 border-top-left-right-10"></div>
                         <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="{{serverUrl}}{{service.cover_image}}">
