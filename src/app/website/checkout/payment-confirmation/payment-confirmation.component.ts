@@ -311,6 +311,8 @@ export class PaymentConfirmationComponent implements OnInit {
                     
                             } else {
                     
+                              this.paymentCaptured = false
+                              this.verified = true
                           
                             }
                             
@@ -318,7 +320,8 @@ export class PaymentConfirmationComponent implements OnInit {
                           error: ( err: any ) => {
                             
                             console.log(err)
-                    
+                            this.paymentCaptured = false
+                            this.verified = true
                           }
                       
                         }) 
