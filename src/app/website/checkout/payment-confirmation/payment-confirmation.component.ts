@@ -163,7 +163,7 @@ export class PaymentConfirmationComponent implements OnInit {
                 this._b2c.verifyPaymentStatus(data).subscribe({
               
                   next : ( ress : any ) => {
-            
+                    console.log(ress.status)
                     //in case of success the api returns 0 as a status code
                     if( ress.status === APIResponse.Success ) {
             
@@ -347,6 +347,9 @@ export class PaymentConfirmationComponent implements OnInit {
                     
                     console.log(err)
             
+                    this.paymentCaptured = false
+                    this.verified = true
+                    
                   }
               
                 }) 
