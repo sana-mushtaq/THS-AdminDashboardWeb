@@ -762,10 +762,9 @@ export class ServiceViewComponent implements OnInit {
               if(filter.length>0){
 
                 this.serviceList.splice(this.selectedServiceIndex, 1)
-                this.displayedServiceList.splice(this.selectedServiceIndex, 1)
-  
-            
-  
+
+                this.displayedServiceList = this.serviceList
+    
                 this.unassignServiceData()
                 
                 Swal.fire(res.message)
