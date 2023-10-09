@@ -379,4 +379,10 @@ export class PaymentConfirmationComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  naviagteToHome() {
+
+    this.router.navigate(['/'])
+
+  }
+  
 }
