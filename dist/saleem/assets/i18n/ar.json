@@ -105,7 +105,8 @@
         "userNotLoggedInTitleDesc": "الرجاء تسجيل الدخول للمتابعة",
         "tryAgain": "حدث خطأ. حاول مرة أخرى لاحقا",
         "errorWhileUpdatingAddress": "حدث خطأ أثناء حفظ العنوان في حسابك ولكن يمكنك استخدام هذا العنوان لحجز الخدمة.",
-        "sureRemovingUser": "هل أنت متأكد من حذف هذا المستخدم؟"
+        "sureRemovingUser": "هل أنت متأكد من حذف هذا المستخدم؟",
+        "success":"تم بنجاح"
 
     },
 
@@ -124,7 +125,8 @@
         "appointmentId": "رقم الموعد",
         "serviceName": "اسم الخدمة",
         "dateTime": "التاريخ والوقت",
-        "bookService": "ابدأ بحجز موعد"
+        "bookService": "ابدأ بحجز موعد",
+        "dependantSuccess": "تم تحديث بيانات المستخدم بنجاح"
 
     },
 
@@ -160,7 +162,8 @@
         "personalInformationDesc": "أدخل معلوماتك الشخصية",
         "changePasswordTitle": "تغيير كلمة السر",
         "confirmPasswordTitle": "تأكيد كلمة السر",
-        "enterNewPassword": "أدخل كلمة السر الجديدة"
+        "enterNewPassword": "أدخل كلمة السر الجديدة",
+        "backToHome": "الرئيسية"
 
     },
 

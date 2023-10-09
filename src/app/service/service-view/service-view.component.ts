@@ -483,6 +483,12 @@ export class ServiceViewComponent implements OnInit {
               
               Swal.fire(res.message)
 
+              if(!status) {
+
+                this.deactivateServiceVariants(currentService.id)
+
+              }
+
             } else {
     
               //if it is unable to get branch data it will return an error
@@ -500,6 +506,21 @@ export class ServiceViewComponent implements OnInit {
         })
 
       }
+
+    })
+
+  }
+
+  deactivateServiceVariants(serviceId) {
+
+    this.service_variants.forEach(s => {
+
+      if(s.primary_service_id === serviceId)
+        {
+
+          s.active = false
+
+        }
 
     })
 

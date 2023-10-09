@@ -631,6 +631,76 @@ export class AllServicesComponent implements OnInit {
     this.placeSelected = false
     this.getComponentData()
 
+    // Get the location name using the Google Maps Places API
+    const geocoder = new google.maps.Geocoder()
+    const latlng = { lat: this.centerLat, lng: this.centerLng }
+
+    geocoder.geocode({ location: latlng }, (results, status) => {
+
+      if (status === google.maps.GeocoderStatus.OK) {
+      
+        if (results[0]) {
+      
+          const locationName = results[0].formatted_address
+          this.locationName = locationName
+      
+          this.userAddress = {
+            
+            latitude: this.selectedLat,
+            longitude: this.selectedLng,
+            address_line1: locationName,
+            address_line2: ''
+
+          }
+
+          let data = {
+
+            user_address: this.userAddress,
+            branch_id: this.branch_id
+          }
+
+          localStorage.setItem("THSAppointmentAddress", JSON.stringify(data))
+
+          const addressComponents = results[0].address_components
+
+          for (const component of addressComponents) {
+
+            if (component.types.includes("locality")) {
+
+              const cityName = component.long_name
+
+              this.cityName = cityName
+
+              this.addressForm.get('city').setValue( cityName )
+
+              return cityName // You can use the cityName as needed
+
+            }
+
+              // Check for the country component
+              if (component.types.includes("country")) {
+                
+                this.addressForm.get('country').setValue( component.long_name )
+              
+              }
+
+          }
+
+          // You can use the locationName as needed
+        } else {
+      
+          console.error("No results found.")
+      
+        }
+      
+      } else {
+        
+        console.error("Geocoder failed due to: " + status)
+      
+      }
+
+    })
+
     if(this.userId) {
 
       this.addNewAddress()

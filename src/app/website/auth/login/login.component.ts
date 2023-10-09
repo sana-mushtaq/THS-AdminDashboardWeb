@@ -124,6 +124,13 @@ export class LoginComponent implements OnInit {
 
   }
 
+  naviagteToHome() {
+
+    this.router.navigate(['/'])
+
+  }
+  
+
 }
 
 /* TO BE REPLACED LATER

@@ -70,7 +70,7 @@
 
                       <div class="auto-flex-center-space-between-gap20 days phone-no-gap">
 
-                        <div class="day cursor-pointer" *ngFor="let day of currentWeek" (click)="selectDate(day);  setCartDataDateValue(keyvalue.key, day)" [ngClass]="{ 'selected-date':  keyvalue.value[0].selectedDate?.toDateString() === day.toDateString() }">
+                        <div class="day cursor-pointer" *ngFor="let day of currentWeek" (click)="selectDate(day);  setCartDataDateValue(keyvalue.key, day)" [ngClass]="{ 'selected-date': getDate(keyvalue.value[0].selectedDate, day.toDateString()) }">
                             {{ day.getDate() }}
                         </div>
                         

@@ -375,5 +375,11 @@ export class RegisterComponent implements OnInit {
 
   }
 
+  naviagteToHome() {
+
+    this.router.navigate(['/'])
+
+  }
+
 }
 

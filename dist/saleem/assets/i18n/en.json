@@ -106,8 +106,8 @@
         "userNotLoggedInTitleDesc": "Please log in to continue",
         "tryAgain": "An error occurred. Try agin later",
         "errorWhileUpdatingAddress": "An error occured while saving address in your account but you can use this address to book service.",
-        "sureRemovingUser": "Are you sure that you want to remove this user?"
-
+        "sureRemovingUser": "Are you sure that you want to remove this user?",
+        "success":"Success"
     },
 
     "patientProfile": {
@@ -125,7 +125,8 @@
         "appointmentId": "Appointment ID",
         "serviceName": "Service Name",
         "dateTime": "Date & time",
-        "bookService": "Book a service"
+        "bookService": "Book a service",
+        "dependantSuccess": "User data is updated successfully"
 
     },
 
@@ -161,7 +162,8 @@
         "personalInformationDesc": "Enter your additional information",
         "changePasswordTitle": "Change Password",
         "confirmPasswordTitle": "Confirm Password",
-        "enterNewPassword": "Enter New Password"
+        "enterNewPassword": "Enter New Password",
+        "backToHome": "Home"
 
     },
 

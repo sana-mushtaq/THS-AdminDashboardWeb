@@ -621,6 +621,9 @@
     <!-- An Error occured while creating user. Try again later -->
     <app-custom-alert *ngIf="showErrorCreatingDependant" [title]="'messages.error' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
+     <!-- An Error occured while creating user. Try again later -->
+     <app-custom-alert *ngIf="showSuccessUpdatingDependant" [title]="'messages.success' | translate" [message]="'patientProfile.dependantSuccess' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+
     <!-- An Error occured while updating user. Try again later -->
     <app-custom-alert *ngIf="showErrorUpdatingDependant" [title]="'messages.error' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 

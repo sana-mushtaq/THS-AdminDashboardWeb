@@ -34,6 +34,8 @@ export class CaretgoryViewComponent implements OnInit {
     id: -1,
     title: '',
     title_arabic: '',
+    description: '',
+    description_arabic: '',
     icon: '',
     image: '',
     banner: '',
@@ -45,6 +47,8 @@ export class CaretgoryViewComponent implements OnInit {
     id: -1,
     title: '',
     title_arabic: '',
+    description: '',
+    description_arabic: '',
     category_id: -1,
     parent_category: '',
     icon: '',
@@ -77,6 +81,8 @@ export class CaretgoryViewComponent implements OnInit {
       
       title: ['', [ Validators.required]],
       title_arabic: ['', [ Validators.required]],
+      description:  [''],
+      description_arabic:  [''],
       icon: [''],
       image: [''],
       banner: [''],
@@ -86,7 +92,7 @@ export class CaretgoryViewComponent implements OnInit {
     })
 
     //now we will initialize service sub category form
-    this.addSubCategoryForm = this.editSubCategoryForm =this.fb.group({
+    this.addSubCategoryForm = this.editSubCategoryForm = this.fb.group({
   
       title: ['', [ Validators.required ]],
       title_arabic: ['', [ Validators.required ]],
@@ -133,6 +139,8 @@ export class CaretgoryViewComponent implements OnInit {
       id: -1,
       title: '',
       title_arabic: '',
+      description: '',
+      description_arabic: '',
       icon: '',
       image: '',
       banner: '',
@@ -149,6 +157,8 @@ export class CaretgoryViewComponent implements OnInit {
       id: -1,
       title: '',
       title_arabic: '',
+      description: '',
+      description_arabic: '',
       category_id: -1,
       parent_category: '',
       icon: '',

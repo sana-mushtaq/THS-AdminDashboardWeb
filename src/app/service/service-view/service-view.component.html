@@ -228,16 +228,17 @@
 
                                         </div>
 
-                                        <div class="auto-flex-center-start-gap20">
+                                        <!-- <div class="auto-flex-center-start-gap20">
 
                                             <div class="auto-flex-start-gap5-column">
 
                                                 <p class="bold">URL</p>
-                                                <input class="input-global" formControlName="url" type="text" />    
+                                                <input class="input-global" formControlName="url" type="text" readonly="true" />    
 
                                             </div>
 
                                         </div>
+                                        -->
 
                                         <div class="auto-flex-center-start-gap20">
 
@@ -394,7 +395,7 @@
 
                                     <div class="auto-flex-center-gap20">
                                     
-                                        <p class="bold">Service tags</p>
+                                        <p class="bold text-left max-width">Select Service </p>
                                         <div class="auto-flex-center-start-gap10">
 
                                             <ng-multiselect-dropdown class="max-width" *ngIf="serviceSettings" [settings]="serviceSettings" [data]="serviceList" (onSelect)="setPreferredService($event)" (onDeSelect)="unsetPreferredService($event)"></ng-multiselect-dropdown>
@@ -429,30 +430,6 @@
                                             </div>    
 
                                         </div>
-  
-                                        <div class="auto-flex-center-start-gap20">
-
-                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
-
-                                                <p class="bold">Category</p>
-                                                <select class="input-global" formControlName="category_id">
-                                                    <option *ngFor="let category of categoryList" [value]="category.id"> {{ category.title }}</option>
-                                                </select>
-                                            
-                                            </div>
-
-                                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
-
-                                                <p class="bold">Service Type</p>
-                                                <select class="input-global" formControlName="service_type">
-                                                    <option value="service">Service</option>
-                                                    <option value="labtest">Lab Test</option>
-                                                    <option value="labpackage">Lab Package</option>
-                                                </select>
-                                            
-                                            </div>
-                                        
-                                        </div>
 
                                         <div class="auto-flex-center-start-gap20">
 
@@ -468,17 +445,6 @@
                                                 <p class="bold">Title Arabic</p>
                                                 <input class="input-global" formControlName="title_arabic" type="text" />
             
-                                            </div>
-
-                                        </div>
-
-                                        <div class="auto-flex-center-start-gap20">
-
-                                            <div class="auto-flex-start-gap5-column">
-
-                                                <p class="bold">URL</p>
-                                                <input class="input-global" formControlName="url" type="text" />    
-
                                             </div>
 
                                         </div>
@@ -809,16 +775,17 @@
 
                                     </div>
 
-                                    <div class="auto-flex-center-start-gap20">
+                                   <!-- <div class="auto-flex-center-start-gap20">
 
                                         <div class="auto-flex-start-gap5-column">
 
                                             <p class="bold">URL</p>
-                                            <input class="input-global" [(ngModel)]="selectedService.url" type="text" />    
+                                            <input class="input-global" [(ngModel)]="selectedService.url" type="text" readonly="true" />    
 
                                         </div>
 
                                     </div>
+                                   -->
 
                                     <div class="auto-flex-center-start-gap20">
 

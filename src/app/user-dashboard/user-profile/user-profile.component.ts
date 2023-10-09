@@ -41,6 +41,7 @@ export class UserProfileComponent implements OnInit {
   showUserAlreadyExist: boolean = false
   showErrorCreatingDependant: boolean = false
   showErrorUpdatingDependant: boolean = false
+  showSuccessUpdatingDependant: boolean = false
   showDependantDetails: boolean = false
   showDeleteDependant: boolean = false
   showErrorDeletingDependant: boolean = false
@@ -442,6 +443,7 @@ export class UserProfileComponent implements OnInit {
     this.showErrorUpdatingDependant = false
     this.showErrorDeletingDependant = false
     this.showErrorUpdatingAddress = false
+    this.showSuccessUpdatingDependant = false
 
   }
 
@@ -543,7 +545,11 @@ export class UserProfileComponent implements OnInit {
             //in case of success the api returns 0 as a status code
             if( res.status === APIResponse.Success ) {
 
-              console.log("success")
+              this.showDependantDetails = false
+              this.dependantData = {}
+              this.updateDependantForm.reset()
+
+              this.showSuccessUpdatingDependant = true
 
             } else {
 

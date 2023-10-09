@@ -735,15 +735,50 @@ export class BranchViewComponent implements OnInit {
     this._serviceProvider.assignBranch(data).subscribe({
   
       next : ( res : any ) => {
-
+        
         //in case of success the api returns 0 as a status code
-        if( res.status === APIResponse.Success) {
-          
+        if( res.status === "Success") {
+
+          let ids = this.selectedSPs
+
           //after assiging branch to a service provider we will reset the data
-         // this.selectedSPs = []
+          this.selectedSPs = []
+          this.showSp = false
+
+          let tmpSp = this.spList
+          this.spList = []
+
+          for( let i = 0; i < tmpSp.length; i++ ) {
+
+            ids.forEach(id=>{
+
+              if(tmpSp[i] && tmpSp[i].id) {
+
+                if(id === tmpSp[i].id) {
+
+                  tmpSp.splice(i,1)
+                  i = i - 1;
+  
+                }   
+
+              }
+
+            })
+
+          }
+
+          this.spList = tmpSp
+
+          setTimeout(()=>{
+            this.showSp = true
+
+          }, 200)
+
           //this.spList = []
           //this.serviceProviderListAssigned = []
-          this.assignServiceProviderToggle = false
+          // this.assignServiceProviderToggle = false 
+          
+          this.getServiceProviders()
 
         } else {
 

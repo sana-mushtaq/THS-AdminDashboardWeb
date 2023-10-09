@@ -636,7 +636,7 @@ export class AppointmentScheduleComponent implements OnInit {
       // Get the day name from the dayNames array using the day index
       const dayName = dayNames[dayIndex].toLowerCase();
 
-      const uniqueScheduledTimes = this.fetchedData.appointments
+      let uniqueScheduledTimes = this.fetchedData.appointments
       .filter(app => {
         // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
         return (
@@ -660,7 +660,7 @@ export class AppointmentScheduleComponent implements OnInit {
         timeSlotCounts[time] = (timeSlotCounts[time] || 0) + 1;
     
       });
-  
+      console.log(sps.length)
       // Filter the time slots where all service providers are booked
       const filteredTimeSlots = Object.keys(timeSlotCounts).filter(time => {
       
@@ -820,24 +820,29 @@ export class AppointmentScheduleComponent implements OnInit {
 
     for(let data of this.allCartCategoriesData) {
 
-      if(!data[0].preferredTime || !data[0].selectedDate) {
+      if(data) {
 
-        count = count +1
+        if(!data[0].preferredTime || !data[0].selectedDate) {
 
-      } else {
-
-        const currentDate = data[0].selectedDate;
-
-        // Add one day to the current date to get the selected date
-        currentDate.setDate(currentDate.getDate() + 1);
-
-        // Convert the selected date to an ISO string in UTC format
-        const selectedDateISO = currentDate.toISOString();
-        data[0]["selectedDate"] = selectedDateISO
+          count = count +1
+  
+        }
+  
+        if(data[0].selectedDate instanceof Date) {
+  
+          const currentDate = new Date(data[0].selectedDate);
+  
+          // Add one day to the current date to get the selected date
+          currentDate.setDate(currentDate.getDate() + 1);
+  
+          // Convert the selected date to an ISO string in UTC format
+          const selectedDateISO = currentDate.toISOString();
+          data[0]["selectedDate"] = selectedDateISO
+  
+        }  
 
       }
 
-      
     }
 
     if(count > 0) {
@@ -896,6 +901,21 @@ export class AppointmentScheduleComponent implements OnInit {
 
   setCartDataDateValue(value, date) {
     this.allCartCategoriesData[value][0]["selectedDate"] = date
+
+  }
+
+  getDate(date1, date2) {
+  
+    let expression = false
+
+    let x = new Date(date1)
+    if(x?.toDateString() === date2) {
+
+      expression = true
+
+    }
+
+    return expression
 
   }
 
