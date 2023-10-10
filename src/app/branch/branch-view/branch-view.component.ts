@@ -246,8 +246,8 @@ export class BranchViewComponent implements OnInit {
     this.selectedBranch = currentBranch
     this.selectedBranchIndex = index
 
-    this.selectedLat = this.selectedBranch.latitude
-    this.selectedLng = this.selectedBranch.longitude
+    this.selectedLat = Number(this.selectedBranch.latitude)
+    this.selectedLng = Number(this.selectedBranch.longitude)
 
     this.centerLat = this.selectedLat
     this.centerLng = this.selectedLng
