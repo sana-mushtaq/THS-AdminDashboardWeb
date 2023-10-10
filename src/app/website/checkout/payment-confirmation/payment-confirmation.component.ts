@@ -163,152 +163,103 @@ export class PaymentConfirmationComponent implements OnInit {
                 this._b2c.verifyPaymentStatus(data).subscribe({
               
                   next : ( ress : any ) => {
-                    console.log(ress.status)
+
                     //in case of success the api returns 0 as a status code
-                    if( ress.status === 500) {
+                    if( ress.status === 200) {
             
                       //if payment is captured then we wil generate an appointment by passing data
                       if(ress.payment.status === 'CAPTURED' || ress.payment.status === 'CANCELLED') {
-
-                        let appointmentRequest = JSON.parse(localStorage.getItem("THSAppointmentRequest"))
-                        let payload =  JSON.parse(localStorage.getItem("THSPaylaod"))
-                        let address = JSON.parse(localStorage.getItem("THSAppointmentAddress"))
-                        let discount = JSON.parse(localStorage.getItem("THSDiscount"))
-                        let multiAppointment = JSON.parse(localStorage.getItem("THSMultiAppointment"))
-                        
-                        this.cartData = payload.cartData
-                        this.date = payload.preferredDate
-                        this.time = payload.preferredTime
-                        this.name = `${appointmentRequest.userData[0].first_name} ${appointmentRequest.userData[0].last_name} `
-
-                        let request = {
-
-                          userData: appointmentRequest.userData,
-                          branch_id: address.branch_id,
-                          scheduled_date: payload.preferredDate,
-                          scheduled_time: payload.preferredTime,
-                          cartData: payload.cartData,
-                          payment_method: 'tap payments',
-                          payment_id: ress.payment.id,
-                          payment_status: 'CAPTURED',
-                          payment_url: appointmentRequest.paymentURL,
-                          longitude: address.user_address.longitude,
-                          latitude: address.user_address.latitude,
-                          location: `${address.user_address.address_line1} ${address.user_address.address_line2}`,
-                          patient_note: payload.patient_note,
-                          patient_source_id: 4,
-                          additional_items: null,
-                          discount_type: discount.discountType,
-                          discount_amount: discount.discountAmount,
-                          vat_applied: discount.vatApplied,
-                          active_offer_id: null,
-                          invoice_total: ress.payment.amount,
-                          operator_note: null,
-                          insurance_id: null,
-                          is_insured: false,
-                          insurance_provider_id: null,
-                          category_id: payload.cartData[0].category_id,
-                          multiAppointment: multiAppointment,
-                          sourceRef: 'Website'
-                        
-                        }
 
                         this._b2c.verifyPaymentStatus(data).subscribe({
               
                           next : ( ress : any ) => {
                     
                             //in case of success the api returns 0 as a status code
-                            if( ress.status === APIResponse.Success ) {
+                            if( ress.status === 200 ) {
                     
-                              //if payment is captured then we wil generate an appointment by passing data
-                              if(ress.payment.status === 'CAPTURED') {
-                
-                                let appointmentRequest = JSON.parse(localStorage.getItem("THSAppointmentRequest"))
-                                let payload =  JSON.parse(localStorage.getItem("THSPaylaod"))
-                                let address = JSON.parse(localStorage.getItem("THSAppointmentAddress"))
-                                let discount = JSON.parse(localStorage.getItem("THSDiscount"))
-                                let multiAppointment = JSON.parse(localStorage.getItem("THSMultiAppointment"))
-                                
-                                multiAppointment = multiAppointment.filter(app => {
-                
-                                  return app !==null
-                                })
-                
-                                this.cartData = payload.cartData
-                                this.date = payload.preferredDate
-                                this.time = payload.preferredTime
-                                this.name = `${appointmentRequest.userData[0].first_name} ${appointmentRequest.userData[0].last_name} `
-                
-                                let request = {
-                
-                                  userData: appointmentRequest.userData,
-                                  branch_id: address.branch_id,
-                                  scheduled_date: payload.preferredDate,
-                                  scheduled_time: payload.preferredTime,
-                                  cartData: payload.cartData,
-                                  payment_method: 'tap payments',
-                                  payment_id: ress.payment.id,
-                                  payment_status: 'CAPTURED',
-                                  payment_url: appointmentRequest.paymentURL,
-                                  longitude: address.user_address.longitude,
-                                  latitude: address.user_address.latitude,
-                                  location: `${address.user_address.address_line1} ${address.user_address.address_line2}`,
-                                  patient_note: payload.patient_note,
-                                  patient_source_id: 4,
-                                  additional_items: null,
-                                  discount_type: discount.discountType,
-                                  discount_amount: discount.discountAmount,
-                                  vat_applied: discount.vatApplied,
-                                  active_offer_id: null,
-                                  invoice_total: ress.payment.amount,
-                                  operator_note: null,
-                                  insurance_id: null,
-                                  is_insured: false,
-                                  insurance_provider_id: null,
-                                  category_id: payload.cartData[0].category_id,
-                                  multiAppointment: multiAppointment,
-                                  sourceRef: 'Website'
-                                
-                                }
-                
-                                this._b2c.businessToCustomerAppointment(request).subscribe({
-                      
-                                  next : ( res : any ) => {
-                            
-                                    //in case of success the api returns 0 as a status code
-                                    if( res.status === APIResponse.Success ) {
-                            
-                                      //if payment is captured then we wil generate an appointment by passing data
-                                    
-                                      this.appointmentId = res.data
-                                      this.paymentCaptured = true
-                                      this.verified = true
-
-                                      localStorage.removeItem("THSAppointmentRequest")
-                                      localStorage.removeItem("THSPaylaod")
-                                      localStorage.removeItem("THSAppointmentAddress")
-                                      localStorage.removeItem("THSCart")
-                                      localStorage.removeItem("THSDiscount")
-                                      localStorage.removeItem("THSMultiAppointment")
-                                      
-                                    } else {
-                            
-                                      this.paymentCaptured = false
-                                      this.verified = true
-                                      
-                                    }
-                                    
-                                  },
-                                  error: ( errr: any ) => {
-                                    
-                                    console.log(errr)
-                            
-                                  }
+                              let appointmentRequest = JSON.parse(localStorage.getItem("THSAppointmentRequest"))
+                              let payload =  JSON.parse(localStorage.getItem("THSPaylaod"))
+                              let address = JSON.parse(localStorage.getItem("THSAppointmentAddress"))
+                              let discount = JSON.parse(localStorage.getItem("THSDiscount"))
+                              let multiAppointment = JSON.parse(localStorage.getItem("THSMultiAppointment"))
                               
-                                }) 
-                
+                              multiAppointment = multiAppointment.filter(app => {
+              
+                                return app !==null
+                              })
+              
+                              this.cartData = payload.cartData
+                              this.date = payload.preferredDate
+                              this.time = payload.preferredTime
+                              this.name = `${appointmentRequest.userData[0].first_name} ${appointmentRequest.userData[0].last_name} `
+              
+                              let request = {
+              
+                                userData: appointmentRequest.userData,
+                                branch_id: address.branch_id,
+                                scheduled_date: payload.preferredDate,
+                                scheduled_time: payload.preferredTime,
+                                cartData: payload.cartData,
+                                payment_method: 'tap payments',
+                                payment_id: ress.payment.id,
+                                payment_status: 'CAPTURED',
+                                payment_url: appointmentRequest.paymentURL,
+                                longitude: address.user_address.longitude,
+                                latitude: address.user_address.latitude,
+                                location: `${address.user_address.address_line1} ${address.user_address.address_line2}`,
+                                patient_note: payload.patient_note,
+                                patient_source_id: 4,
+                                additional_items: null,
+                                discount_type: discount.discountType,
+                                discount_amount: discount.discountAmount,
+                                vat_applied: discount.vatApplied,
+                                active_offer_id: null,
+                                invoice_total: ress.payment.amount,
+                                operator_note: null,
+                                insurance_id: null,
+                                is_insured: false,
+                                insurance_provider_id: null,
+                                category_id: payload.cartData[0].category_id,
+                                multiAppointment: multiAppointment,
+                                sourceRef: 'Website'
+                              
                               }
+              
+                              this._b2c.businessToCustomerAppointment(request).subscribe({
                     
+                                next : ( res : any ) => {
+                          
+                                  //in case of success the api returns 0 as a status code
+                                  if( res.status === APIResponse.Success ) {
+                          
+                                    //if payment is captured then we wil generate an appointment by passing data
+                                  
+                                    this.appointmentId = res.data
+                                    this.paymentCaptured = true
+                                    this.verified = true
+
+                                    localStorage.removeItem("THSAppointmentRequest")
+                                    localStorage.removeItem("THSPaylaod")
+                                    localStorage.removeItem("THSAppointmentAddress")
+                                    localStorage.removeItem("THSCart")
+                                    localStorage.removeItem("THSDiscount")
+                                    localStorage.removeItem("THSMultiAppointment")
+                                    
+                                  } else {
+                          
+                                    this.paymentCaptured = false
+                                    this.verified = true
+                                    
+                                  }
+                                  
+                                },
+                                error: ( errr: any ) => {
+                                  
+                                  console.log(errr)
+                          
+                                }
+                            
+                              }) 
                             } else {
                     
                               this.paymentCaptured = false
@@ -325,8 +276,7 @@ export class PaymentConfirmationComponent implements OnInit {
                           }
                       
                         }) 
-                        
-                        
+                                  
                       } else {
 
                         this.paymentCaptured = false
@@ -349,6 +299,92 @@ export class PaymentConfirmationComponent implements OnInit {
             
                     this.paymentCaptured = false
                     this.verified = true
+
+
+                    let appointmentRequest = JSON.parse(localStorage.getItem("THSAppointmentRequest"))
+                    let payload =  JSON.parse(localStorage.getItem("THSPaylaod"))
+                    let address = JSON.parse(localStorage.getItem("THSAppointmentAddress"))
+                    let discount = JSON.parse(localStorage.getItem("THSDiscount"))
+                    let multiAppointment = JSON.parse(localStorage.getItem("THSMultiAppointment"))
+                    
+                    multiAppointment = multiAppointment.filter(app => {
+    
+                      return app !==null
+                    })
+    
+                    this.cartData = payload.cartData
+                    this.date = payload.preferredDate
+                    this.time = payload.preferredTime
+                    this.name = `${appointmentRequest.userData[0].first_name} ${appointmentRequest.userData[0].last_name} `
+    
+                    let request = {
+    
+                      userData: appointmentRequest.userData,
+                      branch_id: address.branch_id,
+                      scheduled_date: payload.preferredDate,
+                      scheduled_time: payload.preferredTime,
+                      cartData: payload.cartData,
+                      payment_method: 'tap payments',
+                      payment_id: id,
+                      payment_status: 'CAPTURED',
+                      payment_url: appointmentRequest.paymentURL,
+                      longitude: address.user_address.longitude,
+                      latitude: address.user_address.latitude,
+                      location: `${address.user_address.address_line1} ${address.user_address.address_line2}`,
+                      patient_note: payload.patient_note,
+                      patient_source_id: 4,
+                      additional_items: null,
+                      discount_type: discount.discountType,
+                      discount_amount: discount.discountAmount,
+                      vat_applied: discount.vatApplied,
+                      active_offer_id: null,
+                      invoice_total: 200,
+                      operator_note: null,
+                      insurance_id: null,
+                      is_insured: false,
+                      insurance_provider_id: null,
+                      category_id: payload.cartData[0].category_id,
+                      multiAppointment: multiAppointment,
+                      sourceRef: 'Website'
+                    
+                    }
+    
+                    this._b2c.businessToCustomerAppointment(request).subscribe({
+          
+                      next : ( res : any ) => {
+                
+                        //in case of success the api returns 0 as a status code
+                        if( res.status === APIResponse.Success ) {
+                
+                          //if payment is captured then we wil generate an appointment by passing data
+                        
+                          this.appointmentId = res.data
+                          this.paymentCaptured = true
+                          this.verified = true
+
+                          localStorage.removeItem("THSAppointmentRequest")
+                          localStorage.removeItem("THSPaylaod")
+                          localStorage.removeItem("THSAppointmentAddress")
+                          localStorage.removeItem("THSCart")
+                          localStorage.removeItem("THSDiscount")
+                          localStorage.removeItem("THSMultiAppointment")
+                          
+                        } else {
+                
+                          this.paymentCaptured = false
+                          this.verified = true
+                          
+                        }
+                        
+                      },
+                      error: ( errr: any ) => {
+                        
+                        console.log(errr)
+                
+                      }
+                  
+                    }) 
+
                     
                   }
               
