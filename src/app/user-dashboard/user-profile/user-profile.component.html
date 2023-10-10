@@ -69,7 +69,7 @@
 
             <div class="auto-flex-start-gap20-no-wrap overflow-auto padding-bottom-20 place-stretch">
 
-                <div class="auto-flex-center-gap10-column-no-set-width width-min-100">
+                <div class="auto-flex-center-gap10-column-no-set-width width-min-100" (click)="showUser()">
 
                     <img class="medImg" src="assets/images/web/icons/user.svg" />
                     <p class="bold">{{ 'patientProfile.users' | translate }}</p>
@@ -328,6 +328,144 @@
                                 <p class="xsmall bold">{{ 'inputFields.maritalStatus' | translate }}</p>
                                 <select class="input-global" [(ngModel)]="dependantData.marital_status">
           
+                                    <option value="single">{{ 'inputFields.single' | translate }}</option>
+                                    <option value="married">{{ 'inputFields.married' | translate }}</option>
+        
+                                </select>
+        
+                            </div>    
+
+                            
+                            <!--
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                                <p class="xsmall bold">Relationship Type</p>
+                                <select class="input-global" [(ngModel)]="dependantData.relationship_type">
+                                    
+                                    <option value="daughter">Daughter</option>
+                                    <option value="son">Son</option>
+                                    <option value="wife">Wife</option>
+                                    <option value="other">Other</option>
+        
+                                </select>
+                                <p *ngIf="updateDependantForm.get('relationship_type').hasError('invalidRelationshipType')" class="xsmall red-color">Select relationship type</p>
+
+                            </div>    
+                            -->
+                        
+                        </div>
+        
+                        <div class="auto-flex-end-gap10">
+        
+                            <!-- continue button -->
+                            <button class="white-bg padding-10 gray-border web-font-primary-light xsmall" (click)="discardUpdateDependant()">{{ 'messages.cancel' | translate }}</button>
+                            <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" (click)="updateDependant()">{{ 'allServices.saveChanges' | translate }}</button>
+        
+                        </div>
+        
+                    </div>
+        
+                </div>
+        
+            </div>
+
+            <!-- dependent details and update-->
+            <div class="auto-flex-center-gap10 fixed dialog z-index" *ngIf="showUserDetails" style="z-index: 1000;">
+
+                <div class="popup">
+        
+                    <div class="auto-flex-start-gap20-column relative white-bg overflow-auto max-height-500 border-radius-20 width-min-600 width-max-600 phone-min-width phone-max-height-70Percent">
+        
+                        <!-- input fields -->
+                        <div class="auto-flex-center-space-between-gap20">
+        
+                            <div class="auto-flex-start-gap5-column">
+        
+                                <p class="med bold">{{ dependantData.first_name }} {{ dependantData.last_name }}</p>
+                                <p class="web-font-primary-light">PAT{{ dependantData.id }}</p>
+                                <p class="web-font-primary-light">{{ dependantData.phone_number }}</p>
+                                
+                            </div>
+        
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+        
+                                <p class="xsmall bold">{{ 'inputFields.firstName' | translate }}</p>
+                                <input class="input-global" type="text" [(ngModel)]="dependantData.first_name" placeholder="{{ 'inputFields.firstName_placeholder' | translate }}" />
+                                <p *ngIf="updateDependantForm.get('first_name').hasError('invalidFName')" class="xsmall red-color">{{ 'inputFields.firstName' | translate }}</p>
+                                
+                            </div>    
+        
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+        
+                                <p class="xsmall bold">{{ 'inputFields.lastName' | translate }}</p>
+                                <input class="input-global" type="text" [(ngModel)]="dependantData.last_name"  placeholder="{{ 'inputFields.lastName_placeholder' | translate }}" />
+                                    
+                            </div>    
+        
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            
+                                <p class="xsmall bold">{{ 'inputFields.dob' | translate }}</p>
+                                <input class="input-global" type="date" [(ngModel)]="dependantData.dob" placeholder="{{ 'inputFields.dob_placeholder' | translate }}" />
+                    
+                            </div>    
+        
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+        
+                                <p class="xsmall bold">{{ 'inputFields.gender' | translate }}</p>
+                                <select class="input-global" [(ngModel)]="dependantData.gender">
+                                    
+                                    <option disabled></option>
+                                    <option value="1">{{ 'inputFields.male' | translate }}</option>
+                                    <option value="2">{{ 'inputFields.female' | translate }}</option>
+        
+                                </select>
+                                <p *ngIf="updateDependantForm.get('gender').hasError('invalidGender')" class="xsmall red-color">{{ 'inputFields.validGender' | translate }}</p>
+        
+                            </div>    
+        
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+    
+                                <p class="xsmall bold">{{ 'inputFields.nationality' | translate }}</p>
+                                <select class="input-global" [(ngModel)]="dependantData.nationality">
+                                    
+                                    <option disabled></option>
+                                    <option value="saudi">{{ 'inputFields.saudi' | translate }}</option>
+                                    <option value="non_saudi">{{ 'inputFields.nonSaudi' | translate }}</option>
+        
+                                </select>
+                                <p *ngIf="updateDependantForm.get('nationality').hasError('invalidNationality')" class="xsmall red-color">{{ 'inputFields.selectNationality' | translate }}</p>
+        
+                            </div>    
+        
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+        
+                                <p class="xsmall bold">{{ 'inputFields.idType' | translate }}</p>
+                                <select class="input-global" [(ngModel)]="dependantData.id_type">
+        
+                                    <option disabled></option>
+                                    <option value="national_id">{{ 'inputFields.nationalId' | translate }}</option>
+                                    <option value="iqama">{{ 'inputFields.iqama' | translate }}</option>
+                                    <option value="passport">{{ 'inputFields.passport' | translate }}</option>
+
+                                </select>
+                                <p *ngIf="updateDependantForm.get('id_type').hasError('invalidIdType')" class="xsmall red-color">{{ 'inputFields.selectIdType' | translate }}</p>
+
+                            </div>    
+        
+                            
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+        
+                                <p class="xsmall bold">{{ 'inputFields.isNumber' | translate }}</p>
+                                <input class="input-global" type="text" [(ngModel)]="dependantData.id_number" placeholder="{{ 'inputFields.idNumber_placeholder' | translate }}" />
+                                <p *ngIf="updateDependantForm.get('id_number').hasError('invalidIdNumber')" class="xsmall red-color">{{ 'inputFields.validIdNumber' | translate }}</p>
+        
+                            </div>    
+        
+                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                                <p class="xsmall bold">{{ 'inputFields.maritalStatus' | translate }}</p>
+                                <select class="input-global" [(ngModel)]="dependantData.marital_status">
+            
                                     <option value="single">{{ 'inputFields.single' | translate }}</option>
                                     <option value="married">{{ 'inputFields.married' | translate }}</option>
         

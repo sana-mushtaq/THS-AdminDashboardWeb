@@ -43,6 +43,7 @@ export class UserProfileComponent implements OnInit {
   showErrorUpdatingDependant: boolean = false
   showSuccessUpdatingDependant: boolean = false
   showDependantDetails: boolean = false
+  showUserDetails: boolean = false
   showDeleteDependant: boolean = false
   showErrorDeletingDependant: boolean = false
   showLocationMap: boolean = false
@@ -469,10 +470,34 @@ export class UserProfileComponent implements OnInit {
 
   }
 
+  showUser() {
+   
+    
+    this.dependantData = this.userData
+    
+    //dob conversion
+    const dateTimeString = this.dependantData.dob
+    const dateObject = new Date(dateTimeString)
+
+    const year = dateObject.getUTCFullYear()
+    const month = String(dateObject.getUTCMonth() + 1).padStart(2, '0')
+    const day = String(dateObject.getUTCDate()).padStart(2, '0')
+
+    const formattedDate = `${year}-${month}-${day}`
+
+    // Assign the formatted string to the dob property (not as a new Date)
+    this.dependantData.dob = formattedDate;
+    this.updateDependantForm.patchValue(this.dependantData)
+    this.showUserDetails = true
+
+  }
+
+
   //this will show dependent details popup and reset form data
   discardUpdateDependant() {
 
     this.showDependantDetails = false
+    this.showUserDetails = false
     this.dependantData = {}
     this.updateDependantForm.reset()
 
@@ -546,6 +571,8 @@ export class UserProfileComponent implements OnInit {
             if( res.status === APIResponse.Success ) {
 
               this.showDependantDetails = false
+              this.showUserDetails = false
+
               this.dependantData = {}
               this.updateDependantForm.reset()
 
@@ -575,6 +602,8 @@ export class UserProfileComponent implements OnInit {
   confirmDeleteDependant() {
 
     this.showDependantDetails = false
+    this.showUserDetails = false
+
     this.showDeleteDependant = true
 
   }
@@ -590,6 +619,8 @@ export class UserProfileComponent implements OnInit {
     //here we will delete dependant and its details
     this.showDeleteDependant = false
     this.showDependantDetails = false
+    this.showUserDetails = false
+
 
     let data = {
 
