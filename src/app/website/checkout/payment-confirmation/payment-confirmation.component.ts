@@ -301,7 +301,7 @@ export class PaymentConfirmationComponent implements OnInit {
                     this.verified = true
 
 
-  /*                  let appointmentRequest = JSON.parse(localStorage.getItem("THSAppointmentRequest"))
+                    let appointmentRequest = JSON.parse(localStorage.getItem("THSAppointmentRequest"))
                     let payload =  JSON.parse(localStorage.getItem("THSPaylaod"))
                     let address = JSON.parse(localStorage.getItem("THSAppointmentAddress"))
                     let discount = JSON.parse(localStorage.getItem("THSDiscount"))
@@ -384,7 +384,7 @@ export class PaymentConfirmationComponent implements OnInit {
                       }
                   
                     }) 
-*/
+
                     
                   }
               
