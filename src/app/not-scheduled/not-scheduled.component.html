@@ -119,9 +119,10 @@
                               {{ service.serviceName }} <br />
                               {{ service.serviceNameArabic }}
                             </td>
-                            <td>
+                            <td *ngIf="service.firstName.length>0">
                               {{ service.firstName }} {{ service.lastName }}
                             </td>
+                            <td *ngIf="service.firstName.length<=0">{{appointmentDetails.primaryPatientName}}</td>
                             <td>{{ service.dob }}</td>
                             <td>{{ service.idNumber }}</td>
                           </tr>
