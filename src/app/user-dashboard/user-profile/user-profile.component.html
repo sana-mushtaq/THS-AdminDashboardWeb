@@ -57,7 +57,7 @@
 
             <div class="auto-flex-center-start-gap10 cursor-pointer" (click)="addDependant()">
 
-                <p class="med bold">{{ 'patientProfile.users' | translate }}</p>
+                <p class="med bold" *ngIf="userData">{{ userData.first_name }} {{ userData.last_name }}</p>
 
                 <div class="gray-border padding-5 border-radius-100">
 
