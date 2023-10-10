@@ -165,10 +165,10 @@ export class PaymentConfirmationComponent implements OnInit {
                   next : ( ress : any ) => {
 
                     //in case of success the api returns 0 as a status code
-                    if( ress.status === 200) {
+                    if( ress.status === APIResponse.Success) {
             
                       //if payment is captured then we wil generate an appointment by passing data
-                      if(ress.payment.status === 'CAPTURED' || ress.payment.status === 'CANCELLED') {
+                      if(ress.payment.status === 'CAPTURED') {
 
                         this._b2c.verifyPaymentStatus(data).subscribe({
               
@@ -301,7 +301,7 @@ export class PaymentConfirmationComponent implements OnInit {
                     this.verified = true
 
 
-                    let appointmentRequest = JSON.parse(localStorage.getItem("THSAppointmentRequest"))
+  /*                  let appointmentRequest = JSON.parse(localStorage.getItem("THSAppointmentRequest"))
                     let payload =  JSON.parse(localStorage.getItem("THSPaylaod"))
                     let address = JSON.parse(localStorage.getItem("THSAppointmentAddress"))
                     let discount = JSON.parse(localStorage.getItem("THSDiscount"))
@@ -384,7 +384,7 @@ export class PaymentConfirmationComponent implements OnInit {
                       }
                   
                     }) 
-
+*/
                     
                   }
               
