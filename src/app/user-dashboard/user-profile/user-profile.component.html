@@ -57,7 +57,7 @@
 
             <div class="auto-flex-center-start-gap10 cursor-pointer" (click)="addDependant()">
 
-                <p class="med bold" *ngIf="userData">{{ userData.first_name }} {{ userData.last_name }}</p>
+                <p class="med bold">{{ 'patientProfile.users' | translate }}</p>
 
                 <div class="gray-border padding-5 border-radius-100">
 
@@ -72,7 +72,7 @@
                 <div class="auto-flex-center-gap10-column-no-set-width width-min-100" (click)="showUser()">
 
                     <img class="medImg" src="assets/images/web/icons/user.svg" />
-                    <p class="bold">{{ 'patientProfile.users' | translate }}</p>
+                    <p class="bold" *ngIf="userData">{{ userData.first_name }} {{ userData.last_name }}</p>
 
                 </div>
 
