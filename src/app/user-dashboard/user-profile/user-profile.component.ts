@@ -549,7 +549,7 @@ export class UserProfileComponent implements OnInit {
               this.dependantData = {}
               this.updateDependantForm.reset()
 
-              this.showSuccessUpdatingDependant = true
+            //  this.showSuccessUpdatingDependant = true
 
             } else {
 

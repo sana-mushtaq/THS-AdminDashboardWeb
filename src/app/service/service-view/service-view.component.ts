@@ -112,7 +112,7 @@ export class ServiceViewComponent implements OnInit {
 
     this.addServiceForm = this.editServiceForm = this.fb.group({
      
-      'category_id' : [-1, [ Validators.required]],
+      'category_id' : ['', [ Validators.required]],
       'service_type': [''],
       'url': [''],
       'title': ['', [ Validators.required]],
@@ -377,7 +377,7 @@ export class ServiceViewComponent implements OnInit {
 
      //now owe will check if out form is valid or not
      if (this.addServiceForm.valid) {
-      
+
         this.addServiceForm.get('tag').patchValue(JSON.stringify(this.selectedServiceTags))
 
         //we will submit the data if it is valid
