@@ -139,7 +139,7 @@ export class ServiceViewComponent implements OnInit {
 
     this.addServiceVariantForm = this.fb.group({
      
-      'category_id' : [-1, [ Validators.required]],
+      'category_id' : ['', [ Validators.required]],
       'service_type': [''],
       'url': [''],
       'title': ['', [ Validators.required]],

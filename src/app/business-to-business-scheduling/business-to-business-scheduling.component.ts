@@ -319,6 +319,12 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
   
             console.log(this.allSP)
             this.allSP = res.data
+
+            if(this.allSP.length<=0) {
+
+              this.preferredServiceProvider = null
+
+            }
   
           } else {
   
@@ -513,20 +519,20 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
   createAppointment(record) {
 
     if(!this.preferredDate || !this.preferredTime) {
-      
-      Swal.fire("Select branch and service")
+      console.log("s")
+      Swal.fire("Select date and time")
     
     }
 
     if(!this.preferredService) {
-   
-      Swal.fire("Select branch and service")
+  
+      Swal.fire("Select  service")
 
     }
 
     if(!this.preferredBranch) {
       
-      Swal.fire("Select branch and service")
+      Swal.fire("Select branch")
 
     }
 
