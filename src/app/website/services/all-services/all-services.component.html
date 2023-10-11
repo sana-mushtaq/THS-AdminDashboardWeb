@@ -239,7 +239,7 @@
 
     <div class="auto-flex-center-gap20" *ngIf="allServices && allServices.length>0 && displayedCategories[0].services.length>0">
 
-        <button class="primary-bg padding-10 box-shadow xsmall width-max-300 max-width uppercase" (click)="loadMoreCategories()" *ngIf="allCategories && displayedCategories.length<allCategories.length && allCategories[2].services.length>0">{{ 'allServices.loadMore' | translate }}</button>
+        <button class="primary-bg padding-10 box-shadow xsmall width-max-300 max-width uppercase" (click)="loadMoreCategories()" *ngIf="allCategories && displayedCategories.length<allCategories.length && displayedCategories[2].services.length>0">{{ 'allServices.loadMore' | translate }}</button>
 
     </div>
 
