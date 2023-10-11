@@ -251,6 +251,20 @@ export class AllServicesComponent implements OnInit {
           this.topServices = Object.values(this.topServices)
 
           console.log(this.topServices)
+
+          this.topServices.sort((a, b) => {
+            const numServicesA = a.services.length;
+            const numServicesB = b.services.length;
+          
+            if (numServicesA < numServicesB) {
+              return 1; // B comes before A
+            } else if (numServicesA > numServicesB) {
+              return -1; // A comes before B
+            } else {
+              return 0; // No change in order
+            }
+          });
+
           this.displayedCategories = this.topServices.slice(0, this.itemsToShowInitially);
           console.log(this.displayedCategories)
         } else {
