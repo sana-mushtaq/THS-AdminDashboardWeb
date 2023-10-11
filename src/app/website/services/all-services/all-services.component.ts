@@ -227,7 +227,7 @@ export class AllServicesComponent implements OnInit {
             s.top = 1
   
           })*/
-  
+          console.log(this.allCategories)
           // now we will filter all top Services and assign them to TopServices object with respect to each category
           this.allCategories.forEach(category => {
 
@@ -245,12 +245,14 @@ export class AllServicesComponent implements OnInit {
   
             }
   
-          
+          console.log(this.topCategories)
   
           })
           this.topServices = Object.values(this.topServices)
+
+          console.log(this.topServices)
           this.displayedCategories = this.topServices.slice(0, this.itemsToShowInitially);
- 
+          console.log(this.displayedCategories)
         } else {
 
           this.allServices = []
