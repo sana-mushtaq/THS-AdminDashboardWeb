@@ -695,6 +695,8 @@ export class ServiceViewComponent implements OnInit {
             this.editServiceForm.reset()
             this.selectedServiceTags = []
 
+            this.displayedServiceList[this.selectedServiceIndex] =  this.selectedService
+
             Swal.fire(res.message)
 
           } else {
