@@ -356,7 +356,10 @@ export class CheckoutAppointmentComponent implements OnInit {
                 appliedDiscount = appliedDiscount - promoAmount
                 this.total = appliedDiscount
 
-                if(!this.userData.id_number.startsWith("1")) {
+                let idType =this.userData.id_number
+                let ifSaudiId = this.validateNationalId(idType)
+        
+                if(ifSaudiId === -1) {
 
                   const taxRate = 0.15;
                   const taxAmount = this.total * taxRate;
@@ -440,4 +443,42 @@ export class CheckoutAppointmentComponent implements OnInit {
 
   }
 
+  validateNationalId(id) {
+
+    const type = id.substr(0, 1)
+    const _idLength = 10
+    const _type1 = '1'
+    const _type2 = '2'
+    let sum = 0
+
+    id = id.trim()
+    
+    if (isNaN(parseInt(id)) || (id.length !== _idLength) || (type !== _type2 && type !== _type1)) {
+    
+      return -1
+    
+    }
+    for (let num = 0; num < 10; num++) {
+    
+      const digit = Number(id[num])
+    
+      if (num % 2 === 0) {
+    
+        const doubled = digit * 2
+        const ZFOdd = `00${doubled}`.slice(-2)
+        sum += Number(ZFOdd[0]) + Number(ZFOdd[1])
+    
+      } else {
+    
+        sum += digit
+    
+      }
+    
+    }
+    
+    return (sum % 10 !== 0) ? -1 : Number(type)
+
+  }
+
+  
 }

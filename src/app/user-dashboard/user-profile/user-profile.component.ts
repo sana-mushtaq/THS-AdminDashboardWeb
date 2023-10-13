@@ -67,7 +67,7 @@ export class UserProfileComponent implements OnInit {
   
         email: [' '],
         phone_number: [' '],
-        first_name: ['', [ Validators.required, Validators.minLength(4) ]],
+        first_name: ['', [ Validators.required ]],
         last_name: [''],
         dob: [''],
         gender: ['', [Validators.required]],
@@ -81,7 +81,7 @@ export class UserProfileComponent implements OnInit {
 
       this.updateDependantForm = this.fb.group({
   
-        first_name: ['', [ Validators.required, Validators.minLength(4) ]],
+        first_name: ['', [ Validators.required ]],
         last_name: [''],
         dob: [''],
         gender: ['', [Validators.required]],
@@ -250,21 +250,11 @@ export class UserProfileComponent implements OnInit {
   //in this function we will create dependant
   createDependant() {
 
+    this.addDependantForm.get('email').patchValue('')
+
     if (this.addDependantForm.invalid) {
-
       // Display error messages
-  /*    if (this.addDependantForm.get('email').invalid) {
-      
-        this.addDependantForm.get('email').setErrors({ invalidEmail: true })
 
-      }
-      
-      if (this.addDependantForm.get('phone_number').invalid) {
-      
-        this.addDependantForm.get('phone_number').setErrors({ invalidPhoneNumber: true })
-      
-      }
-*/
       if (this.addDependantForm.get('first_name').invalid) {
       
         this.addDependantForm.get('first_name').setErrors({ invalidFName: true })
@@ -295,23 +285,22 @@ export class UserProfileComponent implements OnInit {
 
       }
 
-      /*
-      if (this.addDependantForm.get('relationship_type').invalid) {
-
-        this.addDependantForm.get('relationship_type').setErrors({ invalidRelationshipType: true })
-
-      }*/
-
     } else {
 
-      /*//if form is valid then fist we will verify if user already exists or not
-      let data  = {
+        let idType = this.addDependantForm.get('id_number').value
+        let ifSaudiId = this.validateNationalId(idType)
+    
+        if(this.addDependantForm.get('id_type').value === 'national_id' && ifSaudiId === -1) {
 
-        phone_number: this.addDependantForm.get('phone_number').value,
-        email: this.addDependantForm.get('email').value
-      
-      } */
+            this.addDependantForm.get('id_number').setErrors({ invalidIdNumber: true })
 
+        } else if(this.addDependantForm.get('id_type').value !== 'national_id' && ifSaudiId === 1) {
+
+            this.addDependantForm.get('id_type').setErrors({ invalidIdType: true })
+            this.addDependantForm.get('id_number').setErrors({ invalidIdNumber: true })
+        } 
+
+        else {
          //if user verifcation is valid then we will create a dependant
          let data = {
 
@@ -357,6 +346,8 @@ export class UserProfileComponent implements OnInit {
           }
 
         })
+
+      }
 
       /*
        //now we will send 6 digits random code to user's valid phone number
@@ -471,7 +462,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   showUser() {
-   
     
     this.dependantData = this.userData
     
@@ -491,7 +481,6 @@ export class UserProfileComponent implements OnInit {
     this.showUserDetails = true
 
   }
-
 
   //this will show dependent details popup and reset form data
   discardUpdateDependant() {
@@ -548,52 +537,69 @@ export class UserProfileComponent implements OnInit {
 
     } else {
 
-        let data = {
+        //first we will check id validator
+        let idType = this.updateDependantForm.get('id_number').value
+        let ifSaudiId = this.validateNationalId(idType)
 
-          user_id: this.dependantData.id,
-          first_name: this.updateDependantForm.get('first_name').value,
-          last_name: this.updateDependantForm.get('last_name').value,
-          dob: this.updateDependantForm.get('dob').value,
-          gender: this.updateDependantForm.get('gender').value,
-          nationality: this.updateDependantForm.get('nationality').value,
-          id_type: this.updateDependantForm.get('id_type').value,
-          id_number: this.updateDependantForm.get('id_number').value,
-          marital_status: this.updateDependantForm.get('marital_status').value,
-          //relationship_type: this.updateDependantForm.get('relationship_type').value
+        if(this.updateDependantForm.get('id_type').value === 'national_id' && ifSaudiId === -1) {
+        
+            this.updateDependantForm.get('id_number').setErrors({ invalidIdNumber: true })
 
-        }
+        } else if(this.updateDependantForm.get('id_type').value !== 'national_id' && ifSaudiId === 1) {
+   
+            this.updateDependantForm.get('id_type').setErrors({ invalidIdType: true })
+            this.updateDependantForm.get('id_number').setErrors({ invalidIdNumber: true })
 
-        this._patientService.updateDependent(data).subscribe({
+   
+        } else {
+          let data = {
 
-          next : ( res : any ) => {
-
-            //in case of success the api returns 0 as a status code
-            if( res.status === APIResponse.Success ) {
-
-              this.showDependantDetails = false
-              this.showUserDetails = false
-
-              this.dependantData = {}
-              this.updateDependantForm.reset()
-
-            //  this.showSuccessUpdatingDependant = true
-
-            } else {
-
-              //if it is unable to add category data it will return an error
-              this.showErrorUpdatingDependant = true
-
-            }
-            
-          },
-
-          error: ( err: any ) => {
-            
-            this.showErrorUpdatingDependant = true
-
+            user_id: this.dependantData.id,
+            first_name: this.updateDependantForm.get('first_name').value,
+            last_name: this.updateDependantForm.get('last_name').value,
+            dob: this.updateDependantForm.get('dob').value,
+            gender: this.updateDependantForm.get('gender').value,
+            nationality: this.updateDependantForm.get('nationality').value,
+            id_type: this.updateDependantForm.get('id_type').value,
+            id_number: this.updateDependantForm.get('id_number').value,
+            marital_status: this.updateDependantForm.get('marital_status').value,
+            //relationship_type: this.updateDependantForm.get('relationship_type').value
+  
           }
-
-        })
+  
+          this._patientService.updateDependent(data).subscribe({
+  
+            next : ( res : any ) => {
+  
+              //in case of success the api returns 0 as a status code
+              if( res.status === APIResponse.Success ) {
+  
+                this.showDependantDetails = false
+                this.showUserDetails = false
+  
+                this.dependantData = {}
+                this.updateDependantForm.reset()
+  
+              //  this.showSuccessUpdatingDependant = true
+  
+              } else {
+  
+                //if it is unable to add category data it will return an error
+                this.showErrorUpdatingDependant = true
+  
+              }
+              
+            },
+  
+            error: ( err: any ) => {
+              
+              this.showErrorUpdatingDependant = true
+  
+            }
+  
+          })
+  
+        }
 
     }
 
@@ -1018,6 +1024,43 @@ export class UserProfileComponent implements OnInit {
   goToServices() {
 
     this.router.navigate(['/'])
+
+  }
+
+  validateNationalId(id) {
+
+    const type = id.substr(0, 1)
+    const _idLength = 10
+    const _type1 = '1'
+    const _type2 = '2'
+    let sum = 0
+
+    id = id.trim()
+    
+    if (isNaN(parseInt(id)) || (id.length !== _idLength) || (type !== _type2 && type !== _type1)) {
+    
+      return -1
+    
+    }
+    for (let num = 0; num < 10; num++) {
+    
+      const digit = Number(id[num])
+    
+      if (num % 2 === 0) {
+    
+        const doubled = digit * 2
+        const ZFOdd = `00${doubled}`.slice(-2)
+        sum += Number(ZFOdd[0]) + Number(ZFOdd[1])
+    
+      } else {
+    
+        sum += digit
+    
+      }
+    
+    }
+    
+    return (sum % 10 !== 0) ? -1 : Number(type)
 
   }
 

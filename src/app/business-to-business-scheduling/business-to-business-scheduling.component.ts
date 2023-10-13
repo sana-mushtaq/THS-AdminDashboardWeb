@@ -317,7 +317,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
           //in case of success the api returns 0 as a status code
           if( res.status === APIResponse.Success) {
   
-            console.log(this.allSP)
             this.allSP = res.data
 
             if(this.allSP.length<=0) {
@@ -519,7 +518,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
   createAppointment(record) {
 
     if(!this.preferredDate || !this.preferredTime) {
-      console.log("s")
       Swal.fire("Select date and time")
     
     }
@@ -949,6 +947,13 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
             return sps.service_id === serviceId;
           });
 
+          
+          this.serviceProvidersServices.forEach(s=>{
+
+            s.days = JSON.parse(s.days);
+          })
+
+
           // Convert the selected date to "YYYY-MM-DD" format
           const formattedSelectedDate = this.preferredDate;
 
@@ -967,7 +972,34 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
           // Get the day name from the dayNames array using the day index
           const dayName = dayNames[dayIndex].toLowerCase();
 
-          console.log(formattedSelectedDate)
+          // Initialize a variable to store the minimum time
+          let minTime = undefined;
+          let maxTime = undefined;
+
+          // Iterate through the service providers again to find the minimum time for Tuesday
+          sps.forEach(s => {
+            // Extract the Tuesday availability from the service provider
+            const dayAvailability = s.days[dayName];
+
+            // Check if the availability is defined
+            if (dayAvailability) {
+              // Extract the start time for Tuesday
+              const startTime = new Date(`1970-01-01T${dayAvailability.start_time}`);
+
+              // Convert end time to a Date object
+              const endTime = new Date(`1970-01-01T${dayAvailability.end_time}`);
+          
+              // If minTime is undefined or the current start time is earlier than minTime
+              if (!minTime || startTime < minTime) {
+                minTime = startTime;
+              }
+
+              if (!maxTime || endTime > maxTime) {
+                maxTime = endTime;
+              }
+
+            }
+          });
 
           let uniqueScheduledTimes = this.fetchedData.appointments
           .filter(app => {
@@ -998,7 +1030,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
         
           });
 
-          console.log(uniqueScheduledTimes)
           // Filter the time slots where all service providers are booked
           const filteredTimeSlots = Object.keys(timeSlotCounts).filter(time => {
           
@@ -1006,7 +1037,6 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
           
           });
 
-          console.log(filteredTimeSlots)
           // Function to check if a time slot is available
           const isTimeSlotAvailable = (timeSlot: string) => {
             return !filteredTimeSlots.includes(timeSlot);
@@ -1014,7 +1044,10 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
       
           this.timeSlots = [];
           // Generate time slots and filter unavailable ones
-          for (let hour = 12; hour <= 23; hour++) {
+          // Convert minTime and maxTime to hours (as integers)
+          const minHour = minTime.getHours();
+          const maxHour = maxTime.getHours();
+          for (let hour = minHour; hour <= maxHour; hour++) {
             const timeSlot = this.formatTimeSlot(hour);
             if (isTimeSlotAvailable(timeSlot)) {
               this.timeSlots.push(timeSlot);

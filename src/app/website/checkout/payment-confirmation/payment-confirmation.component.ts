@@ -31,7 +31,6 @@ export class PaymentConfirmationComponent implements OnInit {
     
       const id : string = params['tap_id'] || ''
 
-      console.log(id)
       if(['', undefined, null].includes( id.trim())) {
     
         this.paymentStatus = false

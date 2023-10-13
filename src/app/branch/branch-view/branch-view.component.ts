@@ -165,7 +165,7 @@ export class BranchViewComponent implements OnInit {
     }
 
     //first we will get user location and display on the header
-    this.getUserLocation()
+   // this.getUserLocation()
    
   }
 
@@ -814,7 +814,6 @@ export class BranchViewComponent implements OnInit {
   //the following function will unassign branch for the service provider
   unassignBranch(id) {
 
-    console.log(id)
     let data = {
 
       user_id: id,
@@ -932,6 +931,7 @@ export class BranchViewComponent implements OnInit {
           // Set the map center to the selected location
           this.place.setCenter(this.place.geometry.location);
           this.place.setZoom(15); // You can adjust the zoom level as needed
+          
         }
       
       })
@@ -942,7 +942,6 @@ export class BranchViewComponent implements OnInit {
 
   getUserLocation() {
 
-    
     if (navigator.geolocation) {
     
       const options = {
@@ -1017,6 +1016,8 @@ export class BranchViewComponent implements OnInit {
 
     this.selectedLat = event.coords.lat
     this.selectedLng = event.coords.lng
+    this.centerLat = this.selectedLat
+    this.centerLng = this.selectedLng
 
     this.addBranchForm.patchValue({
       latitude: this.selectedLat
@@ -1027,6 +1028,36 @@ export class BranchViewComponent implements OnInit {
     })
 
     this.placeSelected = true
+
+    const geocoder = new google.maps.Geocoder()
+    const latlng = { lat: this.centerLat, lng: this.centerLng }
+
+    geocoder.geocode({ location: latlng }, (results, status) => {
+
+      if (status === google.maps.GeocoderStatus.OK) {
+      
+        if (results[0]) {
+      
+          const locationName = results[0].formatted_address
+          this.addBranchForm.patchValue({
+            location: locationName
+          })
+  
+          // You can use the locationName as needed
+        } else {
+      
+          console.error("No results found.")
+      
+        }
+      
+      } else {
+        
+        console.error("Geocoder failed due to: " + status)
+      
+      }
+
+    })
+
   }
 
   onMarkerDragEnd(event) {
@@ -1048,6 +1079,36 @@ export class BranchViewComponent implements OnInit {
       longitude: this.selectedLng
     })
 
+    
+    const geocoder = new google.maps.Geocoder()
+    const latlng = { lat: this.centerLat, lng: this.centerLng }
+
+    geocoder.geocode({ location: latlng }, (results, status) => {
+
+      if (status === google.maps.GeocoderStatus.OK) {
+      
+        if (results[0]) {
+      
+          const locationName = results[0].formatted_address
+          this.addBranchForm.patchValue({
+            location: locationName
+          })
+  
+          // You can use the locationName as needed
+        } else {
+      
+          console.error("No results found.")
+      
+        }
+      
+      } else {
+        
+        console.error("Geocoder failed due to: " + status)
+      
+      }
+
+    })
+
   }
 
   onConfirmLocation() {
@@ -1064,12 +1125,53 @@ export class BranchViewComponent implements OnInit {
 
     this.placeSelected = false
 
+    this.addBranchForm.patchValue({
+      latitude: this.selectedLat
+    })
+
+    this.addBranchForm.patchValue({
+      longitude: this.selectedLng
+    })
+
+    
+    const geocoder = new google.maps.Geocoder()
+    const latlng = { lat: this.centerLat, lng: this.centerLng }
+
+    geocoder.geocode({ location: latlng }, (results, status) => {
+
+      if (status === google.maps.GeocoderStatus.OK) {
+      
+        if (results[0]) {
+      
+          const locationName = results[0].formatted_address
+          this.addBranchForm.patchValue({
+            location: locationName
+          })
+  
+          // You can use the locationName as needed
+        } else {
+      
+          console.error("No results found.")
+      
+        }
+      
+      } else {
+        
+        console.error("Geocoder failed due to: " + status)
+      
+      }
+
+    })
+
   } 
 
   onMapClick1(event) {
 
     this.selectedLat = event.coords.lat
     this.selectedLng = event.coords.lng
+
+    this.centerLat = this.selectedLat
+    this.centerLng = this.selectedLng
 
     this.selectedBranch.longitude = this.selectedLng
     this.selectedBranch.latitude = this.selectedLat
@@ -1080,6 +1182,38 @@ export class BranchViewComponent implements OnInit {
 
     this.editBranchForm.patchValue({
       longitude: this.selectedLng
+    })
+
+    
+    const geocoder = new google.maps.Geocoder()
+    const latlng = { lat: this.centerLat, lng: this.centerLng }
+
+    geocoder.geocode({ location: latlng }, (results, status) => {
+
+      if (status === google.maps.GeocoderStatus.OK) {
+      
+        if (results[0]) {
+      
+          const locationName = results[0].formatted_address
+          this.editBranchForm.patchValue({
+            location: locationName
+          })
+
+          this.selectedBranch.location = locationName
+
+          // You can use the locationName as needed
+        } else {
+      
+          console.error("No results found.")
+      
+        }
+      
+      } else {
+        
+        console.error("Geocoder failed due to: " + status)
+      
+      }
+
     })
 
   }
@@ -1106,6 +1240,37 @@ export class BranchViewComponent implements OnInit {
       longitude: this.selectedLng
     })
 
+    const geocoder = new google.maps.Geocoder()
+    const latlng = { lat: this.centerLat, lng: this.centerLng }
+
+    geocoder.geocode({ location: latlng }, (results, status) => {
+
+      if (status === google.maps.GeocoderStatus.OK) {
+      
+        if (results[0]) {
+      
+          const locationName = results[0].formatted_address
+          this.editBranchForm.patchValue({
+            location: locationName
+          })
+
+          this.selectedBranch.location = locationName
+  
+          // You can use the locationName as needed
+        } else {
+      
+          console.error("No results found.")
+      
+        }
+      
+      } else {
+        
+        console.error("Geocoder failed due to: " + status)
+      
+      }
+
+    })
+
   }
 
   onConfirmLocation1() {
@@ -1121,6 +1286,47 @@ export class BranchViewComponent implements OnInit {
     this.centerLng = this.selectedLng
 
     this.placeSelected = false
+
+    
+    this.editBranchForm.patchValue({
+      latitude: this.selectedLat
+    })
+
+    this.editBranchForm.patchValue({
+      longitude: this.selectedLng
+    })
+
+    
+    const geocoder = new google.maps.Geocoder()
+    const latlng = { lat: this.centerLat, lng: this.centerLng }
+
+    geocoder.geocode({ location: latlng }, (results, status) => {
+
+      if (status === google.maps.GeocoderStatus.OK) {
+      
+        if (results[0]) {
+      
+          const locationName = results[0].formatted_address
+          this.editBranchForm.patchValue({
+            location: locationName
+          })
+          
+          this.selectedBranch.location = locationName
+
+          // You can use the locationName as needed
+        } else {
+      
+          console.error("No results found.")
+      
+        }
+      
+      } else {
+        
+        console.error("Geocoder failed due to: " + status)
+      
+      }
+
+    })
 
   } 
 

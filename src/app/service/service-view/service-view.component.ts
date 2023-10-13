@@ -1087,7 +1087,6 @@ export class ServiceViewComponent implements OnInit {
   //the following function will create a service variant
   createServiceVariant() {
 
-    console.log(this.addServiceVariantForm.value)
     //now owe will check if out form is valid or not
     if (this.addServiceVariantForm.valid) {
      

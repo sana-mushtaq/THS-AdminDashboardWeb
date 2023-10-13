@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
       
       this.accountSetupForm = this.fb.group({
 
-        first_name: ['', [ Validators.required, Validators.minLength(4) ]],
+        first_name: ['', [ Validators.required]],
         last_name: [''],
         dob: [''],
         gender: ['', [Validators.required]],
@@ -159,7 +159,7 @@ export class RegisterComponent implements OnInit {
       }
 
     } else {
-
+      
       let data  = {
 
         phone_number: this.accountDetailsForm.get('phone_number').value,
@@ -315,55 +315,70 @@ export class RegisterComponent implements OnInit {
       }
 
     } else {
-  
-      //if details are correct then we will combine details & register user in out system
-      let data = {
 
-        email: this.accountDetailsForm.get('email').value,
-        phone_number: this.accountDetailsForm.get('phone_number').value,
-        password: this.accountDetailsForm.get('password').value,
-        first_name: this.accountSetupForm.get('first_name').value,
-        last_name: this.accountSetupForm.get('last_name').value,
-        dob: this.accountSetupForm.get('dob').value,
-        gender: this.accountSetupForm.get('gender').value,
-        nationality: this.accountSetupForm.get('nationality').value,
-        id_type: this.accountSetupForm.get('id_type').value,
-        id_number: this.accountSetupForm.get('id_number').value,
-        marital_status: this.accountSetupForm.get('marital_status').value
-
-      }
-
-      this._patientService.registerUser(data).subscribe({
-  
-        next : ( res : any ) => {
-
-          //in case of success the api returns 0 as a status code
-          if( res.status === APIResponse.Success ) {
-
-            this.userData =  res.data.result
-            localStorage.setItem("THSUserId", JSON.stringify(this.userData.id))
-            localStorage.setItem('THSToken',  res.data.token)
-
-            this.router.navigate(['/user/profile'])
-
-          } else {
-  
-            //if it is unable to add category data it will return an error
-            this.showErrorCreatingUser = true
-  
-          }
-          
-        },
-
-        error: ( err: any ) => {
-          
-          this.showErrorCreatingUser = true
-  
-        }
+        let idType = this.accountSetupForm.get('id_number').value
+        let ifSaudiId = this.validateNationalId(idType)
     
-      })
+        if(this.accountSetupForm.get('id_type').value === 'national_id' && ifSaudiId === -1) {
 
-      
+            this.accountSetupForm.get('id_number').setErrors({ invalidIdNumber: true })
+
+        } else if(this.accountSetupForm.get('id_type').value !== 'national_id' && ifSaudiId === 1) {
+
+            this.accountSetupForm.get('id_type').setErrors({ invalidIdType: true })
+            this.accountSetupForm.get('id_number').setErrors({ invalidIdNumber: true })
+        } 
+
+        else {
+
+          //if details are correct then we will combine details & register user in out system
+          let data = {
+
+            email: this.accountDetailsForm.get('email').value,
+            phone_number: this.accountDetailsForm.get('phone_number').value,
+            password: this.accountDetailsForm.get('password').value,
+            first_name: this.accountSetupForm.get('first_name').value,
+            last_name: this.accountSetupForm.get('last_name').value,
+            dob: this.accountSetupForm.get('dob').value,
+            gender: this.accountSetupForm.get('gender').value,
+            nationality: this.accountSetupForm.get('nationality').value,
+            id_type: this.accountSetupForm.get('id_type').value,
+            id_number: this.accountSetupForm.get('id_number').value,
+            marital_status: this.accountSetupForm.get('marital_status').value
+
+          }
+
+          this._patientService.registerUser(data).subscribe({
+
+            next : ( res : any ) => {
+
+              //in case of success the api returns 0 as a status code
+              if( res.status === APIResponse.Success ) {
+
+                this.userData =  res.data.result
+                localStorage.setItem("THSUserId", JSON.stringify(this.userData.id))
+                localStorage.setItem('THSToken',  res.data.token)
+
+                this.router.navigate(['/user/profile'])
+
+              } else {
+
+                //if it is unable to add category data it will return an error
+                this.showErrorCreatingUser = true
+
+              }
+              
+            },
+
+            error: ( err: any ) => {
+              
+              this.showErrorCreatingUser = true
+
+            }
+
+          })
+
+        }
 
     }
     
@@ -380,6 +395,44 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/'])
 
   }
+
+  validateNationalId(id) {
+
+    const type = id.substr(0, 1)
+    const _idLength = 10
+    const _type1 = '1'
+    const _type2 = '2'
+    let sum = 0
+
+    id = id.trim()
+    
+    if (isNaN(parseInt(id)) || (id.length !== _idLength) || (type !== _type2 && type !== _type1)) {
+    
+      return -1
+    
+    }
+    for (let num = 0; num < 10; num++) {
+    
+      const digit = Number(id[num])
+    
+      if (num % 2 === 0) {
+    
+        const doubled = digit * 2
+        const ZFOdd = `00${doubled}`.slice(-2)
+        sum += Number(ZFOdd[0]) + Number(ZFOdd[1])
+    
+      } else {
+    
+        sum += digit
+    
+      }
+    
+    }
+    
+    return (sum % 10 !== 0) ? -1 : Number(type)
+
+  }
+
 
 }
 

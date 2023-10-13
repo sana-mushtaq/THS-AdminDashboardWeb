@@ -66,14 +66,12 @@ export class ServiceDetailsComponent implements OnInit {
           if(this.currentService.length>0) {
            
             this.currentService = this.currentService[0]
-            console.log(this.currentService)
             this.serviceVariants = res.services.filter(service => {
   
               return Number(service.primary_service_id) === Number(this.currentService.id)
   
             })
 
-            console.log(this.serviceVariants)
 
           } else {
 
