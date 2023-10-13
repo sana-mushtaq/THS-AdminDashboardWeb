@@ -697,6 +697,16 @@ export class ServiceViewComponent implements OnInit {
 
             this.displayedServiceList[this.selectedServiceIndex] =  this.selectedService
 
+            this.categoryList.forEach(c => {
+
+              if(this.selectedService.category_id === c.id) {
+
+                this.displayedServiceList[this.selectedServiceIndex].category_title =  c.title
+
+              }
+
+            })
+
             Swal.fire(res.message)
 
           } else {
