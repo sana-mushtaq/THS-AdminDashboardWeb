@@ -603,6 +603,8 @@ export class AppointmentScheduleComponent implements OnInit {
         return formattedTime;
       });
 
+      console.log(uniqueScheduledTimes)
+
       const timeSlotCounts = {};
       uniqueScheduledTimes.forEach(time => {
       
@@ -615,6 +617,8 @@ export class AppointmentScheduleComponent implements OnInit {
         return timeSlotCounts[time] === sps.length;
       
       });
+
+      console.log(filteredTimeSlots)
   
       // Function to check if a time slot is available
       const isTimeSlotAvailable = (timeSlot: string) => {
