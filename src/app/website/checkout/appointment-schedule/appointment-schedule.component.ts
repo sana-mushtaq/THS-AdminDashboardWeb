@@ -584,16 +584,27 @@ export class AppointmentScheduleComponent implements OnInit {
         }
       });
       
-      console.log(sd)
-      console.log(this.fetchedData.appointments)
-      
+      let filtera =  this.fetchedData.appointments(s=>{
+
+        return s.serviceDate === sd
+      })
+      console.log(filtera);
+
+          
+      let filterb =  this.fetchedData.appointments(s=>{
+
+        return s.serviceDate === sd
+      })
+      console.log(filterb);
+
+
       let uniqueScheduledTimes = this.fetchedData.appointments
       .filter(app => {
         // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
         return (
           app.serviceAssigneeId !== null &&
-          sps.every(sp => sp.user_id === Number(app.serviceAssigneeId)) &&
-          sps.every(sp => sp[dayName] === 1) &&
+          sps.some(sp => sp.user_id === Number(app.serviceAssigneeId)) &&
+          sps.some(sp => sp[dayName] === 1) &&
           app.serviceDate === sd
         );
       }).map(app => {
