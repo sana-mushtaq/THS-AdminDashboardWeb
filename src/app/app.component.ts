@@ -11,12 +11,12 @@ import { LanguageService } from 'src/service/language.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [
+  /*providers: [
     Location, {
       provide: LocationStrategy,
       useClass: PathLocationStrategy
     }
-  ]
+  ]*/
 })
 
 export class AppComponent {
