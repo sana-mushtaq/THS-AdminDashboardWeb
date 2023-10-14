@@ -583,23 +583,26 @@ export class AppointmentScheduleComponent implements OnInit {
 
         }
       });
-
+console.log(sd)
 
       let uniqueScheduledTimes = this.fetchedData.appointments
       .filter(app => {
         // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
         return (
           app.serviceAssigneeId !== null &&
-          sps.some(sp => sp.user_id === app.serviceAssigneeId) &&
+          sps.some(sp => sp.user_id === Number(app.serviceAssigneeId)) &&
           sps.some(sp => sp[dayName] !== 0) &&
           app.serviceDate === sd
         );
       }).map(app => {
         // Convert the database time format (e.g., "2023-09-04T19:00:00.000Z") to time slots format (e.g., "4:00pm")
         const dbTime = app.serviceTime;
+
+        console.log(dbTime)
         const [hours, minutes] = dbTime.split(':');
         const ampm = hours >= 12 ? 'pm' : 'am';
         const formattedTime = `${(hours % 12) || 12}:${minutes}${ampm}`;
+        console.log(formattedTime)
         return formattedTime;
       });
 
