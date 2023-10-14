@@ -538,7 +538,7 @@ export class AppointmentScheduleComponent implements OnInit {
       // Flatten the array of arrays into a single array of service providers
       const flattenedProviders = [].concat(...sps);
       sps = flattenedProviders;
- 
+      console.log(sps)
       let sd = this.formatSelectedDate(this.selectedDate).toString()
   
       let day = this.selectedDate
