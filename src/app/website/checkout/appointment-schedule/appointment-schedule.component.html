@@ -59,13 +59,7 @@
 
                     <div class="auto-flex-center-space-between-gap20 week">
                       <div class="auto-flex-center-space-between-gap20 day-labels phone-no-gap">
-                        <div class="day-label web-font-primary-light xsmall">SUN</div>
-                        <div class="day-label web-font-primary-light xsmall">MON</div>
-                        <div class="day-label web-font-primary-light xsmall">TUE</div>
-                        <div class="day-label web-font-primary-light xsmall">WED</div>
-                        <div class="day-label web-font-primary-light xsmall">THU</div>
-                        <div class="day-label web-font-primary-light xsmall">FRI</div>
-                        <div class="day-label web-font-primary-light xsmall">SAT</div>
+                        <div class="day-label web-font-primary-light xsmall" *ngFor="let d of weekDays">{{d}}</div>
                       </div>
 
                       <div class="auto-flex-center-space-between-gap20 days phone-no-gap">

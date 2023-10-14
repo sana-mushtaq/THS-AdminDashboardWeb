@@ -42,6 +42,8 @@ export class AppointmentScheduleComponent implements OnInit {
   preferredTime: any
   preferredDate: any
 
+  weekDays: any = []
+
   private fetchedData: any = {
     serviceProviders: [],
     appointments: []
@@ -436,12 +438,24 @@ export class AppointmentScheduleComponent implements OnInit {
   generateWeek() {
  
     this.currentWeek = []
+    const currentDay = this.currentDate.getDay();
+
+    const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    const currentDayIndex = this.currentDate.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+
+    // Reorder the days of the week to start from the current day.
+    this.weekDays  = [
+      ...daysOfWeek.slice(currentDayIndex),
+      ...daysOfWeek.slice(0, currentDayIndex)
+    ];
 
     for (let i = 0; i < 7; i++) {
 
       const day = new Date(this.currentDate)
       day.setDate(this.currentDate.getDate() + i)
       this.currentWeek.push(day)
+
+
 
     }
 
@@ -538,23 +552,19 @@ export class AppointmentScheduleComponent implements OnInit {
       // Flatten the array of arrays into a single array of service providers
       const flattenedProviders = [].concat(...sps);
       sps = flattenedProviders;
-      console.log(sps)
       let sd = this.formatSelectedDate(this.selectedDate).toString()
   
       let day = this.selectedDate.toISOString()
-      console.log(day)
       // Create an array to map the day index to its name
       const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
       // Create a new Date object from the selected date
       const dateObject = new Date(day);
-      console.log(dateObject.toString());
       // Get the day index (0 for Sunday, 1 for Monday, etc.)
       const dayIndex = dateObject.getDay();
 
       // Get the day name from the dayNames array using the day index
       const dayName = dayNames[dayIndex].toLowerCase();
-      console.log(dayName)
       // Initialize a variable to store the minimum time
       let minTime = undefined;
       let maxTime = undefined;
@@ -589,30 +599,11 @@ export class AppointmentScheduleComponent implements OnInit {
         return app.serviceAssigneeId !== null
 
       })
-      console.log(this.fetchedData.appointments)
       sps = sps.filter(s => {
 
         return s[dayName] === 1
       })
-      let uniqueScheduledTimes1 = this.fetchedData.appointments
-      .filter(app => {
-        // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
-        return (
-          sps.some(sp => sp[dayName] === 1) 
-        );
-      })
-
-      console.log(uniqueScheduledTimes1)
-
-      let uniqueScheduledTimes2 = this.fetchedData.appointments
-      .filter(app => {
-        // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
-        return (
-          sps.some(sp => Number(sp.user_id) === Number(app.serviceAssigneeId))
-        );
-      })
-      console.log(uniqueScheduledTimes2)
-
+ 
       let uniqueScheduledTimes = this.fetchedData.appointments
       .filter(app => {
         // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
@@ -624,15 +615,12 @@ export class AppointmentScheduleComponent implements OnInit {
         // Convert the database time format (e.g., "2023-09-04T19:00:00.000Z") to time slots format (e.g., "4:00pm")
         const dbTime = app.serviceTime;
 
-        console.log(dbTime)
         const [hours, minutes] = dbTime.split(':');
         const ampm = hours >= 12 ? 'pm' : 'am';
         const formattedTime = `${(hours % 12) || 12}:${minutes}${ampm}`;
-        console.log(formattedTime)
         return formattedTime;
       });
 
-      console.log(uniqueScheduledTimes)
 
       const timeSlotCounts = {};
       uniqueScheduledTimes.forEach(time => {
@@ -647,7 +635,6 @@ export class AppointmentScheduleComponent implements OnInit {
       
       });
 
-      console.log(filteredTimeSlots)
   
       // Function to check if a time slot is available
       const isTimeSlotAvailable = (timeSlot: string) => {
