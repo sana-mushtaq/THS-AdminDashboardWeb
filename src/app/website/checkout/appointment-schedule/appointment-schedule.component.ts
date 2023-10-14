@@ -541,14 +541,14 @@ export class AppointmentScheduleComponent implements OnInit {
       console.log(sps)
       let sd = this.formatSelectedDate(this.selectedDate).toString()
   
-      let day = this.selectedDate
-
+      let day = this.selectedDate.toISOString()
+      console.log(day)
       // Create an array to map the day index to its name
       const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
       // Create a new Date object from the selected date
       const dateObject = new Date(day);
-
+      console.log(dateObject.toString());
       // Get the day index (0 for Sunday, 1 for Monday, etc.)
       const dayIndex = dateObject.getDay();
 
