@@ -337,7 +337,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoaderService, WebsiteDataService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
+   // { provide: LocationStrategy, useClass: HashLocationStrategy },
 
   ],
   bootstrap: [AppComponent],
