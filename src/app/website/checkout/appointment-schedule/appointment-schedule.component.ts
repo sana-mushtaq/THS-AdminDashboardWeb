@@ -554,7 +554,7 @@ export class AppointmentScheduleComponent implements OnInit {
 
       // Get the day name from the dayNames array using the day index
       const dayName = dayNames[dayIndex].toLowerCase();
-
+      console.log(dayName)
       // Initialize a variable to store the minimum time
       let minTime = undefined;
       let maxTime = undefined;
@@ -590,7 +590,10 @@ export class AppointmentScheduleComponent implements OnInit {
 
       })
       console.log(this.fetchedData.appointments)
+      sps = sps.filter(s => {
 
+        return s[dayName] === 1
+      })
       let uniqueScheduledTimes1 = this.fetchedData.appointments
       .filter(app => {
         // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
@@ -609,13 +612,12 @@ export class AppointmentScheduleComponent implements OnInit {
         );
       })
       console.log(uniqueScheduledTimes2)
-      
+
       let uniqueScheduledTimes = this.fetchedData.appointments
       .filter(app => {
         // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
         return (
           sps.some(sp => Number(sp.user_id) === Number(app.serviceAssigneeId)) &&
-          sps.some(sp => sp[dayName] === 1) &&
           app.serviceDate === sd
         );
       }).map(app => {
