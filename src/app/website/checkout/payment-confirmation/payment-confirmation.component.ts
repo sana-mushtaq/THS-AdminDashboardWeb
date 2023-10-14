@@ -181,7 +181,7 @@ export class PaymentConfirmationComponent implements OnInit {
                               let address = JSON.parse(localStorage.getItem("THSAppointmentAddress"))
                               let discount = JSON.parse(localStorage.getItem("THSDiscount"))
                               let multiAppointment = JSON.parse(localStorage.getItem("THSMultiAppointment"))
-                              
+                              let branch = JSON.parse(localStorage.getItem("THSBranch"))
                               multiAppointment = multiAppointment.filter(app => {
               
                                 return app !==null
@@ -195,7 +195,7 @@ export class PaymentConfirmationComponent implements OnInit {
                               let request = {
               
                                 userData: appointmentRequest.userData,
-                                branch_id: address.branch_id,
+                                branch_id: branch,
                                 scheduled_date: payload.preferredDate,
                                 scheduled_time: payload.preferredTime,
                                 cartData: payload.cartData,
