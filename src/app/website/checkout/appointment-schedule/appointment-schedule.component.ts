@@ -584,14 +584,14 @@ export class AppointmentScheduleComponent implements OnInit {
         }
       });
       
-      let filtera =  this.fetchedData.appointments(s=>{
+      let filtera =  this.fetchedData.appointments.filter(s=>{
 
         return s.serviceDate === sd
       })
       console.log(filtera);
 
           
-      let filterb =  this.fetchedData.appointments(s=>{
+      let filterb =  this.fetchedData.appointments.filter(s=>{
 
         return s.serviceDate === sd
       })
