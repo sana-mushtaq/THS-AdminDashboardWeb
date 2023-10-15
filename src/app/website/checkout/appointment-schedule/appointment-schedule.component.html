@@ -76,7 +76,7 @@
                   
             </div>
             
-            <div class="time-slots auto-flex-start-gap10-no-set-width width-half phone-no-wrap padding-bottom-20" *ngIf="keyvalue.value[0].timeSlots.length>0">
+            <div class="time-slots auto-flex-start-gap10-no-set-width width-half phone-no-wrap padding-bottom-20" *ngIf="keyvalue.value[0].timeSlots && keyvalue.value[0].timeSlots.length>0">
 
                 <p class="gray-border padding-10 padding-left-right-30 blue-color border-radius-10 max-width width-max-150 text-center cursor-pointer" *ngFor="let timeSlot of keyvalue.value[0].timeSlots" (click)="setPreferredTimeSlot(timeSlot); setCartDataTimeValue(keyvalue.key, timeSlot)" [ngClass]="{ 'selected-date':  keyvalue.value[0].preferredTime === timeSlot }">{{ timeSlot }}</p>
 

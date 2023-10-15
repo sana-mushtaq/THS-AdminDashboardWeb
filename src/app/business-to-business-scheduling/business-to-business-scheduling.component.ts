@@ -457,8 +457,15 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
       this.preferredDate = date.value
 
-      this.getAvailableTimeSlots()
+      if(this.preferredServiceProvider !== null) {
 
+        this.calculateTimeSlotsForSp(this.preferredServiceProvider)
+
+      } else {
+
+        this.getAvailableTimeSlots()
+
+      }
 
     } else {
 
@@ -481,7 +488,16 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
     }
 
     this.displayTime = false
-    this.getAvailableTimeSlots()
+
+    if(this.preferredServiceProvider !== null) {
+
+      this.calculateTimeSlotsForSp(this.preferredServiceProvider)
+
+    } else {
+
+      this.getAvailableTimeSlots()
+
+    }
 
   }
 
@@ -498,7 +514,16 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
     }
 
     this.displayTime = false
-    this.getAvailableTimeSlots()
+
+    if(this.preferredServiceProvider !== null) {
+
+      this.calculateTimeSlotsForSp(this.preferredServiceProvider)
+
+    } else {
+
+      this.getAvailableTimeSlots()
+
+    }
 
   }
 
@@ -943,7 +968,7 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
           //after fetching all service providers we will now check if their gender match with selected user or not 
           this.serviceProvidersServices = ress.data        
             // Get all service providers for the selected service
-          const sps = this.serviceProvidersServices.filter(sps => {
+          let sps = this.serviceProvidersServices.filter(sps => {
             return sps.service_id === serviceId;
           });
 
@@ -972,10 +997,168 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
           // Get the day name from the dayNames array using the day index
           const dayName = dayNames[dayIndex].toLowerCase();
 
+          sps = sps.filter(s => {
+
+            return s[dayName] === 1
+          })
+          console.log(sps)
           // Initialize a variable to store the minimum time
           let minTime = undefined;
           let maxTime = undefined;
 
+          // Iterate through the service providers again to find the minimum time for Tuesday
+          sps.forEach(s => {
+            // Extract the Tuesday availability from the service provider
+            const dayAvailability = s.days[dayName];
+
+            // Check if the availability is defined
+            if (dayAvailability) {
+              // Extract the start time for Tuesday
+              const startTime = new Date(`1970-01-01T${dayAvailability.start_time}`);
+
+              // Convert end time to a Date object
+              const endTime = new Date(`1970-01-01T${dayAvailability.end_time}`);
+          
+              // If minTime is undefined or the current start time is earlier than minTime
+              if (!minTime || startTime < minTime) {
+                minTime = startTime;
+              }
+
+              if (!maxTime || endTime > maxTime) {
+                maxTime = endTime;
+              }
+
+            }
+          });
+
+          let uniqueScheduledTimes = this.fetchedData.appointments
+          .filter(app => {
+            // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
+            return (
+              app.serviceAssigneeId !== null &&
+              sps.some(sp => sp.user_id === app.serviceAssigneeId) &&
+              sps.some(sp => sp[dayName] !== 0) &&
+              app.serviceDate === formattedSelectedDate
+            );
+          }).map(app => {
+            // Convert the database time format (e.g., "2023-09-04T19:00:00.000Z") to time slots format (e.g., "4:00pm")
+            const dbTime = app.serviceTime;
+            const [hours, minutes] = dbTime.split(':');
+            const ampm = hours >= 12 ? 'pm' : 'am';
+            const formattedTime = `${(hours % 12) || 12}:${minutes}${ampm}`;
+            return formattedTime;
+          });
+
+          uniqueScheduledTimes = new Set(uniqueScheduledTimes);
+ 
+          // Count the occurrences of each time slot
+          const timeSlotCounts = {};
+ 
+          uniqueScheduledTimes.forEach(time => {
+          
+            timeSlotCounts[time] = (timeSlotCounts[time] || 0) + 1;
+        
+          });
+
+          // Filter the time slots where all service providers are booked
+          const filteredTimeSlots = Object.keys(timeSlotCounts).filter(time => {
+          
+            return timeSlotCounts[time] === sps.length;
+          
+          });
+
+          // Function to check if a time slot is available
+          const isTimeSlotAvailable = (timeSlot: string) => {
+            return !filteredTimeSlots.includes(timeSlot);
+          };
+      
+          this.timeSlots = [];
+          
+          // Generate time slots and filter unavailable ones
+          // Convert minTime and maxTime to hours (as integers)
+          const minHour = minTime.getHours();
+          const maxHour = maxTime.getHours();
+          for (let hour = minHour; hour <= maxHour; hour++) {
+            const timeSlot = this.formatTimeSlot(hour);
+            if (isTimeSlotAvailable(timeSlot)) {
+              this.timeSlots.push(timeSlot);
+            }
+          }
+
+          this.displayTime = true
+
+        } else {}
+        
+      },
+      error: ( err: any ) => {
+        
+        console.log(err)
+
+      }
+  
+    }) 
+
+  }
+
+  calculateTimeSlotsForSp(id) {
+
+    const serviceId = this.preferredService
+
+    let spData  = {
+
+      service_id: serviceId,
+      branch_id: this.preferredBranch
+
+    }
+
+    this._b2c.getServiceProviderService(spData).subscribe({
+
+      next : ( ress : any ) => {
+
+        //in case of success the api returns 0 as a status code
+        if( ress.status === APIResponse.Success ) {
+
+          //after fetching all service providers we will now check if their gender match with selected user or not 
+          this.serviceProvidersServices = ress.data        
+          console.log(this.serviceProvidersServices)
+            // Get all service providers for the selected service
+          let sps = this.serviceProvidersServices.filter(sps => {
+            return sps.service_id === serviceId && sps.user_id === Number(id);
+          });
+
+          this.serviceProvidersServices.forEach(s=>{
+
+            s.days = JSON.parse(s.days);
+          })
+
+
+          // Convert the selected date to "YYYY-MM-DD" format
+          const formattedSelectedDate = this.preferredDate;
+
+  
+          let day = formattedSelectedDate
+    
+          // Create an array to map the day index to its name
+          const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    
+          // Create a new Date object from the selected date
+          const dateObject = new Date(day);
+    
+          // Get the day index (0 for Sunday, 1 for Monday, etc.)
+          const dayIndex = dateObject.getDay();
+    
+          // Get the day name from the dayNames array using the day index
+          const dayName = dayNames[dayIndex].toLowerCase();
+
+          // Initialize a variable to store the minimum time
+          let minTime = undefined;
+          let maxTime = undefined;
+
+          sps = sps.filter(s => {
+
+            return s[dayName] === 1
+          })
+     
           // Iterate through the service providers again to find the minimum time for Tuesday
           sps.forEach(s => {
             // Extract the Tuesday availability from the service provider
@@ -1084,7 +1267,16 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
     this.preferredServiceProvider = event.target.value
     this.displayTime = false
-    this.getAvailableTimeSlots()
+    if(this.preferredServiceProvider !== null) {
+
+      this.calculateTimeSlotsForSp(this.preferredServiceProvider)
+
+    } else {
+
+      this.getAvailableTimeSlots()
+
+    }
+
   }
 
 }

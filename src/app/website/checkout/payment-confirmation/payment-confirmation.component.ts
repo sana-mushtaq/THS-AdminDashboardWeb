@@ -71,7 +71,7 @@ export class PaymentConfirmationComponent implements OnInit {
                           next : ( ress : any ) => {
                     
                             //in case of success the api returns 0 as a status code
-                            if( ress.status === 200 ) {
+                            if( ress.status === APIResponse.Success ) {
                     
                               let appointmentRequest = JSON.parse(localStorage.getItem("THSAppointmentRequest"))
                               let payload =  JSON.parse(localStorage.getItem("THSPaylaod"))
