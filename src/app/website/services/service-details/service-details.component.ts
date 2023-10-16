@@ -108,10 +108,12 @@ export class ServiceDetailsComponent implements OnInit {
 
         'id': service.id,
         'title': service.title,
+        'title_arabic': service.title_arabic,
         'price': service.price,
         'icon': service.icon,
         'category_id': service.category_id,
         'description': service.description,
+        'description_arabic': service.description_arabic,
         'user': null
       }
 
