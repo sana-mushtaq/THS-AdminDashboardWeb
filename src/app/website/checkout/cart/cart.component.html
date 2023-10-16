@@ -26,8 +26,8 @@
                 <p class="web-font-primary-light cursor-pointer" *ngIf="languageService.getCurrentLanguage() === 'ar' && cart.description_arabic && cart.description_arabic.length>0 && !cart.showFullDescription" (click)="toggleDescription(cartIndex)">{{ 'cart.showMore' | translate }}</p>
                 <p class="web-font-primary-light cursor-pointer" *ngIf="languageService.getCurrentLanguage() === 'ar' && cart.description_arabic && cart.description_arabic.length>0 && cart.showFullDescription"(click)="toggleDescription(cartIndex)">{{ 'cart.showLess' | translate }}</p>
                
-                <p class="web-font-primary-light cursor-pointer" *ngIf="languageService.getCurrentLanguage() === 'en' && cart.description && cart.description_arabic.length>0 && !cart.showFullDescription" (click)="toggleDescription(cartIndex)">{{ 'cart.showMore' | translate }}</p>
-                <p class="web-font-primary-light cursor-pointer" *ngIf="languageService.getCurrentLanguage() === 'en' && cart.description && cart.description_arabic.length>0 && cart.showFullDescription"(click)="toggleDescription(cartIndex)">{{ 'cart.showLess' | translate }}</p>
+                <p class="web-font-primary-light cursor-pointer" *ngIf="languageService.getCurrentLanguage() === 'en' && cart.description && cart.description.length>0 && !cart.showFullDescription" (click)="toggleDescription(cartIndex)">{{ 'cart.showMore' | translate }}</p>
+                <p class="web-font-primary-light cursor-pointer" *ngIf="languageService.getCurrentLanguage() === 'en' && cart.description && cart.description.length>0 && cart.showFullDescription"(click)="toggleDescription(cartIndex)">{{ 'cart.showLess' | translate }}</p>
                
 
             </div>
