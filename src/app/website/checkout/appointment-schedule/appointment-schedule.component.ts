@@ -372,6 +372,7 @@ export class AppointmentScheduleComponent implements OnInit {
 
   selectDate(date: Date) {
     this.selectedDate = date;
+    this.timeSlots = [];
     this.calculateTimeSlots();
   }
 
@@ -400,6 +401,7 @@ export class AppointmentScheduleComponent implements OnInit {
 
   //this function will calculate time slots if date is selected
   calculateTimeSlots() {
+    this.timeSlots = [];
     // Assuming fetchedData.appointments contains the list of appointments
     if (!this.selectedDate || this.cartData.length === 0) {
       // No selected date or no services in cart, return empty time slots
