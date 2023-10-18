@@ -412,7 +412,7 @@ export class AppointmentScheduleComponent implements OnInit {
     this.allCartCategoriesData.forEach((data) => {
       this.timeSlots = [];
 
-      data.value[0].timeSlots = []
+      data[0]["timeSlots"] = []
       
       const formattedSelectedDate = this.formatSelectedDate(this.selectedDate);
 
