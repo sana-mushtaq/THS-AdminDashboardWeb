@@ -496,10 +496,7 @@ export class AppointmentScheduleComponent implements OnInit {
             return s[dayName] === 1;
           });
 
-          if(sps.length  === 0) { 
-            data[0]["timeSlots"] = []
-
-          }
+   
           console.log(sps)
           let uniqueScheduledTimes = this.fetchedData.appointments
             .filter((app) => {
@@ -581,7 +578,15 @@ export class AppointmentScheduleComponent implements OnInit {
             (slot) => !timeSlotsToRemove.includes(slot)
           );
   
-          data[0]["timeSlots"] = this.timeSlots;
+          if(sps.length  === 0) { 
+            data[0]["timeSlots"] = []
+
+          }
+          else {
+
+            data[0]["timeSlots"] = this.timeSlots;
+
+          }
 
         }
       
