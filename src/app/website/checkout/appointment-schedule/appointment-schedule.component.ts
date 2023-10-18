@@ -495,6 +495,11 @@ export class AppointmentScheduleComponent implements OnInit {
           sps = sps.filter((s) => {
             return s[dayName] === 1;
           });
+
+          if(sps.length  === 0) { 
+            data[0]["timeSlots"] = []
+
+          }
           console.log(sps)
           let uniqueScheduledTimes = this.fetchedData.appointments
             .filter((app) => {
