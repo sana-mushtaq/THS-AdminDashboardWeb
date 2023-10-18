@@ -8,6 +8,8 @@ import { Router } from "@angular/router";
 })
 export class HeaderComponent implements OnInit {
 
+  title = 'Taib Home Medical Care Company - Riyadh'
+  
   constructor(private router: Router,) { this.getDetails()}
 
   sessionDetails;
@@ -17,11 +19,12 @@ export class HeaderComponent implements OnInit {
     this.sessionDetails = localStorage.getItem("SessionDetails");
     var details =  JSON.parse(this.sessionDetails);
     this.accessLevel = details.accessLevel;
+    this.title = details.title;
   }
 
   LogoutClick() {
     localStorage.setItem("SessionDetails", null);
-    this.router.navigate(["/"]);
+    this.router.navigate(["/admin-login"]);
   }
   ngOnInit(): void {
     $('.el-submenu__title').click(function(){

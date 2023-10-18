@@ -258,7 +258,7 @@
                                             <div class="auto-flex-start-gap10-column-no-set-width width-half">
 
                                                 <p class="bold">Description</p>
-                                                <textarea class="input-global" formControlName="selectedCategory.description" type="text"></textarea>
+                                                <textarea class="input-global" [(ngModel)]="selectedCategory.description" type="text"></textarea>
             
                                             </div>
 
@@ -266,15 +266,16 @@
                                             <div class="auto-flex-start-gap10-column-no-set-width width-half">
 
                                                 <p class="bold">Description Arabic</p>
-                                                <textarea class="input-global" formControlName="selectedCategory.description_arabic" type="text"></textarea>
+                                                <textarea class="input-global" [(ngModel)]="selectedCategory.description_arabic" type="text"></textarea>
             
                                             </div>
                                             
                                             <div class="auto-flex-start-gap5-column-no-set-width width-half">
         
                                                 <p class="bold">Top</p>
-                                                <input class="input-global" [(ngModel)]="selectedCategory.top" style="width:auto" type="checkbox" /> 
-    
+                                                <!-- Render the checkbox based on the value of selectedCategory.top -->
+                                                <input class="input-global" [checked]="selectedCategory.top === 1" style="width:auto" type="checkbox" />
+                                            
                                             </div>
 
                                             

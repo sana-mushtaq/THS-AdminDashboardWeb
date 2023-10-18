@@ -496,8 +496,6 @@ export class AppointmentScheduleComponent implements OnInit {
             return s[dayName] === 1;
           });
 
-   
-          console.log(sps)
           let uniqueScheduledTimes = this.fetchedData.appointments
             .filter((app) => {
               // Check if app.serviceAssigneeId is not null and there's a matching sp in sps
