@@ -13,6 +13,9 @@ import { FormBuilder, Validators, FormGroup, NG_VALUE_ACCESSOR } from "@angular/
 import Swal from "sweetalert2";
 import { ServiceProvider } from 'src/model/common/service-provider.model';
 
+import { HttpClient } from '@angular/common/http';
+
+
 declare var $: any;
 declare var google : any;
 
@@ -41,9 +44,14 @@ export class EditLabComponent implements OnInit {
   inelligibleLabTests;
   ineligibleOtherServices;
 
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
   private _unsubscribeAll: Subject<any>;
 
-  constructor(private _appService: AppService, private _appUtil: UtilService, private router: Router, public formBuilder: FormBuilder, private _appDataService: AppDataService) {
+  constructor(private _appService: AppService, private _appUtil: UtilService, private router: Router, public formBuilder: FormBuilder, private _appDataService: AppDataService, private http: HttpClient) {
     this.getMainServicePackages();
     this.getMainIndividualLabTests();
     this.getMainCommonServiceList();
@@ -61,6 +69,15 @@ export class EditLabComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+    
     $('.onlyemployee').removeClass('dclass');
     $('.onlyadmin').removeClass('dclass');
     $('.active-nurse').addClass('active');

@@ -54,3 +54,23 @@ table.pat-table tr td:first-child{color:#88909C}
     align-items: center;
     justify-content: center;
 }
+
+/* Default color for unfilled stars */
+.star {
+    display: inline-block;
+    font-size: 24px;
+    color: black;
+}
+  
+/* Color for filled stars */
+.filled {
+    color: yellow;
+}
+
+.star-rating {
+    font-size: 24px;
+}
+
+.star.selected {
+    color: gold;
+}

@@ -10,6 +10,8 @@ import { Appointment } from "src/model/appointments/appointment.model";
 import { AlertType, APIResponse, AppointmentTriggerSource } from "src/utils/app-constants";
 import * as moment from "moment";
 import Swal from "sweetalert2";
+import { HttpClient } from '@angular/common/http';
+
 declare var $: any;
 
 
@@ -30,14 +32,29 @@ export class ProgramRequestComponent implements OnInit {
   selectedAppointmentId;
   selectedServiceProvider;
 
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
   constructor(private _appService: AppService, private _appUtil: UtilService, private router: Router,
-    private _appDataService: AppDataService,) {
+    private _appDataService: AppDataService, private http: HttpClient) {
     this.getInsuranceProviderList();
     this.getSectors();
     this.getAppointmentLists();
   }
 
   ngOnInit(): void {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+    
     $('.onlyservicerequests').show();
     $(".onlyadmin").removeClass("dclass");
     $(".appoint-programs").addClass("active");
@@ -118,10 +135,14 @@ export class ProgramRequestComponent implements OnInit {
     );
   }
   getAppointmentLists() {
-    this._appService.getInsuredAppointmentList().subscribe(
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    let data = {
+      userId: this.userRoles['sp']
+    }
+    this._appService.getInsuredAppointmentList(data).subscribe(
       (response: any) => {
         if (response.status == APIResponse.Success) {
-          debugger
+          
           // this.sectorList = Sector.getSectorList(response);
           this.actualAppointmentList = Appointment.getInsuredAppointmentList(response.upcomingAppointmentList);
           // this.appointmentList = response.upcomingAppointmentList;

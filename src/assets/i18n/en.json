@@ -107,7 +107,15 @@
         "tryAgain": "An error occurred. Try agin later",
         "errorWhileUpdatingAddress": "An error occured while saving address in your account but you can use this address to book service.",
         "sureRemovingUser": "Are you sure that you want to remove this user?",
-        "success":"Success"
+        "success":"Success",
+        "appointmentCanNotBeCanceled": "An appointment can only be canceled before 24 Hours from the booked time",
+        "showAppointmentCancelationConfimationMessage": "Are you sure you want to cancel your appointment",
+        "showAppointmentCancelMessage": "Your appointment has been canceled",
+        "showAppointmentUpdateMessage": "An appointment can only be updared before 6 Hours from the booked time",
+        "showAppointmentAfterUpdateMessage": "Your appointment has been updated",
+        "fileNotUpdatedSuccessfully": "Error while uploading file, Try Again",
+        "fileUpdatedSuccessfully": "Your file has been updated successfully"
+    
     },
 
     "patientProfile": {
@@ -125,8 +133,26 @@
         "appointmentId": "Appointment ID",
         "serviceName": "Service Name",
         "dateTime": "Date & time",
+        "actions": "Actions",
+        "medicalRecords": "Medical Records",
+        "viewAllAttachments": "attachments",
         "bookService": "Book a service",
-        "dependantSuccess": "User data is updated successfully"
+        "dependantSuccess": "User data is updated successfully",
+        "upcoming": "Upcoming appointments",
+        "past": "History and Medical records",
+        "noUpcoming": "No upcoming appointments available",
+        "noPast": "No past appointments available",
+        "confirmDateTime": "Confirm date & time",
+        "file_name": "File Name",
+        "uploaded_at": "Uploaded Date",
+        "added_by": "Added by",
+        "noFilesUploadedYet": "No files uploaded yet",
+        "review": "Review",
+        "reviewTitle": "Due to the importance of your opinion to improve the level of service provided to you, we hope that you will kindly fill out the questionnaire for the purpose of developing and improving our services. We ask that you participate transparently, knowing that it will not require any personal information or recording any data, out of concern for customer privacy.",
+        "send": "Send",
+        "reviewError": "Please rate all questions before submitting.",
+        "patientNotes": "Patient Notes",
+        "providerNotes": "Provider Notes"
 
     },
 
@@ -182,6 +208,7 @@
         "nationalId": "National ID",
         "iqama": "Iqama",
         "passport": "Passport",
+        "medicalHistory": "Medical History",
 
         "isNumber": "ID Number",
         "maritalStatus": "Marital Status",
@@ -212,6 +239,32 @@
         "selectNationality": "Select Nationality",
         "selectIdType": "Select Id type"
         
+    },
+
+    "insurance": {
+        "PolicyNumber":"Policy Number",
+        "InsuranceCompanyName":"Insurance Company Name",
+        "InsuranceCompanyNameAr": "Insurance Company Name In Arabic",
+        "ClassName": "Class Name",
+        "Gender": "Gender",
+        "DeductibleRate": "Deductible Rate",
+        "MaxLimit": "Max Limit",
+        "BeneficiaryType": "Beneficiary Type",
+        "BeneficiaryTypeId": "Beneficiary Type Id",
+        "BeneficiaryNumber": "Beneficiary Number",
+        "IdentityNumber": "Identity Number",
+        "BeneficiaryName": "Beneficiary Name",
+        "InceptionDate": "Inception Date",
+        "PolicyHolder": "Policy Holder",
+        "InsurancePoIicyExpiryDate": "Insurance PoIicy Expiry Date",
+        "validField": "Enter valid data for the required field",
+        "submit": "Add Insurance",
+        "addInsurance": "Add Insurance",
+        "discardChanges": "Discard Changes",
+        "Male": "Male",
+        "Female": "Female",
+        "Main": "Main",
+        "Dependent": "Dependent"
     }
 
 }

@@ -160,4 +160,10 @@ export class PatientsService {
 
      }
 
+     submitInsuranceInformation(body) {
+
+        return this._httpClient.post<any>(this.patientUrlUpdated+'/submitInsuranceInformation', body );
+        
+     }
+
 }

@@ -4,6 +4,7 @@ import { UtilService } from "src/service/util.service";
 import { InsuranceList } from 'src/model/common/insurance.modal';
 import { AlertType, APIResponse, FileUploadType } from "src/utils/app-constants";
 import { FormBuilder, Validators, FormGroup, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { HttpClient } from '@angular/common/http';
 
 import Swal from "sweetalert2";
 
@@ -25,12 +26,26 @@ export class InsuranceListComponent implements OnInit {
   imgPreview;
   selectedInsurance;
   insuranceList;
+  userRoles: any = {}
 
-  constructor(private _appService: AppService, private _appUtil: UtilService, public formBuilder: FormBuilder) {
+  jsonData: any;
+  loaded: boolean = false;
+  constructor(private _appService: AppService, private _appUtil: UtilService, public formBuilder: FormBuilder,private http: HttpClient) {
     this.getInsuranceProviderList()
   }
 
   ngOnInit(): void {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
+    
     $('.onlyadmin').removeClass('dclass');
     $('.onlysetting').removeClass('dclass');
     this.modalTitle = "Add Insurance";

@@ -12,6 +12,8 @@ import { IDropdownSettings, } from 'ng-multiselect-dropdown';
 import { ServiceService } from 'src/service/service.service'
 import { environment } from 'src/environments/environment'
 import { MapsAPILoader } from '@agm/core';
+import { HttpClient } from '@angular/common/http';
+
 declare var google: any;
 
 @Component({
@@ -115,6 +117,11 @@ export class BranchViewComponent implements OnInit {
   public addBranchForm : FormGroup
   public editBranchForm : FormGroup
   
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+  
   constructor( 
     private _branchService: BranchService,
     private _appService: AppService,
@@ -123,6 +130,7 @@ export class BranchViewComponent implements OnInit {
     private _service: ServiceService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
+    private http: HttpClient
     ) {
     
     //this will be called at first to get a list of branches
@@ -230,6 +238,15 @@ export class BranchViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
 
     $('#nav_settings').addClass('active');
     $('.onlysetting').removeClass('dclass');

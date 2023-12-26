@@ -64,6 +64,107 @@ a:hover{
     place-items: stretch;
   }
 
-  .width-max-80Percent{
-    max-width: 80%;
-  }
+.width-max-80Percent{
+max-width: 80%;
+}
+.calendar {
+    text-align: center;
+    margin: 15px;
+}
+  
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.header-text {
+    flex: 1;
+    text-align: center;
+}
+  
+.arrow-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.arrow-button img {
+    width: 24px;
+    height: 24px;
+}
+
+.week {
+    display: flex;
+    flex-direction: column;
+}
+
+.day-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.day-label {
+    flex: 1;
+    text-align: center;
+}
+
+.days {
+    display: flex;
+    justify-content: space-between;
+}
+
+.day {
+    flex: 1;
+    padding: 10px;
+}
+
+.selected-date {
+    border: 1.5px solid var(--blue-color); /* Apply a border to the selected date */
+    border-radius: 15px;
+}
+
+.text-area-color {
+    background-color: #EDEEF2;
+}
+
+.star-rating {
+    font-size: 24px;
+}
+
+.star {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.star.selected {
+    color: gold;
+}
+
+@media only screen and (max-width: 1090px) {
+
+    .phone-no-wrap{
+        flex-wrap: nowrap;
+        overflow: auto;
+    }
+    
+}
+
+@media only screen and (max-width: 500px) {
+
+    .phone-no-gap {
+        gap: 0px;
+    }
+    .xxxSmallImg{
+        width: 16px;
+        height: 16px;
+    }
+    .phone-max-300{
+        max-width: 300px;
+    }
+
+}

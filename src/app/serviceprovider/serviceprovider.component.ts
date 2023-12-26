@@ -8,6 +8,7 @@ import { ServiceproviderService } from 'src/service/serviceprovider.service';
 import { BranchService  } from 'src/service/branch.service'
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ServiceService } from 'src/service/service.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-serviceprovider',
@@ -57,12 +58,18 @@ export class ServiceproviderComponent implements OnInit {
   //service provider availablility
   spAvailabilities: any = {}
 
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
   constructor(
     private _appService: AppService,
     private _serviceProvider: ServiceproviderService,
     private fb : FormBuilder,
     private _branchService: BranchService,
     private _service: ServiceService,
+    private http: HttpClient
   ) {
 
     this.getPractiseUserList(PractiseUserRoles.All);
@@ -144,6 +151,17 @@ export class ServiceproviderComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
+    
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+    
     $('#nav_settings').addClass('active');
     $('.onlysetting').removeClass('dclass');
     $('.onlyadmin').removeClass('dclass');

@@ -5,6 +5,8 @@ import { PatientsService } from 'src/service/patient.service';
 import { WebsiteDataService } from 'src/service/website-data.service';
 import { APIResponse } from 'src/utils/app-enum';
 import { UtilService } from 'src/utils/util.service';
+import { GoSellService } from 'src/service/go-sell.service';
+declare const goSell: any; // Declare goSell to avoid TypeScript errors
 
 @Component({
   selector: 'app-checkout-appointment',
@@ -32,7 +34,8 @@ export class CheckoutAppointmentComponent implements OnInit {
     private router: Router,
     private _patientService: PatientsService,
     private _b2c: BusinessToCustomerSchedulingService,
-    private dataService: WebsiteDataService
+    private dataService: WebsiteDataService,
+    private goSellService: GoSellService
   ) { }
 
   ngOnInit(): void {
@@ -62,7 +65,6 @@ export class CheckoutAppointmentComponent implements OnInit {
     this.userId = localStorage.getItem("THSUserId")
 
     if(this.userId !== null) {
-
       //check dependants and whether services match with service provider or not
        //first we will get user profile information
         let data = {
@@ -79,6 +81,7 @@ export class CheckoutAppointmentComponent implements OnInit {
             if( res.status === APIResponse.Success ) {
               
               this.userData = res.data
+              
               this.userDependants[0] = res.data
               
               this.cartData.forEach(cartItem => {
@@ -200,7 +203,128 @@ export class CheckoutAppointmentComponent implements OnInit {
 
       }
       
-      localStorage.setItem("THSDiscount", JSON.stringify(dicountStorage))
+      localStorage.setItem("THSDiscount", JSON.stringify(dicountStorage));
+
+      goSell.config({
+        containerID: "root",
+        gateway: {
+          publicKey: "pk_test_IHFiBNWxlPU29hm0bA7s5c1e",
+          merchantId: null,
+          language: "en",
+          contactInfo: true,
+          supportedCurrencies: "SAR",
+          supportedPaymentMethods: "all",
+          saveCardOption: false,
+          customerCards: true,
+          notifications: "standard",
+          callback: (response) => {
+            console.log("response", response);
+          },
+          onClose: () => {
+            console.log("onClose Event");
+          },
+          backgroundImg: {
+            url: "imgURL",
+            opacity: "0.5",
+          },
+          labels: {
+            cardNumber: "Card Number",
+            expirationDate: "MM/YY",
+            cvv: "CVV",
+            cardHolder: "Name on Card",
+            actionButton: "Pay",
+          },
+          style: {
+            base: {
+              color: "#535353",
+              lineHeight: "18px",
+              fontFamily: "sans-serif",
+              fontSmoothing: "antialiased",
+              fontSize: "16px",
+              "::placeholder": {
+                color: "rgba(0, 0, 0, 0.26)",
+                fontSize: "15px",
+              },
+            },
+            invalid: {
+              color: "red",
+              iconColor: "#fa755a ",
+            },
+          },
+        },
+        customer: {
+          id: null,
+          first_name: this.userData.first_name,
+          middle_name: "",
+          last_name: this.userData.last_name,
+          email: this.userData.email,
+          phone: {
+            country_code: "966",
+            number: this.userData.phone_number,
+          },
+        },
+        order: {
+          amount: this.total_inc_cost.toString(),
+          currency: "SAR",
+          /*items: [
+            {
+              id: 1,
+              name: "item1",
+              description: "item1 desc",
+              quantity: "1",
+              amount_per_unit: "00.000",
+              discount: {
+                type: "P",
+                value: "10%",
+              },
+              total_amount: "000.000",
+            },
+            {
+              id: 2,
+              name: "item2",
+              description: "item2 desc",
+              quantity: "2",
+              amount_per_unit: "00.000",
+              discount: {
+                type: "P",
+                value: "10%",
+              },
+              total_amount: "000.000",
+            },
+            {
+              id: 3,
+              name: "item3",
+              description: "item3 desc",
+              quantity: "1",
+              amount_per_unit: "00.000",
+              discount: {
+                type: "P",
+                value: "10%",
+              },
+              total_amount: "000.000",
+            },
+          ],*/
+          shipping: null,
+          taxes: null,
+        },
+        transaction: {
+          mode: "charge",
+          charge: {
+            saveCard: false,
+            threeDSecure: true,
+            description: "",
+            statement_descriptor: "",
+            hashstring:"",
+            metadata: {},
+            receipt: {
+              email: false,
+              sms: true,
+            },
+            redirect:"http://localhost:4200"+"/checkout/payment-confirmation/?order-currency=SAR&order-total="+this.total_inc_cost+"&lang=en",
+            post: null,
+          },
+        },
+      });
 
     } else {
 
@@ -480,5 +604,20 @@ export class CheckoutAppointmentComponent implements OnInit {
 
   }
 
-  
+  openLightBox(): void {
+
+    
+    let data = {
+
+      userData: this.userDependants,
+      paymentURL: "",
+    
+    }
+
+    localStorage.setItem("THSAppointmentRequest", JSON.stringify(data))
+
+    
+    this.goSellService.openLightBox();
+  }
+
 }

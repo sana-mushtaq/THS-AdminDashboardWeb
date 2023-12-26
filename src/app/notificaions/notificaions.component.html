@@ -12,7 +12,7 @@
           <nav class="nav-bar-none"></nav>
        </div>
  
-       <main class="el-main dashboard">
+       <main class="el-main dashboard" *ngIf="jsonData['notification']['view']">
  
  
           <app-header></app-header>
@@ -37,7 +37,7 @@
  
                       <div class="d-flex justify-content align-items-center">
                          <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-flask"></i> Notifications</span>  
-                         <button id="package" data-toggle="modal" data-target="#add_department" class="add-btn mr-0 float-right"><i class="fa fa-plus-circle"></i> Add Notificaions</button>
+                         <button *ngIf="jsonData['notification']['add']" id="package" data-toggle="modal" data-target="#add_department" class="add-btn mr-0 float-right"><i class="fa fa-plus-circle"></i> Add Notificaions</button>
                       </div>
  
  
@@ -534,10 +534,7 @@
           <h2>Send Notification</h2>
        </div>
        <div class="modal-body">
-        <form class="el-form newform el-form--label-top" id="departmentForm" [formGroup]="notificationForm">
-
-            
-
+        <form class="el-form newform el-form--label-top" id="departmentForm" [formGroup]="notificationForm" *ngIf="!showWhatsappForm">
             <div class="el-row" style="margin-left: -15px; margin-right: -15px;display:flex">
                 <div class="el-col el-col-24 el-col-xs-24 el-col-sm-15" style="border: 1px solid #dfdfdf;padding: 2%;margin: 1%;border-radius: 10px;">
                     <div class="el-row" style="margin-left: -15px; margin-right: -15px; margin-top: 1%;">
@@ -588,6 +585,8 @@
                         </div>                
         
                     </div>
+
+
                     <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-right: 10px;">
                         <div class="el-form-item is-required">
                             <label for="fn.en" class="el-form-item__label">Notification Type</label>
@@ -740,7 +739,9 @@
 
             </div>
         </form>
-        <form class="el-form newform el-form--label-top" id="departmentForm" [formGroup]="notificationForm" (ngSubmit)="onSendNotification()">
+
+
+        <form class="el-form newform el-form--label-top" *ngIf="!showWhatsappForm" id="departmentForm" [formGroup]="notificationForm" (ngSubmit)="onSendNotification()">
 
             
             <div class="el-row" style="margin-left: -15px; margin-right: -15px;margin-top:1%">
@@ -951,6 +952,73 @@
             </button>
             </div>
         </form>
+
+        
+        <!--show notification dropdown-->
+        <div class="auto-flex-start-gap10">
+            
+            <select class="input-global" (change)="selectWhatsappTemplate($event)">
+                <option>Select Template</option>
+                <option value="15cd1067-1563-4de7-8391-a5342fa8a706">open_conversation</option>
+            </select>
+
+        </div>
+
+        <form class="el-form newform el-form--label-top" *ngIf="showWhatsappForm" [formGroup]="notificationWhatsappForm" (ngSubmit)="onSendNotificationWhatsapp()">
+
+            <div class="el-row" style="margin-left: -15px; margin-right: -15px;margin-top:1%">
+                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
+     
+                    <div class="el-form-item is-required">
+
+                        <label for="fn.ar" class="el-form-item__label">Message</label>
+
+                        <div class="el-form-item__content">
+
+                            <div class="line-input el-input">
+                                
+                                <textarea class="input-global" formControlName="message"></textarea>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24">
+                        <div class="el-form-item is-required">
+                            <label for="fn.ar" class="el-form-item__label">Select Patient</label>
+                            <div class="el-form-item__content">
+                                <div class="line-input el-input">
+                                    
+                                        <ng-multiselect-dropdown
+                                            [settings]="dropdownSettings"
+                                            [data]="dropdownList"
+                                            formControlName="patients"
+                                        >
+                                        </ng-multiselect-dropdown>
+                                    <div
+                                        class="invalid-feedback">
+                                        <span>This value is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="text-right">
+            <button type="submit" class="add-btn el-button el-button--primary save">
+                Send
+            </button>
+            </div>
+        </form>
+        
+
        </div>
        <div class="modal-footer">
           <h3></h3>

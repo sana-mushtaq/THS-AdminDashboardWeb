@@ -254,6 +254,17 @@ export class AppService {
     return this._httpClient.post(fileUploadUrl, formData);
 
   }
+
+  
+  fileUploadMedicalRecord(imageFile) {
+
+    const formData: FormData = new FormData();
+    let fileUploadUrl = AppConstants.mrUploadURL;
+    formData.append("uploadedImage", imageFile, imageFile.name);
+    formData.append("fileName", imageFile.name);
+    return this._httpClient.post(fileUploadUrl, formData);
+
+  }
   
   getAdminLabDashboard(params: any) {
     // let reqParams = {};
@@ -510,9 +521,10 @@ export class AppService {
     return this._httpClient.post<any>(AppConstants.postNewCorpEmployeeURL, params);
   }
 
-  getInsuredAppointmentList() {
+  getInsuredAppointmentList(data) {
     let reqParams = {};
-    return this._httpClient.post<any>(AppConstants.getInsuredAppointmentListURL, reqParams);
+    console.log(data)
+    return this._httpClient.post<any>(AppConstants.getInsuredAppointmentListURL, data);
   }
 
   getInsuredAppointmentDetails(appointmentId: string) {
@@ -596,6 +608,12 @@ export class AppService {
   sendWhatsappNotification( body : any ) {
 
     return this._httpClient.post<any>( environment.domainName+'whatsapp/send-notification', body)
+
+  }
+  
+  sendWhatsappNotificationTemplate( body : any ) {
+
+    return this._httpClient.post<any>( environment.domainName+'whatsapp/send-notification-template', body)
 
   }
 

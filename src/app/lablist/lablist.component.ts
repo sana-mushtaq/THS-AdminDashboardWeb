@@ -7,6 +7,7 @@ import { Router } from "@angular/router";
 import { AppDataService } from 'src/service/app-data.service';
 import Swal from "sweetalert2";
 import * as moment from "moment";
+import { HttpClient } from '@angular/common/http';
 
 declare var $: any;
 declare var google : any;
@@ -27,12 +28,18 @@ export class LablistComponent implements OnInit {
     modalTitle;
     editEnabled = 0;
 
+    userRoles: any = {}
+
+    jsonData: any;
+    loaded: boolean = false;
+
   constructor(
     private _appService: AppService,
     private _appUtil: UtilService,
     public formBuilder: FormBuilder,
     private router: Router,
     private _appDataService: AppDataService,
+    private http: HttpClient
   ) {
     this.getLabListData();
    }
@@ -184,6 +191,19 @@ export class LablistComponent implements OnInit {
     }
 
   ngOnInit(): void {
+
+    
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
+
+    
     this.formValidation();
     $('.onlylab').removeClass('dclass');
     $('.onlyadmin').removeClass('dclass');

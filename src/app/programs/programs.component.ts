@@ -5,6 +5,7 @@ import { AppService } from "src/service/app.service";
 import { UtilService } from "src/service/util.service";
 import { AlertType, APIResponse, FileUploadType } from "src/utils/app-constants";
 import { FormBuilder, Validators, FormGroup, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { HttpClient } from '@angular/common/http';
 
 import Swal from "sweetalert2";
 import { each } from 'jquery';
@@ -30,7 +31,12 @@ export class ProgramsComponent implements OnInit {
   SessionLists = [];
   idArr=[];
 
-  constructor(private _appService: AppService, private _appUtil: UtilService, public formBuilder: FormBuilder) {
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+  
+  constructor(private _appService: AppService, private _appUtil: UtilService, public formBuilder: FormBuilder,private http: HttpClient) {
     this.getCommonServiceCategories();
     this.getSectors();
   }
@@ -125,6 +131,16 @@ export class ProgramsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
 
     $('.onlypackage').removeClass('dclass');
     $('.onlyadmin').removeClass('dclass');

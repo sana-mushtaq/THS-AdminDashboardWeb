@@ -100,7 +100,7 @@ export class PaymentConfirmationComponent implements OnInit {
                                 payment_method: 'tap payments',
                                 payment_id: id,
                                 payment_status: 'CAPTURED',
-                                payment_url: appointmentRequest.paymentURL,
+                                payment_url: "",
                                 longitude: address.user_address.longitude,
                                 latitude: address.user_address.latitude,
                                 location: `${address.user_address.address_line1} ${address.user_address.address_line2}`,
@@ -111,7 +111,7 @@ export class PaymentConfirmationComponent implements OnInit {
                                 discount_amount: discount.discountAmount,
                                 vat_applied: discount.vatApplied,
                                 active_offer_id: null,
-                                invoice_total: 200,
+                                invoice_total: ress.payment.amount,
                                 operator_note: null,
                                 insurance_id: null,
                                 is_insured: false,
@@ -141,6 +141,51 @@ export class PaymentConfirmationComponent implements OnInit {
                                     localStorage.removeItem("THSCart")
                                     localStorage.removeItem("THSDiscount")
                                     localStorage.removeItem("THSMultiAppointment")
+
+                                    //send invoice email
+
+                                    let invoiceData = {
+
+                                      appointmentId: this.appointmentId,
+                                      appointmentTotal: ress.payment.amount,
+                                      user_email: appointmentRequest.userData[0].email,
+                                      user_name:  `${appointmentRequest.userData[0].first_name} ${appointmentRequest.userData[0].last_name} `
+                                    }
+
+                                    this._b2c.sendInvoiceEmail(invoiceData).subscribe({
+                    
+                                      next : ( res : any ) => {
+                                        
+
+                                        console.log(res);
+                                        console.log("email sent successfully!");
+                                        
+                                      },
+                                      error: ( errr: any ) => {
+                                        
+                                        console.log(errr)
+                                
+                                      }
+                                  
+                                    }) 
+
+                                    this._b2c.createOdooInvoice(invoiceData).subscribe({
+                    
+                                      next : ( res : any ) => {
+
+
+                                        console.log(res);
+                                        console.log("invoice created successfully!");
+                                        
+                                      },
+                                      error: ( errr: any ) => {
+                                        
+                                        console.log(errr)
+                                
+                                      }
+                                  
+                                    }) 
+                          
                                     
                                   } else {
                           

@@ -13,6 +13,7 @@ import { Subject, takeUntil } from "rxjs";
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { HttpClient } from '@angular/common/http';
 
 export enum NotificationMedium {
   Whatsapp = 1,
@@ -26,6 +27,7 @@ export enum NotificationType {
   Group = 2,
 }
 
+
 declare var $: any;
 @Component({
   selector: 'app-notificaions',
@@ -33,6 +35,15 @@ declare var $: any;
   styleUrls: ['./notificaions.component.css']
 })
 export class NotificaionsComponent implements OnInit {
+
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
+  whatsappTemplateValue: any = '';
+  showWhatsappTemplateDropDown: boolean = false;
+  showWhatsappForm: boolean = false;
 
   dropdownList = [];
   dropdownSettings:IDropdownSettings={};
@@ -93,6 +104,7 @@ export class NotificaionsComponent implements OnInit {
   };
   // Notification form
   public notificationForm : FormGroup;
+  public notificationWhatsappForm : FormGroup;
   
 
   constructor(
@@ -100,7 +112,8 @@ export class NotificaionsComponent implements OnInit {
     private _appUtil: UtilService, 
     private router: Router,
     private _appDataService: AppDataService,
-    private _formBuilder : FormBuilder
+    private _formBuilder : FormBuilder,
+    private http: HttpClient
   ) {
     this.getPaitentsList();
     // Create Notification Form
@@ -111,13 +124,33 @@ export class NotificaionsComponent implements OnInit {
       description_ar : ['', [Validators.required]],
       patients : [[]],
     });
+  
+    this.notificationWhatsappForm = this._formBuilder.group({
+      name : [''],
+      message : ['', [Validators.required]],
+      patients : [[]],
+    });
+  
   }
+
 
   actualpatientList: Patient[] = [];
   notificationType;
   notificationTo = 2;
 
   ngOnInit(): void {
+
+    
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
+    
     $('.onlyadmin').removeClass('dclass');
     this.dropdownList = this.actualpatientList
     this.dropdownSettings = {
@@ -158,6 +191,14 @@ export class NotificaionsComponent implements OnInit {
   NotificationTypeChange(e) {
     // console.log(e.value);
     this.notificationType = e.value;
+
+    //check of selected notification is 1 type or of type whatsapp then we will show whatsapp form
+    if(e.value === "1") {
+
+      this.showWhatsappForm = true;
+      this.showWhatsappTemplateDropDown = true;
+    }
+
   }
 
   NotificationTo(e) {
@@ -212,4 +253,51 @@ export class NotificaionsComponent implements OnInit {
       });
     }
   }
+
+  selectWhatsappTemplate(event) {
+
+    this.whatsappTemplateValue = event.target.value;
+    console.log(this.whatsappTemplateValue);
+  }
+
+  onSendNotificationWhatsapp() {
+
+      // Check if patient list is empty
+      if( this.notificationWhatsappForm.value.patients.length == 0 ){
+
+        Swal.fire('Error', 'Select atleast one patient', 'error');
+        return
+
+      }
+
+      const data = {
+        name: this.notificationWhatsappForm.get("name").value,
+        message: this.notificationWhatsappForm.get("message").value,
+        patients: this.notificationWhatsappForm.get("patients").value,
+        templateId: this.whatsappTemplateValue
+      }
+
+      this._appService.sendWhatsappNotificationTemplate( data ).subscribe({
+
+        next: (res : any) => {
+
+          let message = 'Message sent successfully;';
+          message += '<br>Success: '+res.success.length;
+
+          if( res.failed.length > 0 ) {
+
+            message += '<br>Failed: '+res.failed.length;
+            message += '<br>Failed Reason:<br> Missing Phone Number';
+          }
+
+          Swal.fire('Success', message, 'success')
+
+        },
+
+        error: (err : any) => {Swal.fire('Error', err.error.message, 'error')}
+
+      });
+    
+  }
+
 }

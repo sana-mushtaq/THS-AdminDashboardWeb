@@ -1,0 +1,207 @@
+<div id="app">
+
+    <!-- page section -->
+    <section class="el-container">
+    
+        <div>
+            
+            <!-- main menu bar-->
+            <menu class="menu-bar lab-hide">
+    
+                <a routerLink="javascript:void(0);" class="toggle-menu">
+    
+                    <div class="inactive">
+                        
+                        <span class="bar bar1"></span>
+                        <span class="bar"></span>
+                        <span class="bar bar3"></span>
+                  
+                    </div>
+
+                </a>
+                
+                <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
+          
+            </menu>
+            
+            <!-- app side bar-->
+            <app-sidebar class="lab-hide"></app-sidebar>
+
+            <!-- app sub menu -->
+            <div>
+            
+                <app-submenu></app-submenu>
+            
+            </div>
+
+            <!-- top nav bar in the right side -->
+            <nav class="nav-bar-none"></nav>
+        
+        </div>
+
+        <!-- right side or the main component content -->
+        <main class="el-main">
+      
+            <app-header></app-header>
+
+            <!-- category wrapper -->
+            <div class="web auto-flex-start-gap30-column max-height relative">
+
+                <div class="auto-flex-start-gap20">
+                
+                    <div class="auto-flex-end-gap10">
+
+                        <button class="primary-bg padding-10 secondary-color bold" (click)="addTag()">Add a New Tag</button>
+
+                    </div>
+
+                    <div class="auto-flex-start-gap10 padding-none border-radius-20 gray-border">
+
+                        <table class="custom-table web-font-primary-light overflow-hidden">
+
+                            <thead class="custom-table-thead">
+                                <tr>
+                                    <th class="padding-20">Id</th>
+                                    <th class="padding-20">Title</th>
+                                    <th class="padding-20">Title Ar.</th>
+                                    <th class="padding-20 text-right">Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr *ngFor="let tag of tagList; let tagIndex = index">
+
+                                    <td>
+                                        <p> {{ tag.id }} </p>
+                                    </td>
+    
+                                    <td>
+                                        <p> {{ tag.title }} </p>
+                                    </td>
+
+                                    <td>
+                                        <p> {{ tag.title_arabic }} </p>
+                                    </td>
+
+                                
+                                    <td class="auto-flex-center-end-gap10-no-set-width">
+                                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/edit.svg" (click)="editTag(tag, tagIndex)"/>
+                                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/delete.svg" (click)="deleteTag(tag, tagIndex)"/>
+                                    </td>
+    
+                                    </tr>
+    
+
+                            </tbody>
+
+                        </table>
+
+
+                    </div>
+
+                    <div class="auto-flex-center-gap10-column">
+
+                        <!-- Add categoyy-->
+                        <div class="fixed dialog" *ngIf="addNewTagToggle">
+
+                            <div class="popup">
+
+                                <div class="content white-bg scrollable-div">
+
+                                    <button class="close" (click)="closeAddTag()">x</button>
+
+                                    <form [formGroup]="addTagForm" (ngSubmit)="createTag()">
+
+                                        <div class="auto-flex-center-gap20">
+                                            
+                                            <div class="auto-flex-center-start-gap20">
+
+                                                <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                    <p class="bold">Title</p>
+                                                    <input class="input-global" formControlName="title" type="text" />    
+
+                                                </div>
+
+                                                <div class="auto-flex-start-gap10-column-no-set-width width-half">
+
+                                                    <p class="bold">Title Arabic</p>
+                                                    <input class="input-global" formControlName="title_arabic" type="text" />
+                
+                                                </div>
+
+                                            </div>
+                                            
+
+                                            <div class="auto-flex-center-gap10">
+
+                                                <button class="primary-bg max-width padding-10 secondary-color" type="submit">Add Tag</button>
+
+                                            </div>
+
+                                        </div>
+
+                                    </form>                            
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Edit category-->
+                        <div class="fixed dialog" *ngIf="editTagToggle">
+                            
+                            <div class="popup">
+
+                                <div class="content white-bg scrollable-div web-font-primary-light">
+
+                                    <button class="close" (click)="closeEditTag()">x</button>
+                                    
+                                    <!-- edit content -->
+                                    <div class="auto-flex-center-gap20">
+                                        
+                                        <div class="auto-flex-center-start-gap20">
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Title</p>
+                                                <input class="input-global" [(ngModel)]="selectedTag.title" type="text" />    
+
+                                            </div>
+
+                                            <div class="auto-flex-start-gap5-column-no-set-width width-half">
+
+                                                <p class="bold">Title Arabic</p>
+                                                <input class="input-global" [(ngModel)]="selectedTag.title_arabic" type="text" />
+            
+                                            </div>
+
+                                        </div>
+
+                                        <div class="auto-flex-center-gap10">
+
+                                            <button class="primary-bg max-width padding-10 secondary-color" (click)="updateTag()">Update Tag</button>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+    
+    </section>
+
+</div>

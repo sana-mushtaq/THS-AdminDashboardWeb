@@ -40,7 +40,7 @@
         </div>
 
         <!-- right side or the main component content -->
-        <main class="el-main">
+        <main class="el-main" *ngIf="jsonData['branch_management']['view']">
       
             <app-header></app-header>
 
@@ -50,7 +50,7 @@
                 <div class="auto-flex-start-space-between-gap10">
 
                     <p class="large">All Branches</p>
-                    <button class="primary-bg padding-10 secondary-color bold" (click)="addBranch()">Add a New Branch</button>
+                    <button class="primary-bg padding-10 secondary-color bold" (click)="addBranch()" *ngIf="jsonData['branch_management']['add']">Add a New Branch</button>
 
                 </div>
 
@@ -113,15 +113,15 @@
                         <!-- edit, delete and disable branch-->
                         <div class="auto-flex-center-gap10">
 
-                            <button class="glass-bg padding-10 border-none width-100" (click)="editBranch(branch, branchIndex)">Edit</button>
-                            <button class="glass-bg padding-10 border-none width-100" (click)="deleteBranch(branch, branchIndex)">Delete</button>
+                            <button class="glass-bg padding-10 border-none width-100" (click)="editBranch(branch, branchIndex)" *ngIf="jsonData['branch_management']['edit']">Edit</button>
+                            <button class="glass-bg padding-10 border-none width-100" (click)="deleteBranch(branch, branchIndex)" *ngIf="jsonData['branch_management']['delete']">Delete</button>
 
                         </div>
 
                         
                         <div class="auto-flex-center-gap10">
 
-                            <button class="glass-bg padding-10 border-none max-width" (click)="assignServiceProvider(branch, branchIndex)">Assign Service Provider</button>
+                            <button class="glass-bg padding-10 border-none max-width" (click)="assignServiceProvider(branch, branchIndex)" *ngIf="jsonData['branch_management']['assign_sp']">Assign Service Provider</button>
 
                         </div>
 
@@ -129,8 +129,8 @@
                         <div class="auto-flex-center-gap10">
 
                             <hr class="hr-black" />
-                            <button class="glass-bg padding-10 border-none max-width" *ngIf="!branch.active" (click)="activateBranch(branch, branchIndex)">Activate Branch</button>
-                            <button class="glass-bg padding-10 border-none max-width" *ngIf="branch.active" (click)="deactivateBranch(branch, branchIndex)">Deactivate Branch</button>
+                            <button class="glass-bg padding-10 border-none max-width" *ngIf="!branch.active && jsonData['branch_management']['acticate']" (click)="activateBranch(branch, branchIndex)" >Activate Branch</button>
+                            <button class="glass-bg padding-10 border-none max-width" *ngIf="branch.active && jsonData['branch_management']['deactivate']" (click)="deactivateBranch(branch, branchIndex)">Deactivate Branch</button>
 
                         </div>
 
@@ -468,7 +468,7 @@
                                     </td>    
 
                                     <td class="auto-flex-center-gap10-no-set-width">
-                                        <button class="red-bg bold secondary-color padding-5 border-radius-10" (click)="unassignBranch(sp.id)">remove</button>
+                                        <button class="red-bg bold secondary-color padding-5 border-radius-10" (click)="unassignBranch(sp.id)" *ngIf="jsonData['branch_management']['remove_sp']">remove</button>
                                     </td>
 
 

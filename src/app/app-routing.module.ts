@@ -134,6 +134,8 @@ import { PaymentConfirmationComponent } from './website/checkout/payment-confirm
 import { BusinessToBusinessSchedulingComponent } from './business-to-business-scheduling/business-to-business-scheduling.component';
 import { BusinessToBusinessAppointmentsComponent } from './business-to-business-appointments/business-to-business-appointments.component';
 import { ServicetagComponent } from './servicetag/servicetag.component';
+import { MedicaltagComponent } from './medicaltag/medicaltag.component';
+import { ReportingDashboardComponent } from './reporting-dashboard/reporting-dashboard.component';
 
 const routes: Routes = [
  { path: '', component: AllServicesComponent},
@@ -253,9 +255,11 @@ const routes: Routes = [
 { path: 'branch/view-all', component: BranchViewComponent },
 { path: 'service/view-all', component: ServiceViewComponent },
 { path: 'service-tag/view-all', component: ServicetagComponent },
+{ path: 'medical-tag/view-all', component: MedicaltagComponent },
 { path: 'category/view-all', component: CaretgoryViewComponent },
 { path: 'b2b', component: BusinessToBusinessSchedulingComponent },
 { path: 'service-provider/view-all', component: ServiceproviderComponent },
+{ path:'reporting-dashboard', component: ReportingDashboardComponent},
 
  /* LOGIN */ 
  { path: 'login', component: LoginComponent },

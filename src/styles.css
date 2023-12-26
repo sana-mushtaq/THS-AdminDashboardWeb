@@ -3706,6 +3706,15 @@ a:hover{
     width: 100%;
 }
 
+.auto-flex-start-gap10-column-no-set-width {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 10px;
+}
+
 .auto-flex-start-gap20-column {
     display: flex;
     flex-direction: column;

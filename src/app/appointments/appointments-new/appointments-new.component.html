@@ -13,7 +13,7 @@
       </div>
       <nav class="nav-bar-none"></nav>
     </div>
-    <main class="el-main" [ngClass]="(accessLevel!=1) ? 'dashboard' : ''">
+    <main class="el-main" [ngClass]="(accessLevel!=1) ? 'dashboard' : ''" *ngIf="jsonData['appointment']['add']">
       <app-header></app-header>
 
 
@@ -26,7 +26,7 @@
             </div>
             <div>
               <button type="button" (click)="onSearchPatient( searchInput.value )" class="btn btn-theme save"><i class="icon-search"></i> Find</button>
-              <button type="button" (click)="isAddingPatient = true" class="btn btn-theme save ml-2"><i class="icon-plus"></i> Add Patient</button>
+              <button type="button" (click)="isAddingPatient = true" class="btn btn-theme save ml-2" *ngIf="jsonData['patient']['add']"><i class="icon-plus"></i> Add Patient</button>
             </div>
           </div>
         </div>

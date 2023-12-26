@@ -1,0 +1,21 @@
+.utilization-rate-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 20px;
+  }
+  
+  .utilization-rate-item {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .time-slot {
+    font-weight: bold;
+  }
+  
+  .providers-count {
+    color: #007bff; /* Set your desired color */
+  }
+  

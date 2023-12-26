@@ -7,6 +7,9 @@ import { UtilService } from "src/service/util.service";
 import { APIResponse, FileUploadType } from "src/utils/app-constants";
 import * as moment from "moment";
 import Swal from "sweetalert2";
+import { HttpClient } from '@angular/common/http';
+
+
 declare var $: any;
 
 @Component({
@@ -31,7 +34,12 @@ export class GiftPromotionComponent implements OnInit {
   filterStartDate;
   filterEndDate;
 
-  constructor(private _appService: AppService, private _appUtil: UtilService, public formBuilder: FormBuilder) {
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
+  constructor(private _appService: AppService, private _appUtil: UtilService, public formBuilder: FormBuilder, private http: HttpClient) {
     this.getPromoList();
     this.getServiceSectors();
   }
@@ -46,6 +54,16 @@ export class GiftPromotionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+    
     $(".onlygift").removeClass("dclass");
     $(".onlyadmin").removeClass("dclass");
     $(".active-promotion").addClass("active");

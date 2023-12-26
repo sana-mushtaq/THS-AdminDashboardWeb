@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+
 declare var $: any;
 @Component({
   selector: 'app-gifts',
@@ -7,9 +10,24 @@ declare var $: any;
 })
 export class GiftsComponent implements OnInit {
 
-  constructor() { }
+    userRoles: any = {}
+
+    jsonData: any;
+    loaded: boolean = false;
+    
+  constructor( private http: HttpClient) { }
 
   ngOnInit(): void {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
 
     $('.onlygift').removeClass('dclass');
     $('.onlyadmin').removeClass('dclass');

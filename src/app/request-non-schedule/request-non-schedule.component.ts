@@ -9,6 +9,8 @@ import { AppService } from "src/service/app.service";
 import { UtilService } from "src/service/util.service";
 import { FormBuilder, Validators, FormGroup, NG_VALUE_ACCESSOR } from "@angular/forms";
 import * as moment from "moment";
+import { HttpClient } from '@angular/common/http';
+
 import {
   AlertType,
   APIResponse,
@@ -59,8 +61,12 @@ export class RequestNonScheduleComponent implements OnInit {
   selectedFile;
   typeValidationForm: FormGroup;
 
+  userRoles: any = {}
 
-  constructor(private _appService: AppService, private _appUtil: UtilService, private _appDataService: AppDataService,  public formBuilder: FormBuilder) {
+  jsonData: any;
+  loaded: boolean = false;
+
+  constructor(private _appService: AppService, private _appUtil: UtilService, private _appDataService: AppDataService,  public formBuilder: FormBuilder, private http: HttpClient) {
     this._unsubscribeAll = new Subject();
     this.getPractiseUserList("2");
     this._appDataService.selectedAppointment.pipe(takeUntil(this._unsubscribeAll)).subscribe((appointment) => {
@@ -94,6 +100,17 @@ export class RequestNonScheduleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
+    
     this.formValidation();
     this.drawUI();
     $('.onlyadmin').removeClass('dclass');

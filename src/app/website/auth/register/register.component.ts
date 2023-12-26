@@ -5,6 +5,8 @@ import { APIResponse } from 'src/utils/app-enum';
 import { PatientsService } from 'src/service/patient.service';
 import { Router } from '@angular/router';
 import { LanguageService } from 'src/service/language.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { MedicaltagService } from 'src/service/medicaltag.service';
 
 @Component({
   selector: 'app-register',
@@ -35,6 +37,15 @@ export class RegisterComponent implements OnInit {
   currentTitle = 'Simple steps to start your healing journey'
   currentDesc = 'More than 100 home medical services for you and your family.'
 
+  //medicalTags
+  medicalTags: any = []
+  medicalTagListEn: any = []
+  medicalTagListAr: any = []
+  medicalTagSettingsEn: IDropdownSettings = {}
+  medicalTagSettingsAr: IDropdownSettings = {}
+  userMedicalTags: any = []
+  modelMedicalTag: any = []
+
   constructor(
     private fb : FormBuilder,
     private renderer: Renderer2,
@@ -42,7 +53,24 @@ export class RegisterComponent implements OnInit {
     private _patientService: PatientsService,
     private router: Router,
     public languageService: LanguageService,
+    private _medicalTagService: MedicaltagService,
     ) {
+
+      //this will be used for dropdown settings
+      this.medicalTagSettingsEn = {
+        idField: 'id',
+        textField: 'title',
+        allowSearchFilter: false,
+        enableCheckAll: false
+      }
+
+      //this will be used for dropdown settings
+      this.medicalTagSettingsAr = {
+        idField: 'id',
+        textField: 'title_arabic',
+        allowSearchFilter: false,
+        enableCheckAll: false
+      }
 
       this.accountDetailsForm = this.fb.group({
   
@@ -78,6 +106,26 @@ export class RegisterComponent implements OnInit {
     
   ngOnInit(): void {
 
+     //fetch all medical tags stored by operations
+     this._medicalTagService.getTagList().subscribe({
+    
+      next : ( res : any ) => {
+
+        //in case of success the api returns 0 as a status code
+        if( res.status === APIResponse.Success ) {
+          
+          this.medicalTags = res.data
+          this.medicalTagListEn = this.medicalTags
+          this.medicalTagListAr = this.medicalTags
+          
+        }
+        
+      },
+      error: ( err: any ) => {
+      
+      }
+  
+    })
     
   }
 
@@ -433,6 +481,21 @@ export class RegisterComponent implements OnInit {
 
   }
 
+   //the following function will be executed when service provider will be selected
+   onTagSelect(item: any) {
+
+    let id = item.id
+    this.userMedicalTags.push(id)
+
+
+  }
+
+  //the following function will be executed when service provider will be deselected
+  onTagDeSelect(item: any) {
+
+    this.userMedicalTags = this.userMedicalTags.filter(i => Number(i) !== item.id)
+
+  }
 
 }
 

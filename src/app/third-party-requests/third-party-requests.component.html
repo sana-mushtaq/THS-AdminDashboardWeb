@@ -11,7 +11,7 @@
       <app-submenu></app-submenu>
       <nav class="nav-bar-none"></nav>
     </div>
-    <main class="el-main">
+    <main class="el-main" *ngIf="jsonData['external_request']['view']">
       <app-header></app-header>
       <div class="table-responsive">
         <table id="request_table" class="display" cellspacing="0">

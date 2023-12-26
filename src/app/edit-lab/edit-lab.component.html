@@ -4,7 +4,7 @@
         <app-sidebar></app-sidebar>
   
       </div>
-      <main class="el-main dashboard">
+      <main class="el-main dashboard" *ngIf="jsonData['lab_list']['edit_package']">
         <app-header></app-header>
         <div>
           <div>

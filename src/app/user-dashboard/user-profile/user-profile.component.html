@@ -1,53 +1,181 @@
 <app-checkout-header></app-checkout-header>
 
-<div class="web auto-flex-start-gap40-column main-div-max padding-top-40" style="padding: 20px;">
+    <div class="web auto-flex-start-gap40-column main-div-max padding-top-40" style="padding: 20px;">
 
-    <!-- full name and user id -->
-    <div class="auto-flex-center-start-gap20 cursor-pointer">
+        <!-- full name and user id -->
+        <div class="auto-flex-center-start-gap20 cursor-pointer">
 
-        <img class="xxmedImg" src="assets/images/web/icons/user.svg" />
+            <img class="xxmedImg" src="assets/images/web/icons/user.svg" />
 
-        <div class="auto-flex-start-gap5-column-no-set-width">
+            <div class="auto-flex-start-gap5-column-no-set-width">
 
-            <p class="med bold" *ngIf="userData">{{ userData.first_name }} {{ userData.last_name }}</p>
-            <p class="web-font-primary-light" *ngIf="userData">PAT{{ userData.id }}</p>
-            <p class="web-font-primary-light" *ngIf="userData">{{ userData.phone_number }}</p>
-            <button class="border-none padding-5 light-red-bg red-color" *ngIf="userData" (click)="logout()">{{ 'header.logout' | translate }}</button>
-            
+                <p class="med bold" *ngIf="userData">{{ userData.first_name }} {{ userData.last_name }}</p>
+                <p class="web-font-primary-light" *ngIf="userData">PAT{{ userData.id }}</p>
+                <p class="web-font-primary-light" *ngIf="userData">{{ userData.phone_number }}</p>
+                <button class="border-none padding-5 light-red-bg red-color" *ngIf="userData" (click)="logout()">{{ 'header.logout' | translate }}</button>
+                
+            </div>
+
         </div>
 
-    </div>
+        <!-- tabs -->
+        <div class="auto-flex-center-space-between-gap20">
 
-    <!-- tabs -->
-    <div class="auto-flex-center-space-between-gap20">
+            <div #personalInfo class="auto-flex-start-gap20-no-set-width width-half gray-border border-radius-20 padding-20 item-selected cursor-pointer" (click)="displayBlock('userInfo')">
 
-        <div #personalInfo class="auto-flex-start-gap20-no-set-width width-half gray-border border-radius-20 padding-20 item-selected cursor-pointer" (click)="displayBlock('userInfo')">
+                <img class="smallImg" src="assets/images/web/icons/account.svg" />
+                
+                <div class="auto-flex-start-gap10-column-no-set-width">
 
-            <img class="smallImg" src="assets/images/web/icons/account.svg" />
-            
-            <div class="auto-flex-start-gap10-column-no-set-width">
+                    <p class="bold">{{ 'patientProfile.account' | translate }}</p>
+                    <p class="web-font-primary-light capitalize">{{ 'patientProfile.personalInformation' | translate }}</p>
 
-                <p class="bold">{{ 'patientProfile.account' | translate }}</p>
-                <p class="web-font-primary-light capitalize">{{ 'patientProfile.personalInformation' | translate }}</p>
+                </div>
+
+            </div>
+
+            <div #appointmentInfo class="auto-flex-start-gap20-no-set-width width-half gray-border border-radius-20 padding-20 cursor-pointer" (click)="displayBlock('appointmentInfo')">
+
+                <img class="smallImg" src="assets/images/web/icons/appointment.svg" />
+                
+                <div class="auto-flex-start-gap10-column-no-set-width">
+
+                    <p class="bold">{{ 'patientProfile.appointments' | translate }}</p>
+                    <p class="web-font-primary-light capitalize">{{ 'patientProfile.appointmentInformation' | translate }}</p>
+
+                </div>
 
             </div>
 
         </div>
 
-        <div #appointmentInfo class="auto-flex-start-gap20-no-set-width width-half gray-border border-radius-20 padding-20 cursor-pointer" (click)="displayBlock('appointmentInfo')">
+        <div class="auto-flex-center-gap10 fixed dialog z-index" *ngIf="addInsuranceForm" style="z-index: 1031;">
 
-            <img class="smallImg" src="assets/images/web/icons/appointment.svg" />
-            
-            <div class="auto-flex-start-gap10-column-no-set-width">
+            <div class="popup">
 
-                <p class="bold">{{ 'patientProfile.appointments' | translate }}</p>
-                <p class="web-font-primary-light capitalize">{{ 'patientProfile.appointmentInformation' | translate }}</p>
+                <!-- insurance form -->
+                <div class="auto-flex-start-gap20-column relative white-bg overflow-auto max-height-500 border-radius-20 width-min-600 width-max-600 phone-min-width phone-max-height-70Percent">
+                                
+                    <form class="auto-flex-start-gap10" [formGroup]="insuranceForm" (ngSubmit)="submitInsuranceForm()">
+
+                        <!-- input fields -->
+                        <div class="auto-flex-center-space-between-gap20">
+                    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">{{ 'insurance.PolicyNumber' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="PolicyNumber" placeholder="{{ 'insurance.PolicyNumber' | translate }}" />
+                            <p *ngIf="insuranceForm.get('PolicyNumber').hasError('invalidPolicyNumber')" class="xsmall red-color">{{ 'insurance.validField' | translate }}</p>
+                        </div>
+                    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">{{ 'insurance.InsuranceCompanyName' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="InsuranceCompanyName" placeholder="{{ 'insurance.InsuranceCompanyName' | translate }}" />
+                            <p *ngIf="insuranceForm.get('InsuranceCompanyName').hasError('invalidInsuranceCompanyName')" class="xsmall red-color">{{ 'insurance.validField' | translate }}</p>
+                        </div>
+                    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">{{ 'insurance.InsuranceCompanyNameAr' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="InsuranceCompanyNameAr" placeholder="{{ 'insurance.InsuranceCompanyNameAr' | translate }}" />
+                            <p *ngIf="insuranceForm.get('InsuranceCompanyNameAr').hasError('invalidInsuranceCompanyNameAr')" class="xsmall red-color">{{ 'insurance.validField' | translate }}</p>
+                        </div>
+                    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">{{ 'insurance.ClassName' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="ClassName" placeholder="{{ 'insurance.ClassName' | translate }}" />
+                            <p *ngIf="insuranceForm.get('ClassName').hasError('invalidClassName')" class="xsmall red-color">{{ 'insurance.validField' | translate }}</p>
+                        </div>
+                    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">{{ 'insurance.Gender' | translate }}</p>
+                            <select class="input-global" formControlName="Gender">
+                            <option disabled></option>
+                            <option value="male">{{ 'insurance.Male' | translate }}</option>
+                            <option value="female">{{ 'insurance.Female' | translate }}</option>
+                            </select>
+                            <p *ngIf="insuranceForm.get('Gender').hasError('invalidGender')" class="xsmall red-color">{{ 'insurance.validField' | translate }}</p>
+                        </div>
+                    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">{{ 'insurance.DeductibleRate' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="DeductibleRate" placeholder="{{ 'insurance.DeductibleRate' | translate }}" />
+                            <p *ngIf="insuranceForm.get('DeductibleRate').hasError('invalidDeductibleRate')" class="xsmall red-color">{{ 'insurance.validField' | translate }}</p>
+                        </div>
+                    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">{{ 'insurance.MaxLimit' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="MaxLimit" placeholder="{{ 'insurance.MaxLimit' | translate }}" />
+                            <p *ngIf="insuranceForm.get('MaxLimit').hasError('invalidMaxLimit')" class="xsmall red-color">{{ 'insurance.validField' | translate }}</p>
+                        </div>
+                    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">{{ 'insurance.BeneficiaryType' | translate }}</p>
+                            <select class="input-global" formControlName="BeneficiaryType">
+                            <option disabled></option>
+                            <option value="Main">{{ 'insurance.Main' | translate }}</option>
+                            <option value="Dependent">{{ 'insurance.Dependent' | translate }}</option>
+                            </select>
+                            <p *ngIf="insuranceForm.get('BeneficiaryType').hasError('invalidBeneficiaryType')" class="xsmall red-color">{{ 'insurance.validField' | translate }}</p>
+                        </div>
+                    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">{{ 'insurance.BeneficiaryTypeId' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="BeneficiaryTypeId" placeholder="{{ 'insurance.BeneficiaryTypeId' | translate }}" />
+                            <p *ngIf="insuranceForm.get('BeneficiaryTypeId').hasError('invalidBeneficiaryTypeId')" class="xsmall red-color">{{ 'insurance.validField' | translate }}</p>
+                        </div>
+                    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">{{ 'insurance.BeneficiaryNumber' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="BeneficiaryNumber" placeholder="{{ 'insurance.BeneficiaryNumber' | translate }}" />
+                            <p *ngIf="insuranceForm.get('BeneficiaryNumber').hasError('invalidBeneficiaryNumber')" class="xsmall red-color">{{ 'insurance.validField' | translate }}</p>
+                        </div>
+                    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">{{ 'insurance.IdentityNumber' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="IdentityNumber" placeholder="{{ 'insurance.IdentityNumber' | translate }}" />
+                            <p *ngIf="insuranceForm.get('IdentityNumber').hasError('invalidIdentityNumber')" class="xsmall red-color">{{ 'insurance.validField' | translate }}</p>
+                        </div>
+                    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">{{ 'insurance.BeneficiaryName' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="BeneficiaryName" placeholder="{{ 'BeneficiaryName' | translate }}" />
+                            <p *ngIf="insuranceForm.get('BeneficiaryName').hasError('invalidBeneficiaryName')" class="xsmall red-color">{{ 'insurance.validField' | translate }}</p>
+                        </div>
+                    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">{{ 'insurance.InceptionDate' | translate }}</p>
+                            <input class="input-global" type="date" formControlName="InceptionDate" placeholder="{{ 'insurance.InceptionDate' | translate }}" />
+                            <p *ngIf="insuranceForm.get('InceptionDate').hasError('invalidInceptionDate')" class="xsmall red-color">{{ 'insurance.validField' | translate }}</p>
+                        </div>
+                    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">{{ 'insurance.PolicyHolder' | translate }}</p>
+                            <input class="input-global" type="text" formControlName="PolicyHolder" placeholder="{{ 'insurance.PolicyHolder' | translate }}" />
+                            <p *ngIf="insuranceForm.get('PolicyHolder').hasError('invalidPolicyHolder')" class="xsmall red-color">{{ 'insurance.validField' | translate }}</p>
+                        </div>
+                    
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <p class="xsmall bold">{{ 'insurance.InsurancePoIicyExpiryDate' | translate }}</p>
+                            <input class="input-global" type="date" formControlName="InsurancePoIicyExpiryDate" placeholder="{{ 'insurance.InsurancePoIicyExpiryDate' | translate }}" />
+                            <p *ngIf="insuranceForm.get('InsurancePoIicyExpiryDate').hasError('invalidInsurancePoIicyExpiryDate')" class="xsmall red-color">{{ 'insurance.validField' | translate }}</p>
+                        </div>
+                    
+                        <!-- Add more input fields similarly -->
+                    
+                        </div>
+                    
+                        <div class="auto-flex-end-gap10">
+                        <!-- continue button -->
+                        <button class="white-bg padding-10 gray-border web-font-primary-light xsmall" (click)="discardInsuranceForm()">{{ 'insurance.discardChanges' | translate }}</button>
+                        <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" type="submit">{{ 'insurance.submit' | translate }}</button>
+                        </div>
+                    
+                    </form>
+                
+                </div>
 
             </div>
 
         </div>
-
-    </div>
 
     <!-- users tab-->
     <div class="auto-flex-start-gap10" *ngIf="displayUserInfo">
@@ -69,19 +197,21 @@
 
             <div class="auto-flex-start-gap20-no-wrap overflow-auto padding-bottom-20 place-stretch">
 
-                <div class="auto-flex-center-gap10-column-no-set-width width-min-100" (click)="showUser()">
+                <div class="auto-flex-center-gap10-column-no-set-width width-min-100">
 
-                    <img class="medImg" src="assets/images/web/icons/user.svg" />
-                    <p class="bold" *ngIf="userData">{{ userData.first_name }} {{ userData.last_name }}</p>
+                    <img class="medImg" src="assets/images/web/icons/user.svg"  (click)="showUser()" />
+                    <p class="bold" *ngIf="userData"  (click)="showUser()" >{{ userData.first_name }} {{ userData.last_name }}</p>
+                    <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" (click)="setCurrentInsuranceForm(userData)" *ngIf="!userData.insurance_data || userData.insurance_data.length<=0">{{ 'insurance.addInsurance' | translate }}</button>
 
                 </div>
 
                 <div class="hr-black-vertical min-height-100"></div>
 
-                <div class="auto-flex-center-gap10-column-no-set-width cursor-pointer width-min-100" *ngFor="let dependant of userDependants; let dependantIndex = index" (click)="showDependant(dependantIndex)">
+                <div class="auto-flex-center-gap10-column-no-set-width cursor-pointer width-min-100" *ngFor="let dependant of userDependants; let dependantIndex = index">
 
-                    <img class="medImg" src="assets/images/web/icons/user.svg" />
-                    <p class="bold"> {{ dependant.first_name }} {{ dependant.last_name }}</p>
+                    <img class="medImg" src="assets/images/web/icons/user.svg" (click)="showDependant(dependantIndex)"/>
+                    <p class="bold" (click)="showDependant(dependantIndex)"> {{ dependant.first_name }} {{ dependant.last_name }}</p>
+                    <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" (click)="setCurrentInsuranceForm(dependant)" *ngIf="!dependant.insurance_data || dependant.insurance_data.length<=0">{{ 'insurance.addInsurance' | translate }}</button>
 
                 </div>
                     
@@ -110,24 +240,6 @@
                             
                         </div>    
 
-                        <!--
-                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-
-                            <p class="xsmall bold">Email</p>
-                            <input class="input-global" type="email" formControlName="email" placeholder="name@example.com" />
-                            <p *ngIf="addDependantForm.get('email').hasError('invalidEmail')" class="xsmall red-color">Enter valid email</p>
-
-                        </div>    
-
-                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-
-                            <p class="xsmall bold">Phone Number</p>
-                            <input class="input-global" type="tel" formControlName="phone_number" placeholder="966 XX XXXXXXXXX" />
-                            <p *ngIf="addDependantForm.get('phone_number').hasError('invalidPhoneNumber')" class="xsmall red-color">Enter valid phone number</p>
-
-                        </div>    
-                        -->
-                        
                         <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
 
                             <p class="xsmall bold">{{ 'inputFields.dob' | translate }}</p>
@@ -198,23 +310,14 @@
 
                         </div>    
 
-                        <!--
-                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                         <!--medical tags Ar-->
+                         <div class="auto-flex-start-gap10-column-no-set-width max-width web-font-primary-light">
 
-                            <p class="xsmall bold">Relationship Type</p>
-                            <select class="input-global" formControlName="relationship_type">
-                                
-                                <option disabled></option>
-                                <option value="daughter">Daughter</option>
-                                <option value="son">Son</option>
-                                <option value="wife">Wife</option>
-                                <option value="other">Other</option>
-    
-                            </select>
-                            <p *ngIf="addDependantForm.get('relationship_type').hasError('invalidRelationshipType')" class="xsmall red-color">Select relationship type</p>
+                            <p class="xsmall bold">{{ 'inputFields.medicalHistory' | translate }}</p>
+                            <ng-multiselect-dropdown class="max-width input-global" *ngIf="medicalTagSettingsAr && languageService.getCurrentLanguage() === 'ar'" [settings]="medicalTagSettingsAr" [data]="medicalTagListAr" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" [(ngModel)]="modelMedicalTag"></ng-multiselect-dropdown>
+                            <ng-multiselect-dropdown class="max-width input-global" *ngIf="medicalTagSettingsEn && languageService.getCurrentLanguage() === 'en'" [settings]="medicalTagSettingsEn" [data]="medicalTagListEn" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" [(ngModel)]="modelMedicalTag"></ng-multiselect-dropdown>
 
                         </div>    
-                        -->
 
                     </div>
 
@@ -231,7 +334,7 @@
             </div>
 
             <!-- dependent details and update-->
-            <div class="auto-flex-center-gap10 fixed dialog z-index" *ngIf="showDependantDetails" style="z-index: 1000;">
+            <div class="auto-flex-center-gap10 fixed dialog z-index" *ngIf="showDependantDetails" style="z-index: 1031;">
 
                 <div class="popup">
         
@@ -335,23 +438,14 @@
         
                             </div>    
 
-                            
-                            <!--
-                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <!--medical tags Ar-->
+                            <div class="auto-flex-start-gap10-column-no-set-width max-width web-font-primary-light">
 
-                                <p class="xsmall bold">Relationship Type</p>
-                                <select class="input-global" [(ngModel)]="dependantData.relationship_type">
-                                    
-                                    <option value="daughter">Daughter</option>
-                                    <option value="son">Son</option>
-                                    <option value="wife">Wife</option>
-                                    <option value="other">Other</option>
-        
-                                </select>
-                                <p *ngIf="updateDependantForm.get('relationship_type').hasError('invalidRelationshipType')" class="xsmall red-color">Select relationship type</p>
+                                <p class="xsmall bold">{{ 'inputFields.medicalHistory' | translate }}</p>
+                                <ng-multiselect-dropdown class="max-width input-global" *ngIf="medicalTagSettingsAr && languageService.getCurrentLanguage() === 'ar'" [settings]="medicalTagSettingsAr" [data]="medicalTagListAr" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" [(ngModel)]="modelMedicalTag"></ng-multiselect-dropdown>
+                                <ng-multiselect-dropdown class="max-width input-global" *ngIf="medicalTagSettingsEn && languageService.getCurrentLanguage() === 'en'" [settings]="medicalTagSettingsEn" [data]="medicalTagListEn" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" [(ngModel)]="modelMedicalTag"></ng-multiselect-dropdown>
 
                             </div>    
-                            -->
                         
                         </div>
         
@@ -359,7 +453,7 @@
         
                             <!-- continue button -->
                             <button class="white-bg padding-10 gray-border web-font-primary-light xsmall" (click)="discardUpdateDependant()">{{ 'messages.cancel' | translate }}</button>
-                            <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" (click)="updateDependant()">{{ 'allServices.saveChanges' | translate }}</button>
+                            <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" (click)="updateDependant('dependant')">{{ 'allServices.saveChanges' | translate }}</button>
         
                         </div>
         
@@ -474,30 +568,22 @@
                             </div>    
 
                             
-                            <!--
-                            <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                            <!--medical tags Ar-->
+                            <div class="auto-flex-start-gap10-column-no-set-width max-width web-font-primary-light">
 
-                                <p class="xsmall bold">Relationship Type</p>
-                                <select class="input-global" [(ngModel)]="dependantData.relationship_type">
-                                    
-                                    <option value="daughter">Daughter</option>
-                                    <option value="son">Son</option>
-                                    <option value="wife">Wife</option>
-                                    <option value="other">Other</option>
-        
-                                </select>
-                                <p *ngIf="updateDependantForm.get('relationship_type').hasError('invalidRelationshipType')" class="xsmall red-color">Select relationship type</p>
+                                <p class="xsmall bold">{{ 'inputFields.medicalHistory' | translate }}</p>
+                                <ng-multiselect-dropdown class="max-width input-global" *ngIf="medicalTagSettingsAr && languageService.getCurrentLanguage() === 'ar'" [settings]="medicalTagSettingsAr" [data]="medicalTagListAr" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" [(ngModel)]="modelMedicalTag"></ng-multiselect-dropdown>
+                                <ng-multiselect-dropdown class="max-width input-global" *ngIf="medicalTagSettingsEn && languageService.getCurrentLanguage() === 'en'" [settings]="medicalTagSettingsEn" [data]="medicalTagListEn" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" [(ngModel)]="modelMedicalTag"></ng-multiselect-dropdown>
 
                             </div>    
-                            -->
-                        
+                            
                         </div>
         
                         <div class="auto-flex-end-gap10">
         
                             <!-- continue button -->
                             <button class="white-bg padding-10 gray-border web-font-primary-light xsmall" (click)="discardUpdateDependant()">{{ 'messages.cancel' | translate }}</button>
-                            <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" (click)="updateDependant()">{{ 'allServices.saveChanges' | translate }}</button>
+                            <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" (click)="updateDependant('user')">{{ 'allServices.saveChanges' | translate }}</button>
         
                         </div>
         
@@ -625,132 +711,308 @@
 
         </div>
 
-         <!--
-      
-        <div class="auto-flex-start-gap20-column border-radius-20 gray-border padding-20">
-
-            <p class="med bold">Payment methods</p>
-
-            <div class="auto-flex-start-center-gap20-no-wrap overflow-auto padding-bottom-20">
-
-                <div class="auto-flex-start-gap20-no-set-width gray-border border-radius-10 padding-10 relative width-300 max-width">
-
-                    <div class="auto-flex-start-gap10-column-no-set-width">
-
-                        <p class="bold">**** **** **** 4629</p>
-                        <p class="xsmall web-font-primary-light">12/25</p>
-                        <p class="web-font-primary-light">Jane Robertson</p>
-
-                    </div>
-
-                    <img class="xsmallImg absolute-top-right-10" src="assets/images/web/icons/delete.svg" />
-                    <img class="xsmallImg absolute-bottom-right-10" src="assets/images/web/icons/visa.svg" />
-
-                </div>
-
-                <div class="auto-flex-start-gap20-no-set-width gray-border border-radius-10 padding-10 relative width-300 max-width">
-
-                    <div class="auto-flex-start-gap10-column-no-set-width">
-
-                        <p class="bold">**** **** **** 4629</p>
-                        <p class="xsmall web-font-primary-light">12/25</p>
-                        <p class="web-font-primary-light">Jane Robertson</p>
-
-                    </div>
-
-                    <img class="xsmallImg absolute-top-right-10" src="assets/images/web/icons/delete.svg" />
-                    <img class="xsmallImg absolute-bottom-right-10" src="assets/images/web/icons/mastercard.svg" />
-
-                </div>
-
-                <div class="border-radius-100 gray-border padding-10 cursor-pointer">
-
-                    <img class="xsmallImg" src="assets/images/web/icons/plus.svg" />
-
-                </div>
-                    
-            </div>
-
-      
-            <div class="auto-flex-center-gap20-column">
-            
-                <div class="auto-flex-center-space-between-gap20">
-
-                    <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-
-                        <p class="xsmall bold">Card number</p>
-                        <input class="input-global" type="text" placeholder="XXXX - XXXX - XXXX - XXXX" />
-            
-                    </div>    
-
-                    <div class="auto-flex-start-gap10-column-no-set-width width-23Percent web-font-primary-light">
-
-                        <p class="xsmall bold">Expiration</p>
-                        <input class="input-global" type="text" placeholder="MM / YYYY" />
-            
-                    </div>    
-
-                    <div class="auto-flex-start-gap10-column-no-set-width width-23Percent web-font-primary-light">
-
-                        <p class="xsmall bold">CVC</p>
-                        <input class="input-global" type="text" placeholder="XXX" />
-            
-                    </div>    
-
-                </div>
-
-                <div class="auto-flex-center-space-between-gap20">
-
-                    <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
-
-                        <p class="xsmall bold">Cardholder</p>
-                        <input class="input-global" type="text" placeholder="Enter name on card" />
-            
-                    </div>    
-
-                </div>
-
-                <div class="auto-flex-end-gap10">
-
-                    <button class="white-bg padding-10 gray-border web-font-primary-light xsmall">Discard Changes</button>
-                    <button class="primary-bg padding-10 box-shadow width-200 xsmall phone-width-auto">Add Payment Method</button>
-
-                </div>
-
-            </div>
-       
-        </div>
-    -->
-
     </div>
 
      <!-- appointments tab-->
     <div class="auto-flex-start-gap10 padding-none border-radius-20 gray-border overflow-hidden" *ngIf="displayAppointmentInfo">
 
-        <table class="custom-table web-font-primary-light">
+          <!-- tabs -->
+        <div class="auto-flex-center-space-between-gap20" style="margin-top:10px">
 
-            <thead class="custom-table-thead" style="text-align: start;">
-                <tr>
-                    <th class="padding-20"><p>{{ 'patientProfile.appointmentId' | translate }}</p></th>
-                    <th class="padding-20"><p>{{ 'patientProfile.serviceName' | translate }}</p></th>
-                    <th class="padding-20"><p>{{ 'patientProfile.dateTime' | translate }}</p></th>
-                </tr>
-            </thead>
+            <div #upcomingApp class="auto-flex-center-gap20-no-set-width width-half gray-border border-radius-20 padding-20 item-selected cursor-pointer" (click)="displayBlock('upcomingInfo')">
+                
+                <p class="bold">{{ 'patientProfile.upcoming' | translate }}</p>
+             
+            </div>
 
-            <tbody>
+            <div #pastApp class="auto-flex-center-gap20-no-set-width width-half gray-border border-radius-20 padding-20 cursor-pointer" (click)="displayBlock('pastInfo')">
+                
+                <p class="bold">{{ 'patientProfile.past' | translate }}</p>            
 
-                <tr *ngFor="let appointment of userAppointments">
-                    <td><p>APP{{ appointment.appointmentId }}</p></td>
-                    <td><p class="table-content gap-10" *ngFor="let service of appointment.services">{{ service.serviceName }}</p></td>
-                    <td><p>{{ appointment.serviceDate | date:'yyyy-MM-dd' }} - {{ appointment.serviceTime }}</p></td>
-                </tr>
+            </div>
 
+        </div>
+
+        <div class="overflow-auto max-width">
+
+            <table class="custom-table web-font-primary-light" *ngIf="displayUpcomingInfo && userUpcomingAppointments.length>0">
+
+                <thead class="custom-table-thead" style="text-align: start;">
+                    <tr>
+                        <th class="padding-20"><p>{{ 'patientProfile.appointmentId' | translate }}</p></th>
+                        <th class="padding-20"><p>{{ 'patientProfile.serviceName' | translate }}</p></th>
+                        <th class="padding-20"><p>{{ 'patientProfile.dateTime' | translate }}</p></th>
+                        <th class="padding-20"><p>{{ 'patientProfile.actions' | translate }}</p></th>
+                        <th class="padding-20"><p>{{ 'patientProfile.medicalRecords' | translate }}</p></th>
+                    </tr>
+                </thead>
+    
+                <tbody>
+    
+                    <tr *ngFor="let appointment of userUpcomingAppointments">
+                        <td><p>APP{{ appointment.appointmentId }}</p></td>
+                        <td><p class="table-content gap-10" *ngFor="let service of appointment.services">{{ service.serviceName }}</p></td>
+                        <td><p>{{ appointment.serviceDate | date:'yyyy-MM-dd' }} - {{ appointment.serviceTime }}</p></td>
+                        <td>
+                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/reschedule.svg" (click)="updateAppointmentConfirmation(appointment)" />
+                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/cancel.svg" (click)="cancelAppointmentConfirmation(appointment)" />
+                        </td>
+                        <td>  
+                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/eye.svg" (click)="viewAppointmentFiles(appointment)" />
+                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/plus_circled.svg" (click)="openFileInput()"/>
+                            <input type="file" #fileInput style="display: none" accept=".pdf, image/*" (change)="addAppointmentFile($event, appointment)"/>
+                            <p class="table-content cursor-pointer" style="margin-top:10px" (click)="openPatientNotes(appointment)">notes</p>
+                        </td>
+                    </tr>
+                </tbody>
+    
+            </table>
+    
+        </div>
+
+        <div class="auto-flex-center-gap10 lightest-blue-bg" *ngIf="displayUpcomingInfo && userUpcomingAppointments.length<=0">
+
+            <p class="bold">{{ 'patientProfile.noUpcoming' | translate }}</p>
+    
+        </div>
+
+        <div class="overflow-auto max-width">
+
+            <table class="custom-table web-font-primary-light" *ngIf="displayPastInfo && userPastAppointments.length>0">
+
+                <thead class="custom-table-thead" style="text-align: start;">
+                    <tr>
+                        <th class="padding-20"><p>{{ 'patientProfile.appointmentId' | translate }}</p></th>
+                        <th class="padding-20"><p>{{ 'patientProfile.serviceName' | translate }}</p></th>
+                        <th class="padding-20"><p>{{ 'patientProfile.dateTime' | translate }}</p></th>
+                        <th class="padding-20"><p>{{ 'patientProfile.medicalRecords' | translate }}</p></th>
+                        <th class="padding-20"></th>
+                    </tr>
+                </thead>
+    
+                <tbody>
+    
+                    <tr *ngFor="let appointment of userPastAppointments">
+                        <td><p>APP{{ appointment.appointmentId }}</p></td>
+                        <td><p class="table-content gap-10" *ngFor="let service of appointment.services">{{ service.serviceName }}</p></td>
+                        <td><p>{{ appointment.serviceDate | date:'yyyy-MM-dd' }} - {{ appointment.serviceTime }}</p></td>
+                        <td>  
+                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/eye.svg" (click)="viewAppointmentFiles(appointment)" />
+                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/plus_circled.svg" (click)="openFileInput()"/>
+                            <input type="file" #fileInput style="display: none" accept=".pdf, image/*" (change)="addAppointmentFile($event, appointment)"/>
+                        </td>
+                        <td *ngIf="appointment.appointmentStatus === 1 && (!appointment.review || appointment.review.length<=0)"><p class="cursor-pointer light-green-bg padding-5 green-color fit-content" (click)="openReview(appointment)">{{ 'patientProfile.review' | translate }}</p></td>
+                    </tr>
+    
+                
+                </tbody>
+    
+            </table>
+    
+        </div>
+ 
+        <div class="auto-flex-center-gap10 lightest-blue-bg" *ngIf="displayPastInfo && userPastAppointments.length<=0">
+
+            <p class="bold">{{ 'patientProfile.noPast' | translate }}</p>
+    
+        </div>
+
+        <!-- reschedule appointment -->
+        <div class="auto-flex-center-gap10 fixed dialog z-index" style="z-index: 1000;" *ngIf="displayRescheduleAppointment">
+
+            <div class="popup" style="align-content: start">
+    
+                <div  style="overflow: scroll; max-height: 500px;" class="auto-flex-start-gap20-column relative white-bg border-radius-20 width-min-600 width-max-600 phone-min-width phone-max-height-70Percent">
+  
+
+                    <div class="auto-flex-end-gap10" (click)="closeReschedule()">
+                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/cancel.svg" />
+                    </div>
+
+                    
+                    <div class="auto-flex-start-gap20-column">
+
+                        <div class="auto-flex-center-gap10-no-set-width gray-border border-radius-20">
+                            
+                            <div class="auto-flex-start-gap20 calendar">
             
-            </tbody>
+                                <div class="auto-flex-center-space-between-gap20 calendar-header">
+            
+                                    <button class="arrow-button" [disabled]="isPreviousDisabled()" (click)="goToPreviousWeek()" [style.transform]="languageService.getCurrentLanguage() === 'ar' ? 'rotate(180deg)' : 'rotate(0)'">
+                                        <img class="xxxsmallImg" src="assets/images/web/icons/prev.svg"  />
+                                    </button>
+            
+                                    <div class="header-text small-font bold">{{ currentMonthAndYear }}</div>
+            
+                                    <button class="arrow-button" (click)="goToNextWeek()" [style.transform]="languageService.getCurrentLanguage() === 'ar' ? 'rotate(180deg)' : 'rotate(0)'">
+                                        <img class="xxxsmallImg" src="assets/images/web/icons/next.svg" />
+                                    </button>
+            
+                                </div>
+            
+                                <div class="auto-flex-center-space-between-gap20 week">
+                                  <div class="auto-flex-center-space-between-gap20 day-labels phone-no-gap">
+                                    <div class="day-label web-font-primary-light xsmall" *ngFor="let d of weekDays">{{d}}</div>
+                                  </div>
+            
+                                  <div class="auto-flex-center-space-between-gap20 days phone-no-gap">
+            
+                                    <div class="day cursor-pointer" *ngFor="let day of currentWeek" (click)="selectDate(day);  setCartDataDateValue(day)" [ngClass]="{ 'selected-date': getDate(selectedDate, day.toDateString()) }">
+                                        {{ day.getDate() }}
+                                    </div>
+                                    
+                                  </div>
+                                  
+                                </div>
+                                
+                              </div>
+                              
+                        </div>
+                        
+                        <div class="time-slots auto-flex-start-gap10-no-set-width phone-no-wrap padding-bottom-20 phone-max-300" *ngIf="timeSlots && timeSlots.length>0">
+            
+                            <p class="gray-border padding-10 padding-left-right-30 blue-color border-radius-10 max-width width-max-150 text-center cursor-pointer" *ngFor="let timeSlot of timeSlots" (click)="setPreferredTimeSlot(timeSlot); setCartDataTimeValue(timeSlot)" [ngClass]="{ 'selected-date':  preferredTime === timeSlot }">{{ timeSlot }}</p>
+            
+                        </div>              
+            
+                        <button class="primary-bg padding-10 box-shadow max-width" (click)="updateUserAppointment()" *ngIf="preferredTime && preferredDate">{{ 'patientProfile.confirmDateTime' | translate }}</button>
 
-        </table>
+                    </div>
 
+                </div>
+    
+            </div>
+    
+        </div>
 
+        <!-- medical records -->
+        <div class="auto-flex-center-gap10 fixed dialog z-index" style="z-index: 1000;" *ngIf="currentAppointmentFilesToggle">
+
+            <div class="popup" style="align-content: start">
+
+                <div  style="overflow: scroll; max-height: 500px;" class="auto-flex-start-gap20-column relative white-bg border-radius-20 width-min-600 width-max-600 phone-min-width phone-max-height-70Percent">
+  
+                    <div class="auto-flex-end-gap10" (click)="closeFiles()">
+                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/cancel.svg" />
+                    </div>
+
+                    <div class="overflow-auto max-width" *ngIf="currentAppointmentFiles.length>0">
+
+                        <p class="large">APP{{currentAppointmentFiles[0].appointment_id}}</p>
+                        <table class="custom-table web-font-primary-light">
+            
+                            <thead class="custom-table-thead" style="text-align: start;">
+                                <tr>
+                                    <th class="padding-20"><p>{{ 'patientProfile.file_name' | translate }}</p></th>
+                                    <th class="padding-20"><p>{{ 'patientProfile.uploaded_at' | translate }}</p></th>
+                                    <th class="padding-20"><p>{{ 'patientProfile.added_by' | translate }}</p></th>
+                                </tr>
+                            </thead>
+                
+                            <tbody>
+                
+                                <tr *ngFor="let file of currentAppointmentFiles">
+                                    
+                                     <td><a href="{{serverUrl}}{{file.file_url}}" target="_blank">{{ file.file_name }}</a></td>
+                                     <td><p>{{ file.created_at | date:'yyyy-MM-dd' }}</p></td>
+                                     <td><p>{{ file.added_by }}</p></td>
+                                   
+                                </tr>
+                            </tbody>
+                
+                        </table>
+                
+                    </div>
+
+                    <div class="overflow-auto max-width" *ngIf="currentAppointmentFiles.length<=0">
+
+                        <div class="auto-flex-center-gap10 lightest-blue-bg">
+
+                            <p class="bold">{{ 'patientProfile.noFilesUploadedYet' | translate }}</p>
+                    
+                        </div>
+                
+                    </div>
+                    
+                                    
+                </div>
+    
+            </div>
+    
+        </div>
+
+        <!-- appointment review -->
+        <div class="auto-flex-center-gap10 fixed dialog z-index" style="z-index: 1000;" *ngIf="reviewToggle">
+
+            <div class="popup" style="align-content: start">
+
+                <div  style="overflow: scroll; max-height: 500px;" class="auto-flex-start-gap20-column relative white-bg border-radius-20 width-min-600 width-max-600 phone-min-width phone-max-height-70Percent">
+  
+                    <div class="auto-flex-end-gap10">
+                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/cancel.svg" (click)="closeReviewPopup()"/>
+                    </div>
+
+                    <div class="auto-flex-center-gap10">
+
+                        <p>{{ 'patientProfile.reviewTitle' | translate }}</p>
+
+                        <div class="auto-flex-start-gap20-column">
+
+                            <!-- questionnaire.component.html -->
+                            <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit()" class="auto-flex-start-gap10-column">
+                                <div formArrayName="questions" class="auto-flex-start-gap20-column">
+                                  <div *ngFor="let question of questions.controls; let i = index">
+                                    <label>{{i}}. {{ question.get('text').value }}</label>
+                                    <div class="star-rating auto-flex-start-gap10">
+                                      <div *ngFor="let star of stars[i]; let j = index" (click)="rate(i, j)" class="star cursor-pointer" [class.selected]="star">&#9733;</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div *ngIf="questionnaireForm.invalid" class="xsmall red-color">
+                                    {{ 'patientProfile.reviewError' | translate }}
+                                </div>
+
+                                <button type="submit" class="primary-bg padding-10 box-shadow max-width">Submit</button>
+                                
+                            </form>
+
+                        </div>
+
+                    </div>
+                    
+                </div>
+    
+            </div>
+    
+        </div>
+       
+        <!-- patient notes -->
+        <div class="auto-flex-center-gap10 fixed dialog z-index" style="z-index: 1000;" *ngIf="displayPatientNotes">
+
+            <div class="popup" style="align-content: start">
+
+                <div  style="overflow: scroll; max-height: 500px;" class="auto-flex-start-gap20-column relative white-bg border-radius-20 width-min-600 width-max-600 phone-min-width phone-max-height-70Percent">
+  
+                    <div class="auto-flex-end-gap10" (click)="closePatientNotes()">
+                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/cancel.svg" />
+                    </div>
+
+                    <div class="auto-flex-start-gap10-column">
+
+                        <p class="bold">{{ 'patientProfile.patientNotes' | translate }}</p>
+                        <textarea class="input-global" [(ngModel)]="selectedAppointment.patientNotes"></textarea>
+
+                        <p class="bold">{{ 'patientProfile.providerNotes' | translate }}</p>
+                        <p>{{selectedAppointment.spNotes}}</p>
+                        <button class="primary-bg padding-10 box-shadow xsmall phone-width-auto max-width" (click)="saveSpNotes()">{{ 'allServices.saveChanges' | translate }}</button>
+                    </div>
+            
+                </div>
+    
+            </div>
+    
+        </div>
+   
     </div>
 
     <!-- User already exists-->
@@ -773,6 +1035,27 @@
     
     <!-- An Error occured while updating user. Try again later -->
     <app-custom-alert *ngIf="showErrorUpdatingAddress" [title]="'messages.error' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+
+    <!-- Appointment can only be canceled before 24 hours -->
+    <app-custom-alert *ngIf="showAppointmentCancelationMessage" [title]="'messages.error' | translate" [message]="'messages.appointmentCanNotBeCanceled' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+
+    <!-- Are you sure you want to cancel your appointment -->
+    <app-custom-alert *ngIf="showAppointmentCancelationConfimationMessage" [title]="'messages.error' | translate" [message]="'messages.showAppointmentCancelationConfimationMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="cancelUserAppointment()" [showCancel]="true" [showConfirm]="true"></app-custom-alert>
+
+    <!-- Appointment has been canceled -->
+    <app-custom-alert *ngIf="showAppointmentCancelMessage" [title]="'messages.error' | translate" [message]="'messages.showAppointmentCancelMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+
+    <!-- Appointment can only be updated before 6 hours -->
+    <app-custom-alert *ngIf="showAppointmentUpdateMessage" [title]="'messages.error' | translate" [message]="'messages.showAppointmentUpdateMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+
+    <!-- Your appointment has been updated -->
+    <app-custom-alert *ngIf="showAppointmentAfterUpdateMessage" [title]="'messages.error' | translate" [message]="'messages.showAppointmentAfterUpdateMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+
+    <!-- Your file is updated successfully -->
+    <app-custom-alert *ngIf="fileUpdatedSuccessfully" [title]="'messages.error' | translate" [message]="'messages.fileUpdatedSuccessfully' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+
+    <!-- Unable to upload file -->
+    <app-custom-alert *ngIf="fileNotUpdatedSuccessfully" [title]="'messages.error' | translate" [message]="'messages.fileNotUpdatedSuccessfully' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
 </div>
 

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AppDataService } from "src/service/app-data.service";
 import { AppService } from "src/service/app.service";
 import { UtilService } from "src/service/util.service";
+import { HttpClient } from '@angular/common/http';
+
 import {
     AlertType,
     APIResponse,
@@ -22,13 +24,28 @@ declare var $: any;
 })
 export class GiftCardLogsComponent implements OnInit {
 
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
     giftDetails;
 
-    constructor(private _appService: AppService, private _appUtil: UtilService, private _appDataService: AppDataService) { 
+    constructor(private _appService: AppService, private _appUtil: UtilService, private _appDataService: AppDataService,private http: HttpClient) { 
         this.getGiftLog();
     }
 
   ngOnInit(): void {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+    
     $('.onlygift').removeClass('dclass');
     $('.onlyadmin').removeClass('dclass');
 

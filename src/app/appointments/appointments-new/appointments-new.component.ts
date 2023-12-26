@@ -6,6 +6,9 @@ import { MapsAPILoader} from '@agm/core';
 import * as moment from "moment";
 import { NationalIdValidator } from "src/validators/nationalIdValidator";
 import Swal from "sweetalert2";
+import { HttpClient } from '@angular/common/http';
+
+
 declare var google: any;
 declare var $: any;
 
@@ -54,12 +57,18 @@ export class AppointmentsNewComponent implements OnInit {
   public accessLevel : number = 0;
   public patientDependents : Array<any> = [];
 
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
   constructor(
     private cd : ChangeDetectorRef,
     private autoCompleteApi: MapsAPILoader,
     private ngZone: NgZone,
     private fb : FormBuilder,
     private patientService: PatientsService,
+    private http: HttpClient
   ) {
 
     // notValid
@@ -120,6 +129,16 @@ export class AppointmentsNewComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
     let sessionInfo = localStorage.getItem("SessionDetails");
     if( sessionInfo ){
       this.accessLevel = JSON.parse( sessionInfo ).accessLevel || 0;

@@ -40,7 +40,7 @@
         </div>
 
         <!-- right side or the main component content -->
-        <main class="el-main">
+        <main class="el-main" *ngIf="jsonData['service_management']['view']">
       
             <app-header></app-header>
 
@@ -50,8 +50,8 @@
                 <div class="auto-flex-start-space-between-gap10">
 
                     <p class="large">All Services</p>
-                    <button class="primary-bg padding-10 secondary-color bold" (click)="addService()">Add a New Service</button>
-                    <button class="primary-bg padding-10 secondary-color bold" (click)="addServiceVariant()">Add a New Service Variant</button>
+                    <button class="primary-bg padding-10 secondary-color bold" (click)="addService()" *ngIf="jsonData['service_management']['add']">Add a New Service</button>
+                    <button class="primary-bg padding-10 secondary-color bold" (click)="addServiceVariant()" *ngIf="jsonData['service_management']['add']">Add a New Service Variant</button>
                     <input class="input-global" type="text" placeholder="Search service by id, title, category and price" (ngModelChange)="updateDisplayedServiceList()" [(ngModel)]="searchText" />
 
                     <div class="auto-flex-start-gap10 padding-none border-radius-20 gray-border">
@@ -108,14 +108,14 @@
 
                                     <div class="auto-flex-center-gap5-column">
 
-                                        <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceStatus(service, serviceIndex, true)" *ngIf="!service.active">activate</button>
-                                        <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceStatus(service, serviceIndex, false)" *ngIf="service.active">deactivate</button>
+                                        <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceStatus(service, serviceIndex, true)" *ngIf="!service.active && jsonData['service_management']['acticate']">activate</button>
+                                        <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceStatus(service, serviceIndex, false)" *ngIf="service.active && jsonData['service_management']['deactivate']">deactivate</button>
                                         <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="openVariants(service.id)" *ngIf="checkIfVariantExists(service.id)">variants</button>
                                    
                                         <div class="auto-flex-center-gap5">
 
-                                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/edit.svg" (click)="editService(service, serviceIndex)"/>
-                                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/delete.svg" (click)="deleteService(service, serviceIndex)"/>
+                                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/edit.svg" *ngIf="jsonData['service_management']['edit']" (click)="editService(service, serviceIndex)"/>
+                                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/delete.svg" *ngIf="jsonData['service_management']['delete']" (click)="deleteService(service, serviceIndex)"/>
         
                                         </div>
 
@@ -649,13 +649,13 @@
             
                                                 <div class="auto-flex-center-gap5-column">
             
-                                                    <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceVariantStatus(serviceVariant, serviceVariantIndex, true)" *ngIf="!serviceVariant.active">activate</button>
-                                                    <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceVariantStatus(serviceVariant, serviceVariantIndex, false)" *ngIf="serviceVariant.active">deactivate</button>
+                                                    <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceVariantStatus(serviceVariant, serviceVariantIndex, true)" *ngIf="!serviceVariant.active && jsonData['service_management']['acticate']">activate</button>
+                                                    <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateServiceVariantStatus(serviceVariant, serviceVariantIndex, false)" *ngIf="serviceVariant.active && jsonData['service_management']['deactivate']">deactivate</button>
                                                
                                                     <div class="auto-flex-center-gap5">
             
-                                                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/edit.svg" (click)="editService(serviceVariant, serviceVariantIndex)"/>
-                                                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/delete.svg" (click)="deleteService(serviceVariant, serviceVariantIndex)"/>
+                                                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/edit.svg" *ngIf="jsonData['service_management']['edit']" (click)="editService(serviceVariant, serviceVariantIndex)"/>
+                                                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/delete.svg" *ngIf="jsonData['service_management']['delete']" (click)="deleteService(serviceVariant, serviceVariantIndex)"/>
                     
                                                     </div>
             

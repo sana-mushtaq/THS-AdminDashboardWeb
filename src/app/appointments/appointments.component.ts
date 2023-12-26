@@ -13,6 +13,7 @@ import { AlertType, APIResponse, AppointmentTriggerSource } from "src/utils/app-
 import { LoaderService } from "../../utils/loader.service";
 import { PatientsService } from "src/service/patient.service";
 import Swal from "sweetalert2";
+import { HttpClient } from '@angular/common/http';
 
 declare var $: any;
 declare var checkList: any;
@@ -36,20 +37,35 @@ export class AppointmentsComponent implements OnInit {
   filterEndDate;
   selectedSectorId: number;
   opennewView = true;
+  userRoles: any = {}
 
+  jsonData: any;
+  loaded: boolean = false;
   constructor(
     private patientService : PatientsService,
     private _appService: AppService,
     private _appUtil: UtilService,
     private router: Router,
     private _appDataService: AppDataService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private http: HttpClient
   ) {
     this._unsubscribeAll = new Subject();
     this.getSectors();
   }
 
   ngOnInit(): void {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
+
     this.getServiceProviderAppointmentList("1");
     $(".onlyadmin").removeClass("dclass");
     $('.onlyservicerequests').show();
@@ -69,7 +85,10 @@ export class AppointmentsComponent implements OnInit {
   }
 
   getServiceProviderAppointmentList(serviceProviderId: string) {
-    this._appService.getServiceProviderAppointmentList(serviceProviderId).subscribe(
+    let data = {
+      sp: this.userRoles['sp']
+    }
+    this._appService.getServiceProviderAppointmentList(this.userRoles['sp']).subscribe(
       (response: any) => {
         if (response.status == APIResponse.Success) {
           this.actualAppointmentList = Appointment.getAppointmentList(response.upcomingAppointmentList);
@@ -86,6 +105,7 @@ export class AppointmentsComponent implements OnInit {
         }
       },
       (err) => {
+        console.log(err)
         console.log("Unable to get appointments");
       }
     );

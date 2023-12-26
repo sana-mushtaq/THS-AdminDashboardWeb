@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MirthService } from 'src/service/mirth.service';
+import { HttpClient } from '@angular/common/http';
+
 import Swal from "sweetalert2";
 
 @Component({
@@ -12,7 +14,13 @@ export class ThirdPartyRequestViewComponent implements OnInit {
   public request_id : number = 0;
   public appointmentRequest : any = {};
 
-  constructor( private route : ActivatedRoute, private mirthServices : MirthService) {
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
+  constructor( private route : ActivatedRoute, private mirthServices : MirthService,  private http: HttpClient) {
+    
     this.route.params.subscribe({
       next : ( params : any) => {
         this.request_id = params?.id || null;
@@ -22,6 +30,16 @@ export class ThirdPartyRequestViewComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+    
     $(".onlyadmin").removeClass("dclass");
     $('.onlyservicerequests').show();
     $(".nav-link").click(function () {

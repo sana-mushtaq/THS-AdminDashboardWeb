@@ -4,6 +4,7 @@ import { Promotion } from "src/model/promotions/promotion.model";
 import { AppService } from "src/service/app.service";
 import { APIResponse } from "src/utils/app-constants";
 import * as moment from "moment";
+import { HttpClient } from '@angular/common/http';
 
 declare var $: any;
 @Component({
@@ -12,7 +13,7 @@ declare var $: any;
   styleUrls: ["./promotion-history.component.css"],
 })
 export class PromotionHistoryComponent implements OnInit {
-  constructor(private _appService: AppService) {
+  constructor(private _appService: AppService, private http: HttpClient) {
     this.getPromoHistory();
     this.getPromoList();
   }
@@ -28,8 +29,23 @@ export class PromotionHistoryComponent implements OnInit {
   promotionUsed;
   promtotionDetail;
 
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
   ngOnInit(): void {
 
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
+    
     $('.onlygift').removeClass('dclass');
     $('.onlyadmin').removeClass('dclass');
     $('.active-promotionhistory').addClass('active');

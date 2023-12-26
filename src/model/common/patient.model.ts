@@ -16,6 +16,7 @@ export class Patient {
   nationalId: string;
   walletBalance: string;
   nationality: string;
+  insurance_data: any;
 
   genderText: string;
   patientDisplayId: string;
@@ -48,7 +49,7 @@ export class Patient {
       patient.nationalId = data["idNumber"];
       patient.walletBalance = data["walletBalance"];
       patient.patientDisplayId = "PAT" + Patient.zeroPad(patient.patientId, 4);
-
+      patient.insurance_data = data["insurance_data"];
       var gender = data["gender"];
       if (gender == "1") {
         patient.genderText = "Male";
@@ -78,6 +79,7 @@ export class Patient {
       patient.nationality = data["nationality"];
       patient.nationalId = data["nationalId"];
       patient.walletBalance = data["walletBalance"];
+      patient.insurance_data = data["insurance_data"];
       var gender = data["gender"];
       if (gender == "1") {
         patient.genderText = "Male";
@@ -108,6 +110,7 @@ export class Patient {
       patient.nationality = data["nationality"];
       patient.nationalId = data["nationalId"];
       patient.profileImagePath = data["profileImagePath"];
+      patient.insurance_data = data["insurance_data"];
       var gender = data["gender"];
       if (gender == "1") {
         patient.genderText = "Male";
@@ -150,7 +153,7 @@ export class Patient {
       patient.walletBalance = data["walletBalance"];
       patient.patientDisplayId = "PAT" + Patient.zeroPad(patient.patientId, 4);
       patient.createdDate = moment(data["createdDate"], "YYYY-MM-DD HH:mm:ss ZZ").format("DD-MM-YYYY");
-
+      patient.insurance_data = data["insurance_data"];
       patient.otp = data["otp"];
 
       var gender = data["gender"];

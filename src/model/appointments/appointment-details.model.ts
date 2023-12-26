@@ -70,6 +70,7 @@ export class AppointmentDetails {
   insuranceNameArabic : string;
   insuranceLogoPath : string;
 
+  rescheduleRequestFrom: String;
 
   static initalizeAppointmentDetails(appointmentDetails): AppointmentDetails {
     var appointment = appointmentDetails["appointmentDetails"];
@@ -104,6 +105,7 @@ export class AppointmentDetails {
     apptDetails.rrProviderLastName = appointment["rrProviderLastName"];
     apptDetails.rrProviderMobile = appointment["rrProviderMobile"];
     apptDetails.adminNotes = appointment["adminNotes"];
+    appointment.rescheduleRequestFrom = appointment["rescheduleRequestFrom"];
 
     if (apptDetails.patientNotes == null || apptDetails.patientNotes == "") {
       apptDetails.patientNotes = "_ _";
@@ -216,7 +218,7 @@ export class AppointmentDetails {
     apptDetails.providerEmail = appointment["providerEmail"];
     apptDetails.providerMobile = appointment["providerMobile"];
     apptDetails.dob = appointment["dob"];
-    
+    apptDetails.rescheduleRequestFrom = appointment["rescheduleRequestFrom"];
     
     // apptDetails.patientId = appointment["patientId"];
     // apptDetails.gender = appointment["gender"];
@@ -324,7 +326,7 @@ export class AppointmentDetails {
     apptDetails.rrProviderLastName = appointment["rrProviderLastName"];
     apptDetails.rrProviderMobile = appointment["rrProviderMobile"];
     apptDetails.adminNotes = appointment["adminNotes"];
-
+    apptDetails.rescheduleRequestFrom = appointment["rescheduleRequestFrom"];
     if (apptDetails.patientNotes == null || apptDetails.patientNotes == "") {
       apptDetails.patientNotes = "_ _";
     }

@@ -32,7 +32,7 @@
 
                         <div class="d-flex justify-content align-items-center">
                             <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-bonnet"></i>Insurance Providers</span>  
-                            <button id="package" data-toggle="modal" data-target="#add_labPackage" class="add-btn mr-0 float-right" (click)="addInsurance()"><i class="fa fa-plus-circle"></i> Add Insurance</button>
+                            <button id="package" data-toggle="modal" data-target="#add_labPackage" class="add-btn mr-0 float-right" (click)="addInsurance()" *ngIf="jsonData['insurance_provider']['add']"><i class="fa fa-plus-circle"></i> Add Insurance</button>
                         </div>
 
                         <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%;width:100%;">
@@ -53,7 +53,7 @@
                                         <td>{{ insurance.insuranceName }}</td>
                                         <td>{{ insurance.insuranceNameArabic }}</td>
                                         <td>
-                                          <button class="edit_button btn py-0" type="button" (click)="insuranceEdit(insurance.insuranceProviderId)">
+                                          <button class="edit_button btn py-0" type="button" *ngIf="jsonData['insurance_provider']['edit']" (click)="insuranceEdit(insurance.insuranceProviderId)">
                                             <i class="icon-pencil ico-pointer" id="ico-pointer"></i>
                                           </button>
                                         </td>

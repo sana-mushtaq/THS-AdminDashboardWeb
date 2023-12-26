@@ -40,7 +40,7 @@
         </div>
 
         <!-- right side or the main component content -->
-        <main class="el-main">
+        <main class="el-main" *ngIf="jsonData['category_management']['view']">
       
             <app-header></app-header>
 
@@ -51,7 +51,7 @@
                 
                     <div class="auto-flex-end-gap10">
 
-                        <button class="primary-bg padding-10 secondary-color bold" (click)="addCategory()">Add a New Category</button>
+                        <button class="primary-bg padding-10 secondary-color bold" (click)="addCategory()" *ngIf="jsonData['category_management']['add']">Add a New Category</button>
 
                     </div>
 
@@ -91,10 +91,10 @@
                                     </td>
                                 
                                     <td class="auto-flex-center-end-gap10-no-set-width">
-                                        <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateCategoryStatus(category, categoryIndex, true)" *ngIf="!category.active">activate</button>
-                                        <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateCategoryStatus(category, categoryIndex, false)" *ngIf="category.active">deactivate</button>
-                                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/edit.svg" (click)="editCategory(category, categoryIndex)"/>
-                                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/delete.svg" (click)="deleteCategory(category, categoryIndex)"/>
+                                        <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateCategoryStatus(category, categoryIndex, true)" *ngIf="!category.active  && jsonData['category_management']['acticate']">activate</button>
+                                        <button class="glass-bg padding-5 border-radius-10 border-none web-font-primary-light" (click)="updateCategoryStatus(category, categoryIndex, false)" *ngIf="category.active && jsonData['category_management']['deactivate']">deactivate</button>
+                                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/edit.svg" *ngIf="jsonData['category_management']['edit']" (click)="editCategory(category, categoryIndex)"/>
+                                        <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/delete.svg" *ngIf="jsonData['category_management']['delete']" (click)="deleteCategory(category, categoryIndex)"/>
                                     </td>
     
                                     </tr>

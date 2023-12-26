@@ -11,7 +11,7 @@
           <app-sidebar></app-sidebar>
           <app-submenu></app-submenu>
        </div>
-       <main class="el-main">
+       <main class="el-main" *ngIf="jsonData['lab_list']['view']">
         <app-header></app-header>
         <div>
           <div>
@@ -116,8 +116,8 @@
                                             <span class="slider round"></span>
                                             </label>
                                         </div>
-                                        <button class="reinvite" (click)="reInviteLab(active.serviceProviderId)">Send Invite</button>
-                                        <i class="fa fa-edit ml-4" (click)="EditLabClick(active.serviceProviderId)"></i> 
+                                        <button class="reinvite" (click)="reInviteLab(active.serviceProviderId)"  *ngIf="jsonData['lab_list']['send_invite']">Send Invite</button>
+                                        <i class="fa fa-edit ml-4" (click)="EditLabClick(active.serviceProviderId)" *ngIf="jsonData['lab_list']['edit_package']"></i> 
                                     </div>
 
                                 </td>

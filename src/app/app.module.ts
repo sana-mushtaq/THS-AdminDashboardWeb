@@ -167,6 +167,9 @@ import { BusinessToBusinessAppointmentsComponent } from './business-to-business-
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ServicetagComponent } from './servicetag/servicetag.component';
+import { MedicaltagComponent } from './medicaltag/medicaltag.component';
+import { GoSellElementsComponent } from './go-sell-elements/go-sell-elements.component';
+import { ReportingDashboardComponent } from './reporting-dashboard/reporting-dashboard.component';
 
 // Create a loader for translation files
 export function HttpLoaderFactory(http: HttpClient) {
@@ -312,7 +315,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     CheckoutFooterComponent,
     ServiceproviderComponent,
     BusinessToBusinessAppointmentsComponent,
-    ServicetagComponent
+    ServicetagComponent,
+    MedicaltagComponent,
+    GoSellElementsComponent,
+    ReportingDashboardComponent
    ],
   imports: [
     BrowserModule, 

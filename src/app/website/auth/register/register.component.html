@@ -237,6 +237,16 @@
                             </select>
     
                         </div>  
+
+                        
+                        <!--medical tags Ar-->
+                        <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+
+                            <p class="xsmall bold">{{ 'inputFields.medicalHistory' | translate }}</p>
+                            <ng-multiselect-dropdown class="max-width input-global" *ngIf="medicalTagSettingsAr && languageService.getCurrentLanguage() === 'ar'" [settings]="medicalTagSettingsAr" [data]="medicalTagListAr" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" [(ngModel)]="modelMedicalTag"></ng-multiselect-dropdown>
+                            <ng-multiselect-dropdown class="max-width input-global" *ngIf="medicalTagSettingsEn && languageService.getCurrentLanguage() === 'en'" [settings]="medicalTagSettingsEn" [data]="medicalTagListEn" (onSelect)="onTagSelect($event)" (onDeSelect)="onTagDeSelect($event)" [(ngModel)]="modelMedicalTag"></ng-multiselect-dropdown>
+
+                        </div>  
     
                     </div>
     

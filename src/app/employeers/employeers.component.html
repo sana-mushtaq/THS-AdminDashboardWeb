@@ -10,7 +10,7 @@
       <app-sidebar></app-sidebar>
       <app-submenu></app-submenu>
     </div>
-    <main class="el-main">
+    <main class="el-main" *ngIf="jsonData['employee_check_employeer']['view']">
       <app-header></app-header>
       <div>
         <div class="o-flow-x">
@@ -54,7 +54,7 @@
                     <td>{{ emp.mobile }}</td>
                     <td>
                       <div class="cell">
-                        <i class="icon-pencil ico-pointer" id="ico-pointer" (click)="EmployeerEdit(emp.employeerId)"></i>
+                        <i class="icon-pencil ico-pointer" id="ico-pointer" *ngIf="jsonData['employee_check_employeer']['choose_branch_lab']" (click)="EmployeerEdit(emp.employeerId)"></i>
                       </div>
                     </td>
                   </tr>

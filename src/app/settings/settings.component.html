@@ -11,7 +11,7 @@
                <app-sidebar></app-sidebar>
                <app-submenu></app-submenu>
             </div>
-            <main class="el-main">
+            <main class="el-main" *ngIf="jsonData['settings']['edit_app_detail']">
                <app-header></app-header>
                <div>
                   <div>

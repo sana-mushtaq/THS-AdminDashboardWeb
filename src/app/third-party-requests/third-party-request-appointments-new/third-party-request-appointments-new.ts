@@ -8,6 +8,8 @@ import { NationalIdValidator } from "src/validators/nationalIdValidator";
 import Swal from "sweetalert2";
 import { ActivatedRoute } from "@angular/router";
 import { MirthService } from "src/service/mirth.service";
+import { HttpClient } from '@angular/common/http';
+
 declare var google: any;
 declare var $: any;
 
@@ -56,6 +58,11 @@ export class ThirdPartyRequestsAppointmentsNewComponent implements OnInit {
   public patientDependents : Array<any> = [];
   public appointmentRequest : any = {};
 
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
   constructor(
     private cd : ChangeDetectorRef,
     private autoCompleteApi: MapsAPILoader,
@@ -63,7 +70,8 @@ export class ThirdPartyRequestsAppointmentsNewComponent implements OnInit {
     private fb : FormBuilder,
     private patientService: PatientsService,
     private route : ActivatedRoute,
-    private mirthServices : MirthService
+    private mirthServices : MirthService,
+    private http: HttpClient
   ) {
 
     this.route.params.subscribe({
@@ -114,6 +122,16 @@ export class ThirdPartyRequestsAppointmentsNewComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
     let sessionInfo = localStorage.getItem("SessionDetails");
     if( sessionInfo ){
       this.accessLevel = JSON.parse( sessionInfo ).accessLevel || 0;

@@ -11,6 +11,7 @@ declare var $: any;
 import Swal from "sweetalert2";
 import { ValueConverter } from "@angular/compiler/src/render3/view/template";
 import { LoaderService } from "src/utils/loader.service";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: "app-patientlist",
@@ -18,6 +19,8 @@ import { LoaderService } from "src/utils/loader.service";
   styleUrls: ["./patientlist.component.css"],
 })
 export class PatientlistComponent implements OnInit {
+
+  userRoles: any = {}
   actualpatientList: Patient[] = [];
   patientList: Patient[] = [];
   patientSources: PatientSource[] = [];
@@ -26,14 +29,17 @@ export class PatientlistComponent implements OnInit {
   searchPatientInput;
   isEditEnabled = false;
   jsonText;
-
+  jsonData: any;
+  loaded: boolean = false;
   constructor(
     private _appService: AppService, 
     private _appUtil: UtilService, 
     private router: Router,
     private _appDataService: AppDataService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private http: HttpClient
   ) {
+
     this.getPaitentsList();
     this.getPatientSources();
   }
@@ -130,6 +136,16 @@ export class PatientlistComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
+    
     $(".onlypatient").removeClass("dclass");
     $(".onlyadmin").removeClass("dclass");
     $("#example thead tr").clone(true).addClass("filters").appendTo("#example thead");

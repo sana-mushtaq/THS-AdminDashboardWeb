@@ -11,7 +11,7 @@
           </menu>
           <app-sidebar></app-sidebar>
        </div>
-       <main class="el-main dashboard">
+       <main class="el-main dashboard" *ngIf="jsonData['reports']['view']">
           <app-header></app-header>
           <div>
             

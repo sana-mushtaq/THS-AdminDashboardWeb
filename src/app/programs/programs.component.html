@@ -26,7 +26,7 @@
   
                 <div class="d-flex justify-content align-items-center">
                   <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-bonnet"></i> Programs List</span>  
-                  <button id="package" routerLink="../add-program"  class="add-btn mr-0 float-right"><i class="fa fa-plus-circle"></i> Add New Program</button>
+                  <button id="package" routerLink="../add-program"  class="add-btn mr-0 float-right"  *ngIf="jsonData['programs']['add']"><i class="fa fa-plus-circle"></i> Add New Program</button>
                </div>
   
                 <div class="el-table__body-wrapper is-scrolling-none" style="margin-top: 3%">
@@ -53,7 +53,7 @@
                         <td>5 Sessions</td>
                         <td>4 Levels</td>
                         <td>
-                          <button class="edit_button btn py-0" type="button" (click)="categoryEdit(category.serviceCategoryId)">
+                          <button *ngIf="jsonData['programs']['edit']" class="edit_button btn py-0" type="button" (click)="categoryEdit(category.serviceCategoryId)">
                             <i class="icon-pencil ico-pointer" id="ico-pointer"></i>
                           </button>
                         </td>

@@ -7,6 +7,8 @@ import { UtilService } from 'src/service/util.service';
 import { AlertType, APIResponse, FileUploadType } from 'src/utils/app-constants';
 import { FormBuilder, Validators, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { HttpClient } from '@angular/common/http';
+
 declare var $: any;
 
 @Component({
@@ -28,10 +30,16 @@ export class EmployerPackagelistComponent implements OnInit {
   modalTitle: string;
   selectedFile: File;
 
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
   constructor(
     private _appService: AppService,
     private _appUtil: UtilService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private http: HttpClient
   ) {
     this.getServicePackages();
     this.getIndividualLabTests();
@@ -216,6 +224,16 @@ export class EmployerPackagelistComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+    
     $('.onlyemployer').removeClass('dclass');
     $('.onlyadmin').removeClass('dclass');
     $('.active-packages').addClass('active');

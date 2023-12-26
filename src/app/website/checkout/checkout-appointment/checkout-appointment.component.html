@@ -75,8 +75,8 @@
 
     </div>
 
-    <button class="primary-bg max-width padding-10 uppercase" (click)="payAndBook()">{{ 'cart.payBook' | translate }}</button>
-
+    <button class="primary-bg max-width padding-10 uppercase" (click)="openLightBox()">{{ 'cart.payBook' | translate }}</button>
+    <div id="root"></div>        
     <!-- Cart error -->
     <app-custom-alert *ngIf="errorOccured" [title]="'messages.error' | translate" [message]="'messages.tryAgain'" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue | translate'" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 

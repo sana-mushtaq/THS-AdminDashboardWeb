@@ -67,6 +67,11 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
   preferredBranch: any
   preferredServiceProvider: any
 
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
   private dataSubscription: Subscription;
 
   private fetchedData: any = {
@@ -121,6 +126,15 @@ export class BusinessToBusinessSchedulingComponent implements OnInit {
 
   ngOnInit(): void { 
 
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+    
     $(".onlyadmin").removeClass("dclass");
     $('.onlyservicerequests').show();
     $(".nav-link").click(function () {

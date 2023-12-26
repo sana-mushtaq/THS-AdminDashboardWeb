@@ -117,6 +117,10 @@ export class AppConstants {
   public static get fileUploadURL(): string {
     return `${environment.domainName}${environment.fileUploadURL}`;
   }
+
+  public static get mrUploadURL(): string {
+    return `${environment.domainName}${environment.mrUploadURL}`;
+  }
   
   public static get imageUploadURL(): string {
     return `${environment.domainName}${environment.imageUploadURL}`;

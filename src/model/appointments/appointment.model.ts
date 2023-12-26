@@ -63,6 +63,8 @@ export class Appointment {
   paymentMethod : String;
   refSourceName : String;
 
+  rescheduleRequestFrom: String;
+
   static getAppointmentList(appointments): Appointment[] {
     var appointmentList: Array<Appointment> = [];
     if (appointments == null) {
@@ -82,7 +84,7 @@ export class Appointment {
       appointment.patientSource = data["sourceName"];
       appointment.refSourceName = data["refSourceName"];
       appointment.paymentMethod = data["paymentMethod"];
-
+      appointment.rescheduleRequestFrom = data["rescheduleRequestFrom"];
       switch (appointment.appointmentBookingStatus) {
         case AppointmentStatus.Completed:
           appointment.appointmentStatusMessage = "Open";
@@ -187,7 +189,7 @@ export class Appointment {
       appointment.packageName = data["packageName"] + " - Home visit";
       appointment.city = data["city"];
       appointment.serviceProviderName = data["serviceProviderName"];
-
+      appointment.rescheduleRequestFrom = data['rescheduleRequestFrom']
       switch (appointment.appointmentBookingStatus) {
         case AppointmentStatus.Completed:
           appointment.appointmentStatusMessage = "Open";

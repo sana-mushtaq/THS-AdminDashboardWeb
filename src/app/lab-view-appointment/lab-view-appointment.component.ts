@@ -6,7 +6,10 @@ import { Appointment } from "src/model/appointments/appointment.model";
 import { PractiseUser } from "src/model/common/practise-user.model";
 import { AppDataService } from "src/service/app-data.service";
 import { AppService } from "src/service/app.service";
+import { BusinessToCustomerSchedulingService } from "src/service/business-to-customer-scheduling.service";
 import { UtilService } from "src/service/util.service";
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+
 import {
   AlertType,
   APIResponse,
@@ -39,7 +42,16 @@ export class LabViewAppointmentComponent implements OnInit {
   stepTest = 5;
   docFileList: File[];
 
-  constructor(private _appService: AppService, private _appUtil: UtilService, private _appDataService: AppDataService) {
+  reviewToggle: boolean = false
+  questionnaireForm: FormGroup;
+
+  stars: boolean[][] = [];
+
+
+  appReview: any = {}
+  appReviewSp: any = {}
+
+  constructor(private _appService: AppService, private _appUtil: UtilService, private _appDataService: AppDataService, private fb : FormBuilder, private _b2c: BusinessToCustomerSchedulingService,) {
     this._unsubscribeAll = new Subject();
 
     this._appDataService.selectedAppointment.pipe(takeUntil(this._unsubscribeAll)).subscribe((appointment) => {
@@ -119,6 +131,27 @@ export class LabViewAppointmentComponent implements OnInit {
     this._appService.getLabAppointmentDetails(appointmentId).subscribe(
       (response: any) => {
         if (response.status == APIResponse.Success) {
+
+          if(response.appointmentDetails.review === "") {
+
+            this.appReview = {};
+  
+          } else {
+  
+            this.appReview = JSON.parse(response.appointmentDetails.review) || {};
+  
+          }
+  
+          if(response.appointmentDetails.provider_review === "") {
+  
+            this.appReviewSp = {};
+  
+          } else {
+  
+            this.appReviewSp = JSON.parse(response.appointmentDetails.provider_review) || {};
+  
+          }
+
           this.appointmentDetails = AppointmentDetails.initalizeAppointmentDetails(response);
           this.updateAppointmentHistory();
         } else {
@@ -404,5 +437,80 @@ export class LabViewAppointmentComponent implements OnInit {
         }
       });
     }
+  }
+  get questions(): FormArray {
+    return this.questionnaireForm.get('questions') as FormArray;
+  }
+
+  addQuestion(questionText: string): void {
+    const questionGroup = this.fb.group({
+      text: questionText,
+      rating: [null, Validators.required],
+    });
+
+    this.questions.push(questionGroup);
+    this.stars.push(Array(5).fill(false));
+  }
+
+  onSubmit(): void {
+  
+    if (this.questionnaireForm.valid) {
+  
+      let data = {
+
+        appointment_data: JSON.stringify(this.questionnaireForm.value),
+        appointment_id: this.appointmentDetails.appointmentId
+  
+      }
+
+      console.log(data)
+  
+      //now we will cancel user appointment
+      this._b2c.appointmentReviewSp(data).subscribe({
+                
+        next : ( ress : any ) => {
+  
+          //in case of success the api returns 0 as a status code
+          if( ress.status === APIResponse.Success) {
+            
+            this.appReviewSp = this.questionnaireForm.value
+            
+          }
+          
+        },
+        error: ( err: any ) => {
+          
+          console.log(err)
+          
+        }
+    
+      }) 
+  
+    } else {
+  
+      // Mark the form and controls as dirty to trigger error messages
+      this.questionnaireForm.markAllAsTouched();
+  
+    }
+  
+  }
+
+  rate(questionIndex: number, starIndex: number): void {
+    const ratingControl = this.questions.at(questionIndex).get('rating') as FormControl;
+    ratingControl.setValue(starIndex + 1);
+
+    // Update stars array to reflect the selected rating
+    this.stars[questionIndex] = Array(5).fill(false).map((_, i) => i <= starIndex);
+  }
+
+  openReview() {
+
+    this.reviewToggle = true
+  
+  }
+  closeReviewPopup() {
+
+    this.reviewToggle = false
+
   }
 }

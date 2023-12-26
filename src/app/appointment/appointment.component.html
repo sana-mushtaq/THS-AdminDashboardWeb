@@ -23,7 +23,7 @@
                               <div class="el-card__body">
                                  <div class="d-flex justify-content app-grid-default">
                                     <h4>Default Service Type duration</h4>
-                                    <a routerLink="../edit-appointment" class=""><strong>Edit Details</strong></a>
+                                    <a routerLink="../edit-appointment" class=""  *ngIf="jsonData['appointment_settings']['edit_duration']"><strong>Edit Details</strong></a>
                                  </div>
                                  <div>
                                     <div class="app-grid-default">

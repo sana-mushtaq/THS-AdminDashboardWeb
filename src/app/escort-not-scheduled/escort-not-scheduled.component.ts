@@ -7,6 +7,8 @@ import { PractiseUser } from "src/model/common/practise-user.model";
 import { AppDataService } from "src/service/app-data.service";
 import { AppService } from "src/service/app.service";
 import { UtilService } from "src/service/util.service";
+import { HttpClient } from '@angular/common/http';
+
 import {
   AlertType,
   APIResponse,
@@ -53,7 +55,12 @@ export class EscortNotScheduledComponent implements OnInit {
   collectedAmount;
   paymentReference;
 
-  constructor(private _appService: AppService, private _appUtil: UtilService, private _appDataService: AppDataService) {
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
+  constructor(private _appService: AppService, private _appUtil: UtilService, private _appDataService: AppDataService, private http: HttpClient) {
     this._unsubscribeAll = new Subject();
 
     this._appDataService.selectedAppointment.pipe(takeUntil(this._unsubscribeAll)).subscribe((appointment) => {
@@ -87,6 +94,14 @@ export class EscortNotScheduledComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
     this.drawUI();
     $(".onlyadmin").removeClass("dclass");
   }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MirthService } from 'src/service/mirth.service';
 import Swal from "sweetalert2";
+import { HttpClient } from '@angular/common/http';
+
 declare var $: any;
 
 @Component({
@@ -11,9 +13,26 @@ declare var $: any;
 })
 export class ThirdPartyRequestsComponent implements OnInit {
 
-  constructor( private mirthServices : MirthService, private router : Router ) { }
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
+  constructor( private mirthServices : MirthService, private router : Router,private http: HttpClient ) { }
 
   ngOnInit() {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
+
+    
     $(".onlyadmin").removeClass("dclass");
     $('.onlyservicerequests').show();
     $(".nav-link").click(function () {

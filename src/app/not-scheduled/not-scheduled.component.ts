@@ -8,6 +8,8 @@ import { AppDataService } from "src/service/app-data.service";
 import { AppService } from "src/service/app.service";
 import { PatientsService } from "src/service/patient.service";
 import { UtilService } from "src/service/util.service";
+import { HttpClient } from '@angular/common/http';
+
 import {
   AlertType,
   APIResponse,
@@ -20,6 +22,8 @@ import {
 } from "src/utils/app-constants";
 import Swal from "sweetalert2";
 import * as moment from "moment";
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { BusinessToCustomerSchedulingService } from "src/service/business-to-customer-scheduling.service";
 declare var $: any;
 @Component({
   selector: "app-not-scheduled",
@@ -50,7 +54,19 @@ export class NotScheduledComponent implements OnInit {
   selectedDate : string;
   public paymentReferenceId : string = '';
 
-  constructor(private patientService : PatientsService, private _appService: AppService, private _appUtil: UtilService, private _appDataService: AppDataService) {
+  reviewToggle: boolean = false
+  questionnaireForm: FormGroup;
+
+  stars: boolean[][] = [];
+
+
+  appReview: any = {}
+  appReviewSp: any = {}
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+  constructor(private patientService : PatientsService, private _b2c: BusinessToCustomerSchedulingService, private fb : FormBuilder, private _appService: AppService, private _appUtil: UtilService, private _appDataService: AppDataService,   private http: HttpClient) {
     this._unsubscribeAll = new Subject();
 
     this._appDataService.selectedAppointment.pipe(takeUntil(this._unsubscribeAll)).subscribe((appointment) => {
@@ -81,11 +97,41 @@ export class NotScheduledComponent implements OnInit {
         }
       }
     });
+
   }
 
   ngOnInit(): void {
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
+
     this.drawUI();
     $(".onlyadmin").removeClass("dclass");
+
+     // Initialize the form
+     this.questionnaireForm = this.fb.group({
+      questions: this.fb.array([]),
+      speedOfProvidingServer:  ['', Validators.required ],
+      comments: ['', Validators.required ]
+    });
+
+    // Add questions based on language
+    this.addQuestionsBasedOnLanguage();
+  }
+
+  private addQuestionsBasedOnLanguage(): void {
+   
+      this.addQuestion('تم تقديم الخدمة و جدولة الموعد خلال مدة زمنية مناسبة');
+      this.addQuestion('مدة الموعد / موعد تقديم الخدمة');
+      this.addQuestion('الأخصائي متمكن');
+      this.addQuestion('تعامل الأخصائي');
+   
   }
 
   ngAfterViewInit() {
@@ -116,10 +162,33 @@ export class NotScheduledComponent implements OnInit {
   getAppointmentDetails(appointmentId: string) {
     this._appService.getAppoitmentDetails(appointmentId).subscribe(
       (response: any) => {
-        console.log( response );
+
+        if(response.appointmentDetails.review === "") {
+
+          this.appReview = {};
+
+        } else {
+
+          this.appReview = JSON.parse(response.appointmentDetails.review) || {};
+
+        }
+
+        if(response.appointmentDetails.provider_review === "") {
+
+          this.appReviewSp = {};
+
+        } else {
+
+          this.appReviewSp = JSON.parse(response.appointmentDetails.provider_review) || {};
+
+        }
+       
         if (response.status == APIResponse.Success) {
           this.paymentReferenceId = response.appointmentDetails.paymentReferenceId;
           this.appointmentDetails = AppointmentDetails.initalizeAppointmentDetails(response);
+
+          console.log(this.appointmentDetails);
+
           this.populateAppoitmentStatusHistoryData();
           this.updateAppointmentHistory();
           this.updateDisableBtns();
@@ -666,5 +735,157 @@ export class NotScheduledComponent implements OnInit {
         Swal.fire("Error.", "Something went wrong. Please try again later..!", "error");
       }
     );
+  }
+
+  formatSelectedDate(selectedDate: Date) {
+    console.log(selectedDate)
+    const year = selectedDate.getFullYear();
+    const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
+    const day = String(selectedDate.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  }
+
+  rescheduleAppointment1() {
+
+    let userData = {
+      user_id: this.appointmentDetails.patientId as any,
+      gender: this.appointmentDetails.gender as any
+    }
+  
+    let passUsersData = this.appointmentDetails.requestedServices.map(user => ({ ...user }));
+  
+    passUsersData.forEach(u => {
+      u['user_id'] = u.patientId;
+      u['id'] = u.patientId;
+    });
+  
+    let allCurrentAppointmentData = this.appointmentDetails.requestedServices.map(app => ({ ...app }));
+  
+    allCurrentAppointmentData.forEach(app => {
+      let getUser = passUsersData.filter(u => u['id'] === app.patientId);
+      app['user'] = getUser[0];
+    });
+  
+    // Split the date components
+    let dateComponents = this.appointmentDetails.serviceDate.split("-");
+
+    // Rearrange the components to the "YYYY-MM-DD" format
+    let rearrangedDate = `${dateComponents[2]}-${dateComponents[1]}-${dateComponents[0]}`;
+
+    let timeString = this.appointmentDetails.serviceTime;
+
+    // Remove spaces from the time string
+    let formattedTimeString = timeString.replace(/\s/g, '');
+
+    
+    let data = {
+      appointment_id: this.appointmentDetails.appointmentId,
+      preferredTime: formattedTimeString,
+      preferredDate: rearrangedDate,
+      allAppointmentData: [allCurrentAppointmentData],
+      userData: passUsersData,
+      branch_id: this.appointmentDetails.serviceProviderId,
+      practice_user: this.appointmentDetails.parctiseUserId
+    }
+
+    //now we will cancel user appointment
+    this._b2c.updateB2CAppointmentSp(data).subscribe({
+              
+      next : ( ress : any ) => {
+        console.log(ress)
+        //in case of success the api returns 0 as a status code
+        if( ress.status === APIResponse.Success) {
+
+          Swal.fire("Success", "Appointment is rescheuled")
+
+        }
+        
+      },
+
+      error: ( err: any ) => {
+        
+        console.log(err)
+        
+      }
+  
+    }) 
+
+  }
+
+  get questions(): FormArray {
+    return this.questionnaireForm.get('questions') as FormArray;
+  }
+
+  addQuestion(questionText: string): void {
+    const questionGroup = this.fb.group({
+      text: questionText,
+      rating: [null, Validators.required],
+    });
+
+    this.questions.push(questionGroup);
+    this.stars.push(Array(5).fill(false));
+  }
+
+  onSubmit(): void {
+  
+    if (this.questionnaireForm.valid) {
+  
+      let data = {
+
+        appointment_data: JSON.stringify(this.questionnaireForm.value),
+        appointment_id: this.appointmentDetails.appointmentId
+  
+      }
+
+      console.log(data)
+  
+      //now we will cancel user appointment
+      this._b2c.appointmentReviewSp(data).subscribe({
+                
+        next : ( ress : any ) => {
+  
+          //in case of success the api returns 0 as a status code
+          if( ress.status === APIResponse.Success) {
+            
+            this.appReviewSp = this.questionnaireForm.value
+            
+          }
+          
+        },
+        error: ( err: any ) => {
+          
+          console.log(err)
+          
+        }
+    
+      }) 
+  
+    } else {
+  
+      // Mark the form and controls as dirty to trigger error messages
+      this.questionnaireForm.markAllAsTouched();
+  
+    }
+  
+  }
+
+  rate(questionIndex: number, starIndex: number): void {
+    const ratingControl = this.questions.at(questionIndex).get('rating') as FormControl;
+    ratingControl.setValue(starIndex + 1);
+
+    // Update stars array to reflect the selected rating
+    this.stars[questionIndex] = Array(5).fill(false).map((_, i) => i <= starIndex);
+  }
+
+  openReview() {
+
+    this.reviewToggle = true
+  
+  }
+  closeReviewPopup() {
+
+    this.reviewToggle = false
+
   }
 }

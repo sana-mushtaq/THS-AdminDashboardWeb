@@ -55,6 +55,7 @@ export const environment = {
 
   fileUploadURL: "fileUpload",
   imageUploadURL: "fileUploadImage",
+  mrUploadURL: "medicalRecordUploadURL",
   
   //SA LAB API'S
   getAdminLabDashboardURL: "getLabWiseSummary",

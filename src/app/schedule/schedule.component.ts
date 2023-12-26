@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-schedule',
@@ -6,10 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./schedule.component.css']
 })
 export class ScheduleComponent implements OnInit {
+  userRoles: any = {}
 
-  constructor() { }
+  jsonData: any;
+  loaded: boolean = false;
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
+
     $('.onlysetting').removeClass('dclass');
     $('.onlyadmin').removeClass('dclass');
     $('#nav_settings').addClass('active');

@@ -40,7 +40,7 @@
         </div>
 
         <!-- right side or the main component content -->
-        <main class="el-main">
+        <main class="el-main" *ngIf="jsonData['external_request']['view']">
 
             <app-header></app-header>
 
@@ -51,8 +51,8 @@
 
                     <div class="auto-flex-center-space-between-gap20">
 
-                        <input class="white-bg padding-10 box-shadow bold" type="file" (change)="handleFileInput($event)" accept=".xlsx">
-                        <button class="primary-bg padding-10 secondary-color bold" (click)="downloadTemplate()">Download template</button>
+                        <input class="white-bg padding-10 box-shadow bold" type="file" (change)="handleFileInput($event)" accept=".xlsx" *ngIf="jsonData['external_request']['upload_files']">
+                        <button class="primary-bg padding-10 secondary-color bold" (click)="downloadTemplate()" *ngIf="jsonData['external_request']['download_template']">Download template</button>
 
                     </div>
 

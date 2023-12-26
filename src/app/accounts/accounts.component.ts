@@ -5,6 +5,8 @@ import { APIResponse } from "src/utils/app-constants";
 import { AdminDashboard } from "src/model/dashboard/admin-dashboard.model";
 import { Sector } from "src/model/common/sector.model";
 import * as moment from "moment";
+import { HttpClient } from '@angular/common/http';
+
 declare var $: any;
 
 @Component({
@@ -28,12 +30,29 @@ export class AccountsComponent implements OnInit {
   filterEndDate;
   selectedSectorId: number;
 
-  constructor(private _appService: AppService, private _appUtil: UtilService) {
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
+  constructor(private _appService: AppService, private _appUtil: UtilService, private http: HttpClient) {
     this.getLabListData();
     this.getSectors();
   }
 
   ngOnInit(): void {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
+
+    
     $(".onlylab").removeClass("dclass");
     $(".onlyadmin").removeClass("dclass");
     $(".active-labs").addClass("active");

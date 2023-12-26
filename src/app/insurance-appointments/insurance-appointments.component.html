@@ -10,7 +10,7 @@
         <app-sidebar></app-sidebar>
         <app-submenu></app-submenu>
       </div>
-      <main class="el-main">
+      <main class="el-main" *ngIf="jsonData['insurance_request']['view']">
         <app-header></app-header>
         <div>
           <div class="m-t30 el-row" style="margin-left: -10px; margin-right: -10px">

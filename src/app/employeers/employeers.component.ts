@@ -7,6 +7,8 @@ import { FormBuilder, Validators, FormGroup, NG_VALUE_ACCESSOR } from "@angular/
 import { AlertType, APIResponse, PractiseUserRoles, FileUploadType } from "src/utils/app-constants";
 import { EmployerCheckService } from "src/service/employerCheck.service";
 import Swal from "sweetalert2";
+import { HttpClient } from '@angular/common/http';
+
 declare var $: any;
 
 
@@ -29,7 +31,12 @@ export class EmployeersComponent implements OnInit {
   public isEditing : boolean = false;
   public dataTable : any;
 
-  constructor(private _appService: AppService, private _appUtil: UtilService, public formBuilder: FormBuilder, private empCheckService : EmployerCheckService) {
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
+  constructor(private _appService: AppService, private _appUtil: UtilService, public formBuilder: FormBuilder, private empCheckService : EmployerCheckService,private http: HttpClient) {
     this.getCorpServicePackages();
     this.getEmployeerList();
     this.getLabListData();
@@ -193,6 +200,16 @@ export class EmployeersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+    
     this.modalTitle = "Add Employer";
     this.formValidation();
     $(".onlyemployer").removeClass("dclass");

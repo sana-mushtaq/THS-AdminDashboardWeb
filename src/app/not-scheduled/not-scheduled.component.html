@@ -12,7 +12,7 @@
 
       <nav class="nav-bar-none"></nav>
     </div>
-    <main class="el-main dashboard">
+    <main class="el-main dashboard" *ngIf="jsonData['appointment']['view']">
       <app-header></app-header>
       <div>
         <div>
@@ -49,8 +49,11 @@
                 <div class="col-lg-6">
                   <h4 class="mb-0 f-w6">Booking Details</h4>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6" *ngIf="jsonData['appointment']['cancel']">
                   <div class="text-right">
+                    <button *ngIf="selectedAppointment.appointmentCurrentStatus < 2" class="add-btn" (click)="rescheduleAppointment1()" style="margin-right:10px !important">
+                      Reschedule Appointment
+                    </button>
                     <button *ngIf="selectedAppointment.appointmentCurrentStatus < 2" class="add-btn mr-0" (click)="cancelAppointment()">
                       Cancel Appointment
                     </button>
@@ -74,7 +77,7 @@
                           <div class="col-lg-4 pr-0" style="padding-left: 30px">
                             <label class="label-color">Service Date &amp; Time</label>
                             
-                              <h6>{{ appointmentDetails.serviceDate }}, {{ appointmentDetails.serviceTime }}  <i class="icon-pencil m-r10" (click)="openRescheduleWindow()" style="cursor: pointer;"></i></h6>
+                              <h6>{{ appointmentDetails.serviceDate }}, {{ appointmentDetails.serviceTime }}  <i class="icon-pencil m-r10" *ngIf="jsonData['appointment']['edit_appointment']" (click)="openRescheduleWindow()" style="cursor: pointer;"></i></h6>
                             
                           </div>
                           <div class="col-lg-3">
@@ -241,7 +244,7 @@
                           </tbody>
                         </table>
 
-                        <div class="col-lg-12 pl-0" *ngIf="appointmentDetails.appointmentCurrentStatus <= 2">
+                        <div class="col-lg-12 pl-0" *ngIf="appointmentDetails.appointmentCurrentStatus <= 2 && jsonData['appointment']['edit_appointment']">
                           <div id="myBtn" class="btn btn-primary mb-3 btn-sm" (click)="openStaffSelectionWindow()">
                             <i class="icon-pencil m-r10"></i>
                             <span>Edit</span>
@@ -249,17 +252,120 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-12 text-center">
+                    <div class="col-lg-12 text-center" *ngIf="jsonData['appointment']['assign_sp']">
                       <button
                         *ngIf="appointmentDetails.parctiseUserId == null"
                         type="button"
                         class="btn btn-primary mt-3 mb-4 btn-md btn-pad el-button--default"
                         (click)="openStaffSelectionWindow()"
                       >
-                        <span id="schedule" class="schedule">Assign Care Giver</span>
+                        <span id="schedule" class="schedule" >Assign Care Giver</span>
                       </button>
                     </div>
                   </div>
+
+                  <div class="el-card m-b30 is-always-shadow padding-10" *ngIf="appReview && appReview.questions && appReview.questions.length>0">
+
+                    <h4 class="m-0 f-w6 p-3">Appointment Reviews</h4>
+                    
+                    <p class="text-center cursor-pointer light-green-bg padding-5 green-color max-width">review by patient</p>
+                    <!--here we will display all the reviews done by patient-->
+                    <div class="auto-flex-start-gap10-column" *ngFor="let review of appReview.questions; let appReviewIndex = index;">
+
+                      <p>{{appReviewIndex}}. {{review.text}}</p>
+
+                      <div class="auto-flex-start-gap10">
+
+                        <div *ngFor="let star of [1, 2, 3, 4, 5]; let j = index" class="star" [class.filled]="j < review.rating">&#9733;</div>
+
+                      </div>
+
+                    </div>
+
+                    
+                    <div *ngIf="appReviewSp && appReviewSp.questions && appReviewSp.questions.length>0">
+                      <p class="text-center cursor-pointer light-green-bg padding-5 green-color max-width">review by service provider</p>
+
+                    <!--here we will display all the reviews done by patient-->
+                    <div class="auto-flex-start-gap10-column" *ngFor="let review of appReviewSp.questions; let appReviewIndex = index;">
+
+                      <p>{{appReviewIndex}}. {{review.text}}</p>
+
+                      <div class="auto-flex-start-gap10">
+
+                        <div *ngFor="let star of [1, 2, 3, 4, 5]; let j = index" class="star" [class.filled]="j < review.rating">&#9733;</div>
+
+                      </div>
+
+                    </div>
+
+
+                    </div>
+
+                    <button class="primary-bg padding-10 box-shadow max-width" (click)="openReview()" *ngIf="!appReviewSp || appReviewSp !== {}">Review Service Provider</button>
+                  
+                      <!-- review service provider -->
+                      <div class="auto-flex-center-gap10 fixed dialog z-index" style="z-index: 1000;" *ngIf="reviewToggle">
+
+                        <div class="popup" style="align-content: start">
+
+                            <div  style="overflow: scroll; max-height: 500px;" class="auto-flex-start-gap20-column relative white-bg border-radius-20 width-min-600 width-max-600 phone-min-width phone-max-height-70Percent">
+
+                                <div class="auto-flex-end-gap10">
+                                    <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/cancel.svg" (click)="closeReviewPopup()"/>
+                                </div>
+
+                                <div class="auto-flex-center-gap10">
+
+                                    <div class="auto-flex-start-gap20-column">
+
+                                        <!-- questionnaire.component.html -->
+                                        <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit()" class="auto-flex-start-gap10-column">
+                                            <div formArrayName="questions" class="auto-flex-start-gap20-column">
+                                              <div *ngFor="let question of questions.controls; let i = index">
+                                                <label>{{i}}. {{ question.get('text').value }}</label>
+                                                <div class="star-rating auto-flex-start-gap10">
+                                                  <div *ngFor="let star of stars[i]; let j = index" (click)="rate(i, j)" class="star cursor-pointer" [class.selected]="star">&#9733;</div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            
+                                            <div class="auto-flex-start-gap10-column">
+
+                                              <p>سرعة تقديم الخدمه</p>
+                                              <input class="input-global" formControlName="speedOfProvidingServer" type="number" />
+                                          
+                                            </div>
+
+                                            <div class="auto-flex-start-gap10-column">
+
+                                              <p>تقييم المشرف وملاحظاته</p>
+                                              <textarea class="input-global" formControlName="comments"></textarea>
+                                          
+                                            </div>
+                                            
+                                            <div *ngIf="questionnaireForm.invalid" class="xsmall red-color">
+                                              
+                                              {{ 'patientProfile.reviewError' | translate }}
+                                            
+                                            </div>
+
+                                            <button type="submit" class="primary-bg padding-10 box-shadow max-width">Submit</button>
+                                            
+                                        </form>
+
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                
+                        </div>
+                
+                      </div>
+
+                  </div>
+
                 </div>
               </div>
 
@@ -304,8 +410,8 @@
                 </div>
               </div>
 
-              <div class="row">
-                <div class="col-lg-4">
+              <div class="row" >
+                <div class="col-lg-4" *ngIf="jsonData['appointment']['upload_files']">
                   <div>
                     <h4 class="m-b20 mt-5 f-w6">Upload Result</h4>
                     <div class="el-card is-always-shadow">
@@ -353,7 +459,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4" *ngIf="jsonData['appointment']['upload_files']">
                   <div>
                     <h4 class="m-b20 f-w6 mt-5">Lab Test Result</h4>
                     <div class="el-card is-always-shadow">
@@ -429,7 +535,7 @@
                             <td class="text-right text-primary font600">{{ appointmentDetails.servicePrice | number: "1.2-2" }}</td>
                           </tr>
                           <tr>
-                            <td><button (click)="verifyPayment()" class="btn btn-theme">Verify Payment</button></td>
+                            <td><button *ngIf="jsonData['appointment']['verify_payment']" (click)="verifyPayment()" class="btn btn-theme">Verify Payment</button></td>
                           </tr>
                         </tbody>
                       </table>

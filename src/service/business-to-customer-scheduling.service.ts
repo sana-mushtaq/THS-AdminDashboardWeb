@@ -95,5 +95,70 @@ export class BusinessToCustomerSchedulingService {
 
   }
 
-    
+  sendInvoiceEmail(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/sendInvoiceEmail', body)
+
+  }
+
+  createOdooInvoice(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/createOdooInvoice', body)
+
+  }
+
+  cancelB2CAppointment(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/cancelB2CAppointment', body)
+
+  }
+
+  getAppointmentData(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/getAppointmentData', body)
+
+  }
+
+  updateB2CAppointment(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/updateB2CAppointment', body)
+
+  }
+
+  medicalRecords(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/medicalRecords', body)
+
+  }
+ 
+  getMedicalRecords(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/getMedicalRecords', body)
+
+  }
+
+  appointmentReview(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/appointmentReview', body)
+
+  }
+
+  appointmentReviewSp(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/appointmentReviewSp', body)
+
+  } 
+
+  updateB2CAppointmentSp(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/acceptRescheduleFromSp', body)
+
+  }
+
+  updatePatientNotes(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/updatePatientNotes', body)
+
+  }
+
 }

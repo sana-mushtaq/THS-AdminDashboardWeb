@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { BusinessToCustomerSchedulingService } from "src/service/business-to-customer-scheduling.service";
 import { APIResponse } from "src/utils/app-enum";
 import Swal from "sweetalert2";
+import { HttpClient } from '@angular/common/http';
 
 declare var $: any;
 declare var checkList: any;
@@ -14,15 +15,28 @@ declare var items: any;
 export class BusinessToBusinessAppointmentsComponent implements OnInit {
 
   b2bList: any = []
+  userRoles: any = {}
 
+  jsonData: any;
+  loaded: boolean = false;
   constructor(
     private _b2c: BusinessToCustomerSchedulingService,
+    private http: HttpClient
   ) {
    
   }
 
   ngOnInit(): void {
     
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
     $(".onlyadmin").removeClass("dclass");
     $('.onlyservicerequests').show();
     $(".nav-link").click(function () {

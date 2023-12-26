@@ -10,6 +10,7 @@ import { Subject, takeUntil } from "rxjs";
 import * as moment from "moment";
 import Swal from 'sweetalert2';
 import { LoaderService } from "../../utils/loader.service";
+import { HttpClient } from '@angular/common/http';
 
 declare var $: any;
 @Component({
@@ -20,13 +21,21 @@ declare var $: any;
 export class ViewPatientComponent implements OnInit {
 
   private _unsubscribeAll: Subject<any>;
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
+  currentInusranceData: any;
+  displayInusrance: boolean = false;
   
   constructor(
     private _appService: AppService, 
     private _appUtil: UtilService,
     private router: Router,
     private _appDataService: AppDataService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private http: HttpClient
   ) { 
         this._unsubscribeAll = new Subject();
         this._appDataService.selectedAppointment.pipe(takeUntil(this._unsubscribeAll)).subscribe((patientId) => {
@@ -45,6 +54,16 @@ export class ViewPatientComponent implements OnInit {
   appointmentList;
 
   ngOnInit(): void {
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
+
     $("#appointmentstable thead tr").clone(true).addClass("filters").appendTo("#appointmentstable thead");
     $('.onlyemployee').removeClass('dclass');
     $('.onlyadmin').removeClass('dclass');
@@ -142,10 +161,11 @@ export class ViewPatientComponent implements OnInit {
     }
     this._appService.getPatientSummary(params).subscribe(
       (response: any) => {
-        debugger;
+
         if (response.status == APIResponse.Success) {
           this.patientDetails = Patient.getPatientsDetail(response);
           this.patientDependents = Patient.getPatientDependent(response);
+          console.log(this.patientDependents)
           this.patientAppointmentDetails = Appointment.getAppointmentList(response.appointmentHistory);
 
           let resultPublishedExcludedAppointments = this.patientAppointmentDetails.filter((appointment) => appointment.appointmentCurrentStatus <= 6);
@@ -211,5 +231,10 @@ export class ViewPatientComponent implements OnInit {
 
   DependentgenderSelected(e) {
     this.dependentGenderSelect = e.value;
+  }
+
+  viewInsuranceDetail(data) {
+    this.currentInusranceData = JSON.parse(data);
+    this.displayInusrance = true;
   }
 }

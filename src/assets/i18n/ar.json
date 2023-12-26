@@ -29,7 +29,7 @@
         "addressCity": "المدينة",
         "addressLine": "العنوان",
         "confirmLocation": "تأكيد",
-        "addressName_1": "Address Name",
+        "addressName_1": "العنوان",
         "addressLine_1": "عنوان السكن الرئيسي",
         "addressLine_2": "عنوان السكن الثاني",
         "addressName_1_placeholder": "اسم العنوان",
@@ -106,7 +106,14 @@
         "tryAgain": "حدث خطأ. حاول مرة أخرى لاحقا",
         "errorWhileUpdatingAddress": "حدث خطأ أثناء حفظ العنوان في حسابك ولكن يمكنك استخدام هذا العنوان لحجز الخدمة.",
         "sureRemovingUser": "هل أنت متأكد من حذف هذا المستخدم؟",
-        "success":"تم بنجاح"
+        "success":"تم بنجاح",
+        "appointmentCanNotBeCanceled": "لا يمكن إلغاء الموعد إلا قبل 24 ساعة من وقت الحجز",
+        "showAppointmentCancelationConfimationMessage": "هل أنت متأكد أنك تريد إلغاء موعدك؟",
+        "showAppointmentCancelMessage": "لقد تم إلغاء موعدك",
+        "showAppointmentUpdateMessage": "لا يمكن تحديث الموعد إلا قبل 6 ساعات من وقت الحجز",
+        "showAppointmentAfterUpdateMessage": "لقد تم تحديث موعدك",
+        "fileNotUpdatedSuccessfully": "حدث خطأ أثناء تحميل الملف، حاول مرة أخرى",
+        "fileUpdatedSuccessfully": "لقد تم تحديث ملفك بنجاح"
 
     },
 
@@ -125,8 +132,26 @@
         "appointmentId": "رقم الموعد",
         "serviceName": "اسم الخدمة",
         "dateTime": "التاريخ والوقت",
+        "actions": "الإجراءات",
+        "medicalRecords": "السجلات الطبية",
+        "viewAllAttachments": "المرفقات",
         "bookService": "ابدأ بحجز موعد",
-        "dependantSuccess": "تم تحديث بيانات المستخدم بنجاح"
+        "dependantSuccess": "تم تحديث بيانات المستخدم بنجاح",
+        "upcoming": "المواعيد القادمة",
+        "past": "المواعيد السابقة والسجلات الطبية",
+        "noUpcoming": "لا توجد مواعيد قادمة متاحة",
+        "noPast": "لا توجد مواعيد سابقة متاحة",
+        "confirmDateTime": "تأكيد التاريخ والوقت",
+        "file_name": "اسم الملف",
+        "uploaded_at": "تاريخ الرفع",
+        "added_by": "تمت الإضافة بواسطة",
+        "noFilesUploadedYet": "لم يتم تحميل أي ملفات حتى الآن",
+        "review": "مراجعة",
+        "reviewTitle": "إيمانًا بأهمية رأيك للارتقاء بمستوى الخدمة المقدم لك نأمل منك التكرم بتعبئة الاستبيان لغرض التطوير و تحسين الخدمة ، نرجو المشاركة بشفافية علمًا بأنه لن يتطلب أي معلومات شخصية أو تسجيل أي بيانات حرصًا على خصوصية العملاء",
+        "send": "إرسال",
+        "reviewError": "يرجى تقييم جميع الأسئلة قبل إرسالها.",
+        "patientNotes": "ملاحظات المريض",
+        "providerNotes": "ملاحظات مقدم الخدمة"
 
     },
 
@@ -182,7 +207,8 @@
         "nationalId": "الهوية الوطنية",
         "iqama": "الإقامة",
         "passport": "جواز سفر",
-
+        "medicalHistory": "التاريخ الطبى",
+        
         "isNumber": "رقم الهوية",
         "maritalStatus": "الحالة الاجتماعية",
         "single": "أعزب",
@@ -210,6 +236,32 @@
         "selectNationality": "اختر الجنسية",
         "selectIdType": "اختر نوع الهوية"
 
+    },
+
+    "insurance": {
+        "PolicyNumber":"رقم البوليصة",
+        "InsuranceCompanyName":"اسم شركة التأمين",
+        "InsuranceCompanyNameAr": "اسم شركة التأمين باللغة العربية",
+        "ClassName": "اسم الفئة",
+        "Gender": "الجنس",
+        "DeductibleRate": "معدل الخصم",
+        "MaxLimit": "الحد الأقصى",
+        "BeneficiaryType": "نوع المستفيد",
+        "BeneficiaryTypeId": "معرف نوع المستفيد",
+        "BeneficiaryNumber": "رقم المستفيد",
+        "IdentityNumber": "رقم الهوية",
+        "BeneficiaryName": "اسم المستفيد",
+        "InceptionDate": "تاريخ الانشاء",
+        "PolicyHolder": "حامل عقد البوليصة",
+        "InsurancePoIicyExpiryDate": "تاريخ انتهاء صلاحية بوليصة التأمين",
+        "validField": "أدخل بيانات صحيحة في الحقل المطلوب",
+        "submit": "أضف التأمين",
+        "addInsurance": "أضف التأمين",
+        "discardChanges": "تجاهل التغييرات",
+        "Male": "ذكر",
+        "Female": "أنثى",
+        "Main": "الرئيسية",
+        "Dependent": "الفرد المعال"
     }
 
 }

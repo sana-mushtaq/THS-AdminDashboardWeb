@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { AppService } from 'src/service/app.service'
 import { environment } from 'src/environments/environment'
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-caretgory-view',
@@ -60,6 +61,11 @@ export class CaretgoryViewComponent implements OnInit {
   selectedCategoryIndex: number = -1
   selectedsubCategoryIndex: number = -1
 
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
   // forms
   public addCategoryForm : FormGroup
   public editCategoryForm : FormGroup
@@ -71,6 +77,7 @@ export class CaretgoryViewComponent implements OnInit {
     private fb : FormBuilder,
     private renderer: Renderer2,
     private _appService: AppService,
+    private http: HttpClient
   ) { 
 
     this.getCategoryList()
@@ -110,6 +117,15 @@ export class CaretgoryViewComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+    
     $('#nav_settings').addClass('active');
     $('.onlysetting').removeClass('dclass');
     $('.onlyadmin').removeClass('dclass');

@@ -6,6 +6,8 @@ import { AppService } from "src/service/app.service";
 import { UtilService } from "src/service/util.service";
 import { APIResponse } from "src/utils/app-constants";
 import Swal from "sweetalert2";
+import { HttpClient } from '@angular/common/http';
+
 declare var $: any;
 @Component({
   selector: "app-patient-source",
@@ -18,8 +20,11 @@ export class PatientSourceComponent implements OnInit {
   isEditEnabled: boolean;
   modalTitle;
   selectedPatientSource: PatientSource;
+  userRoles: any = {}
 
-  constructor(private _appService: AppService, public formBuilder: FormBuilder, private _appDataService: AppDataService) {
+  jsonData: any;
+  loaded: boolean = false;
+  constructor(private _appService: AppService, public formBuilder: FormBuilder, private _appDataService: AppDataService,private http: HttpClient) {
     this.getPatientSources();
   }
 
@@ -110,6 +115,17 @@ export class PatientSourceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
+    
     $('.onlysetting').removeClass('dclass');
     $('.onlyadmin').removeClass('dclass');
     this.formValidation();

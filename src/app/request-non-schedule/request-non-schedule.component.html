@@ -12,7 +12,7 @@
 
       <nav class="nav-bar-none"></nav>
     </div>
-    <main class="el-main dashboard">
+    <main class="el-main dashboard" *ngIf="jsonData['eployee_check_service_request']['view']">
       <app-header></app-header>
       <div>
         <div>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-lg-6">
                   <div class="text-right">
-                    <button class="add-btn mr-0" (click)="cancelAppointment()">Cancel Appointment</button>
+                    <button class="add-btn mr-0" (click)="cancelAppointment()"  *ngIf="jsonData['eployee_check_service_request']['cancel']">Cancel Appointment</button>
                   </div>
                 </div>
               </div>
@@ -48,7 +48,7 @@
                         <div class="row mt-3">
                           <div class="col-lg-4 pr-0" style="padding-left: 30px">
                             <label class="label-color">Service Date &amp; Time</label>
-                            <h6>{{ appointmentDetails.serviceDate }}, {{ appointmentDetails.serviceTime }}  <i class="icon-pencil m-r10" (click)="openRescheduleWindow()" style="cursor: pointer;"></i></h6>
+                            <h6>{{ appointmentDetails.serviceDate }}, {{ appointmentDetails.serviceTime }}  <i *ngIf="jsonData['eployee_check_service_request']['edit_appointment']" class="icon-pencil m-r10" (click)="openRescheduleWindow()" style="cursor: pointer;"></i></h6>
                           </div>
                           <div class="col-lg-3">
                             <label class="label-color">Appointment ID</label>
@@ -76,7 +76,7 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6" *ngIf="jsonData['eployee_check_service_request']['upload_files']" >
                       <div>
                         <h4 class="m-b20 mt-5 f-w6">Upload Result</h4>
                         <div class="el-card is-always-shadow">
@@ -117,7 +117,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6" *ngIf="jsonData['eployee_check_service_request']['upload_files']">
                       <div>
                         <h4 class="m-b20 f-w6 mt-5">Lab Test Result</h4>
                         <div class="el-card is-always-shadow">
@@ -288,7 +288,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-12 text-center">
+                    <div class="col-lg-12 text-center" *ngIf="jsonData['eployee_check_service_request']['assign_sp']">
                       <button
                         *ngIf="appointmentDetails.parctiseUserId == null"
                         type="button"

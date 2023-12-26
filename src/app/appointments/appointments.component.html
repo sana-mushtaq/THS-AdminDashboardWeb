@@ -11,7 +11,7 @@
       <app-submenu></app-submenu>
       <nav class="nav-bar-none"></nav>
     </div>
-    <main class="el-main">
+    <main class="el-main" *ngIf="jsonData['appointment']['view']">
       <app-header></app-header>
       <div>
         <div>
@@ -151,7 +151,7 @@
                   </ul>
                   <div class="text-right">
                     <!-- <button class="add-btn mr-0" routerLink="../add-appointments">New Appointment</button> -->
-                    <button class="add-btn mr-0" style="margin-left:10px" routerLink="/appointments/add">New Appointment</button>
+                    <button class="add-btn mr-0" style="margin-left:10px" routerLink="/appointments/add" *ngIf="jsonData['appointment']['add']">New Appointment</button>
 
                   </div>
                   <!-- <div class="text-right mb-5">
@@ -203,6 +203,7 @@
                             <p>{{ appointment.appointmentDisplayId }}</p>
                             <p>{{ appointment.serviceName }}</p>
                             <p>{{ appointment.serviceGender }}</p>
+                            <p class="dark-green-bg padding-5 secondary-color" *ngIf="appointment.rescheduleRequestFrom === 'service_provider'">reschedule request</p>
                           </div>
                         </td>
                         <td (click)="viewAppointmentDetails(appointment)">{{ appointment.appointmentBookingDate }}</td>

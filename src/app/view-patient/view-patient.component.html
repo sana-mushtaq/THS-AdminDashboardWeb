@@ -10,7 +10,7 @@
 
       <app-sidebar></app-sidebar>
     </div>
-    <main class="el-main dashboard">
+    <main class="el-main dashboard" *ngIf="jsonData['patient']['view']">
       <div>
         <div class="row profiletop">
           <div class="col-md-12">
@@ -41,6 +41,7 @@
                                   <h5></h5>
                                   <h6><i class="fa fa-envelope"></i> {{ patientDetails[0].email }}</h6>
                                   <h6><i class="fa fa-phone"></i> +966 {{ patientDetails[0].mobileNumber }}</h6>
+                                  <button class="mb-3 el-button back-btn el-button--default el-button--small is-plain" *ngIf="patientDetails[0].insurance_data" (click)="viewInsuranceDetail(patientDetails[0].insurance_data)">Insurance data</button>
                                 </div>
                               </div>
                             </div>
@@ -132,7 +133,7 @@
                 <h3>Dependents</h3>
               </div>
               <div class="col-md-6 text-right p-0 m-0">
-                <button class="add-btn" id="add_dependent" (click)="showNewDependentView()">Add Dependents</button>
+                <button class="add-btn" id="add_dependent" (click)="showNewDependentView()" *ngIf="jsonData['patient']['add_dependant']">Add Dependents</button>
               </div>
             </div>
             <div class="el-card customtabs is-always-shadow">
@@ -150,6 +151,7 @@
                             <h6>{{ dependents.genderText }}</h6>
                             <h5>{{ dependents.email }}</h5>
                             <h6>{{ dependents.nationalId }}</h6>
+                            <button class="mb-3 el-button back-btn el-button--default el-button--small is-plain" *ngIf="dependents.insurance_data" (click)="viewInsuranceDetail(dependents.insurance_data)">Insurance data</button>
                           </div>
                         </div>
                       </div>
@@ -353,6 +355,105 @@
       </div>
     </div>
   </div>
+
+  <div class="auto-flex-center-gap10 fixed dialog z-index" *ngIf="displayInusrance" style="z-index: 1031;">
+
+    <div class="popup">
+
+        <!-- insurance form -->
+        <div class="auto-flex-start-gap20-column relative white-bg overflow-auto max-height-500 border-radius-20 width-min-600 width-max-600 phone-min-width phone-max-height-70Percent" style="max-height: 500px;">
+
+          <div class="auto-flex-start-gap20-column">
+
+            <div class="auto-flex-start-gap20">
+              <p>Policy Number:</p>
+              <p>{{currentInusranceData.PolicyNumber}}</p>   
+            </div>
+
+            <div class="auto-flex-start-gap20">
+              <p>Insurance Company Name:</p>
+              <p>{{currentInusranceData.InsuranceCompanyName}}</p>   
+            </div>
+
+            <div class="auto-flex-start-gap20">
+              <p>Insurance Company Name Ar:</p>
+              <p>{{currentInusranceData.InsuranceCompanyNameAr}}</p>   
+            </div>
+
+            <div class="auto-flex-start-gap20">
+              <p>Class Name:</p>
+              <p>{{currentInusranceData.ClassName}}</p>   
+            </div>
+
+            <div class="auto-flex-start-gap20">
+              <p>Gender:</p>
+              <p>{{currentInusranceData.Gender}}</p>   
+            </div>
+
+            <div class="auto-flex-start-gap20">
+              <p>DeductibleRate:</p>
+              <p>{{currentInusranceData.DeductibleRate}}</p>   
+            </div>
+
+            <div class="auto-flex-start-gap20">
+              <p>MaxLimit:</p>
+              <p>{{currentInusranceData.MaxLimit}}</p>   
+            </div>
+
+            <div class="auto-flex-start-gap20">
+              <p>Beneficiary Type:</p>
+              <p>{{currentInusranceData.BeneficiaryType}}</p>   
+            </div>
+
+            <div class="auto-flex-start-gap20">
+              <p>Beneficiary Type Id:</p>
+              <p>{{currentInusranceData.BeneficiaryTypeId}}</p>   
+            </div>
+
+            <div class="auto-flex-start-gap20">
+              <p>Beneficiary Number:</p>
+              <p>{{currentInusranceData.BeneficiaryNumber}}</p>   
+            </div>
+
+            <div class="auto-flex-start-gap20">
+              <p>Identity Number:</p>
+              <p>{{currentInusranceData.IdentityNumber}}</p>   
+            </div>
+
+            <div class="auto-flex-start-gap20">
+              <p>Beneficiary Name:</p>
+              <p>{{currentInusranceData.BeneficiaryName}}</p>   
+            </div>
+
+            <div class="auto-flex-start-gap20">
+              <p>Inception Date:</p>
+              <p>{{currentInusranceData.InceptionDate}}</p>   
+            </div>
+
+            <div class="auto-flex-start-gap20">
+              <p>Policy Holder:</p>
+              <p>{{currentInusranceData.PolicyHolder}}</p>   
+            </div>
+
+            <div class="auto-flex-start-gap20">
+              <p>Insurance PoIicy Expiry Date:</p>
+              <p>{{currentInusranceData.InsurancePoIicyExpiryDate}}</p>   
+            </div>     
+         
+          </div>
+      
+            <div class="auto-flex-end-gap10">
+            <!-- continue button -->
+            <button class="mb-3 el-button back-btn el-button--default el-button--small is-plain" (click)="displayInusrance = !displayInusrance; currentInusranceData={}">Close</button>
+            </div>
+        
+        </div>
+
+    </div>
+
+</div>
+
+
 </div>
 <script
   async=""

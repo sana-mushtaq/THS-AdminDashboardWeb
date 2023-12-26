@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { InitializationService } from 'src/service/initialization.service';
 import { DOCUMENT } from '@angular/common';
 import { LanguageService } from 'src/service/language.service';
+import { BusinessToCustomerSchedulingService } from 'src/service/business-to-customer-scheduling.service';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,8 @@ export class AppComponent {
     private initializationService: InitializationService,
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private _b2c: BusinessToCustomerSchedulingService,
     ) {
       this.initializeApp();
   }
@@ -70,6 +72,7 @@ export class AppComponent {
         // Handle initialization error here
       }
     );
+    
   }
 
 

@@ -12,7 +12,7 @@
   
         <nav class="nav-bar-none"></nav>
       </div>
-      <main class="el-main dashboard">
+      <main class="el-main dashboard" *ngIf="jsonData['program_request']['view']">
         <app-header></app-header>
         <div>
           <div>
@@ -30,7 +30,7 @@
                   <div class="col-lg-6">
                     <h4 class="mb-0 f-w6">Booking Details</h4>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-6"  *ngIf="jsonData['program_request']['cancel_appointment']">
                     <div class="text-right">
                       <button *ngIf="selectedAppointment.appointmentCurrentStatus < 2" class="add-btn mr-0" (click)="cancelAppointment()">
                         Cancel Appointment
@@ -55,7 +55,7 @@
                             <div class="col-lg-4 pr-0" style="padding-left: 30px">
                               <label class="label-color">Service Date &amp; Time</label>
                               
-                                <h6>{{ appointmentDetails.serviceDate }}, {{ appointmentDetails.serviceTime }}  <i class="icon-pencil m-r10" (click)="openRescheduleWindow()" style="cursor: pointer;"></i></h6>
+                                <h6>{{ appointmentDetails.serviceDate }}, {{ appointmentDetails.serviceTime }}  <i class="icon-pencil m-r10" (click)="openRescheduleWindow()" *ngIf="jsonData['program_request']['edit_appointment']" style="cursor: pointer;"></i></h6>
                               
                             </div>
                             <div class="col-lg-3">
@@ -184,7 +184,7 @@
                       </div>
                     </div>
 
-                    <div class="el-card m-b30 is-always-shadow">
+                    <div class="el-card m-b30 is-always-shadow" *ngIf="jsonData['program_request']['verify_request']">
                         <h4 class="m-0 f-w6 p-3">
                           Insurance Details
                           <span class="float-right text-white verify-success" *ngIf="appointmentDetails.patientInsuraceDetails[0].verificationStatus == 1">Verified</span>
@@ -243,7 +243,7 @@
                             </tbody>
                           </table>
   
-                          <div class="col-lg-12 pl-0" *ngIf="appointmentDetails.appointmentCurrentStatus <= 2">
+                          <div class="col-lg-12 pl-0" *ngIf="appointmentDetails.appointmentCurrentStatus <= 2 && jsonData['program_request']['assign_sp']">
                             <div id="myBtn" class="btn btn-primary mb-3 btn-sm" (click)="openStaffSelectionWindow()">
                               <i class="icon-pencil m-r10"></i>
                               <span>Edit</span>
@@ -302,7 +302,7 @@
                 </div>
   
                 <div class="row">
-                  <div class="col-lg-6">
+                  <div class="col-lg-6" *ngIf="jsonData['program_request']['upload_files']">
                     <div>
                       <h4 class="m-b20 mt-5 f-w6">Upload Result</h4>
                       <div class="el-card is-always-shadow">
@@ -350,7 +350,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-6" *ngIf="jsonData['program_request']['upload_files']">
                     <div>
                       <h4 class="m-b20 f-w6 mt-5">Lab Test Result</h4>
                       <div class="el-card is-always-shadow">

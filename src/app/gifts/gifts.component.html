@@ -39,7 +39,7 @@
                   </li>
                 </ul>
                 <div class="text-right mb-5">
-                  <button class="add-btn new_btn" data-toggle="modal" data-target="#exampleModal">Add Gift Card</button>
+                  <button class="add-btn new_btn" data-toggle="modal" data-target="#exampleModal"  *ngIf="jsonData['gifts']['add_gift']">Add Gift Card</button>
                 </div>
               </div>
 

@@ -10,6 +10,8 @@ import { AppService } from 'src/service/app.service';
 import { UtilService } from 'src/service/util.service';
 import { Employeer  } from 'src/model/common/employeer-modal';
 import { AlertType, APIResponse, AppointmentStatus, AppointmentTriggerSource} from 'src/utils/app-constants';
+import { HttpClient } from '@angular/common/http';
+
 declare var $: any;
 @Component({
   selector: 'app-service-requests',
@@ -36,11 +38,17 @@ export class ServiceRequestsComponent implements OnInit {
   EmployeerList: Employeer[] = [];
   LabLists;
 
+  userRoles: any = {}
+
+  jsonData: any;
+  loaded: boolean = false;
+
   constructor(
     private _appService: AppService,
     private _appUtil: UtilService,
     private router: Router,
-    private _appDataService: AppDataService
+    private _appDataService: AppDataService,
+    private http: HttpClient
   ) {
     this._unsubscribeAll = new Subject();
     this.getEmployeerList();
@@ -59,6 +67,16 @@ export class ServiceRequestsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.userRoles = JSON.parse(localStorage.getItem("SessionDetails"));
+    
+    this.http.get('assets/userRoles.json').subscribe((data: any) => {
+     
+      let role = this.userRoles['role']
+      this.jsonData = data[role];
+      this.loaded = true;
+    });
+
+    
     $('.onlyemployer').removeClass('dclass');
     $('.onlyadmin').removeClass('dclass');
     $('.active-servicerequest').addClass('active');

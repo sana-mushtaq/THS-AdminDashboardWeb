@@ -11,7 +11,7 @@
             <app-submenu></app-submenu>
         </div>
 
-        <main class="el-main">
+        <main class="el-main" *ngIf="jsonData['employee_check_package']['view']">
             <app-header></app-header>
             <div>
                 <div>
@@ -31,7 +31,7 @@
 
                             <div class="d-flex justify-content align-items-center">
                                 <span class="t-heading d-flex justify-content-center align-items-center"><i class="icon-package"></i> Employer Package List</span>  
-                                <button id="package" data-toggle="modal" data-target="#add_labPackage" (click)="showAddNewPackageView()" class="add-btn mr-0 float-right"><i class="fa fa-plus-circle"></i> Add Package</button>
+                                <button id="package" data-toggle="modal" data-target="#add_labPackage"  (click)="showAddNewPackageView()" class="add-btn mr-0 float-right"><i class="fa fa-plus-circle"></i> Add Package</button>
                             </div>
 
                             <div class="el-table__body-wrapper is-scrolling-left" style="margin-top: 3%;width:100%;">
@@ -74,7 +74,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="cell">
+                                                <div class="cell" *ngIf="jsonData['employee_check_package']['edit']">
                                                     <i class="icon-pencil ico-pointer" id="ico-pointer" (click)="labtechpackagelistEdit(package.packageId)"></i>
                                                 </div>
                                             </td>

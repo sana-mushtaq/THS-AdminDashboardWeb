@@ -40,7 +40,7 @@
         </div>
 
         <!-- right side or the main component content -->
-        <main class="el-main">
+        <main class="el-main" *ngIf="jsonData['service_provider']['view']">
       
             <app-header></app-header>
 
@@ -51,7 +51,7 @@
 
                     <p class="large">All Service Providers</p>
 
-                    <button class="primary-bg padding-10 secondary-color bold" (click)="addServiceProvider()">Add a New Service Provider</button>
+                    <button class="primary-bg padding-10 secondary-color bold" (click)="addServiceProvider()"  *ngIf="jsonData['service_provider']['add']">Add a New Service Provider</button>
 
                     <div class="auto-flex-start-gap10 padding-none border-radius-20 gray-border">
 
@@ -86,8 +86,8 @@
 
                                             <button class="glass-bg padding-5 border-none" (click)="serviceProviderServices(user)">services</button>
                                             <button class="glass-bg padding-5 border-none" (click)="serviceProviderAvailability(user)">availability</button>
-                                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/edit.svg" (click)="editServiceProvider(user, pcIndex)"/>
-                                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/delete.svg" (click)="deleteServiceProvider(user, pcIndex)"/>
+                                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/edit.svg"  *ngIf="jsonData['service_provider']['edit']" (click)="editServiceProvider(user, pcIndex)"/>
+                                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/delete.svg"  *ngIf="jsonData['service_provider']['delete']" (click)="deleteServiceProvider(user, pcIndex)"/>
         
                                         </div>
 
@@ -369,7 +369,7 @@
 
 
                                         <!-- list of services -->
-                                        <div class="auto-flex-center-start-gap10" *ngIf="serviceListRenderer">
+                                        <div class="auto-flex-center-start-gap10" *ngIf="serviceListRenderer && jsonData['service_provider']['assign_service']">
 
                                             <ng-multiselect-dropdown class="width-70Percent" *ngIf="serviceListFiltered.length>0 && serviceSettings" [settings]="serviceSettings" [data]="serviceListFiltered" (onSelect)="onServiceSelect($event)" (onDeSelect)="onServiceDeSelect($event)" (onSelectAll)="onServiceSelectAll($event)" (onDeSelectAll)="onServiceDeSelectAll()"></ng-multiselect-dropdown>
                                             <button class="primary-bg padding-10 secondary-color" type="submit">Assign Services</button>
@@ -400,7 +400,7 @@
                                                 </td>
 
                                                 <td class="auto-flex-center-gap10-no-set-width">
-                                                    <button class="red-bg bold secondary-color padding-5 border-radius-10" (click)="unassignServiceServiceProvider(service.sps_id)">remove</button>
+                                                    <button class="red-bg bold secondary-color padding-5 border-radius-10" (click)="unassignServiceServiceProvider(service.sps_id)" *ngIf="jsonData['service_provider']['assign_service']">remove</button>
                                                 </td>
 
                                             </tr>
