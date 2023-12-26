@@ -1,0 +1,662 @@
+{
+    "manager": {
+        "service_provider": {
+            "add": true,
+            "edit": true,
+            "delete": true,
+            "view": true,
+            "assign_service": true
+        },
+        "patient": {
+            "add": true,
+            "edit": true,
+            "add_dependant": true,
+            "view": true,
+            "view_dependant": true
+        },
+        "appointment": {
+            "add": true,
+            "view": true,
+            "cancel": true,
+            "assign_sp": true,
+            "upload_files": true,
+            "verify_payment": true,
+            "edit_appointment": true
+        },
+        "insurance_request": {
+            "view": true,
+            "cancel": true,
+            "verify_request": true,
+            "assign_sp": true,
+            "upload_files": true,
+            "edit_appointment": true
+        },
+        "program_request": {
+            "view": true,
+            "cancel_appointment": true,
+            "verify_request": true,
+            "assign_sp": true,
+            "upload_files": true,
+            "edit_appointment": true
+        },
+        "escort_request": {
+            "view": true,
+            "cancel_appointment": true,
+            "verify_request": true,
+            "assign_sp": true,
+            "upload_files": true,
+            "edit_appointment": true
+        },
+        "external_request": {
+            "create_appointment": true,
+            "update_appointment": true,
+            "download_template": true,
+            "upload_files": true,
+            "create_b2b_appointment": true
+        },
+        "lab_list": {
+            "view": true,
+            "send_invite": true,
+            "edit_package": true,
+            "edit_service": true,
+            "view_all_requests": true
+        },
+        "lab_appointment_list": {
+            "view_all_requests": true,
+            "cancel_appointment": true,
+            "verify_request": true,
+            "assign_sp": true,
+            "upload_files": true,
+            "edit_appointment": true
+        },
+        "gifts": {
+            "set_status": true,
+            "add_new_promotion": true,
+            "add_gift": true
+        },
+        "promition_history": {
+            "view": true
+        },
+        "gift_card_history": {
+            "view": true
+        },
+        "gift_logs":{
+            "view": true
+        },
+        "employee_check_employeer": {
+            "view": true,
+            "edit": true,
+            "choose_branch_lab": true
+        },
+        "eployee_check_service_request": {
+            "view": true,
+            "cancel": true,
+            "verify_request": true,
+            "assign_sp": true,
+            "upload_files": true,
+            "edit_appointment": true
+        },
+        "employee_check_package": {
+            "view": true,
+            "edit": true
+        },
+        "result_reading": {
+            "view": true,
+            "cancel_appointment": true,
+            "verify_request": true,
+            "assign_sp": true,
+            "upload_files": true,
+            "edit_appointment": true
+        },
+        "notification": {
+            "add": true,
+            "view": true
+        },
+        "programs":{
+            "add": true,
+            "edit": true
+        },
+        "reports": {
+            "view": true
+        },
+        "settings": {
+            "edit_app_detail": true
+        },
+        "appointment_settings": {
+            "edit_duration": true
+        },
+        "schedule_settings":{
+            "edit": true
+        },
+        "patient_source": {
+            "add": true,
+            "edit": true
+        },
+        "insurance_provider": {
+            "add": true,
+            "edit": true
+        },
+        "branch_management": {
+            "add": true,
+            "edit": true,
+            "assign_sp": true,
+            "remove_sp": true,
+            "acticate": true,
+            "deactivate": true,
+            "view": true,
+            "delete": true
+        },
+        "service_management": {
+            "add": true,
+            "acticate": true,
+            "deactivate": true,
+            "edit": true,
+            "delete": true,
+            "view": true
+        },
+        "category_management": {
+            "add": true,
+            "acticate": true,
+            "deactivate": true,
+            "edit": true,
+            "delete": true,
+            "view": true
+        }
+
+    },
+    "supervisor": {
+        "service_provider": {
+            "add": false,
+            "edit": false,
+            "delete": false,
+            "view": true,
+            "assign_service": false
+        },
+        "patient": {
+            "add": true,
+            "edit": true,
+            "add_dependant": true,
+            "view": true,
+            "view_dependant": true
+        },
+        "appointment": {
+            "add": true,
+            "view": true,
+            "cancel": true,
+            "assign_sp": true,
+            "upload_files": true,
+            "verify_payment": true,
+            "edit_appointment": true
+        },
+        "insurance_request": {
+            "view": true,
+            "cancel": true,
+            "verify_request": true,
+            "assign_sp": true,
+            "upload_files": true,
+            "edit_appointment": true
+        },
+        "program_request": {
+            "view": true,
+            "cancel_appointment": true,
+            "verify_request": true,
+            "assign_sp": true,
+            "upload_files": true,
+            "edit_appointment": true
+        },
+        "escort_request": {
+            "view": true,
+            "cancel_appointment": true,
+            "verify_request": true,
+            "assign_sp": true,
+            "upload_files": true,
+            "edit_appointment": true
+        },
+        "external_request": {
+            "create_appointment": true,
+            "update_appointment": true,
+            "download_template": true,
+            "upload_files": true,
+            "create_b2b_appointment": true
+        },
+        "lab_list": {
+            "view": true,
+            "send_invite": true,
+            "edit_package": false,
+            "edit_service": false,
+            "view_all_requests": true
+        },
+        "lab_appointment_list": {
+            "view_all_requests": true,
+            "cancel_appointment": true,
+            "verify_request": true,
+            "assign_sp": true,
+            "upload_files": true,
+            "edit_appointment": true
+        },
+        "gifts": {
+            "set_status": false,
+            "add_new_promotion": false,
+            "add_gift": false
+        },
+        "promition_history": {
+            "view": true
+        },
+        "gift_card_history": {
+            "view": true
+        },
+        "gift_logs":{
+            "view": true
+        },
+        "employee_check_employeer": {
+            "view": true,
+            "edit": false,
+            "choose_branch_lab": false
+        },
+        "eployee_check_service_request": {
+            "view": true,
+            "cancel": true,
+            "verify_request": true,
+            "assign_sp": true,
+            "upload_files": false,
+            "edit_appointment": false
+        },
+        "employee_check_package": {
+            "view": true,
+            "edit": false
+        },
+        "result_reading": {
+            "view": true,
+            "cancel_appointment": true,
+            "verify_request": true,
+            "assign_sp": true,
+            "upload_files": false,
+            "edit_appointment": false
+        },
+        "notification": {
+            "add": false,
+            "view": true
+        },
+        "programs":{
+            "add": false,
+            "edit": false
+        },
+        "reports": {
+            "view": false
+        },
+        "settings": {
+            "edit_app_detail": true
+        },
+        "appointment_settings": {
+            "edit_duration": false
+        },
+        "schedule_settings":{
+            "edit": false
+        },
+        "patient_source": {
+            "add": true,
+            "edit": true
+        },
+        "insurance_provider": {
+            "add": false,
+            "edit": false
+        },
+        "branch_management": {
+            "add": false,
+            "edit": false,
+            "assign_sp": false,
+            "remove_sp": false,
+            "acticate": false,
+            "deactivate": false,
+            "view": true,
+            "delete": false
+        },
+        "service_management": {
+            "add": false,
+            "acticate": false,
+            "deactivate": false,
+            "edit": false,
+            "delete": false,
+            "view": true
+        },
+        "category_management": {
+            "add": false,
+            "acticate": false,
+            "deactivate": false,
+            "edit": false,
+            "delete": false,
+            "view": true
+        }
+
+    },
+    "customer_care": {
+        "service_provider": {
+            "add": false,
+            "edit": false,
+            "delete": false,
+            "view": true,
+            "assign_service": false
+        },
+        "patient": {
+            "add": true,
+            "edit": true,
+            "add_dependant": true,
+            "view": true,
+            "view_dependant": true
+        },
+        "appointment": {
+            "add": true,
+            "view": true,
+            "cancel": true,
+            "assign_sp": false,
+            "upload_files": true,
+            "verify_payment": true,
+            "edit_appointment": true
+        },
+        "insurance_request": {
+            "view": true,
+            "cancel": true,
+            "verify_request": true,
+            "assign_sp": false,
+            "upload_files": true,
+            "edit_appointment": true
+        },
+        "program_request": {
+            "view": true,
+            "cancel_appointment": true,
+            "verify_request": true,
+            "assign_sp": true,
+            "upload_files": true,
+            "edit_appointment": true
+        },
+        "escort_request": {
+            "view": true,
+            "cancel_appointment": true,
+            "verify_request": true,
+            "assign_sp": true,
+            "upload_files": true,
+            "edit_appointment": true
+        },
+        "external_request": {
+            "create_appointment": true,
+            "update_appointment": true,
+            "download_template": true,
+            "upload_files": true,
+            "create_b2b_appointment": true
+        },
+        "lab_list": {
+            "view": true,
+            "send_invite": true,
+            "edit_package": false,
+            "edit_service": false,
+            "view_all_requests": true
+        },
+        "lab_appointment_list": {
+            "view_all_requests": true,
+            "cancel_appointment": true,
+            "verify_request": true,
+            "assign_sp": true,
+            "upload_files": true,
+            "edit_appointment": true
+        },
+        "gifts": {
+            "set_status": false,
+            "add_new_promotion": false,
+            "add_gift": false
+        },
+        "promition_history": {
+            "view": false
+        },
+        "gift_card_history": {
+            "view": false
+        },
+        "gift_logs":{
+            "view": false
+        },
+        "employee_check_employeer": {
+            "view": true,
+            "edit": false,
+            "choose_branch_lab": false
+        },
+        "eployee_check_service_request": {
+            "view": true,
+            "cancel": false,
+            "verify_request": true,
+            "assign_sp": false,
+            "upload_files": false,
+            "edit_appointment": false
+        },
+        "employee_check_package": {
+            "view": true,
+            "edit": false
+        },
+        "result_reading": {
+            "view": true,
+            "cancel_appointment": false,
+            "verify_request": true,
+            "assign_sp": false,
+            "upload_files": false,
+            "edit_appointment": false
+        },
+        "notification": {
+            "add": false,
+            "view": true
+        },
+        "programs":{
+            "add": false,
+            "edit": false
+        },
+        "reports": {
+            "view": false
+        },
+        "settings": {
+            "edit_app_detail": true
+        },
+        "appointment_settings": {
+            "edit_duration": false
+        },
+        "schedule_settings":{
+            "edit": false
+        },
+        "patient_source": {
+            "add": true,
+            "edit": true
+        },
+        "insurance_provider": {
+            "add": false,
+            "edit": false
+        },
+        "branch_management": {
+            "add": false,
+            "edit": false,
+            "assign_sp": false,
+            "remove_sp": false,
+            "acticate": false,
+            "deactivate": false,
+            "view": false,
+            "delete": false
+        },
+        "service_management": {
+            "add": false,
+            "acticate": false,
+            "deactivate": false,
+            "edit": false,
+            "delete": false,
+            "view": true
+        },
+        "category_management": {
+            "add": false,
+            "acticate": false,
+            "deactivate": false,
+            "edit": false,
+            "delete": false,
+            "view": true
+        }
+
+    },
+    "it": {
+        "service_provider": {
+            "add": false,
+            "edit": false,
+            "delete": false,
+            "view": false,
+            "assign_service": false
+        },
+        "patient": {
+            "add": false,
+            "edit": false,
+            "add_dependant": false,
+            "view": false,
+            "view_dependant": false
+        },
+        "appointment": {
+            "add": false,
+            "view": false,
+            "cancel": false,
+            "assign_sp": false,
+            "upload_files": false,
+            "verify_payment": false,
+            "edit_appointment": false
+        },
+        "insurance_request": {
+            "view": false,
+            "cancel": false,
+            "verify_request": false,
+            "assign_sp": false,
+            "upload_files": false,
+            "edit_appointment": false
+        },
+        "program_request": {
+            "view": false,
+            "cancel_appointment": false,
+            "verify_request": false,
+            "assign_sp": false,
+            "upload_files": false,
+            "edit_appointment": false
+        },
+        "escort_request": {
+            "view": false,
+            "cancel_appointment": false,
+            "verify_request": false,
+            "assign_sp": false,
+            "upload_files": false,
+            "edit_appointment": false
+        },
+        "external_request": {
+            "create_appointment": false,
+            "update_appointment": false,
+            "download_template": false,
+            "upload_files": false,
+            "create_b2b_appointment": false
+        },
+        "lab_list": {
+            "view": false,
+            "send_invite": false,
+            "edit_package": false,
+            "edit_service": false,
+            "view_all_requests": false
+        },
+        "lab_appointment_list": {
+            "view_all_requests": false,
+            "cancel_appointment": false,
+            "verify_request": false,
+            "assign_sp": false,
+            "upload_files": false,
+            "edit_appointment": false
+        },
+        "gifts": {
+            "set_status": false,
+            "add_new_promotion": false,
+            "add_gift": false
+        },
+        "promition_history": {
+            "view": false
+        },
+        "gift_card_history": {
+            "view": false
+        },
+        "gift_logs":{
+            "view": false
+        },
+        "employee_check_employeer": {
+            "view": false,
+            "edit": false,
+            "choose_branch_lab": false
+        },
+        "eployee_check_service_request": {
+            "view": false,
+            "cancel": false,
+            "verify_request": false,
+            "assign_sp": false,
+            "upload_files": false,
+            "edit_appointment": false
+        },
+        "employee_check_package": {
+            "view": false,
+            "edit": false
+        },
+        "result_reading": {
+            "view": false,
+            "cancel_appointment": false,
+            "verify_request": false,
+            "assign_sp": false,
+            "upload_files": false,
+            "edit_appointment": false
+        },
+        "notification": {
+            "add": false,
+            "view": false
+        },
+        "programs":{
+            "add": false,
+            "edit": false
+        },
+        "reports": {
+            "view": false
+        },
+        "settings": {
+            "edit_app_detail": true
+        },
+        "appointment_settings": {
+            "edit_duration": false
+        },
+        "schedule_settings":{
+            "edit": false
+        },
+        "patient_source": {
+            "add": false,
+            "edit": false
+        },
+        "insurance_provider": {
+            "add": false,
+            "edit": false
+        },
+        "branch_management": {
+            "add": false,
+            "edit": false,
+            "assign_sp": false,
+            "remove_sp": false,
+            "acticate": false,
+            "deactivate": false,
+            "view": false,
+            "delete": false
+        },
+        "service_management": {
+            "add": false,
+            "acticate": false,
+            "deactivate": false,
+            "edit": false,
+            "delete": false,
+            "view": false
+        },
+        "category_management": {
+            "add": false,
+            "acticate": false,
+            "deactivate": false,
+            "edit": false,
+            "delete": false,
+            "view": false
+        }
+
+    }    
+}
