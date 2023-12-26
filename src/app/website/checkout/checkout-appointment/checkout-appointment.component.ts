@@ -202,13 +202,13 @@ export class CheckoutAppointmentComponent implements OnInit {
         vatApplied: this.vatApplied
 
       }
-      
+      //pk_test_IHFiBNWxlPU29hm0bA7s5c1e
       localStorage.setItem("THSDiscount", JSON.stringify(dicountStorage));
 
       goSell.config({
         containerID: "root",
         gateway: {
-          publicKey: "pk_test_IHFiBNWxlPU29hm0bA7s5c1e",
+          publicKey: "pk_live_wb840JAXOaMqcFUtzQePS53Z",
           merchantId: null,
           language: "en",
           contactInfo: true,
