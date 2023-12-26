@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="414.138 177.016 40.309 38.372" xmlns="http://www.w3.org/2000/svg">
-  <ellipse opacity="0.1" cx="433.998" cy="196.291" rx="19.711" ry="18.761" fill="#1F62FB"/>
-  <path d="M 441.391 188.204 L 427.391 188.204 C 426.286 188.204 425.391 189.1 425.391 190.204 L 425.391 204.204 C 425.391 205.309 426.286 206.204 427.391 206.204 L 441.391 206.204 C 442.496 206.204 443.391 205.309 443.391 204.204 L 443.391 190.204 C 443.391 189.1 442.496 188.204 441.391 188.204 Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: rgb(31, 98, 251); fill: rgba(0, 0, 0, 0);"/>
-  <path d="M 438.391 186.204 L 438.391 190.204" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: rgb(31, 98, 251);"/>
-  <path d="M 430.391 186.204 L 430.391 190.204" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: rgb(31, 98, 251);"/>
-  <path d="M 425.391 194.204 L 443.391 194.204" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: rgb(31, 98, 251);"/>
-</svg>

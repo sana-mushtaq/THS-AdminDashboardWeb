@@ -169,7 +169,7 @@ export class PaymentConfirmationComponent implements OnInit {
                                   
                                     }) 
 
-                                    this._b2c.createOdooInvoice(invoiceData).subscribe({
+                                    /*this._b2c.createOdooInvoice(invoiceData).subscribe({
                     
                                       next : ( res : any ) => {
 
@@ -184,7 +184,7 @@ export class PaymentConfirmationComponent implements OnInit {
                                 
                                       }
                                   
-                                    }) 
+                                    }) */
                           
                                     
                                   } else {
