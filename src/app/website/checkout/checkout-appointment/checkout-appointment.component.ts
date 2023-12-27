@@ -320,7 +320,7 @@ export class CheckoutAppointmentComponent implements OnInit {
               email: false,
               sms: true,
             },
-            redirect:"http://localhost:4200"+"/checkout/payment-confirmation/?order-currency=SAR&order-total="+this.total_inc_cost+"&lang=en",
+            redirect:"http://taib.sa"+"/checkout/payment-confirmation/?order-currency=SAR&order-total="+this.total_inc_cost+"&lang=en",
             post: null,
           },
         },
