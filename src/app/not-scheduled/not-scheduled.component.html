@@ -265,7 +265,7 @@
                   </div>
 
                   <!--*ngIf="appReview && appReview.questions && appReview.questions.length>0 && jsonData['appointment']['review']"-->
-                  <div class="el-card m-b30 is-always-shadow padding-10">
+                  <div class="el-card m-b30 is-always-shadow padding-10" *ngIf="appReview && appReview.questions && appReview.questions.length>0">
 
                     <h4 class="m-0 f-w6 p-3">Appointment Reviews</h4>
                     
