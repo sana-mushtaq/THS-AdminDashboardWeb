@@ -648,11 +648,9 @@ export class ReportingDashboardComponent implements OnInit {
     this.calculateStats();
   }
 
-  
-formatCurrency(value: number): string {
-  // Use Angular currency pipe to format the number as currency
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'SAR' }).format(value);
-}
-
+  formatCurrency(value: number): string {
+    // Use Angular currency pipe to format the number as currency
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'SAR' }).format(value);
+  }
 
 }
