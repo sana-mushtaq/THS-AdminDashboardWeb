@@ -264,7 +264,7 @@
                     </div>
                   </div>
 
-                  <div class="el-card m-b30 is-always-shadow padding-10" *ngIf="appReview && appReview.questions && appReview.questions.length>0">
+                  <div class="el-card m-b30 is-always-shadow padding-10" *ngIf="appReview && appReview.questions && appReview.questions.length>0 && jsonData['appointment']['review']">
 
                     <h4 class="m-0 f-w6 p-3">Appointment Reviews</h4>
                     
@@ -320,27 +320,27 @@
                                     <div class="auto-flex-start-gap20-column">
 
                                         <!-- questionnaire.component.html -->
-                                        <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit()" class="auto-flex-start-gap10-column">
-                                            <div formArrayName="questions" class="auto-flex-start-gap20-column">
+                                        <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit()" class="auto-flex-start-gap10-column" style="align-items: self-end;">
+                                            <div formArrayName="questions" class="auto-flex-start-gap20-column"  style="align-items: self-end;">
                                               <div *ngFor="let question of questions.controls; let i = index">
-                                                <label>{{i}}. {{ question.get('text').value }}</label>
-                                                <div class="star-rating auto-flex-start-gap10">
+                                                <label>{{ question.get('text').value }} .{{i+1}}</label>
+                                                <div class="star-rating auto-flex-start-gap10" style="justify-content: right;">
                                                   <div *ngFor="let star of stars[i]; let j = index" (click)="rate(i, j)" class="star cursor-pointer" [class.selected]="star">&#9733;</div>
                                                 </div>
                                               </div>
                                             </div>
                                             
-                                            <div class="auto-flex-start-gap10-column">
+                                            <div class="auto-flex-start-gap10-column" style="align-items: self-end;">
 
                                               <p>سرعة تقديم الخدمه</p>
-                                              <input class="input-global" formControlName="speedOfProvidingServer" type="number" />
+                                              <input class="input-global" formControlName="speedOfProvidingServer" type="number" style="text-align: right;"/>
                                           
                                             </div>
 
-                                            <div class="auto-flex-start-gap10-column">
+                                            <div class="auto-flex-start-gap10-column" style="align-items: self-end;">
 
                                               <p>تقييم المشرف وملاحظاته</p>
-                                              <textarea class="input-global" formControlName="comments"></textarea>
+                                              <textarea class="input-global" formControlName="comments" style="text-align: right;"></textarea>
                                           
                                             </div>
                                             

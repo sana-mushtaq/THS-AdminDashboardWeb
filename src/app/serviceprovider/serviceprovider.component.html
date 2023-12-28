@@ -563,7 +563,7 @@
 
                             <button class="close" (click)="closeServiceProviderAvailability()">x</button>
 
-                            <button class="primary-bg padding-10 secondary-color bold" style="margin-bottom: 20px;" (click)="updateServiceProviderAvailability()">Save changes</button>
+                            <button class="primary-bg padding-10 secondary-color bold" style="margin-bottom: 20px;" *ngIf="jsonData['service_provider']['set_available']" (click)="updateServiceProviderAvailability()">Save changes</button>
             
                             <div class="auto-flex-start-gap10">
 

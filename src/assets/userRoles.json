@@ -5,7 +5,8 @@
             "edit": true,
             "delete": true,
             "view": true,
-            "assign_service": true
+            "assign_service": true,
+            "set_available": true
         },
         "patient": {
             "add": true,
@@ -21,7 +22,8 @@
             "assign_sp": true,
             "upload_files": true,
             "verify_payment": true,
-            "edit_appointment": true
+            "edit_appointment": true,
+            "review": true
         },
         "insurance_request": {
             "view": true,
@@ -170,7 +172,8 @@
             "edit": false,
             "delete": false,
             "view": true,
-            "assign_service": false
+            "assign_service": false,
+            "set_available": true
         },
         "patient": {
             "add": true,
@@ -186,7 +189,8 @@
             "assign_sp": true,
             "upload_files": true,
             "verify_payment": true,
-            "edit_appointment": true
+            "edit_appointment": true,
+            "review": true
         },
         "insurance_request": {
             "view": true,
@@ -335,7 +339,8 @@
             "edit": false,
             "delete": false,
             "view": true,
-            "assign_service": false
+            "assign_service": false,
+            "set_available": false
         },
         "patient": {
             "add": true,
@@ -351,7 +356,8 @@
             "assign_sp": false,
             "upload_files": true,
             "verify_payment": true,
-            "edit_appointment": true
+            "edit_appointment": true,
+            "review": false
         },
         "insurance_request": {
             "view": true,
@@ -500,7 +506,8 @@
             "edit": false,
             "delete": false,
             "view": false,
-            "assign_service": false
+            "assign_service": false,
+            "set_available": false
         },
         "patient": {
             "add": false,
@@ -516,7 +523,8 @@
             "assign_sp": false,
             "upload_files": false,
             "verify_payment": false,
-            "edit_appointment": false
+            "edit_appointment": false,
+            "review": false
         },
         "insurance_request": {
             "view": false,

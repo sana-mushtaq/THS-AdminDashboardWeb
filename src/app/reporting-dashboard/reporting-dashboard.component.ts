@@ -64,6 +64,8 @@ export class ReportingDashboardComponent implements OnInit {
 
   utilizationRate: any = {};
   startDateUtilizationRate: string;
+  startTimeUtilizationRate: string;
+  endTimeUtilizationRate: string;
 
   userRoles: any = {}
   jsonData: any;
@@ -645,5 +647,12 @@ export class ReportingDashboardComponent implements OnInit {
     this.currentBranch = event.value;
     this.calculateStats();
   }
+
+  
+formatCurrency(value: number): string {
+  // Use Angular currency pipe to format the number as currency
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'SAR' }).format(value);
+}
+
 
 }

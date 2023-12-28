@@ -967,44 +967,51 @@
         <form class="el-form newform el-form--label-top" *ngIf="showWhatsappForm" [formGroup]="notificationWhatsappForm" (ngSubmit)="onSendNotificationWhatsapp()">
 
             <div class="el-row" style="margin-left: -15px; margin-right: -15px;margin-top:1%">
-                <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12" style="padding-left: 15px; padding-right: 15px;">
-     
-                    <div class="el-form-item is-required">
+                <div class="auto-flex-center-space-between-gap10" style="padding-left: 15px; padding-right: 15px;">
+                    
+                    <div class="auto-flex-start-gap10-column" style="max-width: 40%;">
 
-                        <label for="fn.ar" class="el-form-item__label">Message</label>
+                        <div class="el-form-item is-required" style="width: 100%;">
 
-                        <div class="el-form-item__content">
-
-                            <div class="line-input el-input">
-                                
-                                <textarea class="input-global" formControlName="message"></textarea>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24">
-                        <div class="el-form-item is-required">
-                            <label for="fn.ar" class="el-form-item__label">Select Patient</label>
+                            <label for="fn.ar" class="el-form-item__label">Message</label>
+    
                             <div class="el-form-item__content">
+    
                                 <div class="line-input el-input">
                                     
-                                        <ng-multiselect-dropdown
-                                            [settings]="dropdownSettings"
-                                            [data]="dropdownList"
-                                            formControlName="patients"
-                                        >
-                                        </ng-multiselect-dropdown>
-                                    <div
-                                        class="invalid-feedback">
-                                        <span>This value is required.</span>
+                                    <textarea class="input-global max-width" formControlName="message"></textarea>
+    
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+                        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24">
+                            <div class="el-form-item is-required">
+                                <label for="fn.ar" class="el-form-item__label">Select Patient</label>
+                                <div class="el-form-item__content">
+                                    <div class="line-input el-input">
+                                        
+                                            <ng-multiselect-dropdown
+                                                [settings]="dropdownSettings"
+                                                [data]="dropdownList"
+                                                formControlName="patients"
+                                            >
+                                            </ng-multiselect-dropdown>
+                                        <div
+                                            class="invalid-feedback">
+                                            <span>This value is required.</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+    
+
                     </div>
+
+                    <img class="xxxlargeImg border-radius-20" src="/assets/images/web/template.png" />
 
 
                 </div>

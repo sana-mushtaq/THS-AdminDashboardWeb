@@ -159,7 +159,7 @@
                     <!--Operational Expense Services-->
                     <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
 
-                        <p class="med bold">Operational Expense - Services (SAR) {{serviceRevenue}}</p>
+                        <p class="med bold">Operational Revenue - Services {{formatCurrency(serviceRevenue)}}</p>
                         <ng-multiselect-dropdown class="max-width" *ngIf="serviceSettings" [settings]="serviceSettings" [data]="serviceList" (onSelect)="setPreferredService($event)" (onDeSelect)="unsetPreferredService($event)"></ng-multiselect-dropdown>
 
                         <div class="auto-flex-start-gap20">
@@ -182,7 +182,7 @@
                             <button class="primary-bg padding-10 secondary-color width-half"(click)="clearFiltersService()">Clear</button>    
                         </div>
 
-                        <div class="auto-flex-start-gap10-column">
+                        <div class="auto-flex-start-gap10-column" style="max-height: 300px; overflow: auto;">
 
                             <p class="med bold">Best Selling Services</p>
                             <p *ngFor="for let sr of bestSellerServices">{{sr.serviceName}}</p>
@@ -194,7 +194,7 @@
                     <!--Operational Expense Categories-->
                     <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
 
-                        <p class="med bold">Operational Expense - Category (SAR) {{categoryRevenue}}</p>
+                        <p class="med bold">Operational Revenue - Category {{formatCurrency(categoryRevenue)}}</p>
                         <ng-multiselect-dropdown class="max-width" *ngIf="categorySettings" [settings]="categorySettings" [data]="categoryList" (onSelect)="setPreferredCategory($event)" (onDeSelect)="unsetPreferredCategory($event)"></ng-multiselect-dropdown>
 
                         <div class="auto-flex-start-gap20">
@@ -229,13 +229,15 @@
                     <!--Number of Staff-->
                     <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
 
-                        <p class="med bold">Number of Staff: {{ numberOfStaff }}</p>
-                        <p class="med bold">Admin: {{ totalAdmin }}</p>
-                        <p class="med bold">Medical Staff: {{ totalPracticeUsers }}</p>
-                        <p class="med bold">Manager: {{ totalManagers }}</p>
-                        <p class="med bold">Supervisor: {{ totalSupervisor }}</p>
-                        <p class="med bold">Customer Care: {{ totalCC }}</p>
-                        <p class="med bold">IT: {{ totalIT }}</p>
+                        <p class="med bold">Staff Overlook</p>
+
+                        <p>Number of Staff: {{ numberOfStaff }}</p>
+                        <p>Admin: {{ totalAdmin }}</p>
+                        <p>Medical Staff: {{ totalPracticeUsers }}</p>
+                        <p>Manager: {{ totalManagers }}</p>
+                        <p>Supervisor: {{ totalSupervisor }}</p>
+                        <p>Customer Care: {{ totalCC }}</p>
+                        <p>IT: {{ totalIT }}</p>
 
                     </div>
 
@@ -263,7 +265,7 @@
                         <div class="auto-flex-start-gap20">
 
                             <div class="auto-flex-start-gap10-column-no-set-width width-half">
-                                <label for="startDate">Date:</label>
+                                <label for="startTime">Start Time:</label>
                                 <input class="input-global" type="date" id="startDateUtilizationRate" [(ngModel)]="startDateUtilizationRate">
         
                             </div>
@@ -275,7 +277,6 @@
                             <button class="primary-bg padding-10 secondary-color width-half"(click)="clearFiltersUtilizationRate()">Clear</button>    
                         </div>
                             
-                        <!-- Display Utilization Rate Data -->
                         <div *ngIf="utilizationRate.timeSlots.length > 0" class="auto-flex-start-gap10 utilization-rate-container">
                             <div class="auto-flex-start-gap10 utilization-rate-item" *ngFor="let timeSlot of utilizationRate.timeSlots">
                             <p class="time-slot">{{ timeSlot.timeSlot }}</p>

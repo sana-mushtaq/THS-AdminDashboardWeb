@@ -962,7 +962,7 @@
                             <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit()" class="auto-flex-start-gap10-column">
                                 <div formArrayName="questions" class="auto-flex-start-gap20-column">
                                   <div *ngFor="let question of questions.controls; let i = index">
-                                    <label>{{i}}. {{ question.get('text').value }}</label>
+                                    <label>{{i+1}}. {{ question.get('text').value }}</label>
                                     <div class="star-rating auto-flex-start-gap10">
                                       <div *ngFor="let star of stars[i]; let j = index" (click)="rate(i, j)" class="star cursor-pointer" [class.selected]="star">&#9733;</div>
                                     </div>
@@ -1040,19 +1040,19 @@
     <app-custom-alert *ngIf="showAppointmentCancelationMessage" [title]="'messages.error' | translate" [message]="'messages.appointmentCanNotBeCanceled' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Are you sure you want to cancel your appointment -->
-    <app-custom-alert *ngIf="showAppointmentCancelationConfimationMessage" [title]="'messages.error' | translate" [message]="'messages.showAppointmentCancelationConfimationMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="cancelUserAppointment()" [showCancel]="true" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showAppointmentCancelationConfimationMessage" [title]="'auth.confirmationTitle' | translate" [message]="'messages.showAppointmentCancelationConfimationMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="cancelUserAppointment()" [showCancel]="true" [showConfirm]="true"></app-custom-alert>
 
     <!-- Appointment has been canceled -->
-    <app-custom-alert *ngIf="showAppointmentCancelMessage" [title]="'messages.error' | translate" [message]="'messages.showAppointmentCancelMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showAppointmentCancelMessage" [title]="'messages.success' | translate" [message]="'messages.showAppointmentCancelMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Appointment can only be updated before 6 hours -->
     <app-custom-alert *ngIf="showAppointmentUpdateMessage" [title]="'messages.error' | translate" [message]="'messages.showAppointmentUpdateMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Your appointment has been updated -->
-    <app-custom-alert *ngIf="showAppointmentAfterUpdateMessage" [title]="'messages.error' | translate" [message]="'messages.showAppointmentAfterUpdateMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showAppointmentAfterUpdateMessage" [title]="'messages.success' | translate" [message]="'messages.showAppointmentAfterUpdateMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Your file is updated successfully -->
-    <app-custom-alert *ngIf="fileUpdatedSuccessfully" [title]="'messages.error' | translate" [message]="'messages.fileUpdatedSuccessfully' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="fileUpdatedSuccessfully" [title]="'messages.success' | translate" [message]="'messages.fileUpdatedSuccessfully' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Unable to upload file -->
     <app-custom-alert *ngIf="fileNotUpdatedSuccessfully" [title]="'messages.error' | translate" [message]="'messages.fileNotUpdatedSuccessfully' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
