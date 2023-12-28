@@ -201,7 +201,7 @@
 
                     <img class="medImg" src="assets/images/web/icons/user.svg"  (click)="showUser()" />
                     <p class="bold" *ngIf="userData"  (click)="showUser()" >{{ userData.first_name }} {{ userData.last_name }}</p>
-                    <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" (click)="setCurrentInsuranceForm(userData)" *ngIf="!userData.insurance_data || userData.insurance_data.length<=0">{{ 'insurance.addInsurance' | translate }}</button>
+                    <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" (click)="setCurrentInsuranceForm(userData, 'user')" *ngIf="!userData.insurance_data || userData.insurance_data.length<=0">{{ 'insurance.addInsurance' | translate }}</button>
 
                 </div>
 
@@ -211,7 +211,7 @@
 
                     <img class="medImg" src="assets/images/web/icons/user.svg" (click)="showDependant(dependantIndex)"/>
                     <p class="bold" (click)="showDependant(dependantIndex)"> {{ dependant.first_name }} {{ dependant.last_name }}</p>
-                    <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" (click)="setCurrentInsuranceForm(dependant)" *ngIf="!dependant.insurance_data || dependant.insurance_data.length<=0">{{ 'insurance.addInsurance' | translate }}</button>
+                    <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" (click)="setCurrentInsuranceForm(dependant, 'dependant')" *ngIf="!dependant.insurance_data || dependant.insurance_data.length<=0">{{ 'insurance.addInsurance' | translate }}</button>
 
                 </div>
                     
@@ -951,7 +951,7 @@
                     <div class="auto-flex-end-gap10">
                         <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/cancel.svg" (click)="closeReviewPopup()"/>
                     </div>
-
+                    <p class="bold med">{{ 'patientProfile.reviewHeading' | translate }}</p>
                     <div class="auto-flex-center-gap10">
 
                         <p>{{ 'patientProfile.reviewTitle' | translate }}</p>

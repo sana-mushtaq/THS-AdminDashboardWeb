@@ -126,6 +126,8 @@ export class UserProfileComponent implements OnInit {
 
   stars: boolean[][] = [];
 
+  accountType:any="";
+
 
   insuranceForm: FormGroup;
   dataFields = [
@@ -2193,19 +2195,29 @@ export class UserProfileComponent implements OnInit {
               if( res.status === APIResponse.Success ) {
                 
                     
-              let index = this.userDependants.findIndex(el => el.id === this.currentInsuranceUser.id) 
-              if( index > -1){
-              
-                this.userDependants[index].insurance_data = this.insuranceForm.value
+                if(this.accountType === 'user') {
 
-              }
+                  this.userData.insurance_data = this.insuranceForm.value
 
+                }
+
+                if(this.accountType === 'dependant') {
+
+                  let index = this.userDependants.findIndex(el => el.id === this.currentInsuranceUser.id) 
+                  if( index > -1){
+                  
+                    this.userDependants[index].insurance_data = this.insuranceForm.value
+    
+                  }
+    
+                }
 
                 this.currentInsuranceUser = {};
                 this.insuranceForm.reset();
                 this.addInsuranceForm = false;
                 this.showUserDetails = false;
                 this.showDependantDetails = false;
+                this.accountType = "";
         
               } else {
     
@@ -2214,6 +2226,7 @@ export class UserProfileComponent implements OnInit {
                 this.addInsuranceForm = false;
                 this.showUserDetails = false;
                 this.showDependantDetails = false;
+                this.accountType = "";
 
               }
           
@@ -2324,14 +2337,17 @@ export class UserProfileComponent implements OnInit {
     this.addInsuranceForm = false;
     this.showUserDetails = false;
     this.showDependantDetails = false;
+    this.accountType = "";
   }
   
-  setCurrentInsuranceForm(userData) {
+  setCurrentInsuranceForm(userData, type) {
 
     this.showUserDetails = false;
     this.showDependantDetails = false;
     this.currentInsuranceUser = userData;
     this.addInsuranceForm = true;
+
+    this.accountType = type
 
   }
 
