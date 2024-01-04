@@ -94,8 +94,8 @@ export class CartComponent implements OnInit {
 
             let idType = this.userData.id_number
             let ifSaudiId = this.validateNationalId(idType)
-    
-            if(ifSaudiId === -1) {
+            console.log(ifSaudiId)
+            if(ifSaudiId === -1 || ifSaudiId === 2) {
 
               const taxRate = 0.15;
               const taxAmount = this.total * taxRate;

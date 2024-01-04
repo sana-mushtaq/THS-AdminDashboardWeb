@@ -99,7 +99,7 @@ export class AppointmentScheduleComponent implements OnInit {
                     let idType = res.data.id_number;
                     let ifSaudiId = this.validateNationalId(idType);
 
-                    if (ifSaudiId === -1) {
+                    if (ifSaudiId === -1  || ifSaudiId === 2) {
                       const taxRate = 0.15;
                       const taxAmount = this.totalCost * taxRate;
 

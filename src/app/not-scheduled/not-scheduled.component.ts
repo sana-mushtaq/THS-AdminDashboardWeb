@@ -797,7 +797,13 @@ export class NotScheduledComponent implements OnInit {
         //in case of success the api returns 0 as a status code
         if( ress.status === APIResponse.Success) {
 
+          this.getAppointmentDetails(this.selectedAppointment.appointmentId);
+          
           Swal.fire("Success", "Appointment is rescheuled")
+
+        } else {
+
+          Swal.fire("Error", "An error occurred. Try again")
 
         }
         

@@ -130,6 +130,7 @@ export class UserProfileComponent implements OnInit {
 
 
   insuranceForm: FormGroup;
+  updateInsuranceForm : FormGroup
   dataFields = [
     { name: 'PolicyNumber', placeholder: 'Enter Policy Number', validators: [Validators.required, Validators.maxLength(250)] },
     { name: 'InsuranceCompanyName', placeholder: 'Enter Insurance Company Name', validators: [Validators.required, Validators.maxLength(250)] },
@@ -228,6 +229,7 @@ export class UserProfileComponent implements OnInit {
       });
 
       this.insuranceForm = this.fb.group(formGroupConfig);
+      this.updateInsuranceForm = this.fb.group(formGroupConfig);
 
   }
 

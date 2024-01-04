@@ -221,6 +221,11 @@
                   <div class="el-card m-b30 is-always-shadow">
                     <h4 class="m-0 f-w6 p-3">Assign Booking</h4>
 
+                    <div *ngIf="appointmentDetails.parctiseUserId == null">
+
+                      <p class="red-bg padding-5 secondary-color">No cargiver assigned</p>
+                    </div>
+
                     <div *ngIf="appointmentDetails.parctiseUserId != null" class="">
                       <div class="col-lg-12">
                         <table class="table pat-table mb-2">
