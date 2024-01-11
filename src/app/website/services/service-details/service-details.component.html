@@ -14,7 +14,7 @@
     
                 <p class="med bold">{{ languageService.getCurrentLanguage() === 'ar' ? currentService.title_arabic : currentService.title }}</p>
                 <p class="bold blue-color">{{ 'header.sar' | translate }} {{ currentService.price }}</p>
-                <button class="primary-bg padding-10 padding-left-right-30 max-width uppercase" (click)="addToCart(currentService)">{{ 'cart.addToCart' | translate }}</button>
+                <button *ngIf="!showCheckoutButton" class="primary-bg padding-10 padding-left-right-30 max-width uppercase" (click)="addToCart(currentService)">{{ 'cart.addToCart' | translate }}</button>
 
             </div>
 
@@ -28,13 +28,12 @@
                       
                     </div>
 
-                    <button class="primary-bg padding-10 padding-left-right-30 max-width uppercase" (click)="addToCart(variant)">{{ 'cart.addToCart' | translate }}</button>
+                    <button *ngIf="!showCheckoutButton" class="primary-bg padding-10 padding-left-right-30 max-width uppercase" (click)="addToCart(variant)">{{ 'cart.addToCart' | translate }}</button>
                 
                 </div>
 
             </div>
     
-         
         </div>
 
        

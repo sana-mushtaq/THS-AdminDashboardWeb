@@ -36,6 +36,7 @@ export class UserProfileComponent implements OnInit {
   displayUpcomingInfo: boolean = false
   displayPastInfo: boolean = false
   addInsuranceForm: boolean = false
+  editInsuranceForm: boolean = false
 
   geoCoder: any;
   userId: any
@@ -2332,11 +2333,166 @@ export class UserProfileComponent implements OnInit {
 
   }
 
+   //submit insurance form
+   submitInsuranceFormUpdate() {
+
+    if (this.updateInsuranceForm.valid) {
+
+        let data = {
+          user_id: this.currentInsuranceUser.id,
+          insurance_data: JSON.stringify(this.updateInsuranceForm.value)
+        }
+           //first we will get user profile information
+           this._patientService.submitInsuranceInformation(data).subscribe({
+    
+            next : ( res : any ) => {
+      
+              //in case of success the api returns 0 as a status code
+              if( res.status === APIResponse.Success ) {
+                
+                    
+                if(this.accountType === 'user') {
+
+                  this.userData.insurance_data = this.updateInsuranceForm.value
+
+                }
+
+                if(this.accountType === 'dependant') {
+
+                  let index = this.userDependants.findIndex(el => el.id === this.currentInsuranceUser.id) 
+                  if( index > -1){
+                  
+                    this.userDependants[index].insurance_data = this.updateInsuranceForm.value
+    
+                  }
+    
+                }
+
+                this.currentInsuranceUser = {};
+                this.updateInsuranceForm.reset();
+                this.editInsuranceForm = false;
+                this.showUserDetails = false;
+                this.showDependantDetails = false;
+                this.accountType = "";
+        
+              } else {
+    
+                this.currentInsuranceUser = {};
+                this.updateInsuranceForm.reset();
+                this.editInsuranceForm = false;
+                this.showUserDetails = false;
+                this.showDependantDetails = false;
+                this.accountType = "";
+
+              }
+          
+            },
+            error: ( err: any ) => {
+    
+              console.log(err)
+            }
+        
+          })
+
+
+    } else {
+       // Display error messages
+       if (this.updateInsuranceForm.get('PolicyNumber').invalid) {
+      
+        this.updateInsuranceForm.get('PolicyNumber').setErrors({ invalidPolicyNumber: true })
+
+      }
+
+      if (this.updateInsuranceForm.get('InsuranceCompanyName').invalid) {
+      
+        this.updateInsuranceForm.get('InsuranceCompanyName').setErrors({ invalidInsuranceCompanyName: true })
+
+      }
+
+      
+      if (this.updateInsuranceForm.get('InsuranceCompanyNameAr').invalid) {
+      
+        this.updateInsuranceForm.get('InsuranceCompanyNameAr').setErrors({ invalidInsuranceCompanyNameAr: true })
+
+      }
+
+      if (this.updateInsuranceForm.get('ClassName').invalid) {
+      
+        this.updateInsuranceForm.get('ClassName').setErrors({ invalidClassName: true })
+
+      }
+
+      if (this.updateInsuranceForm.get('Gender').invalid) {
+      
+        this.updateInsuranceForm.get('Gender').setErrors({ invalidGender: true })
+
+      }
+
+      if (this.updateInsuranceForm.get('DeductibleRate').invalid) {
+      
+        this.updateInsuranceForm.get('DeductibleRate').setErrors({ invalidDeductibleRate: true })
+
+      }
+
+      if (this.updateInsuranceForm.get('MaxLimit').invalid) {
+      
+        this.updateInsuranceForm.get('MaxLimit').setErrors({ invalidMaxLimit: true })
+
+      }
+
+      if (this.updateInsuranceForm.get('BeneficiaryType').invalid) {
+      
+        this.updateInsuranceForm.get('BeneficiaryType').setErrors({ invalidBeneficiaryType: true })
+
+      }
+
+      if (this.updateInsuranceForm.get('BeneficiaryTypeId').invalid) {
+      
+        this.updateInsuranceForm.get('BeneficiaryTypeId').setErrors({ invalidBeneficiaryTypeId: true })
+
+      }
+
+      if (this.updateInsuranceForm.get('BeneficiaryNumber').invalid) {
+      
+        this.updateInsuranceForm.get('BeneficiaryNumber').setErrors({ invalidBeneficiaryNumber: true })
+        
+      }
+
+      if (this.updateInsuranceForm.get('IdentityNumber').invalid) {
+      
+        this.updateInsuranceForm.get('IdentityNumber').setErrors({ invalidIdentityNumber: true })
+        
+      }
+
+      if (this.updateInsuranceForm.get('InceptionDate').invalid) {
+      
+        this.updateInsuranceForm.get('InceptionDate').setErrors({ invalidInceptionDate: true })
+        
+      }
+
+      if (this.updateInsuranceForm.get('PolicyHolder').invalid) {
+      
+        this.updateInsuranceForm.get('PolicyHolder').setErrors({ invalidPolicyHolder: true })
+        
+      }
+
+      if (this.updateInsuranceForm.get('InsurancePoIicyExpiryDate').invalid) {
+      
+        this.updateInsuranceForm.get('InsurancePoIicyExpiryDate').setErrors({ invalidInsurancePoIicyExpiryDate: true })
+        
+      }
+
+    }
+
+  }
+
   discardInsuranceForm() {
 
     this.currentInsuranceUser = {};
     this.insuranceForm.reset();
     this.addInsuranceForm = false;
+    this.editInsuranceForm = false;
+    this.updateInsuranceForm.reset();
     this.showUserDetails = false;
     this.showDependantDetails = false;
     this.accountType = "";
@@ -2348,6 +2504,18 @@ export class UserProfileComponent implements OnInit {
     this.showDependantDetails = false;
     this.currentInsuranceUser = userData;
     this.addInsuranceForm = true;
+
+    this.accountType = type
+
+  }
+  
+  setCurrentInsuranceFormUpdate(userData, type) {
+
+    this.showUserDetails = false;
+    this.showDependantDetails = false;
+    this.currentInsuranceUser = userData;
+    this.updateInsuranceForm.patchValue(JSON.parse(userData.insurance_data))
+    this.editInsuranceForm = true;
 
     this.accountType = type
 

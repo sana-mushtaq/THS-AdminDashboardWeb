@@ -73,7 +73,8 @@
         "confirm": "المتابعة",
         "cancel": "إلغاء",
         "invalidCouponCode": "كود الكوبون غير صحيح",
-        "cart": "عربة التسوق"
+        "cart": "عربة التسوق",
+        "homeVisit": "Home visit"
 
     },
 
@@ -262,7 +263,10 @@
         "Male": "ذكر",
         "Female": "أنثى",
         "Main": "الرئيسية",
-        "Dependent": "الفرد المعال"
+        "Dependent": "الفرد المعال",
+        "viewInsurance": "View Insurance",
+        "update": "حفظ"
+
     }
 
 }

@@ -74,7 +74,8 @@
         "confirm": "Confirm",
         "cancel": "Cancel",
         "invalidCouponCode": "Invalid coupon code",
-        "cart": "Cart"
+        "cart": "Cart",
+        "homeVisit": "Home visit"
 
     },
 
@@ -265,7 +266,9 @@
         "Male": "Male",
         "Female": "Female",
         "Main": "Main",
-        "Dependent": "Dependent"
+        "Dependent": "Dependent",
+        "viewInsurance": "View Insurance",
+        "update": "Save changes"
     }
 
 }

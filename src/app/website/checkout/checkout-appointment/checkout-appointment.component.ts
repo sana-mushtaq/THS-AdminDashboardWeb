@@ -27,8 +27,11 @@ export class CheckoutAppointmentComponent implements OnInit {
   promoApplied: boolean = false
   invalidPromoMessage: boolean = false
   discountAmount: string = ''
+  displayShowCheckout: any;
 
-  vatApplied = -1
+  vatApplied = -1;
+  homeVist: number = 0;
+
   constructor(
     private _utilService: UtilService,
     private router: Router,
@@ -39,6 +42,12 @@ export class CheckoutAppointmentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.displayShowCheckout = localStorage.getItem("showCheckout");
+    if(this.displayShowCheckout === 'true') {
+      this.router.navigate(['/'])
+    }
+
 
     this.getComponentData()
 
@@ -178,6 +187,17 @@ export class CheckoutAppointmentComponent implements OnInit {
   
       })
 
+      let checkIfCategory1 = this.cartData.some(data => data.category_id === 1);
+      // If there are items with category_id === 1, add home visit cost
+      if (checkIfCategory1) {
+        this.homeVist = 150;
+      }
+
+      let user_data = {
+        user_id: this.userId,
+      };
+
+      this.total = this.total + this.homeVist;
       if(!this.userData.id_number.startsWith("1")) {
 
         const taxRate = 0.15;
@@ -202,7 +222,7 @@ export class CheckoutAppointmentComponent implements OnInit {
         vatApplied: this.vatApplied
 
       }
-      //pk_test_IHFiBNWxlPU29hm0bA7s5c1e
+      //pk_test_IHFiBNWxlPU29hm0bA7s5c1e //pk_live_wb840JAXOaMqcFUtzQePS53Z
       localStorage.setItem("THSDiscount", JSON.stringify(dicountStorage));
 
       goSell.config({
@@ -391,41 +411,6 @@ export class CheckoutAppointmentComponent implements OnInit {
       }
   
     }) 
-/*
-    let preferredDateTime = sessionStorage.getItem("THSPaylaod")
-    
-    let data = {
-
-      preferredDateTime: preferredDateTime,
-      cartData: this.cartData,
-      users: this.userDependants
-      
-    }
-
-    this._b2c.businessToCustomerAppointment(data).subscribe({
-        
-      next : ( res : any ) => {
-
-        //in case of success the api returns 0 as a status code
-        if( res.status === APIResponse.Success ) {
-
-          //after fetching all service providers we will now check if their gender match with selected user or not 
-          
-
-        } else {
-
-       
-        }
-        
-      },
-      error: ( err: any ) => {
-        
-        console.log(err)
-
-      }
-  
-    }) 
-  */
 
   }
 

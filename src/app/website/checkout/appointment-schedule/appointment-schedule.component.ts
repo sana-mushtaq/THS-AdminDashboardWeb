@@ -50,6 +50,8 @@ export class AppointmentScheduleComponent implements OnInit {
   private dataSubscription: Subscription;
 
   timeSlots: string[] = []; // Array to hold time slots
+  displayShowCheckout: any;
+  homeVist: number = 0;
 
   constructor(
     private router: Router,
@@ -67,6 +69,12 @@ export class AppointmentScheduleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.displayShowCheckout = localStorage.getItem("showCheckout");
+    if(this.displayShowCheckout === 'true') {
+      this.router.navigate(['/'])
+    }
+
     this.userId = localStorage.getItem("THSUserId");
 
     if (this.userId !== null) {
@@ -88,6 +96,12 @@ export class AppointmentScheduleComponent implements OnInit {
               //after fetching all service providers we will now check if their gender match with selected user or not
               this.totalCost = res.data;
 
+              let checkIfCategory1 = this.cartData.some(data => data.category_id === 1);
+              // If there are items with category_id === 1, add home visit cost
+              if (checkIfCategory1) {
+                this.homeVist = 150;
+              }
+
               let user_data = {
                 user_id: this.userId,
               };
@@ -98,6 +112,9 @@ export class AppointmentScheduleComponent implements OnInit {
                   if (res.status === APIResponse.Success) {
                     let idType = res.data.id_number;
                     let ifSaudiId = this.validateNationalId(idType);
+
+                 this.totalCost = this.totalCost + this.homeVist;
+
 
                     if (ifSaudiId === -1  || ifSaudiId === 2) {
                       const taxRate = 0.15;

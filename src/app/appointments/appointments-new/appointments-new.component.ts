@@ -7,6 +7,10 @@ import * as moment from "moment";
 import { NationalIdValidator } from "src/validators/nationalIdValidator";
 import Swal from "sweetalert2";
 import { HttpClient } from '@angular/common/http';
+import { APIResponse } from 'src/utils/app-enum'
+import { ServicecategoryService } from "src/service/servicecategory.service";
+import { ServiceService } from "src/service/service.service";
+import { environment } from 'src/environments/environment'
 
 
 declare var google: any;
@@ -18,6 +22,10 @@ declare var $: any;
   styleUrls: ['./appointments-new.component.css']
 })
 export class AppointmentsNewComponent implements OnInit {
+
+  public serverUrl : string = environment.domainName
+
+
   @ViewChild('searchSearviceInput') searchSearviceInput? : ElementRef<HTMLInputElement>;
   @ViewChild('searchAddress') searchAddress? : ElementRef<HTMLInputElement>;
   public todayDate : any = moment( new Date(Date.now()) ).format('YYYY-MM-DD');
@@ -68,7 +76,10 @@ export class AppointmentsNewComponent implements OnInit {
     private ngZone: NgZone,
     private fb : FormBuilder,
     private patientService: PatientsService,
-    private http: HttpClient
+    private http: HttpClient,
+    private _serviceCategory: ServicecategoryService,
+    private _service: ServiceService,
+
   ) {
 
     // notValid
@@ -298,7 +309,7 @@ export class AppointmentsNewComponent implements OnInit {
    *******************************************************************/
   onSelectSevice( service : any ){
     let notValid : Array<any> = ['', null, undefined, false, 0, '0'];
-    if( !notValid.includes( service.name ) && !notValid.includes( service.price ) && !notValid.includes( service.id )  ){
+    if( !notValid.includes( service.title ) && !notValid.includes( service.price ) && !notValid.includes( service.id )  ){
       service.primaryPatientId = this.selection.patient.userId;
       service.patientId = this.selection.patient.userId;
       service.patientName = this.selection.patient.firstName+' '+this.selection.patient.lastName;
@@ -359,7 +370,7 @@ export class AppointmentsNewComponent implements OnInit {
   }
 
   onConfirmService(){
-    let message : string = 'Service : '+this.selection.service.name+'\n';
+    let message : string = 'Service : '+this.selection.service.title+'\n';
     message += 'Patient Name: '+this.selection.patient.firstName+' '+this.selection.patient.lastName+'\n';
     message += 'Address: '+this.personalInfo.get('address')?.value+'\n';
     message += 'Service Date: '+this.personalInfo.get('date')?.value+'\n';
@@ -375,7 +386,34 @@ export class AppointmentsNewComponent implements OnInit {
   getCategories(){
     this.serviceCategories = [];
 
-    this.patientService.serviceCategories( { type : this.selection.serviceType } ).subscribe({
+       //now we will get a list of categories from the backend
+   this._serviceCategory.getCategoryList().subscribe({
+   
+    next : ( res : any ) => {
+
+      //in case of success the api returns 0 as a status code
+      if( res.status === APIResponse.Success) {
+        this.serviceCategories = res.data;
+        //this.categoryList = res.data
+        this.getServiceByCategory( this.serviceCategories[0].id, this.serviceCategories[0]?.id || null );
+
+      } else {
+
+        //if it is unable to get branch data it will return an error
+        Swal.fire(res.message)
+
+      }
+      
+    },
+    error: ( err: any ) => {
+
+      console.log(err)
+
+    }
+ 
+  })
+
+/*    this.patientService.serviceCategories( { type : this.selection.serviceType } ).subscribe({
       next : ( res : any ) => {
         this.serviceCategories = res.categories;
         if( this.serviceCategories.length > 0 ){
@@ -383,13 +421,54 @@ export class AppointmentsNewComponent implements OnInit {
         }
       },
       error : ( err : any ) => { Swal.fire("Error.", err.error.message, "error"); }
-    });
+    });*/
   }
   /*******************************************************************
    * GET SERVICES BY CATEGORIES
    *******************************************************************/
   getServiceByCategory( id : any, sectorId : any = null ){
     if( this.searchSearviceInput?.nativeElement ){
+      this.searchSearviceInput.nativeElement.value = '';
+    }
+
+
+     //now we will get a list of categories from the backend
+     this._service.getServiceList().subscribe({
+    
+      next : ( res : any ) => {
+  
+        //in case of success the api returns 0 as a status code
+        if( res.status === APIResponse.Success) {
+          this.services = res.data;
+          console.log(this.services.length);
+          this.services = this.services.filter(s=> {
+            return s.active === 1 && s.category_id === id && s.primary_service_id === null;
+          })
+          
+          console.log(this.services.length);
+
+          this.selection.categoryId = id;
+          this.selection.sectorId = sectorId;
+
+          //this.serviceList = res.data
+  
+        } else {
+  
+          //if it is unable to get branch data it will return an error
+          Swal.fire(res.message)
+  
+        }
+        
+      },
+      error: ( err: any ) => {
+  
+        console.log(err)
+  
+      }
+    
+    })
+
+    /*if( this.searchSearviceInput?.nativeElement ){
       this.searchSearviceInput.nativeElement.value = '';
     }
     this.services = [];
@@ -405,7 +484,7 @@ export class AppointmentsNewComponent implements OnInit {
         this.services = res.services;
       },
       error : ( err : any ) => { Swal.fire("Error.", err.error.message, "error"); }
-    });
+    });*/
   }
   /*******************************************************************
    * ON SEARCH PATIENT
@@ -528,9 +607,14 @@ export class AppointmentsNewComponent implements OnInit {
   }
 
   onSubmit(){
-
+    console.log("hello")
     let serviceDate = moment(this.personalInfo.get('date').value, "YYYY-MM-DD").format("DD/MM/YYYY");
     let serviceTime = moment(this.personalInfo.get('time').value, ["HH:mm"]).format("h:mm A");
+
+    this.services.forEach(service=>{
+      service['name'] = service.title;
+      service['categoryId'] = service.category_id;
+    })
 
     let data = { 
       date : serviceDate,
@@ -544,6 +628,7 @@ export class AppointmentsNewComponent implements OnInit {
       discount: this.discountCharges
     };
     
+
     this.patientService.getQuote( data ).subscribe({
       next  : ( res : any ) => { 
         this.selection.quote = res.quote; 

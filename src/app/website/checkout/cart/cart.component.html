@@ -67,12 +67,18 @@
 
             </div>    
 
+            <div class="auto-flex-center-space-between-gap20" *ngIf="homeVist>0">
+                
+                <p class="web-font-primary-light">{{ 'cart.homeVist' | translate }}</p>
+                <p class="web-font-primary-light bold">{{ 'header.sar' | translate }} {{ homeVist }}</p>
+
+            </div>  
             <div class="auto-flex-center-space-between-gap20">
                 
                 <p class="web-font-primary-light">{{ 'cart.totalTax' | translate }}</p>
                 <p class="web-font-primary-light bold blue-color">{{ 'header.sar' | translate }} {{ total_inc_cost }}</p>
 
-            </div>    
+            </div>      
 
             <button class="primary-bg max-width padding-10 uppercase" (click)="checkout()">{{ 'cart.checkout' | translate }}</button>
 

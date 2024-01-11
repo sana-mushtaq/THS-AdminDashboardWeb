@@ -14,6 +14,8 @@ import { LanguageService } from 'src/service/language.service';
 })
 export class ServiceDetailsComponent implements OnInit {
 
+  displayShowCheckout: any;
+  showCheckoutButton: boolean = false;
   public serverUrl : string = environment.domainName
 
   addedToCart = []
@@ -46,6 +48,12 @@ export class ServiceDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.displayShowCheckout = localStorage.getItem("showCheckout");
+    if(this.displayShowCheckout === 'none') {
+      this.showCheckoutButton = true;
+    }
+    console.log(this.showCheckoutButton)
 
     this.route.params.subscribe(params => {
 

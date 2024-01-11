@@ -19,6 +19,7 @@ export class PaymentConfirmationComponent implements OnInit {
   name: any
   time: any
   date: any
+  displayShowCheckout: any;
 
   //in this component we will generate an appointment
   constructor(
@@ -27,6 +28,7 @@ export class PaymentConfirmationComponent implements OnInit {
     private router: Router,
   ) { 
 
+    
     this.route.queryParams.subscribe( (params : any) => {
     
       const id : string = params['tap_id'] || ''
@@ -144,7 +146,7 @@ export class PaymentConfirmationComponent implements OnInit {
 
                                     //send invoice email
 
-                                    let invoiceData = {
+                                    /*let invoiceData = {
 
                                       appointmentId: this.appointmentId,
                                       appointmentTotal: ress.payment.amount,
@@ -167,7 +169,7 @@ export class PaymentConfirmationComponent implements OnInit {
                                 
                                       }
                                   
-                                    }) 
+                                    }) */
 
                                     /*this._b2c.createOdooInvoice(invoiceData).subscribe({
                     
@@ -270,7 +272,14 @@ export class PaymentConfirmationComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+    this.displayShowCheckout = localStorage.getItem("showCheckout");
+    if(this.displayShowCheckout === 'true') {
+      this.router.navigate(['/'])
+    }
+
+  }
 
   naviagteToHome() {
 

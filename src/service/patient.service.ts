@@ -47,6 +47,10 @@ export class PatientsService {
         return this._httpClient.post<any>(this.patientUrl+'/create-appointment', body ); 
     }
 
+    createAppointment1(  body : any ){
+        return this._httpClient.post<any>(this.patientUrl+'/create-appointment1', body ); 
+    }
+
     createPayment(  body : any ){
         return this._httpClient.post<any>(this.patientUrl+'/create-payment', body ); 
     }

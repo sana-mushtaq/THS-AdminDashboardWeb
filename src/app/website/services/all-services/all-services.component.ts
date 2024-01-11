@@ -68,6 +68,8 @@ export class AllServicesComponent implements OnInit {
   userLocations: any = []
   changed: boolean = false
 
+  showCheckoutButton: any;
+
   // forms
   public addressForm : FormGroup
 
@@ -206,6 +208,15 @@ export class AllServicesComponent implements OnInit {
             return service.primary_service_id === null
           
           })
+
+          if(res.branchFound && res.branchFound === 'none') {
+
+            localStorage.setItem("showCheckout", "true");
+
+          } else {
+           
+            localStorage.removeItem("showCheckout");
+          }
   
           this.branch_id = res.branch
           
@@ -219,15 +230,6 @@ export class AllServicesComponent implements OnInit {
   
           })
   
-          //this.topCategories = this.topCategories.slice(0, 4)
-  
-          /* Temporary hold */
-          /*this.allServices.forEach(s => {
-  
-            s.top = 1
-  
-          })*/
-          // now we will filter all top Services and assign them to TopServices object with respect to each category
           this.allCategories.forEach(category => {
 
             let services = this.allServices.filter(service => {

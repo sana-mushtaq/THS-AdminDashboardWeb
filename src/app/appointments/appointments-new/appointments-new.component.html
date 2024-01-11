@@ -177,7 +177,7 @@
                 <div class="category-wrapper mt-3 custom-scroll d-flex">
                   <div class="category" [ngClass]="(selection.categoryId==category.id) ? 'active' : ''" *ngFor="let category of serviceCategories" (click)="getServiceByCategory( category.id, category?.sectorId || null )">
                     <div class="category-img">
-                      <img [src]="category?.icon || 'assets/images/taib-logo.png'" [alt]="category.name" [ngClass]="(category?.icon) ? '' : 'default'">
+                      <img src="{{serverUrl}}{{category?.icon}}" [alt]="category.name" [ngClass]="(category?.icon) ? '' : 'default'">
                     </div>
                     <p class="m-0">{{category.name}}</p>
                   </div>
@@ -192,9 +192,11 @@
                     </ng-container>
                     <div class="col-md-3 mb-3" *ngFor="let service of services">
                       <div class="category-card" (click)="onSelectSevice( service )">
-                        <img [src]="service?.icon || 'assets/images/taib-logo.png'" [ngClass]="(service?.icon) ? '' : 'default'" [alt]="service.name">
+                        <img src="{{serverUrl}}{{service?.icon}}" [ngClass]="(service?.icon) ? '' : 'default'" [alt]="service.title" *ngIf="service.icon">
+                        <img src="/assets/images/taib-logo.png" [ngClass]="(service?.icon) ? '' : 'default'" [alt]="service.title" *ngIf="!service.icon">
+
                         <div>
-                          <h5>{{service.name}} ({{service.name_ar}})</h5>
+                          <h5>{{service.title}} ({{service.title_arabic}})</h5>
                           <h4 class="text-primary">SAR {{service.price}}</h4>
                         </div>
                       </div>
@@ -215,7 +217,7 @@
                   <tbody>
                     <tr *ngFor="let service of selection.services; let sIndex=index">
                       <td>
-                        <p class="m-0">{{service.name}}</p>
+                        <p class="m-0">{{service.title}}</p>
                         <select class="form-control my-1" (change)="onChangeServicePatient( sIndex, $event )">
                           <option [value]="selection.patient.userId">{{selection.patient.firstName}} {{selection.patient.lastName}} (Self)</option>
                           <option *ngFor="let patient of patientDependents" [value]="patient.userId">{{patient.firstName}} {{patient.lastName}}</option>
@@ -247,7 +249,7 @@
                   <div class="preview-details">
                     <ng-container *ngFor="let service of selection.services; let sIndex=index">
                       <div class="pb-2 fw-medium" [ngClass]="(sIndex > 0) ? 'pt-2 border-top': ''">
-                        <h6 class="text-theme mb-0">{{service.name}}</h6>
+                        <h6 class="text-theme mb-0">{{service.title}}</h6>
                         <div class="d-flex text-dark">
                           <div class="flex-grow-1">{{service.patientName}}</div>
                           <div>(SAR {{service.price}})</div>

@@ -33,7 +33,10 @@ export class CartComponent implements OnInit {
 
   //service time slots 
   timeSlots: string[] = []
-  
+  displayShowCheckout: any;
+
+  homeVist: number = 0;
+
   constructor(
     private _utilService: UtilService,
     private router: Router,
@@ -43,7 +46,15 @@ export class CartComponent implements OnInit {
     public languageService: LanguageService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    
+    this.displayShowCheckout = localStorage.getItem("showCheckout");
+    if(this.displayShowCheckout === 'true') {
+      console.log("s")
+      this.router.navigate(['/'])
+    }
+
+  }
 
   ngAfterViewInit(): void {
 
@@ -81,6 +92,8 @@ export class CartComponent implements OnInit {
   
       })
 
+   
+
       this._utilService.addToCart(this.cartData)
 
       this._patientService.getProfileInformation(data).subscribe({
@@ -92,22 +105,32 @@ export class CartComponent implements OnInit {
             
             this.userData = res.data
 
-            let idType = this.userData.id_number
-            let ifSaudiId = this.validateNationalId(idType)
-            console.log(ifSaudiId)
-            if(ifSaudiId === -1 || ifSaudiId === 2) {
+            let idType = this.userData.id_number;
+            let ifSaudiId = this.validateNationalId(idType);
 
-              const taxRate = 0.15;
-              const taxAmount = this.total * taxRate;
-        
-              this.total_inc_cost =  Math.round(this.total + taxAmount);
-        
-            } else {
-      
-              this.total_inc_cost =  Math.round(this.total);
-      
+            let checkIfCategory1 = this.cartData.some(data => data.category_id === 1);
+            // If there are items with category_id === 1, add home visit cost
+            if (checkIfCategory1) {
+              this.homeVist = 150;
             }
+
             
+            // Add home visit cost to the total
+            if (ifSaudiId === -1 || ifSaudiId === 2) {
+              // Calculate tax amount (15%)
+              const taxRate = 0.15;
+              this.total = this.total + this.homeVist;
+
+              const taxAmount = this.total * taxRate;
+
+              // Add tax to the total (rounded to the nearest integer)
+              this.total_inc_cost = Math.round(this.total + taxAmount);
+            } else {
+              this.total = this.total + this.homeVist;
+
+              // If not a Saudi ID, don't apply tax
+              this.total_inc_cost = Math.round(this.total);
+            }
             this.userDependants[0] = res.data
     
             this._patientService.getDependantsList(data).subscribe({
@@ -236,25 +259,33 @@ export class CartComponent implements OnInit {
 
   getTotal() {
 
-    //calculate total
-    if(this.cartData.length>0) {
+    // Calculate total
+    if (this.cartData.length > 0) {
+      // Check if there are items with category_id === 1
+      let checkIfCategory1 = this.cartData.some(data => data.category_id === 1);
 
-      this.total = this.cartData.map(cart => {
+      // If there are items with category_id === 1, add home visit cost
+      if (checkIfCategory1) {
+        this.homeVist = 150;
+      }
 
-        return cart.price
-  
-      }).reduce((a, b)=>{
-  
-        return a+b
-  
-      })
+      // Calculate the total price of items in the cart
+      this.total = this.cartData.map(cart => cart.price).reduce((a, b) => a + b, 0);
+
+      // Add the home visit cost to the total
+      this.total = this.total + this.homeVist;
+
+      console.log('Home Visit Cost:', this.homeVist);
+      console.log('Total (before tax):', this.total);
 
       // Calculate the tax amount (15%)
       const taxRate = 0.15;
       const taxAmount = this.total * taxRate;
 
-      this.total_inc_cost =  Math.round(this.total + taxAmount);
-  
+      // Add tax to the total (rounded to the nearest integer)
+      this.total_inc_cost = Math.round(this.total + taxAmount);
+
+      console.log('Total (after tax):', this.total_inc_cost);
     } else {
 
       this.total = 0
