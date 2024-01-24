@@ -163,6 +163,10 @@
             "edit": true,
             "delete": true,
             "view": true
+        },
+        "appointment_hours":{
+            "add": true,
+            "view": true
         }
 
     },
@@ -329,6 +333,10 @@
             "deactivate": false,
             "edit": false,
             "delete": false,
+            "view": true
+        },
+        "appointment_hours":{
+            "add": false,
             "view": true
         }
 
@@ -497,6 +505,10 @@
             "edit": false,
             "delete": false,
             "view": true
+        },
+        "appointment_hours":{
+            "add": false,
+            "view": true
         }
 
     },
@@ -663,6 +675,10 @@
             "deactivate": false,
             "edit": false,
             "delete": false,
+            "view": false
+        },
+        "appointment_hours":{
+            "add": false,
             "view": false
         }
 

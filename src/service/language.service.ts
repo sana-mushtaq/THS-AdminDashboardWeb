@@ -13,8 +13,8 @@ export class LanguageService {
   constructor(private translate: TranslateService) {
 
     translate.addLangs(['en', 'ar']);
-    translate.setDefaultLang('en');
-    this.setLanguage('en');
+    translate.setDefaultLang('ar');
+    this.setLanguage('ar');
 
   }
 

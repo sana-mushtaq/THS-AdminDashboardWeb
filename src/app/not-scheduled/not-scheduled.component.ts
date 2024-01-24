@@ -66,6 +66,9 @@ export class NotScheduledComponent implements OnInit {
 
   jsonData: any;
   loaded: boolean = false;
+
+  calculatedHoursForReview:number=0;
+
   constructor(private patientService : PatientsService, private _b2c: BusinessToCustomerSchedulingService, private fb : FormBuilder, private _appService: AppService, private _appUtil: UtilService, private _appDataService: AppDataService,   private http: HttpClient) {
     this._unsubscribeAll = new Subject();
 
@@ -154,6 +157,43 @@ export class NotScheduledComponent implements OnInit {
 
   staffSelected(event) {
     this.selectedStaffId = event.target.value;
+
+    //now we will check if serverice provdier is availble at this time or not 
+    let data ={
+    serviceDate: this.appointmentDetails.serviceDate,
+    serviceTime: this.appointmentDetails.serviceTime,
+    serviceAssigneeId: this.selectedStaffId,
+    appoinmentId: this.appointmentDetails.appointmentId
+    }
+
+    //now we will cancel user appointment
+    this._b2c.checkSPAvailability(data).subscribe({
+              
+      next : ( ress : any ) => {
+        console.log(ress)
+        //in case of success the api returns 0 as a status code
+        if( ress.status === APIResponse.Success) {
+          
+          if(ress.message.length>0) {
+            Swal.fire("Error", "This service provider alerady has an appointment at selected date and time")
+          }
+
+        } else {
+
+          Swal.fire("Error", "An error occurred. Try again")
+
+        }
+        
+      },
+
+      error: ( err: any ) => {
+        
+        console.log(err)
+        
+      }
+  
+    }) 
+
   }
   readerSelected(event) {
     this.selectedReaderId = event.target.value;
@@ -351,6 +391,7 @@ export class NotScheduledComponent implements OnInit {
             break;
         }
         this.appointmentStatusHistory.push(log);
+        console.log(this.appointmentStatusHistory);
       }
     } else {
       for (let index = 0; index < 6; index++) {
@@ -389,6 +430,8 @@ export class NotScheduledComponent implements OnInit {
             break;
         }
         this.appointmentStatusHistory.push(log);
+        console.log(this.appointmentStatusHistory);
+
       }
     }
   }
@@ -409,10 +452,74 @@ export class NotScheduledComponent implements OnInit {
         log.logStatus = statusLog.logStatus;
       }
     });
+
     this.appointmentStatusCompleted = this.appointmentStatusHistory.filter((history) => history.logStatus == AppointmentLogStatus.Completed);
     this.appointmentStatusOpen = this.appointmentStatusHistory.filter((history) => history.logStatus == AppointmentLogStatus.Open);
     this.appointmentStatusInProgress = this.appointmentStatusHistory.find((history) => history.logStatus == AppointmentLogStatus.InProgress);
+
+    if(this.appointmentStatusCompleted.length>0) {
+
+      //calcluate the hours
+    }
+    console.log( this.appointmentDetails.statusHistory);
+    let sh1 =  this.appointmentStatusHistory.find((history) => history.currentStatus == 3 && this.appointmentDetails.appointmentStatus===1) as any;
+    let sh2 =  this.appointmentStatusHistory.find((history) => history.currentStatus == 4  && this.appointmentDetails.appointmentStatus===1) as any;
+    let sh3 =  this.appointmentStatusHistory.find((history) => history.currentStatus == 5  && this.appointmentDetails.appointmentStatus===1) as any;
+
+   console.log(sh1.updateTime)
+    if(sh1 && sh2 && sh3) {
+
+      //now we will calculate time the hours time 
+       // Calculate total hours between sh1.updatedTime, sh2.updatedTime, and sh3.updatedTime
+       let totalHours = this.calculateHoursDifference(sh1.updateTime, sh1.updateDate, sh3.updateTime, sh3.updateDate);
+
+      // Now you have the total hours between sh1.updatedTime, sh2.updatedTime, and sh3.updatedTime
+      console.log(`Total hours between sh1.updatedTime, sh2.updatedTime, and sh3.updatedTime: ${totalHours} hours`);
+
+      this.calculatedHoursForReview = totalHours;
+
+    }
+
   }
+
+// Function to calculate the difference in hours between two timestamps
+ calculateHoursDifference(time, date, time2, date2) {
+  // Parse the timestamps into Date objects
+  const start = this.parseTimestamp(time, date) as any;
+  const end = this.parseTimestamp(time2, date2) as any;
+
+  // Check if parsing was successful
+  if (start && end) {
+    // Calculate the time difference in milliseconds
+    const timeDiff = end - start;
+
+    // Convert milliseconds to hours
+    const hours = timeDiff / (1000 * 60 * 60);
+
+    return hours;
+  } else {
+    console.error('Invalid timestamp format');
+    return null;
+  }
+}
+
+// Function to parse timestamp into a Date object
+ parseTimestamp(time, date) {
+  // Split the date into day, month, and year
+  const [day, month, year] = date.split('-');
+
+  // Combine with the time to create a valid Date object
+  const dateString = `${month}-${day}-${year} ${time}`;
+  const parsedDate = new Date(dateString);
+
+  // Check if parsing was successful
+  if (!isNaN(parsedDate.getTime())) {
+    return parsedDate;
+  } else {
+    console.error('Invalid timestamp format');
+    return null;
+  }
+}
 
   confirmStaffForAppointment(staffId: string, appointmentId: string, adminNotesValue: string) {
     this._appService.assignStaffForAppointment(staffId, appointmentId, adminNotesValue).subscribe(

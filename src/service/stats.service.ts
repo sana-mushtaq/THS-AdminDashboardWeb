@@ -73,4 +73,10 @@ export class StatsService {
 
   }
 
+  dailyStats(body) {
+
+    return this._httpClient.post<any>(this.statsUrl+'/dailyStats', body)
+
+  }
+
 }

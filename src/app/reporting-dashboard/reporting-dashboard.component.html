@@ -1,297 +1,249 @@
 <div id="app">
 
-    <!-- page section -->
-    <section class="el-container">
+    <div class="web auto-flex-start-gap30-column max-height relative">
+
+        <select class="input-global" (change)="setCurrentBranch($event.target)" *ngIf="userRoles['role'] === 'manager'">
+            <option *ngFor="let branch of branchList" [value]="branch.id">{{branch.title}}</option>
+        </select>
+
+        <h3>Overall appointment status  </h3>
+        <div class="web auto-flex-start-gap20 max-height relative">
     
-        <div>
-            
-            <!-- main menu bar-->
-            <menu class="menu-bar lab-hide">
-    
-                <a routerLink="javascript:void(0);" class="toggle-menu">
-    
-                    <div class="inactive">
-                        
-                        <span class="bar bar1"></span>
-                        <span class="bar"></span>
-                        <span class="bar bar3"></span>
-                  
+            <!--Number of Patients-->
+            <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
+
+                <p class="med bold">Number of Patients: {{ patientCount }}</p>
+
+                <div class="auto-flex-start-gap20">
+
+                    <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                        <label for="startDate">Start Date:</label>
+                        <input class="input-global" type="date" id="startDatePatientCount" [(ngModel)]="startDatePatientCount">
+
+                    </div>
+                    
+                    <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                        <label for="endDate">End Date:</label>
+                        <input class="input-global" type="date" id="endDatePatientCount" [(ngModel)]="endDatePatientCount">
                     </div>
 
-                </a>
-                
-                <a routerLink="dashboard" class="logo"><img src="assets/images/Taib_logo_Trans.png" width="50%" /></a>
-          
-            </menu>
-            
-            <!-- app side bar-->
-            <app-sidebar class="lab-hide"></app-sidebar>
-
-            <!-- app sub menu -->
-            <div>
-            
-                <app-submenu></app-submenu>
-            
+                </div>
+              
+                <div class="auto-flex-start-gap20">
+                    <button class="primary-bg padding-10 secondary-color width-half" (click)="submitFilters()">Submit</button>
+                    <button class="primary-bg padding-10 secondary-color width-half"(click)="clearFilters()">Clear</button>    
+                </div>
+                    
             </div>
 
-            <!-- top nav bar in the right side -->
-            <nav class="nav-bar-none"></nav>
-        
-        </div>
+            <!--Number of Patients per day-->
+            <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
 
-        <!-- right side or the main component content -->
-        <main class="el-main">
-      
-            <app-header></app-header>
-    
-            <div class="web auto-flex-start-gap30-column max-height relative">
+                <p class="med bold">Number of Patients per day: {{ patientCountPerDay }}</p>
+                    
+            </div>
 
-                <select class="input-global" (change)="setCurrentBranch($event.target)" *ngIf="userRoles['role'] === 'manager'">
-                    <option *ngFor="let branch of branchList" [value]="branch.id">{{branch.title}}</option>
-                </select>
+            <!--Number of Appointment Scheduled-->
+            <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
 
-                <h3>Overall appointment status  </h3>
-                <div class="web auto-flex-start-gap20 max-height relative">
-            
-                    <!--Number of Patients-->
-                    <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
-    
-                        <p class="med bold">Number of Patients: {{ patientCount }}</p>
-    
-                        <div class="auto-flex-start-gap20">
-    
-                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
-                                <label for="startDate">Start Date:</label>
-                                <input class="input-global" type="date" id="startDatePatientCount" [(ngModel)]="startDatePatientCount">
-        
-                            </div>
-                            
-                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
-                                <label for="endDate">End Date:</label>
-                                <input class="input-global" type="date" id="endDatePatientCount" [(ngModel)]="endDatePatientCount">
-                            </div>
-        
-                        </div>
-                      
-                        <div class="auto-flex-start-gap20">
-                            <button class="primary-bg padding-10 secondary-color width-half" (click)="submitFilters()">Submit</button>
-                            <button class="primary-bg padding-10 secondary-color width-half"(click)="clearFilters()">Clear</button>    
-                        </div>
-                            
-                    </div>
+                <p class="med bold">Number of Appointments Scheduled: {{ appointmentScheduled }}</p>
 
-                    <!--Number of Patients per day-->
-                    <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
+                <div class="auto-flex-start-gap20">
 
-                        <p class="med bold">Number of Patients per day: {{ patientCountPerDay }}</p>
-                            
-                    </div>
+                    <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                        <label for="startDate">Start Date:</label>
+                        <input class="input-global" type="date" id="startDateAppointmentScheduled" [(ngModel)]="startDateAppointmentScheduled">
 
-                    <!--Number of Appointment Scheduled-->
-                    <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
-
-                        <p class="med bold">Number of Appointments Scheduled: {{ appointmentScheduled }}</p>
-    
-                        <div class="auto-flex-start-gap20">
-    
-                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
-                                <label for="startDate">Start Date:</label>
-                                <input class="input-global" type="date" id="startDateAppointmentScheduled" [(ngModel)]="startDateAppointmentScheduled">
-        
-                            </div>
-                            
-                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
-                                <label for="endDate">End Date:</label>
-                                <input class="input-global" type="date" id="endDateAppointmentScheduled" [(ngModel)]="endDateAppointmentScheduled">
-                            </div>
-        
-                        </div>
-                        
-                        <div class="auto-flex-start-gap20">
-                            <button class="primary-bg padding-10 secondary-color width-half" (click)="submitFiltersAppointmentScheduled()">Submit</button>
-                            <button class="primary-bg padding-10 secondary-color width-half"(click)="clearFiltersAppointmentScheduled()">Clear</button>    
-                        </div>
-                            
-                    </div>
-
-                    <!--Number of Appointment Canceled-->
-                    <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
-
-                    <p class="med bold">Number of Appointments Canceled: {{ appointmentCanceled }}</p>
-
-                    <div class="auto-flex-start-gap20">
-
-                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
-                            <label for="startDate">Start Date:</label>
-                            <input class="input-global" type="date" id="startDateAppointmentCanceled" [(ngModel)]="startDateAppointmentCanceled">
-    
-                        </div>
-                        
-                        <div class="auto-flex-start-gap10-column-no-set-width width-half">
-                            <label for="endDate">End Date:</label>
-                            <input class="input-global" type="date" id="endDateAppointmentCanceled" [(ngModel)]="endDateAppointmentCanceled">
-                        </div>
-    
                     </div>
                     
-                    <div class="auto-flex-start-gap20">
-                        <button class="primary-bg padding-10 secondary-color width-half" (click)="submitFiltersAppointmentCanceled()">Submit</button>
-                        <button class="primary-bg padding-10 secondary-color width-half"(click)="clearFiltersAppointmentCanceled()">Clear</button>    
-                    </div>
-                        
+                    <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                        <label for="endDate">End Date:</label>
+                        <input class="input-global" type="date" id="endDateAppointmentScheduled" [(ngModel)]="endDateAppointmentScheduled">
                     </div>
 
-                    <!--Confidence in treatment-->
-                    <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
-
-                    <p class="med bold">Confidence in treatment</p>
-                    <div>
-                        <div *ngFor="let item of getKeyValues(confidenceInTreatment)">
-                         
-                          <p>{{ item.key }}: {{ item.value.text }}</p>
-                          <p>Average Rating: {{ round(item.value.avgRating, 2) }}</p>
-                          <hr>
-                        </div>
-                      </div>
-                        
-                    </div>
-
-                    <!--Operational Expense Services-->
-                    <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
-
-                        <p class="med bold">Operational Revenue - Services {{formatCurrency(serviceRevenue)}}</p>
-                        <ng-multiselect-dropdown class="max-width" *ngIf="serviceSettings" [settings]="serviceSettings" [data]="serviceList" (onSelect)="setPreferredService($event)" (onDeSelect)="unsetPreferredService($event)"></ng-multiselect-dropdown>
-
-                        <div class="auto-flex-start-gap20">
-
-                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
-                                <label for="startDate">Start Date:</label>
-                                <input class="input-global" type="date" id="startDateService" [(ngModel)]="startDateService">
-        
-                            </div>
-                            
-                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
-                                <label for="endDate">End Date:</label>
-                                <input class="input-global" type="date" id="endDateService" [(ngModel)]="endDateService">
-                            </div>
-        
-                        </div>
-                        
-                        <div class="auto-flex-start-gap20">
-                            <button class="primary-bg padding-10 secondary-color width-half" (click)="submitFiltersService()">Submit</button>
-                            <button class="primary-bg padding-10 secondary-color width-half"(click)="clearFiltersService()">Clear</button>    
-                        </div>
-
-                        <div class="auto-flex-start-gap10-column" style="max-height: 300px; overflow: auto;">
-
-                            <p class="med bold">Best Selling Services</p>
-                            <p *ngFor="for let sr of bestSellerServices">{{sr.serviceName}}</p>
-
-                        </div>
-                            
-                    </div>
-
-                    <!--Operational Expense Categories-->
-                    <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
-
-                        <p class="med bold">Operational Revenue - Category {{formatCurrency(categoryRevenue)}}</p>
-                        <ng-multiselect-dropdown class="max-width" *ngIf="categorySettings" [settings]="categorySettings" [data]="categoryList" (onSelect)="setPreferredCategory($event)" (onDeSelect)="unsetPreferredCategory($event)"></ng-multiselect-dropdown>
-
-                        <div class="auto-flex-start-gap20">
-
-                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
-                                <label for="startDate">Start Date:</label>
-                                <input class="input-global" type="date" id="startDateCategory" [(ngModel)]="startDateCategory">
-        
-                            </div>
-                            
-                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
-                                <label for="endDate">End Date:</label>
-                                <input class="input-global" type="date" id="endDateCategory" [(ngModel)]="endDateCategory">
-                            </div>
-        
-                        </div>
-                        
-                        <div class="auto-flex-start-gap20">
-                            <button class="primary-bg padding-10 secondary-color width-half" (click)="submitFiltersCategory()">Submit</button>
-                            <button class="primary-bg padding-10 secondary-color width-half"(click)="clearFiltersCategory()">Clear</button>    
-                        </div>
-
-                        <div class="auto-flex-start-gap10-column">
-
-                            <p class="med bold">Best Selling Categories</p>
-                            <p *ngFor="for let sr of bestSellerCategory">{{sr.title}}</p>
-
-                        </div>
-                            
-                    </div>
+                </div>
+                
+                <div class="auto-flex-start-gap20">
+                    <button class="primary-bg padding-10 secondary-color width-half" (click)="submitFiltersAppointmentScheduled()">Submit</button>
+                    <button class="primary-bg padding-10 secondary-color width-half"(click)="clearFiltersAppointmentScheduled()">Clear</button>    
+                </div>
                     
-                    <!--Number of Staff-->
-                    <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
+            </div>
 
-                        <p class="med bold">Staff Overlook</p>
+            <!--Number of Appointment Canceled-->
+            <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
 
-                        <p>Number of Staff: {{ numberOfStaff }}</p>
-                        <p>Admin: {{ totalAdmin }}</p>
-                        <p>Medical Staff: {{ totalPracticeUsers }}</p>
-                        <p>Manager: {{ totalManagers }}</p>
-                        <p>Supervisor: {{ totalSupervisor }}</p>
-                        <p>Customer Care: {{ totalCC }}</p>
-                        <p>IT: {{ totalIT }}</p>
+            <p class="med bold">Number of Appointments Canceled: {{ appointmentCanceled }}</p>
 
-                    </div>
+            <div class="auto-flex-start-gap20">
 
-                    <!--Staff performance-->
-                    <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
+                <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                    <label for="startDate">Start Date:</label>
+                    <input class="input-global" type="date" id="startDateAppointmentCanceled" [(ngModel)]="startDateAppointmentCanceled">
 
-                    <p class="med bold">Staff Performance</p>
-                    <div>
-                        <div *ngFor="let item of getKeyValues(staffPerformance)">
-                            
-                            <p>{{ item.key }}: {{ item.value.text }}</p>
-                            <p>Average Rating: {{ round(item.value.avgRating, 2) }}</p>
-                            <hr>
-                            
-                        </div>
-                        </div>
-                        
-                    </div>
-
-                    <!--Utilization rate-->
-                    <!--<div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
-
-                        <p class="med bold">Utilization Rate</p>
-
-                        <div class="auto-flex-start-gap20">
-
-                            <div class="auto-flex-start-gap10-column-no-set-width width-half">
-                                <label for="startTime">Start Time:</label>
-                                <input class="input-global" type="date" id="startDateUtilizationRate" [(ngModel)]="startDateUtilizationRate">
-        
-                            </div>
-                    
-                        </div>
-                        
-                        <div class="auto-flex-start-gap20">
-                            <button class="primary-bg padding-10 secondary-color width-half" (click)="submitFiltersUtilizationRate()">Submit</button>
-                            <button class="primary-bg padding-10 secondary-color width-half"(click)="clearFiltersUtilizationRate()">Clear</button>    
-                        </div>
-                            
-                        <div *ngIf="utilizationRate.timeSlots.length > 0" class="auto-flex-start-gap10 utilization-rate-container">
-                            <div class="auto-flex-start-gap10 utilization-rate-item" *ngFor="let timeSlot of utilizationRate.timeSlots">
-                            <p class="time-slot">{{ timeSlot.timeSlot }}</p>
-                            <p class="providers-count">{{ timeSlot.bookedServiceProviders }}</p>
-                            </div>
-                        </div>
-  
-                    </div>-->
-
+                </div>
+                
+                <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                    <label for="endDate">End Date:</label>
+                    <input class="input-global" type="date" id="endDateAppointmentCanceled" [(ngModel)]="endDateAppointmentCanceled">
                 </div>
 
             </div>
-     
-        </main>
+            
+            <div class="auto-flex-start-gap20">
+                <button class="primary-bg padding-10 secondary-color width-half" (click)="submitFiltersAppointmentCanceled()">Submit</button>
+                <button class="primary-bg padding-10 secondary-color width-half"(click)="clearFiltersAppointmentCanceled()">Clear</button>    
+            </div>
+                
+            </div>
 
-    </section>
+            <!--Confidence in treatment-->
+            <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
+
+            <p class="med bold">Confidence in treatment</p>
+            <div>
+                <div *ngFor="let item of getKeyValues(confidenceInTreatment)">
+                 
+                  <p>{{ item.key }}: {{ item.value.text }}</p>
+                  <p>Average Rating: {{ round(item.value.avgRating, 2) }}</p>
+                  <hr>
+                </div>
+              </div>
+                
+            </div>
+
+            <!--Operational Expense Services-->
+            <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
+
+                <p class="med bold">Operational Revenue - Services {{formatCurrency(serviceRevenue)}}</p>
+                <ng-multiselect-dropdown class="max-width" *ngIf="serviceSettings" [settings]="serviceSettings" [data]="serviceList" (onSelect)="setPreferredService($event)" (onDeSelect)="unsetPreferredService($event)"></ng-multiselect-dropdown>
+
+                <div class="auto-flex-start-gap20">
+
+                    <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                        <label for="startDate">Start Date:</label>
+                        <input class="input-global" type="date" id="startDateService" [(ngModel)]="startDateService">
+
+                    </div>
+                    
+                    <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                        <label for="endDate">End Date:</label>
+                        <input class="input-global" type="date" id="endDateService" [(ngModel)]="endDateService">
+                    </div>
+
+                </div>
+                
+                <div class="auto-flex-start-gap20">
+                    <button class="primary-bg padding-10 secondary-color width-half" (click)="submitFiltersService()">Submit</button>
+                    <button class="primary-bg padding-10 secondary-color width-half"(click)="clearFiltersService()">Clear</button>    
+                </div>
+
+                <div class="auto-flex-start-gap10-column" style="max-height: 300px; overflow: auto;">
+
+                    <p class="med bold">Best Selling Services</p>
+                    <p *ngFor="for let sr of bestSellerServices">{{sr.serviceName}}</p>
+
+                </div>
+                    
+            </div>
+
+            <!--Operational Expense Categories-->
+            <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
+
+                <p class="med bold">Operational Revenue - Category {{formatCurrency(categoryRevenue)}}</p>
+                <ng-multiselect-dropdown class="max-width" *ngIf="categorySettings" [settings]="categorySettings" [data]="categoryList" (onSelect)="setPreferredCategory($event)" (onDeSelect)="unsetPreferredCategory($event)"></ng-multiselect-dropdown>
+
+                <div class="auto-flex-start-gap20">
+
+                    <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                        <label for="startDate">Start Date:</label>
+                        <input class="input-global" type="date" id="startDateCategory" [(ngModel)]="startDateCategory">
+
+                    </div>
+                    
+                    <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                        <label for="endDate">End Date:</label>
+                        <input class="input-global" type="date" id="endDateCategory" [(ngModel)]="endDateCategory">
+                    </div>
+
+                </div>
+                
+                <div class="auto-flex-start-gap20">
+                    <button class="primary-bg padding-10 secondary-color width-half" (click)="submitFiltersCategory()">Submit</button>
+                    <button class="primary-bg padding-10 secondary-color width-half"(click)="clearFiltersCategory()">Clear</button>    
+                </div>
+
+                <div class="auto-flex-start-gap10-column">
+
+                    <p class="med bold">Best Selling Categories</p>
+                    <p *ngFor="for let sr of bestSellerCategory">{{sr.title}}</p>
+
+                </div>
+                    
+            </div>
+            
+            <!--Number of Staff-->
+            <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
+
+                <p class="med bold">Staff Overlook</p>
+
+                <p>Number of Staff: {{ numberOfStaff }}</p>
+                <p>Admin: {{ totalAdmin }}</p>
+                <p>Medical Staff: {{ totalPracticeUsers }}</p>
+                <p>Manager: {{ totalManagers }}</p>
+                <p>Supervisor: {{ totalSupervisor }}</p>
+                <p>Customer Care: {{ totalCC }}</p>
+                <p>IT: {{ totalIT }}</p>
+
+            </div>
+
+            <!--Staff performance-->
+            <div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
+
+            <p class="med bold">Staff Performance</p>
+            <div>
+                <div *ngFor="let item of getKeyValues(staffPerformance)">
+                    
+                    <p>{{ item.key }}: {{ item.value.text }}</p>
+                    <p>Average Rating: {{ round(item.value.avgRating, 2) }}</p>
+                    <hr>
+                    
+                </div>
+                </div>
+                
+            </div>
+
+            <!--Utilization rate-->
+            <!--<div class="auto-flex-start-gap20-column-no-set-width box-shadow padding-20 border-radius-20 width-half">
+
+                <p class="med bold">Utilization Rate</p>
+
+                <div class="auto-flex-start-gap20">
+
+                    <div class="auto-flex-start-gap10-column-no-set-width width-half">
+                        <label for="startTime">Start Time:</label>
+                        <input class="input-global" type="date" id="startDateUtilizationRate" [(ngModel)]="startDateUtilizationRate">
+
+                    </div>
+            
+                </div>
+                
+                <div class="auto-flex-start-gap20">
+                    <button class="primary-bg padding-10 secondary-color width-half" (click)="submitFiltersUtilizationRate()">Submit</button>
+                    <button class="primary-bg padding-10 secondary-color width-half"(click)="clearFiltersUtilizationRate()">Clear</button>    
+                </div>
+                    
+                <div *ngIf="utilizationRate.timeSlots.length > 0" class="auto-flex-start-gap10 utilization-rate-container">
+                    <div class="auto-flex-start-gap10 utilization-rate-item" *ngFor="let timeSlot of utilizationRate.timeSlots">
+                    <p class="time-slot">{{ timeSlot.timeSlot }}</p>
+                    <p class="providers-count">{{ timeSlot.bookedServiceProviders }}</p>
+                    </div>
+                </div>
+
+            </div>-->
+
+        </div>
+
+    </div>
 
 </div>

@@ -53,7 +53,6 @@ export class ServiceDetailsComponent implements OnInit {
     if(this.displayShowCheckout === 'none') {
       this.showCheckoutButton = true;
     }
-    console.log(this.showCheckoutButton)
 
     this.route.params.subscribe(params => {
 
@@ -71,6 +70,7 @@ export class ServiceDetailsComponent implements OnInit {
 
           this.sanitizedWhatsappUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.currentService[0].whatsapp_url);
 
+          console.log(this.currentService.length);
           if(this.currentService.length>0) {
            
             this.currentService = this.currentService[0]
@@ -89,7 +89,7 @@ export class ServiceDetailsComponent implements OnInit {
 
         } else {
 
-          this.router.navigate([''])
+          //this.router.navigate([''])
 
         }
 

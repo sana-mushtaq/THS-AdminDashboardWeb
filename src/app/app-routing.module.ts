@@ -136,6 +136,7 @@ import { BusinessToBusinessAppointmentsComponent } from './business-to-business-
 import { ServicetagComponent } from './servicetag/servicetag.component';
 import { MedicaltagComponent } from './medicaltag/medicaltag.component';
 import { ReportingDashboardComponent } from './reporting-dashboard/reporting-dashboard.component';
+import { DailyStatsComponent } from './daily-stats/daily-stats.component';
 
 const routes: Routes = [
  { path: '', component: AllServicesComponent},
@@ -259,7 +260,8 @@ const routes: Routes = [
 { path: 'category/view-all', component: CaretgoryViewComponent },
 { path: 'b2b', component: BusinessToBusinessSchedulingComponent },
 { path: 'service-provider/view-all', component: ServiceproviderComponent },
-{ path:'reporting-dashboard', component: ReportingDashboardComponent},
+{ path:'reporting-dashboard', component: ReportingDashboardComponent },
+{ path: 'daily-stats', component: DailyStatsComponent },
 
  /* LOGIN */ 
  { path: 'login', component: LoginComponent },

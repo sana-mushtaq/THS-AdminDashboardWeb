@@ -241,6 +241,31 @@
                               </div>
                            </div>
                            <!---->
+
+                           <!--reschedule and canel time-->
+                           <div class="el-card m-t30 is-always-shadow"   *ngIf="jsonData['appointment_hours']['view']"> 
+                              <!---->
+                              <div class="el-card__body">
+                                
+                                 <div class="app-grid">
+                                    <h5>Appointment canceling duration in hours</h5>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                       <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">
+                                          <input class="input-global" type="number" placeholder="enter number of hours" [(ngModel)]="cancelHour" />                                    
+                                       </div>                                      
+                                    </div>
+                                 </div>
+                                 <div class="app-grid">
+                                    <h5>Appointment reschedule duration in hours</h5>
+                                    <div class="el-row" style="margin-left: -15px; margin-right: -15px;">
+                                       <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-24 el-col-lg-12 el-col-xl-12" style="padding-left: 15px; padding-right: 15px;">   
+                                          <input class="input-global" type="number" placeholder="enter number of hours" [(ngModel)]="rescheduleHour" />
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <button class="primary-bg padding-10 box-shadow width-200 phone-width-auto" (click)="saveHours()"   *ngIf="jsonData['appointment_hours']['add']">Save appointment hours</button>
+                              </div>
+                           </div>
                         </div>
                         <!---->
                      </div>

@@ -170,6 +170,7 @@ import { ServicetagComponent } from './servicetag/servicetag.component';
 import { MedicaltagComponent } from './medicaltag/medicaltag.component';
 import { GoSellElementsComponent } from './go-sell-elements/go-sell-elements.component';
 import { ReportingDashboardComponent } from './reporting-dashboard/reporting-dashboard.component';
+import { DailyStatsComponent } from './daily-stats/daily-stats.component';
 
 // Create a loader for translation files
 export function HttpLoaderFactory(http: HttpClient) {
@@ -318,7 +319,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ServicetagComponent,
     MedicaltagComponent,
     GoSellElementsComponent,
-    ReportingDashboardComponent
+    ReportingDashboardComponent,
+    DailyStatsComponent
    ],
   imports: [
     BrowserModule, 

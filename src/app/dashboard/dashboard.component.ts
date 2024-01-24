@@ -7,13 +7,14 @@ import { AppService } from 'src/service/app.service';
 import { UtilService } from 'src/service/util.service';
 import { APIResponse } from 'src/utils/app-constants';
 import * as moment from 'moment';
+
 declare let zingchart: any;
 declare let CanvasJS: any;
 declare var $: any;
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
   private _unsubscribeAll: Subject<any>;

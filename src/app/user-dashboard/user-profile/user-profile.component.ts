@@ -23,6 +23,9 @@ export class UserProfileComponent implements OnInit {
 
   public serverUrl : string = environment.domainName
 
+  cancelHour: number = 0;
+  rescheduleHour: number = 0;
+
   //html elemets 
   @ViewChild('search') searchElementRef: ElementRef
   @ViewChild('personalInfo') personalInfoHTML?: ElementRef<HTMLDivElement>
@@ -1373,7 +1376,7 @@ export class UserProfileComponent implements OnInit {
     // Calculate the time difference in hours
     let hoursDifference = timeDifference / (1000 * 60 * 60);
 
-    if(hoursDifference < 24) {
+    if(hoursDifference < this.cancelHour) {
 
       //we will tell user that appointment cannot be canceled
       this.showAppointmentCancelationMessage = true
@@ -1444,7 +1447,7 @@ export class UserProfileComponent implements OnInit {
     // Calculate the time difference in hours
     let hoursDifference = timeDifference / (1000 * 60 * 60);
 
-    if(hoursDifference < 6) {
+    if(hoursDifference < this.rescheduleHour) {
 
       //we will tell user that appointment cannot be updated
       this.showAppointmentUpdateMessage = true
@@ -2573,6 +2576,39 @@ export class UserProfileComponent implements OnInit {
   closeReschedule(){
     this.displayRescheduleAppointment = false;
     this.selectedAppointment = {}
+  }
+
+
+  fetchHours() {
+
+    let data = { 
+      "post": "post"
+    }
+      //now we will get a list of branches from the backend
+      this._appService.fetchAppHours(data).subscribe({
+  
+        next : ( res : any ) => {
+          console.log(res);
+          //in case of success the api returns 0 as a status code
+          if( res.status === APIResponse.Success) {
+            
+            this.cancelHour = res.data[0].cancel
+            this.rescheduleHour = res.data[0].reschdule
+  
+          } else {
+  
+           
+          }
+          
+        },
+        error: ( err: any ) => {
+  
+          console.log(err)
+  
+        }
+      
+      })
+
   }
 
 } 

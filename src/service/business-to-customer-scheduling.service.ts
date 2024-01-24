@@ -161,4 +161,11 @@ export class BusinessToCustomerSchedulingService {
 
   }
 
+  checkSPAvailability(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/checkSPAvailability', body)
+
+  }
+
+  
 }

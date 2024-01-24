@@ -617,4 +617,16 @@ export class AppService {
 
   }
 
+  fetchAppHours( body: any ) {
+
+    return this._httpClient.post<any>( environment.domainName+'dashboard/appointmentHours/fetchAppointmentHours', body)
+
+  }
+
+  updateAppHours( body: any ) {
+
+    return this._httpClient.post<any>( environment.domainName+'dashboard/appointmentHours/appointmentHours', body)
+    
+  }
+
 }
