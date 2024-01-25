@@ -146,14 +146,14 @@ export class PaymentConfirmationComponent implements OnInit {
 
                                     //send invoice email
 
-                                    /*let invoiceData = {
+                                    let invoiceData = {
 
                                       appointmentId: this.appointmentId,
                                       appointmentTotal: ress.payment.amount,
                                       user_email: appointmentRequest.userData[0].email,
                                       user_name:  `${appointmentRequest.userData[0].first_name} ${appointmentRequest.userData[0].last_name} `
                                     }
-
+/*
                                     this._b2c.sendInvoiceEmail(invoiceData).subscribe({
                     
                                       next : ( res : any ) => {
@@ -171,7 +171,7 @@ export class PaymentConfirmationComponent implements OnInit {
                                   
                                     }) */
 
-                                    /*this._b2c.createOdooInvoice(invoiceData).subscribe({
+                                    this._b2c.createOdooInvoice(invoiceData).subscribe({
                     
                                       next : ( res : any ) => {
 
@@ -186,7 +186,7 @@ export class PaymentConfirmationComponent implements OnInit {
                                 
                                       }
                                   
-                                    }) */
+                                    }) 
                           
                                     
                                   } else {
