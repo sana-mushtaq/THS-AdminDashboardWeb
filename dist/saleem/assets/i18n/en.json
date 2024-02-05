@@ -109,10 +109,10 @@
         "errorWhileUpdatingAddress": "An error occured while saving address in your account but you can use this address to book service.",
         "sureRemovingUser": "Are you sure that you want to remove this user?",
         "success":"Success",
-        "appointmentCanNotBeCanceled": "An appointment can only be canceled before 24 Hours from the booked time",
+        "appointmentCanNotBeCanceled": "An appointment can only be canceled certain Hours before booked time",
         "showAppointmentCancelationConfimationMessage": "Are you sure you want to cancel your appointment",
         "showAppointmentCancelMessage": "Your appointment has been canceled",
-        "showAppointmentUpdateMessage": "An appointment can only be updared before 6 Hours from the booked time",
+        "showAppointmentUpdateMessage": "An appointment can only be updated certain Hours before booked time",
         "showAppointmentAfterUpdateMessage": "Your appointment has been updated",
         "fileNotUpdatedSuccessfully": "Error while uploading file, Try Again",
         "fileUpdatedSuccessfully": "Your file has been updated successfully"
