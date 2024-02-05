@@ -108,10 +108,10 @@
         "errorWhileUpdatingAddress": "حدث خطأ أثناء حفظ العنوان في حسابك ولكن يمكنك استخدام هذا العنوان لحجز الخدمة.",
         "sureRemovingUser": "هل أنت متأكد من حذف هذا المستخدم؟",
         "success":"تم بنجاح",
-        "appointmentCanNotBeCanceled": "لا يمكن إلغاء الموعد إلا قبل 24 ساعة من وقت الحجز",
+        "appointmentCanNotBeCanceled": "لا يمكن إلغاء الموعد إلا قبل  ساعة من وقت الحجز",
         "showAppointmentCancelationConfimationMessage": "هل أنت متأكد أنك تريد إلغاء موعدك؟",
         "showAppointmentCancelMessage": "لقد تم إلغاء موعدك",
-        "showAppointmentUpdateMessage": "لا يمكن تحديث الموعد إلا قبل 6 ساعات من وقت الحجز",
+        "showAppointmentUpdateMessage": "لا يمكن تحديث الموعد إلا قبل  ساعات من وقت الحجز",
         "showAppointmentAfterUpdateMessage": "لقد تم تحديث موعدك",
         "fileNotUpdatedSuccessfully": "حدث خطأ أثناء تحميل الملف، حاول مرة أخرى",
         "fileUpdatedSuccessfully": "لقد تم تحديث ملفك بنجاح"

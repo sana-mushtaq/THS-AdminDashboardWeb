@@ -239,6 +239,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.fetchHours();
     this.userId = localStorage.getItem("THSUserId")
 
     if(this.userId !== null) {
@@ -333,10 +334,25 @@ export class UserProfileComponent implements OnInit {
             this.userAppointments =  res.data
             
             this.userUpcomingAppointments = this.userAppointments.filter(app => {
-
-              return new Date(app.serviceDate) > new Date() && app.appointmentStatus !== 2
-
-            })
+              const appointmentDate = new Date(app.serviceDate);
+              const appointmentTime = app.serviceTime ? new Date(`1970-01-01T${app.serviceTime}Z`) : new Date(0);
+          
+              // Combine date and time to get the full appointment date and time
+              const appointmentDateTime = new Date(appointmentDate.getTime() + appointmentTime.getTime());
+          
+              // Get current date and time
+              const currentDate = new Date();
+          
+              // Check if appointment date and time is greater than current date and time
+              if (appointmentDateTime > currentDate) {
+                  // If the appointment date and time is in the future, it's an upcoming appointment
+                  return true;
+              }
+          
+              // Exclude appointments with status 2 (assuming 2 means completed/cancelled)
+              return false;
+          });
+          
 
             this.userPastAppointments = this.userAppointments.filter(app => {
 
@@ -1431,28 +1447,28 @@ export class UserProfileComponent implements OnInit {
 
   updateAppointmentConfirmation(appointment: any) {
 
-    this.selectedAppointment = appointment
+    this.selectedAppointment = appointment;
 
-    //first we will check if there are 24 hours remnaining in appointment
-    
     // Combine serviceDate and serviceTime into a single string
     const serviceDateTimeString = `${appointment.serviceDate}T${appointment.serviceTime}`;
     
-    const serviceDateTime = new Date(serviceDateTimeString + 'Z') as any;
-    const currentDateTime = new Date() as any;
+    const serviceDateTime = new Date(serviceDateTimeString);
+    console.log(serviceDateTime);
+    const currentDateTime = new Date();
+    console.log(currentDateTime);
     
     // Calculate the time difference in milliseconds
-    let timeDifference = serviceDateTime - currentDateTime;
+    let timeDifference = serviceDateTime.getTime() - currentDateTime.getTime();
     
     // Calculate the time difference in hours
     let hoursDifference = timeDifference / (1000 * 60 * 60);
+    console.log(hoursDifference);
 
-    if(hoursDifference < this.rescheduleHour) {
-
-      //we will tell user that appointment cannot be updated
-      this.showAppointmentUpdateMessage = true
-
-    } else {
+    console.log(this.rescheduleHour);
+    if (hoursDifference < this.rescheduleHour) {
+        // Tell the user that the appointment cannot be updated
+        this.showAppointmentUpdateMessage = true;
+    }else {
 
       //if there are more than 24 hours then we will ask for confirmation message
       //go through the process of appointment re-scheduling
@@ -1510,7 +1526,12 @@ export class UserProfileComponent implements OnInit {
                     });
 
                     let branch = localStorage.getItem("THSBranch") || 1;
-      
+                    
+                    if(branch === undefined || branch === 'undefined') {
+
+                      branch = 1;
+                    }
+
                     let spData = {
                       branch: branch,
                       services: filteredServices,
@@ -1989,69 +2010,68 @@ export class UserProfileComponent implements OnInit {
     this.selectedAppointment = appointment;
 
     const selectedFile = event.target.files[0];
-    
+
     if (selectedFile) {
       const fileSizeInMB = selectedFile.size / (1024 * 1024);
 
       if (fileSizeInMB <= 4) {
 
-        this._appService.fileUploadMedicalRecord( selectedFile ).subscribe( ( response: any ) => {
+        // Display confirmation dialog before proceeding with upload
+        const userConfirmation = this.confirmUpload();
 
-          if (response.status == APIResponse.Success) {
-            
-            let result = response.message
-            console.log(result)
-            let data = {
-
-              appointment_id: appointment.appointmentId,
-              file_url: result,
-              file_name: selectedFile.name,
-              added_by: 'patient'
-
-            }
-            
-            this._b2c.medicalRecords(data).subscribe({
-              next: (ress: any) => {
-                if (ress.status === APIResponse.Success) {
-                  this.selectedAppointment = {};
-                  this.fileUpdatedSuccessfully = true;
-                }
-              },
-              error: (err: any) => {
-                console.log(err);
-                this.fileNotUpdatedSuccessfully = true;
-              }
-            });
-            
-          } 
-        
-        })
-
-
-        console.log(selectedFile)
-        const formData: FormData = new FormData();
-        formData.append('uploadedImage', selectedFile);
-        formData.append('appointment_id', 'testAppointmentId');
-        formData.append('added_by', 'patient'); // Replace with your logic for 'added_by'
-
- 
-        /*this._b2c.medicalRecords(formData).subscribe({
-          next: (ress: any) => {
-            if (ress.status === APIResponse.Success) {
-              this.selectedAppointment = {};
-              this.fileUpdatedSuccessfully = true;
-            }
-          },
-          error: (err: any) => {
-            console.log(err);
-            this.fileNotUpdatedSuccessfully = true;
+        userConfirmation.then((confirmed) => {
+          if (!confirmed) {
+            // User cancelled the upload
+            console.log('User cancelled file upload');
+            return;
           }
-        });*/
+
+          // Continue with file upload logic
+          this._appService.fileUploadMedicalRecord(selectedFile).subscribe((response: any) => {
+
+            if (response.status == APIResponse.Success) {
+
+              let result = response.message;
+              console.log(result);
+              let data = {
+                appointment_id: appointment.appointmentId,
+                file_url: result,
+                file_name: selectedFile.name,
+                added_by: 'patient'
+              };
+
+              this._b2c.medicalRecords(data).subscribe({
+                next: (ress: any) => {
+                  if (ress.status === APIResponse.Success) {
+                    this.selectedAppointment = {};
+                    this.fileUpdatedSuccessfully = true;
+                  }
+                },
+                error: (err: any) => {
+                  console.log(err);
+                  this.fileNotUpdatedSuccessfully = true;
+                }
+              });
+
+            }
+
+          });
+
+        });
+
       } else {
         alert('File size exceeds the limit of 4MB.');
         this.fileInput.nativeElement.value = '';
       }
     }
+  }
+
+  confirmUpload(): Promise<boolean> {
+    return new Promise((resolve) => {
+      const confirmed = window.confirm('Are you sure you want to upload the selected file?');
+
+      resolve(confirmed);
+    });
   }
 
   viewAppointmentFiles(appointment) {
