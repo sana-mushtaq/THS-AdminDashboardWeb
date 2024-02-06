@@ -12,281 +12,32 @@
 
 </div>
 
+<div class="web auto-flex-center-start-gap20 cursor-pointer border-none search-bar  main-div-max" style="margin-top:20px">
+    <input type="text" class="input-global" placeholder="Search..." [(ngModel)]="searchQuery" (input)="search()">
+  </div>
+
+  <div class="web auto-flex-start-gap30-column main-div-max padding-top-20" *ngIf="currentCategory && currentCategory.title.length>0" style="padding: 20px;">
+    <!-- Your filtered services content here -->
+    <div class="auto-flex-center-space-between-gap20" style="align-items: stretch;">
+        <div class="auto-flex-center-start-gap20-no-set-width gray-border border-radius-10 padding-10 relative width-half" *ngFor="let service of filteredServices">
+            <!-- Display each filtered service -->
+            <img class="xxxmedImg cover border-radius-10" *ngIf="service.icon && service.icon.length>0" src="{{serverUrl}}{{service.icon}}" />
+            <img class="xxxmedImg cover border-radius-10" *ngIf="!service.icon || service.icon.length<=0" style="object-fit: fill;" src="assets/images/web/logo.svg" />
+            <div class="auto-flex-start-gap10-column-no-set-width">
+                <p class="width-max-300 phone-max-150">{{ languageService.getCurrentLanguage() === 'ar' ? service.title_arabic : service.title }}</p>
+                <p class="bold">{{ service.price }} {{ 'header.sar' | translate }}</p>
+                <button class="white-bg padding-10 padding-left-right-30 blue-color blue-border uppercase" (click)="navigateToService(service.id)">{{ 'allServices.viewService' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="web auto-flex-start-gap30-column main-div-max padding-top-20" *ngIf="currentCategory && currentCategory.title.length>0"  style="padding: 20px;">
 
     <!--tabs-->
     <div class="auto-flex-start-gap10">
 
-        <!--
-        <mat-tab-group mat-align-tabs="start">
-
-            <mat-tab label="Popular">
-            
-                <div class="auto-flex-start-gap30-column padding-20">
-                    
-                    <p class="xmed bold">Top services</p>
-
-                    <div class="auto-flex-start-center-gap20-no-wrap overflow-auto padding-bottom-20">
-
-                        <div class="auto-flex-center-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative">
-            
-                            <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none">200 SAR</p>
-            
-                            <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="assets/images/web/img.svg">
-            
-                            <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
-            
-                                <p class="med bold capitalize">Service name</p>
-                                <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
-            
-                            </div>
-            
-                            <div class="auto-flex-end-gap10">
-            
-                                <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 xsmall">view more</button>
-            
-                            </div>
-            
-                        </div>
-            
-                        <div class="auto-flex-center-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative">
-            
-                            <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none">200 SAR</p>
-            
-                            <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="assets/images/web/img.svg">
-            
-                            <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
-            
-                                <p class="med bold capitalize">Service name</p>
-                                <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
-            
-                            </div>
-            
-                            <div class="auto-flex-end-gap10">
-            
-                                <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 xsmall">view more</button>
-            
-                            </div>
-            
-                        </div>
-            
-                        <div class="auto-flex-center-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative">
-            
-                            <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none">200 SAR</p>
-            
-                            <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="assets/images/web/img.svg">
-            
-                            <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
-            
-                                <p class="med bold capitalize">Service name</p>
-                                <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
-            
-                            </div>
-            
-                            <div class="auto-flex-end-gap10">
-            
-                                <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 xsmall">view more</button>
-            
-                            </div>
-            
-                        </div>
-            
-                        <div class="auto-flex-center-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative">
-            
-                            <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none">200 SAR</p>
-            
-                            <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="assets/images/web/img.svg">
-            
-                            <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
-            
-                                <p class="med bold capitalize">Service name</p>
-                                <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
-            
-                            </div>
-            
-                            <div class="auto-flex-end-gap10">
-            
-                                <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 xsmall">view more</button>
-            
-                            </div>
-            
-                        </div>
-            
-                        <div class="auto-flex-center-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative">
-            
-                            <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none">200 SAR</p>
-            
-                            <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="assets/images/web/img.svg">
-            
-                            <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
-            
-                                <p class="med bold capitalize">Service name</p>
-                                <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
-            
-                            </div>
-            
-                            <div class="auto-flex-end-gap10">
-            
-                                <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 xsmall">view more</button>
-            
-                            </div>
-            
-                        </div>
-            
-                        <div class="auto-flex-center-gap20-column-no-set-width gray-border border-radius-20 cursor-pointer padding-none width-max-350 relative">
-            
-                            <p class="absolute-top-left-10 xsmall primary-bg padding-5 padding-left-right-10  border-none">200 SAR</p>
-            
-                            <img class="xxlargeImg-350 height-160 cover border-top-left-right-10" src="assets/images/web/img.svg">
-            
-                            <div class="auto-flex-start-gap10-column-no-set-width padding-left-right-10">
-            
-                                <p class="med bold capitalize">Service name</p>
-                                <p class="web-font-primary-light">Lorem ipsum dolor sit amet tetur adip iscing elit.</p>
-            
-                            </div>
-            
-                            <div class="auto-flex-end-gap10">
-            
-                                <button class="primary-bg padding-10 capitalize box-shadow border-none border-top-left-bottom-left-0 border-top-right-0 padding-left-right-30 xsmall">view more</button>
-            
-                            </div>
-            
-                        </div>
-            
-                        <div class="auto-flex-center-gap20-column-no-set-width">
-            
-                            <img class="smallImg" src="assets/images/web/icons/plus.svg" />
-                            <p class="xsmall bold lowercase text-center">show more</p>
-            
-                        </div>
-            
-                    </div>
-
-                    <p class="xmed bold">Subcat</p>
-
-                    <div class="auto-flex-center-space-between-gap20">
-
-                        <div class="auto-flex-center-start-gap20-no-set-width gray-border border-radius-10 padding-10 relative width-half">
-
-                            <img class="xxxmedImg cover border-radius-10" src="assets/images/web/example.svg" />
-        
-                            <div class="auto-flex-start-gap10-column-no-set-width">
-        
-                                <p>Service name</p>
-                                <p class="bold">200 SAR</p>
-                                <button class="white-bg padding-10 padding-left-right-30 blue-color blue-border">View service</button>
-                            </div>
-                
-                        </div>
-
-                        <div class="auto-flex-center-start-gap20-no-set-width gray-border border-radius-10 padding-10 relative width-half">
-
-                            <img class="xxxmedImg cover border-radius-10" src="assets/images/web/example.svg" />
-        
-                            <div class="auto-flex-start-gap10-column-no-set-width">
-        
-                                <p>Service name</p>
-                                <p class="bold">200 SAR</p>
-                                <button class="white-bg padding-10 padding-left-right-30 blue-color blue-border">View service</button>
-                            </div>
-                
-                        </div>
-
-                        <div class="auto-flex-center-start-gap20-no-set-width gray-border border-radius-10 padding-10 relative width-half">
-
-                            <img class="xxxmedImg cover border-radius-10" src="assets/images/web/example.svg" />
-        
-                            <div class="auto-flex-start-gap10-column-no-set-width">
-        
-                                <p>Service name</p>
-                                <p class="bold">200 SAR</p>
-                                <button class="white-bg padding-10 padding-left-right-30 blue-color blue-border">View service</button>
-                            </div>
-                
-                        </div>
-
-                        <div class="auto-flex-center-start-gap20-no-set-width gray-border border-radius-10 padding-10 relative width-half">
-
-                            <img class="xxxmedImg cover border-radius-10" src="assets/images/web/example.svg" />
-        
-                            <div class="auto-flex-start-gap10-column-no-set-width">
-        
-                                <p>Service name</p>
-                                <p class="bold">200 SAR</p>
-                                <button class="white-bg padding-10 padding-left-right-30 blue-color blue-border">View service</button>
-                            </div>
-                
-                        </div>
-            
-                    </div>
-                    
-                </div>  
-            
-            </mat-tab>
-
-            <mat-tab label="Subcat">
-            
-                <div class="auto-flex-start-gap20-column padding-20">
-                    Content 1 
-                </div>  
-            
-            </mat-tab>
-
-            <mat-tab label="Subcat">
-            
-                <div class="auto-flex-start-gap20-column padding-20">
-                    Content 1 
-                </div>  
-            
-            </mat-tab>
-
-            <mat-tab label="Subcat">
-            
-                <div class="auto-flex-start-gap20-column padding-20">
-                    Content 1 
-                </div>  
-            
-            </mat-tab>
-
-            <mat-tab label="Subcat">
-            
-                <div class="auto-flex-start-gap20-column padding-20">
-                    Content 1 
-                </div>  
-            
-            </mat-tab>
-
-            <mat-tab label="Subcat">
-            
-                <div class="auto-flex-start-gap20-column padding-20">
-                    Content 1 
-                </div>  
-            
-            </mat-tab>
-
-            <mat-tab label="Subcat">
-            
-                <div class="auto-flex-start-gap20-column padding-20">
-                    Content 1 
-                </div>  
-            
-            </mat-tab>
-
-            <mat-tab label="Subcat">
-            
-                <div class="auto-flex-start-gap20-column padding-20">
-                    Content 1 
-                </div>  
-            
-            </mat-tab>
-
-
-
-
-        </mat-tab-group>
-        -->
-
+ 
         <div class="auto-flex-start-gap30-column padding-none">
                     
             <div class="auto-flex-center-space-between-gap20 padding-bottom-20 place-stretch phone-scroll scroll-bar-gray">

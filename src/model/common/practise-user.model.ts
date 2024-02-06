@@ -8,6 +8,7 @@ export class PractiseUser {
     dob: string;
     bloodGroup: string;
     empDisplayId: string;
+    password: string;
 
 
     static getPracticeUserList(users): PractiseUser[] {
@@ -21,7 +22,7 @@ export class PractiseUser {
             user.email = data["emailId"];
             user.bloodGroup = data["bloodGroup"];
             user.empDisplayId = "EMP" + PractiseUser.zeroPad(user.userId, 4);
-
+            user.password = data["password"];
             var genderId = data["gender"];
 
             if (genderId == 1) {
@@ -47,7 +48,7 @@ export class PractiseUser {
             user.email = data["emailId"];
             user.bloodGroup = data["bloodGroup"];
             user.empDisplayId = "EMP" + PractiseUser.zeroPad(user.userId, 4);
-
+            user.password = data["password"];
             var genderId = data["gender"];
 
             if (genderId == 1) {

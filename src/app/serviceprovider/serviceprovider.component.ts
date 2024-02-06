@@ -104,6 +104,7 @@ export class ServiceproviderComponent implements OnInit {
       'medicalLicenseNo': [''],
       'medicalLicenseExpiryDate': [''],
       'serviceProviderId' : [''],
+      'password': [''],
 
     })
 
@@ -119,34 +120,6 @@ export class ServiceproviderComponent implements OnInit {
       textField: 'title_arabic',
       allowSearchFilter: true
     }
-
-    //fi
-
-    /* TO BE REPLACED LATER
-    this.addServiceProviderForm = this.fb.group({
-
-      'first_name': ['', [ Validators.required, Validators.minLength(4) ]],
-      'last_name': [''],
-      'dob': [''],
-      'phone_number':['', [ Validators.required, Validators.minLength(9) ]], 
-      'email': ['', [ Validators.required, Validators.email ]],
-      'gender': [2, [ Validators.required]],
-      'nationality': ['', [ Validators.required]],
-      'marital_status': [''],
-      'address': ['', [ Validators.required, Validators.minLength(4) ]],
-      'profile_image': [''],
-      'id_type': ['', [ Validators.required]],
-      'id_number': ['', [ Validators.required]],
-      'password': ['', [ Validators.required]],
-      'type': ['', [ Validators.required]],
-      'start_time': ['', [ Validators.required]],
-      'end_time': ['', [ Validators.required]],
-      'location': [''],
-      'medical_license': [''],
-      'medical_license_expiry_date': [''],
-      'branch_id' : ['', [ Validators.required]],
-
-    })*/
     
    }
 
@@ -174,6 +147,7 @@ export class ServiceproviderComponent implements OnInit {
       if (response.status == APIResponse.Success) {
     
         this.practiseUsers = response.userList
+        console.log(response.userList)
     
       } else {
     

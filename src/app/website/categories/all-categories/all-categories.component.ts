@@ -23,6 +23,11 @@ export class AllCategoriesComponent implements OnInit {
   allServices: any
   topServices: any = {}
 
+  
+  searchQuery: string = ''; // Add this property for the search query
+  filteredServices: any; // Add this property to hold filtered services
+
+
   constructor(
     private route: ActivatedRoute,
     private dataService: WebsiteDataService,
@@ -108,4 +113,20 @@ export class AllCategoriesComponent implements OnInit {
     this.itemsToShowInitially += this.itemsToLoadMore;
   }
   
+  // Function to filter services based on the search query
+  search(): void {
+    if (this.searchQuery.trim() === '') {
+      // If search query is empty, show all services
+      this.filteredServices = this.allServices;
+    } else {
+      // Filter services based on the search query
+      this.filteredServices = this.allServices.filter(service => {
+        // Check if the English title or Arabic title contains the search query
+        return service.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+              service.title_arabic.toLowerCase().includes(this.searchQuery.toLowerCase());
+      });
+
+    }
+  }
+
 }
