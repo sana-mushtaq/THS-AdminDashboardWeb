@@ -40,6 +40,7 @@ export class DailyStatsComponent implements OnInit, OnDestroy {
       next: (res: any) => {
         if (res.status === APIResponse.Success) {
           this.data = res.data;
+          console.log(res.data)
         }
       },
       error: (err: any) => {

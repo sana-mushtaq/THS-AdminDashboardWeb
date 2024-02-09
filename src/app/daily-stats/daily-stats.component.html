@@ -7,50 +7,27 @@
 
     <div class="auto-flex-center-space-between-gap20 place-stretch">
 
-        <div class="auto-flex-center-space-between-gap20 lightest-blue-bg padding-20 padding-bottom-0 cursor-pointer min-height-150">
-
-            <div class="auto-flex-start-gap10-column padding-bottom-20">
-             
-                <p class="large bold capitalize width-max-350"> Total </p>
-                <p class="med bold web-font-primary-light width-max-350 width-max-phone-130"> {{data.recordCount}} </p>
-
-            </div>
-
-        </div>
-
-        <div class="auto-flex-center-space-between-gap20 lightest-blue-bg padding-20 padding-bottom-0 cursor-pointer min-height-150">
-
-            <div class="auto-flex-start-gap10-column padding-bottom-20">
-             
-                <p class="large bold capitalize width-max-350"> Upcoming </p>
-                <p class="med bold web-font-primary-light width-max-350 width-max-phone-130"> {{data.upcomingCount}} </p>
-
-            </div>
-
-        </div>
-
-        <div class="auto-flex-center-space-between-gap20 lightest-blue-bg padding-20 padding-bottom-0 cursor-pointer min-height-150">
-
-            <div class="auto-flex-start-gap10-column padding-bottom-20">
-             
-                <p class="large bold capitalize width-max-350"> Completed </p>
-                <p class="med bold web-font-primary-light width-max-350 width-max-phone-130"> {{data.completedCount}} </p>
-
-            </div>
-
-        </div>
-        
-        <div class="auto-flex-center-space-between-gap20 lightest-blue-bg padding-20 padding-bottom-0 cursor-pointer min-height-150">
-
-            <div class="auto-flex-start-gap10-column padding-bottom-20">
-             
-                <p class="large bold capitalize width-max-350"> Cancelled </p>
-                <p class="med bold web-font-primary-light width-max-350 width-max-phone-130"> {{data.cancelledCount}} </p>
-
-            </div>
-
-        </div>
-    
+        <table>
+            <thead>
+              <tr>
+                <th>Branch</th>
+                <th>Record Count</th>
+                <th>Upcoming</th>
+                <th>Completed</th>
+                <th>Cancelled</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let branch of data">
+                <td>{{ branch.branch }}</td>
+                <td>{{ branch.results[0]?.recordCount || 0 }}</td>
+                <td>{{ branch.results[0]?.Upcoming || 0 }}</td>
+                <td>{{ branch.results[0]?.Completed || 0 }}</td>
+                <td>{{ branch.results[0]?.Cancelled || 0 }}</td>
+              </tr>
+            </tbody>
+          </table>
+          
     </div>
 
 </div>
