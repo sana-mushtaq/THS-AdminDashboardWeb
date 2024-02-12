@@ -153,7 +153,14 @@
         "send": "إرسال",
         "reviewError": "يرجى تقييم جميع الأسئلة قبل إرسالها.",
         "patientNotes": "ملاحظات المريض",
-        "providerNotes": "ملاحظات مقدم الخدمة"
+        "providerNotes": "ملاحظات مقدم الخدمة",
+        "rescheulde": "إعادة جدولة",
+        "files": "الملفات",
+        "cancel": "إلغاء",
+        "notes": "ملاحظات",
+        "upload_file": "رفع الملف",
+        "somethingWentWrong": "حدث خطأ ما",
+        "remove": "إزالة"
 
     },
 

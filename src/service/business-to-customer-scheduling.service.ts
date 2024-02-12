@@ -137,6 +137,12 @@ export class BusinessToCustomerSchedulingService {
 
   }
 
+  deleteMedicalRecords(body) {
+
+    return this._httpClient.post<any>(this.b2cUrl+'/deleteMedicalRecords', body)
+
+  }
+
   appointmentReview(body) {
 
     return this._httpClient.post<any>(this.b2cUrl+'/appointmentReview', body)

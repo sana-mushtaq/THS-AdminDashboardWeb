@@ -2485,6 +2485,11 @@ a:hover{
     color: var(--web-font-primary-light);
     font-size: 14px;
 }
+.input-global:focus {
+    border: 1px solid #C7C8D2 !important;
+    outline: 1px solid #C7C8D2;;
+
+}
 
 .select-global {
     padding: 10px 30px !important;

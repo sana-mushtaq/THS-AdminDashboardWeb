@@ -356,7 +356,7 @@ export class UserProfileComponent implements OnInit {
 
             this.userPastAppointments = this.userAppointments.filter(app => {
 
-              return new Date(app.serviceDate) < new Date() || app.appointmentStatus === 2
+              return new Date(app.serviceDate) < new Date() || app.appointmentStatus === 1
 
             })
 
@@ -2091,7 +2091,6 @@ export class UserProfileComponent implements OnInit {
         if( ress.status === APIResponse.Success) {
 
           this.currentAppointmentFiles = ress.data
-          console.log(this.currentAppointmentFiles);
           this.currentAppointmentFilesToggle = true
 
           this.selectedAppointment = {}
@@ -2598,7 +2597,6 @@ export class UserProfileComponent implements OnInit {
     this.selectedAppointment = {}
   }
 
-
   fetchHours() {
 
     let data = { 
@@ -2629,6 +2627,49 @@ export class UserProfileComponent implements OnInit {
       
       })
 
+  }
+
+  // Function to check if a file was uploaded within the last 24 hours
+  isUploadedWithin24Hours(uploadTime: string): boolean {
+    // Calculate the time difference between the current time and upload time
+    const uploadDate = new Date(uploadTime);
+    const currentDate = new Date();
+    const timeDifference = currentDate.getTime() - uploadDate.getTime();
+    const hoursDifference = timeDifference / (1000 * 3600); // Convert milliseconds to hours
+
+    // Return true if the difference is less than or equal to 24 hours
+    return hoursDifference <= 24;
+  }
+
+  removeFileConfirmation(id,fIndex): void {
+    if (confirm('Are you sure you want to remove this file?')) {
+        console.log(id);
+      let data = {
+        id: id
+      };
+
+      //now we will cancel user appointment
+      this._b2c.deleteMedicalRecords(data).subscribe({
+                
+        next : ( ress : any ) => {
+
+          //in case of success the api returns 0 as a status code
+          if( ress.status === APIResponse.Success) {
+
+            this.currentAppointmentFiles.splice(fIndex, 1);
+        
+          }
+          
+        },
+        error: ( err: any ) => {
+          
+          console.log(err)
+          
+        }
+    
+      }) 
+
+    }
   }
 
 } 

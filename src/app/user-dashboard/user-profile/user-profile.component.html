@@ -884,14 +884,18 @@
                         <td><p class="table-content gap-10" *ngFor="let service of appointment.services">{{ service.serviceName }}</p></td>
                         <td><p>{{ appointment.serviceDate | date:'yyyy-MM-dd' }} - {{ appointment.serviceTime }}</p></td>
                         <td>
-                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/reschedule.svg" (click)="updateAppointmentConfirmation(appointment)" />
-                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/cancel.svg" (click)="cancelAppointmentConfirmation(appointment)" />
+                            <p class="table-content cursor-pointer" style="margin-top:10px" (click)="updateAppointmentConfirmation(appointment)">{{ 'patientProfile.rescheulde' | translate }}</p>
+                            <p class="table-content cursor-pointer" style="margin-top:10px" (click)="cancelAppointmentConfirmation(appointment)">{{ 'patientProfile.cancel' | translate }}</p>
+                            <!--<img class="xsmallImg cursor-pointer" src="assets/images/web/icons/reschedule.svg" (click)="updateAppointmentConfirmation(appointment)" />
+                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/cancel.svg" (click)="cancelAppointmentConfirmation(appointment)" />-->
                         </td>
                         <td>  
-                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/eye.svg" (click)="viewAppointmentFiles(appointment)" />
-                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/plus_circled.svg" (click)="openFileInput()"/>
+                            <p class="table-content cursor-pointer" style="margin-top:10px" (click)="viewAppointmentFiles(appointment)">{{ 'patientProfile.files' | translate }}</p>
+<!--                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/eye.svg" (click)="viewAppointmentFiles(appointment)" />-->
+                            <!--<img class="xsmallImg cursor-pointer" src="assets/images/web/icons/plus_circled.svg" (click)="openFileInput()"/>-->
+                            <p class="table-content cursor-pointer" style="margin-top:10px" (click)="openFileInput()">{{ 'patientProfile.upload_file' | translate }}</p>
                             <input type="file" #fileInput style="display: none" accept=".pdf, image/*" (change)="addAppointmentFile($event, appointment)"/>
-                            <p class="table-content cursor-pointer" style="margin-top:10px" (click)="openPatientNotes(appointment)">notes</p>
+                            <p class="table-content cursor-pointer" style="margin-top:10px" (click)="openPatientNotes(appointment)">{{ 'patientProfile.notes' | translate }}</p>
                         </td>
                     </tr>
                 </tbody>
@@ -927,8 +931,12 @@
                         <td><p class="table-content gap-10" *ngFor="let service of appointment.services">{{ service.serviceName }}</p></td>
                         <td><p>{{ appointment.serviceDate | date:'yyyy-MM-dd' }} - {{ appointment.serviceTime }}</p></td>
                         <td>  
-                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/eye.svg" (click)="viewAppointmentFiles(appointment)" />
-                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/plus_circled.svg" (click)="openFileInput()"/>
+                            <!--
+                            <img class="xsmallImg cursor-pointer" src="assets/images/web/icons/eye.svg" (click)="viewAppointmentFiles(appointment)" />-->
+                            <p class="table-content cursor-pointer" style="margin-top:10px" (click)="viewAppointmentFiles(appointment)">{{ 'patientProfile.files' | translate }}</p>
+                            <!--<img class="xsmallImg cursor-pointer" src="assets/images/web/icons/plus_circled.svg" (click)="openFileInput()"/>-->
+                            <p class="table-content cursor-pointer" style="margin-top:10px" (click)="openFileInput()">{{ 'patientProfile.upload_file' | translate }}</p>
+
                             <input type="file" #fileInput style="display: none" accept=".pdf, image/*" (change)="addAppointmentFile($event, appointment)"/>
                         </td>
                         <td *ngIf="appointment.appointmentStatus === 1 && (!appointment.review || appointment.review.length<=0)"><p class="cursor-pointer light-green-bg padding-5 green-color fit-content" (click)="openReview(appointment)">{{ 'patientProfile.review' | translate }}</p></td>
@@ -1035,16 +1043,28 @@
                                 <tr>
                                     <th class="padding-20"><p>{{ 'patientProfile.file_name' | translate }}</p></th>
                                     <th class="padding-20"><p>{{ 'patientProfile.uploaded_at' | translate }}</p></th>
-                                    <th class="padding-20"><p>{{ 'patientProfile.added_by' | translate }}</p></th>
+                                    <th class="padding-20"><p>{{ 'patientProfile.remove' | translate }}</p></th>
+
+                                   <th class="padding-20"><p>{{ 'patientProfile.added_by' | translate }}</p></th>
                                 </tr>
                             </thead>
                 
                             <tbody>
                 
-                                <tr *ngFor="let file of currentAppointmentFiles">
+                                <tr *ngFor="let file of currentAppointmentFiles; let fIndex = index">
                                     
                                      <td><a href="{{serverUrl}}{{file.file_url}}" target="_blank">{{ file.file_name }}</a></td>
                                      <td><p>{{ file.created_at | date:'yyyy-MM-dd' }}</p></td>
+                                     <p class="cursor-pointer" style=" 
+                                            padding: 10px;
+                                            color: black;
+                                            background-color: #fafafa;
+                                            width: fit-content;
+                                            border-radius: 10px;
+                                            margin-top: 10px;" *ngIf="isUploadedWithin24Hours(file.created_at) && file.added_by==='patient'" 
+                                            (click)="removeFileConfirmation(file.id,fIndex)">
+                                        {{ 'patientProfile.remove' | translate }}
+                                      </p>
                                      <td><p>{{ file.added_by }}</p></td>
                                    
                                 </tr>
@@ -1149,25 +1169,25 @@
     <app-custom-alert *ngIf="showUserAlreadyExist" [title]="'messages.userAlreadyExistTitle'" [message]="'messages.userAlreadyExistDesc'" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
   
     <!-- An Error occured while creating user. Try again later -->
-    <app-custom-alert *ngIf="showErrorCreatingDependant" [title]="'messages.error' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showErrorCreatingDependant" [title]="'messages.somethingWentWrong' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
      <!-- An Error occured while creating user. Try again later -->
      <app-custom-alert *ngIf="showSuccessUpdatingDependant" [title]="'messages.success' | translate" [message]="'patientProfile.dependantSuccess' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- An Error occured while updating user. Try again later -->
-    <app-custom-alert *ngIf="showErrorUpdatingDependant" [title]="'messages.error' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showErrorUpdatingDependant" [title]="'messages.somethingWentWrong' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- An Error occured while updating user. Try again later -->
     <app-custom-alert *ngIf="showDeleteDependant" [title]="'Remove Dependant'" [message]="'messages.sureRemovingUser' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="cancelDeleteDependant()" (continueClick)="deleteDependant()" [showCancel]="true" [showConfirm]="true"></app-custom-alert>
 
     <!-- An Error occured while deleting user. Try again later -->
-    <app-custom-alert *ngIf="showErrorDeletingDependant" [title]="'messages.error' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showErrorDeletingDependant" [title]="'messages.somethingWentWrong' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
     
     <!-- An Error occured while updating user. Try again later -->
-    <app-custom-alert *ngIf="showErrorUpdatingAddress" [title]="'messages.error' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showErrorUpdatingAddress" [title]="'messages.somethingWentWrong' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Appointment can only be canceled before 24 hours -->
-    <app-custom-alert *ngIf="showAppointmentCancelationMessage" [title]="'messages.error' | translate" [message]="'messages.appointmentCanNotBeCanceled' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showAppointmentCancelationMessage" [title]="'messages.somethingWentWrong' | translate" [message]="'messages.appointmentCanNotBeCanceled' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Are you sure you want to cancel your appointment -->
     <app-custom-alert *ngIf="showAppointmentCancelationConfimationMessage" [title]="'auth.confirmationTitle' | translate" [message]="'messages.showAppointmentCancelationConfimationMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="cancelUserAppointment()" [showCancel]="true" [showConfirm]="true"></app-custom-alert>
@@ -1176,7 +1196,7 @@
     <app-custom-alert *ngIf="showAppointmentCancelMessage" [title]="'messages.success' | translate" [message]="'messages.showAppointmentCancelMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Appointment can only be updated before 6 hours -->
-    <app-custom-alert *ngIf="showAppointmentUpdateMessage" [title]="'messages.error' | translate" [message]="'messages.showAppointmentUpdateMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showAppointmentUpdateMessage" [title]="'messages.somethingWentWrong' | translate" [message]="'messages.showAppointmentUpdateMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Your appointment has been updated -->
     <app-custom-alert *ngIf="showAppointmentAfterUpdateMessage" [title]="'messages.success' | translate" [message]="'messages.showAppointmentAfterUpdateMessage' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
@@ -1185,7 +1205,7 @@
     <app-custom-alert *ngIf="fileUpdatedSuccessfully" [title]="'messages.success' | translate" [message]="'messages.fileUpdatedSuccessfully' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Unable to upload file -->
-    <app-custom-alert *ngIf="fileNotUpdatedSuccessfully" [title]="'messages.error' | translate" [message]="'messages.fileNotUpdatedSuccessfully' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="fileNotUpdatedSuccessfully" [title]="'messages.somethingWentWrong' | translate" [message]="'messages.fileNotUpdatedSuccessfully' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
 </div>
 

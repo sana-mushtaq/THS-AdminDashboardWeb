@@ -345,7 +345,7 @@ export class CheckoutAppointmentComponent implements OnInit {
           },
         },
       });
-
+//http://taib.sa
     } else {
 
       this.total = 0

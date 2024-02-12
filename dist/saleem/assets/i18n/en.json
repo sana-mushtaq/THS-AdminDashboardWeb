@@ -115,7 +115,9 @@
         "showAppointmentUpdateMessage": "An appointment can only be updated certain Hours before booked time",
         "showAppointmentAfterUpdateMessage": "Your appointment has been updated",
         "fileNotUpdatedSuccessfully": "Error while uploading file, Try Again",
-        "fileUpdatedSuccessfully": "Your file has been updated successfully"
+        "fileUpdatedSuccessfully": "Your file has been updated successfully",
+        "somethingWentWrong": "Something went wrong",
+        "remove": "Remove"
     
     },
 
@@ -154,7 +156,12 @@
         "send": "Send",
         "reviewError": "Please rate all questions before submitting.",
         "patientNotes": "Patient Notes",
-        "providerNotes": "Provider Notes"
+        "providerNotes": "Provider Notes",
+        "rescheulde": "Rescheulde",
+        "files": "Files",
+        "cancel": "Cancel",
+        "notes": "Notes",
+        "upload_file": "Upload File"
 
     },
 

@@ -325,12 +325,12 @@
 
                                     <div class="auto-flex-start-gap20-column">
 
-                                      <p>Calculated Service Time: {{calculatedHoursForReview}} </p>
+                                      <p style="width: 100%; text-align: center;">Calculated Service Time: {{calculatedHoursForReview}} Hrs</p>
                                         <!-- questionnaire.component.html -->
                                         <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit()" class="auto-flex-start-gap10-column" style="align-items: self-end;">
                                             <div formArrayName="questions" class="auto-flex-start-gap20-column"  style="align-items: self-end;">
-                                              <div *ngFor="let question of questions.controls; let i = index">
-                                                <label>{{ question.get('text').value }} .{{i+1}}</label>
+                                              <div *ngFor="let question of questions.controls; let i = index" style="text-align:end">
+                                                <label style="direction: rtl;">{{i+1}}.{{ question.get('text').value }} </label>
                                                 <div class="star-rating auto-flex-start-gap10" style="justify-content: right;">
                                                   <div *ngFor="let star of stars[i]; let j = index" (click)="rate(i, j)" class="star cursor-pointer" [class.selected]="star">&#9733;</div>
                                                 </div>

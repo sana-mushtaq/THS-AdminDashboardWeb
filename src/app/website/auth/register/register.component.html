@@ -274,10 +274,10 @@
     </div>
 
     <!-- Incorrect Verification Code -->
-    <app-custom-alert *ngIf="showVerificationAlert" [title]="'message.verificationErrorTitle' | translate" [message]="'messages.verificationErrorDesc' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showVerificationAlert" [title]="'messages.verificationErrorTitle' | translate" [message]="'messages.verificationErrorDesc' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- Incorrect Phone Number -->
-    <app-custom-alert *ngIf="showInvalidPhoneNumber" [title]="'message.invalidPhoneNumberTitle' | translate" [message]="'message.invalidPhoneNumberDesc' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
+    <app-custom-alert *ngIf="showInvalidPhoneNumber" [title]="'messages.invalidPhoneNumberTitle' | translate" [message]="'message.invalidPhoneNumberDesc' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>
 
     <!-- An Error occured while creating user. Try again later -->
     <app-custom-alert *ngIf="showErrorCreatingUser" [title]="'messages.error' | translate" [message]="'messages.tryAgain' | translate" [cancelButtonText]="'cart.cancel' | translate" [continueButtonText]="'messages.continue' | translate" (cancelClick)="handleCancelClick()" (continueClick)="handleContinueClick()" [showCancel]="false" [showConfirm]="true"></app-custom-alert>

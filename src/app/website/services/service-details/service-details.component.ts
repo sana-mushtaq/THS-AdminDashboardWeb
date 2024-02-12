@@ -50,7 +50,9 @@ export class ServiceDetailsComponent implements OnInit {
   ngOnInit(): void {
 
     this.displayShowCheckout = localStorage.getItem("showCheckout");
-    if(this.displayShowCheckout === 'none') {
+
+    let branch = localStorage.getItem("THSBranch")
+    if(this.displayShowCheckout === 'none' || branch==='undefined') {
       this.showCheckoutButton = true;
     }
 

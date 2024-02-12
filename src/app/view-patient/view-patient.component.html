@@ -364,82 +364,89 @@
         <div class="auto-flex-start-gap20-column relative white-bg overflow-auto max-height-500 border-radius-20 width-min-600 width-max-600 phone-min-width phone-max-height-70Percent" style="max-height: 500px;">
 
           <div class="auto-flex-start-gap20-column">
+            <h3>Insurance Data</h3>
+              <!-- input fields -->
+              <div class="auto-flex-center-space-between-gap20">
+                    
+                <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <p class="xsmall bold">{{ 'insurance.PolicyNumber' | translate }}</p>
+                    <input class="input-global" type="text" value="{{ currentInusranceData.PolicyNumber }}" />
+                </div>
+            
+                <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <p class="xsmall bold">{{ 'insurance.InsuranceCompanyName' | translate }}</p>
+                    <input class="input-global" type="text" value="{{ currentInusranceData.InsuranceCompanyName}}" />
+                </div>
+            
+                <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <p class="xsmall bold">{{ 'insurance.InsuranceCompanyNameAr' | translate }}</p>
+                    <input class="input-global" type="text" value="{{ currentInusranceData.InsuranceCompanyNameAr}}" />
+                </div>
+            
+                <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <p class="xsmall bold">{{ 'insurance.ClassName' | translate }}</p>
+                    <input class="input-global" type="text" value="{{ currentInusranceData.ClassName}}" />
+                </div>
+            
+                <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <p class="xsmall bold">{{ 'insurance.Gender' | translate }}</p>
+                    <input class="input-global" type="text" value="{{ currentInusranceData.Gender}}" />
+                </div>
+            
+                <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <p class="xsmall bold">{{ 'insurance.DeductibleRate' | translate }}</p>
+                    <input class="input-global" type="text" value="{{ currentInusranceData.DeductibleRate}}" />
+                </div>
+            
+                <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <p class="xsmall bold">{{ 'insurance.MaxLimit' | translate }}</p>
+                    <input class="input-global" type="text" value="{{ currentInusranceData.MaxLimit}}" />
+                </div>
+            
+                <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <p class="xsmall bold">{{ 'insurance.BeneficiaryType' | translate }}</p>
+                    <input class="input-global" type="text" value="{{ currentInusranceData.BeneficiaryType}}" />
+               </div>
+            
+                <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <p class="xsmall bold">{{ 'insurance.BeneficiaryTypeId' | translate }}</p>
+                    <input class="input-global" type="text" value="{{ currentInusranceData.BeneficiaryTypeId}}" />
+                   </div>
+            
+                <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <p class="xsmall bold">{{ 'insurance.BeneficiaryNumber' | translate }}</p>
+                    <input class="input-global" type="text" value="{{ currentInusranceData.BeneficiaryNumber}}" />
+                </div>
+            
+                <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <p class="xsmall bold">{{ 'insurance.IdentityNumber' | translate }}</p>
+                    <input class="input-global" type="text" value="{{ currentInusranceData.IdentityNumber}}" />
+                </div>
+            
+                <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <p class="xsmall bold">{{ 'insurance.BeneficiaryName' | translate }}</p>
+                    <input class="input-global" type="text" value="{{ currentInusranceData.BeneficiaryName }}" />
+                </div>
+            
+                <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <p class="xsmall bold">{{ 'insurance.InceptionDate' | translate }}</p>
+                    <input class="input-global" type="text" value="{{ currentInusranceData.InceptionDate}}" />
+                </div>
+            
+                <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <p class="xsmall bold">{{ 'insurance.PolicyHolder' | translate }}</p>
+                    <input class="input-global" type="text" value="{{currentInusranceData.PolicyHolder}}" />
+                </div>
+            
+                <div class="auto-flex-start-gap10-column-no-set-width width-half web-font-primary-light">
+                    <p class="xsmall bold">{{ 'insurance.InsurancePoIicyExpiryDate' | translate }}</p>
+                    <input class="input-global" type="text" value="{{currentInusranceData.InsurancePoIicyExpiryDate}}" />
+                </div>
+            
+                <!-- Add more input fields similarly -->
+            
+                </div>
 
-            <div class="auto-flex-start-gap20">
-              <p>Policy Number:</p>
-              <p>{{currentInusranceData.PolicyNumber}}</p>   
-            </div>
-
-            <div class="auto-flex-start-gap20">
-              <p>Insurance Company Name:</p>
-              <p>{{currentInusranceData.InsuranceCompanyName}}</p>   
-            </div>
-
-            <div class="auto-flex-start-gap20">
-              <p>Insurance Company Name Ar:</p>
-              <p>{{currentInusranceData.InsuranceCompanyNameAr}}</p>   
-            </div>
-
-            <div class="auto-flex-start-gap20">
-              <p>Class Name:</p>
-              <p>{{currentInusranceData.ClassName}}</p>   
-            </div>
-
-            <div class="auto-flex-start-gap20">
-              <p>Gender:</p>
-              <p>{{currentInusranceData.Gender}}</p>   
-            </div>
-
-            <div class="auto-flex-start-gap20">
-              <p>DeductibleRate:</p>
-              <p>{{currentInusranceData.DeductibleRate}}</p>   
-            </div>
-
-            <div class="auto-flex-start-gap20">
-              <p>MaxLimit:</p>
-              <p>{{currentInusranceData.MaxLimit}}</p>   
-            </div>
-
-            <div class="auto-flex-start-gap20">
-              <p>Beneficiary Type:</p>
-              <p>{{currentInusranceData.BeneficiaryType}}</p>   
-            </div>
-
-            <div class="auto-flex-start-gap20">
-              <p>Beneficiary Type Id:</p>
-              <p>{{currentInusranceData.BeneficiaryTypeId}}</p>   
-            </div>
-
-            <div class="auto-flex-start-gap20">
-              <p>Beneficiary Number:</p>
-              <p>{{currentInusranceData.BeneficiaryNumber}}</p>   
-            </div>
-
-            <div class="auto-flex-start-gap20">
-              <p>Identity Number:</p>
-              <p>{{currentInusranceData.IdentityNumber}}</p>   
-            </div>
-
-            <div class="auto-flex-start-gap20">
-              <p>Beneficiary Name:</p>
-              <p>{{currentInusranceData.BeneficiaryName}}</p>   
-            </div>
-
-            <div class="auto-flex-start-gap20">
-              <p>Inception Date:</p>
-              <p>{{currentInusranceData.InceptionDate}}</p>   
-            </div>
-
-            <div class="auto-flex-start-gap20">
-              <p>Policy Holder:</p>
-              <p>{{currentInusranceData.PolicyHolder}}</p>   
-            </div>
-
-            <div class="auto-flex-start-gap20">
-              <p>Insurance PoIicy Expiry Date:</p>
-              <p>{{currentInusranceData.InsurancePoIicyExpiryDate}}</p>   
-            </div>     
-         
           </div>
       
             <div class="auto-flex-end-gap10">
