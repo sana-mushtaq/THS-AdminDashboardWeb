@@ -282,7 +282,7 @@
             "edit_appointment": false
         },
         "notification": {
-            "add": false,
+            "add": true,
             "view": true
         },
         "programs":{
@@ -453,7 +453,7 @@
             "edit_appointment": false
         },
         "notification": {
-            "add": false,
+            "add": true,
             "view": true
         },
         "programs":{
@@ -624,8 +624,8 @@
             "edit_appointment": false
         },
         "notification": {
-            "add": false,
-            "view": false
+            "add": true,
+            "view": true
         },
         "programs":{
             "add": false,
